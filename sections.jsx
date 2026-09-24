@@ -536,7 +536,7 @@ function AboutBlock({ compact = false }) {
             <p className="lead" style={{ color: compact ? 'var(--text-body)' : 'var(--text-on-dark-2)' }}>
               Prawo nieruchomości to dziedzina, w której mieszczą się jedne z najciekawszych i najtrudniejszych zagadek prawniczych. Roszczenia sięgające stu lat wstecz, splątane stany prawne gruntów, niejasne wpisy w księgach wieczystych. Każda sprawa to inna układanka.
             </p>
-            <p className="lead mt-6" style={{ color: compact ? 'var(--text-body)' : 'var(--text-on-dark-2)' }}>Jestem adwokatem i doktorem nauk prawnych — studia prawnicze ukończyłem na Uniwersytecie Jagiellońskim, a doktorat z postępowania cywilnego obroniłem na UMCS w Lublinie. Szlif zawodowy zdobyłem w SPCG, jednej z czołowych polskich kancelarii. Pracowałem też naukowo w Katedrze Prawa Rolnego i Gospodarki Gruntami UMCS; z uczelni odszedłem, żeby w całości poświęcić się prowadzeniu kancelarii i sprawom klientów.
+            <p className="lead mt-6" style={{ color: compact ? 'var(--text-body)' : 'var(--text-on-dark-2)' }}>Jestem adwokatem i doktorem nauk prawnych — studia prawnicze ukończyłem na Uniwersytecie Jagiellońskim, a doktorat z postępowania cywilnego obroniłem na UMCS w Lublinie. Szlif zawodowy zdobyłem w SPCG, jednej z czołowych polskich kancelarii. Pracowałem też naukowo w Katedrze Prawa Rolnego i Gospodarki Gruntami UMCS; z uczelni odszedłem, żeby w całości poświęcić się prowadzeniu kancelarii i sprawom klientów. Jako wykładowca Okręgowej Rady Adwokackiej w Lublinie uczę aplikantów adwokackich postępowania sądowoadministracyjnego — tego, jak prawidłowo konstruować skargi do WSA i NSA.
             </p>
             <ul className="about-creds mt-8" data-compact={compact}>
               {[
@@ -545,6 +545,7 @@ function AboutBlock({ compact = false }) {
               { i: 'book-open', t: 'Doktor nauk prawnych (postępowanie cywilne) — UMCS' },
               { i: 'award', t: 'Doświadczenie z kancelarii SPCG — jednej z czołowych w Polsce' },
               { i: 'landmark', t: 'Były pracownik naukowy Katedry Prawa Rolnego i Gospodarki Gruntami UMCS' },
+              { i: 'presentation', t: 'Wykładowca Okręgowej Rady Adwokackiej w Lublinie — postępowanie sądowoadministracyjne (skargi do WSA i NSA)' },
               { i: 'file-search', t: 'Praktyka wyłącznie w prawie nieruchomości' },
               { i: 'map-pin', t: 'Prowadzę sprawy klientów z całej Polski' }].
               map((c, i) =>

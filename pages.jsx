@@ -327,10 +327,10 @@ function BlogPage({ setRoute }) {
             <Icon name="arrow-left" size={16} /> Strona główna
           </button>
           <div className="mt-8" style={{ maxWidth: '46rem' }}>
-            <span className="eyebrow">Blog · notatki o prawie nieruchomości</span>
+            <span className="eyebrow">Skarbnica wiedzy · prawo nieruchomości</span>
             <h1 className="display mt-4">
-              Blog<br />
-              <span className="italic" style={{ color: 'var(--text-body)' }}>i notatki.</span>
+              Skarbnica<br />
+              <span className="italic" style={{ color: 'var(--text-body)' }}>wiedzy.</span>
             </h1>
             <p className="lead mt-6">
               Krótkie teksty o tym, co zmienia się w prawie nieruchomości i co ma znaczenie dla osób, które kupują, sprzedają lub wynajmują. Bez prawniczego żargonu — z konkretami, które można zastosować w praktyce.
@@ -393,7 +393,7 @@ function BlogPostPage({ slug, setRoute }) {
           <nav className="breadcrumb">
             <button onClick={() => setRoute('landing')}>Start</button>
             <Icon name="chevron-right" size={14} />
-            <button onClick={() => setRoute('blog')}>Blog</button>
+            <button onClick={() => setRoute('blog')}>Skarbnica wiedzy</button>
             <Icon name="chevron-right" size={14} />
             <span>{post.category}</span>
           </nav>
@@ -587,7 +587,7 @@ function BlogTeaser({ setRoute }) {
       <div className="wrap">
         <div className="services-head">
           <div>
-            <span className="eyebrow">Blog</span>
+            <span className="eyebrow">Skarbnica wiedzy</span>
             <h2 className="display mt-4">
               Z notatnika kancelarii.
             </h2>

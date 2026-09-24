@@ -15,12 +15,9 @@
   gap: 3rem;
   align-items: start;
 }
-@media (min-width: 1000px) {
-  .landing-hero-grid {
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 4rem;
-  }
-}
+/* One column, centered: heading block, then the form */
+.landing-hero-grid { max-width: 44rem; margin-inline: auto; gap: 2.5rem; }
+.landing-hero-form { width: 100%; }
 /* Centered hero text column, top-aligned */
 .landing-hero-text { text-align: center; }
 .landing-hero-text .eyebrow { justify-content: center; }

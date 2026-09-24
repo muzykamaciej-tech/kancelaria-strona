@@ -124,7 +124,7 @@ function setMetaForView(route, ids) {
     const desc = (c && (c.subtitle || c.intro)) || (s && s.desc) || LANDING_META;
     setMeta(title + ' | ' + SITE_NAME, truncMeta(desc, 155));
   } else if (route === 'blog') {
-    setMeta('Blog — prawo nieruchomości | ' + SITE_NAME, 'Praktyczne wpisy o prawie nieruchomości — jak bezpiecznie kupować, sprawdzać umowy i chronić swój kapitał.');
+    setMeta('Skarbnica wiedzy — prawo nieruchomości | ' + SITE_NAME, 'Praktyczne wpisy o prawie nieruchomości — jak bezpiecznie kupować, sprawdzać umowy i chronić swój kapitał.');
   } else if (route === 'blogpost') {
     const p = (window.BLOG || []).find((x) => x.slug === ids.blogSlug) || (window.BLOG || [])[0];
     if (p) setMeta(p.title + ' | ' + SITE_NAME, truncMeta(p.excerpt, 155));
@@ -328,7 +328,7 @@ function App() {
             {[
               { id: 'landing', l: 'Landing' },
               { id: 'uslugi', l: 'Usługi' },
-              { id: 'blog', l: 'Blog' },
+              { id: 'blog', l: 'Skarbnica wiedzy' },
               { id: 'faq', l: 'FAQ' },
               { id: 'kontakt', l: 'Kontakt' },
             ].map((r) => (

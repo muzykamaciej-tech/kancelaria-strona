@@ -3,7 +3,7 @@
 const NAV_LINKS = [
   { id: 'uslugi', label: 'Usługi prawne', hasMenu: true },
   { id: 'dla-firm', label: 'Dla firm', block: 'obsluga-podmiotow-profesjonalnych' },
-  { id: 'blog', label: 'Blog' },
+  { id: 'blog', label: 'Skarbnica wiedzy' },
   { id: 'faq', label: 'FAQ' },
   { id: 'kontakt', label: 'Kontakt' },
 ];
