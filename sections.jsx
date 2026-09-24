@@ -538,25 +538,25 @@ function AboutBlock({ compact = false }) {
             </p>
             <p className="lead mt-6" style={{ color: compact ? 'var(--text-body)' : 'var(--text-on-dark-2)' }}>Jestem adwokatem i doktorem nauk prawnych — studia prawnicze ukończyłem na Uniwersytecie Jagiellońskim, a doktorat z postępowania cywilnego obroniłem na UMCS w Lublinie. Szlif zawodowy zdobyłem w SPCG, jednej z czołowych polskich kancelarii. Pracowałem też naukowo w Katedrze Prawa Rolnego i Gospodarki Gruntami UMCS; z uczelni odszedłem, żeby w całości poświęcić się prowadzeniu kancelarii i sprawom klientów. Jako wykładowca Okręgowej Rady Adwokackiej w Lublinie uczę aplikantów adwokackich postępowania sądowoadministracyjnego — tego, jak prawidłowo konstruować skargi do WSA i NSA.
             </p>
-            <ul className="about-creds mt-8" data-compact={compact}>
-              {[
-              { i: 'scale', t: 'Adwokat — Lubelska Izba Adwokacka, wpis nr LUB/ADW/1702', href: KRA_URL, hrefLabel: 'Krajowy Rejestr Adwokatów' },
-              { i: 'graduation-cap', t: 'Absolwent prawa Uniwersytetu Jagiellońskiego' },
-              { i: 'book-open', t: 'Doktor nauk prawnych (postępowanie cywilne) — UMCS' },
-              { i: 'award', t: 'Doświadczenie z kancelarii SPCG — jednej z czołowych w Polsce' },
-              { i: 'landmark', t: 'Były pracownik naukowy Katedry Prawa Rolnego i Gospodarki Gruntami UMCS' },
-              { i: 'presentation', t: 'Wykładowca Okręgowej Rady Adwokackiej w Lublinie — postępowanie sądowoadministracyjne (skargi do WSA i NSA)' },
-              { i: 'file-search', t: 'Praktyka wyłącznie w prawie nieruchomości' },
-              { i: 'map-pin', t: 'Prowadzę sprawy klientów z całej Polski' }].
-              map((c, i) =>
-              <li key={i}>
-                  <span className={`icon-tile ${compact ? 'icon-tile--info' : 'icon-tile--dark'}`}><Icon name={c.i} size={20} /></span>
-                  <span style={{ color: compact ? 'var(--text-main)' : 'var(--text-on-dark)', fontWeight: 500 }}>{c.t}{c.href && <React.Fragment> · <a className="about-cred-link" href={c.href} target="_blank" rel="noopener noreferrer">{c.hrefLabel}</a></React.Fragment>}</span>
-                </li>
-              )}
-            </ul>
           </div>
         </div>
+        <ul className="about-creds about-creds--below" data-compact={compact}>
+          {[
+          { i: 'scale', t: 'Adwokat — Lubelska Izba Adwokacka, wpis nr LUB/ADW/1702', href: KRA_URL, hrefLabel: 'Krajowy Rejestr Adwokatów' },
+          { i: 'graduation-cap', t: 'Absolwent prawa Uniwersytetu Jagiellońskiego' },
+          { i: 'book-open', t: 'Doktor nauk prawnych (postępowanie cywilne) — UMCS' },
+          { i: 'award', t: 'Doświadczenie z kancelarii SPCG — jednej z czołowych w Polsce' },
+          { i: 'landmark', t: 'Były pracownik naukowy Katedry Prawa Rolnego i Gospodarki Gruntami UMCS' },
+          { i: 'presentation', t: 'Wykładowca Okręgowej Rady Adwokackiej w Lublinie — postępowanie sądowoadministracyjne (skargi do WSA i NSA)' },
+          { i: 'file-search', t: 'Praktyka wyłącznie w prawie nieruchomości' },
+          { i: 'map-pin', t: 'Prowadzę sprawy klientów z całej Polski' }].
+          map((c, i) =>
+          <li key={i}>
+              <span className={`icon-tile ${compact ? 'icon-tile--info' : 'icon-tile--dark'}`}><Icon name={c.i} size={20} /></span>
+              <span style={{ color: compact ? 'var(--text-main)' : 'var(--text-on-dark)', fontWeight: 500 }}>{c.t}{c.href && <React.Fragment> · <a className="about-cred-link" href={c.href} target="_blank" rel="noopener noreferrer">{c.hrefLabel}</a></React.Fragment>}</span>
+            </li>
+          )}
+        </ul>
       </div>
     </section>);
 

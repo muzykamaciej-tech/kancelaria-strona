@@ -55,7 +55,7 @@ window.BLOG.push(
     excerpt: 'Fotowoltaika w Polsce przeżywa boom, a widok paneli słonecznych na polach powoli staje się elementem naszego krajobrazu. Dla wielu właścicieli gruntów rolnych wydzierżawienie ziemi pod farmę PV to wizja stałego, bezpiecznego i atrakcyjnego dochodu pasywnego. Odpowiedź prawnika rzadko jest prosta, ale w tym przypadku brzmi ona: nie, nie na każdej działce rolnej postawisz farmę fotowoltaiczną.',
     date: '18 grudnia 2025', iso: '2025-12-18', readTime: '3 min',
     category: 'Grunty rolne i OZE', tags: ['Fotowoltaika', 'Klasa gruntu', 'MPZP'],
-    cover: 'assets/blog-farma-pv-dzialka-rolna.png',
+    cover: 'assets/blog-farma-pv-dzialka-rolna.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/czy-na-każdej-działce-rolnej-można-postawić-farmę-fotowoltaiczną',
     related: ['dzierzawa-oze', 'odrolnienie', 'warunki-zabudowy'],
     body: [
@@ -106,7 +106,7 @@ window.BLOG.push(
     excerpt: 'Kupiłeś działkę w atrakcyjnej cenie, ale okazuje się, że nie ma ona bezpośredniego dostępu do drogi publicznej? A może odziedziczyłeś ziemię, do której dojeżdża się „przez pole sąsiada” na podstawie ustnej umowy sprzed lat? W obu przypadkach, aby legalnie budować lub sprzedać nieruchomość, potrzebujesz uregulowanego dostępu do drogi – czyli służebności drogi koniecznej.',
     date: '19 grudnia 2025', iso: '2025-12-19', readTime: '3 min',
     category: 'Służebności', tags: ['Droga konieczna', 'Koszty', 'Biegły'],
-    cover: 'assets/blog-koszt-drogi-koniecznej.png',
+    cover: 'assets/blog-koszt-drogi-koniecznej.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/ile-kosztuje-ustanowienie-służebności-drogi-koniecznej-w-2025-roku',
     related: ['droga-konieczna', 'audyt-stanu-prawnego-nieruchomosci'],
     body: [
@@ -168,7 +168,7 @@ window.BLOG.push(
     excerpt: 'Masz w swoim mieszkaniu lokatora, który nie płaci, nie chce się wyprowadzić i czuje się bezkarny? W Internecie aż roi się od „skutecznych porad” i ofert firm, które obiecują szybkie rozwiązanie problemu w kilka dni. Jako adwokat muszę Cię jednak ostrzec: to, co wydaje się drogą na skróty, zazwyczaj kończy się sprawą karną dla właściciela.',
     date: '22 grudnia 2025', iso: '2025-12-22', readTime: '3 min',
     category: 'Najem', tags: ['Eksmisja', 'Czyściciele', 'Art. 191 KK'],
-    cover: 'assets/blog-nielegalna-eksmisja.png',
+    cover: 'assets/blog-nielegalna-eksmisja.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/5-nielegalnych-sposobów-na-wyrzucenie-niechcianego-lokatora-jak-działają-czyściciele-i-dlaczego-to',
     related: ['eksmisja', 'windykacja-czynszu', 'bezpieczny-najem'],
     body: [

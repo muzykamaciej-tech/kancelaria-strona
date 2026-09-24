@@ -6,7 +6,7 @@ window.BLOG.push(
     excerpt: 'Gdy małżeństwo się kończy, wspólny dom lub mieszkanie staje się centralnym punktem sporu. To nie tylko budynek, ale centrum życiowe, inwestycja i symbol stabilizacji. Pytanie „kto to dostanie?” pada niemal zawsze jako pierwsze. Odpowiedź jest złożona, ale opiera się na twardej logice, którą sąd stosuje w każdej sprawie.',
     date: '10 października 2025', iso: '2025-10-10', updated: '11 października 2025', readTime: '6 min',
     category: 'Podział majątku', tags: ['Rozwód', 'Podział majątku', 'Kredyt hipoteczny'],
-    cover: 'assets/blog-podzial-majatku-rozwod.png',
+    cover: 'assets/blog-podzial-majatku-rozwod.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/podział-majątku-w-lublinie-kto-dostanie-mieszkanie-po-rozwodzie-kluczowe-kryteria-sądu',
     related: ['podzial-majatku-po-rozwodzie', 'zniesienie-wspolwlasnosci'],
     body: [
@@ -97,7 +97,7 @@ window.BLOG.push(
     excerpt: 'Jako adwokat specjalizujący się w prawie nieruchomości, widziałem już wszystko: od drobnych nieporozumień po kosztowne batalie sądowe. Ten artykuł to esencja moich doświadczeń, która pomoże Ci wynająć mieszkanie bezpiecznie i z zyskiem.',
     date: '11 października 2025', iso: '2025-10-11', readTime: '5 min',
     category: 'Najem', tags: ['Najem okazjonalny', 'Kaucja', 'Wynajmujący'],
-    cover: 'assets/blog-bezpieczny-najem.png',
+    cover: 'assets/blog-bezpieczny-najem.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/jak-bezpiecznie-wynająć-mieszkanie-kompletny-poradnik-prawnika-od-nieruchomości',
     related: ['bezpieczny-najem', 'eksmisja', 'kaucja-najem'],
     body: [
@@ -183,7 +183,7 @@ window.BLOG.push(
     excerpt: 'Posiadanie własnego kawałka ziemi – czy to działki rolnej odziedziczonej po dziadkach, czy gruntu inwestycyjnego pod miastem – kojarzy się z bezpieczeństwem i wolnością. Niestety, w mojej praktyce adwokackiej zbyt często widzę, jak ta sielanka zamienia się w koszmar. Właściciele, często nieświadomi zagrożeń, stają przed widmem gigantycznych kar i wieloletnich postępowań.',
     date: '11 października 2025', iso: '2025-10-11', readTime: '6 min',
     category: 'Odpowiedzialność właściciela', tags: ['Prawo geologiczne', 'Opłata podwyższona', 'Działka rolna'],
-    cover: 'assets/blog-wydobycie-piachu.png',
+    cover: 'assets/blog-wydobycie-piachu.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/twoja-działka-twoja-odpowiedzialność-nielegalne-wydobycie-piachu-konsekwencje',
     related: ['dzierzawa-rolna', 'uregulowanie-stanu-prawnego'],
     body: [
@@ -255,7 +255,7 @@ window.BLOG.push(
     excerpt: 'Reforma planowania przestrzennego przynosi rewolucję w lokalnych procedurach planistycznych. Pojawia się plan ogólny gminy, zmieniają się zasady wydawania decyzji o warunkach zabudowy (WZ) oraz uchwalania miejscowych planów. Wyjaśniam najważniejsze zmiany i podpowiadam, jakie działania podjąć, by zabezpieczyć swoje interesy.',
     date: '28 października 2025', iso: '2025-10-28', readTime: '13 min',
     category: 'Planowanie przestrzenne', tags: ['Plan ogólny', 'WZ', 'MPZP', 'Konsultacje społeczne'],
-    cover: 'assets/blog-reforma-planowania.png',
+    cover: 'assets/blog-reforma-planowania.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/prawnik-od-nieruchomości-radzi-jak-przygotować-się-na-zmiany-w-planowaniu-przestrzennym',
     related: ['plan-ogolny', 'warunki-zabudowy', 'skarga-na-plan-miejscowy'],
     body: [
@@ -332,7 +332,7 @@ window.BLOG.push(
     excerpt: 'Jeśli jesteś właścicielem działki, przez którą biegną „stare” rury, kable lub linie energetyczne, a przedsiębiorstwo przesyłowe odmawiało Ci zapłaty, powołując się na zasiedzenie – ten artykuł jest dla Ciebie. 2 grudnia 2025 roku Trybunał Konstytucyjny wydał orzeczenie (sygn. P 10/16), które wywraca do góry nogami dotychczasową linię obrony gigantów energetycznych.',
     date: '15 grudnia 2025', iso: '2025-12-15', readTime: '3 min',
     category: 'Służebność przesyłu', tags: ['Trybunał Konstytucyjny', 'Słupy na działce', 'Zasiedzenie'],
-    cover: 'assets/blog-wyrok-tk-przesyl.png',
+    cover: 'assets/blog-wyrok-tk-przesyl.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/rewolucyjny-wyrok-tk-koniec-z-darmowym-zasiedzeniem-służebności-przesyłu',
     related: ['odszkodowanie-sluzebnosc-przesylu', 'bezumowne-korzystanie'],
     body: [
@@ -382,7 +382,7 @@ window.BLOG.push(
     excerpt: 'Wyobraź sobie sytuację: od dekad dojeżdżasz do swojego domu tą samą, utartą ścieżką biegnącą przez działkę sąsiada. Tak robił Twój ojciec, a może i dziadek. Nikt nigdy nie protestował. Aż do dzisiaj. Nowy właściciel sąsiedniej działki stawia płot i mówi: „To mój teren, proszę tędy nie jeździć”.',
     date: '16 grudnia 2025', iso: '2025-12-16', readTime: '3 min',
     category: 'Służebności', tags: ['Zasiedzenie', 'Droga dojazdowa', 'Art. 292 KC'],
-    cover: 'assets/blog-zasiedzenie-drogi.png',
+    cover: 'assets/blog-zasiedzenie-drogi.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/zasiedzenie-służebności-drogi-czy-można-przejąć-prawo-przejazdu-po-30-latach',
     related: ['droga-konieczna', 'zasiedzenie-nieruchomosci'],
     body: [

@@ -9,7 +9,7 @@ const BLOG = [
     excerpt: 'Od kilku miesięcy w mojej kancelarii powtarza się jedno pytanie: „Panie mecenasie, mam działkę pod Lublinem, budowę planowałem za rok, może dwa — czy zdążę?”. Niepokój jest uzasadniony. Od 1 września 2026 roku zmieniają się zasady wydawania decyzji o warunkach zabudowy i dla części działek może to oznaczać, że budowa stanie się — przynajmniej na jakiś czas — po prostu niemożliwa.',
     date: '15 czerwca 2026', iso: '2026-06-15', readTime: '6 min',
     category: 'Warunki zabudowy', tags: ['WZ', 'Plan ogólny', 'Lublin'],
-    cover: 'assets/blog-wz-2026-lublin.png',
+    cover: 'assets/blog-wz-2026-lublin.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/warunki-zabudowy-2026-lublin',
     related: ['warunki-zabudowy', 'plan-ogolny', 'analiza-umowy-przedwstepnej'],
     body: [
@@ -69,7 +69,7 @@ const BLOG = [
     excerpt: 'Kupiłeś lub odziedziczyłeś dużą działkę. Chcesz wybudować dom, ale interesuje Cię zagospodarowanie tylko jednego, niewielkiego narożnika nieruchomości, na przykład tego z dostępem do drogi. Składasz wniosek o ustalenie warunków zabudowy (tzw. „wuzetkę”) i... zderzasz się ze ścianą. Urząd twierdzi, że musisz ustalić warunki dla całej działki. Czy urzędnicy mają rację? A może prawo zostawia nam furtkę?',
     date: '2 marca 2026', iso: '2026-03-02', updated: '9 kwietnia 2026', readTime: '3 min',
     category: 'Warunki zabudowy', tags: ['WZ', 'Orzecznictwo', 'Podział działki'],
-    cover: 'assets/blog-wz-czesc-dzialki.png',
+    cover: 'assets/blog-wz-czesc-dzialki.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/ustalenie-warunków-zabudowy-dla-części-działki-czy-to-w-ogóle-możliwe',
     related: ['warunki-zabudowy'],
     body: [
@@ -96,7 +96,7 @@ const BLOG = [
     excerpt: 'Koniec z wizytami w sądach i czekaniem na papierowe dokumenty z pieczątką. Ustawa z 9 stycznia 2026 r. wprowadza potężne zmiany, które odczuje każdy inwestor, przedsiębiorca i nabywca nieruchomości. Cyfryzacja przyspiesza – już niedługo samodzielnie wydrukowany odpis z Księgi Wieczystej zastąpi ten urzędowy, a o każdym nowym wpisie w KRS Twojej spółki dowiesz się ze swojej aplikacji mObywatel.',
     date: '1 marca 2026', iso: '2026-03-01', updated: '9 kwietnia 2026', readTime: '2 min',
     category: 'Księgi wieczyste', tags: ['Księgi wieczyste', 'KRS', 'mObywatel'],
-    cover: 'assets/blog-kw-krs-2026.png',
+    cover: 'assets/blog-kw-krs-2026.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/rewolucja-w-urzędach-2026-wydruki-ksiąg-wieczystych-z-mocą-urzędową-i-alerty-krs-w-twoim-telefonie',
     related: ['audyt-stanu-prawnego-nieruchomosci', 'obsluga-zakupu'],
     body: [
@@ -138,7 +138,7 @@ const BLOG = [
     excerpt: 'Dostajesz decyzję z urzędu miasta lub gminy o wysokości podatku od nieruchomości na dany rok. Otwierasz kopertę i przecierasz oczy ze zdumienia. Kwota jest znacznie wyższa niż zazwyczaj, a w uzasadnieniu widzisz, że urząd doliczył Ci kilkadziesiąt metrów kwadratowych powierzchni użytkowej, których w rzeczywistości nie masz.',
     date: '28 lutego 2026', iso: '2026-02-28', readTime: '2 min',
     category: 'Podatek od nieruchomości', tags: ['Ewidencja gruntów', 'Podatek', 'Starosta'],
-    cover: 'assets/blog-podatek-ewidencja.png',
+    cover: 'assets/blog-podatek-ewidencja.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/zawyżony-podatek-od-nieruchomości-przez-błąd-w-ewidencji-zobacz-z-kim-tak-naprawdę-musisz-walczyć',
     related: ['uregulowanie-stanu-prawnego'],
     body: [
@@ -168,7 +168,7 @@ const BLOG = [
     excerpt: 'Planujesz budowę pawilonu handlowego lub biurowca na działce, która od lat ma swój zjazd z drogi publicznej. Chcesz go jedynie odświeżyć i dostosować do obecnych standardów, ale w odpowiedzi od zarządcy drogi słyszysz, że zjazdu w ogóle nie powinno tam być, bo jest za blisko skrzyżowania. Brzmi znajomo? To częsta pułapka urzędnicza, w której organy mylą lokalizację nowego zjazdu z przebudową już istniejącego.',
     date: '27 lutego 2026', iso: '2026-02-27', readTime: '2 min',
     category: 'Proces budowlany', tags: ['Zjazd z drogi', 'NSA', 'Zarządca drogi'],
-    cover: 'assets/blog-zjazd-nsa.png',
+    cover: 'assets/blog-zjazd-nsa.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/przebudowa-czy-nowy-zjazd-nsa-o-granicach-kompetencji-zarządcy-drogi',
     related: ['pozwolenie-na-budowe', 'nadzor-budowlany-pinb'],
     body: [
