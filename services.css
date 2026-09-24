@@ -1,0 +1,370 @@
+/* services.css — styling for v3 service overview, pillar, detail, FAQ, form band.
+   Loaded after landing.css. Uses existing brand tokens. */
+
+/* ----------------------------------------------------------------
+   Service cards (rows) — used in overview, pillar, lite related
+   ---------------------------------------------------------------- */
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.svc-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+  width: 100%;
+  min-height: 208px;
+  padding: 1.75rem 1.25rem 1.5rem;
+  background: #fff;
+  border: 1px solid var(--slate-100);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: var(--shadow-card-quiet);
+  transition: border-color 160ms, box-shadow 160ms, transform 160ms;
+}
+.svc-card:hover {
+  border-color: var(--brand-primary);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-3px);
+}
+.svc-card-ic {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--brand-primary-light);
+  color: var(--brand-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.65rem;
+  transition: background 180ms, color 180ms, transform 180ms;
+}
+.svc-card:hover .svc-card-ic { background: var(--brand-primary); color: #fff; transform: scale(1.04); }
+.svc-ic { display: block; }
+.svc-card-title { font-weight: var(--weight-bold); color: var(--text-main); font-size: 1.0625rem; line-height: 1.3; }
+.svc-card-desc { font-size: 0.9rem; line-height: 1.5; color: var(--text-muted); text-wrap: pretty; }
+.svc-card-arrow { position: absolute; top: 0.9rem; right: 0.9rem; color: var(--slate-300); transition: color 160ms, transform 160ms; }
+.svc-card:hover .svc-card-arrow { color: var(--brand-primary); transform: translate(2px, -2px); }
+
+/* ----------------------------------------------------------------
+   Block cards — 12 thematic blocks on the overview page
+   ---------------------------------------------------------------- */
+.block-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.block-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.45rem;
+  min-height: 226px;
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--slate-100);
+  border-radius: var(--radius-xl);
+  padding: 1.85rem 1.5rem 1.6rem;
+  box-shadow: var(--shadow-card-quiet);
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 160ms, box-shadow 160ms, transform 160ms;
+}
+.block-card:hover { border-color: var(--brand-primary); box-shadow: var(--shadow-card); transform: translateY(-3px); }
+.block-card-ic {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: var(--brand-primary-light);
+  color: var(--brand-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.65rem;
+  transition: background 180ms, color 180ms, transform 180ms;
+}
+.block-card:hover .block-card-ic { background: var(--brand-primary); color: #fff; transform: scale(1.04); }
+.block-card-title {
+  font-weight: var(--weight-bold);
+  font-size: 1.1875rem;
+  line-height: 1.25;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+.block-card-tag {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+.block-card-cta {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--brand-primary);
+  font-weight: var(--weight-semibold);
+  font-size: 0.875rem;
+}
+.block-card:hover .block-card-cta { gap: 0.6rem; }
+
+/* ----------------------------------------------------------------
+   Case-form band (the conversion point)
+   ---------------------------------------------------------------- */
+.case-form-band { background: var(--bg-default); }
+.case-form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+@media (min-width: 940px) {
+  .case-form-grid { grid-template-columns: 0.92fr 1.08fr; gap: 3.5rem; }
+}
+.case-form-card { width: 100%; }
+
+/* ----------------------------------------------------------------
+   Check list (Kiedy potrzebne / Czego potrzebuję)
+   ---------------------------------------------------------------- */
+.check-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1rem; }
+.check-list li { display: flex; gap: 0.875rem; align-items: flex-start; }
+.check-list li svg { flex-shrink: 0; margin-top: 3px; }
+.check-list li span { color: var(--text-body); font-size: 1.0625rem; line-height: 1.55; }
+
+/* ----------------------------------------------------------------
+   Cost note callout
+   ---------------------------------------------------------------- */
+.cost-note {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.375rem 1.5rem;
+  background: var(--brand-primary-light);
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in oklch, var(--brand-primary) 18%, transparent);
+}
+.cost-note .body { text-align: left; }
+
+/* ----------------------------------------------------------------
+   Audit level cards
+   ---------------------------------------------------------------- */
+.level-list { display: flex; flex-direction: column; gap: 1.25rem; }
+.level-card {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-left: 4px solid var(--brand-primary);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card-quiet);
+}
+.level-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.875rem;
+}
+.level-card-name {
+  font-weight: var(--weight-extra);
+  font-size: 1.25rem;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+.level-plus {
+  font-size: 0.75rem;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--brand-primary);
+  background: var(--brand-primary-light);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+}
+.level-sub {
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.625rem;
+}
+
+/* ----------------------------------------------------------------
+   FAQ page (TOC + sections)
+   ---------------------------------------------------------------- */
+.faq-page-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+@media (min-width: 920px) {
+  .faq-page-grid { grid-template-columns: 240px 1fr; gap: 4rem; align-items: start; }
+}
+.faq-toc { position: relative; }
+@media (min-width: 920px) {
+  .faq-toc { position: sticky; top: 112px; }
+}
+.faq-toc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+.faq-toc button {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0.5rem 0.625rem;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--text-body);
+  cursor: pointer;
+  transition: background-color 140ms, color 140ms;
+}
+.faq-toc button:hover { background: var(--slate-50); color: var(--brand-primary); }
+.faq-toc-letter {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--brand-primary-light);
+  color: var(--brand-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: var(--weight-bold);
+}
+.faq-search {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #fff;
+  border: 1.5px solid var(--slate-200);
+  border-radius: var(--radius-full);
+  padding: 0.6rem 1rem;
+  max-width: 30rem;
+}
+.faq-search:focus-within { border-color: var(--brand-primary); box-shadow: 0 0 0 3px var(--brand-primary-shadow-soft); }
+.faq-search svg { color: var(--slate-400); flex-shrink: 0; }
+.faq-search input { flex: 1; border: 0; outline: 0; background: transparent; font-family: var(--font-sans); font-size: 1rem; color: var(--text-main); min-width: 0; }
+.faq-search-clear { border: 0; background: var(--slate-100); color: var(--text-muted); width: 1.6rem; height: 1.6rem; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
+.faq-search-clear:hover { background: var(--slate-200); color: var(--text-main); }
+.faq-results { max-width: 52rem; }
+.faq-results-count { font-weight: var(--weight-semibold); color: var(--text-muted); }
+.faq-results-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.faq-result { background: #fff; border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 1rem 1.25rem; }
+.faq-result summary { font-weight: var(--weight-bold); color: var(--text-main); cursor: pointer; display: flex; align-items: center; gap: 0.6rem; list-style: none; }
+.faq-result summary::-webkit-details-marker { display: none; }
+.faq-result-tag { flex-shrink: 0; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--brand-primary-light); color: var(--brand-primary); font-size: 0.75rem; font-weight: var(--weight-bold); display: inline-flex; align-items: center; justify-content: center; }
+.faq-result p { margin-top: 0.75rem; color: var(--text-body); line-height: 1.6; }
+
+.faq-section-head { display: flex; align-items: center; gap: 0.875rem; }
+.faq-section-letter {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--brand-primary);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--weight-bold);
+  font-size: 1rem;
+}
+
+/* ----------------------------------------------------------------
+   Mega-menu featured strip (added below heading)
+   ---------------------------------------------------------------- */
+.mega-menu { min-width: 780px; }
+.mega-menu-featured {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--slate-200);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.mega-menu-featured-label {
+  font-size: 0.6875rem;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.mega-menu-featured-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0.375rem 0;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: var(--weight-semibold);
+  color: var(--text-body);
+  cursor: pointer;
+  text-align: left;
+  line-height: 1.3;
+  transition: color 140ms;
+}
+.mega-menu-featured-item svg { color: var(--brand-primary); flex-shrink: 0; }
+.mega-menu-featured-item:hover { color: var(--brand-primary); }
+
+/* ----------------------------------------------------------------
+   Footer sitemap
+   ---------------------------------------------------------------- */
+.footer-sitemap {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.footer-sitemap-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem 2.5rem;
+}
+@media (min-width: 560px) { .footer-sitemap-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 900px) { .footer-sitemap-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1200px) { .footer-sitemap-grid { grid-template-columns: repeat(4, 1fr); } }
+.footer-sitemap-col ul { list-style: none; margin: 0.875rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-sitemap-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  font-family: inherit;
+  font-weight: var(--weight-bold);
+  font-size: 0.9375rem;
+  color: #fff;
+  cursor: pointer;
+  line-height: 1.3;
+  transition: color 140ms;
+}
+.footer-sitemap-head:hover { color: var(--brand-primary-light); }
+.footer-sitemap-num { font-size: 0.75rem; color: var(--brand-primary-light); font-weight: var(--weight-extra); flex-shrink: 0; }
+.footer-sitemap-col li button {
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--text-on-dark-3);
+  cursor: pointer;
+  transition: color 140ms;
+}
+.footer-sitemap-col li button:hover { color: #fff; }
