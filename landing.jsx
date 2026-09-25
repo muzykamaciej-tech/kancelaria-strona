@@ -38,6 +38,18 @@ function SvgIcon({ name, size = 18, style }) {
    ============================================================ */
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgqoaae';
 const FORMSPREE_READY = !FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID');
+/* Własny skrypt Google (Dysk + mail). Gdy adres jest wpisany, formularz wysyła tutaj zamiast do Formspree. */
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzdGA45EQN9rXFRSW38RNIAhYU7ALkKCrQDa45I1tRoare8r3VPVTKldwwDYAFSzu2Q_w/exec';
+window.APPS_SCRIPT_URL = APPS_SCRIPT_URL;
+const MAX_TOTAL_MB = 25;
+function fileToB64(file) {
+  return new Promise((ok, fail) => {
+    const r = new FileReader();
+    r.onload = () => ok({ name: file.name, type: file.type, size: file.size, data: String(r.result).split(',')[1] || '' });
+    r.onerror = () => fail(r.error);
+    r.readAsDataURL(file);
+  });
+}
 
 /* Wizytówka Google — link do recenzji */
 const GOOGLE_REVIEWS_URL = 'https://www.google.com/search?kgmid=/g/11kpjhpy44&hl=pl-US&q=Adwokat+dr+Maciej+Muzyka+-+Mecenas+od+Nieruchomo%C5%9Bci&shem=epsd1,ltae,rimspwouoe&shndl=30&source=sh/x/loc/osrp/m5/1&kgs=0d09a05fe2da440e&utm_source=epsd1,ltae,rimspwouoe,sh/x/loc/osrp/m5/1#mpd=~18068536807946905391/customers/reviews';
@@ -121,6 +133,8 @@ function QualificationForm({ compact = false }) {
   const [contact, setContact] = lUseState('email'); // email | phone
   const [errors, setErrors] = lUseState({});
   const [status, setStatus] = lUseState('idle'); // idle | sending | sent | error
+  const [errDetail, setErrDetail] = lUseState('');
+  const [filesDropped, setFilesDropped] = lUseState(false);
   const [hp, setHp] = lUseState(''); // honeypot — bots fill this, humans never see it
   const [drag, setDrag] = lUseState(false);
   const fileInput = lUseRef(null);
@@ -170,17 +184,46 @@ function QualificationForm({ compact = false }) {
       files.forEach((f, i) => fd.append('Załącznik ' + (i + 1), f));
       fd.append('_subject', (urgent ? 'PILNE · ' : '') + 'Nowa sprawa: ' + (state.situation || 'analiza') + ' — ' + state.name + ' (' + src + ')');
 
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        body: fd,
-        headers: { Accept: 'application/json' }
-      });
+      if (APPS_SCRIPT_URL) {
+        const fields = {};
+        for (const [k, v] of fd.entries()) if (!(v instanceof File) && k !== '_subject') fields[k] = v;
+        const payload = { subject: fd.get('_subject'), fields, files: await Promise.all(files.map(fileToB64)) };
+        const r = await fetch(APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'text/plain;charset=utf-8' } });
+        const j = await r.json().catch(() => ({}));
+        if (r.ok && j.ok) {
+          if (window.gtag) window.gtag('event', 'generate_lead', { method: 'formularz-wstepna-analiza', situation: state.situation || 'brak', files: files.length, source: src });
+          setStatus('sent');
+        } else {
+          setErrDetail(j.error || ('HTTP ' + r.status));
+          setStatus('error');
+        }
+        return;
+      }
+      const post = (body) => fetch(FORMSPREE_ENDPOINT, { method: 'POST', body, headers: { Accept: 'application/json' } });
+      let res = await post(fd);
+      /* Formspree bez planu z załącznikami odrzuca pliki — wysyłamy wtedy samą treść */
+      if (!res.ok && files.length) {
+        const j = await res.clone().json().catch(() => ({}));
+        const msg = JSON.stringify(j).toLowerCase();
+        if (/file|upload|attachment/.test(msg)) {
+          const fd2 = new FormData();
+          for (const [k, v] of fd.entries()) if (!(v instanceof File)) fd2.append(k, v);
+          fd2.append('Załączniki', 'Klient dodał ' + files.length + ' plik(i) — nie przeszły przez formularz, poproś o nie mailem: ' + files.map((x) => x.name).join(', '));
+          res = await post(fd2);
+          if (res.ok) setFilesDropped(true);
+        }
+      }
+      if (!res.ok) {
+        const j = await res.json().catch(() => ({}));
+        setErrDetail((j.errors && j.errors.map((e) => e.message).join('; ')) || j.error || ('HTTP ' + res.status));
+      }
       if (res.ok) {
         if (window.gtag) window.gtag('event', 'generate_lead', { method: 'formularz-wstepna-analiza', situation: state.situation || 'brak', files: files.length, source: src });
         setStatus('sent');
       } else
       setStatus('error');
     } catch (err) {
+      setErrDetail(String(err && err.message || err));
       setStatus('error');
     }
   }
@@ -201,6 +244,7 @@ function QualificationForm({ compact = false }) {
     let err;
     for (const f of incoming) {
       if (f.size > MAX_FILE_MB * 1024 * 1024) { err = `Plik „${f.name}” jest za duży (maks. ${MAX_FILE_MB} MB).`; continue; }
+      if (next.reduce((s, x) => s + x.size, 0) + f.size > MAX_TOTAL_MB * 1024 * 1024) { err = `Łącznie maks. ${MAX_TOTAL_MB} MB — większe dokumenty wyślij mailem.`; continue; }
       if (next.length >= MAX_FILES) { err = `Możesz dodać maksymalnie ${MAX_FILES} plików.`; break; }
       if (next.some((x) => x.name === f.name && x.size === f.size)) continue;
       next.push(f);
@@ -242,7 +286,7 @@ function QualificationForm({ compact = false }) {
           </li>
         </ol>
         <p className="small mt-6" style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
-          Masz jeszcze dokumenty? Dopisz je mailem na <a href={MAILTO_CASE}>{CONTACT_EMAIL}</a>.
+          {filesDropped ? <strong style={{ display: 'block', marginBottom: '0.25rem', color: 'var(--text-main)' }}>Opis dotarł, ale załączniki nie przeszły — wyślij je proszę mailem.</strong> : 'Masz jeszcze dokumenty? '}Dopisz je mailem na <a href={MAILTO_CASE}>{CONTACT_EMAIL}</a>.
         </p>
         {!FORMSPREE_READY &&
         <p className="small mt-4" style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
@@ -379,7 +423,7 @@ function QualificationForm({ compact = false }) {
           onDrop={onDrop}>
             <SvgIcon name="paperclip" size={18} />
             <span>{files.length ? 'Dodaj kolejny dokument' : 'Dodaj dokumenty lub zdjęcia — kliknij albo przeciągnij tutaj'}</span>
-            <span className="file-drop-hint">PDF, DOCX, JPG, PNG · do {MAX_FILES} plików, każdy do {MAX_FILE_MB} MB</span>
+            <span className="file-drop-hint">PDF, DOCX, JPG, PNG · do {MAX_FILES} plików, każdy do {MAX_FILE_MB} MB, łącznie do {MAX_TOTAL_MB} MB</span>
           </button>}
         {errors.file && <div className="input-err">{errors.file}</div>}
         <p className="small qual-hint">Nie masz wszystkich dokumentów? Napisz, co masz — resztę ustalę sam.</p>
@@ -416,6 +460,7 @@ function QualificationForm({ compact = false }) {
       {status === 'error' &&
       <p className="input-err" style={{ textAlign: 'center', marginTop: '0.75rem' }}>
           Nie udało się wysłać. Spróbuj ponownie albo napisz bezpośrednio na <a href={MAILTO_CASE}>{CONTACT_EMAIL}</a>.
+          {errDetail && <span style={{ display: 'block', marginTop: '0.375rem', opacity: 0.75, fontSize: '0.8125rem' }}>Szczegóły: {errDetail}</span>}
         </p>
       }
 

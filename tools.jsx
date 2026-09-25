@@ -226,8 +226,13 @@ function PlanAlertBand() {
       fd.append('Numer działki', s.dzialka.trim() || '—');
       fd.append('Strona', location.href);
       fd.append('_subject', 'Alert plan ogólny: ' + s.gmina.trim() + ' — ' + s.email.trim());
-      const r = await fetch(TOOLS_ENDPOINT, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
-      if (r.ok) { setStatus('sent'); if (window.gtag) window.gtag('event', 'plan_alert_signup', { gmina: s.gmina.trim() }); } else setStatus('error');
+      let r, okBody = true;
+      if (window.APPS_SCRIPT_URL) {
+        const fields = {}; for (const [k, v] of fd.entries()) if (k !== '_subject') fields[k] = v;
+        r = await fetch(window.APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify({ subject: fd.get('_subject'), fields, files: [] }), headers: { 'Content-Type': 'text/plain;charset=utf-8' } });
+        okBody = !!(await r.json().catch(() => ({}))).ok;
+      } else r = await fetch(TOOLS_ENDPOINT, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
+      if (r.ok && okBody) { setStatus('sent'); if (window.gtag) window.gtag('event', 'plan_alert_signup', { gmina: s.gmina.trim() }); } else setStatus('error');
     } catch (e2) { setStatus('error'); }
   }
   const mailto = `mailto:${TOOLS_EMAIL}?subject=${encodeURIComponent('Powiadomienie o planie ogólnym — gmina ' + s.gmina)}`;
