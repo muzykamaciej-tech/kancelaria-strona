@@ -292,7 +292,7 @@ const QC_PHONE = '+48884784984';
 const QC_PHONE_LABEL = '+48 884 784 984';
 const QC_WA_TEXT = 'Dzień dobry, piszę ze strony mecenasodnieruchomosci.pl w sprawie nieruchomości.';
 function QuickContact() {
-  const track = (m) => () => { if (window.gtag) window.gtag('event', 'contact_click', { method: m, page: location.hash || '#/' }); };
+  const track = (m) => () => { if (window.gtag) window.gtag('event', 'contact_click', { method: m, page: location.pathname }); };
   return (
     <div className="quick-contact" aria-label="Szybki kontakt">
       <a className="qc-btn qc-btn--wa" href={`https://wa.me/${QC_PHONE.replace('+', '')}?text=${encodeURIComponent(QC_WA_TEXT)}`} target="_blank" rel="noopener noreferrer" onClick={track('whatsapp')} aria-label="Napisz na WhatsApp">

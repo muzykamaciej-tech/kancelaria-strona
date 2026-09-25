@@ -48,53 +48,109 @@ function fixOrphans() {
      #/ · #/uslugi · #/uslugi/{blockId} · #/uslugi/{blockId}/{slug}
      #/blog · #/blog/{slug} · #/faq · #/kontakt
    ------------------------------------------------------------------ */
-function buildHash(route, ids) {
+function buildPath(route, ids) {
   ids = ids || {};
   switch (route) {
-    case 'uslugi': return '#/uslugi';
-    case 'blok': return '#/uslugi/' + (ids.blockId || '');
+    case 'uslugi': return '/uslugi';
+    case 'blok': return '/uslugi/' + (ids.blockId || '');
     case 'usluga': {
       const b = window.getBlockOfService(ids.serviceSlug);
-      return '#/uslugi/' + (b ? b.id + '/' : '') + (ids.serviceSlug || '');
+      return '/uslugi/' + (b ? b.id + '/' : '') + (ids.serviceSlug || '');
     }
-    case 'blog': return '#/blog';
-    case 'blogpost': return '#/blog/' + (ids.blogSlug || '');
-    case 'faq': return '#/faq';
-    case 'kontakt': return '#/kontakt';
-    case 'kalkulator': return '#/kalkulator-slupy';
-    case 'polityka-prywatnosci': return '#/polityka-prywatnosci';
-    case 'regulamin': return '#/regulamin';
-    case 'rodo': return '#/rodo';
+    case 'blog': return '/blog';
+    case 'blogpost': return '/blog/' + (ids.blogSlug || '');
+    case 'faq': return '/faq';
+    case 'kontakt': return '/kontakt';
+    case 'o-mnie': return '/o-mnie';
+    case 'kalkulator': return '/kalkulator-slupy';
+    case 'polityka-prywatnosci': return '/polityka-prywatnosci';
+    case 'regulamin': return '/regulamin';
+    case 'rodo': return '/rodo';
+    case 'notfound': return '/404';
     case 'landing':
-    default: return '#/';
+    default: return '/';
   }
 }
+function idsFor(route, slug) {
+  if (slug && typeof slug === 'object') return slug;
+  if (route === 'usluga') return { serviceSlug: slug };
+  if (route === 'blok') return { blockId: slug };
+  if (route === 'blogpost') return { blogSlug: slug };
+  return {};
+}
+/* href for any internal route — used by <NavLink> and plain <a> links */
+function routeHref(route, slug) { return buildPath(route, idsFor(route, slug)); }
 
-function parseHash() {
-  let h = (location.hash || '').replace(/^#/, '');
-  h = h.replace(/^\/+/, '').replace(/\/+$/, '');
+function parsePath(pathname) {
+  let h = (pathname == null ? location.pathname : pathname) || '/';
+  try { h = decodeURIComponent(h); } catch (e) {}
+  h = h.replace(/\.html$/, '').replace(/^\/+/, '').replace(/\/+$/, '');
   const parts = h ? h.split('/') : [];
-  if (parts.length === 0) return { route: 'landing' };
+  if (parts.length === 0 || (parts.length === 1 && parts[0] === 'index')) return { route: 'landing' };
   const [a, b, c] = parts;
   if (a === 'uslugi') {
     if (!b) return { route: 'uslugi' };
-    if (c && window.getService(c)) return { route: 'usluga', serviceSlug: c };
+    if (c) return (window.getService(c) && (window.getBlockOfService(c) || {}).id === b) ? { route: 'usluga', serviceSlug: c } : { route: 'notfound' };
     if (window.getBlock(b)) return { route: 'blok', blockId: b };
     if (window.getService(b)) return { route: 'usluga', serviceSlug: b };
-    return { route: 'uslugi' };
+    return { route: 'notfound' };
   }
-  if (a === 'blog') return b ? { route: 'blogpost', blogSlug: b } : { route: 'blog' };
-  if (a === 'faq') return { route: 'faq' };
-  if (a === 'kontakt') return { route: 'kontakt' };
-  if (a === 'kalkulator-slupy') return { route: 'kalkulator' };
-  if (a === 'polityka-prywatnosci') return { route: 'polityka-prywatnosci' };
-  if (a === 'regulamin') return { route: 'regulamin' };
-  if (a === 'rodo') return { route: 'rodo' };
-  return { route: 'landing' };
+  if (a === 'blog') {
+    if (!b) return { route: 'blog' };
+    return (window.BLOG || []).some((p) => p.slug === b) && !c ? { route: 'blogpost', blogSlug: b } : { route: 'notfound' };
+  }
+  if (parts.length > 1) return { route: 'notfound' };
+  const simple = { faq: 'faq', kontakt: 'kontakt', 'o-mnie': 'o-mnie', 'kalkulator-slupy': 'kalkulator', 'polityka-prywatnosci': 'polityka-prywatnosci', regulamin: 'regulamin', rodo: 'rodo' };
+  return simple[a] ? { route: simple[a] } : { route: 'notfound' };
 }
 
+/* Legacy hash links (#/blog/...) from the old hash router → real paths, once, before first render */
+(function migrateLegacyHash() {
+  if (/^#\/.+/.test(location.hash) || location.hash === '#/') {
+    const p = location.hash.slice(1).replace(/\/+$/, '') || '/';
+    history.replaceState(null, '', p);
+  }
+})();
+
+function isPlainClick(e) {
+  return e && e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && !e.defaultPrevented;
+}
+
+/* <NavLink route="usluga" slug={s.slug} className="…">…</NavLink>
+   Renders a real <a href="/uslugi/…"> (crawlable) and navigates client-side on a plain click. */
+function NavLink({ route, slug, subject, onNavigate, children, ...rest }) {
+  return (
+    <a
+      href={routeHref(route, slug)}
+      {...rest}
+      onClick={(e) => {
+        if (rest.onClick) rest.onClick(e);
+        if (!isPlainClick(e)) return;
+        e.preventDefault();
+        if (onNavigate) onNavigate();
+        window.navigate(route, slug, subject);
+      }}>
+      {children}
+    </a>
+  );
+}
+
+function setHeadTag(selector, create, attr, value) {
+  let el = document.head.querySelector(selector);
+  if (value == null) { if (el) el.remove(); return; }
+  if (!el) { el = create(); document.head.appendChild(el); }
+  el.setAttribute(attr, value);
+}
+/* canonical + og:url point at the page itself (www, no trailing slash); 404 gets noindex and no canonical */
+function setCanonical(path, noindex) {
+  const url = noindex ? null : SITE_ORIGIN + (path === '/' ? '/' : path);
+  setHeadTag('link[rel="canonical"]', () => { const l = document.createElement('link'); l.rel = 'canonical'; return l; }, 'href', url);
+  setHeadTag('meta[property="og:url"]', () => { const m = document.createElement('meta'); m.setAttribute('property', 'og:url'); return m; }, 'content', url);
+  setHeadTag('meta[name="robots"]', () => { const m = document.createElement('meta'); m.setAttribute('name', 'robots'); return m; }, 'content', noindex ? 'noindex' : null);
+}
 function setMeta(title, description) {
   if (title) document.title = title;
+  if (title) setHeadTag('meta[property="og:title"]', () => { const m = document.createElement('meta'); m.setAttribute('property', 'og:title'); return m; }, 'content', title);
   if (description != null) {
     let m = document.querySelector('meta[name="description"]');
     if (!m) { m = document.createElement('meta'); m.setAttribute('name', 'description'); document.head.appendChild(m); }
@@ -107,6 +163,7 @@ function truncMeta(s, n) {
 }
 
 const SITE_NAME = 'Kancelaria Nieruchomości';
+const SITE_ORIGIN = 'https://www.mecenasodnieruchomosci.pl';
 const LANDING_META = 'Adwokat i doktor nauk prawnych. Wyłącznie nieruchomości — audyty, transakcje, inwestycje, spory. Opisz sprawę i odbierz bezpłatną wstępną analizę w 24 h. W pełni zdalnie, w całej Polsce.';
 
 function setMetaForView(route, ids) {
@@ -132,6 +189,10 @@ function setMetaForView(route, ids) {
     setMeta('FAQ — najczęstsze pytania | ' + SITE_NAME, 'Odpowiedzi na najczęstsze pytania o współpracę: bezpłatna analiza sprawy, poufność, wycena i przebieg spraw z nieruchomości.');
   } else if (route === 'kontakt') {
     setMeta('Kontakt | ' + SITE_NAME, 'Opisz swoją sprawę — bezpłatna wstępna analiza w 24 h. Kontakt mailowy, obsługa w całej Polsce. Siedziba w Lublinie, spotkania w Warszawie.');
+  } else if (route === 'o-mnie') {
+    setMeta('O mnie — adw. dr Maciej Muzyka | ' + SITE_NAME, 'Adwokat i doktor nauk prawnych, Lubelska Izba Adwokacka (LUB/ADW/1702). Wyłącznie prawo nieruchomości: Lublin i zdalnie cała Polska. Wykładowca ORA w Lublinie.');
+  } else if (route === 'notfound') {
+    setMeta('Nie znaleziono strony | ' + SITE_NAME, 'Tej strony nie ma pod tym adresem. Przejdź do usług, poradników albo opisz swoją sprawę.');
   } else if (route === 'kalkulator') {
     setMeta('Kalkulator: ile należy Ci się za słupy i rury na działce | ' + SITE_NAME, 'Orientacyjny przedział wynagrodzenia za służebność przesyłu i bezumowne korzystanie z działki — słupy, linie, gazociąg, wodociąg. Bez danych osobowych, w kilka sekund.');
   } else if (route === 'polityka-prywatnosci') {
@@ -143,14 +204,15 @@ function setMetaForView(route, ids) {
   } else {
     setMeta('adw. dr Maciej Muzyka — Kancelaria Nieruchomości | Prawo nieruchomości, prosto i skutecznie.', LANDING_META);
   }
+  setCanonical(buildPath(route, ids), route === 'notfound');
   setJsonLd(buildJsonLd(route, ids));
 }
 
 /* Route-level structured data (FAQPage / Service + BreadcrumbList / BlogPosting) */
-const SITE_BASE = 'https://mecenasodnieruchomosci.pl/';
-const ORG_ID = SITE_BASE + '#kancelaria';
+const SITE_BASE = 'https://www.mecenasodnieruchomosci.pl';
+const ORG_ID = SITE_BASE + '/#kancelaria';
 function crumbs(list) {
-  return { '@type': 'BreadcrumbList', itemListElement: list.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE_BASE + c.hash })) };
+  return { '@type': 'BreadcrumbList', itemListElement: list.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE_BASE + c.path })) };
 }
 function buildJsonLd(route, ids) {
   ids = ids || {};
@@ -162,16 +224,16 @@ function buildJsonLd(route, ids) {
     if (!s || !b) return null;
     const c = (window.SERVICE_CONTENT || {})[ids.serviceSlug] || {};
     return { '@context': 'https://schema.org', '@graph': [
-      { '@type': 'Service', name: c.h1 || s.title, description: truncMeta(c.subtitle || s.desc, 300), serviceType: 'Legal service', provider: { '@id': ORG_ID }, areaServed: { '@type': 'Country', name: 'Polska' }, url: SITE_BASE + buildHash('usluga', ids), offers: { '@type': 'Offer', description: 'Bezpłatna wstępna analiza sprawy w 24 h robocze; wycena przed zleceniem.' } },
-      crumbs([{ name: 'Start', hash: '' }, { name: 'Usługi', hash: '#/uslugi' }, { name: b.title, hash: '#/uslugi/' + b.id }, { name: s.title, hash: buildHash('usluga', ids) }]) ] };
+      { '@type': 'Service', name: c.h1 || s.title, description: truncMeta(c.subtitle || s.desc, 300), serviceType: 'Legal service', provider: { '@id': ORG_ID }, areaServed: { '@type': 'Country', name: 'Polska' }, url: SITE_BASE + buildPath('usluga', ids), offers: { '@type': 'Offer', description: 'Bezpłatna wstępna analiza sprawy w 24 h robocze; wycena przed zleceniem.' } },
+      crumbs([{ name: 'Start', path: '/' }, { name: 'Usługi', path: '/uslugi' }, { name: b.title, path: '/uslugi/' + b.id }, { name: s.title, path: buildPath('usluga', ids) }]) ] };
   }
   if (route === 'blok') {
     const b = window.getBlock(ids.blockId); if (!b) return null;
-    return { '@context': 'https://schema.org', '@graph': [crumbs([{ name: 'Start', hash: '' }, { name: 'Usługi', hash: '#/uslugi' }, { name: b.title, hash: '#/uslugi/' + b.id }])] };
+    return { '@context': 'https://schema.org', '@graph': [crumbs([{ name: 'Start', path: '/' }, { name: 'Usługi', path: '/uslugi' }, { name: b.title, path: '/uslugi/' + b.id }])] };
   }
   if (route === 'blogpost') {
     const p = (window.BLOG || []).find((x) => x.slug === ids.blogSlug); if (!p) return null;
-    return { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, description: truncMeta(p.excerpt, 300), datePublished: p.iso, dateModified: p.iso, image: p.cover ? SITE_BASE + p.cover : undefined, inLanguage: 'pl', author: { '@type': 'Person', '@id': SITE_BASE + '#maciej-muzyka', name: 'Maciej Muzyka' }, publisher: { '@id': ORG_ID }, mainEntityOfPage: SITE_BASE + '#/blog/' + p.slug };
+    return { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, description: truncMeta(p.excerpt, 300), datePublished: p.iso, dateModified: p.updated || p.iso, image: p.cover ? SITE_BASE + (p.cover.charAt(0) === '/' ? '' : '/') + p.cover : undefined, inLanguage: 'pl', author: { '@type': 'Person', '@id': SITE_BASE + '/#maciej-muzyka', name: 'Maciej Muzyka', url: SITE_BASE + '/o-mnie' }, publisher: { '@id': ORG_ID }, mainEntityOfPage: SITE_BASE + '/blog/' + p.slug };
   }
   return null;
 }
@@ -183,10 +245,10 @@ function setJsonLd(data) {
 }
 
 function App() {
-  const [route, setRouteState] = useState(() => parseHash().route);
-  const [serviceSlug, setServiceSlug] = useState(() => parseHash().serviceSlug || null);
-  const [blockId, setBlockId] = useState(() => parseHash().blockId || null);
-  const [blogSlug, setBlogSlug] = useState(() => parseHash().blogSlug || null);
+  const [route, setRouteState] = useState(() => parsePath().route);
+  const [serviceSlug, setServiceSlug] = useState(() => parsePath().serviceSlug || null);
+  const [blockId, setBlockId] = useState(() => parsePath().blockId || null);
+  const [blogSlug, setBlogSlug] = useState(() => parsePath().blogSlug || null);
   const [contactSubject, setContactSubject] = useState('');
   const isInternalNav = React.useRef(false);
   const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
@@ -205,17 +267,17 @@ function App() {
     if (r === 'blok' && slug) { setBlockId(slug); ids.blockId = slug; }
     if (r === 'blogpost' && slug) { setBlogSlug(slug); ids.blogSlug = slug; }
     if (subject) setContactSubject(subject);
-    const target = buildHash(r, ids);
-    const cur = location.hash === '' ? '#/' : location.hash;
-    if (cur !== target) { isInternalNav.current = true; location.hash = target; }
+    const target = buildPath(r, ids);
+    if (location.pathname !== target || location.hash) history.pushState(null, '', target);
     setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0);
   }
+  window.navigate = setRoute;
 
   /* external navigation (back/forward, refresh, pasted deep link) → state */
   useEffect(() => {
     function onRoute() {
-      if (isInternalNav.current) { isInternalNav.current = false; return; }
-      const p = parseHash();
+      if (/^#\//.test(location.hash)) history.replaceState(null, '', location.hash.slice(1).replace(/\/+$/, '') || '/');
+      const p = parsePath();
       setRouteState(p.route);
       setServiceSlug(p.serviceSlug || null);
       setBlockId(p.blockId || null);
@@ -228,6 +290,35 @@ function App() {
       window.removeEventListener('hashchange', onRoute);
       window.removeEventListener('popstate', onRoute);
     };
+  }, []);
+
+  /* Plain internal <a href="/…"> links anywhere (content, footer) → client-side navigation.
+     Assets, downloads, new tabs and unknown paths fall through to the browser. */
+  useEffect(() => {
+    function onClick(e) {
+      if (!isPlainClick(e)) return;
+      const a = e.target.closest && e.target.closest('a[href]');
+      if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+      const raw = a.getAttribute('href');
+      if (!raw || /^(mailto:|tel:|https?:\/\/(?!(www\.)?mecenasodnieruchomosci\.pl))/i.test(raw)) return;
+      const url = new URL(raw, location.href);
+      if (url.origin !== location.origin) return;
+      let path = url.pathname;
+      if (/^#\/.*/.test(url.hash)) path = url.hash.slice(1).replace(/\/+$/, '') || '/';
+      else if (url.hash && path === location.pathname) return; /* in-page anchor */
+      if (/^\/(assets|api)\//.test(path) || /\.[a-z0-9]{2,4}$/i.test(path)) return;
+      const p = parsePath(path);
+      if (p.route === 'notfound') return;
+      e.preventDefault();
+      history.pushState(null, '', buildPath(p.route, p));
+      setRouteState(p.route);
+      setServiceSlug(p.serviceSlug || null);
+      setBlockId(p.blockId || null);
+      setBlogSlug(p.blogSlug || null);
+      setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0);
+    }
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
   }, []);
 
   /* keep document.title + meta description in sync with the current view */
@@ -261,11 +352,13 @@ function App() {
   else if (route === 'blogpost') body = <BlogPostPage setRoute={setRoute} slug={blogSlug || window.BLOG[0].slug} />;
   else if (route === 'faq') body = <FaqPageV3 setRoute={setRoute} />;
   else if (route === 'kontakt') body = <KontaktPage setRoute={setRoute} />;
+  else if (route === 'o-mnie') body = <window.OMniePage setRoute={setRoute} />;
+  else if (route === 'notfound') body = <window.NotFoundPage setRoute={setRoute} />;
   else if (route === 'kalkulator') body = <window.KalkulatorSlupyPage setRoute={setRoute} />;
   else if (route === 'polityka-prywatnosci') body = <PolitykaPrywatnosciPage setRoute={setRoute} />;
   else if (route === 'regulamin') body = <RegulaminPage setRoute={setRoute} />;
   else if (route === 'rodo') body = <RodoPage setRoute={setRoute} />;
-  else body = <LandingPage setRoute={setRoute} />;
+  else body = <window.NotFoundPage setRoute={setRoute} />;
 
   return (
     <>
@@ -349,5 +442,7 @@ function App() {
     </>
   );
 }
+
+Object.assign(window, { NavLink, routeHref, buildPath, parsePath });
 
 ReactDOM.createRoot(document.getElementById('app')).render(<App />);

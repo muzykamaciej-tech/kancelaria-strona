@@ -497,7 +497,7 @@ function GoogleBadge({ onDark = false }) {
 function lScrollToId(id) {
   const el = document.getElementById(id);
   if (!el) return;
-  if (id === 'formularz' && window.gtag) window.gtag('event', 'cta_scroll_form', { page: location.hash || '#/' });
+  if (id === 'formularz' && window.gtag) window.gtag('event', 'cta_scroll_form', { page: location.pathname });
   const top = el.getBoundingClientRect().top + window.pageYOffset - 100;
   window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
 }
@@ -667,7 +667,7 @@ function ReportShowcase() {
             <button className="btn btn-primary" onClick={() => lScrollToId('formularz')}>
               Opisz swoją sprawę <SvgIcon name="arrow-right" size={16} />
             </button>
-              <a className="btn btn-secondary" href="assets/przykladowy-raport-audyt-nieruchomosci.pdf" target="_blank" rel="noopener" download onClick={() => window.gtag && window.gtag('event', 'file_download', { file_name: 'przykladowy-raport-audyt-nieruchomosci.pdf' })}>
+              <a className="btn btn-secondary" href="/assets/przykladowy-raport-audyt-nieruchomosci.pdf" target="_blank" rel="noopener" download onClick={() => window.gtag && window.gtag('event', 'file_download', { file_name: 'przykladowy-raport-audyt-nieruchomosci.pdf' })}>
                 <SvgIcon name="file-text" size={16} /> Pobierz przykładowy raport (PDF)
               </a>
             </div>
@@ -763,7 +763,7 @@ function LandingIntro({ setRoute }) {
 
           <div className="landing-intro-portrait">
             <div className="portrait-card">
-              <img src={window.__resources?.portrait1 || "assets/maciej-muzyka.webp"} alt="adw. dr Maciej Muzyka" width="1100" height="1100" decoding="async" />
+              <img src={window.__resources?.portrait1 || "/assets/maciej-muzyka.webp"} alt="adw. dr Maciej Muzyka" width="1100" height="1100" decoding="async" />
               <div className="portrait-scrim" />
               <div className="portrait-caption">
                 <p className="font-bold" style={{ fontSize: '1.5rem' }}>Maciej Muzyka</p>
@@ -850,9 +850,10 @@ function useInView(ref, threshold = 0.3) {
 }
 
 function CountUp({ value, duration = 1900, grouped = false, suffix = '', start = false }) {
-  const [n, setN] = lUseState(0);
+  /* prerendered HTML (and crawlers) get the final number; the count-up runs only in a live browser */
+  const [n, setN] = lUseState(() => window.__PRERENDER__ ? value : 0);
   lUseEffect(() => {
-    if (!start) return;
+    if (!start || window.__PRERENDER__) return;
     const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) {setN(value);return;}
     let raf;
@@ -1354,4 +1355,4 @@ function LandingPage({ setRoute }) {
 
 }
 
-Object.assign(window, { LandingPage, QualificationForm, GoogleBadge, ReportShowcase, MapSection, MobileCTABar, lScrollToId });
+Object.assign(window, { LandingPage, QualificationForm, GoogleBadge, ReportShowcase, MapSection, MobileCTABar, lScrollToId, ReviewsBand, FinalCTA });

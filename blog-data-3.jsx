@@ -6,7 +6,7 @@ window.BLOG.push(
     excerpt: 'Odbiór kluczy do nowego mieszkania to moment, na który czekamy miesiącami, a czasem latami. Euforia jednak szybko mija, gdy na wymarzonych ścianach pojawiają się pęknięcia, w garażu stoi woda, a wentylacja zamiast wyciągać powietrze – wdmuchuje je do środka.',
     date: '17 grudnia 2025', iso: '2025-12-17', readTime: '3 min',
     category: 'Spory z deweloperem', tags: ['Rękojmia', 'Wady lokalu', 'Obniżenie ceny'],
-    cover: 'assets/blog-odszkodowanie-deweloper-wady.jpg',
+    cover: '/assets/blog-odszkodowanie-deweloper-wady.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/odszkodowanie-od-dewelopera-za-wady-co-można-zyskać',
     related: ['rekojmia-wady-lokalu', 'wady-czesci-wspolnych', 'usuniecie-wad-protokol'],
     body: [
@@ -55,7 +55,7 @@ window.BLOG.push(
     excerpt: 'Fotowoltaika w Polsce przeżywa boom, a widok paneli słonecznych na polach powoli staje się elementem naszego krajobrazu. Dla wielu właścicieli gruntów rolnych wydzierżawienie ziemi pod farmę PV to wizja stałego, bezpiecznego i atrakcyjnego dochodu pasywnego. Odpowiedź prawnika rzadko jest prosta, ale w tym przypadku brzmi ona: nie, nie na każdej działce rolnej postawisz farmę fotowoltaiczną.',
     date: '18 grudnia 2025', iso: '2025-12-18', readTime: '3 min',
     category: 'Grunty rolne i OZE', tags: ['Fotowoltaika', 'Klasa gruntu', 'MPZP'],
-    cover: 'assets/blog-farma-pv-dzialka-rolna.jpg',
+    cover: '/assets/blog-farma-pv-dzialka-rolna.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/czy-na-każdej-działce-rolnej-można-postawić-farmę-fotowoltaiczną',
     related: ['dzierzawa-oze', 'odrolnienie', 'warunki-zabudowy'],
     body: [
@@ -106,7 +106,7 @@ window.BLOG.push(
     excerpt: 'Kupiłeś działkę w atrakcyjnej cenie, ale okazuje się, że nie ma ona bezpośredniego dostępu do drogi publicznej? A może odziedziczyłeś ziemię, do której dojeżdża się „przez pole sąsiada” na podstawie ustnej umowy sprzed lat? W obu przypadkach, aby legalnie budować lub sprzedać nieruchomość, potrzebujesz uregulowanego dostępu do drogi – czyli służebności drogi koniecznej.',
     date: '19 grudnia 2025', iso: '2025-12-19', readTime: '3 min',
     category: 'Służebności', tags: ['Droga konieczna', 'Koszty', 'Biegły'],
-    cover: 'assets/blog-koszt-drogi-koniecznej.jpg',
+    cover: '/assets/blog-koszt-drogi-koniecznej.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/ile-kosztuje-ustanowienie-służebności-drogi-koniecznej-w-2025-roku',
     related: ['droga-konieczna', 'audyt-stanu-prawnego-nieruchomosci'],
     body: [
@@ -168,7 +168,7 @@ window.BLOG.push(
     excerpt: 'Masz w swoim mieszkaniu lokatora, który nie płaci, nie chce się wyprowadzić i czuje się bezkarny? W Internecie aż roi się od „skutecznych porad” i ofert firm, które obiecują szybkie rozwiązanie problemu w kilka dni. Jako adwokat muszę Cię jednak ostrzec: to, co wydaje się drogą na skróty, zazwyczaj kończy się sprawą karną dla właściciela.',
     date: '22 grudnia 2025', iso: '2025-12-22', readTime: '3 min',
     category: 'Najem', tags: ['Eksmisja', 'Czyściciele', 'Art. 191 KK'],
-    cover: 'assets/blog-nielegalna-eksmisja.jpg',
+    cover: '/assets/blog-nielegalna-eksmisja.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/5-nielegalnych-sposobów-na-wyrzucenie-niechcianego-lokatora-jak-działają-czyściciele-i-dlaczego-to',
     related: ['eksmisja', 'windykacja-czynszu', 'bezpieczny-najem'],
     body: [
@@ -226,7 +226,7 @@ window.BLOG.push(
     excerpt: '„Prowadzę własną firmę (jestem czynnym vatowcem), ale mam też kawałek ziemi, na której jestem rolnikiem ryczałtowym. Zgłosił się do mnie inwestor, który chce na moim polu postawić farmę fotowoltaiczną. Moja księgowa zapytała, czy wystawię fakturę z VAT-em, czy bez. Przecież to moja ziemia rolna, a dzierżawa gruntów rolnych jest zwolniona z podatku, prawda?”',
     date: '30 grudnia 2025', iso: '2025-12-30', readTime: '2 min',
     category: 'Grunty rolne i OZE', tags: ['Fotowoltaika', 'VAT', 'Dzierżawa'],
-    cover: 'assets/blog-dzierzawa-pv-vat.jpg',
+    cover: '/assets/blog-dzierzawa-pv-vat.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/kiedy-słońce-zarabia-a-fiskus-zaciera-ręce-czy-dzierżawa-pod-fotowoltaikę-jest-zwolniona-z-vat',
     related: ['dzierzawa-oze', 'dzierzawa-rolna'],
     body: [
@@ -261,7 +261,7 @@ window.BLOG.push(
     excerpt: '„Dwa miesiące temu złożyłem wniosek o Warunki Zabudowy dla mojej działki pod miastem. Wczoraj sąsiad postraszył mnie, że gmina lada chwila uchwali nowy plan ogólny. Podobno jak on wejdzie w życie, to stare przepisy idą do kosza, a mój wniosek przepadnie. Czy to prawda?”',
     date: '31 grudnia 2025', iso: '2025-12-31', readTime: '2 min',
     category: 'Warunki zabudowy', tags: ['WZ', 'Plan ogólny', 'Przepisy przejściowe'],
-    cover: 'assets/blog-plan-ogolny-wniosek-wz.jpg',
+    cover: '/assets/blog-plan-ogolny-wniosek-wz.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/panika-w-urzędzie-czy-plan-ogólny-wysadzi-twój-wniosek-o-wz-w-powietrze',
     related: ['warunki-zabudowy', 'plan-ogolny'],
     body: [

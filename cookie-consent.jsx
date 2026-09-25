@@ -33,6 +33,7 @@ function CookieBanner() {
   const [visible, setVisible] = React.useState(false);
 
   React.useEffect(() => {
+    if (window.__PRERENDER__) return; /* never bake the banner into prerendered HTML */
     /* first visit → no stored decision → show the banner */
     if (!readConsent()) setVisible(true);
 

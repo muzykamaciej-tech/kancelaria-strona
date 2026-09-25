@@ -6,7 +6,7 @@ window.BLOG.push(
     excerpt: 'Jesteś właścicielem działki, płacisz za nią podatki, dbasz o nią. Ale przez środek Twojego ogrodu biegnie linia energetyczna albo pod ziemią zakopana jest rura gazowa. Nigdy nie wyraziłeś na to zgody, a na Twoje konto nie wpływa z tego tytułu ani złotówka. Czy przedsiębiorstwo przesyłowe może korzystać z Twojej własności „za darmo”?',
     date: '20 stycznia 2026', iso: '2026-01-20', readTime: '3 min',
     category: 'Służebność przesyłu', tags: ['Bezumowne korzystanie', 'Słupy na działce', 'Art. 224 KC'],
-    cover: 'assets/blog-bezumowne-korzystanie.jpg',
+    cover: '/assets/blog-bezumowne-korzystanie.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/słup-rura-lub-kable-na-działce-bez-umowy-sprawdź-czy-należy-ci-się-wynagrodzenie-za-bezumowne-kor',
     related: ['bezumowne-korzystanie', 'odszkodowanie-sluzebnosc-przesylu'],
     body: [
@@ -58,7 +58,7 @@ window.BLOG.push(
     excerpt: 'Czy na Twojej działce stoi słup energetyczny, a może pod ziemią biegnie rura z gazem? Jeśli tak, przedsiębiorstwo przesyłowe korzysta z Twojej własności. Zgodnie z prawem należy Ci się za to „odpowiednie” wynagrodzenie. Problem w tym, że przepisy nie podają gotowego wzoru na jego wyliczenie.',
     date: '5 stycznia 2026', iso: '2026-01-05', readTime: '3 min',
     category: 'Służebność przesyłu', tags: ['Wynagrodzenie', 'Rzeczoznawca', 'Strefa ochronna'],
-    cover: 'assets/blog-wynagrodzenie-przesyl.jpg',
+    cover: '/assets/blog-wynagrodzenie-przesyl.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/służebność-przesyłu-jak-obliczyć-wynagrodzenie-za-słupy-i-rury-na-działce-praktyczny-poradnik',
     related: ['odszkodowanie-sluzebnosc-przesylu', 'bezumowne-korzystanie'],
     body: [
@@ -119,7 +119,7 @@ window.BLOG.push(
     excerpt: 'Opóźnienie dewelopera to dla Ciebie konkretne straty finansowe: dłuższy najem, wyższe raty kredytu. Zaglądasz do umowy, a tam deweloper wpisał karę umowną za każdy dzień zwłoki. Wydaje się, że jesteś chroniony, prawda? Często to tylko prawna pułapka — ale Sąd Najwyższy stanął właśnie po stronie kupujących.',
     date: '23 lutego 2026', iso: '2026-02-23', readTime: '3 min',
     category: 'Spory z deweloperem', tags: ['Kara umowna', 'Sąd Najwyższy', 'Klauzule abuzywne'],
-    cover: 'assets/blog-kara-umowna-deweloper.jpg',
+    cover: '/assets/blog-kara-umowna-deweloper.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/kara-umowna-za-opóźnienie-dewelopera-to-nie-wszystko-przełomowa-uchwała-sądu-najwyższego',
     related: ['kary-za-opoznienie-dewelopera', 'sprawdzenie-umowy-deweloperskiej'],
     body: [
@@ -148,7 +148,7 @@ window.BLOG.push(
     excerpt: 'Od połowy lutego dostęp do Rejestru Cen Nieruchomości (RCN) stał się w pełni darmowy. W internecie zaczęły wyrastać portale, które masowo publikują dane o transakcjach. Z jednej strony to potężne narzędzie negocjacyjne dla kupujących. Z drugiej – cios w prywatność. Czy Twój sąsiad może teraz sprawdzić, co do złotówki, ile zapłaciłeś za swoje M4?',
     date: '24 lutego 2026', iso: '2026-02-24', readTime: '3 min',
     category: 'Rynek nieruchomości', tags: ['Rejestr Cen Nieruchomości', 'RODO', 'Prywatność'],
-    cover: 'assets/blog-jawne-ceny.jpg',
+    cover: '/assets/blog-jawne-ceny.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/jawne-ceny-nieruchomości-czy-każdy-może-sprawdzić-za-ile-kupiłeś-mieszkanie',
     related: ['obsluga-zakupu', 'negocjacje-nieruchomosci'],
     body: [
@@ -181,7 +181,7 @@ window.BLOG.push(
     excerpt: 'Masz świetny projekt, zabezpieczone finansowanie, działkę i nagle pojawia się mur. Sąsiedzi obawiają się hałasu, a urząd, zamiast wydać zgodę, piętrzy przed Tobą trudności. Czy czyjeś niezadowolenie może przekreślić Twoje plany? Przekładam na „ludzki” język przepisy i najnowsze orzecznictwo — gdzie kończą się prawa sąsiada, a zaczyna Twoje prawo do zabudowy.',
     date: '26 lutego 2026', iso: '2026-02-26', readTime: '3 min',
     category: 'Proces budowlany', tags: ['Pozwolenie na budowę', 'Sąsiad', 'Hałas'],
-    cover: 'assets/blog-sasiad-budowa.jpg',
+    cover: '/assets/blog-sasiad-budowa.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/czy-sąsiad-może-zablokować-twoją-budowę-prawo-inwestora-a-interesy-osób-trzecich',
     related: ['pozwolenie-na-budowe', 'nadzor-budowlany-pinb'],
     body: [
@@ -213,7 +213,7 @@ window.BLOG.push(
     excerpt: 'Reforma planowania przestrzennego narzuciła gminom obowiązek zastąpienia starego studium planem ogólnym. Dla wielu osób brzmi to jak czysta biurokracja, ale w rzeczywistości może drastycznie zmienić wartość Twojej działki. Czy jeśli gmina „odbierze” Ci prawo do budowy domu, możesz liczyć na pieniądze?',
     date: '9 lutego 2026', iso: '2026-02-09', readTime: '2 min',
     category: 'Planowanie przestrzenne', tags: ['Plan ogólny', 'Odszkodowanie', 'Art. 36 u.p.z.p.'],
-    cover: 'assets/blog-odszkodowanie-plan-ogolny.jpg',
+    cover: '/assets/blog-odszkodowanie-plan-ogolny.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/odszkodowanie-plan-ogolny',
     related: ['oplaty-odszkodowania-planistyczne', 'plan-ogolny'],
     body: [

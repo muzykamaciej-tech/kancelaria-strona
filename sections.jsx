@@ -190,7 +190,7 @@ function Navbar({ route, setRoute, serviceSlug }) {
           onClick={() => go('landing')}
           aria-label="Kancelaria Nieruchomości — Adwokat Maciej Muzyka">
           
-          <img src={window.__resources?.logoLight || "assets/logo.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" style={{ objectFit: "cover" }} />
+          <img src={window.__resources?.logoLight || "/assets/logo.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" style={{ objectFit: "cover" }} />
         </button>
 
         {/* Desktop links */}
@@ -401,7 +401,7 @@ function HeroEditorial({ setRoute }) {
 
           <div className="hero-editorial-portrait">
             <div className="portrait-card">
-              <img src={window.__resources?.portrait1 || "assets/maciej-muzyka.webp"} alt="adw. dr Maciej Muzyka" width="1100" height="1100" loading="lazy" decoding="async" />
+              <img src={window.__resources?.portrait1 || "/assets/maciej-muzyka.webp"} alt="adw. dr Maciej Muzyka" width="1100" height="1100" loading="lazy" decoding="async" />
               <div className="portrait-scrim" />
               <div className="portrait-caption">
                 <p className="font-bold" style={{ fontSize: '1.5rem' }}>Maciej Muzyka</p>
@@ -474,7 +474,7 @@ function HeroSplitCard({ setRoute }) {
           </div>
           <div className="hero-split-portrait">
             <div className="portrait-card">
-              <img src={window.__resources?.portrait1 || "assets/maciej-muzyka.webp"} alt="adw. dr Maciej Muzyka" width="1100" height="1100" loading="lazy" decoding="async" />
+              <img src={window.__resources?.portrait1 || "/assets/maciej-muzyka.webp"} alt="adw. dr Maciej Muzyka" width="1100" height="1100" loading="lazy" decoding="async" />
               <div className="portrait-scrim" />
               <div className="portrait-caption">
                 <p className="font-bold" style={{ fontSize: '1.5rem' }}>Maciej Muzyka</p>
@@ -522,7 +522,7 @@ function AboutBlock({ compact = false }) {
       <div className="wrap relative" style={{ zIndex: 2 }}>
         <div className="about-grid">
           <div className="about-portrait">
-            <img src={window.__resources?.portrait2 || "assets/maciej-muzyka-2.webp"} alt="adw. dr Maciej Muzyka" width="1100" height="1467" loading="lazy" decoding="async" />
+            <img src={window.__resources?.portrait2 || "/assets/maciej-muzyka-2.webp"} alt="adw. dr Maciej Muzyka" width="1100" height="1467" loading="lazy" decoding="async" />
           </div>
           <div className="about-body text-center">
             <span className={`eyebrow ${compact ? '' : 'on-dark'}`}>O mnie</span>
@@ -789,7 +789,7 @@ function Footer({ setRoute }) {
         <div className="footer-grid">
           <div>
             <button onClick={() => setRoute('landing')} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}>
-              <img src={window.__resources?.logoDark || "assets/logo-on-dark.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" style={{ height: 104, width: 'auto' }} />
+              <img src={window.__resources?.logoDark || "/assets/logo-on-dark.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" style={{ height: 104, width: 'auto' }} />
             </button>
             <p className="mt-6" style={{ color: 'var(--text-on-dark-3)', fontSize: '0.875rem', lineHeight: 1.6, maxWidth: '24rem' }}>
               Specjalistyczna kancelaria adwokacka świadcząca usługi prawne wyłącznie w zakresie prawa nieruchomości i procesu inwestycyjno-budowlanego. Klienci z całej Polski — obsługa zdalna.

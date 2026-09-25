@@ -1,0 +1,22 @@
+{
+  "name": "kancelaria-strona",
+  "private": true,
+  "description": "mecenasodnieruchomosci.pl — źródła JSX z Claude Design + build: kompilacja raz (Babel), prerender HTML każdej trasy (Chrome headless), sitemap/robots/llms.txt. Wynik w dist/ (commitowany; Vercel serwuje dist bez budowania).",
+  "scripts": {
+    "build": "node scripts/build.mjs && node scripts/prerender.mjs",
+    "check": "node scripts/check.mjs",
+    "serve": "node scripts/serve.mjs dist 4173"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/plugin-transform-block-scoping": "^7.28.0",
+    "@babel/preset-react": "^7.27.0",
+    "esbuild": "^0.25.0",
+    "lucide": "1.48.0",
+    "pixelmatch": "^7.2.0",
+    "pngjs": "^7.0.0",
+    "puppeteer-core": "^24.0.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}

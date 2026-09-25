@@ -1,0 +1,6 @@
+# mecenasodnieruchomosci.pl — treści są otwarte dla wyszukiwarek i asystentów AI
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://www.mecenasodnieruchomosci.pl/sitemap.xml

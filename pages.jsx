@@ -687,5 +687,5 @@ Object.assign(window, {
   HomePage, UslugiPage, ServiceDetailPage,
   BlogPage, BlogPostPage,
   FAQPage, FAQAccordion,
-  KontaktPage,
+  KontaktPage, LeadFormBand,
 });

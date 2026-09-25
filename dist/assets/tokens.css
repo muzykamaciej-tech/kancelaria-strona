@@ -1,0 +1,283 @@
+/* =========================================================================
+   Muzyka Kancelaria — Colors & Type tokens
+   Brand: adw. dr Maciej Muzyka, Kancelaria Adwokacka (mecenasodnieruchomosci.pl)
+   Source: tailwind.config.ts, app/globals.css, components/* in moja-strona@main
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+:root {
+  /* ---------- Brand palette ------------------------------------------- */
+  --brand-primary:        #0E53A5;   /* Tailwind `primary.DEFAULT` */
+  --brand-primary-light:  #E0EDFA;   /* tints on primary surfaces / dark sections */
+  --brand-primary-hover:  #0A4080;   /* button :hover state */
+
+  /* Coloured shadow used under primary CTAs (rgba of --brand-primary) */
+  --brand-primary-shadow: rgba(14, 83, 165, 0.2);
+  --brand-primary-shadow-soft: rgba(14, 83, 165, 0.1);
+
+  /* ---------- Neutrals (Tailwind slate ramp, used wholesale) ---------- */
+  --slate-50:  #F8FAFC;   /* alias: --section-light, page-bg accent */
+  --slate-100: #F1F5F9;   /* hairline borders on light surfaces */
+  --slate-200: #E2E8F0;   /* form-input borders, secondary button outline */
+  --slate-300: #CBD5E1;
+  --slate-400: #94A3B8;   /* subdued ui icons */
+  --slate-500: #64748B;   /* breadcrumb, copyright */
+  --slate-600: #475569;   /* body copy */
+  --slate-700: #334155;
+  --slate-800: #1E293B;   /* alias: --section-dark / --text-main */
+  --slate-900: #0F172A;   /* footer surface */
+
+  /* Surfaces */
+  --bg-default:      #FFFFFF;
+  --section-light:   var(--slate-50);
+  --section-dark:    var(--slate-800);
+  --footer-bg:       var(--slate-900);
+
+  /* Foreground */
+  --text-main:       var(--slate-800);
+  --text-body:       var(--slate-600);
+  --text-muted:      var(--slate-500);
+  --text-subtle:     var(--slate-400);
+  --text-on-dark:    #FFFFFF;
+  --text-on-dark-2:  var(--slate-300);
+  --text-on-dark-3:  var(--slate-400);
+
+  /* ---------- Semantic accents (used VERY sparingly) ----------------- */
+  --signal-warn-bg:  #FEF2F2;        /* red-50  — pain-point icon tile bg */
+  --signal-warn-fg:  #EF4444;        /* red-500 — pain-point icon stroke */
+  --signal-ok-bg:    #F0FDF4;        /* green-50 (rare) */
+  --signal-ok-fg:    #22C55E;        /* green-500 — success check on light */
+  --signal-star:     #FACC15;        /* yellow-400 — testimonial star fill */
+
+  /* Card surface variant on dark services grid (Features.tsx) */
+  --dark-card-bg:        rgba(42, 55, 74, 0.8);   /* #2A374A/80 */
+  --dark-card-bg-hover:  #324155;
+  --dark-card-border:    rgba(51, 65, 85, 0.5);   /* slate-700/50 */
+
+  /* ---------- Type ---------------------------------------------------- */
+  --font-sans:    'Lora', Georgia, Cambria, 'Times New Roman', serif;
+  --font-heading: var(--font-sans);   /* same family — weight does the differentiation */
+  --font-mono:    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-extra:    700;   /* Lora caps at 700 — avoids faux-bold on display */
+
+  /* Display / heading scale (matches Tailwind text-* used in Hero & sections) */
+  --fs-display:     clamp(2.5rem, 1rem + 4vw, 3.75rem);   /* h1 hero  ~ text-6xl on lg */
+  --fs-display-sub: clamp(1.875rem, 0.75rem + 3vw, 3rem); /* hero sub-line */
+  --fs-h2:          clamp(1.875rem, 0.5rem + 3vw, 3rem);  /* section title */
+  --fs-h3:          1.5rem;                               /* card title */
+  --fs-h4:          1.25rem;
+  --fs-eyebrow:     0.875rem;                             /* uppercase kicker */
+  --fs-body-lg:     1.125rem;                             /* lead paragraph */
+  --fs-body:        1rem;
+  --fs-sm:          0.875rem;
+  --fs-xs:          0.75rem;
+  --fs-microcaps:   0.625rem;                             /* `text-[10px]` subtitle under wordmark */
+
+  /* Tracking */
+  --track-tight:   -0.02em;
+  --track-normal:  0;
+  --track-wide:    0.05em;
+  --track-wider:   0.1em;
+  --track-widest:  0.2em;     /* the signature kerned subline `KANCELARIA ADWOKACKA` */
+
+  /* Line-height */
+  --lh-display: 1.1;
+  --lh-tight:   1.2;
+  --lh-snug:    1.4;
+  --lh-normal:  1.6;          /* prose */
+
+  /* ---------- Spacing & layout (Tailwind defaults that the design relies on) */
+  --container-max:  80rem;    /* max-w-7xl */
+  --gutter-x-sm:    1rem;     /* px-4  */
+  --gutter-x-md:    1.5rem;   /* px-6  */
+  --gutter-x-lg:    2rem;     /* px-8  */
+  --section-py-md:  5rem;     /* py-20 */
+  --section-py-lg:  8rem;     /* py-32 */
+
+  /* Radii */
+  --radius-sm:   0.5rem;      /* rounded-lg  — mobile-menu items */
+  --radius-md:   0.75rem;     /* rounded-xl  — buttons, inputs, icon tiles, service cards */
+  --radius-lg:   1rem;        /* rounded-2xl — marketing cards */
+  --radius-xl:   1.5rem;      /* rounded-3xl — outer Contact panel */
+  --radius-full: 9999px;
+
+  /* Elevation */
+  --shadow-card-quiet: 0 4px 20px rgba(0,0,0,0.03);
+  --shadow-card:       0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+  --shadow-cta:        0 10px 20px var(--brand-primary-shadow);
+  --shadow-popular:    0 20px 40px var(--brand-primary-shadow-soft);
+  --shadow-portrait:   0 25px 50px -12px rgba(226, 232, 240, 0.5); /* slate-200/50 cast */
+  --shadow-deep:       0 25px 50px -12px rgba(0,0,0,0.25);
+}
+
+/* =========================================================================
+   Semantic style classes — drop on tags directly OR copy into your own CSS
+   ========================================================================= */
+
+html, body {
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  background: var(--bg-default);
+  -webkit-font-smoothing: antialiased;
+}
+
+.h1, h1.brand-display {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-extra);
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--track-tight);
+  color: var(--text-main);
+  text-transform: uppercase;     /* Hero pattern */
+}
+.h1 .accent,
+h1.brand-display .accent {
+  display: block;
+  font-size: var(--fs-display-sub);
+  font-weight: var(--weight-bold);
+  color: var(--brand-primary);
+  margin-top: 0.5rem;
+}
+
+.h2, h2.brand-section-title {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--track-tight);
+  color: var(--text-main);
+}
+
+.h3, h3.brand-card-title {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-tight);
+  color: var(--text-main);
+}
+
+.h4 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--fs-h4);
+  color: var(--text-main);
+}
+
+/* Eyebrow / kicker — small, uppercase, wide-tracked, primary-coloured */
+.eyebrow {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--track-widest);
+  text-transform: uppercase;
+  color: var(--brand-primary);
+}
+.on-dark .eyebrow,
+.eyebrow.on-dark {
+  color: var(--brand-primary-light);
+}
+
+/* The signature subline that sits under the wordmark in nav + footer */
+.brand-microcaps {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--fs-microcaps);
+  letter-spacing: var(--track-widest);
+  text-transform: uppercase;
+  color: var(--brand-primary);
+  line-height: 1;
+}
+
+/* Body */
+.body-lg, p.lead {
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-normal);
+  color: var(--text-body);
+}
+.body { font-size: var(--fs-body); line-height: var(--lh-normal); color: var(--text-body); }
+.small { font-size: var(--fs-sm); color: var(--text-muted); }
+.xsmall { font-size: var(--fs-xs); color: var(--text-muted); }
+
+/* Quoted-callout pattern: bold textMain, primary left rule */
+.callout-rule {
+  font-weight: var(--weight-semibold);
+  color: var(--text-main);
+  border-left: 4px solid var(--brand-primary);
+  padding-left: 1rem;
+}
+
+/* Stat number used in the Solution section */
+.brand-stat {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-extra);
+  font-size: clamp(3rem, 1.5rem + 4vw, 3.75rem);
+  letter-spacing: -0.04em;
+  color: var(--brand-primary-light);
+  line-height: 1;
+}
+
+/* Buttons — copy into your component lib as needed */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--fs-body);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  transition: background-color 200ms, transform 200ms, border-color 200ms, color 200ms;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--brand-primary);
+  color: #fff;
+  box-shadow: var(--shadow-cta);
+}
+.btn-primary:hover {
+  background: var(--brand-primary-hover);
+  transform: translateY(-4px);
+}
+.btn-secondary {
+  background: #fff;
+  color: var(--text-main);
+  border: 2px solid var(--slate-200);
+}
+.btn-secondary:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+/* Card */
+.card {
+  background: #fff;
+  border: 1px solid var(--slate-100);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-card-quiet);
+  transition: transform 200ms, box-shadow 200ms;
+}
+.card:hover { transform: translateY(-4px); }
+
+/* Icon tile — square, tinted, holds a lucide stroke icon */
+.icon-tile {
+  width: 3.5rem; height: 3.5rem;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-primary);
+  color: #fff;
+  box-shadow: var(--shadow-card);
+}
+.icon-tile--warn { background: var(--signal-warn-bg); color: var(--signal-warn-fg); box-shadow: none; }
+.icon-tile--info { background: var(--brand-primary-light); color: var(--brand-primary); box-shadow: none; }
