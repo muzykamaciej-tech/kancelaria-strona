@@ -41,8 +41,34 @@ const FORMSPREE_READY = !FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID');
 
 /* Wizytówka Google — link do recenzji */
 const GOOGLE_REVIEWS_URL = 'https://www.google.com/search?kgmid=/g/11kpjhpy44&hl=pl-US&q=Adwokat+dr+Maciej+Muzyka+-+Mecenas+od+Nieruchomo%C5%9Bci&shem=epsd1,ltae,rimspwouoe&shndl=30&source=sh/x/loc/osrp/m5/1&kgs=0d09a05fe2da440e&utm_source=epsd1,ltae,rimspwouoe,sh/x/loc/osrp/m5/1#mpd=~18068536807946905391/customers/reviews';
-const GOOGLE_RATING = '5,0';
-const GOOGLE_REVIEWS_COUNT = '56';
+/* Ocena z wizytówki Google — wartości zapasowe, nadpisywane danymi z /api/google-rating */
+const GOOGLE_RATING_FALLBACK = 5.0;
+const GOOGLE_REVIEWS_COUNT_FALLBACK = 63;
+let googleRatingPromise = null;
+function loadGoogleRating() {
+  if (!googleRatingPromise) {
+    googleRatingPromise = fetch('/api/google-rating').
+    then((r) => r.ok ? r.json() : null).
+    then((d) => d && typeof d.rating === 'number' && typeof d.count === 'number' ? d : null).
+    catch(() => null);
+  }
+  return googleRatingPromise;
+}
+function useGoogleRating() {
+  const [data, setData] = lUseState({ rating: GOOGLE_RATING_FALLBACK, count: GOOGLE_REVIEWS_COUNT_FALLBACK });
+  lUseEffect(() => {
+    let alive = true;
+    loadGoogleRating().then((d) => {if (alive && d) setData(d);});
+    return () => {alive = false;};
+  }, []);
+  return data;
+}
+function formatGoogleRating(r) {return r.toFixed(1).replace('.', ',');}
+function opinieLabel(n) {
+  if (n === 1) return 'opinia';
+  const d = n % 10,h = n % 100;
+  return d >= 2 && d <= 4 && (h < 12 || h > 14) ? 'opinie' : 'opinii';
+}
 
 /* Pasek statystyk — animowany licznik (count-up) */
 const LANDING_STATS = [
@@ -406,6 +432,7 @@ function QualificationForm({ compact = false }) {
    Google rating inline badge
    ============================================================ */
 function GoogleBadge({ onDark = false }) {
+  const { rating, count } = useGoogleRating();
   return (
     <a className={`google-badge ${onDark ? 'google-badge--dark' : ''}`} href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer">
       <span className="google-badge-g">G</span>
@@ -415,7 +442,7 @@ function GoogleBadge({ onDark = false }) {
         )}
       </span>
       <span className="google-badge-text">
-        <strong>{GOOGLE_RATING}</strong> · {GOOGLE_REVIEWS_COUNT} opinii w Google
+        <strong>{formatGoogleRating(rating)}</strong> · {count} {opinieLabel(count)} w Google
       </span>
     </a>);
 
@@ -1038,6 +1065,7 @@ function Standards() {
    ============================================================ */
 function ReviewsBand() {
   const reviews = window.TESTIMONIALS || [];
+  const { count: reviewsCount } = useGoogleRating();
   return (
     <section className="section-py bg-light" id="opinie">
       <div className="wrap">
@@ -1059,7 +1087,7 @@ function ReviewsBand() {
             </figure>
           )}
         </div>
-        <p className="small mt-8" style={{ textAlign: 'center', color: 'var(--text-muted)' }}>Wszystkie 56 opinii znajdziesz w <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-primary)', textDecoration: 'underline' }}>wizytówce Google</a>.</p>
+        <p className="small mt-8" style={{ textAlign: 'center', color: 'var(--text-muted)' }}>Wszystkie {reviewsCount} {opinieLabel(reviewsCount)} znajdziesz w <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-primary)', textDecoration: 'underline' }}>wizytówce Google</a>.</p>
       </div>
     </section>);
 
