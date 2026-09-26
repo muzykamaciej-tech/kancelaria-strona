@@ -1,1 +1,53 @@
 /* links-sections.css — styles for navigation <a> elements that replaced <button> (P0 SEO, 25.09.2026). Keep visuals identical to the old buttons. */
+
+/* sections.jsx: classes moved from <button> to <a> (Navbar, MegaMenu, MobileMenu, Hero, ServiceTile, Footer).
+   :where() keeps specificity at zero, so every existing class rule (colour, display, font, padding,
+   text-align, hover) still wins; these only replace the browser's link defaults (blue, underline)
+   with what the <button> had. */
+:where(a.nav-logo, a.nav-link, a.btn, a.btn-link, a.mega-tile, a.mobile-menu-link, a.service-tile, a.footer-logo-link) {
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* .nav-link sets no display; <button> was inline-block (matters for "Usługi prawne" inside
+   .nav-menu-host — padding and the .active underline need a box). Flex items are blockified anyway. */
+:where(a.nav-link) { display: inline-block; }
+
+/* ServiceTile: <button> had line-height: normal from the UA; the only effect is the line box of
+   .service-tile-audience (every other child sets its own line-height). */
+:where(a.service-tile) { line-height: normal; }
+
+/* Footer logo: inline-block like the old <button>; the UA button font keeps the gap under the image identical
+   (-webkit-small-control = what Chrome/Safari give <button>; Firefox ignores it and keeps the 13.33px fallback). */
+:where(a.footer-logo-link) {
+  display: inline-block;
+  font-size: 13.3333px;
+  line-height: normal;
+  font: -webkit-small-control;
+}
+
+/* Mobile menu sub-links — mirror of ".mobile-menu-sub li button" in layout.css (that selector does not match <a>) */
+.mobile-menu-sub li a {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-body);
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+}
+.mobile-menu-sub li a:hover { color: var(--brand-primary); }
+
+/* Footer "Kancelaria" links — ".footer-links a" in layout.css already sets colour, font and hover;
+   only the inline-block box of the old <button> is missing. Internal links only (tel/mailto/WhatsApp stay inline). */
+.footer-links li > a[href^="/"] { display: inline-block; }

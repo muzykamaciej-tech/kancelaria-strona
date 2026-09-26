@@ -75,7 +75,7 @@ function CookieBanner() {
       <div className="cookie-banner-inner">
         <p className="cookie-banner-text">
           Używamy plików cookies niezbędnych do działania strony oraz — za Twoją zgodą — analitycznych (Google Analytics), by mierzyć ruch. Szczegóły w{' '}
-          <a href="#/polityka-prywatnosci">Polityce prywatności</a>.
+          <a href="/polityka-prywatnosci">Polityce prywatności</a>.
         </p>
         <div className="cookie-banner-actions">
           <button type="button" className="cookie-btn cookie-btn--primary" onClick={accept}>

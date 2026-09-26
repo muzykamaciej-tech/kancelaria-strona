@@ -18,7 +18,7 @@ if (!fs.existsSync(path.join(DIST, '__shell.html'))) throw new Error('run script
 /* live Google rating so the prerendered badge matches production */
 let rating = { rating: 5, count: 63 };
 try {
-  const r = await fetch(ORIGIN + '/api/google-rating');
+  const r = await fetch(ORIGIN + '/api/google-rating', { signal: AbortSignal.timeout(8000) });
   const j = await r.json();
   if (typeof j.rating === 'number' && typeof j.count === 'number') rating = j;
 } catch (e) { console.warn('google-rating: using fallback', rating); }
@@ -34,11 +34,8 @@ async function newPage() {
   await page.setViewport({ width: 1280, height: 900 });
   await page.evaluateOnNewDocument(() => { window.__PRERENDER__ = true; });
   await page.setRequestInterception(true);
-  page.on('request', (req) => {
-    const u = req.url();
-    if (/googletagmanager|google-analytics|fonts\.(googleapis|gstatic)|script\.google\.com|formspree/.test(u)) return req.abort();
-    req.continue();
-  });
+  /* only our own files: no analytics, fonts or third parties can stall a render */
+  page.on('request', (req) => (req.url().startsWith(BASE) || req.url().startsWith('data:') ? req.continue() : req.abort()));
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
   page.on('console', (m) => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) errors.push(m.text()); });
@@ -48,7 +45,8 @@ async function newPage() {
 
 /* 1. discover routes from the data the app itself uses */
 const probe = await newPage();
-await probe.goto(BASE + '/', { waitUntil: 'networkidle0' });
+await probe.goto(BASE + '/', { waitUntil: 'domcontentloaded', timeout: 60000 });
+await probe.waitForSelector('#app main', { timeout: 30000 });
 const data = await probe.evaluate(() => ({
   blocks: window.SERVICE_BLOCKS.map((b) => ({ id: b.id, title: b.title, tagline: b.tagline || '', services: b.services.map((s) => ({ slug: s.slug, title: s.title, desc: s.desc || '' })) })),
   blog: (window.BLOG || []).map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt || '', iso: p.iso, updated: p.updated || '' })),
@@ -84,8 +82,8 @@ function outFile(p) {
 const failures = [];
 async function render(page, r) {
   page._errors.length = 0;
-  await page.goto(BASE + r.path, { waitUntil: 'networkidle0', timeout: 60000 });
-  await page.waitForSelector('#app main', { timeout: 15000 });
+  await page.goto(BASE + r.path, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await page.waitForSelector('#app main', { timeout: 30000 });
   await page.waitForFunction(() => !document.querySelector('#app i[data-lucide]'), { timeout: 5000 }).catch(() => {});
   await new Promise((res) => setTimeout(res, 250));
   const res = await page.evaluate((isNotFound) => {
@@ -116,11 +114,16 @@ await Promise.all(Array.from({ length: CONCURRENCY }, async () => {
   const page = await newPage();
   while (queue.length) {
     const r = queue.shift();
-    try { await render(page, r); } catch (e) { failures.push(`${r.path}: ${e.message}`); }
+    try { await render(page, r); }
+    catch (e) {
+      try { await render(page, r); } /* one retry (sleep/wake, slow machine) */
+      catch (e2) { failures.push(`${r.path}: ${e2.message}`); }
+    }
   }
   await page.close();
 }));
 await browser.close();
+server.closeAllConnections();
 server.close();
 fs.rmSync(path.join(DIST, '__shell.html'));
 
@@ -169,3 +172,4 @@ const thin = routes.filter((r) => !r.noindex && r.words < 250).map((r) => `${r.p
 console.log(`prerender: ${routes.length} routes → dist/, sitemap ${indexable.length} URLs, llms.txt ${llms.length} B`);
 if (thin.length) console.log(`thin pages (<250 words in <main>): ${thin.join(', ')}`);
 if (failures.length) { console.error('FAILURES:\n' + failures.join('\n')); process.exit(1); }
+process.exit(0);

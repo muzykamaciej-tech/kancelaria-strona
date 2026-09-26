@@ -11,7 +11,7 @@ function LegalLayout({ eyebrow, title, label, setRoute, children }) {
         <div className="wrap">
           <Breadcrumb
             trail={[
-              { label: 'Start', onClick: () => setRoute('landing') },
+              { label: 'Start', route: 'landing' },
               { label },
             ]}
           />
@@ -192,7 +192,7 @@ function RodoPage({ setRoute }) {
         <li>Podanie danych jest <strong>dobrowolne</strong>, lecz niezbędne do udzielenia odpowiedzi.</li>
       </ol>
       <p>
-        Pełne informacje znajdziesz w <a href="#/polityka-prywatnosci">Polityce prywatności</a>.
+        Pełne informacje znajdziesz w <a href="/polityka-prywatnosci">Polityce prywatności</a>.
       </p>
     </LegalLayout>);
 
@@ -229,7 +229,7 @@ function RegulaminPage({ setRoute }) {
         <li>Wysłanie formularza <strong>nie oznacza zawarcia umowy</strong> o świadczenie pomocy prawnej ani nie zobowiązuje żadnej ze stron. Umowa może zostać zawarta wyłącznie w drodze odrębnych ustaleń.</li>
         <li>Wstępna analiza ma charakter orientacyjny i nie stanowi pełnej opinii prawnej.</li>
         <li>Warunkiem wysłania formularza jest wyrażenie zgody na przetwarzanie danych osobowych oraz zapoznanie się z Polityką prywatności.</li>
-        <li>Zasady przetwarzania danych osobowych określa <a href="#/polityka-prywatnosci">Polityka prywatności</a>.</li>
+        <li>Zasady przetwarzania danych osobowych określa <a href="/polityka-prywatnosci">Polityka prywatności</a>.</li>
       </ol>
 
       <h2>§ 4. Prawa autorskie</h2>

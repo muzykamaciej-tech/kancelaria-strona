@@ -100,37 +100,63 @@ function Breadcrumb({ trail }) {
       {trail.map((t, i) => (
         <React.Fragment key={i}>
           {i > 0 && <SIcon name="chevron-right" size={14} />}
-          {t.onClick ? <button onClick={t.onClick}>{t.label}</button> : <span>{t.label}</span>}
+          {t.route ? <window.NavLink route={t.route} slug={t.slug}>{t.label}</window.NavLink> :
+            t.onClick ? <button onClick={t.onClick}>{t.label}</button> : <span>{t.label}</span>}
         </React.Fragment>
       ))}
     </nav>
   );
 }
 
-function SvcCard({ service, onOpen }) {
-  return (
-    <button className="svc-card" onClick={onOpen}>
+function SvcCard({ service, onOpen, route, slug }) {
+  const inner = (
+    <React.Fragment>
       <span className="svc-card-arrow"><SIcon name="arrow-up-right" size={15} /></span>
       <span className="svc-card-ic"><SIcon name={service.icon} size={24} /></span>
       <span className="svc-card-title">{service.title}</span>
       <span className="svc-card-desc">{service.desc}</span>
+    </React.Fragment>
+  );
+  if (route) {
+    return <window.NavLink className="svc-card" route={route} slug={slug}>{inner}</window.NavLink>;
+  }
+  return (
+    <button className="svc-card" onClick={onOpen}>
+      {inner}
     </button>
   );
 }
 
-function BlockCard({ block, setRoute }) {
-  return (
-    <button
-      className="block-card"
-      id={'block-' + block.id}
-      data-block-id={block.id}
-      onClick={() => setRoute('blok', block.id)}>
+function BlockCard({ block, setRoute, route, slug }) {
+  const inner = (
+    <React.Fragment>
       <span className="block-card-ic"><SIcon name={block.icon} size={26} /></span>
       <h3 className="block-card-title">{block.title}</h3>
       <p className="block-card-tag">{block.tagline}</p>
       <span className="block-card-cta">
         Zobacz usługi <SIcon name="arrow-right" size={14} />
       </span>
+    </React.Fragment>
+  );
+  if (route) {
+    return (
+      <window.NavLink
+        className="block-card"
+        id={'block-' + block.id}
+        data-block-id={block.id}
+        route={route}
+        slug={slug}>
+        {inner}
+      </window.NavLink>
+    );
+  }
+  return (
+    <button
+      className="block-card"
+      id={'block-' + block.id}
+      data-block-id={block.id}
+      onClick={() => setRoute('blok', block.id)}>
+      {inner}
     </button>
   );
 }
@@ -144,7 +170,7 @@ function UslugiOverview({ setRoute }) {
     <main data-screen-label="02 Usługi — przegląd">
       <section className="bg-light" style={{ paddingBlock: '3rem 4.5rem' }}>
         <div className="wrap">
-          <Breadcrumb trail={[{ label: 'Start', onClick: () => setRoute('landing') }, { label: 'Usługi' }]} />
+          <Breadcrumb trail={[{ label: 'Start', route: 'landing' }, { label: 'Usługi' }]} />
           <div className="mt-8 section-head--center" style={{ maxWidth: '48rem', marginInline: 'auto' }}>
             <span className="eyebrow">Usługi prawne</span>
             <h1 className="display mt-4">
@@ -171,7 +197,7 @@ function UslugiOverview({ setRoute }) {
           </div>
           <div className="svc-grid mt-8">
             {featured.map((s) => (
-              <SvcCard key={s.slug} service={s} onOpen={() => setRoute('usluga', s.slug)} />
+              <SvcCard key={s.slug} service={s} route="usluga" slug={s.slug} />
             ))}
           </div>
         </div>
@@ -186,7 +212,7 @@ function UslugiOverview({ setRoute }) {
           </div>
           <div className="block-grid mt-10">
             {window.SERVICE_BLOCKS.map((b) => (
-              <BlockCard key={b.id} block={b} setRoute={setRoute} />
+              <BlockCard key={b.id} block={b} route="blok" slug={b.id} />
             ))}
           </div>
         </div>
@@ -210,8 +236,8 @@ function PillarPage({ blockId, setRoute }) {
         <div className="orb" style={{ width: 560, height: 560, top: -200, right: -160, opacity: 'calc(0.18 * var(--ambient-on))' }} />
         <div className="wrap relative" style={{ zIndex: 2 }}>
           <Breadcrumb trail={[
-            { label: 'Start', onClick: () => setRoute('landing') },
-            { label: 'Usługi', onClick: () => setRoute('uslugi') },
+            { label: 'Start', route: 'landing' },
+            { label: 'Usługi', route: 'uslugi' },
             { label: block.title },
           ]} />
           <div className="mt-8 section-head--center" style={{ maxWidth: '46rem', marginInline: 'auto' }}>
@@ -238,7 +264,7 @@ function PillarPage({ blockId, setRoute }) {
           </div>
           <div className="svc-grid mt-8">
             {block.services.map((s) => (
-              <SvcCard key={s.slug} service={s} onOpen={() => setRoute('usluga', s.slug)} />
+              <SvcCard key={s.slug} service={s} route="usluga" slug={s.slug} />
             ))}
           </div>
         </div>
@@ -455,7 +481,7 @@ function RelatedServices({ block, slug, setRoute }) {
         </div>
         <div className="svc-grid mt-8">
           {block.services.filter((s) => s.slug !== slug).slice(0, 6).map((s) => (
-            <SvcCard key={s.slug} service={s} onOpen={() => setRoute('usluga', s.slug)} />
+            <SvcCard key={s.slug} service={s} route="usluga" slug={s.slug} />
           ))}
         </div>
       </div>
@@ -475,9 +501,9 @@ function ServicePage({ slug, setRoute }) {
       <section className="bg-light" style={{ paddingBlock: '3rem 4rem', borderBottom: '1px solid var(--slate-100)' }}>
         <div className="wrap">
           <Breadcrumb trail={[
-            { label: 'Start', onClick: () => setRoute('landing') },
-            { label: 'Usługi', onClick: () => setRoute('uslugi') },
-            { label: block.title, onClick: () => setRoute('blok', block.id) },
+            { label: 'Start', route: 'landing' },
+            { label: 'Usługi', route: 'uslugi' },
+            { label: block.title, route: 'blok', slug: block.id },
             { label: service.title },
           ]} />
           <div className="mt-8 section-head--center" style={{ maxWidth: '46rem', marginInline: 'auto' }}>
@@ -485,9 +511,9 @@ function ServicePage({ slug, setRoute }) {
               <span className="icon-tile icon-tile--lg" style={{ width: 56, height: 56 }}>
                 <SIcon name={service.icon} size={26} />
               </span>
-              <button className="eyebrow" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }} onClick={() => setRoute('blok', block.id)}>
+              <window.NavLink className="eyebrow" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }} route="blok" slug={block.id}>
                 {block.title}
-              </button>
+              </window.NavLink>
             </div>
             <h1 className="display">{c && c.h1 ? c.h1 : service.title}</h1>
             <p className="lead mt-6">{c ? c.subtitle : service.desc}</p>
@@ -495,9 +521,9 @@ function ServicePage({ slug, setRoute }) {
               <button className="btn btn-primary" onClick={() => spScrollToForm()}>
                 Opisz swoją sprawę <SIcon name="arrow-right" size={16} />
               </button>
-              <button className="btn btn-secondary" onClick={() => setRoute('blok', block.id)}>
+              <window.NavLink className="btn btn-secondary" route="blok" slug={block.id}>
                 Wszystkie usługi w tym obszarze
-              </button>
+              </window.NavLink>
             </div>
           </div>
         </div>
@@ -577,7 +603,7 @@ function FaqPageV3({ setRoute }) {
     <main data-screen-label="FAQ">
       <section className="bg-light" style={{ paddingBlock: '3rem 4rem' }}>
         <div className="wrap">
-          <Breadcrumb trail={[{ label: 'Start', onClick: () => setRoute('landing') }, { label: 'FAQ' }]} />
+          <Breadcrumb trail={[{ label: 'Start', route: 'landing' }, { label: 'FAQ' }]} />
           <div className="mt-8" style={{ maxWidth: '46rem' }}>
             <span className="eyebrow">FAQ · {total} pytań</span>
             <h1 className="display mt-4">Wszystko, co warto<br /><span className="italic" style={{ color: 'var(--text-body)' }}>wiedzieć przed startem.</span></h1>

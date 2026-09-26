@@ -179,19 +179,25 @@ function Navbar({ route, setRoute, serviceSlug }) {
     setMobileOpen(false);
     setMenuOpen(false);
   }
+  /* NavLink side effect: close menus before client-side navigation */
+  function closeMenus() {
+    setMobileOpen(false);
+    setMenuOpen(false);
+  }
 
   return (
     <React.Fragment>
       <div ref={sentinelRef} aria-hidden="true" className="nav-sentinel" />
       <nav className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="wrap nav-inner">
-        <button
+        <window.NavLink
+          route="landing"
           className="nav-logo"
-          onClick={() => go('landing')}
+          onNavigate={closeMenus}
           aria-label="Kancelaria Nieruchomości — Adwokat Maciej Muzyka">
-          
+
           <img src={window.__resources?.logoLight || "/assets/logo.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" style={{ objectFit: "cover" }} />
-        </button>
+        </window.NavLink>
 
         {/* Desktop links */}
         <div className="nav-desktop" data-md-show style={{ display: 'none' }}>
@@ -204,33 +210,35 @@ function Navbar({ route, setRoute, serviceSlug }) {
                   onMouseEnter={openMenu}
                   onMouseLeave={closeMenu}>
                   
-                  <button
+                  <window.NavLink
+                    route="uslugi"
                     className={`nav-link ${route === 'uslugi' || route === 'usluga' ? 'active' : ''}`}
-                    onClick={() => go('uslugi')}
+                    onNavigate={closeMenus}
                     aria-haspopup="true"
                     aria-expanded={menuOpen}>
-                    
+
                     {l.label}
                     <Icon name="chevron-down" size={14} style={{ marginLeft: 4, transition: 'transform 200ms', transform: menuOpen ? 'rotate(180deg)' : 'none' }} />
-                  </button>
-                  {menuOpen && <MegaMenu go={go} active={serviceSlug} />}
+                  </window.NavLink>
+                  {menuOpen && <MegaMenu onNavigate={closeMenus} active={serviceSlug} />}
                 </div>);
 
             }
             if (l.block) {
               return (
-                <button key={l.id} className={`nav-link ${serviceSlug === l.block ? 'active' : ''}`} onClick={() => go('blok', l.block)}>
+                <window.NavLink key={l.id} route="blok" slug={l.block} className={`nav-link ${serviceSlug === l.block ? 'active' : ''}`} onNavigate={closeMenus}>
                   {l.label}
-                </button>);
+                </window.NavLink>);
             }
             return (
-              <button
+              <window.NavLink
                 key={l.id}
+                route={l.id}
                 className={`nav-link ${route === l.id ? 'active' : ''}`}
-                onClick={() => go(l.id)}>
-                
+                onNavigate={closeMenus}>
+
                 {l.label}
-              </button>);
+              </window.NavLink>);
 
           })}
           <button className="btn btn-primary nav-cta" onClick={() => { if (document.getElementById('formularz') && window.spScrollToForm) { setMobileOpen(false); setMenuOpen(false); window.spScrollToForm(); } else { go('landing'); setTimeout(() => window.spScrollToForm && window.spScrollToForm(), 140); } }}>
@@ -252,34 +260,36 @@ function Navbar({ route, setRoute, serviceSlug }) {
       </div>
 
       {/* Mobile menu */}
-      {mobileOpen && <MobileMenu go={go} route={route} />}
+      {mobileOpen && <MobileMenu go={go} route={route} onNavigate={closeMenus} />}
       </nav>
     </React.Fragment>);
 
 }
 
-function MegaMenu({ go, active }) {
+function MegaMenu({ onNavigate, active }) {
   return (
     <div className="mega-menu" onMouseDown={(e) => e.stopPropagation()}>
       <div className="mega-menu-inner">
         <div className="mega-menu-top">
           <span className="eyebrow">Usługi prawne</span>
-          <button className="btn-link" onClick={() => go('uslugi')}>
+          <window.NavLink route="uslugi" className="btn-link" onNavigate={onNavigate}>
             Wszystkie usługi <Icon name="arrow-right" size={14} />
-          </button>
+          </window.NavLink>
         </div>
         <ul className="mega-menu-grid">
           {window.SERVICE_BLOCKS.map((b) =>
           <li key={b.id}>
-              <button
+              <window.NavLink
+              route="blok"
+              slug={b.id}
               className={`mega-tile ${active === b.id ? 'active' : ''}`}
-              onClick={() => go('blok', b.id)}>
-              
+              onNavigate={onNavigate}>
+
                 <span className="mega-tile-head">
                   <span className="mega-tile-icon"><Icon name={b.icon} size={18} /></span>
                 </span>
                 <span className="mega-tile-label">{b.title}</span>
-              </button>
+              </window.NavLink>
             </li>
           )}
         </ul>
@@ -288,7 +298,7 @@ function MegaMenu({ go, active }) {
 
 }
 
-function MobileMenu({ go, route }) {
+function MobileMenu({ go, route, onNavigate }) {
   const [servicesOpen, setServicesOpen] = useState(false);
   useEffect(() => {
     if (servicesOpen && window.lucide) {
@@ -313,13 +323,13 @@ function MobileMenu({ go, route }) {
                 {servicesOpen &&
                 <ul className="mobile-menu-sub">
                     <li>
-                      <button onClick={() => go('uslugi')}>Wszystkie usługi</button>
+                      <window.NavLink route="uslugi" onNavigate={onNavigate}>Wszystkie usługi</window.NavLink>
                     </li>
                     {window.SERVICE_BLOCKS.map((b) =>
                   <li key={b.id}>
-                        <button onClick={() => go('blok', b.id)}>
+                        <window.NavLink route="blok" slug={b.id} onNavigate={onNavigate}>
                           {b.title}
-                        </button>
+                        </window.NavLink>
                       </li>
                   )}
                   </ul>
@@ -329,16 +339,17 @@ function MobileMenu({ go, route }) {
           }
           if (l.block) {
             return (
-              <button key={l.id} className="mobile-menu-link" onClick={() => go('blok', l.block)}>{l.label}</button>);
+              <window.NavLink key={l.id} route="blok" slug={l.block} className="mobile-menu-link" onNavigate={onNavigate}>{l.label}</window.NavLink>);
           }
           return (
-            <button
+            <window.NavLink
               key={l.id}
+              route={l.id}
               className={`mobile-menu-link ${route === l.id ? 'active' : ''}`}
-              onClick={() => go(l.id)}>
-              
+              onNavigate={onNavigate}>
+
               {l.label}
-            </button>);
+            </window.NavLink>);
 
         })}
         <button className="btn btn-primary mt-4" style={{ width: '100%' }} onClick={() => { if (document.getElementById('formularz') && window.spScrollToForm) { go(route); window.spScrollToForm(); } else { go('landing'); setTimeout(() => window.spScrollToForm && window.spScrollToForm(), 140); } }}>
@@ -381,12 +392,12 @@ function HeroEditorial({ setRoute }) {
               Nie musisz znać się na prawie, aby bezpiecznie inwestować w nieruchomości. Od tego masz mnie.
             </p>
             <div className="flex gap-3 mt-8" style={{ flexWrap: 'wrap' }}>
-              <button className="btn btn-primary" onClick={() => setRoute('uslugi')}>
+              <window.NavLink route="uslugi" className="btn btn-primary">
                 Zobacz usługi <Icon name="arrow-right" size={16} />
-              </button>
-              <button className="btn btn-secondary" onClick={() => setRoute('kontakt')}>
+              </window.NavLink>
+              <window.NavLink route="kontakt" className="btn btn-secondary">
                 Skontaktuj się
-              </button>
+              </window.NavLink>
             </div>
 
             <div className="hero-meta mt-8">
@@ -437,12 +448,12 @@ function HeroClassic({ setRoute }) {
           Adwokat specjalizujący się wyłącznie w prawie nieruchomości. Analizuję umowy, reguluję stany prawne, chronię Twój kapitał. Obsługa zdalna — klienci z całej Polski.
         </p>
         <div className="flex gap-3 mt-8 justify-center" style={{ flexWrap: 'wrap' }}>
-          <button className="btn btn-primary" onClick={() => setRoute('uslugi')}>
+          <window.NavLink route="uslugi" className="btn btn-primary">
             Zobacz usługi <Icon name="arrow-right" size={16} />
-          </button>
-          <button className="btn btn-secondary" onClick={() => setRoute('kontakt')}>
+          </window.NavLink>
+          <window.NavLink route="kontakt" className="btn btn-secondary">
             Skontaktuj się
-          </button>
+          </window.NavLink>
         </div>
       </div>
     </section>);
@@ -464,12 +475,12 @@ function HeroSplitCard({ setRoute }) {
               Pomagam kupującym, inwestorom i deweloperom bezpiecznie przechodzić przez gąszcz przepisów. Wszystko mailowo, z konkretną wyceną i terminem.
             </p>
             <div className="flex gap-3 mt-8" style={{ flexWrap: 'wrap' }}>
-              <button className="btn btn-primary" onClick={() => setRoute('uslugi')}>
+              <window.NavLink route="uslugi" className="btn btn-primary">
                 Zobacz usługi
-              </button>
-              <button className="btn btn-secondary" onClick={() => setRoute('kontakt')}>
+              </window.NavLink>
+              <window.NavLink route="kontakt" className="btn btn-secondary">
                 Skontaktuj się
-              </button>
+              </window.NavLink>
             </div>
           </div>
           <div className="hero-split-portrait">
@@ -493,9 +504,10 @@ function HeroSplitCard({ setRoute }) {
 /* ============================================================
    Service tile (used in services index + home featured)
    ============================================================ */
-function ServiceTile({ service, onOpen, large = false }) {
-  return (
-    <button className={`service-tile ${large ? 'service-tile--lg' : ''}`} onClick={onOpen}>
+function ServiceTile({ service, onOpen, route, slug, large = false }) {
+  const className = `service-tile ${large ? 'service-tile--lg' : ''}`;
+  const body =
+  <React.Fragment>
       <div className="service-tile-head">
         <span className="service-tile-num">{service.n}</span>
         <span className="service-tile-icon">
@@ -508,6 +520,15 @@ function ServiceTile({ service, onOpen, large = false }) {
         <span className="service-tile-audience">{service.audience[0]}</span>
         <span className="service-tile-arrow"><Icon name="arrow-right" size={16} /></span>
       </div>
+    </React.Fragment>;
+
+  /* route/slug → crawlable link; onOpen kept as a fallback for older callers */
+  if (route) {
+    return <window.NavLink route={route} slug={slug} className={className}>{body}</window.NavLink>;
+  }
+  return (
+    <button className={className} onClick={onOpen}>
+      {body}
     </button>);
 
 }
@@ -788,14 +809,14 @@ function Footer({ setRoute }) {
       <div className="wrap">
         <div className="footer-grid">
           <div>
-            <button onClick={() => setRoute('landing')} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}>
+            <window.NavLink route="landing" className="footer-logo-link" style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}>
               <img src={window.__resources?.logoDark || "/assets/logo-on-dark.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" style={{ height: 104, width: 'auto' }} />
-            </button>
+            </window.NavLink>
             <p className="mt-6" style={{ color: 'var(--text-on-dark-3)', fontSize: '0.875rem', lineHeight: 1.6, maxWidth: '24rem' }}>
               Specjalistyczna kancelaria adwokacka świadcząca usługi prawne wyłącznie w zakresie prawa nieruchomości i procesu inwestycyjno-budowlanego. Klienci z całej Polski — obsługa zdalna.
             </p>
             <div className="mt-6 small" style={{ color: 'var(--slate-500)', lineHeight: 1.6 }}>
-              <p>adw. dr Maciej Muzyka</p>
+              <p><window.NavLink route="o-mnie" style={{ color: 'inherit', textDecoration: 'none' }}>adw. dr Maciej Muzyka</window.NavLink></p>
               <p>Lubelska Izba Adwokacka, nr wpisu LUB/ADW/1702 · <a href={KRA_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>rejestr adwokatów</a></p>
               <p>NIP: 7123424474 · REGON: 389987200</p>
             </div>
@@ -803,10 +824,10 @@ function Footer({ setRoute }) {
           <div>
             <h4 className="font-bold mb-6" style={{ color: '#fff' }}>Kancelaria</h4>
             <ul className="footer-links">
-              <li><button onClick={() => setRoute('uslugi')}>Usługi prawne</button></li>
-              <li><button onClick={() => setRoute('faq')}>FAQ</button></li>
-              <li><button onClick={() => setRoute('kalkulator')}>Kalkulator — słupy na działce</button></li>
-              <li><button onClick={() => setRoute('kontakt')}>Kontakt</button></li>
+              <li><window.NavLink route="uslugi">Usługi prawne</window.NavLink></li>
+              <li><window.NavLink route="faq">FAQ</window.NavLink></li>
+              <li><window.NavLink route="kalkulator">Kalkulator — słupy na działce</window.NavLink></li>
+              <li><window.NavLink route="kontakt">Kontakt</window.NavLink></li>
               <li className="mt-4">ul. Cicha 4/5, 20-078 Lublin<br /><span style={{ color: 'var(--slate-500)' }}>Siedziba</span></li>
               <li className="mt-3">ul. Bracka 20/lok. 7A, 00-028 Warszawa<br /><span style={{ color: 'var(--slate-500)' }}>Możliwość spotkania</span></li>
               <li className="mt-3"><a href="tel:+48884784984" style={{ color: 'inherit' }}>+48 884 784 984</a> · <a href="https://wa.me/48884784984" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>WhatsApp</a></li>
@@ -824,9 +845,9 @@ function Footer({ setRoute }) {
             © 2026 adw. dr Maciej Muzyka Kancelaria Adwokacka. Wszelkie prawa zastrzeżone.
           </p>
           <ul className="footer-legal">
-            <li><a href="#/polityka-prywatnosci">Polityka Prywatności</a></li>
-            <li><a href="#/regulamin">Regulamin</a></li>
-            <li><a href="#/rodo">RODO</a></li>
+            <li><a href="/polityka-prywatnosci">Polityka Prywatności</a></li>
+            <li><a href="/regulamin">Regulamin</a></li>
+            <li><a href="/rodo">RODO</a></li>
             <li><button type="button" onClick={() => window.dispatchEvent(new CustomEvent('open-cookie-settings'))}>Ustawienia cookies</button></li>
           </ul>
         </div>

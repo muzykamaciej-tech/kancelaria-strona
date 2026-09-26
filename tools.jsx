@@ -65,9 +65,9 @@ function CalcResult({ r, setRoute }) {
       <button className="btn btn-primary mt-6" style={{ width: '100%' }} onClick={() => window.spScrollToForm && window.spScrollToForm()}>
         Sprawdź swoją sprawę bezpłatnie <TIcon name="arrow-right" size={16} />
       </button>
-      <button className="btn-link mt-4" style={{ display: 'inline-flex', width: '100%', justifyContent: 'center' }} onClick={() => setRoute('blogpost', 'sluzebnosc-przesylu-jak-obliczyc-wynagrodzenie')}>
+      <window.NavLink route="blogpost" slug="sluzebnosc-przesylu-jak-obliczyc-wynagrodzenie" className="btn-link mt-4" style={{ display: 'inline-flex', width: '100%', justifyContent: 'center' }}>
         Jak liczą to rzeczoznawcy — artykuł <TIcon name="arrow-right" size={14} />
-      </button>
+      </window.NavLink>
     </div>
   );
 }
@@ -92,8 +92,8 @@ function KalkulatorSlupyPage({ setRoute }) {
       <section className="bg-light" style={{ paddingBlock: '3rem 4rem', borderBottom: '1px solid var(--slate-100)' }}>
         <div className="wrap">
           {Breadcrumb && <Breadcrumb trail={[
-            { label: 'Start', onClick: () => setRoute('landing') },
-            { label: 'Służebności i odszkodowania', onClick: () => setRoute('blok', 'sluzebnosci-odszkodowania') },
+            { label: 'Start', route: 'landing' },
+            { label: 'Służebności i odszkodowania', route: 'blok', slug: 'sluzebnosci-odszkodowania' },
             { label: 'Kalkulator' },
           ]} />}
           <div className="mt-8 section-head--center" style={{ maxWidth: '46rem', marginInline: 'auto' }}>
@@ -195,7 +195,7 @@ function KalkulatorTeaser({ setRoute }) {
             <h2 className="h2 mt-3" style={{ fontSize: 'clamp(1.4rem, 1rem + 1.4vw, 2rem)' }}>Ile należy Ci się za słupy i rury na działce?</h2>
             <p className="body mt-3">Rodzaj urządzenia, długość, rodzaj działki — w kilka sekund orientacyjny przedział wynagrodzenia za służebność i za lata bez umowy.</p>
           </div>
-          <button className="btn btn-primary" onClick={() => setRoute('kalkulator')}>Policz kwotę <TIcon name="arrow-right" size={16} /></button>
+          <window.NavLink route="kalkulator" className="btn btn-primary">Policz kwotę <TIcon name="arrow-right" size={16} /></window.NavLink>
         </div>
       </div>
     </section>
@@ -277,7 +277,7 @@ function PlanAlertBand() {
               {status === 'sending' ? 'Zapisuję…' : <React.Fragment>Powiadom mnie <TIcon name="bell" size={16} /></React.Fragment>}
             </button>
             {status === 'error' && <p className="input-err" style={{ marginTop: '0.75rem', textAlign: 'center' }}>Nie udało się zapisać. Napisz na <a href={mailto}>{TOOLS_EMAIL}</a>.</p>}
-            <p className="small plan-alert-note">Jedna, dwie wiadomości w roku — tylko o Twojej gminie. Zrezygnujesz jednym mailem. Administrator danych: adw. dr Maciej Muzyka — <a href="#/polityka-prywatnosci">polityka prywatności</a>.</p>
+            <p className="small plan-alert-note">Jedna, dwie wiadomości w roku — tylko o Twojej gminie. Zrezygnujesz jednym mailem. Administrator danych: adw. dr Maciej Muzyka — <a href="/polityka-prywatnosci">polityka prywatności</a>.</p>
           </form>}
         </div>
       </div>

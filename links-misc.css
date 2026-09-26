@@ -1,1 +1,16 @@
 /* links-misc.css — styles for navigation <a> elements that replaced <button> (P0 SEO, 25.09.2026). Keep visuals identical to the old buttons. */
+
+/* landing.jsx — wyniki wyszukiwarki usług (.svc-search-item). Klasa ustawia już display:flex, text-align:left, cursor, tło i ramkę;
+   brakuje resetów, które <button> miał z UA, a <a> nie. Kolory tekstu nadają dzieci (.svc-search-item-title/-block/-icon/-arrow). */
+a.svc-search-item {
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+}
+
+/* landing.jsx (FAQ teaser), tools.jsx (wynik kalkulatora) — .btn-link ustawia już kolor, dekorację, inline-flex, kursor i font-family.
+   <button> centrował tekst z UA; bez tego zawijany tekst w wyniku kalkulatora (width:100%) wyrównałby się do lewej. */
+a.btn-link { text-align: center; }
+
+/* tools.jsx (KalkulatorTeaser) — .btn ustawia display, kolor, dekorację, kursor i font; tu tylko wyrównanie z UA przycisku. */
+a.btn { text-align: center; }

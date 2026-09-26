@@ -30,31 +30,32 @@ function HomePage({ setRoute, tweaks }) {
               <p className="lead">
                 Każda usługa to konkretny zakres prac, jasna procedura współpracy i wycena indywidualna ustalana przed rozpoczęciem.
               </p>
-              <button className="btn-link mt-4" onClick={() => setRoute('uslugi')}>
+              <window.NavLink className="btn-link mt-4" route="uslugi">
                 Zobacz pełną listę <Icon name="arrow-right" size={14} />
-              </button>
+              </window.NavLink>
             </div>
           </div>
 
           <div className="services-featured mt-12">
             {featured.map((s) => (
-              <ServiceTile key={s.id} service={s} onOpen={() => setRoute('usluga', s.id)} large />
+              <ServiceTile key={s.id} service={s} route="usluga" slug={s.id} large />
             ))}
           </div>
 
           <div className="services-rest mt-6">
             {rest.map((s) => (
-              <button
+              <window.NavLink
                 key={s.id}
                 className="service-row"
-                onClick={() => setRoute('usluga', s.id)}
+                route="usluga"
+                slug={s.id}
               >
                 <span className="service-row-num">{s.n}</span>
                 <span className="service-row-icon"><Icon name={s.icon} size={18} /></span>
                 <span className="service-row-title">{s.title}</span>
                 <span className="service-row-desc">{s.short}</span>
                 <span className="service-row-arrow"><Icon name="arrow-right" size={16} /></span>
-              </button>
+              </window.NavLink>
             ))}
           </div>
         </div>
@@ -81,9 +82,9 @@ function UslugiPage({ setRoute }) {
     <main data-screen-label="02 Uslugi index">
       <section className="bg-light" style={{ paddingBlock: '3rem 5rem' }}>
         <div className="wrap">
-          <button className="btn-link" onClick={() => setRoute('landing')}>
+          <window.NavLink className="btn-link" route="landing">
             <Icon name="arrow-left" size={16} /> Strona główna
-          </button>
+          </window.NavLink>
           <div className="mt-8" style={{ maxWidth: '46rem' }}>
             <span className="eyebrow">Usługi prawne · pełna lista</span>
             <h1 className="display mt-4">
@@ -102,7 +103,7 @@ function UslugiPage({ setRoute }) {
         <div className="wrap">
           <div className="services-grid">
             {window.SERVICES.map((s) => (
-              <ServiceTile key={s.id} service={s} onOpen={() => setRoute('usluga', s.id)} />
+              <ServiceTile key={s.id} service={s} route="usluga" slug={s.id} />
             ))}
           </div>
         </div>
@@ -118,9 +119,9 @@ function UslugiPage({ setRoute }) {
           <p className="lead mt-6" style={{ color: 'var(--text-on-dark-2)' }}>
             Wystarczy kilka zdań mailem — odpiszę z propozycją usługi, wyceną i terminem. Bez konsultacji wstępnych.
           </p>
-          <button className="btn btn-on-dark mt-8" onClick={() => setRoute('kontakt')}>
+          <window.NavLink className="btn btn-on-dark mt-8" route="kontakt">
             Skontaktuj się <Icon name="arrow-right" size={16} />
-          </button>
+          </window.NavLink>
         </div>
       </section>
     </main>
@@ -139,9 +140,9 @@ function ServiceDetailPage({ serviceId, setRoute }) {
       <section className="bg-light" style={{ paddingBlock: '3rem 4rem', borderBottom: '1px solid var(--slate-100)' }}>
         <div className="wrap">
           <nav className="breadcrumb">
-            <button onClick={() => setRoute('landing')}>Start</button>
+            <window.NavLink route="landing">Start</window.NavLink>
             <Icon name="chevron-right" size={14} />
-            <button onClick={() => setRoute('uslugi')}>Usługi prawne</button>
+            <window.NavLink route="uslugi">Usługi prawne</window.NavLink>
             <Icon name="chevron-right" size={14} />
             <span>{service.title}</span>
           </nav>
@@ -159,12 +160,12 @@ function ServiceDetailPage({ serviceId, setRoute }) {
               </h1>
               <p className="lead mt-6" style={{ maxWidth: '38rem' }}>{service.teaser}</p>
               <div className="flex gap-3 mt-8" style={{ flexWrap: 'wrap' }}>
-                <button className="btn btn-primary" onClick={() => setRoute('kontakt', null, service.title)}>
+                <window.NavLink className="btn btn-primary" route="kontakt" subject={service.title}>
                   Zamów wycenę <Icon name="arrow-right" size={16} />
-                </button>
-                <button className="btn btn-secondary" onClick={() => setRoute('uslugi')}>
+                </window.NavLink>
+                <window.NavLink className="btn btn-secondary" route="uslugi">
                   Wszystkie usługi
-                </button>
+                </window.NavLink>
               </div>
             </div>
 
@@ -295,7 +296,7 @@ function ServiceDetailPage({ serviceId, setRoute }) {
               {service.related.map((rid) => {
                 const r = window.SERVICES.find((s) => s.id === rid);
                 if (!r) return null;
-                return <ServiceTile key={r.id} service={r} onOpen={() => setRoute('usluga', r.id)} />;
+                return <ServiceTile key={r.id} service={r} route="usluga" slug={r.id} />;
               })}
             </div>
           </div>
@@ -323,9 +324,9 @@ function BlogPage({ setRoute }) {
     <main data-screen-label="04 Blog">
       <section className="bg-light" style={{ paddingBlock: '3rem 5rem' }}>
         <div className="wrap">
-          <button className="btn-link" onClick={() => setRoute('landing')}>
+          <window.NavLink className="btn-link" route="landing">
             <Icon name="arrow-left" size={16} /> Strona główna
-          </button>
+          </window.NavLink>
           <div className="mt-8" style={{ maxWidth: '46rem' }}>
             <span className="eyebrow">Skarbnica wiedzy · prawo nieruchomości</span>
             <h1 className="display mt-4">
@@ -344,7 +345,7 @@ function BlogPage({ setRoute }) {
           <ul className="blog-list">
             {window.BLOG.map((post, i) => (
               <li key={post.slug} className="blog-card-wrap">
-                <button className="blog-card" onClick={() => setRoute('blogpost', post.slug)}>
+                <window.NavLink className="blog-card" route="blogpost" slug={post.slug}>
                   <div className="blog-card-aside">
                     <span className="kicker-num kicker-num--ghost">{String(i + 1)}</span>
                     <span className="tag tag-info mt-4">{post.category}</span>
@@ -368,7 +369,7 @@ function BlogPage({ setRoute }) {
                       </div>
                     </div>
                   </div>
-                </button>
+                </window.NavLink>
               </li>
             ))}
           </ul>
@@ -391,9 +392,9 @@ function BlogPostPage({ slug, setRoute }) {
       <section className="bg-light" style={{ paddingBlock: '3rem 4rem' }}>
         <div className="wrap">
           <nav className="breadcrumb">
-            <button onClick={() => setRoute('landing')}>Start</button>
+            <window.NavLink route="landing">Start</window.NavLink>
             <Icon name="chevron-right" size={14} />
-            <button onClick={() => setRoute('blog')}>Skarbnica wiedzy</button>
+            <window.NavLink route="blog">Skarbnica wiedzy</window.NavLink>
             <Icon name="chevron-right" size={14} />
             <span>{post.category}</span>
           </nav>
@@ -433,20 +434,20 @@ function BlogPostPage({ slug, setRoute }) {
         <div className="wrap">
           <span className="eyebrow">Czytaj dalej</span>
           <div className="grid grid-2 mt-6" style={{ gap: '1.5rem' }}>
-            <button className="related-post" onClick={() => setRoute('blogpost', prev.slug)}>
+            <window.NavLink className="related-post" route="blogpost" slug={prev.slug}>
               <Icon name="arrow-left" size={18} />
               <div>
                 <div className="small uppercase tracking-widest font-bold">Poprzedni</div>
                 <div className="font-bold mt-2" style={{ color: 'var(--text-main)' }}>{prev.title}</div>
               </div>
-            </button>
-            <button className="related-post related-post-next" onClick={() => setRoute('blogpost', next.slug)}>
+            </window.NavLink>
+            <window.NavLink className="related-post related-post-next" route="blogpost" slug={next.slug}>
               <div>
                 <div className="small uppercase tracking-widest font-bold">Następny</div>
                 <div className="font-bold mt-2" style={{ color: 'var(--text-main)' }}>{next.title}</div>
               </div>
               <Icon name="arrow-right" size={18} />
-            </button>
+            </window.NavLink>
           </div>
         </div>
       </section>
@@ -495,7 +496,7 @@ function BlogRelatedServices({ slugs, setRoute }) {
           <h2 className="h2 mt-4">Dotyczy Cię ten temat?</h2>
         </div>
         <div className="svc-grid mt-8" style={{ justifyContent: 'center' }}>
-          {items.map((s) => <Card key={s.slug} service={s} onOpen={() => setRoute('usluga', s.slug)} />)}
+          {items.map((s) => <Card key={s.slug} service={s} route="usluga" slug={s.slug} />)}
         </div>
       </div>
     </section>
@@ -510,9 +511,9 @@ function FAQPage({ setRoute }) {
     <main data-screen-label="06 FAQ">
       <section className="bg-light" style={{ paddingBlock: '3rem 5rem' }}>
         <div className="wrap">
-          <button className="btn-link" onClick={() => setRoute('landing')}>
+          <window.NavLink className="btn-link" route="landing">
             <Icon name="arrow-left" size={16} /> Strona główna
-          </button>
+          </window.NavLink>
           <div className="mt-8" style={{ maxWidth: '46rem' }}>
             <span className="eyebrow">FAQ · pytania, które usłyszysz tu pierwszy raz</span>
             <h1 className="display mt-4">
@@ -594,14 +595,14 @@ function BlogTeaser({ setRoute }) {
           </div>
           <div className="services-head-side">
             <p className="lead">Krótkie teksty o tym, co zmienia się w prawie nieruchomości i co ma znaczenie dla osób, które kupują, sprzedają lub wynajmują.</p>
-            <button className="btn-link mt-4" onClick={() => setRoute('blog')}>
+            <window.NavLink className="btn-link mt-4" route="blog">
               Zobacz wszystkie <Icon name="arrow-right" size={14} />
-            </button>
+            </window.NavLink>
           </div>
         </div>
         <div className="grid grid-3 mt-12" style={{ gap: 'var(--d-gap)' }}>
           {window.BLOG.map((post, i) => (
-            <button key={post.slug} className="card card-hover blog-teaser-card" onClick={() => setRoute('blogpost', post.slug)} style={{ textAlign: 'left' }}>
+            <window.NavLink key={post.slug} className="card card-hover blog-teaser-card" route="blogpost" slug={post.slug} style={{ textAlign: 'left' }}>
               <span className="tag tag-info">{post.category}</span>
               <h3 className="font-bold mt-4" style={{ color: 'var(--text-main)', fontSize: '1.125rem', lineHeight: 1.3 }}>{post.title}</h3>
               <div className="small mt-4 flex items-center gap-2">
@@ -612,7 +613,7 @@ function BlogTeaser({ setRoute }) {
               <div className="blog-teaser-arrow">
                 <Icon name="arrow-up-right" size={16} />
               </div>
-            </button>
+            </window.NavLink>
           ))}
         </div>
       </div>
@@ -638,9 +639,9 @@ function FAQTeaser({ setRoute }) {
             <p className="lead mt-6">
               Krótkie odpowiedzi na pytania, które słyszę najczęściej. Pełna lista — w sekcji FAQ.
             </p>
-            <button className="btn-link mt-6" onClick={() => setRoute('faq')}>
+            <window.NavLink className="btn-link mt-6" route="faq">
               Wszystkie pytania <Icon name="arrow-right" size={14} />
-            </button>
+            </window.NavLink>
           </div>
           <div>
             <FAQAccordion items={group.items.slice(0, 4)} startOpen={0} />
@@ -659,9 +660,9 @@ function KontaktPage({ setRoute }) {
     <main data-screen-label="07 Kontakt">
       <section className="bg-light" style={{ paddingBlock: '3rem 2.5rem' }}>
         <div className="wrap">
-          <button className="btn-link" onClick={() => setRoute('landing')}>
+          <window.NavLink className="btn-link" route="landing">
             <Icon name="arrow-left" size={16} /> Strona główna
-          </button>
+          </window.NavLink>
           <div className="mt-8" style={{ maxWidth: '48rem' }}>
             <span className="eyebrow">Kontakt</span>
             <h1 className="display mt-4">Napisz — odpiszę<br /><span className="italic" style={{ color: 'var(--text-body)' }}>zwykle w 24 h.</span></h1>

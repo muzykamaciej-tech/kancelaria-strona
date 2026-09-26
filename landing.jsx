@@ -446,7 +446,7 @@ function QualificationForm({ compact = false }) {
       {/* Klauzula informacyjna RODO — bez checkboxa (odpowiedź na zapytanie nie wymaga odrębnej zgody) */}
       <p className="small qual-rodo">
         Wysyłając formularz, przekazujesz mi dane w celu odpowiedzi na sprawę. Administratorem danych jest adw. dr Maciej Muzyka — szczegóły w{' '}
-        <a href="#/polityka-prywatnosci">polityce prywatności</a>. Sprawę obejmuje tajemnica adwokacka; kancelaria ma ubezpieczenie OC adwokata.
+        <a href="/polityka-prywatnosci">polityce prywatności</a>. Sprawę obejmuje tajemnica adwokacka; kancelaria ma ubezpieczenie OC adwokata.
       </p>
 
       <button type="submit" className="btn btn-primary qual-submit" disabled={status === 'sending'}>
@@ -1034,14 +1034,14 @@ function ServiceSearch({ setRoute }) {
             </div> :
 
         results.map((s) =>
-        <button key={s.slug} className="svc-search-item" onClick={() => setRoute('usluga', s.slug)}>
+        <window.NavLink key={s.slug} route="usluga" slug={s.slug} className="svc-search-item">
               <span className="svc-search-item-icon"><LIcon name={s.icon} size={18} /></span>
               <span className="svc-search-item-text">
                 <span className="svc-search-item-title">{s.title}</span>
                 <span className="svc-search-item-block">{s.blockTitle}</span>
               </span>
               <LIcon name="arrow-right" size={16} className="svc-search-item-arrow" />
-            </button>)}
+            </window.NavLink>)}
         </div>}
     </div>);
 
@@ -1070,7 +1070,7 @@ function PracticeAreas({ setRoute }) {
 
         <div className="block-grid mt-12">
           {window.SERVICE_BLOCKS.map((b) =>
-          <BlockCard key={b.id} block={b} setRoute={setRoute} />
+          <BlockCard key={b.id} block={b} route="blok" slug={b.id} setRoute={setRoute} />
           )}
         </div>
       </div>
@@ -1232,9 +1232,9 @@ function LandingFAQ({ setRoute }) {
         <div className="faq-teaser-body mt-12">
           <LFAQAccordion items={window.FAQ_HOME} startOpen={0} />
           <div className="text-center mt-8">
-            <button className="btn-link" onClick={() => setRoute('faq')}>
+            <window.NavLink route="faq" className="btn-link">
               Wszystkie pytania (FAQ) <LIcon name="arrow-right" size={14} />
-            </button>
+            </window.NavLink>
           </div>
         </div>
       </div>

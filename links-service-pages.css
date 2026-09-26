@@ -1,1 +1,35 @@
 /* links-service-pages.css — styles for navigation <a> elements that replaced <button> (P0 SEO, 25.09.2026). Keep visuals identical to the old buttons. */
+
+/* Breadcrumb (service-pages.jsx Breadcrumb) — mirrors .breadcrumb button in layout.css */
+.breadcrumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font: inherit;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: color 150ms;
+}
+.breadcrumb a:hover { color: var(--brand-primary); }
+.bg-dark .breadcrumb a { color: var(--text-on-dark-2); }
+.bg-dark .breadcrumb a:hover { color: #fff; }
+
+/* Service / block cards (SvcCard, BlockCard) — .svc-card/.block-card in services.css already set
+   display:flex, text-align, cursor, background, border, padding and hover.
+   font-size/line-height mirror the UA button font (the only effect is the line box of the
+   absolutely positioned .svc-card-arrow; all visible text sets its own rem size). */
+a.svc-card,
+a.block-card {
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+  font-size: 13.3333px;
+  line-height: normal;
+}
+
+/* Eyebrow link to the block in the service hero (ServicePage). No color/font override here:
+   .eyebrow sets color, size and weight, and the inline style resets background/border/padding. */
+a.eyebrow { text-decoration: none; }
+
+/* "Wszystkie usługi w tym obszarze" uses .btn.btn-secondary — .btn already sets
+   display:inline-flex, text-decoration:none and cursor, .btn-secondary sets color; nothing to add. */
