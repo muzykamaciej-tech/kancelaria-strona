@@ -1,7 +1,7 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "buildCommand": "echo 'dist/ budowany lokalnie: npm run build (Babel + prerender w Chrome), commitowany do repo'",
+  "buildCommand": "node scripts/verify-dist.mjs",
   "installCommand": "echo 'bez instalacji: zależności tylko do lokalnego builda'",
   "outputDirectory": "dist",
   "redirects": [

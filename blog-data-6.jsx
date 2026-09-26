@@ -8,7 +8,7 @@ window.BLOG.push(
     excerpt: 'Eksmisja lokatora bez tytułu prawnego trwa od kilkunastu miesięcy do kilku lat. Pokazuję kalendarz, błędy, które cofają sprawę, i jak odzyskać pieniądze.',
     date: '26 września 2026', iso: '2026-09-26', readTime: '10 min',
     category: 'Najem', tags: ['Eksmisja', 'Lokal socjalny', 'Odszkodowanie od gminy'],
-    cover: 'assets/blog-ile-trwa-eksmisja.jpg',
+    cover: '/assets/blog-ile-trwa-eksmisja.jpg',
     related: ['eksmisja', 'windykacja-czynszu', 'bezpieczny-najem'],
     faq: [
       { q: 'Ile trwa eksmisja z mieszkania, gdy lokator nie płaci?', a: 'Zwykle od kilkunastu miesięcy do kilku lat. Od pierwszej nieopłaconej raty do końca najmu mija około 5 miesięcy, potem proces (zwykle od kilku do kilkunastu miesięcy) i egzekucja. Jeżeli sąd przyzna lokal socjalny albo gmina nie wskaże pomieszczenia tymczasowego, całość może trwać kilka lat.' },

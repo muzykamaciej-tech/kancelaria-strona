@@ -43,7 +43,8 @@ Object.assign(window, { useTweaks: useTweaks, TweaksPanel: TweaksPanel, TweakSec
 const parts = [];
 for (const f of jsxFiles) {
   if (f === 'tweaks-panel.jsx') { parts.push(`/* ${f} (production stub) */\n${TWEAKS_STUB}`); continue; }
-  const code = fs.readFileSync(rel(f), 'utf8');
+  /* relative 'assets/…' paths break on nested URLs (/blog/x → /blog/assets/…); new content often uses them, so normalise */
+  const code = fs.readFileSync(rel(f), 'utf8').replace(/(["'`(])assets\//g, '$1/assets/');
   const out = babel.transformSync(code, {
     filename: f,
     babelrc: false,
