@@ -1,6 +1,461 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "buildCommand": "echo 'dist/ budowany lokalnie: npm run build (Babel + prerender w Chrome), commitowany do repo'",
+  "installCommand": "echo 'bez instalacji: zależności tylko do lokalnego builda'",
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/blank",
+      "destination": "/polityka-prywatnosci",
+      "permanent": true
+    },
+    {
+      "source": "/blank-1",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blank-2",
+      "destination": "/regulamin",
+      "permanent": true
+    },
+    {
+      "source": "/blank-3",
+      "destination": "/regulamin",
+      "permanent": true
+    },
+    {
+      "source": "/blog/categories/planowanie-przestrzenne",
+      "destination": "/uslugi/warunki-zabudowy-planowanie",
+      "permanent": true
+    },
+    {
+      "source": "/blog/categories/podzia%C5%82-maj%C4%85tku-wsp%C3%B3lnego",
+      "destination": "/uslugi/wspolwlasnosc-podzialy/podzial-majatku-po-rozwodzie",
+      "permanent": true
+    },
+    {
+      "source": "/blog/categories/podział-majątku-wspólnego",
+      "destination": "/uslugi/wspolwlasnosc-podzialy/podzial-majatku-po-rozwodzie",
+      "permanent": true
+    },
+    {
+      "source": "/oferta",
+      "destination": "/uslugi",
+      "permanent": true
+    },
+    {
+      "source": "/payment-request-page",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/post/5-nielegalnych-sposob%C3%B3w-na-wyrzucenie-niechcianego-lokatora-jak-dzia%C5%82aj%C4%85-czy%C5%9Bciciele-i-dlaczego-to",
+      "destination": "/blog/5-nielegalnych-sposobow-na-wyrzucenie-lokatora",
+      "permanent": true
+    },
+    {
+      "source": "/post/5-nielegalnych-sposobów-na-wyrzucenie-niechcianego-lokatora-jak-działają-czyściciele-i-dlaczego-to",
+      "destination": "/blog/5-nielegalnych-sposobow-na-wyrzucenie-lokatora",
+      "permanent": true
+    },
+    {
+      "source": "/post/art-10b-prawo-budowlane-odwolania",
+      "destination": "/blog/czy-sasiad-moze-zablokowac-budowe",
+      "permanent": true
+    },
+    {
+      "source": "/post/czy-na-każdej-działce-rolnej-można-postawić-farmę-fotowoltaiczną",
+      "destination": "/blog/farma-fotowoltaiczna-na-dzialce-rolnej",
+      "permanent": true
+    },
+    {
+      "source": "/post/czy-na-ka%C5%BCdej-dzia%C5%82ce-rolnej-mo%C5%BCna-postawi%C4%87-farm%C4%99-fotowoltaiczn%C4%85",
+      "destination": "/blog/farma-fotowoltaiczna-na-dzialce-rolnej",
+      "permanent": true
+    },
+    {
+      "source": "/post/czy-sąsiad-może-zablokować-twoją-budowę-prawo-inwestora-a-interesy-osób-trzecich",
+      "destination": "/blog/czy-sasiad-moze-zablokowac-budowe",
+      "permanent": true
+    },
+    {
+      "source": "/post/czy-s%C4%85siad-mo%C5%BCe-zablokowa%C4%87-twoj%C4%85-budow%C4%99-prawo-inwestora-a-interesy-os%C3%B3b-trzecich",
+      "destination": "/blog/czy-sasiad-moze-zablokowac-budowe",
+      "permanent": true
+    },
+    {
+      "source": "/post/czy-s%C5%82u%C5%BCebno%C5%9B%C4%87-wystarczy-by-dosta%C4%87-pozwolenie-na-budow%C4%99",
+      "destination": "/blog/szerokosc-drogi-koniecznej",
+      "permanent": true
+    },
+    {
+      "source": "/post/czy-służebność-wystarczy-by-dostać-pozwolenie-na-budowę",
+      "destination": "/blog/szerokosc-drogi-koniecznej",
+      "permanent": true
+    },
+    {
+      "source": "/post/decyzja-nakazująca-przywrócenie-stanu-poprzedniego-co-musi-zawierać-by-nie-była-tylko-świstkiem-p",
+      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "permanent": true
+    },
+    {
+      "source": "/post/decyzja-nakazuj%C4%85ca-przywr%C3%B3cenie-stanu-poprzedniego-co-musi-zawiera%C4%87-by-nie-by%C5%82a-tylko-%C5%9Bwistkiem-p",
+      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "permanent": true
+    },
+    {
+      "source": "/post/decyzja-%C5%9Brodowiskowa-dla-zrealizowanej-inwestycji-czy-to-w-og%C3%B3le-mo%C5%BCliwe",
+      "destination": "/uslugi/proces-budowlany/legalizacja-samowoli",
+      "permanent": true
+    },
+    {
+      "source": "/post/decyzja-środowiskowa-dla-zrealizowanej-inwestycji-czy-to-w-ogóle-możliwe",
+      "destination": "/uslugi/proces-budowlany/legalizacja-samowoli",
+      "permanent": true
+    },
+    {
+      "source": "/post/ile-kosztuje-ustanowienie-s%C5%82u%C5%BCebno%C5%9Bci-drogi-koniecznej-w-2025-roku",
+      "destination": "/blog/ile-kosztuje-sluzebnosc-drogi-koniecznej",
+      "permanent": true
+    },
+    {
+      "source": "/post/ile-kosztuje-ustanowienie-służebności-drogi-koniecznej-w-2025-roku",
+      "destination": "/blog/ile-kosztuje-sluzebnosc-drogi-koniecznej",
+      "permanent": true
+    },
+    {
+      "source": "/post/jak-bezpiecznie-wynająć-mieszkanie-kompletny-poradnik-prawnika-od-nieruchomości",
+      "destination": "/blog/jak-bezpiecznie-wynajac-mieszkanie-poradnik",
+      "permanent": true
+    },
+    {
+      "source": "/post/jak-bezpiecznie-wynaj%C4%85%C4%87-mieszkanie-kompletny-poradnik-prawnika-od-nieruchomo%C5%9Bci",
+      "destination": "/blog/jak-bezpiecznie-wynajac-mieszkanie-poradnik",
+      "permanent": true
+    },
+    {
+      "source": "/post/jawne-ceny-nieruchomo%C5%9Bci-czy-ka%C5%BCdy-mo%C5%BCe-sprawdzi%C4%87-za-ile-kupi%C5%82e%C5%9B-mieszkanie",
+      "destination": "/blog/jawne-ceny-nieruchomosci-rejestr-cen",
+      "permanent": true
+    },
+    {
+      "source": "/post/jawne-ceny-nieruchomości-czy-każdy-może-sprawdzić-za-ile-kupiłeś-mieszkanie",
+      "destination": "/blog/jawne-ceny-nieruchomosci-rejestr-cen",
+      "permanent": true
+    },
+    {
+      "source": "/post/kara-umowna-za-op%C3%B3%C5%BAnienie-dewelopera-to-nie-wszystko-prze%C5%82omowa-uchwa%C5%82a-s%C4%85du-najwy%C5%BCszego",
+      "destination": "/blog/kara-umowna-za-opoznienie-dewelopera-uchwala-sn",
+      "permanent": true
+    },
+    {
+      "source": "/post/kara-umowna-za-opóźnienie-dewelopera-to-nie-wszystko-przełomowa-uchwała-sądu-najwyższego",
+      "destination": "/blog/kara-umowna-za-opoznienie-dewelopera-uchwala-sn",
+      "permanent": true
+    },
+    {
+      "source": "/post/kiedy-s%C5%82o%C5%84ce-zarabia-a-fiskus-zaciera-r%C4%99ce-czy-dzier%C5%BCawa-pod-fotowoltaik%C4%99-jest-zwolniona-z-vat",
+      "destination": "/blog/dzierzawa-pod-fotowoltaike-a-vat",
+      "permanent": true
+    },
+    {
+      "source": "/post/kiedy-słońce-zarabia-a-fiskus-zaciera-ręce-czy-dzierżawa-pod-fotowoltaikę-jest-zwolniona-z-vat",
+      "destination": "/blog/dzierzawa-pod-fotowoltaike-a-vat",
+      "permanent": true
+    },
+    {
+      "source": "/post/koszty-drogi-koniecznej",
+      "destination": "/blog/koszty-utrzymania-drogi-koniecznej",
+      "permanent": true
+    },
+    {
+      "source": "/post/na-jakiej-podstawie-należy-wydać-warunki-zabudowy-jeśli-w-trakcie-postępowania-wejdzie-w-życie-plan",
+      "destination": "/blog/warunki-zabudowy-a-plan-ogolny-przepisy-przejsciowe",
+      "permanent": true
+    },
+    {
+      "source": "/post/na-jakiej-podstawie-nale%C5%BCy-wyda%C4%87-warunki-zabudowy-je%C5%9Bli-w-trakcie-post%C4%99powania-wejdzie-w-%C5%BCycie-plan",
+      "destination": "/blog/warunki-zabudowy-a-plan-ogolny-przepisy-przejsciowe",
+      "permanent": true
+    },
+    {
+      "source": "/post/nowy-bat-na-właścicieli-działek-decyzja-o-zakazie-zagospodarowania-terenu-wbrew-mpzp-art-35a-u-p",
+      "destination": "/uslugi/warunki-zabudowy-planowanie",
+      "permanent": true
+    },
+    {
+      "source": "/post/nowy-bat-na-w%C5%82a%C5%9Bcicieli-dzia%C5%82ek-decyzja-o-zakazie-zagospodarowania-terenu-wbrew-mpzp-art-35a-u-p",
+      "destination": "/uslugi/warunki-zabudowy-planowanie",
+      "permanent": true
+    },
+    {
+      "source": "/post/odstepstwo-przepisy-techniczno-budowlane-2026",
+      "destination": "/uslugi/proces-budowlany/pozwolenie-na-budowe",
+      "permanent": true
+    },
+    {
+      "source": "/post/odst%C4%99pstwa-od-przepis%C3%B3w-techniczno-budowlanych-w-2026-r-rewolucja-dla-inwestor%C3%B3w",
+      "destination": "/uslugi/proces-budowlany/pozwolenie-na-budowe",
+      "permanent": true
+    },
+    {
+      "source": "/post/odstępstwa-od-przepisów-techniczno-budowlanych-w-2026-r-rewolucja-dla-inwestorów",
+      "destination": "/uslugi/proces-budowlany/pozwolenie-na-budowe",
+      "permanent": true
+    },
+    {
+      "source": "/post/odszkodowanie-od-dewelopera-za-wady-co-mo%C5%BCna-zyska%C4%87",
+      "destination": "/blog/odszkodowanie-od-dewelopera-za-wady",
+      "permanent": true
+    },
+    {
+      "source": "/post/odszkodowanie-od-dewelopera-za-wady-co-można-zyskać",
+      "destination": "/blog/odszkodowanie-od-dewelopera-za-wady",
+      "permanent": true
+    },
+    {
+      "source": "/post/odszkodowanie-plan-ogolny",
+      "destination": "/blog/odszkodowanie-za-plan-ogolny",
+      "permanent": true
+    },
+    {
+      "source": "/post/odszkodowanie-za-zalanie-gruntów-czy-decyzja-administracyjna-wystarczy-by-odzyskać-pieniądze",
+      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "permanent": true
+    },
+    {
+      "source": "/post/odszkodowanie-za-zalanie-grunt%C3%B3w-czy-decyzja-administracyjna-wystarczy-by-odzyska%C4%87-pieni%C4%85dze",
+      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "permanent": true
+    },
+    {
+      "source": "/post/panika-w-urzędzie-czy-plan-ogólny-wysadzi-twój-wniosek-o-wz-w-powietrze",
+      "destination": "/blog/plan-ogolny-a-wniosek-o-wz-w-toku",
+      "permanent": true
+    },
+    {
+      "source": "/post/panika-w-urz%C4%99dzie-czy-plan-og%C3%B3lny-wysadzi-tw%C3%B3j-wniosek-o-wz-w-powietrze",
+      "destination": "/blog/plan-ogolny-a-wniosek-o-wz-w-toku",
+      "permanent": true
+    },
+    {
+      "source": "/post/podział-majątku-w-lublinie-kto-dostanie-mieszkanie-po-rozwodzie-kluczowe-kryteria-sądu",
+      "destination": "/blog/podzial-nieruchomosci-po-rozwodzie-komu-sad-przyzna-mieszkanie",
+      "permanent": true
+    },
+    {
+      "source": "/post/podzia%C5%82-maj%C4%85tku-w-lublinie-kto-dostanie-mieszkanie-po-rozwodzie-kluczowe-kryteria-s%C4%85du",
+      "destination": "/blog/podzial-nieruchomosci-po-rozwodzie-komu-sad-przyzna-mieszkanie",
+      "permanent": true
+    },
+    {
+      "source": "/post/prawnik-od-nieruchomo%C5%9Bci-radzi-jak-przygotowa%C4%87-si%C4%99-na-zmiany-w-planowaniu-przestrzennym",
+      "destination": "/blog/jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym",
+      "permanent": true
+    },
+    {
+      "source": "/post/prawnik-od-nieruchomości-radzi-jak-przygotować-się-na-zmiany-w-planowaniu-przestrzennym",
+      "destination": "/blog/jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym",
+      "permanent": true
+    },
+    {
+      "source": "/post/przebudowa-czy-nowy-zjazd-nsa-o-granicach-kompetencji-zarządcy-drogi",
+      "destination": "/blog/przebudowa-czy-nowy-zjazd-nsa",
+      "permanent": true
+    },
+    {
+      "source": "/post/przebudowa-czy-nowy-zjazd-nsa-o-granicach-kompetencji-zarz%C4%85dcy-drogi",
+      "destination": "/blog/przebudowa-czy-nowy-zjazd-nsa",
+      "permanent": true
+    },
+    {
+      "source": "/post/rewolucja-w-urz%C4%99dach-2026-wydruki-ksi%C4%85g-wieczystych-z-moc%C4%85-urz%C4%99dow%C4%85-i-alerty-krs-w-twoim-telefonie",
+      "destination": "/blog/wydruki-ksiag-wieczystych-i-alerty-krs-2026",
+      "permanent": true
+    },
+    {
+      "source": "/post/rewolucja-w-urzędach-2026-wydruki-ksiąg-wieczystych-z-mocą-urzędową-i-alerty-krs-w-twoim-telefonie",
+      "destination": "/blog/wydruki-ksiag-wieczystych-i-alerty-krs-2026",
+      "permanent": true
+    },
+    {
+      "source": "/post/rewolucyjny-wyrok-tk-koniec-z-darmowym-zasiedzeniem-służebności-przesyłu",
+      "destination": "/blog/wyrok-tk-zasiedzenie-sluzebnosci-przesylu",
+      "permanent": true
+    },
+    {
+      "source": "/post/rewolucyjny-wyrok-tk-koniec-z-darmowym-zasiedzeniem-s%C5%82u%C5%BCebno%C5%9Bci-przesy%C5%82u",
+      "destination": "/blog/wyrok-tk-zasiedzenie-sluzebnosci-przesylu",
+      "permanent": true
+    },
+    {
+      "source": "/post/szerokosc-drogi-koniecznej",
+      "destination": "/blog/szerokosc-drogi-koniecznej",
+      "permanent": true
+    },
+    {
+      "source": "/post/s%C4%85siad-ignoruje-nakaz-urz%C4%99du-grzywna-w-celu-przymuszenia-jako-spos%C3%B3b-na-opornych",
+      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "permanent": true
+    },
+    {
+      "source": "/post/sąsiad-ignoruje-nakaz-urzędu-grzywna-w-celu-przymuszenia-jako-sposób-na-opornych",
+      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "permanent": true
+    },
+    {
+      "source": "/post/słup-energetyczny-na-działce-czy-musisz-płacić-za-jego-przesunięcie",
+      "destination": "/blog/slup-energetyczny-na-dzialce-przesuniecie",
+      "permanent": true
+    },
+    {
+      "source": "/post/s%C5%82up-energetyczny-na-dzia%C5%82ce-czy-musisz-p%C5%82aci%C4%87-za-jego-przesuni%C4%99cie",
+      "destination": "/blog/slup-energetyczny-na-dzialce-przesuniecie",
+      "permanent": true
+    },
+    {
+      "source": "/post/s%C5%82up-rura-lub-kable-na-dzia%C5%82ce-bez-umowy-sprawd%C5%BA-czy-nale%C5%BCy-ci-si%C4%99-wynagrodzenie-za-bezumowne-kor",
+      "destination": "/blog/slup-rura-kable-na-dzialce-bez-umowy-bezumowne-korzystanie",
+      "permanent": true
+    },
+    {
+      "source": "/post/słup-rura-lub-kable-na-działce-bez-umowy-sprawdź-czy-należy-ci-się-wynagrodzenie-za-bezumowne-kor",
+      "destination": "/blog/slup-rura-kable-na-dzialce-bez-umowy-bezumowne-korzystanie",
+      "permanent": true
+    },
+    {
+      "source": "/post/s%C5%82u%C5%BCebno%C5%9B%C4%87-przesy%C5%82u-jak-obliczy%C4%87-wynagrodzenie-za-s%C5%82upy-i-rury-na-dzia%C5%82ce-praktyczny-poradnik",
+      "destination": "/blog/sluzebnosc-przesylu-jak-obliczyc-wynagrodzenie",
+      "permanent": true
+    },
+    {
+      "source": "/post/służebność-przesyłu-jak-obliczyć-wynagrodzenie-za-słupy-i-rury-na-działce-praktyczny-poradnik",
+      "destination": "/blog/sluzebnosc-przesylu-jak-obliczyc-wynagrodzenie",
+      "permanent": true
+    },
+    {
+      "source": "/post/twoja-dzia%C5%82ka-twoja-odpowiedzialno%C5%9B%C4%87-nielegalne-wydobycie-piachu-konsekwencje",
+      "destination": "/blog/nielegalne-wydobycie-piachu-z-dzialki-konsekwencje",
+      "permanent": true
+    },
+    {
+      "source": "/post/twoja-działka-twoja-odpowiedzialność-nielegalne-wydobycie-piachu-konsekwencje",
+      "destination": "/blog/nielegalne-wydobycie-piachu-z-dzialki-konsekwencje",
+      "permanent": true
+    },
+    {
+      "source": "/post/ustalenie-warunk%C3%B3w-zabudowy-dla-cz%C4%99%C5%9Bci-dzia%C5%82ki-czy-to-w-og%C3%B3le-mo%C5%BCliwe",
+      "destination": "/blog/warunki-zabudowy-dla-czesci-dzialki",
+      "permanent": true
+    },
+    {
+      "source": "/post/ustalenie-warunków-zabudowy-dla-części-działki-czy-to-w-ogóle-możliwe",
+      "destination": "/blog/warunki-zabudowy-dla-czesci-dzialki",
+      "permanent": true
+    },
+    {
+      "source": "/post/warunki-zabudowy-2026-lublin",
+      "destination": "/blog/warunki-zabudowy-2026-lublin",
+      "permanent": true
+    },
+    {
+      "source": "/post/wycena-służebności-przesyłu-jak-robi-to-rzeczoznawca-majątkowy",
+      "destination": "/blog/wycena-sluzebnosci-przesylu-rzeczoznawca",
+      "permanent": true
+    },
+    {
+      "source": "/post/wycena-s%C5%82u%C5%BCebno%C5%9Bci-przesy%C5%82u-jak-robi-to-rzeczoznawca-maj%C4%85tkowy",
+      "destination": "/blog/wycena-sluzebnosci-przesylu-rzeczoznawca",
+      "permanent": true
+    },
+    {
+      "source": "/post/wynagrodzenie-za-sluzebnosc-drogi-koniecznej",
+      "destination": "/blog/wynagrodzenie-za-sluzebnosc-drogi-koniecznej",
+      "permanent": true
+    },
+    {
+      "source": "/post/zalana-dzia%C5%82ka-przez-s%C4%85siada-sprawd%C5%BA-jak-skutecznie-walczy%C4%87-o-swoje-prawa",
+      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "permanent": true
+    },
+    {
+      "source": "/post/zalana-działka-przez-sąsiada-sprawdź-jak-skutecznie-walczyć-o-swoje-prawa",
+      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "permanent": true
+    },
+    {
+      "source": "/post/zasiedzenie-s%C5%82u%C5%BCebno%C5%9Bci-drogi-czy-mo%C5%BCna-przej%C4%85%C4%87-prawo-przejazdu-po-30-latach",
+      "destination": "/blog/zasiedzenie-sluzebnosci-drogi-po-30-latach",
+      "permanent": true
+    },
+    {
+      "source": "/post/zasiedzenie-służebności-drogi-czy-można-przejąć-prawo-przejazdu-po-30-latach",
+      "destination": "/blog/zasiedzenie-sluzebnosci-drogi-po-30-latach",
+      "permanent": true
+    },
+    {
+      "source": "/post/zawyżony-podatek-od-nieruchomości-przez-błąd-w-ewidencji-zobacz-z-kim-tak-naprawdę-musisz-walczyć",
+      "destination": "/blog/zawyzony-podatek-od-nieruchomosci-blad-w-ewidencji",
+      "permanent": true
+    },
+    {
+      "source": "/post/zawy%C5%BCony-podatek-od-nieruchomo%C5%9Bci-przez-b%C5%82%C4%85d-w-ewidencji-zobacz-z-kim-tak-naprawd%C4%99-musisz-walczy%C4%87",
+      "destination": "/blog/zawyzony-podatek-od-nieruchomosci-blad-w-ewidencji",
+      "permanent": true
+    },
+    {
+      "source": "/post/zintegrowane-plany-inwestycyjne-zpi-i-umowy-urbanistyczne-co-nowelizacja-z-grudnia-2025-r-oznac",
+      "destination": "/uslugi/obsluga-podmiotow-profesjonalnych/obsluga-prawna-deweloperow",
+      "permanent": true
+    },
+    {
+      "source": "/post/zniesienie-sluzebnosci-nieistniejaca-linia",
+      "destination": "/blog/zniesienie-sluzebnosci-przesylu-nieistniejaca-linia",
+      "permanent": true
+    },
+    {
+      "source": "/post/zpi-nowelizacja-2026-umowy-urbanistyczne",
+      "destination": "/uslugi/obsluga-podmiotow-profesjonalnych/obsluga-prawna-deweloperow",
+      "permanent": true
+    },
+    {
+      "source": "/post/żółta-kartka-od-nadzoru-budowlanego-jak-działa-nowa-procedura-naprawcza-w-2026-roku",
+      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "permanent": true
+    },
+    {
+      "source": "/post/%C5%BC%C3%B3%C5%82ta-kartka-od-nadzoru-budowlanego-jak-dzia%C5%82a-nowa-procedura-naprawcza-w-2026-roku",
+      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "permanent": true
+    },
+    {
+      "source": "/service-page/porozmawiajmy-o-twojej-sprawie-3",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/umów-się-na-konsultację",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/um%C3%B3w-si%C4%99-na-konsultacj%C4%99",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/booking-calendar/porozmawiajmy-o-twojej-sprawie-3",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/2",
+      "destination": "/blog",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
@@ -12,11 +467,20 @@
       ]
     },
     {
-      "source": "/(.*)\\.(jsx|css|html)",
+      "source": "/vendor/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(app|styles)\\.([a-f0-9]{10})\\.(js|css)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     },
