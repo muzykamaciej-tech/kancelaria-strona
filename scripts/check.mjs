@@ -6,12 +6,14 @@
    Report: .check/report.json (+ .check/visual/*.png). Exit code 1 on any hard failure. */
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer-core';
 import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
 import { createServer } from './serve.mjs';
+import { sourceHash } from './source-hash.mjs';
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
 const OUT = path.join(ROOT, '.check');
 const ORIGIN = 'https://www.mecenasodnieruchomosci.pl';
@@ -22,6 +24,14 @@ fs.rmSync(path.join(OUT, 'report.json'), { force: true });
 fs.mkdirSync(path.join(OUT, 'visual'), { recursive: true });
 
 const fail = [], warn = [];
+/* dist/ is committed and served as is: it must come from the current sources */
+{
+  const built = fs.existsSync(path.join(DIST, '.source-hash')) ? fs.readFileSync(path.join(DIST, '.source-hash'), 'utf8').trim() : '(none)';
+  const now = sourceHash(ROOT);
+  if (built !== now) fail.push(`dist/ is stale: built from sources ${built}, sources now ${now} (run npm run build)`);
+}
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}($|T)/;
+const jsonDates = (o, out = []) => { if (o && typeof o === 'object') for (const [k, v] of Object.entries(o)) { if (/^date(Published|Modified|Created)$/.test(k)) out.push(v); else jsonDates(v, out); } return out; };
 const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]);
 const htmlFiles = walk(DIST).filter((f) => f.endsWith('.html'));
 const toPath = (f) => { const r = '/' + path.relative(DIST, f).replace(/\.html$/, ''); return r === '/index' ? '/' : r; };
@@ -41,7 +51,18 @@ for (const f of htmlFiles) {
   const internal = links.filter((l) => l.startsWith('/') && !l.startsWith('//') && !/^\/(assets|vendor|api)\//.test(l) && !/\.[a-z0-9]{2,4}$/i.test(l.split('#')[0]));
   const hashLinks = links.filter((l) => l.startsWith('#/'));
   const jsonld = [...h.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
-  jsonld.forEach((j, i) => { try { JSON.parse(j); } catch (e) { fail.push(`${p}: JSON-LD #${i} does not parse`); } });
+  jsonld.forEach((j, i) => {
+    let data; try { data = JSON.parse(j); } catch (e) { return fail.push(`${p}: JSON-LD #${i} does not parse`); }
+    jsonDates(data).filter((d) => !ISO_DATE.test(String(d))).forEach((d) => fail.push(`${p}: JSON-LD date "${d}" is not ISO 8601`));
+  });
+  /* FAQ: every answer in the HTML, not only the open one (crawlers do not click) */
+  const faqItems = (h.match(/class="faq-acc-item"/g) || []).length, faqBodies = (h.match(/class="[^"]*\bfaq-acc-body\b/g) || []).length;
+  if (faqItems !== faqBodies) fail.push(`${p}: ${faqItems} FAQ questions but ${faqBodies} answers in the HTML`);
+  for (const [prop, val] of [['og:url', canonical], ['og:title', null], ['og:description', null]]) {
+    const v = (h.match(new RegExp(`<meta property="${prop}" content="([^"]*)"`)) || [])[1];
+    if (!noindex && (v == null || (val && v !== val))) fail.push(`${p}: ${prop} ${v == null ? 'missing' : v}`);
+  }
+  if (/<i [^>]*data-lucide=/.test(h)) fail.push(`${p}: unrendered lucide icon placeholder in HTML`);
   if (/text\/babel|babel\.min\.js|unpkg\.com/.test(h)) fail.push(`${p}: still references Babel/unpkg`);
   if (!noindex && canonical !== ORIGIN + (p === '/' ? '/' : p)) fail.push(`${p}: canonical ${canonical}`);
   if (!noindex && h1 !== 1) warn.push(`${p}: ${h1} <h1>`);
@@ -54,7 +75,9 @@ for (const [p, d] of Object.entries(pages)) for (const l of d.internal) if (!exi
 const dupTitles = Object.entries(Object.entries(pages).filter(([, d]) => !d.noindex).reduce((a, [p, d]) => ((a[d.title] = a[d.title] || []).push(p), a), {})).filter(([, ps]) => ps.length > 1);
 dupTitles.forEach(([t, ps]) => warn.push(`duplicate <title> "${t}": ${ps.join(', ')}`));
 
-const sitemap = [...fs.readFileSync(path.join(DIST, 'sitemap.xml'), 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(ORIGIN, '') || '/');
+const sitemapXml = fs.readFileSync(path.join(DIST, 'sitemap.xml'), 'utf8');
+const sitemap = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(ORIGIN, '') || '/');
+[...sitemapXml.matchAll(/<lastmod>([^<]*)<\/lastmod>/g)].filter((m) => !ISO_DATE.test(m[1])).forEach((m) => fail.push(`sitemap: lastmod "${m[1]}" is not YYYY-MM-DD`));
 sitemap.forEach((p) => { if (!pages[p]) fail.push(`sitemap URL without page: ${p}`); });
 
 /* reachability through real links, from the home page */
@@ -101,7 +124,7 @@ const browserChecks = [];
   for (const t of targets) {
     await pg.goto(BASE + '/', { waitUntil: 'domcontentloaded', timeout: 60000 }); await pg.waitForSelector('#app main', { timeout: 30000 });
     await pg.evaluate(() => { window.__marker = 1; });
-    const clicked = await pg.evaluate((t) => { const a = [...document.querySelectorAll(`#app a[href="${t}"]`)].find((x) => x.offsetParent !== null); if (!a) return false; a.click(); return true; }, t);
+    const clicked = await pg.evaluate((t) => { const a = [...document.querySelectorAll(`#app a[href="${t}"]:not([target="_blank"])`)].find((x) => x.offsetParent !== null); if (!a) return false; a.click(); return true; }, t);
     if (!clicked) { warn.push(`client nav: no visible link to ${t} on /`); continue; }
     await new Promise((r) => setTimeout(r, 400));
     const res = await pg.evaluate(() => ({ path: location.pathname, marker: window.__marker === 1, h1: (document.querySelector('#app h1') || {}).innerText || '' }));
@@ -138,6 +161,8 @@ if (VISUAL) {
         await new Promise((r) => setTimeout(r, 1200));
         await pg.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 700) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 60)); } window.scrollTo(0, 0); });
         await new Promise((r) => setTimeout(r, 600));
+        /* screenshot only after finite CSS transitions (sticky nav growing back at the top) have finished */
+        await pg.waitForFunction(() => window.scrollY === 0 && !document.getAnimations().some((a) => a.playState === 'running' && a.effect && a.effect.getComputedTiming().iterations !== Infinity), { timeout: 3000 }).catch(() => {});
         const file = path.join(OUT, 'visual', `${tag}${p.replace(/\//g, '_') || '_home'}.${who}.png`);
         await pg.screenshot({ path: file, fullPage: true });
         shots[who] = file;

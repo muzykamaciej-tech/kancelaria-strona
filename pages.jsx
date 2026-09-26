@@ -11,7 +11,7 @@ function HomePage({ setRoute, tweaks }) {
   const rest = window.SERVICES.filter((s) => !window.FEATURED_IDS.includes(s.id));
 
   return (
-    <main data-screen-label="01 Home">
+    <main id="main-content" data-screen-label="01 Home">
       <Hero setRoute={setRoute} variant={tweaks.heroVariant} />
       <CredibilityStrip />
 
@@ -79,7 +79,7 @@ function HomePage({ setRoute, tweaks }) {
    ============================================================ */
 function UslugiPage({ setRoute }) {
   return (
-    <main data-screen-label="02 Uslugi index">
+    <main id="main-content" data-screen-label="02 Uslugi index">
       <section className="bg-light" style={{ paddingBlock: '3rem 5rem' }}>
         <div className="wrap">
           <window.NavLink className="btn-link" route="landing">
@@ -135,7 +135,7 @@ function ServiceDetailPage({ serviceId, setRoute }) {
   const service = window.SERVICES.find((s) => s.id === serviceId) || window.SERVICES[0];
 
   return (
-    <main data-screen-label={`03 Usluga — ${service.title}`}>
+    <main id="main-content" data-screen-label={`03 Usluga — ${service.title}`}>
       {/* Hero */}
       <section className="bg-light" style={{ paddingBlock: '3rem 4rem', borderBottom: '1px solid var(--slate-100)' }}>
         <div className="wrap">
@@ -321,7 +321,7 @@ function LeadFormBand() {
    ============================================================ */
 function BlogPage({ setRoute }) {
   return (
-    <main data-screen-label="04 Blog">
+    <main id="main-content" data-screen-label="04 Blog">
       <section className="bg-light" style={{ paddingBlock: '3rem 5rem' }}>
         <div className="wrap">
           <window.NavLink className="btn-link" route="landing">
@@ -388,7 +388,7 @@ function BlogPostPage({ slug, setRoute }) {
   const prev = window.BLOG[(idx - 1 + window.BLOG.length) % window.BLOG.length];
 
   return (
-    <main data-screen-label={`05 Blog post — ${post.title}`}>
+    <main id="main-content" data-screen-label={`05 Blog post — ${post.title}`}>
       <section className="bg-light" style={{ paddingBlock: '3rem 4rem' }}>
         <div className="wrap">
           <nav className="breadcrumb">
@@ -418,7 +418,7 @@ function BlogPostPage({ slug, setRoute }) {
 
       <article className="section-py">
         <div className="wrap" style={{ maxWidth: '46rem' }}>
-          {post.cover && <img className="prose-cover" src={post.cover} alt="" width="1200" height="654" loading="lazy" decoding="async" />}
+          {post.cover && <img className="prose-cover" src={post.cover} alt="" width="1200" height="654" decoding="async" />}
           <BlogBody blocks={post.body} />
         </div>
       </article>
@@ -508,7 +508,7 @@ function BlogRelatedServices({ slugs, setRoute }) {
    ============================================================ */
 function FAQPage({ setRoute }) {
   return (
-    <main data-screen-label="06 FAQ">
+    <main id="main-content" data-screen-label="06 FAQ">
       <section className="bg-light" style={{ paddingBlock: '3rem 5rem' }}>
         <div className="wrap">
           <window.NavLink className="btn-link" route="landing">
@@ -553,6 +553,7 @@ function FAQPage({ setRoute }) {
    ============================================================ */
 function FAQAccordion({ items, startOpen = -1 }) {
   const [open, setOpen] = useState(startOpen);
+  const uid = React.useId(); /* unique panel ids when a page has several accordions */
   return (
     <div className="faq-acc mt-6 flex-col gap-3">
       {items.map((f, i) => (
@@ -564,15 +565,14 @@ function FAQAccordion({ items, startOpen = -1 }) {
           <button
             onClick={() => setOpen(open === i ? -1 : i)}
             aria-expanded={open === i}
-            aria-controls={`faq-panel-${i}`}>
+            aria-controls={`faq-panel-${uid}-${i}`}>
             <span>{f.q}</span>
             <span className="faq-acc-icon" aria-hidden="true">
               <Icon name="plus" size={18} />
             </span>
           </button>
-          {open === i && (
-            <div className="anim-fade-up faq-acc-body" id={`faq-panel-${i}`}>{f.a}</div>
-          )}
+          {/* every answer stays in the HTML (crawlers, AI, find-in-page); closed ones are hidden */}
+          <div className="anim-fade-up faq-acc-body" id={`faq-panel-${uid}-${i}`} hidden={open !== i}>{f.a}</div>
         </div>
       ))}
     </div>
@@ -657,7 +657,7 @@ function FAQTeaser({ setRoute }) {
    ============================================================ */
 function KontaktPage({ setRoute }) {
   return (
-    <main data-screen-label="07 Kontakt">
+    <main id="main-content" data-screen-label="07 Kontakt">
       <section className="bg-light" style={{ paddingBlock: '3rem 2.5rem' }}>
         <div className="wrap">
           <window.NavLink className="btn-link" route="landing">

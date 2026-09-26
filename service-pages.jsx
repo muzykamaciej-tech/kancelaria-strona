@@ -167,7 +167,7 @@ function BlockCard({ block, setRoute, route, slug }) {
 function UslugiOverview({ setRoute }) {
   const featured = window.getFeatured();
   return (
-    <main data-screen-label="02 Usługi — przegląd">
+    <main id="main-content" data-screen-label="02 Usługi — przegląd">
       <section className="bg-light" style={{ paddingBlock: '3rem 4.5rem' }}>
         <div className="wrap">
           <Breadcrumb trail={[{ label: 'Start', route: 'landing' }, { label: 'Usługi' }]} />
@@ -231,7 +231,7 @@ function PillarPage({ blockId, setRoute }) {
   const block = window.getBlock(blockId) || window.SERVICE_BLOCKS[0];
   const bc = window.BLOCK_CONTENT ? window.BLOCK_CONTENT[block.id] : null;
   return (
-    <main data-screen-label={`Blok — ${block.title}`}>
+    <main id="main-content" data-screen-label={`Blok — ${block.title}`}>
       <section className="bg-dark relative overflow-hidden" style={{ paddingBlock: '3rem 4.5rem' }}>
         <div className="orb" style={{ width: 560, height: 560, top: -200, right: -160, opacity: 'calc(0.18 * var(--ambient-on))' }} />
         <div className="wrap relative" style={{ zIndex: 2 }}>
@@ -496,7 +496,7 @@ function ServicePage({ slug, setRoute }) {
   const isFull = !!c;
 
   return (
-    <main data-screen-label={`Usługa — ${service.title}`}>
+    <main id="main-content" data-screen-label={`Usługa — ${service.title}`}>
       {/* Hero */}
       <section className="bg-light" style={{ paddingBlock: '3rem 4rem', borderBottom: '1px solid var(--slate-100)' }}>
         <div className="wrap">
@@ -600,7 +600,7 @@ function FaqPageV3({ setRoute }) {
     null;
 
   return (
-    <main data-screen-label="FAQ">
+    <main id="main-content" data-screen-label="FAQ">
       <section className="bg-light" style={{ paddingBlock: '3rem 4rem' }}>
         <div className="wrap">
           <Breadcrumb trail={[{ label: 'Start', route: 'landing' }, { label: 'FAQ' }]} />

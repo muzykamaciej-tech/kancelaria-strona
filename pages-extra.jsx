@@ -4,7 +4,7 @@
 function OMniePage({ setRoute }) {
   const About = window.AboutBlock, Reviews = window.ReviewsBand, Lead = window.LeadFormBand, Icon = window.Icon;
   return (
-    <main data-screen-label="08 O mnie">
+    <main id="main-content" data-screen-label="08 O mnie">
       <section className="bg-light" style={{ paddingBlock: '3rem 2.5rem' }}>
         <div className="wrap">
           <window.NavLink route="landing" className="btn-link">
@@ -35,7 +35,7 @@ function OMniePage({ setRoute }) {
 function NotFoundPage({ setRoute }) {
   const Icon = window.Icon;
   return (
-    <main data-screen-label="404">
+    <main id="main-content" data-screen-label="404">
       <section className="bg-light" style={{ paddingBlock: '4rem 4rem' }}>
         <div className="wrap" style={{ maxWidth: '48rem' }}>
           <span className="eyebrow">Błąd 404</span>

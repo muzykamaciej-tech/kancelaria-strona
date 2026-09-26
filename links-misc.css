@@ -14,3 +14,15 @@ a.btn-link { text-align: center; }
 
 /* tools.jsx (KalkulatorTeaser) — .btn ustawia display, kolor, dekorację, kursor i font; tu tylko wyrównanie z UA przycisku. */
 a.btn { text-align: center; }
+
+/* a11y (26.09.2026) — keyboard focus ring with >= 3:1 contrast where the brand blue ring (#0E53A5) sits on a dark background:
+   footer (#0F172A: 2.38:1 -> #9DC2EC 9:1) and the light-on-dark controls of .bg-dark sections (#1E293B: 1.95:1 -> 7.5:1).
+   Only the :focus-visible state changes; nothing else looks different. */
+.bg-ink :focus-visible,
+.bg-dark .btn-on-dark:focus-visible,
+.bg-dark .btn-secondary:focus-visible,
+.bg-dark .about-cred-link:focus-visible { outline-color: #9DC2EC; }
+/* floating phone/WhatsApp buttons: the ring (outline-offset 3px) sits on the page background, where #E0EDFA was 1.19:1 */
+.qc-btn:focus-visible { outline-color: var(--brand-primary); }
+/* after a client-side navigation the new page's <h1> takes focus (tabindex=-1) for screen readers; no ring on a heading */
+main h1[tabindex="-1"]:focus { outline: none; }

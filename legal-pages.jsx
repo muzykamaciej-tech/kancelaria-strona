@@ -6,7 +6,7 @@
 function LegalLayout({ eyebrow, title, label, setRoute, children }) {
   const Breadcrumb = window.Breadcrumb;
   return (
-    <main data-screen-label={label}>
+    <main id="main-content" data-screen-label={label}>
       <section className="bg-light" style={{ paddingBlock: '3rem 4rem' }}>
         <div className="wrap">
           <Breadcrumb

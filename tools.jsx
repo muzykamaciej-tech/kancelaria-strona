@@ -88,7 +88,7 @@ function KalkulatorSlupyPage({ setRoute }) {
     if (window.gtag) window.gtag('event', 'calculator_used', { device: f.device, land: f.land, total_high: Math.round(r.total[1]) });
   }
   return (
-    <main data-screen-label="Kalkulator — słupy na działce">
+    <main id="main-content" data-screen-label="Kalkulator — słupy na działce">
       <section className="bg-light" style={{ paddingBlock: '3rem 4rem', borderBottom: '1px solid var(--slate-100)' }}>
         <div className="wrap">
           {Breadcrumb && <Breadcrumb trail={[
@@ -277,7 +277,7 @@ function PlanAlertBand() {
               {status === 'sending' ? 'Zapisuję…' : <React.Fragment>Powiadom mnie <TIcon name="bell" size={16} /></React.Fragment>}
             </button>
             {status === 'error' && <p className="input-err" style={{ marginTop: '0.75rem', textAlign: 'center' }}>Nie udało się zapisać. Napisz na <a href={mailto}>{TOOLS_EMAIL}</a>.</p>}
-            <p className="small plan-alert-note">Jedna, dwie wiadomości w roku — tylko o Twojej gminie. Zrezygnujesz jednym mailem. Administrator danych: adw. dr Maciej Muzyka — <a href="/polityka-prywatnosci">polityka prywatności</a>.</p>
+            <p className="small plan-alert-note">Jedna, dwie wiadomości w roku — tylko o Twojej gminie. Zrezygnujesz jednym mailem. Administrator danych: adw. dr Maciej Muzyka — <a href="/polityka-prywatnosci" target="_blank" rel="noopener">polityka prywatności</a>.</p>
           </form>}
         </div>
       </div>

@@ -138,17 +138,24 @@ function Navbar({ route, setRoute, serviceSlug }) {
   const sentinelRef = useRef(null);
 
   useEffect(() => {
-    // Fallback: window scroll (normal iframes / direct view)
-    const onScroll = () => setScrolled((window.scrollY || document.documentElement.scrollTop || 0) > 24);
+    // Window scroll with hysteresis: the bar shrinks by ~36px, which moves the page up by as much
+    // (scroll anchoring). The on/off thresholds are further apart than that, so shrinking can never
+    // flip the state back (no flicker loop when the page rests a few dozen px from the top).
+    const onScroll = () => {
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      setScrolled((prev) => prev ? y > 8 : y > 80);
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    // Primary: IntersectionObserver on a top sentinel — fires regardless of
-    // which ancestor actually scrolls (robust inside embedded/auto-sized frames)
+    // Embedded/auto-sized frames (the window itself never scrolls): IntersectionObserver on a top
+    // sentinel, used only while the window is at 0
     let io;
     const el = sentinelRef.current;
     if (el && typeof IntersectionObserver !== 'undefined') {
-      io = new IntersectionObserver(([entry]) => setScrolled(!entry.isIntersecting), { threshold: 0 });
+      io = new IntersectionObserver(([entry]) => {
+        if (!(window.scrollY || document.documentElement.scrollTop)) setScrolled(!entry.isIntersecting);
+      }, { threshold: 0 });
       io.observe(el);
     }
     return () => {
@@ -196,7 +203,7 @@ function Navbar({ route, setRoute, serviceSlug }) {
           onNavigate={closeMenus}
           aria-label="Kancelaria Nieruchomości — Adwokat Maciej Muzyka">
 
-          <img src={window.__resources?.logoLight || "/assets/logo.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" style={{ objectFit: "cover" }} />
+          <img src={window.__resources?.logoLight || "/assets/logo.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" width="686" height="208" style={{ objectFit: "cover" }} />
         </window.NavLink>
 
         {/* Desktop links */}
@@ -213,9 +220,7 @@ function Navbar({ route, setRoute, serviceSlug }) {
                   <window.NavLink
                     route="uslugi"
                     className={`nav-link ${route === 'uslugi' || route === 'usluga' ? 'active' : ''}`}
-                    onNavigate={closeMenus}
-                    aria-haspopup="true"
-                    aria-expanded={menuOpen}>
+                    onNavigate={closeMenus}>
 
                     {l.label}
                     <Icon name="chevron-down" size={14} style={{ marginLeft: 4, transition: 'transform 200ms', transform: menuOpen ? 'rotate(180deg)' : 'none' }} />
@@ -352,7 +357,7 @@ function MobileMenu({ go, route, onNavigate }) {
             </window.NavLink>);
 
         })}
-        <button className="btn btn-primary mt-4" style={{ width: '100%' }} onClick={() => { if (document.getElementById('formularz') && window.spScrollToForm) { go(route); window.spScrollToForm(); } else { go('landing'); setTimeout(() => window.spScrollToForm && window.spScrollToForm(), 140); } }}>
+        <button className="btn btn-primary mt-4" style={{ width: '100%' }} onClick={() => { if (document.getElementById('formularz') && window.spScrollToForm) { onNavigate(); setTimeout(() => window.spScrollToForm(), 0); /* after the menu (part of the sticky nav) has closed */ } else { go('landing'); setTimeout(() => window.spScrollToForm && window.spScrollToForm(), 140); } }}>
           Opisz swoją sprawę <Icon name="arrow-right" size={16} />
         </button>
       </div>
@@ -810,7 +815,7 @@ function Footer({ setRoute }) {
         <div className="footer-grid">
           <div>
             <window.NavLink route="landing" className="footer-logo-link" style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}>
-              <img src={window.__resources?.logoDark || "/assets/logo-on-dark.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" style={{ height: 104, width: 'auto' }} />
+              <img src={window.__resources?.logoDark || "/assets/logo-on-dark.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" width="686" height="208" loading="lazy" decoding="async" style={{ height: 104, width: 'auto' }} />
             </window.NavLink>
             <p className="mt-6" style={{ color: 'var(--text-on-dark-3)', fontSize: '0.875rem', lineHeight: 1.6, maxWidth: '24rem' }}>
               Specjalistyczna kancelaria adwokacka świadcząca usługi prawne wyłącznie w zakresie prawa nieruchomości i procesu inwestycyjno-budowlanego. Klienci z całej Polski — obsługa zdalna.

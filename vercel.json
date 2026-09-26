@@ -454,6 +454,26 @@
       "source": "/blog/page/2",
       "destination": "/blog",
       "permanent": true
+    },
+    {
+      "source": "/post/:slug*",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/categories/:category*",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tags/:tag*",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/:page*",
+      "destination": "/blog",
+      "permanent": true
     }
   ],
   "headers": [
@@ -462,7 +482,7 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
         }
       ]
     },

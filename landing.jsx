@@ -25,6 +25,7 @@ function SvgIcon({ name, size = 18, style }) {
     <svg
       width={size} height={size} viewBox="0 0 24 24" fill="none"
       stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round"
+      aria-hidden="true" focusable="false"
       style={{ display: 'inline-flex', flexShrink: 0, ...style }}
       dangerouslySetInnerHTML={{ __html: SVG_PATHS[name] || '' }} />);
 
@@ -446,7 +447,7 @@ function QualificationForm({ compact = false }) {
       {/* Klauzula informacyjna RODO — bez checkboxa (odpowiedź na zapytanie nie wymaga odrębnej zgody) */}
       <p className="small qual-rodo">
         Wysyłając formularz, przekazujesz mi dane w celu odpowiedzi na sprawę. Administratorem danych jest adw. dr Maciej Muzyka — szczegóły w{' '}
-        <a href="/polityka-prywatnosci">polityce prywatności</a>. Sprawę obejmuje tajemnica adwokacka; kancelaria ma ubezpieczenie OC adwokata.
+        <a href="/polityka-prywatnosci" target="_blank" rel="noopener">polityce prywatności</a>. Sprawę obejmuje tajemnica adwokacka; kancelaria ma ubezpieczenie OC adwokata.
       </p>
 
       <button type="submit" className="btn btn-primary qual-submit" disabled={status === 'sending'}>
@@ -1338,7 +1339,7 @@ function MapSection() {
    ============================================================ */
 function LandingPage({ setRoute }) {
   return (
-    <main data-screen-label="00 Landing">
+    <main id="main-content" data-screen-label="00 Landing">
       <LandingIntro setRoute={setRoute} />
       <LandingHero />
       <StatsBand />

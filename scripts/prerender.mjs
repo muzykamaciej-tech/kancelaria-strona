@@ -1,19 +1,21 @@
 /* prerender.mjs — renders every route in headless Chrome and saves the finished HTML,
    so Google and AI crawlers (which do not run JS) get the full content, title, canonical and JSON-LD.
-   Also writes sitemap.xml, robots.txt and llms.txt from the same data the site renders. */
+   Also writes sitemap.xml, robots.txt and llms.txt from the same data the site renders.
+   Works in .dist-build/ (from build.mjs) and replaces dist/ only when every route rendered cleanly. */
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer-core';
 import { createServer } from './serve.mjs';
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
-const DIST = path.join(ROOT, 'dist');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const DIST = path.join(ROOT, '.dist-build');
+const FINAL = path.join(ROOT, 'dist');
 const ORIGIN = 'https://www.mecenasodnieruchomosci.pl';
 const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const TODAY = new Date().toISOString().slice(0, 10);
 const CONCURRENCY = 4;
 
-if (!fs.existsSync(path.join(DIST, '__shell.html'))) throw new Error('run scripts/build.mjs first');
+if (!fs.existsSync(path.join(DIST, '__shell.html'))) throw new Error('run scripts/build.mjs first (no .dist-build/__shell.html)');
 
 /* live Google rating so the prerendered badge matches production */
 let rating = { rating: 5, count: 63 };
@@ -49,26 +51,29 @@ await probe.goto(BASE + '/', { waitUntil: 'domcontentloaded', timeout: 60000 });
 await probe.waitForSelector('#app main', { timeout: 30000 });
 const data = await probe.evaluate(() => ({
   blocks: window.SERVICE_BLOCKS.map((b) => ({ id: b.id, title: b.title, tagline: b.tagline || '', services: b.services.map((s) => ({ slug: s.slug, title: s.title, desc: s.desc || '' })) })),
-  blog: (window.BLOG || []).map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt || '', iso: p.iso, updated: p.updated || '' })),
+  blog: (window.BLOG || []).map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt || '', iso: p.iso, modified: window.postModifiedIso(p) })),
 }));
 await probe.close();
 
+/* lastmod only where there is a real date (blog: published/updated). A build date on every other page would
+   change on each build without any content change, and Google stops trusting lastmod that is not accurate. */
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 const routes = [
-  { path: '/', lastmod: TODAY, priority: '1.0' },
-  { path: '/uslugi', lastmod: TODAY, priority: '0.8' },
+  { path: '/', priority: '1.0' },
+  { path: '/uslugi', priority: '0.8' },
   ...data.blocks.flatMap((b) => [
-    { path: `/uslugi/${b.id}`, lastmod: TODAY, priority: '0.8' },
-    ...b.services.map((s) => ({ path: `/uslugi/${b.id}/${s.slug}`, lastmod: TODAY, priority: '0.7' })),
+    { path: `/uslugi/${b.id}`, priority: '0.8' },
+    ...b.services.map((s) => ({ path: `/uslugi/${b.id}/${s.slug}`, priority: '0.7' })),
   ]),
-  { path: '/blog', lastmod: TODAY, priority: '0.7' },
-  ...data.blog.map((p) => ({ path: `/blog/${p.slug}`, lastmod: (p.updated || p.iso || TODAY).slice(0, 10), priority: '0.6' })),
-  { path: '/o-mnie', lastmod: TODAY, priority: '0.7' },
-  { path: '/kontakt', lastmod: TODAY, priority: '0.6' },
-  { path: '/faq', lastmod: TODAY, priority: '0.5' },
-  { path: '/kalkulator-slupy', lastmod: TODAY, priority: '0.6' },
-  { path: '/polityka-prywatnosci', lastmod: TODAY, priority: '0.2' },
-  { path: '/regulamin', lastmod: TODAY, priority: '0.2' },
-  { path: '/rodo', lastmod: TODAY, priority: '0.2' },
+  { path: '/blog', priority: '0.7' },
+  ...data.blog.map((p) => ({ path: `/blog/${p.slug}`, lastmod: p.modified, priority: '0.6' })),
+  { path: '/o-mnie', priority: '0.7' },
+  { path: '/kontakt', priority: '0.6' },
+  { path: '/faq', priority: '0.5' },
+  { path: '/kalkulator-slupy', priority: '0.6' },
+  { path: '/polityka-prywatnosci', priority: '0.2' },
+  { path: '/regulamin', priority: '0.2' },
+  { path: '/rodo', priority: '0.2' },
   { path: '/404', noindex: true },
 ];
 
@@ -91,8 +96,11 @@ async function render(page, r) {
     const is404 = main && main.getAttribute('data-screen-label') === '404';
     /* any leftover legacy hash links → real paths */
     document.querySelectorAll('a[href^="#/"]').forEach((a) => a.setAttribute('href', a.getAttribute('href').slice(1).replace(/\/+$/, '') || '/'));
+    /* until the app mounts, Enter in a field must not submit the form natively (GET with the typed text in the URL) */
+    document.querySelectorAll('#app form').forEach((f) => f.setAttribute('onsubmit', 'return false'));
     const canonical = document.querySelector('link[rel="canonical"]');
     return {
+      icons: [...new Set([...document.querySelectorAll('#app i[data-lucide]')].map((i) => i.getAttribute('data-lucide')))],
       is404, wrong404: is404 !== isNotFound,
       title: document.title,
       canonical: canonical && canonical.href,
@@ -101,6 +109,7 @@ async function render(page, r) {
     };
   }, !!r.noindex);
   if (res.wrong404) failures.push(`${r.path}: rendered ${res.is404 ? '404' : 'content'} unexpectedly`);
+  if (res.icons.length) failures.push(`${r.path}: lucide icons not rendered (missing from the subset?): ${res.icons.join(', ')}`);
   if (!r.noindex && res.canonical !== ORIGIN + r.path) failures.push(`${r.path}: canonical ${res.canonical}`);
   if (page._errors.length) failures.push(`${r.path}: JS errors: ${page._errors.slice(0, 3).join(' | ')}`);
   const file = path.join(DIST, outFile(r.path));
@@ -129,9 +138,10 @@ fs.rmSync(path.join(DIST, '__shell.html'));
 
 /* 3. sitemap.xml, robots.txt, llms.txt */
 const indexable = routes.filter((r) => !r.noindex);
+indexable.filter((r) => r.lastmod && !ISO_DATE.test(r.lastmod)).forEach((r) => failures.push(`${r.path}: lastmod "${r.lastmod}" is not YYYY-MM-DD`));
 fs.writeFileSync(path.join(DIST, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-  indexable.map((r) => `  <url><loc>${ORIGIN}${r.path === '/' ? '/' : r.path}</loc><lastmod>${r.lastmod}</lastmod><priority>${r.priority}</priority></url>`).join('\n') +
+  indexable.map((r) => `  <url><loc>${ORIGIN}${r.path === '/' ? '/' : r.path}</loc>${r.lastmod ? `<lastmod>${r.lastmod}</lastmod>` : ''}<priority>${r.priority}</priority></url>`).join('\n') +
   `\n</urlset>\n`);
 
 fs.writeFileSync(path.join(DIST, 'robots.txt'),
@@ -139,14 +149,14 @@ fs.writeFileSync(path.join(DIST, 'robots.txt'),
 
 const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
 const llms = [
-  '# Kancelaria Nieruchomości – adw. dr Maciej Muzyka',
+  '# Kancelaria Nieruchomości – adw. dr Maciej Muzyka (Mecenas od Nieruchomości)',
   '',
-  '> Kancelaria adwokacka z Lublina zajmująca się wyłącznie prawem nieruchomości. Prowadzi adw. dr Maciej Muzyka (Lubelska Izba Adwokacka, wpis LUB/ADW/1702). Sprawy z całej Polski, kontakt zdalny, przede wszystkim mailowo. Sprawę opisuje się w formularzu na stronie; odpowiedź w ciągu 24 h roboczych.',
+  '> Mecenas od Nieruchomości: kancelaria adwokacka z Lublina zajmująca się wyłącznie prawem nieruchomości. Prowadzi adw. dr Maciej Muzyka (Lubelska Izba Adwokacka, wpis LUB/ADW/1702). Sprawy z całej Polski, kontakt zdalny, przede wszystkim mailowo; spotkania w Lublinie i w Warszawie. Sprawę opisuje się w formularzu na stronie; odpowiedź w ciągu 24 h roboczych.',
   '',
   `- Strona: ${ORIGIN}/`,
   `- O kancelarii i kwalifikacjach: ${ORIGIN}/o-mnie`,
   `- Kontakt i formularz: ${ORIGIN}/kontakt`,
-  '- E-mail: maciej.muzyka@mecenasodnieruchomosci.pl, tel. +48 884 784 984, ul. Cicha 4/5, 20-078 Lublin',
+  '- E-mail: maciej.muzyka@mecenasodnieruchomosci.pl, tel. +48 884 784 984, ul. Cicha 4/5, 20-078 Lublin (siedziba); spotkania także: ul. Bracka 20/lok. 7A, 00-028 Warszawa',
   `- Kalkulator wynagrodzenia za słupy i rury na działce: ${ORIGIN}/kalkulator-slupy`,
   '',
   '## Usługi',
@@ -160,7 +170,7 @@ const llms = [
   '',
   ...data.blog.map((p) => `- [${clean(p.title)}](${ORIGIN}/blog/${p.slug})${p.excerpt ? ': ' + clean(p.excerpt) : ''}`),
   '',
-  '## Opcjonalne',
+  '## Optional',
   '',
   `- [FAQ](${ORIGIN}/faq)`,
   `- [Mapa strony](${ORIGIN}/sitemap.xml)`,
@@ -169,7 +179,9 @@ const llms = [
 fs.writeFileSync(path.join(DIST, 'llms.txt'), llms);
 
 const thin = routes.filter((r) => !r.noindex && r.words < 250).map((r) => `${r.path} (${r.words})`);
-console.log(`prerender: ${routes.length} routes → dist/, sitemap ${indexable.length} URLs, llms.txt ${llms.length} B`);
 if (thin.length) console.log(`thin pages (<250 words in <main>): ${thin.join(', ')}`);
-if (failures.length) { console.error('FAILURES:\n' + failures.join('\n')); process.exit(1); }
+if (failures.length) { console.error('FAILURES (dist/ left unchanged, see .dist-build/):\n' + failures.join('\n')); process.exit(1); }
+fs.rmSync(FINAL, { recursive: true, force: true });
+fs.renameSync(DIST, FINAL);
+console.log(`prerender: ${routes.length} routes → dist/, sitemap ${indexable.length} URLs, llms.txt ${llms.length} B`);
 process.exit(0);
