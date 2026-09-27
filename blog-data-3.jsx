@@ -286,7 +286,7 @@ window.BLOG.push(
         'Twoja inwestycja będzie oceniana według zasad znanych Ci w momencie składania dokumentów.',
       ]],
       ['p', 'Pamiętaj jednak, że każda gmina interpretuje przepisy w swoim tempie, a diabeł tkwi w szczegółach Twojego konkretnego wniosku.'],
-      ['p', 'Jeśli chcesz mieć stuprocentową pewność, że Twoja dokumentacja jest kuloodporna – **opisz sprawę w formularzu poniżej, a bezpłatnie sprawdzę ją w ciągu 24 h.** Upewnimy się, że żadna urzędnicza niespodzianka Cię nie zaskoczy.'],
+      ['p', 'Jeśli chcesz mieć stuprocentową pewność, że Twoja dokumentacja jest kuloodporna – **opisz sprawę w formularzu poniżej, a w ciągu 24 h bezpłatnie odpiszę, co trzeba sprawdzić, i prześlę ofertę z ceną.** Upewnimy się, że żadna urzędnicza niespodzianka Cię nie zaskoczy.'],
     ],
   }
 );

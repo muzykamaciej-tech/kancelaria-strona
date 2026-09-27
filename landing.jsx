@@ -93,7 +93,7 @@ const LANDING_STATS = [
 
 /* Standardy współpracy */
 const STANDARDS = [
-{ icon: 'wallet', t: 'Najpierw wycena, potem praca', d: 'Po bezpłatnej analizie dostajesz propozycję rozliczenia i umowę. Dopiero gdy je zaakceptujesz, zaczynam działać; do tego momentu nic Cię nie wiąże.' },
+{ icon: 'wallet', t: 'Najpierw oferta, potem praca', d: 'Razem z bezpłatną wstępną analizą dostajesz ofertę z ceną i terminem. Zaczynam działać dopiero, gdy ją zaakceptujesz; do tego momentu nic nie płacisz.' },
 { icon: 'file-search', t: 'Konkret zamiast żargonu', d: 'Nie dostaniesz opinii na dwadzieścia stron, której nikt nie czyta. Mówię wprost, co jest bezpieczne, co ryzykowne i co z tym zrobić — językiem, który rozumiesz.' },
 { icon: 'shield-check', t: 'Pełna poufność', d: 'Twoje dokumenty trafiają tylko do mnie i obejmuje je tajemnica adwokacka. Nic nie wychodzi na zewnątrz, także wtedy, gdy ostatecznie nie dojdzie do współpracy.' },
 { icon: 'bell', t: 'Jesteś na bieżąco', d: 'Informuję Cię o każdym istotnym etapie i nie musisz dopytywać. Gdy coś wymaga Twojej decyzji, tłumaczę opcje i ich skutki, zanim zrobimy następny krok.' }];
@@ -102,9 +102,9 @@ const STANDARDS = [
 /* Jak to działa — 5 kroków */
 const HOW_STEPS = [
 { n: '1', t: 'Opisujesz sprawę', d: 'Kilka zdań i dokumenty, jeśli je masz (umowa, księga wieczysta, zdjęcie).' },
-{ n: '2', t: 'Dostajesz bezpłatną analizę w 24 h', d: 'Ocena ryzyka i konkretny kolejny krok, prostym językiem. Jeśli do oceny będę potrzebował więcej informacji, odezwę się, żeby dopytać.' },
-{ n: '3', t: 'Znasz cenę i termin', d: 'Wycena na piśmie przed startem; do tego momentu nic Cię nie wiąże.' },
-{ n: '4', t: 'Akceptujesz cenę i strategię', d: 'Zatwierdzasz wycenę i plan działania. Drobne sprawy domykamy ustaleniem mailowym, większe — jasną umową na piśmie. Zero ukrytych kosztów, zero niespodzianek.' },
+{ n: '2', t: 'Bezpłatna analiza i oferta w 24 h', d: 'Piszę, co trzeba zrobić w Twojej sprawie — audyt, pismo czy sprawa sądowa — i od razu wysyłam ofertę z ceną i terminem. Jeśli potrzebuję więcej informacji, dopytam.' },
+{ n: '3', t: 'Znasz zakres i cenę', d: 'To nie jest opinia prawna ani pełne sprawdzenie dokumentów. Szczegółowa analiza, pismo czy prowadzenie sprawy to zakres oferty.' },
+{ n: '4', t: 'Akceptujesz cenę i strategię', d: 'Do akceptacji oferty nic nie płacisz. Drobne sprawy domykamy ustaleniem mailowym, większe — jasną umową na piśmie. Zero ukrytych kosztów, zero niespodzianek.' },
 { n: '5', t: 'Prowadzę sprawę', d: 'Raport, pisma lub reprezentacja, a Ty wiesz, co dzieje się na każdym etapie.' }];
 
 
@@ -270,7 +270,7 @@ function QualificationForm({ compact = false }) {
           Sprawa przyjęta.
         </h3>
         <p className="lead mt-3" style={{ textAlign: 'center' }}>
-          Dziękuję. Przeczytam Twój opis i odpiszę z bezpłatną wstępną oceną — w ciągu 24 h roboczych.
+          Dziękuję. W ciągu 24 h roboczych odpiszę, co trzeba zrobić w Twojej sprawie, i prześlę ofertę z ceną i terminem.
         </p>
         <ol className="success-steps mt-8">
           <li>
@@ -279,11 +279,11 @@ function QualificationForm({ compact = false }) {
           </li>
           <li>
             <span className="success-step-num">2</span>
-            <div className="success-step-txt"><strong>Odpisuję w ciągu 24 h roboczych</strong><span>z bezpłatną oceną ryzyka</span></div>
+            <div className="success-step-txt"><strong>Odpisuję w ciągu 24 h roboczych</strong><span>co trzeba zrobić: audyt, pismo czy sprawa sądowa</span></div>
           </li>
           <li>
             <span className="success-step-num">3</span>
-            <div className="success-step-txt"><strong>Dostajesz ocenę, wycenę i orientacyjny czas trwania</strong><span>oraz konkretny następny krok</span></div>
+            <div className="success-step-txt"><strong>Razem z analizą dostajesz ofertę</strong><span>z ceną i terminem; do jej akceptacji nic nie płacisz</span></div>
           </li>
         </ol>
         <p className="small mt-6" style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
@@ -306,7 +306,7 @@ function QualificationForm({ compact = false }) {
       <div className="qual-card-head">
         <span className="qual-badge"><SvgIcon name="gift" size={14} /> Bezpłatnie · w 24 h</span>
         <h3 className="qual-title">Wstępna analiza sprawy</h3>
-        <p className="body" style={{ marginTop: '0.5rem' }}>Opisz, z czym się mierzysz. Odpiszę z oceną, czy to realny problem prawny, co da się z nim zrobić i ile to potrwa.</p>
+        <p className="body" style={{ marginTop: '0.5rem' }}>Opisz, z czym się mierzysz. Odpiszę, co trzeba zrobić — audyt, pismo czy sprawa sądowa — i prześlę ofertę z ceną i terminem.</p>
       </div>
 
       <input
@@ -467,7 +467,7 @@ function QualificationForm({ compact = false }) {
 
       <p className="small qual-foot">
         <SvgIcon name="lock" size={13} style={{ color: 'var(--brand-primary)' }} />
-        Odpowiadam w ciągu 24 h roboczych. Zero spamu, zero zobowiązań.
+        Analiza i oferta w 24 h robocze. Do akceptacji oferty nic nie płacisz.
       </p>
       <p className="small qual-alt">Wolisz mailem? Wyślij opis i dokumenty na <a href={MAILTO_CASE}>{CONTACT_EMAIL}</a>.</p>
     </form>);
@@ -743,7 +743,7 @@ function LandingIntro({ setRoute }) {
               Sprawdzam umowy, wychwytuję ukryte ryzyka i reguluję stany prawne, zanim staną się Twoim problemem.<br />
               Prowadzę sprawę od pierwszej oceny aż po ostateczny podpis.<br />
               Zdalnie, prostym językiem, z ceną i terminem ustalonymi z góry.<br />
-              A zanim cokolwiek zlecisz, wstępnie przeanalizuję Twoją sprawę bezpłatnie i powiem wprost, na czym stoisz.
+              A zanim cokolwiek zlecisz, bezpłatnie powiem, co trzeba zrobić w Twojej sprawie, i od razu prześlę ofertę.
             </p>
             <div className="flex gap-3 mt-8" style={{ flexWrap: 'wrap', alignItems: 'center' }}>
               <button className="btn btn-on-dark" onClick={() => lScrollToId('formularz')}>
@@ -758,7 +758,7 @@ function LandingIntro({ setRoute }) {
               </button>
             </div>
             <p className="small mt-4" style={{ color: 'var(--text-on-dark-3)' }}>
-              Bezpłatnie, w ciągu 24 h roboczych. Zero spamu, zero zobowiązań.
+              Analiza i oferta w 24 h robocze. Do akceptacji oferty nic nie płacisz.
             </p>
           </div>
 
@@ -790,14 +790,14 @@ function LandingHero() {
       <div className="wrap relative" style={{ zIndex: 2 }}>
         <div className="landing-hero-grid">
           <div className="landing-hero-text">
-            <span className="eyebrow">Bezpłatna analiza sprawy</span>
+            <span className="eyebrow">Bezpłatna wstępna analiza</span>
             <h2 className="display display--xl mt-6">
               Bezpłatnie<br />
-              sprawdzę<br />
-              <span className="accent">Twoją sprawę.</span>
+              powiem, co<br />
+              <span className="accent">trzeba zrobić.</span>
             </h2>
             <p className="lead mt-6" style={{ maxWidth: '32rem' }}>
-              Kupujesz, sprzedajesz, inwestujesz albo masz spór o nieruchomość? Opisz sprawę w kilku zdaniach — odpiszę z bezpłatną oceną ryzyka i konkretną propozycją kolejnego kroku. Kontakt prowadzę przede wszystkim mailowo, w pełni zdalnie.
+              Kupujesz, sprzedajesz, inwestujesz albo masz spór o nieruchomość? Opisz sprawę. W ciągu 24 h roboczych odpiszę, co trzeba w niej zrobić — audyt, pismo czy sprawa sądowa — i od razu prześlę ofertę z ceną i terminem.
             </p>
 
             <div className="landing-hero-meta mt-8">
@@ -805,7 +805,7 @@ function LandingHero() {
               <ul className="trust-points">
                 <li><LIcon name="shield-check" size={16} /> Tajemnica adwokacka</li>
                 <li><LIcon name="map-pin" size={16} /> Lublin i cała Polska</li>
-                <li><LIcon name="wallet" size={16} /> Wycena z góry, na piśmie</li>
+                <li><LIcon name="wallet" size={16} /> Oferta z ceną i terminem</li>
               </ul>
             </div>
           </div>
@@ -1227,7 +1227,7 @@ function LandingFAQ({ setRoute }) {
             <span className="italic" style={{ color: 'var(--text-body)' }}>napiszesz.</span>
           </h2>
           <p className="lead mt-6">
-            Najczęstsze pytania o bezpłatną analizę. Jeśli czegoś tu brakuje — po prostu zapytaj w formularzu.
+            Najczęstsze pytania o bezpłatną wstępną analizę i ofertę. Jeśli czegoś tu brakuje — zapytaj w formularzu.
           </p>
         </div>
         <div className="faq-teaser-body mt-12">
@@ -1257,7 +1257,7 @@ function FinalCTA() {
           <span style={{ color: 'var(--brand-primary-light)' }}>niż żałować po podpisie.</span>
         </h2>
         <p className="lead mt-6" style={{ color: 'var(--text-on-dark-2)' }}>
-          Jeśli kupujesz, sprzedajesz albo coś Cię niepokoi w dokumentach — opisz sprawę. Wstępna analiza jest bezpłatna i do niczego nie zobowiązuje.
+          Jeśli kupujesz, sprzedajesz albo coś Cię niepokoi w dokumentach — opisz sprawę. W 24 h odpiszę, co trzeba zrobić, i prześlę ofertę. Do jej akceptacji nic nie płacisz.
         </p>
         <div className="flex gap-3 mt-8 justify-center" style={{ flexWrap: 'wrap' }}>
           <button className="btn btn-on-dark" onClick={() => lScrollToId('formularz')}>

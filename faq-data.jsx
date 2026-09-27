@@ -6,18 +6,18 @@ const FAQ_SECTIONS = [
   {
     id: 'jak-to-dziala', letter: 'A', title: 'Jak to działa',
     items: [
-      { q: 'Jak wygląda pierwszy kontakt?', a: 'Opisujesz sprawę w formularzu — krótko, kilka zdań, w razie potrzeby z dokumentami w PDF. W ciągu 24 h roboczych odzywam się z bezpłatną wstępną oceną i propozycją kolejnego kroku. Bez telefonów wstępnych.' },
-      { q: 'Jak szybko dostanę odpowiedź?', a: 'Na wstępną analizę odpowiadam w ciągu 24 h roboczych, często tego samego dnia. Jeśli sprawa jest pilna, zaznacz to w opisie — postaram się odpisać szybciej.' },
-      { q: 'Co dzieje się po wysłaniu formularza?', a: 'Czytam Twój opis i dokumenty, oceniam, czy to realny problem prawny i co da się z nim zrobić, a następnie odpisuję z rekomendacją oraz — jeśli sprawa nadaje się do prowadzenia — propozycją usługi, zakresu i wyceny. Decyzję podejmujesz Ty, bez presji.' },
-      { q: 'Czy wysłanie sprawy do mnie do czegoś zobowiązuje?', a: 'Nie. Wstępna analiza jest bezpłatna i niezobowiązująca. Dopiero jeśli zdecydujesz się na współpracę, ustalamy zakres i koszt na piśmie.' },
+      { q: 'Jak wygląda pierwszy kontakt?', a: 'Opisujesz sprawę w formularzu — krótko, kilka zdań, w razie potrzeby z dokumentami w PDF. W ciągu 24 h roboczych odpisuję, co trzeba w niej zrobić — audyt, pismo czy sprawa sądowa — i od razu wysyłam ofertę z ceną i terminem.' },
+      { q: 'Jak szybko dostanę odpowiedź?', a: 'Wstępną analizę i ofertę wysyłam w ciągu 24 h roboczych, często tego samego dnia. Jeśli sprawa jest pilna, zaznacz to w opisie — postaram się odpisać szybciej.' },
+      { q: 'Co dzieje się po wysłaniu formularza?', a: 'Czytam Twój opis i przesłane dokumenty. Odpisuję, co trzeba w sprawie zrobić — np. szczegółowy audyt, pismo albo sprawa sądowa — i w tym samym mailu wysyłam ofertę z zakresem, ceną i terminem. Decyzję podejmujesz Ty, bez presji.' },
+      { q: 'Czy wysłanie sprawy do mnie do czegoś zobowiązuje?', a: 'Nie. Wstępna analiza i oferta są bezpłatne. Do akceptacji oferty nic nie płacisz; zakres i koszt potwierdzamy na piśmie dopiero wtedy, gdy zdecydujesz się na współpracę.' },
     ],
   },
   {
     id: 'bezplatna-analiza', letter: 'B', title: 'Bezpłatna wstępna analiza',
     items: [
-      { q: 'Co dokładnie obejmuje bezpłatna analiza?', a: 'Wstępną ocenę: czy Twój problem ma wymiar prawny, jakie są główne ryzyka i jaka usługa realnie go rozwiązuje. To nie jest jeszcze pełna opinia ani audyt — to rzetelne wskazanie kierunku, żebyś wiedział, na czym stoisz.' },
-      { q: 'Dlaczego nie podajesz cen na stronie?', a: 'Bo uczciwa wycena wymaga poznania sprawy. Nie każda nieruchomość i nie każdy problem są tak samo złożone. Najpierw bezpłatnie sprawdzam, czego naprawdę potrzebujesz, a dopiero potem podaję konkretny koszt i termin — zanim cokolwiek zlecisz.' },
-      { q: 'Co dostaję po analizie?', a: 'Pisemną rekomendację: co widzę, co proponuję zrobić i dlaczego. Jeśli sprawa nadaje się do prowadzenia, dołączam propozycję usługi z ryczałtową wyceną i terminem.' },
+      { q: 'Co dokładnie obejmuje bezpłatna analiza?', a: 'Odpowiedź, co w Twojej sprawie trzeba zrobić — np. szczegółowy audyt, pismo albo sprawa sądowa — i ofertę z ceną i terminem. To nie jest opinia prawna ani pełne sprawdzenie dokumentów. Szczegółowa analiza, pismo czy prowadzenie sprawy to zakres oferty.' },
+      { q: 'Dlaczego nie podajesz cen na stronie?', a: 'Bo cena zależy od sprawy: od nieruchomości, dokumentów i tego, co trzeba zrobić. Podaję ją w ofercie, którą wysyłam razem z bezpłatną wstępną analizą — konkretną kwotę i termin, zanim cokolwiek zlecisz.' },
+      { q: 'Co dostaję w odpowiedzi?', a: 'Jeden mail: co trzeba zrobić w Twojej sprawie i dlaczego, a do tego ofertę z zakresem, ceną (najczęściej ryczałtową) i terminem. Do akceptacji oferty nic nie płacisz.' },
     ],
   },
   {
@@ -62,8 +62,8 @@ const FAQ_SECTIONS = [
   {
     id: 'wycena-rozliczenia', letter: 'G', title: 'Wycena i rozliczenia',
     items: [
-      { q: 'Jak ustalasz koszt?', a: 'Najpierw bezpłatna wstępna analiza, a po niej rekomendacja i wycena — najczęściej ryczałtowa, więc znasz całość kosztu z góry. Koszt poznajesz, zanim cokolwiek zlecisz.' },
-      { q: 'Kiedy płacę?', a: 'Standardowo po akceptacji wyceny, przed rozpoczęciem prac (przelew na konto kancelarii). Dla stałych klientów możliwe są inne ustalenia.' },
+      { q: 'Jak ustalasz koszt?', a: 'Cenę podaję w ofercie, którą wysyłam razem z bezpłatną wstępną analizą — najczęściej ryczałtową, więc znasz całość kosztu z góry, zanim cokolwiek zlecisz.' },
+      { q: 'Kiedy płacę?', a: 'Standardowo po akceptacji oferty, przed rozpoczęciem prac (przelew na konto kancelarii). Dla stałych klientów możliwe są inne ustalenia.' },
       { q: 'Czy wystawiasz faktury?', a: 'Tak — osobom i firmom, na życzenie. Kancelaria jest podatnikiem VAT.' },
       { q: 'Co, jeśli po analizie okaże się, że potrzebuję innej usługi?', a: 'Jeśli wspólnie dobierzemy lepiej dopasowaną usługę, przechodzimy na nią z rozliczeniem różnicy — dopłatą lub zwrotem. Nie zarabiam na pomyłce w doborze.' },
     ],

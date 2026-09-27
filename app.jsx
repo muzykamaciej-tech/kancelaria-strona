@@ -245,10 +245,10 @@ const DEFAULT_OG_ALT = 'adw. dr Maciej Muzyka — Kancelaria Nieruchomości';
 /* home page social texts exactly as in index.html (short og:title, own og/twitter descriptions) */
 const LANDING_SOCIAL = {
   ogTitle: 'Prawnik od nieruchomości w Lublinie – adw. dr Maciej Muzyka',
-  ogDescription: 'Nie musisz znać się na prawie, żeby bezpiecznie kupować i inwestować. Adwokat w Lublinie, wyłącznie prawo nieruchomości. Wycena sprawy w 24 h robocze.',
-  twitterDescription: 'Adwokat w Lublinie, wyłącznie prawo nieruchomości. Opisz sprawę, w 24 h robocze odpiszę z wyceną. Sprawy z całej Polski zdalnie.',
+  ogDescription: 'Nie musisz znać się na prawie, żeby bezpiecznie kupować i inwestować. Adwokat w Lublinie, wyłącznie prawo nieruchomości. Bezpłatna wstępna analiza i oferta w 24 h.',
+  twitterDescription: 'Adwokat w Lublinie, wyłącznie prawo nieruchomości. Opisz sprawę: w 24 h odpiszę, co trzeba zrobić, i prześlę ofertę. Sprawy z całej Polski zdalnie.',
 };
-const LANDING_META = 'Kancelaria Nieruchomości w Lublinie. Adwokat i dr nauk prawnych, wyłącznie prawo nieruchomości: plan ogólny i WZ, słupy, zakup, spory. Wycena w 24 h robocze.';
+const LANDING_META = 'Kancelaria Nieruchomości w Lublinie. Adwokat, wyłącznie prawo nieruchomości: plan ogólny i WZ, słupy, zakup, spory. Bezpłatna wstępna analiza i oferta w 24 h.';
 
 function setMetaForView(route, ids) {
   ids = ids || {};
@@ -273,9 +273,9 @@ function setMetaForView(route, ids) {
       image: p.cover ? absUrl(p.cover) : null, imageWidth: p.cover ? 1200 : null, imageHeight: p.cover ? 654 : null, imageAlt: p.cover ? p.title : null,
     });
   } else if (route === 'faq') {
-    setMeta('FAQ — najczęstsze pytania | ' + SITE_NAME, 'Odpowiedzi na najczęstsze pytania o współpracę: pierwszy kontakt, wycena, poufność i przebieg spraw z nieruchomości.');
+    setMeta('FAQ — najczęstsze pytania | ' + SITE_NAME, 'Odpowiedzi na pytania o współpracę: bezpłatna wstępna analiza i oferta w 24 h, koszt, poufność i przebieg spraw z nieruchomości.');
   } else if (route === 'kontakt') {
-    setMeta('Kontakt – adwokat od nieruchomości, Lublin, ul. Cicha 4/5', 'Kancelaria adwokacka: ul. Cicha 4/5, 20-078 Lublin. Spotkania także w Warszawie, ul. Bracka 20/7A. Opisz sprawę w formularzu, odpiszę w 24 h robocze.');
+    setMeta('Kontakt – adwokat od nieruchomości, Lublin, ul. Cicha 4/5', 'Kancelaria adwokacka: ul. Cicha 4/5, 20-078 Lublin. Spotkania także w Warszawie, ul. Bracka 20/7A. Opisz sprawę: wstępna analiza i oferta w 24 h.');
   } else if (route === 'o-mnie') {
     setMeta('adw. dr Maciej Muzyka – Mecenas od Nieruchomości, Lublin', 'Adwokat w Lublinie (LUB/ADW/1702) i doktor nauk prawnych. Wyłącznie prawo nieruchomości. Absolwent UJ, doktorat na UMCS, wykładowca ORA w Lublinie.');
   } else if (route === 'notfound') {
@@ -336,7 +336,7 @@ function buildJsonLd(route, ids) {
     if (!s || !b) return null;
     const c = (window.SERVICE_CONTENT || {})[ids.serviceSlug] || {};
     return { '@context': 'https://schema.org', '@graph': [
-      { '@type': 'Service', name: c.h1 || s.title, description: truncMeta(c.subtitle || s.desc, 300), serviceType: 'Legal service', provider: { '@id': ORG_ID }, areaServed: AREA_SERVED, url: SITE_BASE + buildPath('usluga', ids), offers: { '@type': 'Offer', description: 'Wycena sprawy w 24 h robocze, przed zleceniem.' } },
+      { '@type': 'Service', name: c.h1 || s.title, description: truncMeta(c.subtitle || s.desc, 300), serviceType: 'Legal service', provider: { '@id': ORG_ID }, areaServed: AREA_SERVED, url: SITE_BASE + buildPath('usluga', ids), offers: { '@type': 'Offer', description: 'Bezpłatna wstępna analiza sprawy i oferta w 24 h robocze.' } },
       crumbs([{ name: 'Start', path: '/' }, { name: 'Usługi', path: '/uslugi' }, { name: b.title, path: '/uslugi/' + b.id }, { name: s.title, path: buildPath('usluga', ids) }]) ] };
   }
   if (route === 'blok') {

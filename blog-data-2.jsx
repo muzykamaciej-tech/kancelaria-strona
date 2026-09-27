@@ -173,7 +173,7 @@ window.BLOG.push(
       ['p', '**4. Co zrobić, gdy najemca nie chce odebrać korespondencji?** Jeśli wysyłasz ważne pisma (jak wezwanie do zapłaty) listem poleconym za potwierdzeniem odbioru, a najemca go nie odbierze, pismo uważa się za skutecznie doręczone, jeżeli adresat mógł się z nim realnie zapoznać (a w postępowaniu sądowym kiedy przesyłka była podwójnie awizowana). Zachowaj dowód nadania i zwrotkę.'],
       ['h2', 'Potrzebujesz pewności? Porozmawiajmy'],
       ['p', 'Zarządzanie najmem nie musi być polem minowym. Dobrze przygotowana strategia i solidne dokumenty to klucz do spokoju i ochrony Twojej inwestycji.'],
-      ['p', 'Jeśli planujesz wynająć mieszkanie w **Lublinie, Warszawie** lub gdziekolwiek indziej w Polsce i chcesz mieć pewność, że Twoja umowa jest kuloodporna, opisz swoją sprawę w formularzu poniżej — bezpłatnie ocenię ją w ciągu 24 h.'],
+      ['p', 'Jeśli planujesz wynająć mieszkanie w **Lublinie, Warszawie** lub gdziekolwiek indziej w Polsce i chcesz mieć pewność, że Twoja umowa jest kuloodporna, opisz swoją sprawę w formularzu poniżej — w ciągu 24 h bezpłatnie odpiszę, co trzeba sprawdzić, i prześlę ofertę z ceną.'],
       ['note', 'Niniejszy artykuł ma charakter wyłącznie informacyjny i nie stanowi porady prawnej. Każda sytuacja prawna jest inna i wymaga indywidualnej analizy. W celu uzyskania wiążącej porady prawnej, skontaktuj się z profesjonalnym pełnomocnikiem.'],
     ],
   },

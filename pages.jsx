@@ -666,7 +666,7 @@ function KontaktPage({ setRoute }) {
           <div className="mt-8" style={{ maxWidth: '48rem' }}>
             <span className="eyebrow">Kontakt</span>
             <h1 className="display mt-4">Napisz — odpiszę<br /><span className="italic" style={{ color: 'var(--text-body)' }}>zwykle w 24 h.</span></h1>
-            <p className="lead mt-6">Kontakt prowadzę przede wszystkim mailowo, w pełni zdalnie — bez wstępnych konsultacji telefonicznych. Najprościej opisać sprawę w formularzu „Wstępna analiza sprawy”: odpiszę z bezpłatną oceną ryzyka i konkretnym kolejnym krokiem.</p>
+            <p className="lead mt-6">Kontakt prowadzę przede wszystkim mailowo, w pełni zdalnie. Najprościej opisać sprawę w formularzu „Wstępna analiza sprawy”: w ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem.</p>
             <div className="flex gap-3 mt-8" style={{ flexWrap: 'wrap' }}>
               <button className="btn btn-primary" onClick={() => window.spScrollToForm && window.spScrollToForm()}>
                 Opisz swoją sprawę <Icon name="arrow-right" size={16} />

@@ -225,9 +225,9 @@ function RegulaminPage({ setRoute }) {
 
       <h2>§ 3. Formularz kontaktowy i wstępna analiza sprawy</h2>
       <ol>
-        <li>Za pośrednictwem formularza „Wstępna analiza sprawy” użytkownik może przekazać opis sprawy w celu uzyskania bezpłatnej wstępnej oceny.</li>
+        <li>Za pośrednictwem formularza „Wstępna analiza sprawy” użytkownik może przekazać opis sprawy w celu uzyskania bezpłatnej wstępnej analizy sprawy i oferty.</li>
         <li>Wysłanie formularza <strong>nie oznacza zawarcia umowy</strong> o świadczenie pomocy prawnej ani nie zobowiązuje żadnej ze stron. Umowa może zostać zawarta wyłącznie w drodze odrębnych ustaleń.</li>
-        <li>Wstępna analiza ma charakter orientacyjny i nie stanowi pełnej opinii prawnej.</li>
+        <li>Wstępna analiza ma charakter orientacyjny: wskazuje, jakie czynności są w sprawie potrzebne, i nie stanowi opinii prawnej ani pełnego sprawdzenia dokumentów.</li>
         <li>Warunkiem wysłania formularza jest wyrażenie zgody na przetwarzanie danych osobowych oraz zapoznanie się z Polityką prywatności.</li>
         <li>Zasady przetwarzania danych osobowych określa <a href="/polityka-prywatnosci">Polityka prywatności</a>.</li>
       </ol>

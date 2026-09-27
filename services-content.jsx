@@ -4,7 +4,7 @@
    Loaded after services-data.jsx. */
 
 /* Standard copy reused where a page needs the generic cost line (no prices anywhere) */
-const COST_TEXT = 'Koszt ustalam po bezpłatnej wstępnej analizie Twojej sprawy — najpierw sprawdzam, ile pracy realnie wymaga, i podaję stałą cenę oraz termin, zanim cokolwiek zlecisz.';
+const COST_TEXT = 'Cenę podaję w ofercie, którą wysyłam razem z bezpłatną wstępną analizą Twojej sprawy — stałą kwotę i termin, zanim cokolwiek zlecisz.';
 
 const SERVICE_CONTENT = {
   /* ===== WZORCOWA (flagowa) — Audyt stanu prawnego ===== */
@@ -22,8 +22,8 @@ const SERVICE_CONTENT = {
     ],
     levels: {
       eyebrow: 'Trzy poziomy audytu',
-      intro: 'Nie każda nieruchomość wymaga najszerszej analizy. Po bezpłatnej wstępnej ocenie podpowiem, który poziom realnie wystarczy w Twojej sprawie — i nie zaproponuję Ci pracy, której nie potrzebujesz. Każdy wyższy poziom zawiera wszystko z niższego.',
-      cost: 'Cena zależy od poziomu i od tego, jak złożona jest nieruchomość. Dokładną kwotę i termin podaję po bezpłatnej wstępnej analizie — zanim cokolwiek zlecisz.',
+      intro: 'Nie każda nieruchomość wymaga najszerszej analizy. W bezpłatnej wstępnej analizie podpowiem, który poziom realnie wystarczy w Twojej sprawie — i nie zaproponuję Ci pracy, której nie potrzebujesz. Każdy wyższy poziom zawiera wszystko z niższego.',
+      cost: 'Cena zależy od poziomu i od tego, jak złożona jest nieruchomość. Dokładną kwotę i termin podaję w ofercie razem z bezpłatną wstępną analizą — zanim cokolwiek zlecisz.',
       items: [
         {
           name: 'Poziom 1 — Audyt podstawowy',
@@ -63,7 +63,7 @@ const SERVICE_CONTENT = {
     },
     steps: [
       'Opisujesz sprawę — w formularzu albo mailem, w miarę możliwości z dokumentami: numer księgi wieczystej, dane nieruchomości, projekt umowy.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, który poziom audytu realnie wystarczy, i podaję cenę oraz termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, który poziom audytu realnie wystarczy, i od razu wysyłam ofertę z ceną i terminem.',
       'Robię audyt — analizuję dokumenty i rejestry, w razie potrzeby dopytuję o szczegóły.',
       'Dostajesz raport i omówienie — ryzyka w trzech kolorach, rekomendacja i rozmowa, na której tłumaczę wszystko prostym językiem.',
     ],
@@ -84,7 +84,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Audyt kosztuje ułamek tego, co możesz stracić.',
-      lead: 'Zadatek, cena, kredyt — przy nieruchomości stawką są oszczędności całego życia. Opisz sprawę, a bezpłatnie ocenię ryzyko i podpowiem, czy audyt jest potrzebny.',
+      lead: 'Zadatek, cena, kredyt — przy nieruchomości stawką są oszczędności całego życia. Opisz sprawę, a w 24 h odpiszę, czy audyt jest potrzebny, i prześlę ofertę z ceną.',
     },
   },
 
@@ -103,8 +103,8 @@ const SERVICE_CONTENT = {
     ],
     levels: {
       eyebrow: 'Trzy poziomy sprawdzenia',
-      intro: 'Umowa to jedno, ale bezpieczeństwo zakupu zależy też od stanu prawnego inwestycji i od samego dewelopera. Po bezpłatnej wstępnej ocenie podpowiem, który poziom realnie wystarczy w Twojej sprawie — i nie zaproponuję Ci pracy, której nie potrzebujesz. Każdy wyższy poziom zawiera wszystko z niższego.',
-      cost: 'Cena zależy od poziomu i od samej umowy. Podaję ją po bezpłatnej wstępnej analizie — zanim cokolwiek zlecisz.',
+      intro: 'Umowa to jedno, ale bezpieczeństwo zakupu zależy też od stanu prawnego inwestycji i od samego dewelopera. W bezpłatnej wstępnej analizie podpowiem, który poziom realnie wystarczy w Twojej sprawie — i nie zaproponuję Ci pracy, której nie potrzebujesz. Każdy wyższy poziom zawiera wszystko z niższego.',
+      cost: 'Cena zależy od poziomu i od samej umowy. Podaję ją w ofercie razem z bezpłatną wstępną analizą — zanim cokolwiek zlecisz.',
       items: [
         {
           name: 'Analiza podstawowa',
@@ -144,14 +144,14 @@ const SERVICE_CONTENT = {
     },
     steps: [
       'Przesyłasz umowę i dokumenty — umowę deweloperską lub rezerwacyjną, prospekt informacyjny, harmonogram, a także numer księgi wieczystej, jeśli go masz.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, który poziom sprawdzenia wystarczy, i podaję cenę oraz termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, który poziom sprawdzenia wystarczy, i od razu wysyłam ofertę z ceną i terminem.',
       'Sprawdzam umowę i inwestycję — analizuję dokumenty, w razie potrzeby pozyskuję brakujące i dopytuję o szczegóły.',
       'Dostajesz raport i omówienie — ryzyka w trzech kolorach, gotowe zmiany do umowy i rozmowa prostym językiem; odpowiadam na pytania aż do podpisania.',
     ],
     faq: [
       { q: 'Czy sprawdzenie umowy deweloperskiej jest zawsze potrzebne?', a: 'Przy zakupie za kilkaset tysięcy złotych, często na kredyt, i przy umowie pisanej przez dewelopera — tak. Nawet jeśli inwestycja wygląda solidnie, ryzyk nie widać po pobieżnym przeczytaniu umowy.' },
       { q: 'Czy da się negocjować umowę z deweloperem?', a: 'Częściej, niż myślisz. Deweloperzy zwykle godzą się na zmiany, jeśli są dobrze uzasadnione — a część zapisów jest wręcz niedozwolona i musi zniknąć. Wszystko zależy od tego, co i jak zaproponujemy.' },
-      { q: 'Ile trwa sprawdzenie umowy?', a: 'Najczęściej kilka dni roboczych; dokładny termin podaję po wstępnej ocenie. Gdy podpis jest pilny, robię analizę w trybie przyspieszonym — po wcześniejszym uzgodnieniu.' },
+      { q: 'Ile trwa sprawdzenie umowy?', a: 'Najczęściej kilka dni roboczych; dokładny termin podaję w ofercie. Gdy podpis jest pilny, robię analizę w trybie przyspieszonym — po wcześniejszym uzgodnieniu.' },
       { q: 'Jak zdobyć umowę i dokumenty od dewelopera?', a: 'Wystarczy o nie poprosić — deweloper ma ustawowy obowiązek udostępnić projekt umowy, prospekt informacyjny i pozostałe dokumenty do wglądu.' },
       { q: 'Co dostaję po analizie?', a: 'Umowę z naniesionymi zmianami oraz pisemny raport: co i dlaczego zmieniam, jaki jest stan prawny inwestycji i jakie są wnioski. Do tego omówienie prostym językiem.' },
       { q: 'Co się stanie, jeśli deweloper się spóźni albo zbankrutuje?', a: 'To jedne z najważniejszych rzeczy, które sprawdzam: kary za opóźnienie, zasady odstąpienia i to, jak Twoje wpłaty chroni rachunek powierniczy oraz Deweloperski Fundusz Gwarancyjny. Mówię wprost, co Ci realnie grozi.' },
@@ -162,14 +162,14 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Nie podpisuj umowy deweloperskiej w ciemno.',
-      lead: 'Prześlij umowę i dokumenty — w 24 h odpiszę z bezpłatną wstępną oceną i podpowiem, który poziom sprawdzenia wystarczy.',
+      lead: 'Prześlij umowę i dokumenty — w 24 h odpiszę, który poziom sprawdzenia wystarczy, i prześlę ofertę z ceną i terminem.',
     },
   },
 
   /* ===== Odszkodowanie za słupy / służebność przesyłu ===== */
   'odszkodowanie-sluzebnosc-przesylu': {
     h1: 'Odszkodowanie za słupy i urządzenia przesyłowe na działce',
-    subtitle: 'Słupy, linie energetyczne, gazociąg albo wodociąg na Twoim gruncie? Firma przesyłowa powinna Ci za to płacić — także za lata wstecz. Bezpłatnie sprawdzam, ile możesz odzyskać i czy sprawa jest warta prowadzenia.',
+    subtitle: 'Słupy, linie energetyczne, gazociąg albo wodociąg na Twoim gruncie? Firma przesyłowa powinna Ci za to płacić — także za lata wstecz. W 24 h bezpłatnie odpiszę, co trzeba zrobić, i prześlę ofertę z ceną.',
     intro: 'Firmy przesyłowe przez lata stawiały słupy, linie i rury na prywatnych działkach — często bez umowy i bez zapłaty. Jeśli takie urządzenia stoją na Twoim gruncie, prawo daje Ci konkretne roszczenie: wynagrodzenie za korzystanie z Twojej ziemi, i to nie tylko na przyszłość, ale też za lata wstecz. Wielu właścicieli o tym nie wie — a firmy na tę niewiedzę liczą. Sprawdzam Twoją sytuację i mówię wprost, ile możesz odzyskać.',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: '',
@@ -216,7 +216,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Nie zostawiaj swoich pieniędzy firmie przesyłowej.',
-      lead: 'Jeśli na Twojej działce stoją słupy, linie lub rury, prawdopodobnie należy Ci się zapłata — także za lata wstecz. Opisz sprawę, a bezpłatnie ocenię Twoje szanse.',
+      lead: 'Jeśli na Twojej działce stoją słupy, linie lub rury, prawdopodobnie należy Ci się zapłata — także za lata wstecz. Opisz sprawę, a w 24 h odpiszę, co trzeba zrobić, i prześlę ofertę.',
     },
   },
 
@@ -261,7 +261,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Zanim kupisz działkę, sprawdź, czy na niej zbudujesz.',
-      lead: 'Ocena szans na warunki zabudowy przed zakupem to najtańszy sposób, by nie utknąć z gruntem, na którym nie postawisz domu. Opisz sprawę, a bezpłatnie ją ocenię.',
+      lead: 'Ocena szans na warunki zabudowy przed zakupem to najtańszy sposób, by nie utknąć z gruntem, na którym nie postawisz domu. Opisz sprawę, a w 24 h odpiszę, co trzeba sprawdzić, i prześlę ofertę z ceną.',
     },
   },
 
@@ -286,7 +286,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz wady i przesyłasz zdjęcia oraz umowę i protokół odbioru.',
-      'W ciągu 24 h roboczych potwierdzam zakres, termin i koszt.',
+      'W ciągu 24 h roboczych mówię, co trzeba zrobić, i wysyłam ofertę z zakresem, ceną i terminem.',
       'Oceniam roszczenie i wybieram najkorzystniejszą drogę.',
       'Kieruję formalne żądanie do dewelopera i prowadzę sprawę.',
       'Doprowadzam do naprawy, obniżenia ceny lub rozliczenia — w razie potrzeby przez sąd.',
@@ -330,7 +330,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sprawę — przesyłasz projekt umowy (jeśli go masz), numer księgi wieczystej i najważniejsze ustalenia z drugą stroną.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy wystarczy analiza, czy lepiej napisać umowę od nowa, i podaję cenę oraz termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czy wystarczy sprawdzić umowę, czy lepiej napisać ją od nowa, i od razu wysyłam ofertę z ceną i terminem.',
       'Sprawdzam albo przygotowuję umowę — z konkretnymi zapisami zabezpieczającymi Twój zadatek i transakcję.',
       'Dostajesz gotowy dokument i omówienie — wiesz, co podpisujesz, i możesz spokojnie iść do notariusza.',
     ],
@@ -345,7 +345,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Zadatek wpłacasz raz. Sprawdź umowę, zanim to zrobisz.',
-      lead: 'Prześlij projekt umowy albo opisz ustalenia — bezpłatnie ocenię, czy Cię zabezpiecza, i powiem, co zmienić.',
+      lead: 'Prześlij projekt umowy albo opisz ustalenia — w 24 h odpiszę, czy wystarczy ją sprawdzić, czy lepiej napisać od nowa, i prześlę ofertę z ceną.',
     },
   },
 
@@ -375,7 +375,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Przesyłasz umowę i prospekt — umowę rezerwacyjną oraz prospekt informacyjny, jeśli już go masz.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy warto podpisać, i podaję cenę oraz termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, co trzeba sprawdzić przed podpisem, i od razu wysyłam ofertę z ceną i terminem.',
       'Sprawdzam umowę i warunki zwrotu opłaty — w razie potrzeby proponuję zmiany albo negocjuję je z deweloperem.',
       'Dostajesz omówienie prostym językiem — wiesz, czy i na jakich warunkach podpisać rezerwację.',
     ],
@@ -391,7 +391,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Zanim zarezerwujesz mieszkanie, sprawdź, czy odzyskasz opłatę.',
-      lead: 'Prześlij umowę rezerwacyjną — bezpłatnie ocenię, czy warunki zwrotu Cię chronią, i powiem, co zmienić przed podpisem.',
+      lead: 'Prześlij umowę rezerwacyjną — w 24 h odpiszę, co trzeba sprawdzić przed podpisem, i prześlę ofertę z ceną i terminem.',
     },
   },
 
@@ -421,7 +421,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz, co kupujesz — rodzaj nieruchomości, etap, numer księgi wieczystej.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, co sprawdzić i na co uważać, i podaję zakres, cenę oraz termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, co trzeba sprawdzić i na co uważać; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Prowadzę zakup — sprawdzam, negocjuję, zabezpieczam płatność, przygotowuję dokumenty.',
       'Bezpieczny finał — asysta przy akcie i wpis Twojej własności w księdze.',
     ],
@@ -437,7 +437,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Kupuj z kimś, kto pilnuje Twojej strony.',
-      lead: 'Opisz, co chcesz kupić — bezpłatnie ocenię ryzyka i powiem, jak bezpiecznie doprowadzić zakup do końca.',
+      lead: 'Opisz, co chcesz kupić — w 24 h odpiszę, co trzeba sprawdzić, żeby bezpiecznie doprowadzić zakup do końca, i prześlę ofertę z ceną.',
     },
   },
 
@@ -467,7 +467,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz, co sprzedajesz — rodzaj nieruchomości, obciążenia, numer księgi wieczystej.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — co uporządkować i jak zabezpieczyć pieniądze, plus zakres, cena i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, co uporządkować i jak zabezpieczyć pieniądze; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Przygotowuję sprzedaż — dokumenty, umowa, zabezpieczenie płatności.',
       'Bezpieczny finał — asysta przy akcie; pieniądze i wydanie zgrane w czasie.',
     ],
@@ -475,7 +475,7 @@ const SERVICE_CONTENT = {
       { q: 'Jak dostać pieniądze, zanim wydam nieruchomość?', a: 'Najczęściej przez depozyt notarialny albo odpowiednie warunki płatności i wydania. Dobieram rozwiązanie do Twojej sytuacji.' },
       { q: 'Kupujący płaci kredytem — jak się zabezpieczyć?', a: 'Wpisujemy zapisy o terminach wypłaty kredytu i warunkach wydania, żeby brak wypłaty nie zostawił Cię bez pieniędzy i bez nieruchomości.' },
       { q: 'Sprzedaję mieszkanie z hipoteką — da się?', a: 'Tak. Układam scenariusz spłaty kredytu z ceny i wykreślenia hipoteki, tak by transakcja przebiegła bezpiecznie.' },
-      { q: 'Jakie dokumenty muszę przygotować?', a: 'Zależy od nieruchomości — podaję konkretną listę po wstępnej ocenie.' },
+      { q: 'Jakie dokumenty muszę przygotować?', a: 'Zależy od nieruchomości — konkretną listę podaję razem ze wstępną analizą.' },
       { q: 'Sprzedaję udział, ze spadku albo ze współwłasności — pomożesz?', a: 'Tak. Ustalam, kto i na jakich warunkach może sprzedać, i zabezpieczam transakcję.' },
       { q: 'Muszę mieć prawnika, skoro kupujący organizuje notariusza?', a: 'Notariusz jest bezstronny — ja pilnuję wyłącznie Twojego interesu jako sprzedającego.' },
       { q: 'Co z najemcą albo lokatorami przy sprzedaży?', a: 'Oceniam sytuację i układam sprzedaż tak, by nie obciążała Cię ryzykiem.' },
@@ -483,7 +483,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Sprzedaj bezpiecznie — z pieniędzmi zabezpieczonymi od początku.',
-      lead: 'Opisz, co sprzedajesz — bezpłatnie ocenię, co uporządkować i jak zabezpieczyć zapłatę.',
+      lead: 'Opisz, co sprzedajesz — w 24 h odpiszę, co uporządkować i jak zabezpieczyć zapłatę, i prześlę ofertę z ceną.',
     },
   },
 
@@ -512,7 +512,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sytuację — co chcesz przekazać, komu i czego oczekujesz (opieka, mieszkanie, zabezpieczenie).',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, które rozwiązanie realnie Cię zabezpiecza, i podaję cenę oraz termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, które rozwiązanie realnie Cię zabezpiecza, i od razu wysyłam ofertę z ceną i terminem.',
       'Przygotowuję umowę i doradzam podatkowo — z zapisami dopasowanymi do Twojej sytuacji rodzinnej.',
       'Bezpieczny finał — idziesz do notariusza z gotowym, przemyślanym dokumentem; w razie sporu prowadzę sprawę dalej.',
     ],
@@ -528,7 +528,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Przekaż mieszkanie mądrze — z opieką i bez sporów o zachowek.',
-      lead: 'Opisz, co chcesz przekazać i komu — bezpłatnie doradzę, czy dożywocie jest dla Ciebie, i jak zabezpieczyć obie strony.',
+      lead: 'Opisz, co chcesz przekazać i komu — w 24 h odpiszę, czy dożywocie jest dla Ciebie, i prześlę ofertę z ceną.',
     },
   },
 
@@ -557,7 +557,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sprawę — co i komu chcesz przekazać albo jaką darowiznę chcesz odwołać.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, jak to bezpiecznie ułożyć (albo jakie są szanse na odwołanie), i podaję cenę oraz termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, jak to bezpiecznie ułożyć (albo czy iść z odwołaniem darowizny), i od razu wysyłam ofertę z ceną i terminem.',
       'Przygotowuję dokumenty i doradzam podatkowo — albo prowadzę sprawę o odwołanie.',
       'Finał — bezpieczna darowizna u notariusza albo reprezentacja w sądzie aż do rozstrzygnięcia.',
     ],
@@ -573,7 +573,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Przekaż nieruchomość w rodzinie — bezpiecznie i z głową.',
-      lead: 'Opisz, co chcesz przekazać albo jaką darowiznę odwołać — bezpłatnie ocenię sytuację i powiem, jak ją najlepiej ułożyć.',
+      lead: 'Opisz, co chcesz przekazać albo jaką darowiznę odwołać — w 24 h odpiszę, jak to najlepiej ułożyć, i prześlę ofertę z ceną.',
     },
   },
 
@@ -602,7 +602,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sprawę — gmina, numer działki i co planujesz (budowa, sprzedaż, inwestycja).',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — sprawdzam status planu w Twojej gminie i mówię, co z niego wynika dla działki; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, na jakim etapie jest plan w Twojej gminie i co trzeba zrobić; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — składam uwagi do projektu, prowadzę sprawę w gminie albo przygotowuję skargę do sądu.',
       'Masz jasność i wpływ — wiesz, na czym stoisz, i wykorzystujesz każdy moment, w którym można zawalczyć o swoją działkę.',
     ],
@@ -618,7 +618,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Nie daj się zaskoczyć planem ogólnym.',
-      lead: 'Podaj gminę i numer działki — bezpłatnie sprawdzę, co plan ogólny oznacza dla Twojego gruntu i czy warto zawalczyć o korzystne zapisy.',
+      lead: 'Podaj gminę i numer działki — w 24 h odpiszę, na jakim etapie jest plan ogólny i co warto zrobić, i prześlę ofertę z ceną.',
     },
   },
 
@@ -647,7 +647,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sprawę — gmina, numer działki i co plan Ci uniemożliwia albo ogranicza.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy plan da się skutecznie zaskarżyć (albo czy lepsza jest inna droga), i podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czy iść ze skargą na plan, czy lepsza jest inna droga; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — składam uwagi do projektu albo przygotowuję i wnoszę skargę do sądu.',
       'Prowadzę sprawę do końca — przed WSA, a jeśli trzeba, przed NSA.',
     ],
@@ -663,7 +663,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Plan miejscowy związał Ci ręce? Sprawdźmy, czy słusznie.',
-      lead: 'Podaj gminę i numer działki — bezpłatnie ocenię, co plan pozwala i czy da się skutecznie zaskarżyć jego niekorzystne zapisy.',
+      lead: 'Podaj gminę i numer działki — w 24 h odpiszę, czy iść ze skargą na plan, czy wybrać inną drogę, i prześlę ofertę z ceną.',
     },
   },
 
@@ -708,7 +708,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sprawę — prześlij decyzję gminy albo opisz, jak zmienił się plan i co zrobił z Twoją działką; podaj numer działki.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy opłata jest należna albo czy masz roszczenie, i podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, co trzeba zrobić: odwołanie od opłaty czy roszczenie o odszkodowanie lub wykup; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — kwestionuję operat i składam odwołanie albo przygotowuję i prowadzę roszczenie o odszkodowanie lub wykup.',
       'Prowadzę sprawę do końca — przed SKO i sądem administracyjnym albo w sprawie o odszkodowanie.',
     ],
@@ -724,7 +724,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Nie płać gminie więcej, niż musisz — i odzyskaj to, co plan Ci zabrał.',
-      lead: 'Prześlij decyzję albo opisz sytuację — bezpłatnie ocenię, czy opłata jest należna, czy masz roszczenie i o jaką kwotę można walczyć.',
+      lead: 'Prześlij decyzję albo opisz sytuację — w 24 h odpiszę, czy składać odwołanie, czy dochodzić roszczenia, i prześlę ofertę z ceną.',
     },
   },
 
@@ -768,7 +768,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sprawę — co budujesz, na jakim etapie jest sprawa (wniosek, odmowa, odwołanie sąsiada) i czy masz decyzję lub pisma z urzędu.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy potrzebne jest pozwolenie, czy zgłoszenie, jakie masz możliwości i szanse; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czy potrzebne jest pozwolenie, czy zgłoszenie, i co trzeba zrobić dalej; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — prowadzę postępowanie, składam odwołania, pisma i wnioski, reprezentuję Cię przed urzędem.',
       'Prowadzę sprawę do końca — przed organami administracji, a gdy trzeba, przed sądem administracyjnym.',
     ],
@@ -784,7 +784,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Odmowa, odwołanie sąsiada albo cisza w urzędzie? Zawalczę o Twoją budowę.',
-      lead: 'Prześlij decyzję albo opisz, na jakim etapie jest sprawa — bezpłatnie ocenię, jakie masz możliwości i jak najszybciej ruszyć z inwestycją.',
+      lead: 'Prześlij decyzję albo opisz, na jakim etapie jest sprawa — w 24 h odpiszę, co zrobić, żeby ruszyć z inwestycją, i prześlę ofertę z ceną.',
     },
   },
 
@@ -815,7 +815,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sprawę — co, kiedy i na jakiej działce powstało oraz czy nadzór już się tym zajął.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy i którą ścieżką da się zalegalizować, i podaję zakres, cenę oraz termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, którą ścieżką iść z legalizacją; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Prowadzę legalizację — kompletuję dokumenty i reprezentuję Cię przed nadzorem budowlanym.',
       'Uregulowany budynek — dostajesz decyzję legalizującą i czysty stan prawny: możesz sprzedać, wziąć kredyt i spać spokojnie.',
     ],
@@ -831,7 +831,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Samowola nie zniknie sama. Ale można ją uporządkować.',
-      lead: 'Opisz, co i kiedy powstało — bezpłatnie ocenię, czy i którą ścieżką da się to zalegalizować, i ile może kosztować.',
+      lead: 'Opisz, co i kiedy powstało — w 24 h odpiszę, którą ścieżką iść z legalizacją, i prześlę ofertę z ceną.',
     },
   },
 
@@ -861,7 +861,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz spór — co ustaliliście, co poszło nie tak i jakie masz dokumenty.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, jakie masz roszczenia (albo jak się bronić) i jakie są szanse; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, co trzeba zrobić: wezwanie, negocjacje czy pozew (albo jak się bronić); od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — wzywam wykonawcę, naliczam kary, żądam usunięcia wad albo zwrotu pieniędzy, zabezpieczam dowody.',
       'Prowadzę sprawę do końca — negocjacje, a gdy trzeba, postępowanie sądowe.',
     ],
@@ -877,7 +877,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Niedokończona budowa albo fuszerka to nie musi być Twój koszt.',
-      lead: 'Opisz, co poszło nie tak — bezpłatnie ocenię Twoje roszczenia i powiem, jak je wyegzekwować.',
+      lead: 'Opisz, co poszło nie tak — w 24 h odpiszę, jak dochodzić roszczeń, i prześlę ofertę z ceną.',
     },
   },
 
@@ -908,7 +908,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz inwestycję — co budujesz lub remontujesz, na jakim jesteś etapie, czy masz projekt umowy.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy wystarczy analiza, czy lepiej napisać umowę od nowa; podaję cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czy wystarczy sprawdzić umowę, czy lepiej napisać ją od nowa, i od razu wysyłam ofertę z ceną i terminem.',
       'Sprawdzam albo przygotowuję umowę — z zabezpieczeniami dopasowanymi do Twojej roli i inwestycji.',
       'Dostajesz gotowy dokument i omówienie — wiesz, co podpisujesz i jak działać, gdyby coś poszło nie tak.',
     ],
@@ -924,7 +924,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Dobra umowa to Twoja polisa na czas budowy.',
-      lead: 'Prześlij projekt umowy albo opisz inwestycję — bezpłatnie ocenię, czy Cię zabezpiecza, i powiem, co zmienić przed podpisem.',
+      lead: 'Prześlij projekt umowy albo opisz inwestycję — w 24 h odpiszę, czy wystarczy sprawdzić umowę, czy lepiej napisać ją od nowa, i prześlę ofertę z ceną.',
     },
   },
 
@@ -953,7 +953,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sprawę — prześlij pismo lub decyzję z nadzoru i opisz, co wydarzyło się na budowie.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, jakie masz możliwości i szanse, i podaję zakres, cenę oraz termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, co trzeba zrobić przed nadzorem budowlanym i w jakim terminie; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — reprezentuję Cię przed PINB, składam pisma, dokumenty i odwołania, pilnuję terminów.',
       'Prowadzę sprawę do końca — przed PINB i WINB, a gdy trzeba, przed sądem administracyjnym.',
     ],
@@ -969,7 +969,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Pismo z nadzoru budowlanego? Nie czekaj na decyzję — działaj teraz.',
-      lead: 'Prześlij pismo lub decyzję z PINB — bezpłatnie ocenię, na czym stoisz i jak się bronić, zanim miną terminy.',
+      lead: 'Prześlij pismo lub decyzję z PINB — w 24 h odpiszę, co zrobić, zanim miną terminy, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1015,7 +1015,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sprawę — czego dotyczy nieruchomość, od kiedy i jak z niej korzystasz (albo kto zajmuje Twoją).',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy i po ilu latach zasiedzenie wchodzi w grę (albo jak się bronić), i podaję zakres, cenę oraz termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czy zasiedzenie wchodzi w grę (albo jak się bronić) i co trzeba zrobić; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Zbieramy dowody i składam wniosek — albo przygotowuję obronę i przerwanie biegu zasiedzenia.',
       'Prowadzę sprawę do końca — przed sądem, aż do prawomocnego postanowienia i wpisu w księdze.',
     ],
@@ -1024,7 +1024,7 @@ const SERVICE_CONTENT = {
       { q: 'Co znaczy „posiadanie samoistne”?', a: 'To władanie nieruchomością jak właściciel — użytkujesz ją, dbasz o nią, płacisz podatki, decydujesz o niej. Najemca, dzierżawca czy osoba korzystająca za zgodą właściciela nie może zasiedzieć, bo jego posiadanie jest zależne.' },
       { q: 'Kupiłem działkę bez aktu notarialnego — czy mogę ją zasiedzieć?', a: 'Zwykle tak, ale najczęściej w złej wierze, czyli po 30 latach — sądy traktują brak aktu notarialnego jako podstawę złej wiary. Sprawdzam, od kiedy biegnie termin i czy da się doliczyć posiadanie poprzedników.' },
       { q: 'Czy lata użytkowania przez rodziców się liczą?', a: 'Tak — do swojego posiadania możesz doliczyć posiadanie poprzednika, na przykład rodziców, po których przejąłeś nieruchomość. To często przesądza o tym, że termin już upłynął.' },
-      { q: 'Ile kosztuje sprawa o zasiedzenie?', a: 'Opłata sądowa od wniosku jest stała i wynosi 2000 zł, a do tego dochodzi podatek od zasiedzenia — 7% wartości nieruchomości. Moje wynagrodzenie ustalam po bezpłatnej ocenie sprawy.' },
+      { q: 'Ile kosztuje sprawa o zasiedzenie?', a: 'Opłata sądowa od wniosku jest stała i wynosi 2000 zł, a do tego dochodzi podatek od zasiedzenia — 7% wartości nieruchomości. Moje wynagrodzenie podaję w ofercie razem z bezpłatną wstępną analizą.' },
       { q: 'Czy samo płacenie podatku od nieruchomości wystarczy?', a: 'Nie, ale pomaga. Opłacanie podatku to jeden z dowodów posiadania samoistnego, lecz sąd bada całość — dlatego zbieramy też świadków, dokumenty i ślady nakładów.' },
       { q: 'Czy można zasiedzieć służebność, na przykład przejazd przez cudzą działkę?', a: 'Tak — zasiedzeniu podlega także służebność gruntowa, na zbliżonych zasadach. Takie sprawy prowadzę razem z tematem służebności — oceniam, co lepiej pasuje do Twojej sytuacji.' },
       { q: 'Jestem właścicielem — jak nie dopuścić do zasiedzenia mojej działki?', a: 'Trzeba działać, zanim minie termin, i to skutecznie: samo wysłanie wezwania nie przerywa biegu. Przerywają go dopiero określone czynności przed sądem — dobieram właściwą i przeprowadzam ją za Ciebie.' },
@@ -1032,7 +1032,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Wieloletnie posiadanie może stać się własnością. Sprawdźmy, czy w Twoim przypadku.',
-      lead: 'Opisz, od kiedy i jak korzystasz z nieruchomości (albo kto zajmuje Twoją) — bezpłatnie ocenię szanse na zasiedzenie lub obronę przed nim.',
+      lead: 'Opisz, od kiedy i jak korzystasz z nieruchomości (albo kto zajmuje Twoją) — w 24 h odpiszę, czy zasiedzenie wchodzi w grę i co trzeba zrobić, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1075,7 +1075,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sprawę — czego dotyczy nieruchomość, co blokuje jej sprzedaż albo dziedziczenie i co masz w księdze oraz dokumentach.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, na czym polega problem i którą drogą go rozwiązać; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, na czym polega problem i którą drogą go rozwiązać; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — składam wniosek, pozew albo prowadzę sprawę spadkową czy graniczną, zależnie od diagnozy.',
       'Czysty stan prawny — księga zgodna z rzeczywistością, a Ty możesz swobodnie sprzedać, obciążyć albo odziedziczyć nieruchomość.',
     ],
@@ -1091,7 +1091,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Uporządkuj papiery, zanim zablokują Ci sprzedaż albo spadek.',
-      lead: 'Opisz, co blokuje Twoją nieruchomość — bezpłatnie zdiagnozuję problem i powiem, którą drogą najszybciej uregulować jej stan prawny.',
+      lead: 'Opisz, co blokuje Twoją nieruchomość — w 24 h odpiszę, którą drogą uregulować jej stan prawny, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1142,7 +1142,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sprawę — prześlij pismo o opłacie albo opisz, że chcesz wykupić grunt; podaj numer księgi.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, co Ci przysługuje i czy podwyżka jest zasadna; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, co trzeba zrobić z podwyżką opłaty albo wykupem gruntu; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — składam sprzeciw, wniosek o wykup albo o wykreślenie roszczenia i reprezentuję Cię przed organem.',
       'Prowadzę sprawę do końca — przed SKO i sądem albo do uzyskania własności i czystej księgi.',
     ],
@@ -1158,7 +1158,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Zawyżona opłata albo wykup gruntu? Sprawdźmy, co Ci się należy.',
-      lead: 'Prześlij pismo o opłacie albo opisz, co chcesz zrobić z użytkowaniem wieczystym — bezpłatnie ocenię, czy podwyżka jest zasadna i jak wykupić grunt.',
+      lead: 'Prześlij pismo o opłacie albo opisz, co chcesz zrobić z użytkowaniem wieczystym — w 24 h odpiszę, co zrobić z podwyżką albo wykupem gruntu, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1188,7 +1188,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sytuację — czego dotyczy nieruchomość, kto jest współwłaścicielem i czego chcesz (zatrzymać, sprzedać, odzyskać pieniądze).',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, który sposób jest dla Ciebie najlepszy i jakie są szanse; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, który sposób zniesienia współwłasności wchodzi w grę: umowa czy sąd; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — negocjuję i prowadzę sprawę u notariusza albo składam wniosek do sądu i reprezentuję Cię w postępowaniu.',
       'Wychodzisz ze współwłasności — z pieniędzmi albo z nieruchomością na wyłączność i uporządkowaną księgą.',
     ],
@@ -1196,7 +1196,7 @@ const SERVICE_CONTENT = {
       { q: 'Czy mogę znieść współwłasność, jeśli pozostali się nie zgadzają?', a: 'Tak. Nie potrzebujesz ich zgody — każdy współwłaściciel może wystąpić do sądu, a prawa do żądania zniesienia nie da się „przeczekać”, bo się nie przedawnia.' },
       { q: 'Jakie są sposoby wyjścia ze współwłasności?', a: 'Trzy: podział fizyczny (np. działki na mniejsze), przyznanie nieruchomości jednej osobie ze spłatą pozostałych oraz sprzedaż i podział pieniędzy. Sąd preferuje podział fizyczny, a licytację traktuje jako ostateczność. Dobieram wariant pod Twój cel.' },
       { q: 'Chcę zatrzymać mieszkanie — jak je przejąć?', a: 'Trzeba wystąpić o przyznanie nieruchomości Tobie ze spłatą pozostałych i wykazać, że masz na tę spłatę środki. Pomagam to udowodnić oraz wynegocjować rozsądną kwotę i termin.' },
-      { q: 'Ile kosztuje sprawa o zniesienie współwłasności?', a: 'Opłata sądowa to 1000 zł, a przy zgodnym projekcie podziału tylko 300 zł. Zwykle dochodzi koszt wyceny biegłego. Moje wynagrodzenie ustalam po bezpłatnej ocenie sprawy.' },
+      { q: 'Ile kosztuje sprawa o zniesienie współwłasności?', a: 'Opłata sądowa to 1000 zł, a przy zgodnym projekcie podziału tylko 300 zł. Zwykle dochodzi koszt wyceny biegłego. Moje wynagrodzenie podaję w ofercie razem z bezpłatną wstępną analizą.' },
       { q: 'Boję się, że sąd sprzeda nieruchomość na licytacji — da się tego uniknąć?', a: 'Zwykle tak. Licytacja to ostateczność; wcześniej dążę do przyznania nieruchomości ze spłatą albo do sprzedaży na wolnym rynku, która daje znacznie wyższą cenę niż licytacja komornicza.' },
       { q: 'Wyremontowałem nieruchomość z własnych pieniędzy — odzyskam je?', a: 'Często tak. W sprawie działowej rozliczam nakłady, a także wynagrodzenie za to, że ktoś korzystał z nieruchomości ponad swój udział. To realne pieniądze, o które warto zawalczyć.' },
       { q: 'Współwłasność jest ze spadku — to ta sama sprawa?', a: 'Blisko, ale formalnie to dział spadku, którym również się zajmuję. Często łączy się go ze zniesieniem współwłasności w jednym postępowaniu — dobieram właściwą drogę.' },
@@ -1204,7 +1204,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Wyjdź ze współwłasności, zanim ona zablokuje Twoje plany.',
-      lead: 'Opisz, kto jest współwłaścicielem i czego chcesz — bezpłatnie ocenię, który sposób wyjścia jest dla Ciebie najkorzystniejszy.',
+      lead: 'Opisz, kto jest współwłaścicielem i czego chcesz — w 24 h odpiszę, który sposób wyjścia ze współwłasności wchodzi w grę, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1234,7 +1234,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sprawę — co wchodzi w skład spadku, kto dziedziczy i czego chcesz (zatrzymać nieruchomość, dostać spłatę).',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, jaką przyjąć strategię i jakie są szanse; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czy dział przeprowadzić u notariusza, czy w sądzie; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — reguluję dziedziczenie, negocjuję i prowadzę dział u notariusza albo składam wniosek do sądu i reprezentuję Cię.',
       'Sprawa zamknięta — nieruchomość przypada konkretnej osobie, rozliczenia są ustalone, a księga uporządkowana.',
     ],
@@ -1243,14 +1243,14 @@ const SERVICE_CONTENT = {
       { q: 'Czy dział spadku się przedawnia?', a: 'Nie. Możesz go przeprowadzić rok albo trzydzieści lat po śmierci spadkodawcy. Im dłużej zwlekasz, tym trudniej jednak ustalić skład majątku i udowodnić nakłady — dlatego lepiej nie czekać.' },
       { q: 'Chcę zatrzymać dom — jak go przejąć i ile zapłacę rodzeństwu?', a: 'Trzeba wystąpić o przyznanie nieruchomości Tobie ze spłatą pozostałych i wykazać, że masz na to środki. Spłata odpowiada wartości ich udziałów według aktualnej wyceny — walczę o to, by była uczciwa, i o rozsądny termin.' },
       { q: 'Wyremontowałem odziedziczony dom — czy zapłacę spłatę też od remontu?', a: 'Nie powinieneś. Nieruchomość wycenia się według stanu z dnia śmierci, ale cen dzisiejszych, więc Twoje nakłady po śmierci nie podnoszą spłaty. Trzeba to jednak udowodnić — pomagam zebrać dowody (zdjęcia, faktury) i podważyć błędną wycenę.' },
-      { q: 'Ile kosztuje dział spadku?', a: 'Opłata sądowa to 500 zł, a przy zgodnym projekcie podziału 300 zł (przy połączeniu ze zniesieniem współwłasności — odpowiednio 1000 i 600 zł). Do tego dochodzi zwykle koszt wyceny biegłego. Moje wynagrodzenie ustalam po bezpłatnej ocenie sprawy.' },
+      { q: 'Ile kosztuje dział spadku?', a: 'Opłata sądowa to 500 zł, a przy zgodnym projekcie podziału 300 zł (przy połączeniu ze zniesieniem współwłasności — odpowiednio 1000 i 600 zł). Do tego dochodzi zwykle koszt wyceny biegłego. Moje wynagrodzenie podaję w ofercie razem z bezpłatną wstępną analizą.' },
       { q: 'Rodzeństwo blokuje podział — co mogę zrobić?', a: 'Nie potrzebujesz ich zgody, żeby ruszyć sprawę. Składam wniosek do sądu, który rozstrzygnie podział nawet bez ich współpracy. Sama groźba sprawy często skłania do porozumienia.' },
       { q: 'Ktoś żąda ode mnie zachowku — pomożesz?', a: 'Tak. Zachowek liczy się od wartości spadku, a wycenę można kwestionować podobnie jak przy dziale. Prowadzę sprawy o zachowek po obu stronach — gdy go dochodzisz i gdy masz go zapłacić.' },
       { q: 'Czy zajmiesz się tym zdalnie?', a: 'Tak, w całej Polsce. Kontakt prowadzę przede wszystkim mailowo; sprawę rozpoznaje sąd właściwy dla ostatniego miejsca zamieszkania spadkodawcy.' },
     ],
     cta: {
       heading: 'Zamień odziedziczone „ułamki” w konkretny, sprawiedliwy podział.',
-      lead: 'Opisz, co wchodzi w skład spadku i czego chcesz — bezpłatnie ocenię strategię i powiem, jak przeprowadzić dział na Twoją korzyść.',
+      lead: 'Opisz, co wchodzi w skład spadku i czego chcesz — w 24 h odpiszę, jak przeprowadzić dział spadku, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1295,7 +1295,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sprawę — kto zmarł, co było w testamencie albo jakie darowizny poczyniono i po której jesteś stronie.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy zachowek się należy (albo czy żądanie jest zasadne) i ile realnie wynosi; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, co trzeba zrobić: wezwanie do zapłaty, pozew albo obrona przed roszczeniem; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — wzywam do zapłaty i negocjuję albo bronię przed roszczeniem; gdy trzeba, kieruję sprawę do sądu.',
       'Prowadzę sprawę do końca — do zapłaty zachowku albo do oddalenia czy obniżenia roszczenia.',
     ],
@@ -1311,7 +1311,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Pominięto Cię przy podziale majątku? Zachowek to Twoje prawo.',
-      lead: 'Opisz, kto zmarł i co znalazło się w testamencie albo darowiznach — bezpłatnie ocenię, czy zachowek Ci przysługuje (albo czy żądanie wobec Ciebie jest zasadne) i ile realnie wynosi.',
+      lead: 'Opisz, kto zmarł i co znalazło się w testamencie albo darowiznach — w 24 h odpiszę, jak dochodzić zachowku albo jak się przed nim bronić, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1341,7 +1341,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sytuację — kto zmarł, czy jest testament, kto należy do rodziny i co wchodzi w skład spadku.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy wystarczy notariusz, czy potrzebny jest sąd, i podaję zakres, cenę oraz termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czy wystarczy notariusz, czy potrzebny jest sąd; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — przygotowuję dokumenty, kieruję sprawę do sądu albo umawiam u notariusza i reprezentuję Cię.',
       'Masz potwierdzone dziedziczenie — możesz zarządzać majątkiem, ujawnić się w księdze i przejść do działu spadku.',
     ],
@@ -1357,7 +1357,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Potwierdź, że dziedziczysz — i odzyskaj kontrolę nad majątkiem.',
-      lead: 'Opisz, kto zmarł i czy jest testament — bezpłatnie ocenię, czy wystarczy notariusz, czy potrzebny jest sąd, i ile to potrwa.',
+      lead: 'Opisz, kto zmarł i czy jest testament — w 24 h odpiszę, czy wystarczy notariusz, czy potrzebny jest sąd, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1387,7 +1387,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sytuację — co jest wspólne, skąd pochodził wkład, czy jest kredyt i czego chcesz (zatrzymać nieruchomość, dostać spłatę).',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — robię „bilans” Twoich roszczeń i mówię, na co realnie liczyć; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czy wystarczy umowa u notariusza, czy potrzebny jest wniosek do sądu; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — negocjuję i prowadzę podział u notariusza albo składam wniosek do sądu i reprezentuję Cię, rozliczając nakłady i kredyt.',
       'Sprawa zamknięta — nieruchomość przypada konkretnej osobie, spłata i rozliczenia są ustalone, a księga uporządkowana.',
     ],
@@ -1397,13 +1397,13 @@ const SERVICE_CONTENT = {
       { q: 'Wkład własny był z darowizny od moich rodziców — odzyskam go?', a: 'Zwykle tak. To nakład z majątku osobistego na wspólny i podlega rozliczeniu przy podziale. Kluczowe są dowody — akt darowizny, przelewy. Pomagam je zebrać i przeforsować roszczenie.' },
       { q: 'Co z kredytem hipotecznym?', a: 'Sąd dzieli majątek, ale nie orzeka o kredycie — wobec banku pozostajecie dłużnikami oboje, dopóki bank nie zgodzi się na przejęcie długu. W praktyce wartość hipoteki uwzględnia się jednak przy liczeniu spłaty. Układam to tak, żebyś nie „płacił dwa razy”.' },
       { q: 'Po rozwodzie sam spłacam raty — czy to się liczy?', a: 'Tak. Raty kredytu zapłacone z Twoich środków po ustaniu wspólności to nakład, który rozliczam na Twoją korzyść — pod warunkiem, że go udokumentujesz (harmonogram, potwierdzenia przelewów).' },
-      { q: 'Ile kosztuje podział majątku?', a: 'Opłata sądowa to 1000 zł, a przy zgodnym projekcie podziału 300 zł (a jeśli podział przeprowadza się już w sprawie rozwodowej — 200 zł). Do tego dochodzi zwykle koszt wyceny biegłego. Moje wynagrodzenie ustalam po bezpłatnej ocenie sprawy.' },
+      { q: 'Ile kosztuje podział majątku?', a: 'Opłata sądowa to 1000 zł, a przy zgodnym projekcie podziału 300 zł (a jeśli podział przeprowadza się już w sprawie rozwodowej — 200 zł). Do tego dochodzi zwykle koszt wyceny biegłego. Moje wynagrodzenie podaję w ofercie razem z bezpłatną wstępną analizą.' },
       { q: 'Czy podział majątku się przedawnia?', a: 'Nie. Można go przeprowadzić także wiele lat po rozwodzie. Ale zwłoka utrudnia udowodnienie nakładów i wartości — dlatego lepiej nie czekać.' },
       { q: 'Czy zajmiesz się tym zdalnie?', a: 'Tak, w całej Polsce. Kontakt prowadzę przede wszystkim mailowo; sprawę rozpoznaje sąd właściwy dla miejsca położenia nieruchomości.' },
     ],
     cta: {
       heading: 'Wspólny dom i kredyt po rozwodzie? Zadbam, żeby podział wyszedł po Twojej stronie.',
-      lead: 'Opisz, co jest wspólne, skąd był wkład i czy jest kredyt — bezpłatnie zrobię bilans Twoich roszczeń i powiem, na co realnie liczyć.',
+      lead: 'Opisz, co jest wspólne, skąd był wkład i czy jest kredyt — w 24 h odpiszę, jak przeprowadzić podział majątku, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1433,7 +1433,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sytuację — co wynajmujesz, komu i czy prowadzisz to w ramach działalności.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, który tryb najmu będzie dla Ciebie najbezpieczniejszy; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, który tryb najmu będzie dla Ciebie najbezpieczniejszy; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Przygotowuję umowę i zabezpieczenia — z kompletem załączników i instrukcją, o czym pamiętać przy podpisaniu.',
       'Wynajmujesz bezpiecznie — z umową, która pozwala szybko odzyskać lokal, gdyby coś poszło nie tak.',
     ],
@@ -1449,7 +1449,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Wynajmuj spokojnie — z umową, która naprawdę Cię chroni.',
-      lead: 'Opisz, co i komu wynajmujesz — bezpłatnie ocenię, który tryb najmu będzie najbezpieczniejszy, i przygotuję umowę z pełnym zabezpieczeniem.',
+      lead: 'Opisz, co i komu wynajmujesz — w 24 h odpiszę, który tryb najmu będzie najbezpieczniejszy, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1478,7 +1478,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Przesyłasz umowę — najlepiej z załącznikami i propozycją drugiej strony.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy warto ją poprawić i co jest najbardziej ryzykowne; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, jaki zakres sprawdzenia umowy wystarczy; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Analizuję i proponuję zmiany — z gotową listą poprawek do negocjacji.',
       'Podpisujesz świadomie — wiesz, na co się zgadzasz i co udało się zmienić.',
     ],
@@ -1492,7 +1492,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Zanim podpiszesz najem, sprawdźmy, na co się zgadzasz.',
-      lead: 'Prześlij umowę — bezpłatnie ocenię, czy Cię chroni, i powiem, co zmienić przed podpisem.',
+      lead: 'Prześlij umowę — w 24 h odpiszę, jaki zakres sprawdzenia wystarczy przed podpisem, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1521,7 +1521,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sytuację — jaka jest umowa, od kiedy trwa problem i czego dotyczy (zaległości, koniec umowy, dewastacja).',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, którą ścieżką i jak szybko da się odzyskać lokal; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, którą ścieżką i jak szybko da się odzyskać lokal; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — wypowiadam umowę, wzywam do opróżnienia, kieruję sprawę do sądu albo o klauzulę wykonalności i do komornika.',
       'Odzyskujesz lokal — a przy okazji dochodzę zaległości i odszkodowania.',
     ],
@@ -1537,7 +1537,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Lokator, który nie płaci i nie wychodzi, to nie musi być Twój problem na lata.',
-      lead: 'Opisz, jaka jest umowa i na czym polega problem — bezpłatnie ocenię, którą ścieżką najszybciej odzyskać lokal i pieniądze.',
+      lead: 'Opisz, jaka jest umowa i na czym polega problem — w 24 h odpiszę, którą ścieżką odzyskać lokal i pieniądze, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1566,7 +1566,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sprawę — jaka umowa, ile wynosi zaległość i czy lokator wciąż mieszka.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, jak szybko i którą drogą odzyskać pieniądze; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, jak szybko i którą drogą odzyskać pieniądze; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — wzywam do zapłaty, kieruję pozew i uzyskuję tytuł wykonawczy.',
       'Odzyskujesz pieniądze — z pomocą komornika, jeśli dłużnik nie zapłaci dobrowolnie.',
     ],
@@ -1580,7 +1580,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Zaległy czynsz nie musi przepaść. Odzyskam go za Ciebie.',
-      lead: 'Opisz, ile wynosi zaległość i jaka jest umowa — bezpłatnie ocenię, jak najszybciej odzyskać pieniądze.',
+      lead: 'Opisz, ile wynosi zaległość i jaka jest umowa — w 24 h odpiszę, jak najszybciej odzyskać pieniądze, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1609,7 +1609,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sytuację — jaka umowa, ile wynosi kaucja i czego dotyczy spór.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, komu i ile się należy oraz jak to wyegzekwować; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, jak rozliczyć kaucję i jak to wyegzekwować; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — wzywam do zwrotu albo bronię potrącenia, zabezpieczam dowody.',
       'Sprawa rozliczona — kaucja wraca do właściwej osoby we właściwej kwocie.',
     ],
@@ -1623,7 +1623,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Kaucja to Twoje pieniądze — po którejkolwiek stronie umowy stoisz.',
-      lead: 'Opisz spór o kaucję — bezpłatnie ocenię, komu i ile się należy oraz jak to rozliczyć.',
+      lead: 'Opisz spór o kaucję — w 24 h odpiszę, co zrobić, żeby rozliczyć kaucję, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1659,7 +1659,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz swój najem — ile lokali, jakie umowy, czego potrzebujesz.',
-      'Bezpłatna wstępna rozmowa — proponuję zakres i abonament dopasowany do skali.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — proponuję zakres i abonament dopasowany do skali; od razu wysyłam ofertę z ceną.',
       'Porządkuję dokumenty — ujednolicam umowy i zabezpieczenia.',
       'Masz prawnika na stałe — jeden kontakt do wszystkich spraw najmu, w stałej opłacie.',
     ],
@@ -1673,7 +1673,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Traktujesz najem jak biznes? Miej do niego prawnika na stałe.',
-      lead: 'Opisz, ile lokali wynajmujesz i czego potrzebujesz — bezpłatnie zaproponuję zakres obsługi i abonament.',
+      lead: 'Opisz, ile lokali wynajmujesz i czego potrzebujesz — w 24 h zaproponuję zakres obsługi i prześlę ofertę abonamentu.',
     },
   },
 
@@ -1703,7 +1703,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Przesyłasz umowę i opisujesz opóźnienie — co i o ile się opóźnia.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, ile kar Ci się należy i jak je odzyskać; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, jak dochodzić kar: wezwanie, negocjacje czy pozew; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — wzywam dewelopera i negocjuję, a przy oporze kieruję sprawę do sądu.',
       'Odzyskujesz pieniądze — należne kary i ewentualne odszkodowanie.',
     ],
@@ -1717,7 +1717,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Opóźnienie dewelopera ma swoją cenę — i to on powinien ją zapłacić.',
-      lead: 'Prześlij umowę i opisz opóźnienie — bezpłatnie wyliczę, ile kar Ci się należy, i powiem, jak je odzyskać.',
+      lead: 'Prześlij umowę i opisz opóźnienie — w 24 h odpiszę, jak dochodzić kar umownych, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1747,7 +1747,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz wady i przesyłasz dokumenty — protokół odbioru, umowę, zdjęcia.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czego żądać i jakie są szanse; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czego żądać i jaką drogą; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — zgłaszam wady, stawiam żądania i negocjuję, a przy oporze kieruję sprawę do sądu.',
       'Wada usunięta albo rozliczona — naprawą, obniżeniem ceny albo odstąpieniem.',
     ],
@@ -1762,7 +1762,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Kupiłeś mieszkanie bez wad — i takie Ci się należy.',
-      lead: 'Opisz usterki i prześlij protokół odbioru — bezpłatnie ocenię, czego żądać od dewelopera i jak to wyegzekwować.',
+      lead: 'Opisz usterki i prześlij protokół odbioru — w 24 h odpiszę, czego i jak żądać od dewelopera, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1791,7 +1791,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz wady — czego dotyczą i od kiedy występują.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, kto odpowiada i jak dochodzić naprawy; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, kto odpowiada i jak dochodzić naprawy; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — zgłaszam wady, gromadzę dowody i prowadzę sprawę przeciwko właściwemu podmiotowi.',
       'Wady usunięte albo rozliczone — z korzyścią dla Ciebie i pozostałych właścicieli.',
     ],
@@ -1805,7 +1805,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Wady wspólne to wspólny problem — pomogę go rozwiązać u źródła.',
-      lead: 'Opisz, co szwankuje w budynku — bezpłatnie ocenię, kto odpowiada i jak wyegzekwować naprawę.',
+      lead: 'Opisz, co szwankuje w budynku — w 24 h odpiszę, kto odpowiada i jak dochodzić naprawy, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1834,7 +1834,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sytuację — kiedy był odbiór, co jest w protokole i jak deweloper zareagował.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, jakie masz uprawnienia i co wyegzekwować; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, jakie masz uprawnienia i co wyegzekwować; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — wzywam do usunięcia wad, pilnuję terminów, kwestionuję odmowy, uruchamiam naprawę zastępczą.',
       'Wady usunięte — na koszt dewelopera, we właściwym standardzie.',
     ],
@@ -1849,7 +1849,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Wpisane do protokołu wady to Twoje prawo — dopilnuję, żeby deweloper je usunął.',
-      lead: 'Opisz, co jest w protokole i jak zachowuje się deweloper — bezpłatnie ocenię, co wyegzekwować i w jakim terminie.',
+      lead: 'Opisz, co jest w protokole i jak zachowuje się deweloper — w 24 h odpiszę, co wyegzekwować i w jakim terminie, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1879,7 +1879,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Przesyłasz umowę i dane — zapis o metrażu, cenę i informację o rzeczywistej powierzchni, jeśli ją masz.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, ile możesz odzyskać i czy wchodzi w grę odstąpienie; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czy żądać obniżenia ceny, czy odstąpić od umowy; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — organizuję pomiar, wyliczam różnicę i kieruję żądanie do dewelopera.',
       'Odzyskujesz pieniądze — zwrot nadpłaconej części ceny, a przy dużej rozbieżności również inne roszczenia.',
     ],
@@ -1893,7 +1893,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Płaciłeś za metry, których nie ma? Odzyskam różnicę.',
-      lead: 'Prześlij umowę i dane o powierzchni — bezpłatnie policzę, ile możesz odzyskać, i sprawdzę, czy wchodzi w grę odstąpienie.',
+      lead: 'Prześlij umowę i dane o powierzchni — w 24 h odpiszę, czy żądać obniżenia ceny, czy odstąpić od umowy, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1923,7 +1923,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Przesyłasz umowę — projekt do podpisu albo umowę, na której opiera się spór.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, które zapisy są problematyczne i jak je wykorzystać; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, co trzeba zrobić: sprawdzić projekt przed podpisem czy iść w spór; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — negocjuję zmiany przed podpisem albo podważam abuzywny zapis w sporze.',
       'Masz przewagę — świadomie podpisaną umowę albo pozbawionego argumentu dewelopera.',
     ],
@@ -1937,7 +1937,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Nie każdy zapis w umowie deweloperskiej naprawdę Cię wiąże.',
-      lead: 'Prześlij umowę — bezpłatnie wskażę niedozwolone postanowienia i powiem, jak je wykorzystać przed podpisem albo w sporze.',
+      lead: 'Prześlij umowę — w 24 h odpiszę, co trzeba zrobić: sprawdzić ją przed podpisem czy iść w spór, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1966,7 +1966,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Przesyłasz dokumenty — kartę gwarancyjną, umowę i opis usterki.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy iść z gwarancji, czy z rękojmi, i czego żądać; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czy iść z gwarancji, czy z rękojmi, i czego żądać; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — zgłaszam roszczenie i egzekwuję świadczenie gwarancyjne.',
       'Usterka usunięta — na koszt gwaranta, z zachowaniem pozostałych uprawnień.',
     ],
@@ -1980,7 +1980,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Gwarancja to obietnica, którą można wyegzekwować — pomogę Ci to zrobić.',
-      lead: 'Prześlij kartę gwarancyjną i opis usterki — bezpłatnie ocenię, którą drogą działać i czego żądać.',
+      lead: 'Prześlij kartę gwarancyjną i opis usterki — w 24 h odpiszę, którą drogą działać i czego żądać, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2009,7 +2009,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujecie sytuację — jakie wady, jak duża wspólnota i na jakim etapie są rozmowy z deweloperem.',
-      'Dostajecie bezpłatną wstępną ocenę w 24 h — mówię, jak zebrać roszczenia i czego żądać; podaję zakres, cenę i termin.',
+      'Dostajecie bezpłatną wstępną analizę w 24 h — mówię, jak zebrać roszczenia i czego żądać; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Buduję sprawę — uchwały, cesje, dokumentacja wad i wezwania do dewelopera.',
       'Dochodzimy roszczeń — ugodą albo przed sądem, na rzecz wspólnoty.',
     ],
@@ -2024,7 +2024,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Rozproszone roszczenia to słabość. Zbiorę je we wspólną, mocną sprawę.',
-      lead: 'Opiszcie wady części wspólnych — bezpłatnie ocenię, jak zebrać roszczenia nabywców i czego żądać od dewelopera.',
+      lead: 'Opiszcie wady części wspólnych — w 24 h odpiszę, jak zebrać roszczenia nabywców i czego żądać od dewelopera, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2054,7 +2054,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sytuację — kto korzysta z gruntu, w jaki sposób i od jak dawna.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czego można żądać i za jaki okres; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czego można żądać i za jaki okres; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — wzywam do zapłaty i uregulowania, a przy oporze kieruję sprawę do sądu.',
       'Odzyskujesz pieniądze — i masz uporządkowaną sytuację prawną gruntu.',
     ],
@@ -2068,7 +2068,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Ktoś korzysta z Twojej ziemi za darmo? Należy Ci się zapłata.',
-      lead: 'Opisz, kto i jak korzysta z Twojej działki — bezpłatnie ocenię, czego można żądać i za jaki okres.',
+      lead: 'Opisz, kto i jak korzysta z Twojej działki — w 24 h odpiszę, czego i za jaki okres można żądać, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2097,7 +2097,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sytuację — gdzie leży działka, jak wygląda dostęp i czego dotyczy spór.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, jak ustanowić albo obronić drogę i jakie są koszty; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, jak ustanowić albo obronić drogę i jakie są koszty sądowe; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — negocjuję albo kieruję wniosek do sądu i prowadzę sprawę.',
       'Masz uregulowany dojazd — ustanowioną służebność albo obronioną działkę przed nadmiernym obciążeniem.',
     ],
@@ -2111,7 +2111,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Działka bez dojazdu to nie ślepy zaułek — jest droga wyjścia.',
-      lead: 'Opisz, jak wygląda dostęp do Twojej nieruchomości — bezpłatnie ocenię, jak ustanowić albo obronić drogę konieczną.',
+      lead: 'Opisz, jak wygląda dostęp do Twojej nieruchomości — w 24 h odpiszę, jak ustanowić albo obronić drogę konieczną, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2140,7 +2140,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Przesyłasz dokumenty — decyzję ZRID, decyzję o odszkodowaniu i operat, jeśli je masz.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy odszkodowanie jest zaniżone i o ile realnie można je podnieść; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, co trzeba zrobić: zastrzeżenia do operatu, odwołanie czy kontroperat; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — składam zastrzeżenia i odwołanie, organizuję kontroperat, pilnuję terminów i zaliczki.',
       'Uzyskujesz wyższe odszkodowanie — odpowiadające rynkowej wartości Twojej nieruchomości.',
     ],
@@ -2155,7 +2155,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Wywłaszczenie musi być słusznie wynagrodzone. Dopilnuję, żeby tak było.',
-      lead: 'Prześlij decyzję i operat — bezpłatnie ocenię, czy odszkodowanie jest zaniżone i o ile można je podnieść.',
+      lead: 'Prześlij decyzję i operat — w 24 h odpiszę, jak i w jakim terminie kwestionować odszkodowanie, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2185,7 +2185,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sytuację — co wywłaszczono, co zostało i dlaczego resztówki nie da się wykorzystać.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy przysługuje wykup i jak go dochodzić; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czy przysługuje wykup i jak go dochodzić; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — składam uzasadnione żądanie wykupu, a przy odmowie kieruję sprawę do sądu.',
       'Wychodzisz z resztówki — inwestor ją wykupuje, a Ty odzyskujesz jej wartość.',
     ],
@@ -2200,7 +2200,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Nie musisz zostać z bezużytecznym kawałkiem ziemi.',
-      lead: 'Opisz, co zostało Ci po wywłaszczeniu — bezpłatnie ocenię, czy możesz żądać wykupu resztówki i jak to przeprowadzić.',
+      lead: 'Opisz, co zostało Ci po wywłaszczeniu — w 24 h odpiszę, czy możesz żądać wykupu resztówki i jak to przeprowadzić, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2229,7 +2229,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sytuację — na jakim etapie jest sprawa i czego dotyczy (rokowania, decyzja, szkody, odszkodowanie).',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, co da się jeszcze ugrać i jakiego odszkodowania żądać; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, co da się jeszcze zrobić i jakiego odszkodowania żądać; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — reprezentuję Cię w postępowaniu, odwołaniu i sprawie o odszkodowanie.',
       'Masz zabezpieczone interesy — mniejsze obciążenie działki, przywrócony grunt i należne odszkodowanie.',
     ],
@@ -2244,7 +2244,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: '„Małe wywłaszczenie” to wciąż wywłaszczenie — i wciąż masz prawa.',
-      lead: 'Opisz, na jakim etapie jest sprawa sieci na Twojej działce — bezpłatnie ocenię, co da się ugrać i jakiego odszkodowania żądać.',
+      lead: 'Opisz, na jakim etapie jest sprawa sieci na Twojej działce — w 24 h odpiszę, co da się jeszcze zrobić i jakiego odszkodowania żądać, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2274,7 +2274,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz transakcję — jaka działka, jaki areał, kto kupuje i kto sprzedaje.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy zgoda jest potrzebna i jak przejść procedurę; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czy zgoda jest potrzebna i jak przejść procedurę; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Prowadzę wniosek — ogłoszenie, dokumentacja, reprezentacja przed KOWR i pilnowanie terminów.',
       'Kupujesz bezpiecznie — z decyzją zgody i ważną umową u notariusza.',
     ],
@@ -2289,7 +2289,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Nie jesteś rolnikiem, a chcesz kupić ziemię? Przeprowadzę Cię przez zgodę KOWR.',
-      lead: 'Opisz transakcję — bezpłatnie ocenię, czy zgoda jest potrzebna, i poprowadzę cały wniosek aż do ważnej umowy.',
+      lead: 'Opisz transakcję — w 24 h odpiszę, czy zgoda jest potrzebna, i prześlę ofertę na cały wniosek aż do ważnej umowy.',
     },
   },
 
@@ -2318,7 +2318,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sytuację — jakie masz gospodarstwo, wykształcenie, gdzie mieszkasz i od kiedy.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy i jak wykazać status oraz czego brakuje; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czy i jak wykazać status oraz czego brakuje; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Kompletuję dowody — dokumenty, poświadczenia i oświadczenia potwierdzające status.',
       'Masz potwierdzony status — gotowy do zakupu ziemi, pierwokupu albo obrony przed urzędem.',
     ],
@@ -2332,7 +2332,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Status rolnika trzeba udowodnić — pomogę Ci to zrobić bez potknięć.',
-      lead: 'Opisz swoje gospodarstwo i sytuację — bezpłatnie ocenię, czy i jak wykazać status rolnika indywidualnego.',
+      lead: 'Opisz swoje gospodarstwo i sytuację — w 24 h odpiszę, czy i jak wykazać status rolnika indywidualnego, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2362,7 +2362,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz sytuację — czy wydzierżawiasz, czy dzierżawisz, na jakich warunkach i czego dotyczy sprawa.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, jak zabezpieczyć umowę albo rozwiązać spór; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, jak zabezpieczyć umowę albo rozwiązać spór; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — przygotowuję lub poprawiam umowę albo prowadzę spór o czynsz, grunt czy zakończenie dzierżawy.',
       'Masz uporządkowaną dzierżawę — bezpieczną umowę albo rozstrzygnięty konflikt.',
     ],
@@ -2376,7 +2376,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Dobra umowa dzierżawy chroni Cię, zanim pojawi się problem.',
-      lead: 'Opisz swoją dzierżawę — bezpłatnie ocenię, jak zabezpieczyć umowę albo rozwiązać spór z drugą stroną.',
+      lead: 'Opisz swoją dzierżawę — w 24 h odpiszę, jak zabezpieczyć umowę albo rozwiązać spór z drugą stroną, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2406,7 +2406,7 @@ const SERVICE_CONTENT = {
     ],
     steps: [
       'Opisujesz działkę i plan — jaka klasa gruntu, jakie przeznaczenie i co chcesz na niej zrobić.',
-      'Dostajesz bezpłatną wstępną ocenę w 24 h — mówię, czy potrzebne jest odrolnienie i ile realnie wyniosą opłaty; podaję zakres, cenę i termin.',
+      'Dostajesz bezpłatną wstępną analizę w 24 h — mówię, czy potrzebne jest odrolnienie i jak je przeprowadzić; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Prowadzę procedurę — zmiana przeznaczenia, wyłączenie z produkcji i optymalizacja opłat.',
       'Grunt gotowy pod inwestycję — z minimalnymi, prawidłowo policzonymi kosztami.',
     ],
@@ -2421,7 +2421,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Odrolnienie nie musi kosztować fortuny — a często nie kosztuje nic.',
-      lead: 'Opisz działkę i plany — bezpłatnie ocenię, czy potrzebne jest odrolnienie i ile realnie wyniosą opłaty.',
+      lead: 'Opisz działkę i plany — w 24 h odpiszę, czy potrzebne jest odrolnienie i jak je przeprowadzić, i prześlę ofertę z ceną.',
     },
   },
 };
@@ -2484,7 +2484,7 @@ const BLOCK_CONTENT = {
     ],
     cta: {
       heading: 'Deweloper liczy, że odpuścisz. Nie musisz.',
-      lead: 'Za opóźnienie i wady należą Ci się konkretne pieniądze i naprawy. Opisz sprawę, a bezpłatnie ocenię, czego możesz żądać i jak to wyegzekwować.',
+      lead: 'Za opóźnienie i wady należą Ci się konkretne pieniądze i naprawy. Opisz sprawę, a w 24 h odpiszę, czego i jak żądać, i prześlę ofertę z ceną.',
     },
   },
 };

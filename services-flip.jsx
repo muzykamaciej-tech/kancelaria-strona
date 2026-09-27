@@ -43,7 +43,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     steps: [
       'Przesyłasz numer księgi wieczystej, link do ogłoszenia i to, co wiesz o sprzedającym — najlepiej zanim wpłacisz zadatek.',
-      'W ciągu 24 h roboczych dostajesz bezpłatną wstępną ocenę: czy okazja jest bezpieczna, gdzie jest ryzyko i ile potrwa jego usunięcie. Podaję cenę i termin.',
+      'W ciągu 24 h roboczych dostajesz bezpłatną wstępną analizę: mówię, co trzeba sprawdzić przed zadatkiem, i od razu wysyłam ofertę z ceną i terminem.',
       'Sprawdzam i prowadzę zakup — raport w trzech kolorach, umowa przedwstępna, negocjacje, akt notarialny.',
       'Przy sprzedaży przygotowuję umowę i dokumenty, uzgadniam podatki z księgowym i pilnuję rozliczenia. Przy kolejnych flipach pracujemy już na gotowym schemacie.',
     ],
@@ -54,12 +54,12 @@ Object.assign(window.SERVICE_CONTENT, {
       { q: 'Ile flipów rocznie mogę zrobić bez działalności gospodarczej?', a: 'Nie ma sztywnej liczby — liczy się zorganizowany i ciągły charakter. Przy jednym czy dwóch flipach prywatnie zwykle chodzi o PIT od sprzedaży przed upływem 5 lat, z możliwością ulgi mieszkaniowej. Przy regularnym obrocie w grę wchodzą działalność i VAT. Omawiam to z Tobą i Twoim księgowym przed pierwszą sprzedażą, nie po niej.' },
       { q: 'Kupuję na cesję od osoby, która ma umowę deweloperską. To bezpieczne?', a: 'Jeśli deweloper wyrazi zgodę, cesja jest zgodna z prawem — ale trzeba sprawdzić umowę deweloperską, stan wpłat, kary i to, czy zbywca nie sprzedaje tej samej umowy komuś jeszcze. Przygotowuję umowę cesji i pilnuję rozliczenia.' },
       { q: 'Mam wspólnika albo inwestora, który finansuje zakup. Jak to spisać?', a: 'Umową, która ustala udziały, podział zysku i straty, decyzje o cenie i terminie sprzedaży oraz to, co się dzieje, gdy ktoś chce wyjść wcześniej. Bez tego pierwszy udany flip często kończy się sporem o pieniądze.' },
-      { q: 'Ile trwa sprawdzenie okazji?', a: 'Wstępna ocena z księgi wieczystej i ogłoszenia — 24 h robocze. Pełne sprawdzenie z dokumentami sprzedającego — 2–4 dni robocze. Przy okazjach „na wczoraj” zaznacz w formularzu, że sprawa jest pilna.' },
+      { q: 'Ile trwa sprawdzenie okazji?', a: 'Wstępna analiza i oferta — 24 h robocze. Pełne sprawdzenie z dokumentami sprzedającego — 2–4 dni robocze od akceptacji oferty. Przy okazjach „na wczoraj” zaznacz w formularzu, że sprawa jest pilna.' },
       { q: 'Robię flipy regularnie. Możemy współpracować stale?', a: 'Tak — w formie abonamentu albo stawki za transakcję. Znam Twoje wzory umów i model, więc kolejne zakupy sprawdzam szybciej i taniej. Szczegóły w obszarze „Dla firm”.' },
     ],
     cta: {
       heading: 'Okazja nie poczeka. Ryzyko też nie.',
-      lead: 'Prześlij numer księgi wieczystej i link do ogłoszenia. Bezpłatnie, w ciągu 24 h roboczych, powiem Ci, czy to bezpieczny flip i co sprawdzić przed zadatkiem.',
+      lead: 'Prześlij numer księgi wieczystej i link do ogłoszenia. W ciągu 24 h roboczych odpiszę, co trzeba sprawdzić przed zadatkiem, i prześlę ofertę z ceną i terminem.',
     },
   },
 });

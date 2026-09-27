@@ -140,7 +140,7 @@ window.BLOG.push(
       ['p', 'Aby lepiej to zobrazować, warto prześledzić historię z wokandy, która doprowadziła do podjęcia tej uchwały. Powodowie domagali się od dewelopera zapłaty kwoty 125 000 zł odszkodowania. Suma ta wynikała z faktu, że przez niewykonanie zobowiązania przez dewelopera musieli oni niekorzystnie sprzedać inną nieruchomość, co wygenerowało szkodę w wysokości 69 800 zł, a dodatkowo utracili korzyści z czynszu najmu w kwocie 55 200 zł. Deweloper bronił się umową z 10 maja 2016 r., w której sprytnie wpisano karę umowną wynoszącą zaledwie 0,01% wpłaconych kwot za każdy dzień zwłoki w ustanowieniu własności lokalu, z pominięciem prawa do wyższego odszkodowania. Ostatecznie uznano, że takie ograniczenie zmierza do zawężenia odpowiedzialności dewelopera, rażąco narusza interesy konsumentów będących słabszą stroną i jest sprzeczne z dobrymi obyczajami.'],
       ['h2', 'Nie odpuszczaj swoich pieniędzy'],
       ['p', 'Opóźnienie dewelopera to nie jest „taki urok rynku”. To zwykłe nienależyte wykonanie umowy, za które przysługuje Ci pełna rekompensata. Jeśli Twoja umowa zawiera niedozwolone zapisy, otwiera się przed Tobą droga do żądania zwrotu utraconych pieniędzy. Zastanawiasz się, czy postanowienia w Twojej umowie deweloperskiej są abuzywne?'],
-      ['p', '**Prześlij umowę w formularzu poniżej — bezpłatnie, w ciągu 24 h ocenię, czy deweloper naruszył Twoje prawa i w jaki sposób możemy odzyskać Twoje pieniądze.**'],
+      ['p', '**Prześlij umowę w formularzu poniżej — w ciągu 24 h bezpłatnie odpiszę, co trzeba zrobić, żeby odzyskać Twoje pieniądze, i prześlę ofertę z ceną.**'],
     ],
   },
   {
@@ -202,9 +202,9 @@ window.BLOG.push(
       ['p', 'Twój sąsiad ma prawo patrzeć Ci na ręce, ale nie ma prawa bezpodstawnie wstrzymywać Twojej inwestycji. Sam fakt potencjalnych uciążliwości dla sąsiedztwa nie może stanowić podstawy odmowy pozwolenia, jeżeli nie dochodzi do naruszenia konkretnych przepisów prawa. Jeżeli napotykasz opór w urzędzie lub mierzysz się z nieuzasadnionymi skargami sąsiadów, warto niezwłocznie skonsultować się z prawnikiem.'],
       ['p', 'Zamiast tracić czas na przepychanki pismami, **opisz sprawę w formularzu poniżej — bezpłatna wstępna analiza w ciągu 24 h**. W odpowiedzi:'],
       ['ul', [
-        'przeanalizuję dotychczasową korespondencję z urzędem architektoniczno-budowlanym;',
-        'sprawdzę zasadność zarzutów podnoszonych przez sąsiadów;',
-        'zaproponuję strategię obrony Twojego interesu prawnego.',
+        'przeczytam Twój opis i korespondencję z urzędem architektoniczno-budowlanym;',
+        'powiem, co trzeba zrobić: odpowiedź na zarzuty sąsiadów, odwołanie czy skarga;',
+        'od razu prześlę ofertę z ceną i terminem.',
       ]],
     ],
   },

@@ -29,7 +29,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     steps: [
       'Opisujesz swoją działalność — co i dla kogo zarządzasz oraz gdzie widzisz ryzyka.',
-      'Bezpłatna wstępna rozmowa w 24 h — proponuję model współpracy: stała obsługa albo pojedynczy projekt; podaję zakres, cenę i termin.',
+      'Bezpłatna wstępna analiza w 24 h — proponuję model współpracy: stała obsługa albo pojedynczy projekt; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Porządkuję dokumenty i procesy — umowy, windykację, wzory pism.',
       'Masz prawnika pod ręką — do bieżących pytań i szybkiej reakcji przy sporach.',
     ],
@@ -42,7 +42,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Zarządzaj spokojnie — prawną stronę wezmę na siebie.',
-      lead: 'Opisz swoją działalność — bezpłatnie zaproponuję model współpracy i wskażę, co zabezpieczyć w pierwszej kolejności.',
+      lead: 'Opisz swoją działalność — w 24 h zaproponuję model współpracy, wskażę, co zabezpieczyć najpierw, i prześlę ofertę z ceną.',
     },
   },
 
@@ -71,7 +71,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     steps: [
       'Opisujesz sprawę albo potrzebę — czy chodzi o konkretną uchwałę, przekształcenia, czy o stałą obsługę.',
-      'Bezpłatna wstępna rozmowa w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; podaję zakres, cenę i termin.',
+      'Bezpłatna wstępna analiza w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — przygotowuję dokumenty, prowadzę procedury i reprezentuję spółdzielnię.',
       'Masz pewność proceduralną — decyzje organów, które się obronią.',
     ],
@@ -84,7 +84,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Uchwały, które się obronią. Procedury bez potknięć.',
-      lead: 'Opisz sprawę albo potrzebę spółdzielni — bezpłatnie ocenię ryzyka i zaproponuję model współpracy.',
+      lead: 'Opisz sprawę albo potrzebę spółdzielni — w 24 h zaproponuję model współpracy i prześlę ofertę z ceną.',
     },
   },
 
@@ -113,7 +113,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     steps: [
       'Opisujesz kontrakt albo spór — jaki projekt, jaka umowa i na czym polega problem.',
-      'Bezpłatna wstępna rozmowa w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; podaję zakres, cenę i termin.',
+      'Bezpłatna wstępna analiza w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — negocjuję umowę, zabezpieczam płatności albo prowadzę spór.',
       'Kontrakt pod kontrolą — zabezpieczone wynagrodzenie i mniejsze ryzyko.',
     ],
@@ -126,7 +126,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Zabezpieczona umowa i pewna zapłata — zanim wejdziesz na budowę.',
-      lead: 'Opisz kontrakt albo spór — bezpłatnie wskażę ryzyka i zaproponuję, jak zabezpieczyć Twoje wynagrodzenie.',
+      lead: 'Opisz kontrakt albo spór — w 24 h odpiszę, jak zabezpieczyć Twoje wynagrodzenie, i prześlę ofertę z ceną.',
     },
   },
 
@@ -155,7 +155,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     steps: [
       'Opisujesz sytuację — jakie zlecenia realizujesz i co chcesz zabezpieczyć.',
-      'Bezpłatna wstępna rozmowa w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; podaję zakres, cenę i termin.',
+      'Bezpłatna wstępna analiza w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — układam umowy, porządkuję prawa autorskie i bronię honorarium.',
       'Praca pod ochroną — jasne prawa, bezpieczne honorarium, ograniczone ryzyko.',
     ],
@@ -168,7 +168,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Twój projekt, Twoje prawa, Twoje honorarium — dobrze zabezpieczone.',
-      lead: 'Opisz, jak pracujesz — bezpłatnie ocenię Twoje umowy i wskażę, co poprawić w prawach autorskich i odpowiedzialności.',
+      lead: 'Opisz, jak pracujesz — w 24 h odpiszę, które umowy warto sprawdzić pod kątem praw autorskich i odpowiedzialności, i prześlę ofertę z ceną.',
     },
   },
 
@@ -197,7 +197,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     steps: [
       'Opisujesz sprawę — jakie prace, jaki spór albo jaka potrzeba.',
-      'Bezpłatna wstępna rozmowa w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; podaję zakres, cenę i termin.',
+      'Bezpłatna wstępna analiza w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — zabezpieczam umowy, prowadzę spór albo reprezentuję przed urzędem.',
       'Masz wsparcie prawne — w sporach, przed urzędem i w kwestiach odpowiedzialności.',
     ],
@@ -210,7 +210,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Tam, gdzie kończy się pomiar, a zaczyna spór — jestem po Twojej stronie.',
-      lead: 'Opisz sprawę — bezpłatnie ocenię ryzyka i zaproponuję, jak Cię zabezpieczyć albo poprowadzić spór.',
+      lead: 'Opisz sprawę — w 24 h odpiszę, jak Cię zabezpieczyć albo poprowadzić spór, i prześlę ofertę z ceną.',
     },
   },
 
@@ -239,7 +239,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     steps: [
       'Opisujesz sprawę — jaki operat, jaki spór albo jaka potrzeba.',
-      'Bezpłatna wstępna rozmowa w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; podaję zakres, cenę i termin.',
+      'Bezpłatna wstępna analiza w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — bronię operatu, prowadzę sprawę o odpowiedzialność albo zabezpieczam umowy.',
       'Masz ochronę prawną — dla swoich wycen i dla siebie.',
     ],
@@ -252,7 +252,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Bronię Twoich wycen — i Ciebie.',
-      lead: 'Opisz sprawę albo potrzebę — bezpłatnie ocenię ryzyka i zaproponuję model współpracy.',
+      lead: 'Opisz sprawę albo potrzebę — w 24 h zaproponuję model współpracy i prześlę ofertę z ceną.',
     },
   },
 
@@ -282,7 +282,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     steps: [
       'Opisujesz projekt — jaka forma, na jakim etapie i czego potrzebujesz.',
-      'Bezpłatna wstępna rozmowa w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; podaję zakres, cenę i termin.',
+      'Bezpłatna wstępna analiza w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — ustawiam strukturę i umowy albo prowadzę konkretny etap inwestycji.',
       'Projekt na pewnym gruncie prawnym — zgodny z reżimem, w którym działasz.',
     ],
@@ -296,7 +296,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Społeczne budownictwo ma swoje reguły — poprowadzę Cię przez nie bezpiecznie.',
-      lead: 'Opisz projekt — bezpłatnie ocenię, jak ustawić strukturę i umowy zgodnie z reżimem, w którym działasz.',
+      lead: 'Opisz projekt — w 24 h odpiszę, co trzeba ustawić w strukturze i umowach, i prześlę ofertę z ceną.',
     },
   },
 
@@ -330,7 +330,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     steps: [
       'Opisujesz inwestycję — jaki portfel albo transakcja i na jakim etapie.',
-      'Bezpłatna wstępna rozmowa w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; podaję zakres, cenę i termin.',
+      'Bezpłatna wstępna analiza w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — prowadzę due diligence, strukturyzuję transakcję i przygotowuję dokumentację.',
       'Inwestycja zabezpieczona — na etapie nabycia i w bieżącym zarządzaniu.',
     ],
@@ -343,7 +343,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Skala wymaga precyzji. Zapewnię ją na każdym etapie inwestycji.',
-      lead: 'Opisz portfel albo transakcję — bezpłatnie ocenię ryzyka i zaproponuję zakres współpracy.',
+      lead: 'Opisz portfel albo transakcję — w 24 h zaproponuję zakres współpracy i prześlę ofertę z ceną.',
     },
   },
 
@@ -373,7 +373,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     steps: [
       'Opisujesz swój model — co kupujesz, jak często i czego potrzebujesz najszybciej.',
-      'Bezpłatna wstępna rozmowa w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; podaję zakres, cenę i termin.',
+      'Bezpłatna wstępna analiza w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam szybko — weryfikuję, przygotowuję umowy i obsługuję cesje w tempie transakcji.',
       'Obrót bez przestojów — szybko, ale bezpiecznie.',
     ],
@@ -386,7 +386,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Nadążam za rynkiem — żeby prawo nie hamowało Twoich transakcji.',
-      lead: 'Opisz swój model inwestowania — bezpłatnie ocenię, jak przyspieszyć i zabezpieczyć obrót.',
+      lead: 'Opisz swój model inwestowania — w 24 h odpiszę, jak przyspieszyć i zabezpieczyć obrót, i prześlę ofertę z ceną.',
     },
   },
 
@@ -416,7 +416,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     steps: [
       'Opisujesz projekt — jaki portfel, jaka technologia i na jakim etapie.',
-      'Bezpłatna wstępna rozmowa w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; podaję zakres, cenę i termin.',
+      'Bezpłatna wstępna analiza w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — porządkuję dzierżawy, służebności i cesje pod bankowalność.',
       'Grunt gotowy pod finansowanie — tytuł prawny odporny na due diligence.',
     ],
@@ -429,7 +429,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Projekt OZE jest tyle wart, ile pewny jest tytuł do gruntu.',
-      lead: 'Opisz portfel — bezpłatnie ocenię dzierżawy i służebności pod kątem bankowalności i wskażę ryzyka.',
+      lead: 'Opisz portfel — w 24 h odpiszę, co trzeba sprawdzić w dzierżawach i służebnościach pod kątem bankowalności, i prześlę ofertę z ceną.',
     },
   },
 
@@ -458,7 +458,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     steps: [
       'Opisujesz model — najem zwrotny, gwarancje, podnajem czy condohotel i na jakim etapie.',
-      'Bezpłatna wstępna rozmowa w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; podaję zakres, cenę i termin.',
+      'Bezpłatna wstępna analiza w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — układam umowy i strukturę tak, by były rentowne i zgodne z prawem.',
       'Model pod kontrolą — uczciwie rozłożone ryzyko i mniejsza ekspozycja na spory.',
     ],
@@ -471,7 +471,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Model operatorski, który się broni — finansowo i prawnie.',
-      lead: 'Opisz swój model — bezpłatnie ocenię rozłożenie ryzyka i zgodność oraz zaproponuję zakres współpracy.',
+      lead: 'Opisz swój model — w 24 h zaproponuję zakres współpracy (rozłożenie ryzyka, zgodność z prawem) i prześlę ofertę z ceną.',
     },
   },
 
@@ -501,7 +501,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     steps: [
       'Opisujesz potrzebę — pojedynczy najem czy warunki dla sieci lokalizacji.',
-      'Bezpłatna wstępna rozmowa w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; podaję zakres, cenę i termin.',
+      'Bezpłatna wstępna analiza w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — negocjuję warunki i porządkuję dokumentację po Twojej stronie.',
       'Najem policzalny i elastyczny — uczciwe warunki i bezpieczne wyjście.',
     ],
@@ -514,7 +514,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Najem po stronie najemcy — policzalny, elastyczny, uczciwy.',
-      lead: 'Opisz najem albo plany sieci — bezpłatnie ocenię warunki i wskażę, co wynegocjować.',
+      lead: 'Opisz najem albo plany sieci — w 24 h odpiszę, co trzeba wynegocjować, i prześlę ofertę z ceną.',
     },
   },
 
@@ -544,7 +544,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     steps: [
       'Opisujesz gospodarstwo i potrzebę — jaki areał, jakie sprawy i cele.',
-      'Bezpłatna wstępna rozmowa w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; podaję zakres, cenę i termin.',
+      'Bezpłatna wstępna analiza w 24 h — proponuję model: stała obsługa albo pojedynczy projekt; od razu wysyłam ofertę z zakresem, ceną i terminem.',
       'Działam — prowadzę transakcje, kontrakty i planowanie sukcesji.',
       'Areał poukładany — bezpieczny obrót, dobre kontrakty i zabezpieczona przyszłość.',
     ],
@@ -557,7 +557,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Duży areał wymaga jednego prawnika do wszystkiego. Jestem nim.',
-      lead: 'Opisz swoje gospodarstwo — bezpłatnie ocenię potrzeby i zaproponuję zakres kompleksowej obsługi.',
+      lead: 'Opisz swoje gospodarstwo — w 24 h zaproponuję zakres kompleksowej obsługi i prześlę ofertę z ceną.',
     },
   },
 

@@ -64,21 +64,21 @@ function CaseFormBand({ eyebrow, heading, lead }) {
       <div className="wrap relative" style={{ zIndex: 2 }}>
         <div className="case-form-grid">
           <div className="case-form-text">
-            <span className="eyebrow">Bezpłatna analiza sprawy</span>
+            <span className="eyebrow">Bezpłatna wstępna analiza</span>
             <h2 className="display display--xl mt-6">
               Bezpłatnie<br />
-              sprawdzę<br />
-              <span className="accent">Twoją sprawę.</span>
+              powiem, co<br />
+              <span className="accent">trzeba zrobić.</span>
             </h2>
             <p className="lead mt-6" style={{ maxWidth: '32rem' }}>
-              {lead || 'Kupujesz, sprzedajesz, inwestujesz albo masz spór o nieruchomość? Opisz sprawę w kilku zdaniach — odpiszę z bezpłatną oceną ryzyka i konkretną propozycją kolejnego kroku. Kontakt prowadzę przede wszystkim mailowo, w pełni zdalnie.'}
+              {lead || 'Kupujesz, sprzedajesz, inwestujesz albo masz spór o nieruchomość? Opisz sprawę. W ciągu 24 h roboczych odpiszę, co trzeba w niej zrobić — audyt, pismo czy sprawa sądowa — i od razu prześlę ofertę z ceną i terminem.'}
             </p>
             <div className="landing-hero-meta mt-8">
               {GBadge && <GBadge />}
               <ul className="trust-points">
                 <li><SIcon name="shield-check" size={16} /> Tajemnica adwokacka</li>
                 <li><SIcon name="map-pin" size={16} /> Cała Polska, zdalnie</li>
-                <li><SIcon name="wallet" size={16} /> Wycena z góry, na piśmie</li>
+                <li><SIcon name="wallet" size={16} /> Oferta z ceną i terminem</li>
               </ul>
             </div>
           </div>
@@ -178,7 +178,7 @@ function UslugiOverview({ setRoute }) {
               <span className="italic" style={{ color: 'var(--text-body)' }}>pełen zakres spraw.</span>
             </h1>
             <p className="lead mt-6">
-              Zajmuję się wyłącznie prawem nieruchomości i procesem inwestycyjno-budowlanym. Kancelaria jest w Lublinie, sprawy z całej Polski prowadzę zdalnie. Wybierz obszar, żeby zobaczyć konkretne usługi — albo po prostu opisz sprawę, a ja odpowiem ze wstępną analizą i ofertą naszej współpracy.
+              Zajmuję się wyłącznie prawem nieruchomości i procesem inwestycyjno-budowlanym. Kancelaria jest w Lublinie, sprawy z całej Polski prowadzę zdalnie. Wybierz obszar, żeby zobaczyć konkretne usługi — albo po prostu opisz sprawę: w 24 h odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem.
             </p>
             <button className="btn btn-primary mt-8" onClick={() => spScrollToForm()}>
               Opisz swoją sprawę <SIcon name="arrow-right" size={16} />
@@ -218,7 +218,7 @@ function UslugiOverview({ setRoute }) {
         </div>
       </section>
 
-      <CaseFormBand heading="Nie wiesz, którą usługę wybrać?" lead="Opisz sprawę w kilku zdaniach — odpiszę, która usługa realnie ją rozwiązuje, z oceną ryzyk i kolejnym krokiem. Bezpłatnie i niezobowiązująco." />
+      <CaseFormBand heading="Nie wiesz, którą usługę wybrać?" lead="Opisz sprawę w kilku zdaniach — w 24 h odpiszę, co trzeba zrobić i która usługa to obejmuje, i prześlę ofertę z ceną. Do jej akceptacji nic nie płacisz." />
       <ServiceTrustStrip />
     </main>
   );
@@ -457,7 +457,7 @@ function DocsToSend({ blockId, n }) {
       <div className="wrap">
         <NumberedBlock n={n} eyebrow="Co przesłać do bezpłatnej analizy" title="Wystarczy to, co masz.">
           <ul className="check-list mt-8">{docs.map((d, i) => <li key={i}><SIcon name="file-text" size={18} style={{ color: 'var(--brand-primary)' }} /><span>{d}</span></li>)}</ul>
-          <p className="body mt-6">Nie masz wszystkich dokumentów? Napisz, co masz — resztę ustalę sam. Do wstępnej oceny zwykle wystarczy kilka zdań i jeden dokument.</p>
+          <p className="body mt-6">Nie masz wszystkich dokumentów? Napisz, co masz — resztę ustalę sam. Do wstępnej analizy i oferty zwykle wystarczy kilka zdań i jeden dokument.</p>
           <button className="btn btn-primary mt-6" onClick={() => spScrollToForm()}>
             Prześlij dokumenty do analizy <SIcon name="arrow-right" size={16} />
           </button>
@@ -576,7 +576,7 @@ function ServicePage({ slug, setRoute }) {
 
       <CaseFormBand
         heading={c && c.cta ? c.cta.heading : 'Opisz swoją sprawę.'}
-        lead={c && c.cta ? c.cta.lead : 'Napisz w kilku zdaniach, z czym się mierzysz — w ciągu 24 h odpiszę z oceną i kolejnym krokiem. Bezpłatnie i niezobowiązująco.'}
+        lead={c && c.cta ? c.cta.lead : 'Napisz w kilku zdaniach, z czym się mierzysz — w ciągu 24 h odpiszę, co trzeba zrobić, i prześlę ofertę z ceną. Do jej akceptacji nic nie płacisz.'}
       />
       <ServiceTrustStrip />
     </main>
@@ -608,7 +608,7 @@ function FaqPageV3({ setRoute }) {
             <span className="eyebrow">FAQ · {total} pytań</span>
             <h1 className="display mt-4">Wszystko, co warto<br /><span className="italic" style={{ color: 'var(--text-body)' }}>wiedzieć przed startem.</span></h1>
             <p className="lead mt-6">
-              Jak wygląda współpraca, co obejmuje bezpłatna analiza, jak chronię Twoje dane i jak ustalam koszt. Jeśli czegoś tu brakuje — po prostu zapytaj w formularzu.
+              Jak wygląda współpraca, co obejmuje bezpłatna wstępna analiza, jak chronię Twoje dane i jak ustalam koszt. Jeśli czegoś tu brakuje — po prostu zapytaj w formularzu.
             </p>
             <div className="faq-search mt-8">
               <SIcon name="search" size={18} />
@@ -639,7 +639,7 @@ function FaqPageV3({ setRoute }) {
               </p>
               {results.length === 0 ?
               <p className="lead mt-4" style={{ maxWidth: '46rem' }}>
-                  Nie znalazłem pytania na ten temat. Najprościej: opisz sprawę w formularzu — odpiszę konkretnie na Twoją sytuację, bezpłatnie, w 24 h.
+                  Nie znalazłem pytania na ten temat. Najprościej: opisz sprawę w formularzu — w 24 h bezpłatnie odpiszę, co trzeba zrobić, i prześlę ofertę.
                 </p> :
 
               <div className="faq-results-list mt-6">
@@ -685,7 +685,7 @@ function FaqPageV3({ setRoute }) {
         </div>
       </section>
 
-      <CaseFormBand heading="Masz pytanie, którego tu nie ma?" lead="Najprościej: opisz sprawę w formularzu. Odpiszę konkretnie na Twoją sytuację — bezpłatnie, w ciągu 24 h." />
+      <CaseFormBand heading="Masz pytanie, którego tu nie ma?" lead="Najprościej: opisz sprawę w formularzu. W ciągu 24 h odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem." />
       <ServiceTrustStrip />
     </main>);
 

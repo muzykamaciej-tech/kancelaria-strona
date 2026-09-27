@@ -177,7 +177,7 @@ function KalkulatorSlupyPage({ setRoute }) {
         </div>
       </section>
 
-      {Band && <Band eyebrow="Bezpłatna analiza" heading="Kalkulator pokazuje przedział. Ja pokażę, ile naprawdę możesz odzyskać." lead="Prześlij zdjęcia urządzeń, numer działki i pisma od firmy przesyłowej, jeśli je masz. W ciągu 24 h roboczych bezpłatnie ocenię, czy roszczenie jest realne i o jaką kwotę warto walczyć." />}
+      {Band && <Band eyebrow="Bezpłatna analiza" heading="Kalkulator pokazuje przedział. Ja powiem, co zrobić, żeby odzyskać pieniądze." lead="Prześlij zdjęcia urządzeń, numer działki i pisma od firmy przesyłowej, jeśli je masz. W ciągu 24 h roboczych odpiszę, co trzeba zrobić, żeby dochodzić zapłaty, i prześlę ofertę z ceną." />}
       {Strip && <Strip />}
     </main>
   );

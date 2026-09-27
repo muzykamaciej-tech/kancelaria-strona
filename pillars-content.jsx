@@ -55,7 +55,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Nie podpisuj w ciemno.',
-      lead: 'Prześlij numer księgi wieczystej i umowę, jeśli ją masz. Bezpłatnie ocenię, czy widzę coś, co powinno Cię zatrzymać — i co warto sprawdzić dokładniej.',
+      lead: 'Prześlij numer księgi wieczystej i umowę, jeśli ją masz. W 24 h odpiszę, co trzeba sprawdzić przed podpisem, i prześlę ofertę z ceną i terminem.',
     },
   },
 
@@ -112,7 +112,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Jedno zdanie w umowie potrafi kosztować więcej niż cała obsługa prawna.',
-      lead: 'Prześlij projekt umowy albo opisz ustalenia z drugą stroną. Bezpłatnie wskażę, które zapisy są dla Ciebie ryzykowne i co dopisać przed podpisem.',
+      lead: 'Prześlij projekt umowy albo opisz ustalenia z drugą stroną. W 24 h odpiszę, czy umowę wystarczy sprawdzić, czy trzeba ją napisać od nowa, i prześlę ofertę z ceną.',
     },
   },
 
@@ -169,7 +169,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Sprawdźmy Twoją działkę, zanim zmienią się przepisy.',
-      lead: 'Podaj numer działki i gminę. Bezpłatnie ocenię, na jakim etapie jest Twoja gmina, czy działka ma szansę na zabudowę i co warto zrobić w pierwszej kolejności.',
+      lead: 'Podaj numer działki i gminę. W 24 h odpiszę, na jakim etapie jest Twoja gmina i co warto zrobić w pierwszej kolejności, a do tego prześlę ofertę z ceną.',
     },
   },
 
@@ -226,7 +226,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Budowa nie może stać, bo urząd czeka na pismo.',
-      lead: 'Prześlij decyzję, wezwanie albo umowę z wykonawcą. Bezpłatnie ocenię, o co naprawdę toczy się sprawa, jakie masz terminy i co zrobić najpierw.',
+      lead: 'Prześlij decyzję, wezwanie albo umowę z wykonawcą. W 24 h odpiszę, jakie masz terminy i co zrobić najpierw, i prześlę ofertę z ceną.',
     },
   },
 
@@ -283,7 +283,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Nieuregulowany stan prawny nie naprawi się sam.',
-      lead: 'Podaj numer księgi wieczystej albo napisz, że jej nie ma, i opisz historię nieruchomości. Bezpłatnie ocenię, jaką drogą najszybciej uporządkować stan prawny i czego będzie trzeba.',
+      lead: 'Podaj numer księgi wieczystej albo napisz, że jej nie ma, i opisz historię nieruchomości. W 24 h odpiszę, jaką drogą uporządkować stan prawny, i prześlę ofertę z ceną.',
     },
   },
 
@@ -340,7 +340,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Współwłasność da się zakończyć — bez wojny w rodzinie.',
-      lead: 'Opisz, kto jest współwłaścicielem, jak korzystacie z nieruchomości i czego chcesz. Bezpłatnie ocenię, jaki podział jest realny, ile potrwa i jaka spłata wchodzi w grę.',
+      lead: 'Opisz, kto jest współwłaścicielem, jak korzystacie z nieruchomości i czego chcesz. W 24 h odpiszę, jaki sposób podziału wchodzi w grę, i prześlę ofertę z ceną i terminem.',
     },
   },
 
@@ -396,7 +396,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Dobra umowa najmu kosztuje mniej niż jeden miesiąc bez czynszu.',
-      lead: 'Prześlij umowę — swoją albo tę, którą dostałeś do podpisu — lub opisz problem z najemcą czy właścicielem. Bezpłatnie ocenię, co Ci grozi i co da się zrobić.',
+      lead: 'Prześlij umowę — swoją albo tę, którą dostałeś do podpisu — lub opisz problem z najemcą czy właścicielem. W 24 h odpiszę, co trzeba zrobić, i prześlę ofertę z ceną.',
     },
   },
 
@@ -453,7 +453,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Słup stoi na Twoim gruncie. Pieniądze należą się Tobie.',
-      lead: 'Prześlij zdjęcia urządzeń, numer działki i pisma od firmy przesyłowej, jeśli je masz. Bezpłatnie oszacuję, o jakie kwoty gra się w Twojej sprawie i czy warto ją prowadzić.',
+      lead: 'Prześlij zdjęcia urządzeń, numer działki i pisma od firmy przesyłowej, jeśli je masz. W 24 h odpiszę, czy i jak dochodzić zapłaty, i prześlę ofertę z ceną.',
     },
   },
 
@@ -510,7 +510,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Zanim podpiszesz umowę z inwestorem — przeczytajmy ją razem.',
-      lead: 'Prześlij projekt umowy dzierżawy lub numer działki. Bezpłatnie ocenię, czy inwestycja jest realna, które zapisy działają przeciw Tobie i jaki czynsz jest rynkowy.',
+      lead: 'Prześlij projekt umowy dzierżawy lub numer działki. W 24 h odpiszę, co trzeba sprawdzić i wynegocjować przed podpisem, i prześlę ofertę z ceną.',
     },
   },
 
@@ -567,7 +567,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Prawnik, który zna Twoją branżę, kosztuje mniej niż ten, który się jej uczy.',
-      lead: 'Opisz firmę, skalę działalności i bieżące potrzeby. Bezpłatnie zaproponuję zakres współpracy i formę rozliczenia — abonament albo projekt.',
+      lead: 'Opisz firmę, skalę działalności i bieżące potrzeby. W 24 h zaproponuję zakres współpracy i formę rozliczenia — abonament albo projekt — i prześlę ofertę.',
     },
   },
 
