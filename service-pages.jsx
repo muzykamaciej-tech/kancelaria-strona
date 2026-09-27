@@ -178,7 +178,7 @@ function UslugiOverview({ setRoute }) {
               <span className="italic" style={{ color: 'var(--text-body)' }}>pełen zakres spraw.</span>
             </h1>
             <p className="lead mt-6">
-              Zajmuję się wyłącznie prawem nieruchomości i procesem inwestycyjno-budowlanym. Kancelaria jest w Lublinie, sprawy z całej Polski prowadzę zdalnie. Wybierz obszar, żeby zobaczyć konkretne usługi — albo po prostu opisz sprawę: w 24 h odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem.
+              Zajmuję się wyłącznie prawem nieruchomości i procesem inwestycyjno-budowlanym. Kancelaria jest w Lublinie, sprawy z całej Polski prowadzę zdalnie. Wybierz obszar, żeby zobaczyć konkretne usługi — albo po prostu opisz sprawę: w ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem.
             </p>
             <button className="btn btn-primary mt-8" onClick={() => spScrollToForm()}>
               Opisz swoją sprawę <SIcon name="arrow-right" size={16} />
@@ -218,7 +218,7 @@ function UslugiOverview({ setRoute }) {
         </div>
       </section>
 
-      <CaseFormBand heading="Nie wiesz, którą usługę wybrać?" lead="Opisz sprawę w kilku zdaniach — w 24 h odpiszę, co trzeba zrobić i która usługa to obejmuje, i prześlę ofertę z ceną. Do jej akceptacji nic nie płacisz." />
+      <CaseFormBand heading="Nie wiesz, którą usługę wybrać?" lead="Opisz sprawę w kilku zdaniach — w ciągu 24 h roboczych odpiszę, co trzeba zrobić i która usługa to obejmuje, i prześlę ofertę z ceną. Do jej akceptacji nic nie płacisz." />
       <ServiceTrustStrip />
     </main>
   );
@@ -455,11 +455,11 @@ function DocsToSend({ blockId, n }) {
   return (
     <section className="section-py docs-to-send">
       <div className="wrap">
-        <NumberedBlock n={n} eyebrow="Co przesłać do bezpłatnej analizy" title="Wystarczy to, co masz.">
+        <NumberedBlock n={n} eyebrow="Co przesłać do wstępnej analizy" title="Wystarczy to, co masz.">
           <ul className="check-list mt-8">{docs.map((d, i) => <li key={i}><SIcon name="file-text" size={18} style={{ color: 'var(--brand-primary)' }} /><span>{d}</span></li>)}</ul>
-          <p className="body mt-6">Nie masz wszystkich dokumentów? Napisz, co masz — resztę ustalę sam. Do wstępnej analizy i oferty zwykle wystarczy kilka zdań i jeden dokument.</p>
+          <p className="body mt-6">Nie masz wszystkich dokumentów? Napisz, co masz. Do wstępnej analizy i oferty zwykle wystarczy kilka zdań i jeden dokument. Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów; szczegółowa analiza to zakres oferty.</p>
           <button className="btn btn-primary mt-6" onClick={() => spScrollToForm()}>
-            Prześlij dokumenty do analizy <SIcon name="arrow-right" size={16} />
+            Opisz sprawę i dołącz dokumenty <SIcon name="arrow-right" size={16} />
           </button>
         </NumberedBlock>
       </div>
@@ -576,7 +576,7 @@ function ServicePage({ slug, setRoute }) {
 
       <CaseFormBand
         heading={c && c.cta ? c.cta.heading : 'Opisz swoją sprawę.'}
-        lead={c && c.cta ? c.cta.lead : 'Napisz w kilku zdaniach, z czym się mierzysz — w ciągu 24 h odpiszę, co trzeba zrobić, i prześlę ofertę z ceną. Do jej akceptacji nic nie płacisz.'}
+        lead={c && c.cta ? c.cta.lead : 'Napisz w kilku zdaniach, z czym się mierzysz — w ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną. Do jej akceptacji nic nie płacisz.'}
       />
       <ServiceTrustStrip />
     </main>
@@ -639,7 +639,7 @@ function FaqPageV3({ setRoute }) {
               </p>
               {results.length === 0 ?
               <p className="lead mt-4" style={{ maxWidth: '46rem' }}>
-                  Nie znalazłem pytania na ten temat. Najprościej: opisz sprawę w formularzu — w 24 h bezpłatnie odpiszę, co trzeba zrobić, i prześlę ofertę.
+                  Nie znalazłem pytania na ten temat. Najprościej: opisz sprawę w formularzu — w ciągu 24 h roboczych bezpłatnie odpiszę, co trzeba zrobić, i prześlę ofertę.
                 </p> :
 
               <div className="faq-results-list mt-6">
@@ -685,7 +685,7 @@ function FaqPageV3({ setRoute }) {
         </div>
       </section>
 
-      <CaseFormBand heading="Masz pytanie, którego tu nie ma?" lead="Najprościej: opisz sprawę w formularzu. W ciągu 24 h odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem." />
+      <CaseFormBand heading="Masz pytanie, którego tu nie ma?" lead="Najprościej: opisz sprawę w formularzu. W ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem." />
       <ServiceTrustStrip />
     </main>);
 

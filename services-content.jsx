@@ -4,7 +4,7 @@
    Loaded after services-data.jsx. */
 
 /* Standard copy reused where a page needs the generic cost line (no prices anywhere) */
-const COST_TEXT = 'Cenę podaję w ofercie, którą wysyłam razem z bezpłatną wstępną analizą Twojej sprawy — stałą kwotę i termin, zanim cokolwiek zlecisz.';
+const COST_TEXT = 'Stałą cenę i termin podaję w ofercie, którą wysyłam razem z bezpłatną wstępną analizą Twojej sprawy — zanim cokolwiek zlecisz.';
 
 const SERVICE_CONTENT = {
   /* ===== WZORCOWA (flagowa) — Audyt stanu prawnego ===== */
@@ -68,7 +68,7 @@ const SERVICE_CONTENT = {
       'Dostajesz raport i omówienie — ryzyka w trzech kolorach, rekomendacja i rozmowa, na której tłumaczę wszystko prostym językiem.',
     ],
     faq: [
-      { q: 'Ile trwa audyt?', a: 'Standardowo kilka dni roboczych od chwili, gdy mam komplet dokumentów. Dokładny termin podaję po wstępnej analizie. Jeśli sprawa jest pilna — zaznacz to, postaram się przyspieszyć.' },
+      { q: 'Ile trwa audyt?', a: 'Standardowo kilka dni roboczych od chwili, gdy mam komplet dokumentów. Dokładny termin podaję w ofercie, razem ze wstępną analizą. Jeśli sprawa jest pilna — zaznacz to, postaram się przyspieszyć.' },
       { q: 'Co, jeśli wykryjesz poważne ryzyko?', a: 'Dostajesz jasną rekomendację: od zapisów do zmiany w umowie, przez renegocjację warunków, po rekomendację rezygnacji z transakcji w skrajnym przypadku. Zawsze tłumaczę konsekwencje każdej opcji — decyzję podejmujesz Ty.' },
       { q: 'Czy raport ma wartość prawną?', a: 'Tak. To profesjonalna opinia sygnowana przeze mnie jako adwokata — możesz się na nią powołać wobec sprzedającego, pośrednika czy banku.' },
       { q: 'Czy wystarczy samo sprawdzenie księgi wieczystej?', a: 'Nie. W księdze nie znajdziesz m.in. przeznaczenia działki w planie, ograniczeń w zabudowie czy ryzyk wynikających z innych dokumentów. Dlatego nawet audyt podstawowy obejmuje więcej niż samą księgę.' },
@@ -84,7 +84,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Audyt kosztuje ułamek tego, co możesz stracić.',
-      lead: 'Zadatek, cena, kredyt — przy nieruchomości stawką są oszczędności całego życia. Opisz sprawę, a w 24 h odpiszę, czy audyt jest potrzebny, i prześlę ofertę z ceną.',
+      lead: 'Zadatek, cena, kredyt — przy nieruchomości stawką są oszczędności całego życia. Opisz sprawę, a w ciągu 24 h roboczych odpiszę, czy audyt jest potrzebny, i prześlę ofertę z ceną.',
     },
   },
 
@@ -162,14 +162,14 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Nie podpisuj umowy deweloperskiej w ciemno.',
-      lead: 'Prześlij umowę i dokumenty — w 24 h odpiszę, który poziom sprawdzenia wystarczy, i prześlę ofertę z ceną i terminem.',
+      lead: 'Prześlij umowę i dokumenty — w ciągu 24 h roboczych odpiszę, który poziom sprawdzenia wystarczy, i prześlę ofertę z ceną i terminem.',
     },
   },
 
   /* ===== Odszkodowanie za słupy / służebność przesyłu ===== */
   'odszkodowanie-sluzebnosc-przesylu': {
     h1: 'Odszkodowanie za słupy i urządzenia przesyłowe na działce',
-    subtitle: 'Słupy, linie energetyczne, gazociąg albo wodociąg na Twoim gruncie? Firma przesyłowa powinna Ci za to płacić — także za lata wstecz. W 24 h bezpłatnie odpiszę, co trzeba zrobić, i prześlę ofertę z ceną.',
+    subtitle: 'Słupy, linie energetyczne, gazociąg albo wodociąg na Twoim gruncie? Firma przesyłowa powinna Ci za to płacić — także za lata wstecz. Pomagam dochodzić wynagrodzenia za służebność przesyłu i za bezumowne korzystanie z gruntu.',
     intro: 'Firmy przesyłowe przez lata stawiały słupy, linie i rury na prywatnych działkach — często bez umowy i bez zapłaty. Jeśli takie urządzenia stoją na Twoim gruncie, prawo daje Ci konkretne roszczenie: wynagrodzenie za korzystanie z Twojej ziemi, i to nie tylko na przyszłość, ale też za lata wstecz. Wielu właścicieli o tym nie wie — a firmy na tę niewiedzę liczą. Sprawdzam Twoją sytuację i mówię wprost, ile możesz odzyskać.',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: '',
@@ -204,7 +204,7 @@ const SERVICE_CONTENT = {
       },
     ],
     faq: [
-      { q: 'Ile mogę dostać za słupy na działce?', a: 'To zależy od powierzchni zajętego pasa, przebiegu i rodzaju urządzeń oraz przeznaczenia działki. Po wstępnej ocenie podaję orientacyjny rząd wielkości; dokładną kwotę wylicza w sprawie biegły rzeczoznawca.' },
+      { q: 'Ile mogę dostać za słupy na działce?', a: 'To zależy od powierzchni zajętego pasa, przebiegu i rodzaju urządzeń oraz przeznaczenia działki. Orientacyjny przedział policzysz w kalkulatorze na stronie; dokładną kwotę wylicza w sprawie biegły rzeczoznawca.' },
       { q: 'Urządzenia stoją na mojej działce od dziesięcioleci — czy nadal mogę czegoś żądać?', a: 'Najczęściej tak. To, czy firma ma prawo trzymać urządzenia na Twoim gruncie bez zapłaty, zależy przede wszystkim od tego, czy kiedykolwiek uzyskała na to Twoją zgodę lub zgodę poprzedniego właściciela albo odpowiednią decyzję administracyjną. Jeśli takich podstaw nie było — a bardzo często ich nie ma — możesz żądać wynagrodzenia za służebność na przyszłość oraz za bezumowne korzystanie za ostatnie 6 lat. Sam fakt, że urządzenia stoją od dawna, nie odbiera Ci prawa do wynagrodzenia.' },
       { q: 'Firma twierdzi, że nic mi się nie należy. Kto ma rację?', a: 'To standardowa taktyka. O tym, czy roszczenie przysługuje, nie decyduje stanowisko firmy, lecz stan prawny — czy ma tytuł do Twojego gruntu i czy roszczenie nie jest przedawnione. To właśnie sprawdzam.' },
       { q: 'Dostałem od firmy propozycję jednorazowej kwoty — podpisywać?', a: 'Nie podpisuj, zanim ktoś tego nie sprawdzi. Pierwsze propozycje bywają zaniżone, a podpisana ugoda albo służebność potrafi zamknąć drogę do wyższego wynagrodzenia. Ocenię, czy kwota jest uczciwa.' },
@@ -216,7 +216,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Nie zostawiaj swoich pieniędzy firmie przesyłowej.',
-      lead: 'Jeśli na Twojej działce stoją słupy, linie lub rury, prawdopodobnie należy Ci się zapłata — także za lata wstecz. Opisz sprawę, a w 24 h odpiszę, co trzeba zrobić, i prześlę ofertę.',
+      lead: 'Jeśli na Twojej działce stoją słupy, linie lub rury, prawdopodobnie należy Ci się zapłata — także za lata wstecz. Opisz sprawę, a w ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę.',
     },
   },
 
@@ -261,7 +261,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Zanim kupisz działkę, sprawdź, czy na niej zbudujesz.',
-      lead: 'Ocena szans na warunki zabudowy przed zakupem to najtańszy sposób, by nie utknąć z gruntem, na którym nie postawisz domu. Opisz sprawę, a w 24 h odpiszę, co trzeba sprawdzić, i prześlę ofertę z ceną.',
+      lead: 'Opisz działkę i plany — w ciągu 24 h roboczych odpiszę, co trzeba sprawdzić przed zakupem, i prześlę ofertę z ceną.',
     },
   },
 
@@ -345,7 +345,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Zadatek wpłacasz raz. Sprawdź umowę, zanim to zrobisz.',
-      lead: 'Prześlij projekt umowy albo opisz ustalenia — w 24 h odpiszę, czy wystarczy ją sprawdzić, czy lepiej napisać od nowa, i prześlę ofertę z ceną.',
+      lead: 'Prześlij projekt umowy albo opisz ustalenia — w ciągu 24 h roboczych odpiszę, czy wystarczy ją sprawdzić, czy lepiej napisać od nowa, i prześlę ofertę z ceną.',
     },
   },
 
@@ -391,7 +391,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Zanim zarezerwujesz mieszkanie, sprawdź, czy odzyskasz opłatę.',
-      lead: 'Prześlij umowę rezerwacyjną — w 24 h odpiszę, co trzeba sprawdzić przed podpisem, i prześlę ofertę z ceną i terminem.',
+      lead: 'Prześlij umowę rezerwacyjną — w ciągu 24 h roboczych odpiszę, co trzeba sprawdzić przed podpisem, i prześlę ofertę z ceną i terminem.',
     },
   },
 
@@ -437,7 +437,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Kupuj z kimś, kto pilnuje Twojej strony.',
-      lead: 'Opisz, co chcesz kupić — w 24 h odpiszę, co trzeba sprawdzić, żeby bezpiecznie doprowadzić zakup do końca, i prześlę ofertę z ceną.',
+      lead: 'Opisz, co chcesz kupić — w ciągu 24 h roboczych odpiszę, co trzeba sprawdzić, żeby bezpiecznie doprowadzić zakup do końca, i prześlę ofertę z ceną.',
     },
   },
 
@@ -483,7 +483,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Sprzedaj bezpiecznie — z pieniędzmi zabezpieczonymi od początku.',
-      lead: 'Opisz, co sprzedajesz — w 24 h odpiszę, co uporządkować i jak zabezpieczyć zapłatę, i prześlę ofertę z ceną.',
+      lead: 'Opisz, co sprzedajesz — w ciągu 24 h roboczych odpiszę, co uporządkować i jak zabezpieczyć zapłatę, i prześlę ofertę z ceną.',
     },
   },
 
@@ -528,7 +528,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Przekaż mieszkanie mądrze — z opieką i bez sporów o zachowek.',
-      lead: 'Opisz, co chcesz przekazać i komu — w 24 h odpiszę, czy dożywocie jest dla Ciebie, i prześlę ofertę z ceną.',
+      lead: 'Opisz, co chcesz przekazać i komu — w ciągu 24 h roboczych odpiszę, czy dożywocie jest dla Ciebie, i prześlę ofertę z ceną.',
     },
   },
 
@@ -573,7 +573,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Przekaż nieruchomość w rodzinie — bezpiecznie i z głową.',
-      lead: 'Opisz, co chcesz przekazać albo jaką darowiznę odwołać — w 24 h odpiszę, jak to najlepiej ułożyć, i prześlę ofertę z ceną.',
+      lead: 'Opisz, co chcesz przekazać albo jaką darowiznę odwołać — w ciągu 24 h roboczych odpiszę, jak to ułożyć, i prześlę ofertę z ceną.',
     },
   },
 
@@ -618,7 +618,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Nie daj się zaskoczyć planem ogólnym.',
-      lead: 'Podaj gminę i numer działki — w 24 h odpiszę, na jakim etapie jest plan ogólny i co warto zrobić, i prześlę ofertę z ceną.',
+      lead: 'Podaj gminę i numer działki — w ciągu 24 h roboczych odpiszę, na jakim etapie jest plan ogólny i co warto zrobić, i prześlę ofertę z ceną.',
     },
   },
 
@@ -663,7 +663,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Plan miejscowy związał Ci ręce? Sprawdźmy, czy słusznie.',
-      lead: 'Podaj gminę i numer działki — w 24 h odpiszę, czy iść ze skargą na plan, czy wybrać inną drogę, i prześlę ofertę z ceną.',
+      lead: 'Podaj gminę i numer działki — w ciągu 24 h roboczych odpiszę, czy iść ze skargą na plan, czy wybrać inną drogę, i prześlę ofertę z ceną.',
     },
   },
 
@@ -724,7 +724,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Nie płać gminie więcej, niż musisz — i odzyskaj to, co plan Ci zabrał.',
-      lead: 'Prześlij decyzję albo opisz sytuację — w 24 h odpiszę, czy składać odwołanie, czy dochodzić roszczenia, i prześlę ofertę z ceną.',
+      lead: 'Prześlij decyzję albo opisz sytuację — w ciągu 24 h roboczych odpiszę, czy składać odwołanie, czy dochodzić roszczenia, i prześlę ofertę z ceną.',
     },
   },
 
@@ -784,7 +784,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Odmowa, odwołanie sąsiada albo cisza w urzędzie? Zawalczę o Twoją budowę.',
-      lead: 'Prześlij decyzję albo opisz, na jakim etapie jest sprawa — w 24 h odpiszę, co zrobić, żeby ruszyć z inwestycją, i prześlę ofertę z ceną.',
+      lead: 'Prześlij decyzję albo opisz, na jakim etapie jest sprawa — w ciągu 24 h roboczych odpiszę, co zrobić, żeby ruszyć z inwestycją, i prześlę ofertę z ceną.',
     },
   },
 
@@ -831,7 +831,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Samowola nie zniknie sama. Ale można ją uporządkować.',
-      lead: 'Opisz, co i kiedy powstało — w 24 h odpiszę, którą ścieżką iść z legalizacją, i prześlę ofertę z ceną.',
+      lead: 'Opisz, co i kiedy powstało — w ciągu 24 h roboczych odpiszę, którą ścieżką iść z legalizacją, i prześlę ofertę z ceną.',
     },
   },
 
@@ -877,7 +877,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Niedokończona budowa albo fuszerka to nie musi być Twój koszt.',
-      lead: 'Opisz, co poszło nie tak — w 24 h odpiszę, jak dochodzić roszczeń, i prześlę ofertę z ceną.',
+      lead: 'Opisz, co poszło nie tak — w ciągu 24 h roboczych odpiszę, jak dochodzić roszczeń, i prześlę ofertę z ceną.',
     },
   },
 
@@ -924,7 +924,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Dobra umowa to Twoja polisa na czas budowy.',
-      lead: 'Prześlij projekt umowy albo opisz inwestycję — w 24 h odpiszę, czy wystarczy sprawdzić umowę, czy lepiej napisać ją od nowa, i prześlę ofertę z ceną.',
+      lead: 'Prześlij projekt umowy albo opisz inwestycję — w ciągu 24 h roboczych odpiszę, czy wystarczy sprawdzić umowę, czy lepiej napisać ją od nowa, i prześlę ofertę z ceną.',
     },
   },
 
@@ -969,7 +969,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Pismo z nadzoru budowlanego? Nie czekaj na decyzję — działaj teraz.',
-      lead: 'Prześlij pismo lub decyzję z PINB — w 24 h odpiszę, co zrobić, zanim miną terminy, i prześlę ofertę z ceną.',
+      lead: 'Prześlij pismo lub decyzję z PINB — w ciągu 24 h roboczych odpiszę, co zrobić, zanim miną terminy, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1032,7 +1032,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Wieloletnie posiadanie może stać się własnością. Sprawdźmy, czy w Twoim przypadku.',
-      lead: 'Opisz, od kiedy i jak korzystasz z nieruchomości (albo kto zajmuje Twoją) — w 24 h odpiszę, czy zasiedzenie wchodzi w grę i co trzeba zrobić, i prześlę ofertę z ceną.',
+      lead: 'Opisz, od kiedy i jak korzystasz z nieruchomości (albo kto zajmuje Twoją) — w ciągu 24 h roboczych odpiszę, czy zasiedzenie wchodzi w grę i co trzeba zrobić, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1091,7 +1091,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Uporządkuj papiery, zanim zablokują Ci sprzedaż albo spadek.',
-      lead: 'Opisz, co blokuje Twoją nieruchomość — w 24 h odpiszę, którą drogą uregulować jej stan prawny, i prześlę ofertę z ceną.',
+      lead: 'Opisz, co blokuje Twoją nieruchomość — w ciągu 24 h roboczych odpiszę, którą drogą uregulować jej stan prawny, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1158,7 +1158,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Zawyżona opłata albo wykup gruntu? Sprawdźmy, co Ci się należy.',
-      lead: 'Prześlij pismo o opłacie albo opisz, co chcesz zrobić z użytkowaniem wieczystym — w 24 h odpiszę, co zrobić z podwyżką albo wykupem gruntu, i prześlę ofertę z ceną.',
+      lead: 'Prześlij pismo o opłacie albo opisz, co chcesz zrobić z użytkowaniem wieczystym — w ciągu 24 h roboczych odpiszę, co zrobić z podwyżką albo wykupem gruntu, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1204,7 +1204,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Wyjdź ze współwłasności, zanim ona zablokuje Twoje plany.',
-      lead: 'Opisz, kto jest współwłaścicielem i czego chcesz — w 24 h odpiszę, który sposób wyjścia ze współwłasności wchodzi w grę, i prześlę ofertę z ceną.',
+      lead: 'Opisz, kto jest współwłaścicielem i czego chcesz — w ciągu 24 h roboczych odpiszę, który sposób wyjścia ze współwłasności wchodzi w grę, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1250,7 +1250,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Zamień odziedziczone „ułamki” w konkretny, sprawiedliwy podział.',
-      lead: 'Opisz, co wchodzi w skład spadku i czego chcesz — w 24 h odpiszę, jak przeprowadzić dział spadku, i prześlę ofertę z ceną.',
+      lead: 'Opisz, co wchodzi w skład spadku i czego chcesz — w ciągu 24 h roboczych odpiszę, jak przeprowadzić dział spadku, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1311,7 +1311,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Pominięto Cię przy podziale majątku? Zachowek to Twoje prawo.',
-      lead: 'Opisz, kto zmarł i co znalazło się w testamencie albo darowiznach — w 24 h odpiszę, jak dochodzić zachowku albo jak się przed nim bronić, i prześlę ofertę z ceną.',
+      lead: 'Opisz, kto zmarł i co znalazło się w testamencie albo darowiznach — w ciągu 24 h roboczych odpiszę, jak dochodzić zachowku albo jak się przed nim bronić, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1357,7 +1357,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Potwierdź, że dziedziczysz — i odzyskaj kontrolę nad majątkiem.',
-      lead: 'Opisz, kto zmarł i czy jest testament — w 24 h odpiszę, czy wystarczy notariusz, czy potrzebny jest sąd, i prześlę ofertę z ceną.',
+      lead: 'Opisz, kto zmarł i czy jest testament — w ciągu 24 h roboczych odpiszę, czy wystarczy notariusz, czy potrzebny jest sąd, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1403,7 +1403,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Wspólny dom i kredyt po rozwodzie? Zadbam, żeby podział wyszedł po Twojej stronie.',
-      lead: 'Opisz, co jest wspólne, skąd był wkład i czy jest kredyt — w 24 h odpiszę, jak przeprowadzić podział majątku, i prześlę ofertę z ceną.',
+      lead: 'Opisz, co jest wspólne, skąd był wkład i czy jest kredyt — w ciągu 24 h roboczych odpiszę, jak przeprowadzić podział majątku, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1449,7 +1449,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Wynajmuj spokojnie — z umową, która naprawdę Cię chroni.',
-      lead: 'Opisz, co i komu wynajmujesz — w 24 h odpiszę, który tryb najmu będzie najbezpieczniejszy, i prześlę ofertę z ceną.',
+      lead: 'Opisz, co i komu wynajmujesz — w ciągu 24 h roboczych odpiszę, który tryb najmu (okazjonalny, instytucjonalny czy zwykły) pasuje do Twojej sytuacji, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1492,7 +1492,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Zanim podpiszesz najem, sprawdźmy, na co się zgadzasz.',
-      lead: 'Prześlij umowę — w 24 h odpiszę, jaki zakres sprawdzenia wystarczy przed podpisem, i prześlę ofertę z ceną.',
+      lead: 'Prześlij umowę — w ciągu 24 h roboczych odpiszę, jaki zakres sprawdzenia wystarczy przed podpisem, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1537,7 +1537,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Lokator, który nie płaci i nie wychodzi, to nie musi być Twój problem na lata.',
-      lead: 'Opisz, jaka jest umowa i na czym polega problem — w 24 h odpiszę, którą ścieżką odzyskać lokal i pieniądze, i prześlę ofertę z ceną.',
+      lead: 'Opisz, jaka jest umowa i na czym polega problem — w ciągu 24 h roboczych odpiszę, którą ścieżką odzyskać lokal i pieniądze, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1580,7 +1580,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Zaległy czynsz nie musi przepaść. Odzyskam go za Ciebie.',
-      lead: 'Opisz, ile wynosi zaległość i jaka jest umowa — w 24 h odpiszę, jak najszybciej odzyskać pieniądze, i prześlę ofertę z ceną.',
+      lead: 'Opisz, ile wynosi zaległość i jaka jest umowa — w ciągu 24 h roboczych odpiszę, którą drogą odzyskać zaległy czynsz, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1623,7 +1623,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Kaucja to Twoje pieniądze — po którejkolwiek stronie umowy stoisz.',
-      lead: 'Opisz spór o kaucję — w 24 h odpiszę, co zrobić, żeby rozliczyć kaucję, i prześlę ofertę z ceną.',
+      lead: 'Opisz spór o kaucję — w ciągu 24 h roboczych odpiszę, co zrobić, żeby rozliczyć kaucję, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1673,7 +1673,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Traktujesz najem jak biznes? Miej do niego prawnika na stałe.',
-      lead: 'Opisz, ile lokali wynajmujesz i czego potrzebujesz — w 24 h zaproponuję zakres obsługi i prześlę ofertę abonamentu.',
+      lead: 'Opisz, ile lokali wynajmujesz i czego potrzebujesz — w ciągu 24 h roboczych zaproponuję zakres obsługi i prześlę ofertę abonamentu.',
     },
   },
 
@@ -1717,7 +1717,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Opóźnienie dewelopera ma swoją cenę — i to on powinien ją zapłacić.',
-      lead: 'Prześlij umowę i opisz opóźnienie — w 24 h odpiszę, jak dochodzić kar umownych, i prześlę ofertę z ceną.',
+      lead: 'Prześlij umowę i opisz opóźnienie — w ciągu 24 h roboczych odpiszę, jak dochodzić kar umownych, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1762,7 +1762,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Kupiłeś mieszkanie bez wad — i takie Ci się należy.',
-      lead: 'Opisz usterki i prześlij protokół odbioru — w 24 h odpiszę, czego i jak żądać od dewelopera, i prześlę ofertę z ceną.',
+      lead: 'Opisz usterki i prześlij protokół odbioru — w ciągu 24 h roboczych odpiszę, czego i jak żądać od dewelopera, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1805,7 +1805,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Wady wspólne to wspólny problem — pomogę go rozwiązać u źródła.',
-      lead: 'Opisz, co szwankuje w budynku — w 24 h odpiszę, kto odpowiada i jak dochodzić naprawy, i prześlę ofertę z ceną.',
+      lead: 'Opisz, co szwankuje w budynku — w ciągu 24 h roboczych odpiszę, kto odpowiada i jak dochodzić naprawy, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1849,7 +1849,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Wpisane do protokołu wady to Twoje prawo — dopilnuję, żeby deweloper je usunął.',
-      lead: 'Opisz, co jest w protokole i jak zachowuje się deweloper — w 24 h odpiszę, co wyegzekwować i w jakim terminie, i prześlę ofertę z ceną.',
+      lead: 'Opisz, co jest w protokole i jak zachowuje się deweloper — w ciągu 24 h roboczych odpiszę, co wyegzekwować i w jakim terminie, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1893,7 +1893,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Płaciłeś za metry, których nie ma? Odzyskam różnicę.',
-      lead: 'Prześlij umowę i dane o powierzchni — w 24 h odpiszę, czy żądać obniżenia ceny, czy odstąpić od umowy, i prześlę ofertę z ceną.',
+      lead: 'Prześlij umowę i dane o powierzchni — w ciągu 24 h roboczych odpiszę, czy żądać obniżenia ceny, czy odstąpić od umowy, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1937,7 +1937,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Nie każdy zapis w umowie deweloperskiej naprawdę Cię wiąże.',
-      lead: 'Prześlij umowę — w 24 h odpiszę, co trzeba zrobić: sprawdzić ją przed podpisem czy iść w spór, i prześlę ofertę z ceną.',
+      lead: 'Prześlij umowę — w ciągu 24 h roboczych odpiszę, co trzeba zrobić: sprawdzić ją przed podpisem czy iść w spór, i prześlę ofertę z ceną.',
     },
   },
 
@@ -1980,7 +1980,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Gwarancja to obietnica, którą można wyegzekwować — pomogę Ci to zrobić.',
-      lead: 'Prześlij kartę gwarancyjną i opis usterki — w 24 h odpiszę, którą drogą działać i czego żądać, i prześlę ofertę z ceną.',
+      lead: 'Prześlij kartę gwarancyjną i opis usterki — w ciągu 24 h roboczych odpiszę, którą drogą działać i czego żądać, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2024,7 +2024,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Rozproszone roszczenia to słabość. Zbiorę je we wspólną, mocną sprawę.',
-      lead: 'Opiszcie wady części wspólnych — w 24 h odpiszę, jak zebrać roszczenia nabywców i czego żądać od dewelopera, i prześlę ofertę z ceną.',
+      lead: 'Opiszcie wady części wspólnych — w ciągu 24 h roboczych odpiszę, jak zebrać roszczenia nabywców i czego żądać od dewelopera, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2068,7 +2068,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Ktoś korzysta z Twojej ziemi za darmo? Należy Ci się zapłata.',
-      lead: 'Opisz, kto i jak korzysta z Twojej działki — w 24 h odpiszę, czego i za jaki okres można żądać, i prześlę ofertę z ceną.',
+      lead: 'Opisz, kto i jak korzysta z Twojej działki — w ciągu 24 h roboczych odpiszę, czego i za jaki okres można żądać, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2111,7 +2111,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Działka bez dojazdu to nie ślepy zaułek — jest droga wyjścia.',
-      lead: 'Opisz, jak wygląda dostęp do Twojej nieruchomości — w 24 h odpiszę, jak ustanowić albo obronić drogę konieczną, i prześlę ofertę z ceną.',
+      lead: 'Opisz, jak wygląda dostęp do Twojej nieruchomości — w ciągu 24 h roboczych odpiszę, jak ustanowić albo obronić drogę konieczną, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2155,7 +2155,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Wywłaszczenie musi być słusznie wynagrodzone. Dopilnuję, żeby tak było.',
-      lead: 'Prześlij decyzję i operat — w 24 h odpiszę, jak i w jakim terminie kwestionować odszkodowanie, i prześlę ofertę z ceną.',
+      lead: 'Prześlij decyzję i operat — w ciągu 24 h roboczych odpiszę, jak i w jakim terminie kwestionować odszkodowanie, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2200,7 +2200,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Nie musisz zostać z bezużytecznym kawałkiem ziemi.',
-      lead: 'Opisz, co zostało Ci po wywłaszczeniu — w 24 h odpiszę, czy możesz żądać wykupu resztówki i jak to przeprowadzić, i prześlę ofertę z ceną.',
+      lead: 'Opisz, co zostało Ci po wywłaszczeniu — w ciągu 24 h roboczych odpiszę, czy możesz żądać wykupu resztówki i jak to przeprowadzić, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2244,7 +2244,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: '„Małe wywłaszczenie” to wciąż wywłaszczenie — i wciąż masz prawa.',
-      lead: 'Opisz, na jakim etapie jest sprawa sieci na Twojej działce — w 24 h odpiszę, co da się jeszcze zrobić i jakiego odszkodowania żądać, i prześlę ofertę z ceną.',
+      lead: 'Opisz, na jakim etapie jest sprawa sieci na Twojej działce — w ciągu 24 h roboczych odpiszę, co da się jeszcze zrobić i jakiego odszkodowania żądać, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2289,7 +2289,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Nie jesteś rolnikiem, a chcesz kupić ziemię? Przeprowadzę Cię przez zgodę KOWR.',
-      lead: 'Opisz transakcję — w 24 h odpiszę, czy zgoda jest potrzebna, i prześlę ofertę na cały wniosek aż do ważnej umowy.',
+      lead: 'Opisz transakcję — w ciągu 24 h roboczych odpiszę, czy zgoda jest potrzebna, i prześlę ofertę na cały wniosek aż do ważnej umowy.',
     },
   },
 
@@ -2332,7 +2332,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Status rolnika trzeba udowodnić — pomogę Ci to zrobić bez potknięć.',
-      lead: 'Opisz swoje gospodarstwo i sytuację — w 24 h odpiszę, czy i jak wykazać status rolnika indywidualnego, i prześlę ofertę z ceną.',
+      lead: 'Opisz swoje gospodarstwo i sytuację — w ciągu 24 h roboczych odpiszę, czy i jak wykazać status rolnika indywidualnego, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2376,7 +2376,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Dobra umowa dzierżawy chroni Cię, zanim pojawi się problem.',
-      lead: 'Opisz swoją dzierżawę — w 24 h odpiszę, jak zabezpieczyć umowę albo rozwiązać spór z drugą stroną, i prześlę ofertę z ceną.',
+      lead: 'Opisz swoją dzierżawę — w ciągu 24 h roboczych odpiszę, jak zabezpieczyć umowę albo rozwiązać spór z drugą stroną, i prześlę ofertę z ceną.',
     },
   },
 
@@ -2421,7 +2421,7 @@ const SERVICE_CONTENT = {
     ],
     cta: {
       heading: 'Odrolnienie nie musi kosztować fortuny — a często nie kosztuje nic.',
-      lead: 'Opisz działkę i plany — w 24 h odpiszę, czy potrzebne jest odrolnienie i jak je przeprowadzić, i prześlę ofertę z ceną.',
+      lead: 'Opisz działkę i plany — w ciągu 24 h roboczych odpiszę, czy potrzebne jest odrolnienie i jak je przeprowadzić, i prześlę ofertę z ceną.',
     },
   },
 };
@@ -2484,7 +2484,7 @@ const BLOCK_CONTENT = {
     ],
     cta: {
       heading: 'Deweloper liczy, że odpuścisz. Nie musisz.',
-      lead: 'Za opóźnienie i wady należą Ci się konkretne pieniądze i naprawy. Opisz sprawę, a w 24 h odpiszę, czego i jak żądać, i prześlę ofertę z ceną.',
+      lead: 'Za opóźnienie i wady należą Ci się konkretne pieniądze i naprawy. Opisz sprawę, a w ciągu 24 h roboczych odpiszę, czego i jak żądać, i prześlę ofertę z ceną.',
     },
   },
 };

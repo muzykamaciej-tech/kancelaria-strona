@@ -268,7 +268,7 @@ function setMetaForView(route, ids) {
     setMeta('Skarbnica wiedzy: poradniki o prawie nieruchomości', 'Praktyczne wpisy o prawie nieruchomości — jak bezpiecznie kupować, sprawdzać umowy i chronić swój kapitał.');
   } else if (route === 'blogpost') {
     const p = (window.BLOG || []).find((x) => x.slug === ids.blogSlug) || (window.BLOG || [])[0];
-    if (p) setMeta(fitTitle([p.title + ' | ' + SITE_NAME, p.title]), p.metaDesc || truncMeta(p.excerpt, 155), {
+    if (p) setMeta(fitTitle([p.metaTitle && p.metaTitle + ' | ' + SITE_NAME, p.title + ' | ' + SITE_NAME, p.metaTitle, p.title]), p.metaDesc || truncMeta(p.excerpt, 155), {
       ogTitle: p.title, type: 'article', published: p.iso, modified: postModifiedIso(p),
       image: p.cover ? absUrl(p.cover) : null, imageWidth: p.cover ? 1200 : null, imageHeight: p.cover ? 654 : null, imageAlt: p.cover ? p.title : null,
     });

@@ -368,6 +368,7 @@ function MobileMenu({ go, route, onNavigate }) {
 /* ============================================================
    Hero (3 variants — kept from v1)
    ============================================================ */
+/* LEGACY — nie używać: komponent niepodpięty do routingu (app.jsx), stary model „wyceny”. Model pierwszego kontaktu: CLAUDE.md. */
 function Hero({ setRoute, variant = 'editorial' }) {
   if (variant === 'classic') return <HeroClassic setRoute={setRoute} />;
   if (variant === 'splitcard') return <HeroSplitCard setRoute={setRoute} />;
@@ -633,6 +634,7 @@ function Testimonials() {
 /* ============================================================
    ContactBlock — used as the contact page AND as a footer CTA
    ============================================================ */
+/* LEGACY — nie używać: komponent niepodpięty do routingu (app.jsx), stary model „wyceny”. Model pierwszego kontaktu: CLAUDE.md. */
 function ContactBlock({ heading, subheading, source }) {
   const [state, setState] = useState({ name: '', email: '', phone: '', subject: source || '', message: '' });
   const [sent, setSent] = useState(false);

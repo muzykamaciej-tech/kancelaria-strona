@@ -42,7 +42,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Zarządzaj spokojnie — prawną stronę wezmę na siebie.',
-      lead: 'Opisz swoją działalność — w 24 h zaproponuję model współpracy, wskażę, co zabezpieczyć najpierw, i prześlę ofertę z ceną.',
+      lead: 'Opisz swoją działalność — w ciągu 24 h roboczych zaproponuję model współpracy, wskażę, co zabezpieczyć najpierw, i prześlę ofertę z ceną.',
     },
   },
 
@@ -84,7 +84,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Uchwały, które się obronią. Procedury bez potknięć.',
-      lead: 'Opisz sprawę albo potrzebę spółdzielni — w 24 h zaproponuję model współpracy i prześlę ofertę z ceną.',
+      lead: 'Opisz sprawę albo potrzebę spółdzielni — w ciągu 24 h roboczych zaproponuję model współpracy i prześlę ofertę z ceną.',
     },
   },
 
@@ -126,7 +126,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Zabezpieczona umowa i pewna zapłata — zanim wejdziesz na budowę.',
-      lead: 'Opisz kontrakt albo spór — w 24 h odpiszę, jak zabezpieczyć Twoje wynagrodzenie, i prześlę ofertę z ceną.',
+      lead: 'Opisz kontrakt albo spór — w ciągu 24 h roboczych odpiszę, jak zabezpieczyć Twoje wynagrodzenie, i prześlę ofertę z ceną.',
     },
   },
 
@@ -168,7 +168,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Twój projekt, Twoje prawa, Twoje honorarium — dobrze zabezpieczone.',
-      lead: 'Opisz, jak pracujesz — w 24 h odpiszę, które umowy warto sprawdzić pod kątem praw autorskich i odpowiedzialności, i prześlę ofertę z ceną.',
+      lead: 'Opisz, jak pracujesz — w ciągu 24 h roboczych odpiszę, które umowy warto sprawdzić pod kątem praw autorskich i odpowiedzialności, i prześlę ofertę z ceną.',
     },
   },
 
@@ -210,7 +210,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Tam, gdzie kończy się pomiar, a zaczyna spór — jestem po Twojej stronie.',
-      lead: 'Opisz sprawę — w 24 h odpiszę, jak Cię zabezpieczyć albo poprowadzić spór, i prześlę ofertę z ceną.',
+      lead: 'Opisz sprawę — w ciągu 24 h roboczych odpiszę, jak Cię zabezpieczyć albo poprowadzić spór, i prześlę ofertę z ceną.',
     },
   },
 
@@ -252,7 +252,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Bronię Twoich wycen — i Ciebie.',
-      lead: 'Opisz sprawę albo potrzebę — w 24 h zaproponuję model współpracy i prześlę ofertę z ceną.',
+      lead: 'Opisz sprawę albo potrzebę — w ciągu 24 h roboczych zaproponuję model współpracy i prześlę ofertę z ceną.',
     },
   },
 
@@ -296,7 +296,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Społeczne budownictwo ma swoje reguły — poprowadzę Cię przez nie bezpiecznie.',
-      lead: 'Opisz projekt — w 24 h odpiszę, co trzeba ustawić w strukturze i umowach, i prześlę ofertę z ceną.',
+      lead: 'Opisz projekt — w ciągu 24 h roboczych odpiszę, co trzeba ustawić w strukturze i umowach, i prześlę ofertę z ceną.',
     },
   },
 
@@ -343,7 +343,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Skala wymaga precyzji. Zapewnię ją na każdym etapie inwestycji.',
-      lead: 'Opisz portfel albo transakcję — w 24 h zaproponuję zakres współpracy i prześlę ofertę z ceną.',
+      lead: 'Opisz portfel albo transakcję — w ciągu 24 h roboczych zaproponuję zakres współpracy i prześlę ofertę z ceną.',
     },
   },
 
@@ -386,7 +386,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Nadążam za rynkiem — żeby prawo nie hamowało Twoich transakcji.',
-      lead: 'Opisz swój model inwestowania — w 24 h odpiszę, jak przyspieszyć i zabezpieczyć obrót, i prześlę ofertę z ceną.',
+      lead: 'Opisz swój model inwestowania — w ciągu 24 h roboczych odpiszę, jak przyspieszyć i zabezpieczyć obrót, i prześlę ofertę z ceną.',
     },
   },
 
@@ -429,7 +429,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Projekt OZE jest tyle wart, ile pewny jest tytuł do gruntu.',
-      lead: 'Opisz portfel — w 24 h odpiszę, co trzeba sprawdzić w dzierżawach i służebnościach pod kątem bankowalności, i prześlę ofertę z ceną.',
+      lead: 'Opisz portfel — w ciągu 24 h roboczych odpiszę, co trzeba sprawdzić w dzierżawach i służebnościach pod kątem bankowalności, i prześlę ofertę z ceną.',
     },
   },
 
@@ -471,7 +471,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Model operatorski, który się broni — finansowo i prawnie.',
-      lead: 'Opisz swój model — w 24 h zaproponuję zakres współpracy (rozłożenie ryzyka, zgodność z prawem) i prześlę ofertę z ceną.',
+      lead: 'Opisz swój model — w ciągu 24 h roboczych zaproponuję zakres współpracy (rozłożenie ryzyka, zgodność z prawem) i prześlę ofertę z ceną.',
     },
   },
 
@@ -514,7 +514,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Najem po stronie najemcy — policzalny, elastyczny, uczciwy.',
-      lead: 'Opisz najem albo plany sieci — w 24 h odpiszę, co trzeba wynegocjować, i prześlę ofertę z ceną.',
+      lead: 'Opisz najem albo plany sieci — w ciągu 24 h roboczych odpiszę, co trzeba wynegocjować, i prześlę ofertę z ceną.',
     },
   },
 
@@ -557,7 +557,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Duży areał wymaga jednego prawnika do wszystkiego. Jestem nim.',
-      lead: 'Opisz swoje gospodarstwo — w 24 h zaproponuję zakres kompleksowej obsługi i prześlę ofertę z ceną.',
+      lead: 'Opisz swoje gospodarstwo — w ciągu 24 h roboczych zaproponuję zakres kompleksowej obsługi i prześlę ofertę z ceną.',
     },
   },
 

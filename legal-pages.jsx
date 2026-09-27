@@ -248,7 +248,7 @@ function RegulaminPage({ setRoute }) {
       <ol>
         <li>Kancelaria zastrzega sobie prawo do zmiany Regulaminu. Aktualna wersja jest zawsze dostępna na Stronie.</li>
         <li>W sprawach nieuregulowanych stosuje się przepisy prawa polskiego.</li>
-        <li>Data ostatniej aktualizacji: <strong>4 lipca 2026 r.</strong></li>
+        <li>Data ostatniej aktualizacji: <strong>27 września 2026 r.</strong></li>
       </ol>
     </LegalLayout>);
 

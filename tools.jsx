@@ -63,7 +63,7 @@ function CalcResult({ r, setRoute }) {
       </details>
       <p className="small calc-disclaimer mt-6">To orientacyjny przedział oparty na metodach stosowanych przez rzeczoznawców. Nie jest wyceną ani poradą prawną — ostateczna kwota zależy od operatu, stanu prawnego urządzeń (umowa, decyzja, zasiedzenie) i lokalnych cen. Wynik może różnić się w obie strony.</p>
       <button className="btn btn-primary mt-6" style={{ width: '100%' }} onClick={() => window.spScrollToForm && window.spScrollToForm()}>
-        Sprawdź swoją sprawę bezpłatnie <TIcon name="arrow-right" size={16} />
+        Bezpłatna wstępna analiza i oferta w 24 h <TIcon name="arrow-right" size={16} />
       </button>
       <window.NavLink route="blogpost" slug="sluzebnosc-przesylu-jak-obliczyc-wynagrodzenie" className="btn-link mt-4" style={{ display: 'inline-flex', width: '100%', justifyContent: 'center' }}>
         Jak liczą to rzeczoznawcy — artykuł <TIcon name="arrow-right" size={14} />

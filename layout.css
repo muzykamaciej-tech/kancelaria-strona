@@ -964,6 +964,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 .docs-to-send { background: var(--slate-50); border-block: 1px solid var(--slate-100); }
+.docs-to-send .btn { max-width: 100%; white-space: normal; text-align: center; }
 
 /* Blog article — cover, h3, ol, strong (imported posts) */
 .prose-cover { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); margin: 0 0 2.5rem; border: 1px solid var(--slate-100); }
@@ -976,6 +977,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 /* Legal pages — extend .prose with ordered lists, tables and inline links */
 .prose-legal h2:first-child { margin-top: 0; }
+.prose-legal { overflow-wrap: anywhere; } /* długie adresy e-mail nie rozpychają strony na telefonie */
 .prose-legal ol {
   padding-left: 1.5rem;
   margin: 0 0 1.25rem;

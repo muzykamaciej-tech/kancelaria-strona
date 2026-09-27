@@ -55,7 +55,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Nie podpisuj w ciemno.',
-      lead: 'Prześlij numer księgi wieczystej i umowę, jeśli ją masz. W 24 h odpiszę, co trzeba sprawdzić przed podpisem, i prześlę ofertę z ceną i terminem.',
+      lead: 'Prześlij numer księgi wieczystej i umowę, jeśli ją masz. W ciągu 24 h roboczych odpiszę, co trzeba sprawdzić przed podpisem, i prześlę ofertę z ceną i terminem.',
     },
   },
 
@@ -112,7 +112,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Jedno zdanie w umowie potrafi kosztować więcej niż cała obsługa prawna.',
-      lead: 'Prześlij projekt umowy albo opisz ustalenia z drugą stroną. W 24 h odpiszę, czy umowę wystarczy sprawdzić, czy trzeba ją napisać od nowa, i prześlę ofertę z ceną.',
+      lead: 'Prześlij projekt umowy albo opisz ustalenia z drugą stroną. W ciągu 24 h roboczych odpiszę, czy umowę wystarczy sprawdzić, czy trzeba ją napisać od nowa, i prześlę ofertę z ceną.',
     },
   },
 
@@ -169,7 +169,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Sprawdźmy Twoją działkę, zanim zmienią się przepisy.',
-      lead: 'Podaj numer działki i gminę. W 24 h odpiszę, na jakim etapie jest Twoja gmina i co warto zrobić w pierwszej kolejności, a do tego prześlę ofertę z ceną.',
+      lead: 'Podaj numer działki i gminę. W ciągu 24 h roboczych odpiszę, na jakim etapie jest Twoja gmina i co warto zrobić w pierwszej kolejności, a do tego prześlę ofertę z ceną.',
     },
   },
 
@@ -226,7 +226,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Budowa nie może stać, bo urząd czeka na pismo.',
-      lead: 'Prześlij decyzję, wezwanie albo umowę z wykonawcą. W 24 h odpiszę, jakie masz terminy i co zrobić najpierw, i prześlę ofertę z ceną.',
+      lead: 'Prześlij decyzję, wezwanie albo umowę z wykonawcą. W ciągu 24 h roboczych odpiszę, jakie masz terminy i co zrobić najpierw, i prześlę ofertę z ceną.',
     },
   },
 
@@ -283,7 +283,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Nieuregulowany stan prawny nie naprawi się sam.',
-      lead: 'Podaj numer księgi wieczystej albo napisz, że jej nie ma, i opisz historię nieruchomości. W 24 h odpiszę, jaką drogą uporządkować stan prawny, i prześlę ofertę z ceną.',
+      lead: 'Podaj numer księgi wieczystej albo napisz, że jej nie ma, i opisz historię nieruchomości. W ciągu 24 h roboczych odpiszę, jaką drogą uporządkować stan prawny, i prześlę ofertę z ceną.',
     },
   },
 
@@ -340,7 +340,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Współwłasność da się zakończyć — bez wojny w rodzinie.',
-      lead: 'Opisz, kto jest współwłaścicielem, jak korzystacie z nieruchomości i czego chcesz. W 24 h odpiszę, jaki sposób podziału wchodzi w grę, i prześlę ofertę z ceną i terminem.',
+      lead: 'Opisz, kto jest współwłaścicielem, jak korzystacie z nieruchomości i czego chcesz. W ciągu 24 h roboczych odpiszę, jaki sposób podziału wchodzi w grę, i prześlę ofertę z ceną i terminem.',
     },
   },
 
@@ -396,7 +396,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Dobra umowa najmu kosztuje mniej niż jeden miesiąc bez czynszu.',
-      lead: 'Prześlij umowę — swoją albo tę, którą dostałeś do podpisu — lub opisz problem z najemcą czy właścicielem. W 24 h odpiszę, co trzeba zrobić, i prześlę ofertę z ceną.',
+      lead: 'Prześlij umowę — swoją albo tę, którą dostałeś do podpisu — lub opisz problem z najemcą czy właścicielem. W ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną.',
     },
   },
 
@@ -443,7 +443,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     faq: [
       { q: 'Słup stoi na działce od lat 70. Czy nie jest za późno?', a: 'Nie. Roszczenie o wynagrodzenie za bezumowne korzystanie obejmuje ostatnie 10 lat, a służebność przesyłu na przyszłość można ustanowić w każdym czasie. Wyrok TK z 2 grudnia 2025 r. (P 10/16) podważył zasiedzenie liczone z okresów sprzed 2008 r. — najczęstszy argument firm przesyłowych.' },
-      { q: 'Ile mogę dostać za słup na działce?', a: 'Zależy od rodzaju urządzenia, powierzchni pasa ograniczonego użytkowania, przeznaczenia działki (budowlana czy rolna) i cen w okolicy. Za pojedynczy słup na gruncie rolnym — kilka tysięcy; za linię wysokiego napięcia przez działkę budowlaną — dziesiątki, czasem setki tysięcy. Wstępny szacunek robię bezpłatnie.' },
+      { q: 'Ile mogę dostać za słup na działce?', a: 'Zależy od rodzaju urządzenia, powierzchni pasa ograniczonego użytkowania, przeznaczenia działki (budowlana czy rolna) i cen w okolicy. Za pojedynczy słup na gruncie rolnym — kilka tysięcy; za linię wysokiego napięcia przez działkę budowlaną — dziesiątki, czasem setki tysięcy. Orientacyjny przedział policzysz w kalkulatorze na stronie. Dokładną kwotę ustala w sprawie biegły rzeczoznawca.' },
       { q: 'Firma przesyłowa twierdzi, że ma decyzję z czasów PRL. Co wtedy?', a: 'Stara decyzja wywłaszczeniowa może być skuteczną podstawą — ale musi istnieć, dotyczyć tej działki i tego urządzenia. Żądam jej okazania i sprawdzam. Zaskakująco często okazuje się, że jej nie ma albo dotyczy czegoś innego.' },
       { q: 'Kto płaci za przesunięcie słupa, gdy chcę budować?', a: 'Jeśli urządzenie stoi bez tytułu prawnego — co do zasady przedsiębiorstwo. Jeśli ma służebność lub decyzję — zwykle wnioskujący, chyba że umowa stanowi inaczej. Analizuję podstawę i negocjuję podział kosztów.' },
       { q: 'Moja działka nie ma dostępu do drogi. Sąsiad nie zgadza się na przejazd.', a: 'Sąd ustanowi drogę konieczną bez zgody sąsiada — za wynagrodzeniem, po trasie najmniej dla niego uciążliwej. Postępowanie wymaga biegłego geodety i rzeczoznawcy. Ustalam najlepszy wariant przebiegu i prowadzę sprawę.' },
@@ -453,7 +453,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Słup stoi na Twoim gruncie. Pieniądze należą się Tobie.',
-      lead: 'Prześlij zdjęcia urządzeń, numer działki i pisma od firmy przesyłowej, jeśli je masz. W 24 h odpiszę, czy i jak dochodzić zapłaty, i prześlę ofertę z ceną.',
+      lead: 'Prześlij zdjęcia urządzeń, numer działki i pisma od firmy przesyłowej, jeśli je masz. W ciągu 24 h roboczych odpiszę, czy i jak dochodzić zapłaty, i prześlę ofertę z ceną.',
     },
   },
 
@@ -510,7 +510,7 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     cta: {
       heading: 'Zanim podpiszesz umowę z inwestorem — przeczytajmy ją razem.',
-      lead: 'Prześlij projekt umowy dzierżawy lub numer działki. W 24 h odpiszę, co trzeba sprawdzić i wynegocjować przed podpisem, i prześlę ofertę z ceną.',
+      lead: 'Prześlij projekt umowy dzierżawy lub numer działki. W ciągu 24 h roboczych odpiszę, co trzeba sprawdzić i wynegocjować przed podpisem, i prześlę ofertę z ceną.',
     },
   },
 
@@ -557,17 +557,17 @@ Object.assign(window.BLOCK_CONTENT, {
     ],
     faq: [
       { q: 'Czym abonament różni się od zlecania spraw pojedynczo?', a: 'Przewidywalnością kosztu i szybkością. W abonamencie znam Twoje umowy i historię spraw, więc odpowiadam od razu, bez „wdrażania się”. Przy pojedynczych zleceniach każda sprawa zaczyna się od zera. Dla firm z regularnym obrotem abonament wychodzi zwykle taniej.' },
-      { q: 'Jak wygląda start współpracy?', a: 'Rozmowa o Twojej firmie i bieżących sprawach, przegląd wzorów umów i dokumentów, propozycja zakresu i wycena. Od pierwszego miesiąca dostajesz konkretne poprawki, nie prezentację.' },
+      { q: 'Jak wygląda start współpracy?', a: 'Opisujesz firmę i bieżące sprawy. W ciągu 24 h roboczych odpisuję, od czego zacząć, i wysyłam ofertę: abonament albo projekt. Po akceptacji przeglądam wzory umów i dokumenty; od pierwszego miesiąca dostajesz konkretne poprawki.' },
       { q: 'Obsługujesz firmy z innych miast?', a: 'Tak — większość obsługi to dokumenty i korespondencja, które prowadzę zdalnie. Rozprawy i spotkania z kontrahentami w całej Polsce, spotkania osobiste w Lublinie i Warszawie.' },
       { q: 'Jesteśmy małym deweloperem — jedna inwestycja rocznie. Czy to ma sens?', a: 'Szczególnie wtedy. Duży deweloper ma dział prawny; mały ryzykuje całą inwestycją przez jeden błędny zapis w umowie deweloperskiej albo prospekcie. Projektowa obsługa jednej inwestycji od WZ po akty to najczęstszy model u moich klientów tej wielkości.' },
       { q: 'Prowadzę biuro nieruchomości. Klienci kwestionują prowizję po transakcji „za naszymi plecami”. Da się to zabezpieczyć?', a: 'Tak — dobrze napisana umowa pośrednictwa z klauzulą wyłączności i zapisem o transakcji z klientem wskazanym przez biuro broni się w sądzie. Wzory z sieci często zawierają klauzule niedozwolone, przez co całe zapisy o prowizji upadają. Robię audyt i poprawiam.' },
       { q: 'Wspólnota chce dochodzić wad od dewelopera. Kto może to zrobić?', a: 'Wspólnota po przelewie roszczeń od właścicieli albo właściciele indywidualnie. Ustalam, kto ma legitymację, przygotowuję uchwały i umowy cesji, prowadzę sprawę — od ekspertyzy po wyrok.' },
       { q: 'Czy zajmujesz się też prawem pracy, podatkami, RODO w naszej firmie?', a: 'Nie — tylko nieruchomościami i tym, co z nimi bezpośrednio związane. W innych obszarach polecam sprawdzonych specjalistów i koordynuję z nimi pracę, jeśli sprawa tego wymaga. Dzięki temu jestem dobry w tym, co robię.' },
-      { q: 'Jak rozliczasz pracę?', a: 'Abonament — stała kwota miesięczna za ustaloną pulę godzin, ponad nią stawka godzinowa. Projekty — wycena z góry. Każdy miesiąc kończy zestawienie czynności. Wycenę przygotowuję po rozpoznaniu potrzeb firmy, bez zobowiązań.' },
+      { q: 'Jak rozliczasz pracę?', a: 'Abonament — stała kwota miesięczna za ustaloną pulę godzin, ponad nią stawka godzinowa. Projekty — cena ustalona z góry w ofercie. Każdy miesiąc kończy zestawienie czynności. Do akceptacji oferty nic nie płacisz.' },
     ],
     cta: {
       heading: 'Prawnik, który zna Twoją branżę, kosztuje mniej niż ten, który się jej uczy.',
-      lead: 'Opisz firmę, skalę działalności i bieżące potrzeby. W 24 h zaproponuję zakres współpracy i formę rozliczenia — abonament albo projekt — i prześlę ofertę.',
+      lead: 'Opisz firmę, skalę działalności i bieżące potrzeby. W ciągu 24 h roboczych zaproponuję zakres współpracy i formę rozliczenia — abonament albo projekt — i prześlę ofertę.',
     },
   },
 

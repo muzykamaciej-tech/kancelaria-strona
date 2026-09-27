@@ -1,5 +1,5 @@
 /* blog-data-6.jsx — nowe poradniki z planu treści 300 tematów (IX 2026). Dołącza do window.BLOG.
-   Pola metaTitle i faq są dodatkowe: obecny szablon je pomija, gałąź P0 może ich użyć (setMeta, FAQPage). */
+   Pole metaTitle (do 60 znaków) trafia do <title> zamiast pełnego tytułu (app.jsx, setMetaForView). Pole faq szablon pomija (pytania są w treści wpisu). */
 window.BLOG.push(
   {
     slug: 'ile-trwa-eksmisja-lokatora',
@@ -19,7 +19,7 @@ window.BLOG.push(
       { q: 'Czy można eksmitować matkę z dzieckiem z prywatnego mieszkania?', a: 'Tak. Przy mieszkaniu prywatnym sąd nie musi przyznać lokalu socjalnego nawet rodzinie z dzieckiem, bo obowiązkowy katalog z art. 14 ust. 4 nie działa (art. 14 ust. 7). Może go jednak przyznać, oceniając sytuację rodziny. Wtedy eksmisja czeka, aż gmina złoży ofertę lokalu (art. 14 ust. 6).' },
       { q: 'Czy komornik czeka na gminę tylko 6 miesięcy?', a: 'Nie. Obecny art. 1046 § 4 k.p.c. nie przewiduje limitu czasu. Czekanie możesz skrócić, zapewniając pomieszczenie tymczasowe samodzielnie (art. 1046 § 5).' },
       { q: 'Czy gmina zapłaci mi za to, że lokator dalej mieszka?', a: 'Możesz tego żądać, jeżeli sąd przyznał lokatorowi lokal socjalny, a gmina go nie dostarcza (art. 18 ust. 5). Szkodę trzeba wykazać, np. czynszem najmu, którego nie dostajesz. Roszczenie przedawnia się po 6 latach, liczonych osobno za każdy miesiąc.' },
-      { q: 'Ile kosztuje eksmisja?', a: 'Opłata od pozwu o eksmisję wynosi 200 zł, a opłata komornicza od wniosku o eksmisję z mieszkania 1500 zł. Do tego zaliczki na wydatki komornika (np. ślusarz, transport i przechowanie rzeczy lokatora) i wynagrodzenie pełnomocnika. Jeżeli wygrasz, sąd co do zasady obciąży lokatora kosztami procesu. Wycenę Twojej sprawy prześlę mailem po opisie w formularzu, bez opłat.' },
+      { q: 'Ile kosztuje eksmisja?', a: 'Opłata od pozwu o eksmisję wynosi 200 zł, a opłata komornicza od wniosku o eksmisję z mieszkania 1500 zł. Do tego zaliczki na wydatki komornika (np. ślusarz, transport i przechowanie rzeczy lokatora) i wynagrodzenie pełnomocnika. Jeżeli wygrasz, sąd co do zasady obciąży lokatora kosztami procesu. Moje wynagrodzenie podaję w ofercie razem z bezpłatną wstępną analizą.' },
     ],
     body: [
       ['lead', 'Lokator nie płaci, a Ty dalej płacisz czynsz do wspólnoty? Eksmisja lokatora bez tytułu prawnego (czyli po zakończeniu najmu) może potrwać od kilkunastu miesięcy do kilku lat. Zanim w ogóle złożysz pozew, przy zaległościach w czynszu mija około 5 miesięcy. Przy czynszu najmu 2 500 zł każdy rok czekania to 30 000 zł, których nie dostajesz. Najwięcej czasu zabierają błędy w wypowiedzeniu i czekanie na gminę. Poniżej kalendarz, pułapki i to, co możesz zrobić, żeby odzyskać mieszkanie szybciej, oraz od kogo możesz żądać pieniędzy za ten czas.'],
@@ -69,7 +69,7 @@ window.BLOG.push(
         'Pozwać gminę o odszkodowanie, jeżeli nie dostarcza lokalu socjalnego.',
         'Na przyszłość: przygotować umowę najmu okazjonalnego.',
       ]],
-      ['p', 'Nie obiecuję wyniku. Mogę za to powiedzieć, na którym etapie jesteś, co możesz jeszcze zrobić i ile to kosztuje. Po opisie sprawy w formularzu odpiszę mailem z oceną, planem i ceną. Ta wycena jest bezpłatna.'],
+      ['p', 'Nie obiecuję wyniku. Opisz sprawę w formularzu: w ciągu 24 h roboczych odpiszę, na którym etapie jesteś i co trzeba zrobić — wypowiedzenie, pozew czy wniosek do komornika — i od razu prześlę ofertę z ceną i terminem. Do akceptacji oferty nic nie płacisz.'],
       ['h2', 'Najczęstsze pytania'],
       ['h3', 'Ile trwa eksmisja z mieszkania, gdy lokator nie płaci?'],
       ['p', 'Zwykle od kilkunastu miesięcy do kilku lat. Od pierwszej nieopłaconej raty do końca najmu mija około 5 miesięcy, potem proces (zwykle od kilku do kilkunastu miesięcy) i egzekucja. Jeżeli sąd przyzna lokal socjalny albo gmina nie wskaże pomieszczenia tymczasowego, całość może trwać kilka lat.'],
@@ -88,7 +88,7 @@ window.BLOG.push(
       ['h3', 'Czy gmina zapłaci mi za to, że lokator dalej mieszka?'],
       ['p', 'Możesz tego żądać, jeżeli sąd przyznał lokatorowi lokal socjalny, a gmina go nie dostarcza (art. 18 ust. 5). Szkodę trzeba wykazać, np. czynszem najmu, którego nie dostajesz. Roszczenie przedawnia się po 6 latach, liczonych osobno za każdy miesiąc.'],
       ['h3', 'Ile kosztuje eksmisja?'],
-      ['p', 'Opłata od pozwu o eksmisję wynosi 200 zł, a opłata komornicza od wniosku o eksmisję z mieszkania 1500 zł. Do tego zaliczki na wydatki komornika (np. ślusarz, transport i przechowanie rzeczy lokatora) i wynagrodzenie pełnomocnika. Jeżeli wygrasz, sąd co do zasady obciąży lokatora kosztami procesu. Wycenę Twojej sprawy prześlę mailem po opisie w formularzu, bez opłat.'],
+      ['p', 'Opłata od pozwu o eksmisję wynosi 200 zł, a opłata komornicza od wniosku o eksmisję z mieszkania 1500 zł. Do tego zaliczki na wydatki komornika (np. ślusarz, transport i przechowanie rzeczy lokatora) i wynagrodzenie pełnomocnika. Jeżeli wygrasz, sąd co do zasady obciąży lokatora kosztami procesu. Moje wynagrodzenie podaję w ofercie razem z bezpłatną wstępną analizą.'],
       ['h2', 'Źródła'],
       ['ul', [
         'Ustawa z 21.06.2001 o ochronie praw lokatorów, mieszkaniowym zasobie gminy i o zmianie Kodeksu cywilnego (t.j. Dz.U. 2023 poz. 725): art. 2 ust. 1 pkt 5a, 11, 14, 16–18, 19a, 19b, 19d, 19e, 25d.',

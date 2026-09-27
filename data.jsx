@@ -340,6 +340,7 @@ const SERVICES = [
 ];
 
 /* ---------- Cross-cutting FAQ on the FAQ page (grouped) ---------- */
+/* LEGACY — nie używać: komponent niepodpięty do routingu (app.jsx), stary model „wyceny”. Model pierwszego kontaktu: CLAUDE.md. */
 const FAQ_GROUPS = [
   {
     title: 'Współpraca',

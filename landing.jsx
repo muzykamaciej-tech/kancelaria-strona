@@ -103,18 +103,11 @@ const STANDARDS = [
 const HOW_STEPS = [
 { n: '1', t: 'Opisujesz sprawę', d: 'Kilka zdań i dokumenty, jeśli je masz (umowa, księga wieczysta, zdjęcie).' },
 { n: '2', t: 'Bezpłatna analiza i oferta w 24 h', d: 'Piszę, co trzeba zrobić w Twojej sprawie — audyt, pismo czy sprawa sądowa — i od razu wysyłam ofertę z ceną i terminem. Jeśli potrzebuję więcej informacji, dopytam.' },
-{ n: '3', t: 'Znasz zakres i cenę', d: 'To nie jest opinia prawna ani pełne sprawdzenie dokumentów. Szczegółowa analiza, pismo czy prowadzenie sprawy to zakres oferty.' },
+{ n: '3', t: 'Wiesz, co obejmuje oferta', d: 'Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów. Szczegółowa analiza, pismo czy prowadzenie sprawy to zakres oferty.' },
 { n: '4', t: 'Akceptujesz cenę i strategię', d: 'Do akceptacji oferty nic nie płacisz. Drobne sprawy domykamy ustaleniem mailowym, większe — jasną umową na piśmie. Zero ukrytych kosztów, zero niespodzianek.' },
 { n: '5', t: 'Prowadzę sprawę', d: 'Raport, pisma lub reprezentacja, a Ty wiesz, co dzieje się na każdym etapie.' }];
 
 
-/* FAQ skrojone pod bezpłatną analizę */
-const LANDING_FAQ = [
-{ q: 'Czy wstępna analiza naprawdę jest bezpłatna?', a: 'Tak. Wstępna ocena sprawy — czy jest tu realny problem prawny i co da się z nim zrobić — jest bezpłatna i niezobowiązująca. Płacisz dopiero wtedy, gdy zdecydujesz się zlecić konkretną usługę, a jej cenę poznajesz wcześniej.' },
-{ q: 'Co dokładnie dostanę w ciągu 24 godzin?', a: 'Mailowo otrzymujesz wstępną ocenę: czy sprawa wymaga działania, jakie są główne ryzyka, jakie masz opcje oraz propozycję następnego kroku. To nie jest jeszcze pełna opinia prawna — to mapa, która pokazuje, czy i jak warto działać dalej.' },
-{ q: 'Czy moje dokumenty są bezpieczne?', a: 'Tak. Jako adwokata wiąże mnie tajemnica adwokacka — obejmuje wszystko, co mi przekażesz. Dokumenty trafiają wyłącznie do mnie i nie są udostępniane osobom trzecim.' },
-{ q: 'Jakich spraw dotyczy analiza?', a: 'Wyłącznie prawa nieruchomości i procesu inwestycyjno-budowlanego: audyty stanu prawnego, umowy deweloperskie, warunki zabudowy, najem, grunty rolne, inwestycje, flipy i pokrewne. Jeśli Twoja sprawa jest z innej dziedziny — napisz, podpowiem, gdzie szukać.' },
-{ q: 'Czy muszę dzwonić?', a: 'Nie. Cały proces prowadzę mailowo i zdalnie — obsługuję klientów z całej Polski. Jeśli sprawa będzie tego wymagała, umówimy krótką rozmowę online.' }];
 
 
 /* ============================================================
@@ -270,7 +263,9 @@ function QualificationForm({ compact = false }) {
           Sprawa przyjęta.
         </h3>
         <p className="lead mt-3" style={{ textAlign: 'center' }}>
-          Dziękuję. W ciągu 24 h roboczych odpiszę, co trzeba zrobić w Twojej sprawie, i prześlę ofertę z ceną i terminem.
+          {contact === 'phone'
+            ? 'Dziękuję. W ciągu 24 h roboczych zadzwonię i powiem, co trzeba zrobić w Twojej sprawie. Ofertę z ceną i terminem prześlę mailem.'
+            : 'Dziękuję. W ciągu 24 h roboczych odpiszę, co trzeba zrobić w Twojej sprawie, i prześlę ofertę z ceną i terminem.'}
         </p>
         <ol className="success-steps mt-8">
           <li>
@@ -279,7 +274,7 @@ function QualificationForm({ compact = false }) {
           </li>
           <li>
             <span className="success-step-num">2</span>
-            <div className="success-step-txt"><strong>Odpisuję w ciągu 24 h roboczych</strong><span>co trzeba zrobić: audyt, pismo czy sprawa sądowa</span></div>
+            <div className="success-step-txt"><strong>{contact === 'phone' ? 'Dzwonię w ciągu 24 h roboczych' : 'Odpisuję w ciągu 24 h roboczych'}</strong><span>co trzeba zrobić: audyt, pismo czy sprawa sądowa</span></div>
           </li>
           <li>
             <span className="success-step-num">3</span>
@@ -427,7 +422,7 @@ function QualificationForm({ compact = false }) {
             <span className="file-drop-hint">PDF, DOCX, JPG, PNG · do {MAX_FILES} plików, każdy do {MAX_FILE_MB} MB, łącznie do {MAX_TOTAL_MB} MB</span>
           </button>}
         {errors.file && <div className="input-err">{errors.file}</div>}
-        <p className="small qual-hint">Nie masz wszystkich dokumentów? Napisz, co masz — resztę ustalę sam.</p>
+        <p className="small qual-hint">Nie masz wszystkich dokumentów? Napisz, co masz. Do wstępnej analizy i oferty zwykle wystarczy kilka zdań i jeden dokument.</p>
       </div>
 
       <div className="qual-field">
@@ -436,7 +431,7 @@ function QualificationForm({ compact = false }) {
           <label className={contact === 'email' ? 'is-on' : ''}><input type="radio" name="contact-pref" checked={contact === 'email'} onChange={() => setContact('email')} />E-mailem</label>
           <label className={contact === 'phone' ? 'is-on' : ''}><input type="radio" name="contact-pref" checked={contact === 'phone'} onChange={() => setContact('phone')} />Zadzwoń do mnie</label>
         </div>
-        {contact === 'phone' && <p className="small qual-hint">Oddzwonię w ciągu 24 h roboczych — wpisz numer w polu „Telefon” powyżej.</p>}
+        {contact === 'phone' && <p className="small qual-hint">Oddzwonię w ciągu 24 h roboczych i powiem, co trzeba zrobić. Ofertę z ceną i terminem prześlę mailem. Wpisz numer w polu „Telefon” powyżej.</p>}
       </div>
 
       <label className="consent-row consent-row--plain">
@@ -1257,7 +1252,7 @@ function FinalCTA() {
           <span style={{ color: 'var(--brand-primary-light)' }}>niż żałować po podpisie.</span>
         </h2>
         <p className="lead mt-6" style={{ color: 'var(--text-on-dark-2)' }}>
-          Jeśli kupujesz, sprzedajesz albo coś Cię niepokoi w dokumentach — opisz sprawę. W 24 h odpiszę, co trzeba zrobić, i prześlę ofertę. Do jej akceptacji nic nie płacisz.
+          Jeśli kupujesz, sprzedajesz albo coś Cię niepokoi w dokumentach — opisz sprawę. W ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem. Do jej akceptacji nic nie płacisz.
         </p>
         <div className="flex gap-3 mt-8 justify-center" style={{ flexWrap: 'wrap' }}>
           <button className="btn btn-on-dark" onClick={() => lScrollToId('formularz')}>

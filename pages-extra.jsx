@@ -58,7 +58,7 @@ function OMnieIntro() {
           <ol>
             <li>Opisujesz sprawę w formularzu na dole strony. Wystarczy kilka zdań.</li>
             <li>W ciągu 24 h roboczych odpisuję (albo oddzwaniam, jeśli wybierzesz telefon), co trzeba zrobić — audyt, pismo czy sprawa sądowa — i od razu wysyłam ofertę z ceną i terminem.</li>
-            <li>Decydujesz, czy przyjmujesz ofertę; do jej akceptacji nic nie płacisz. Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów — to już zakres oferty.</li>
+            <li>Decydujesz, czy przyjmujesz ofertę; do jej akceptacji nic nie płacisz. Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów. Szczegółowa analiza, pismo czy prowadzenie sprawy to zakres oferty.</li>
           </ol>
           <p>Nie obiecuję wyniku sprawy. Piszę wprost, co przemawia za nią, a co przeciw niej. Kontakt prowadzę przede wszystkim mailowo. Gdy sprawa wymaga spotkania, spotykamy się w Lublinie albo w Warszawie (ul. Bracka 20/7A).</p>
         </div>

@@ -6,18 +6,18 @@ const FAQ_SECTIONS = [
   {
     id: 'jak-to-dziala', letter: 'A', title: 'Jak to działa',
     items: [
-      { q: 'Jak wygląda pierwszy kontakt?', a: 'Opisujesz sprawę w formularzu — krótko, kilka zdań, w razie potrzeby z dokumentami w PDF. W ciągu 24 h roboczych odpisuję, co trzeba w niej zrobić — audyt, pismo czy sprawa sądowa — i od razu wysyłam ofertę z ceną i terminem.' },
+      { q: 'Jak wygląda pierwszy kontakt?', a: 'Opisujesz sprawę w formularzu — krótko, kilka zdań, w razie potrzeby z dokumentami (PDF, DOCX, zdjęcia). W ciągu 24 h roboczych odpisuję (albo oddzwaniam, jeśli wybierzesz telefon), co trzeba w niej zrobić — audyt, pismo czy sprawa sądowa — i od razu wysyłam ofertę z ceną i terminem.' },
       { q: 'Jak szybko dostanę odpowiedź?', a: 'Wstępną analizę i ofertę wysyłam w ciągu 24 h roboczych, często tego samego dnia. Jeśli sprawa jest pilna, zaznacz to w opisie — postaram się odpisać szybciej.' },
-      { q: 'Co dzieje się po wysłaniu formularza?', a: 'Czytam Twój opis i przesłane dokumenty. Odpisuję, co trzeba w sprawie zrobić — np. szczegółowy audyt, pismo albo sprawa sądowa — i w tym samym mailu wysyłam ofertę z zakresem, ceną i terminem. Decyzję podejmujesz Ty, bez presji.' },
+      { q: 'Co dzieje się po wysłaniu formularza?', a: 'Czytam Twój opis i przesłane dokumenty. Odpisuję (albo oddzwaniam, jeśli wybierzesz telefon), co trzeba w sprawie zrobić — np. szczegółowy audyt, pismo albo sprawa sądowa — i od razu wysyłam mailem ofertę z zakresem, ceną i terminem. Decyzję podejmujesz Ty, bez presji.' },
       { q: 'Czy wysłanie sprawy do mnie do czegoś zobowiązuje?', a: 'Nie. Wstępna analiza i oferta są bezpłatne. Do akceptacji oferty nic nie płacisz; zakres i koszt potwierdzamy na piśmie dopiero wtedy, gdy zdecydujesz się na współpracę.' },
     ],
   },
   {
     id: 'bezplatna-analiza', letter: 'B', title: 'Bezpłatna wstępna analiza',
     items: [
-      { q: 'Co dokładnie obejmuje bezpłatna analiza?', a: 'Odpowiedź, co w Twojej sprawie trzeba zrobić — np. szczegółowy audyt, pismo albo sprawa sądowa — i ofertę z ceną i terminem. To nie jest opinia prawna ani pełne sprawdzenie dokumentów. Szczegółowa analiza, pismo czy prowadzenie sprawy to zakres oferty.' },
+      { q: 'Co obejmuje bezpłatna wstępna analiza?', a: 'Odpowiedź, co w Twojej sprawie trzeba zrobić — np. szczegółowy audyt, pismo albo sprawa sądowa — i ofertę z ceną i terminem. To nie jest opinia prawna ani pełne sprawdzenie dokumentów. Szczegółowa analiza, pismo czy prowadzenie sprawy to zakres oferty.' },
       { q: 'Dlaczego nie podajesz cen na stronie?', a: 'Bo cena zależy od sprawy: od nieruchomości, dokumentów i tego, co trzeba zrobić. Podaję ją w ofercie, którą wysyłam razem z bezpłatną wstępną analizą — konkretną kwotę i termin, zanim cokolwiek zlecisz.' },
-      { q: 'Co dostaję w odpowiedzi?', a: 'Jeden mail: co trzeba zrobić w Twojej sprawie i dlaczego, a do tego ofertę z zakresem, ceną (najczęściej ryczałtową) i terminem. Do akceptacji oferty nic nie płacisz.' },
+      { q: 'Co dostaję w odpowiedzi?', a: 'Mail (albo telefon, jeśli go wybierzesz): co trzeba zrobić w Twojej sprawie i dlaczego. Ofertę z zakresem, ceną (najczęściej ryczałtową) i terminem zawsze dostajesz mailem. Do akceptacji oferty nic nie płacisz.' },
     ],
   },
   {
@@ -43,7 +43,7 @@ const FAQ_SECTIONS = [
   {
     id: 'audyty-raporty', letter: 'E', title: 'Audyty, raporty i ich wartość',
     items: [
-      { q: 'Czym różni się audyt od porady prawnej?', a: 'Porada to krótka odpowiedź na konkretne pytanie. Audyt to pełna analiza dokumentów (KW, umowa, prospekt) zakończona pisemnym raportem ryzyk i rekomendacji.' },
+      { q: 'Czym różni się audyt od bezpłatnej wstępnej analizy?', a: 'Wstępna analiza mówi, co trzeba zrobić w sprawie, i kończy się ofertą. To nie jest opinia prawna ani pełne sprawdzenie dokumentów. Audyt to pełna analiza dokumentów (KW, umowa, prospekt) zakończona pisemnym raportem ryzyk i rekomendacji.' },
       { q: 'Jak wygląda raport?', a: 'Konkretnie i czytelnie: ryzyka oznaczam w systemie czerwone / żółte / zielone, opisuję ich konsekwencje i podaję, co z każdym zrobić. Raport kończy się planem dalszych działań.' },
       { q: 'Czy raport ma wartość prawną?', a: 'Tak. To profesjonalna opinia prawna sygnowana przeze mnie jako adwokata. Możesz się na nią powołać, pokazać ją drugiej stronie, pośrednikowi czy bankowi.' },
       { q: 'Co, jeśli w trakcie audytu wykryjesz problem?', a: 'Dostajesz konkretne rekomendacje — od wskazania klauzul do zmiany, przez propozycje renegocjacji, po rekomendację odstąpienia od transakcji w skrajnych przypadkach. Zawsze tłumaczę, jakie masz opcje.' },
@@ -60,12 +60,12 @@ const FAQ_SECTIONS = [
     ],
   },
   {
-    id: 'wycena-rozliczenia', letter: 'G', title: 'Wycena i rozliczenia',
+    id: 'wycena-rozliczenia', letter: 'G', title: 'Koszt i rozliczenia',
     items: [
-      { q: 'Jak ustalasz koszt?', a: 'Cenę podaję w ofercie, którą wysyłam razem z bezpłatną wstępną analizą — najczęściej ryczałtową, więc znasz całość kosztu z góry, zanim cokolwiek zlecisz.' },
+      { q: 'Jak ustalasz koszt?', a: 'Cenę — najczęściej ryczałtową — podaję w ofercie, którą wysyłam razem z bezpłatną wstępną analizą. Znasz całość kosztu z góry, zanim cokolwiek zlecisz.' },
       { q: 'Kiedy płacę?', a: 'Standardowo po akceptacji oferty, przed rozpoczęciem prac (przelew na konto kancelarii). Dla stałych klientów możliwe są inne ustalenia.' },
       { q: 'Czy wystawiasz faktury?', a: 'Tak — osobom i firmom, na życzenie. Kancelaria jest podatnikiem VAT.' },
-      { q: 'Co, jeśli po analizie okaże się, że potrzebuję innej usługi?', a: 'Jeśli wspólnie dobierzemy lepiej dopasowaną usługę, przechodzimy na nią z rozliczeniem różnicy — dopłatą lub zwrotem. Nie zarabiam na pomyłce w doborze.' },
+      { q: 'Co, jeśli w trakcie pracy okaże się, że potrzebuję innej usługi?', a: 'Proponuję na piśmie nowy zakres i cenę. Zmieniamy je dopiero po Twojej akceptacji, z rozliczeniem różnicy — dopłatą lub zwrotem. Nie zarabiam na pomyłce w doborze.' },
     ],
   },
 ];

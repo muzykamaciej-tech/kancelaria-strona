@@ -6,6 +6,7 @@ const { useState, useEffect, useMemo } = React;
 /* ============================================================
    HomePage
    ============================================================ */
+/* LEGACY — nie używać: komponent niepodpięty do routingu (app.jsx), stary model „wyceny”. Model pierwszego kontaktu: CLAUDE.md. */
 function HomePage({ setRoute, tweaks }) {
   const featured = window.FEATURED_IDS.map((id) => window.SERVICES.find((s) => s.id === id));
   const rest = window.SERVICES.filter((s) => !window.FEATURED_IDS.includes(s.id));
@@ -77,6 +78,7 @@ function HomePage({ setRoute, tweaks }) {
 /* ============================================================
    Uslugi index page
    ============================================================ */
+/* LEGACY — nie używać: komponent niepodpięty do routingu (app.jsx), stary model „wyceny”. Model pierwszego kontaktu: CLAUDE.md. */
 function UslugiPage({ setRoute }) {
   return (
     <main id="main-content" data-screen-label="02 Uslugi index">
@@ -131,6 +133,7 @@ function UslugiPage({ setRoute }) {
 /* ============================================================
    Service detail page
    ============================================================ */
+/* LEGACY — nie używać: komponent niepodpięty do routingu (app.jsx), stary model „wyceny”. Model pierwszego kontaktu: CLAUDE.md. */
 function ServiceDetailPage({ serviceId, setRoute }) {
   const service = window.SERVICES.find((s) => s.id === serviceId) || window.SERVICES[0];
 
@@ -506,6 +509,7 @@ function BlogRelatedServices({ slugs, setRoute }) {
 /* ============================================================
    FAQ page (grouped accordion)
    ============================================================ */
+/* LEGACY — nie używać: komponent niepodpięty do routingu (app.jsx), stary model „wyceny”. Model pierwszego kontaktu: CLAUDE.md. */
 function FAQPage({ setRoute }) {
   return (
     <main id="main-content" data-screen-label="06 FAQ">
@@ -665,7 +669,7 @@ function KontaktPage({ setRoute }) {
           </window.NavLink>
           <div className="mt-8" style={{ maxWidth: '48rem' }}>
             <span className="eyebrow">Kontakt</span>
-            <h1 className="display mt-4">Napisz — odpiszę<br /><span className="italic" style={{ color: 'var(--text-body)' }}>zwykle w 24 h.</span></h1>
+            <h1 className="display mt-4">Napisz — odpiszę<br /><span className="italic" style={{ color: 'var(--text-body)' }}>w ciągu 24 h roboczych.</span></h1>
             <p className="lead mt-6">Kontakt prowadzę przede wszystkim mailowo, w pełni zdalnie. Najprościej opisać sprawę w formularzu „Wstępna analiza sprawy”: w ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem.</p>
             <div className="flex gap-3 mt-8" style={{ flexWrap: 'wrap' }}>
               <button className="btn btn-primary" onClick={() => window.spScrollToForm && window.spScrollToForm()}>

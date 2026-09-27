@@ -43,7 +43,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Ziemia rolna to osobne przepisy — sprawdźmy je, zanim podpiszesz.',
-      lead: 'Opisz transakcję — w 24 h odpiszę, czy wchodzą przepisy o ustroju rolnym i co trzeba zrobić, i prześlę ofertę z ceną.',
+      lead: 'Opisz transakcję — w ciągu 24 h roboczych odpiszę, czy wchodzą przepisy o ustroju rolnym i co trzeba zrobić, i prześlę ofertę z ceną.',
     },
   },
 
@@ -87,7 +87,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Twój grunt na 30 lat — podpisz dopiero, gdy umowa naprawdę Cię chroni.',
-      lead: 'Prześlij umowę od firmy OZE — w 24 h odpiszę, co trzeba w niej sprawdzić i wynegocjować, i prześlę ofertę z ceną.',
+      lead: 'Prześlij umowę od firmy OZE — w ciągu 24 h roboczych odpiszę, co trzeba w niej sprawdzić i wynegocjować, i prześlę ofertę z ceną.',
     },
   },
 
@@ -130,7 +130,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Nie negocjuj sam pod presją emocji. Zrobię to za Ciebie.',
-      lead: 'Opisz transakcję i cel — w 24 h odpiszę, jak poprowadzę negocjacje po Twojej stronie, i prześlę ofertę z ceną.',
+      lead: 'Opisz transakcję i cel — w ciągu 24 h roboczych odpiszę, jak poprowadzę negocjacje po Twojej stronie, i prześlę ofertę z ceną.',
     },
   },
 
@@ -173,7 +173,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Zgłoszenie zamiast pozwolenia — szybciej, o ile zrobione bez błędu.',
-      lead: 'Opisz inwestycję — w 24 h odpiszę, czy wystarczy zgłoszenie i jak uniknąć sprzeciwu urzędu, i prześlę ofertę z ceną.',
+      lead: 'Opisz inwestycję — w ciągu 24 h roboczych odpiszę, czy wystarczy zgłoszenie i jak uniknąć sprzeciwu urzędu, i prześlę ofertę z ceną.',
     },
   },
 
@@ -217,7 +217,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Cały cykl inwestycji — od gruntu po posprzedaż — pod jedną prawną opieką.',
-      lead: 'Opisz projekt — w 24 h zaproponuję zakres obsługi dopasowany do inwestycji i prześlę ofertę z ceną.',
+      lead: 'Opisz projekt — w ciągu 24 h roboczych zaproponuję zakres obsługi dopasowany do inwestycji i prześlę ofertę z ceną.',
     },
   },
 
@@ -261,7 +261,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Pewna umowa i chroniona prowizja — żebyś dostał zapłatę za swoją pracę.',
-      lead: 'Opisz, jak działa Twoje biuro — w 24 h odpiszę, co zabezpieczyć w pierwszej kolejności, i prześlę ofertę z ceną.',
+      lead: 'Opisz, jak działa Twoje biuro — w ciągu 24 h roboczych odpiszę, co zabezpieczyć w pierwszej kolejności, i prześlę ofertę z ceną.',
     },
   },
 
@@ -306,7 +306,7 @@ Object.assign(window.SERVICE_CONTENT, {
     ],
     cta: {
       heading: 'Uchwały, które się bronią. Pieniądze, które wracają. Deweloper, który odpowiada.',
-      lead: 'Opisz sprawę wspólnoty — w 24 h zaproponuję model współpracy i prześlę ofertę z ceną.',
+      lead: 'Opisz sprawę wspólnoty — w ciągu 24 h roboczych zaproponuję model współpracy i prześlę ofertę z ceną.',
     },
   },
 

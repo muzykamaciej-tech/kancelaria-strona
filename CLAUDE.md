@@ -27,6 +27,7 @@ Potem commit razem z `dist/`. Najpierw push na gałąź roboczą (podgląd), a n
   - `date` (słownie, do wyświetlania);
   - opcjonalnie `updated` (słownie) i/lub `updatedIso`;
   - `cover: '/assets/…'` (ścieżka od `/`; build i tak poprawia `assets/…`);
+  - `metaTitle` (do 60 znaków), jeśli tytuł wpisu jest dłuższy: trafia do `<title>`, a H1 zostaje pełnym tytułem;
   - opcjonalnie `metaDesc` (pełne zdania, do 155 znaków, tylko z treści wpisu). Bez niego opis w Google to ucięty `excerpt` z „…”. To samo pole działa w `SERVICE_CONTENT` (usługi) i `SERVICE_BLOCKS` (bloki).
 - Po `npm run build` wpis dostaje:
   - własny adres `/blog/<slug>`;
