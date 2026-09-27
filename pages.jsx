@@ -407,7 +407,7 @@ function BlogPostPage({ slug, setRoute }) {
               <div className="flex items-center gap-3">
                 <div className="author-avatar">MM</div>
                 <div>
-                  <div className="font-bold" style={{ color: 'var(--text-main)' }}>adw. dr Maciej Muzyka</div>
+                  <window.NavLink route="o-mnie" className="font-bold" style={{ color: 'var(--text-main)', display: 'block', textDecoration: 'none' }}>adw. dr Maciej Muzyka</window.NavLink>
                   <div className="small">{post.date} · {post.readTime} czytania{post.updated ? ` · zaktualizowano ${post.updated}` : ''}</div>
                 </div>
               </div>

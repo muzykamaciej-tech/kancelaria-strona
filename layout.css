@@ -1166,6 +1166,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 @media (min-width: 700px) {
   .footer-grid { grid-template-columns: 2fr 1.5fr; }
 }
+@media (min-width: 1000px) {
+  .footer-grid { grid-template-columns: 2fr 1.5fr 1.5fr; }
+}
 .footer-links {
   list-style: none;
   padding: 0;

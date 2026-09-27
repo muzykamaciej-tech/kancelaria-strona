@@ -32,7 +32,7 @@ function spScrollToForm() {
 function ServiceTrustStrip() {
   const items = [
     { i: 'shield-check', l: 'Tajemnica adwokacka · OC' },
-    { i: 'map-pin', l: 'W pełni zdalnie, w całej Polsce' },
+    { i: 'map-pin', l: 'Kancelaria w Lublinie · zdalnie w całej Polsce' },
     { i: 'scale', l: 'Praktyka wyłącznie w prawie nieruchomości' },
     { i: 'badge-check', l: 'adw. dr Maciej Muzyka · LUB/ADW/1702' },
   ];
@@ -174,11 +174,11 @@ function UslugiOverview({ setRoute }) {
           <div className="mt-8 section-head--center" style={{ maxWidth: '48rem', marginInline: 'auto' }}>
             <span className="eyebrow">Usługi prawne</span>
             <h1 className="display mt-4">
-              Obszary praktyki,<br />
+              Obsługa prawna nieruchomości,<br />
               <span className="italic" style={{ color: 'var(--text-body)' }}>pełen zakres spraw.</span>
             </h1>
             <p className="lead mt-6">
-              Zajmuję się wyłącznie prawem nieruchomości i procesem inwestycyjno-budowlanym. Wybierz obszar, żeby zobaczyć konkretne usługi — albo po prostu opisz sprawę, a ja odpowiem ze wstępną analizą i ofertą naszej współpracy.
+              Zajmuję się wyłącznie prawem nieruchomości i procesem inwestycyjno-budowlanym. Kancelaria jest w Lublinie, sprawy z całej Polski prowadzę zdalnie. Wybierz obszar, żeby zobaczyć konkretne usługi — albo po prostu opisz sprawę, a ja odpowiem ze wstępną analizą i ofertą naszej współpracy.
             </p>
             <button className="btn btn-primary mt-8" onClick={() => spScrollToForm()}>
               Opisz swoją sprawę <SIcon name="arrow-right" size={16} />

@@ -818,7 +818,7 @@ function Footer({ setRoute }) {
               <img src={window.__resources?.logoDark || "/assets/logo-on-dark.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" width="686" height="208" loading="lazy" decoding="async" style={{ height: 104, width: 'auto' }} />
             </window.NavLink>
             <p className="mt-6" style={{ color: 'var(--text-on-dark-3)', fontSize: '0.875rem', lineHeight: 1.6, maxWidth: '24rem' }}>
-              Specjalistyczna kancelaria adwokacka świadcząca usługi prawne wyłącznie w zakresie prawa nieruchomości i procesu inwestycyjno-budowlanego. Klienci z całej Polski — obsługa zdalna.
+              Kancelaria adwokacka w Lublinie: wyłącznie prawo nieruchomości i proces inwestycyjno-budowlany. Sprawy klientów z całej Polski prowadzę zdalnie.
             </p>
             <div className="mt-6 small" style={{ color: 'var(--slate-500)', lineHeight: 1.6 }}>
               <p><window.NavLink route="o-mnie" style={{ color: 'inherit', textDecoration: 'none' }}>adw. dr Maciej Muzyka</window.NavLink></p>
@@ -830,6 +830,8 @@ function Footer({ setRoute }) {
             <h4 className="font-bold mb-6" style={{ color: '#fff' }}>Kancelaria</h4>
             <ul className="footer-links">
               <li><window.NavLink route="uslugi">Usługi prawne</window.NavLink></li>
+              <li><window.NavLink route="blog">Poradniki</window.NavLink></li>
+              <li><window.NavLink route="o-mnie">O mnie</window.NavLink></li>
               <li><window.NavLink route="faq">FAQ</window.NavLink></li>
               <li><window.NavLink route="kalkulator">Kalkulator — słupy na działce</window.NavLink></li>
               <li><window.NavLink route="kontakt">Kontakt</window.NavLink></li>
@@ -841,6 +843,17 @@ function Footer({ setRoute }) {
                   maciej.muzyka@mecenasodnieruchomosci.pl
                 </a>
               </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-bold mb-6" style={{ color: '#fff' }}>Najczęstsze sprawy</h4>
+            <ul className="footer-links">
+              <li><window.NavLink route="blok" slug="warunki-zabudowy-planowanie">Plan ogólny i warunki zabudowy</window.NavLink></li>
+              <li><window.NavLink route="blok" slug="sluzebnosci-odszkodowania">Słupy na działce i służebność przesyłu</window.NavLink></li>
+              <li><window.NavLink route="blok" slug="sprawdzenie-przed-zakupem">Sprawdzenie nieruchomości przed zakupem</window.NavLink></li>
+              <li><window.NavLink route="blok" slug="roszczenia-deweloper">Spory z deweloperem</window.NavLink></li>
+              <li><window.NavLink route="blok" slug="wspolwlasnosc-podzialy">Współwłasność i dział spadku</window.NavLink></li>
+              <li><window.NavLink route="blok" slug="najem">Najem i eksmisja</window.NavLink></li>
             </ul>
           </div>
         </div>

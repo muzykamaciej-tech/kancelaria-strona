@@ -461,6 +461,26 @@
       "permanent": true
     },
     {
+      "source": "/strona-glowna",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/book-online",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/blog/hashtags/:tag*",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog-feed.xml",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
       "source": "/blog/categories/:category*",
       "destination": "/blog",
       "permanent": true

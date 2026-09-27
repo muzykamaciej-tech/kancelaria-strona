@@ -157,6 +157,7 @@ const llms = [
   `- O kancelarii i kwalifikacjach: ${ORIGIN}/o-mnie`,
   `- Kontakt i formularz: ${ORIGIN}/kontakt`,
   '- E-mail: maciej.muzyka@mecenasodnieruchomosci.pl, tel. +48 884 784 984, ul. Cicha 4/5, 20-078 Lublin (siedziba); spotkania także: ul. Bracka 20/lok. 7A, 00-028 Warszawa',
+  '- Wizytówka w Mapach Google: https://maps.google.com/?cid=8576864712077445002',
   `- Kalkulator wynagrodzenia za słupy i rury na działce: ${ORIGIN}/kalkulator-slupy`,
   '',
   '## Usługi',

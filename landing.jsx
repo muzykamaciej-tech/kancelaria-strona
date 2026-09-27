@@ -728,12 +728,12 @@ function LandingIntro({ setRoute }) {
       <div className="orb" style={{ width: 640, height: 640, top: -240, right: -200, opacity: 'calc(0.16 * var(--ambient-on))' }} />
       <div className="wrap relative" style={{ zIndex: 2 }}>
         <div className="landing-intro-head">
-          <span className="eyebrow on-dark">Adwokat · doktor nauk prawnych · specjalista prawa nieruchomości</span>
-          <h1 className="display landing-intro-title mt-6" style={{ color: '#fff' }}>
+          <h1 className="eyebrow on-dark" style={{ margin: 0 }}>Prawnik od nieruchomości w Lublinie · adwokat · doktor nauk prawnych</h1>
+          <p className="display landing-intro-title mt-6" style={{ color: '#fff', marginBottom: '0.67em' }}>
             Nie musisz znać się na prawie,<br />
             żeby bezpiecznie<br />
             <span className="italic" style={{ color: 'var(--brand-primary-light)' }}>kupować i inwestować.</span>
-          </h1>
+          </p>
         </div>
 
         <div className="landing-intro-grid">
@@ -804,7 +804,7 @@ function LandingHero() {
               <GoogleBadge />
               <ul className="trust-points">
                 <li><LIcon name="shield-check" size={16} /> Tajemnica adwokacka</li>
-                <li><LIcon name="map-pin" size={16} /> Cała Polska, zdalnie</li>
+                <li><LIcon name="map-pin" size={16} /> Lublin · cała Polska zdalnie</li>
                 <li><LIcon name="wallet" size={16} /> Wycena z góry, na piśmie</li>
               </ul>
             </div>
@@ -1301,7 +1301,7 @@ function MapSection() {
         <span className="eyebrow">Kancelaria</span>
         <h3 className="h2 mt-4">Lublin i Warszawa —<br />sprawy z całej Polski</h3>
         <ul className="map-info-list mt-8">
-          <li><LIcon name="map-pin" size={20} style={{ color: 'var(--brand-primary)' }} /><span><span className="loc-label">Siedziba kancelarii</span>ul. Cicha 4/5<br />20-078 Lublin</span></li>
+          <li><LIcon name="map-pin" size={20} style={{ color: 'var(--brand-primary)' }} /><span><span className="loc-label">Siedziba kancelarii</span>ul. Cicha 4/5<br />20-078 Lublin<br /><a href="https://maps.google.com/?cid=8576864712077445002" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-primary)', fontWeight: 600 }}>Wizytówka w Mapach Google</a></span></li>
           <li><LIcon name="map-pin" size={20} style={{ color: 'var(--brand-primary)' }} /><span><span className="loc-label">Spotkania osobiste — Warszawa</span>ul. Bracka 20/lok. 7A<br />00-028 Warszawa</span></li>
           <li><LIcon name="mail" size={20} style={{ color: 'var(--brand-primary)' }} /><span style={{ wordBreak: 'break-all' }}>maciej.muzyka@mecenasodnieruchomosci.pl</span></li>
           <li><LIcon name="phone" size={20} style={{ color: 'var(--brand-primary)' }} /><span>+48 884 784 984<br /><span className="small">Preferowany kontakt mailowy</span></span></li>
