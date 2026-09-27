@@ -2,6 +2,7 @@
 window.BLOG.push(
   {
     slug: 'slup-rura-kable-na-dzialce-bez-umowy-bezumowne-korzystanie',
+    metaDesc: 'Słup, linia albo rura na działce bez umowy? Kiedy przedsiębiorstwo przesyłowe powinno Ci zapłacić za bezumowne korzystanie i jak liczy się wynagrodzenie.',
     title: 'Słup, rura lub kable na działce bez umowy? Sprawdź, czy należy Ci się wynagrodzenie za bezumowne korzystanie',
     excerpt: 'Jesteś właścicielem działki, płacisz za nią podatki, dbasz o nią. Ale przez środek Twojego ogrodu biegnie linia energetyczna albo pod ziemią zakopana jest rura gazowa. Nigdy nie wyraziłeś na to zgody, a na Twoje konto nie wpływa z tego tytułu ani złotówka. Czy przedsiębiorstwo przesyłowe może korzystać z Twojej własności „za darmo”?',
     date: '20 stycznia 2026', iso: '2026-01-20', readTime: '3 min',

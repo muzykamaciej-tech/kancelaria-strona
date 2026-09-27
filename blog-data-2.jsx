@@ -179,6 +179,7 @@ window.BLOG.push(
   },
   {
     slug: 'nielegalne-wydobycie-piachu-z-dzialki-konsekwencje',
+    metaDesc: 'Nawet ustna zgoda na wydobycie piasku z Twojej działki może obarczyć Cię odpowiedzialnością: administracyjną, karną i podatkową. Jak się zabezpieczyć.',
     title: 'Twoja działka, Twoja odpowiedzialność? Nielegalne wydobycie piachu – konsekwencje',
     excerpt: 'Posiadanie własnego kawałka ziemi – czy to działki rolnej odziedziczonej po dziadkach, czy gruntu inwestycyjnego pod miastem – kojarzy się z bezpieczeństwem i wolnością. Niestety, w mojej praktyce adwokackiej zbyt często widzę, jak ta sielanka zamienia się w koszmar. Właściciele, często nieświadomi zagrożeń, stają przed widmem gigantycznych kar i wieloletnich postępowań.',
     date: '11 października 2025', iso: '2025-10-11', readTime: '6 min',
@@ -328,6 +329,7 @@ window.BLOG.push(
   },
   {
     slug: 'wyrok-tk-zasiedzenie-sluzebnosci-przesylu',
+    metaDesc: 'Przedsiębiorstwo przesyłowe odmawia zapłaty za słupy lub rury, powołując się na zasiedzenie? Co zmienia wyrok Trybunału Konstytucyjnego.',
     title: 'Rewolucyjny wyrok TK: koniec z „darmowym” zasiedzeniem służebności przesyłu?',
     excerpt: 'Jeśli jesteś właścicielem działki, przez którą biegną „stare” rury, kable lub linie energetyczne, a przedsiębiorstwo przesyłowe odmawiało Ci zapłaty, powołując się na zasiedzenie – ten artykuł jest dla Ciebie. 2 grudnia 2025 roku Trybunał Konstytucyjny wydał orzeczenie (sygn. P 10/16), które wywraca do góry nogami dotychczasową linię obrony gigantów energetycznych.',
     date: '15 grudnia 2025', iso: '2025-12-15', readTime: '3 min',

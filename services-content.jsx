@@ -9,6 +9,7 @@ const COST_TEXT = 'Koszt ustalam po bezpłatnej wstępnej analizie Twojej sprawy
 const SERVICE_CONTENT = {
   /* ===== WZORCOWA (flagowa) — Audyt stanu prawnego ===== */
   'audyt-stanu-prawnego-nieruchomosci': {
+    metaDesc: 'Pełny audyt prawny działki, domu lub mieszkania. Wyłapuję obciążenia, ryzyka i pułapki w dokumentach i mówię wprost, czy możesz bezpiecznie podpisywać.',
     subtitle: 'Pełny audyt prawny działki, domu lub mieszkania. Wyłapuję obciążenia, ukryte ryzyka i pułapki w dokumentach — i mówię wprost, czy możesz bezpiecznie podpisywać.',
     intro: 'Większość problemów z nieruchomością widać w dokumentach na długo, zanim staną się Twoim problemem — trzeba tylko wiedzieć, gdzie patrzeć. Audyt to mój prawny przegląd działki, domu lub mieszkania: sprawdzam wszystko, co decyduje o bezpieczeństwie transakcji, i mówię Ci wprost, czy możesz podpisywać.',
     whenTitle: 'Kiedy warto zrobić audyt',
@@ -89,6 +90,7 @@ const SERVICE_CONTENT = {
 
   /* ===== Sprawdzenie umowy deweloperskiej ===== */
   'sprawdzenie-umowy-deweloperskiej': {
+    metaDesc: 'Deweloper pisze umowę pod siebie. Czytam ją pod kątem Twojego bezpieczeństwa (kary, terminy, odbiór, cesja, zwrot pieniędzy) i tłumaczę, co Ci grozi.',
     subtitle: 'Deweloper pisze umowę pod siebie. Ja czytam ją pod kątem Twojego bezpieczeństwa — kary, terminy, odbiór, cesja, zwrot pieniędzy — i tłumaczę, co realnie Ci grozi.',
     intro: 'Umowę deweloperską przygotowuje prawnik dewelopera — i pisze ją tak, żeby chronić dewelopera, nie Ciebie. Większość zapisów wygląda standardowo, ale to właśnie w szczegółach kryją się kary, terminy i furtki, które mogą Cię kosztować. A wbrew temu, co słyszy wielu kupujących, sporo z tych zapisów podlega negocjacji — część bywa wręcz niedozwolona. Czytam całą umowę paragraf po paragrafie i mówię wprost, co podpisujesz i co da się zmienić.',
     whenTitle: 'Kiedy warto sprawdzić umowę',
@@ -349,6 +351,7 @@ const SERVICE_CONTENT = {
 
   /* ===== Sprawdzenie umowy rezerwacyjnej (Blok 1) ===== */
   'sprawdzenie-umowy-rezerwacyjnej': {
+    metaDesc: 'Zanim wpłacisz opłatę rezerwacyjną, sprawdzam umowę: czy odzyskasz pieniądze, gdy nie dostaniesz kredytu albo deweloper zmieni warunki.',
     h1: 'Sprawdzenie umowy rezerwacyjnej',
     subtitle: 'Zanim wpłacisz opłatę rezerwacyjną i zablokujesz mieszkanie, sprawdzam umowę — przede wszystkim to, czy odzyskasz pieniądze, gdy nie dostaniesz kredytu albo deweloper zmieni warunki.',
     intro: 'Umowa rezerwacyjna wygląda niewinnie — „tylko rezerwacja” — ale wpłacasz przy niej realne pieniądze, a to jej zapisy przesądzają, czy je odzyskasz. Opłata bywa niemała (ustawa dopuszcza do 1% ceny), a warunki jej zwrotu deweloperzy formułują na swoją korzyść. Sprawdzam umowę, zanim ją podpiszesz, i mówię wprost, czy naprawdę Cię chroni.',
@@ -394,6 +397,7 @@ const SERVICE_CONTENT = {
 
   /* ===== Obsługa prawna zakupu nieruchomości (Blok 2) ===== */
   'obsluga-zakupu': {
+    metaDesc: 'Kupujesz mieszkanie, dom albo działkę? Prowadzę Cię przez cały zakup: sprawdzam, co kupujesz, negocjuję warunki i zabezpieczam Twoje pieniądze.',
     h1: 'Obsługa prawna zakupu nieruchomości',
     subtitle: 'Kupujesz mieszkanie, dom albo działkę? Prowadzę Cię przez cały zakup — sprawdzam, co kupujesz, negocjuję warunki, zabezpieczam Twoje pieniądze i pilnuję, żebyś wyszedł z transakcji z czystą księgą.',
     intro: 'Zakup nieruchomości to często najważniejsza decyzja finansowa w życiu — i moment, w którym najłatwiej o kosztowny błąd. Sprzedający i pośrednik mają swój interes, a notariusz dba o poprawność aktu, nie o Ciebie. Ja pilnuję wyłącznie Twojej strony — od sprawdzenia nieruchomości po bezpieczny wpis własności.',
@@ -439,6 +443,7 @@ const SERVICE_CONTENT = {
 
   /* ===== Obsługa prawna sprzedaży nieruchomości (Blok 2) ===== */
   'obsluga-sprzedazy': {
+    metaDesc: 'Sprzedajesz mieszkanie, dom albo działkę? Kompletuję dokumenty, układam umowę i pilnuję, żeby pieniądze trafiły do Ciebie, zanim wydasz nieruchomość.',
     h1: 'Obsługa prawna sprzedaży nieruchomości',
     subtitle: 'Sprzedajesz mieszkanie, dom albo działkę? Przygotowuję bezpieczną sprzedaż — kompletuję dokumenty, układam umowę zgodnie z Twoim interesem i pilnuję, żeby pieniądze trafiły do Ciebie, zanim wydasz nieruchomość.',
     intro: 'Przy sprzedaży najwięcej ryzyka leży po stronie pieniędzy i terminów — czy zapłata wpłynie, zanim wydasz klucze, i co zrobić, gdy kupujący finansuje zakup kredytem. Dbam o to, żeby sprzedaż była dla Ciebie bezpieczna i przewidywalna, a nie oparta na zaufaniu do obcej osoby.',
@@ -725,6 +730,7 @@ const SERVICE_CONTENT = {
 
   /* ===== BLOK 5 — Proces budowlany i samowole ===== */
   'pozwolenie-na-budowe': {
+    metaDesc: 'Odmowa, odwołanie sąsiada albo zwłoka urzędu? Prowadzę prawną stronę pozwolenia na budowę: postępowanie, odwołania i obronę Twojej inwestycji.',
     h1: 'Pozwolenie na budowę',
     subtitle: 'Dostałeś odmowę, sąsiad odwołuje się od Twojego pozwolenia albo urząd zwleka? Prowadzę prawną stronę pozwolenia na budowę — postępowanie, odwołania i obronę Twojej inwestycji — a przy prostszych robotach doradzam, czy wystarczy zgłoszenie.',
     intro: 'Sam projekt budowlany przygotowuje architekt — ale pozwolenie na budowę to decyzja administracyjna, a wokół niej toczy się postępowanie, w którym łatwo o kosztowne komplikacje: odmowa urzędu, odwołanie sąsiada, przewlekłość, spór o to, kto jest stroną. Zajmuję się prawną stroną tego procesu: prowadzę postępowanie, walczę z odmową i bronię Twojego pozwolenia, gdy ktoś je kwestionuje. Doradzam też, czy Twoja inwestycja w ogóle wymaga pozwolenia, czy wystarczy zgłoszenie.',
@@ -783,6 +789,7 @@ const SERVICE_CONTENT = {
   },
 
   'legalizacja-samowoli': {
+    metaDesc: 'Dom lub rozbudowa bez pozwolenia? Sprawdzam, czy i którą ścieżką da się to zalegalizować, żeby uniknąć rozbiórki i nie przepłacić opłaty legalizacyjnej.',
     h1: 'Legalizacja samowoli budowlanej',
     subtitle: 'Dom, rozbudowa albo budynek bez pozwolenia? Sprawdzam, czy da się to zalegalizować — i którą ścieżką, żeby uniknąć rozbiórki i nie przepłacić opłaty legalizacyjnej.',
     intro: 'Samowola budowlana nie znika z czasem — nie „przedawnia się” i nie legalizuje sama. Prędzej czy później wychodzi: przy sprzedaży, kredycie albo kontroli nadzoru budowlanego. Dobra wiadomość jest taka, że większość samowoli da się zalegalizować, a starsze obiekty — często bez opłaty legalizacyjnej. Sprawdzam, czy Twój przypadek się kwalifikuje i którą ścieżką iść, żeby zamiast nakazu rozbiórki skończyło się na uporządkowaniu papierów.',
@@ -829,6 +836,7 @@ const SERVICE_CONTENT = {
   },
 
   'spory-z-wykonawca': {
+    metaDesc: 'Wykonawca się spóźnia, porzucił budowę albo zostawił wady? Dochodzę kar umownych, usunięcia usterek i zwrotu pieniędzy, także w sądzie.',
     h1: 'Spory z wykonawcą',
     subtitle: 'Wykonawca się spóźnia, porzucił budowę albo zostawił po sobie wady? Dochodzę Twoich roszczeń — kar umownych, usunięcia usterek, zwrotu pieniędzy — a gdy trzeba, reprezentuję Cię w sądzie.',
     intro: 'Budowa albo remont potrafi zamienić się w spór: ekipa znika w połowie, terminy się rozjeżdżają, a efekt odbiega od tego, co obiecano. Wykonawca często liczy, że odpuścisz, bo nie chcesz wchodzić w konflikt. Tymczasem masz konkretne narzędzia — kary umowne, rękojmię za wady, prawo do naprawy na koszt wykonawcy, a w razie potrzeby odstąpienie od umowy. Oceniam, na czym stoisz, i egzekwuję to za Ciebie.',
@@ -874,6 +882,7 @@ const SERVICE_CONTENT = {
   },
 
   'umowa-o-roboty-budowlane': {
+    metaDesc: 'Podpisujesz umowę z wykonawcą? Sprawdzam ją albo piszę od zera: kary, terminy, zasady odbioru i zabezpieczenie pieniędzy na wypadek fuszerki i opóźnień.',
     h1: 'Umowa o roboty budowlane',
     subtitle: 'Budujesz dom albo remontujesz i podpisujesz umowę z wykonawcą? Sprawdzam ją albo piszę od zera — z karami, terminami, zasadami odbioru i zabezpieczeniem pieniędzy, żeby fuszerka albo opóźnienie nie stały się Twoim problemem.',
     intro: 'Umowa z wykonawcą to Twoje główne zabezpieczenie na wypadek opóźnień, wad i porzuconej budowy — ale większość umów, które dostają inwestorzy, chroni wykonawcę, nie Ciebie. Brak kar umownych, nieprecyzyjne terminy, żadnego zabezpieczenia na usterki — to najczęstsze luki, przez które później trudno cokolwiek wyegzekwować. Sprawdzam umowę, którą masz podpisać, albo przygotowuję ją od zera, tak żebyś w razie problemów miał realne narzędzia.',
@@ -1200,6 +1209,7 @@ const SERVICE_CONTENT = {
   },
 
   'dzial-spadku': {
+    metaDesc: 'Odziedziczyliście dom albo mieszkanie razem? Przeprowadzam dział spadku: od ustalenia, kto dziedziczy, po sprawiedliwy podział z realną spłatą.',
     h1: 'Dział spadku z nieruchomością',
     subtitle: 'Odziedziczyliście dom albo mieszkanie razem i nie wiecie, jak je podzielić? Przeprowadzam dział spadku — od ustalenia, kto dziedziczy, po sprawiedliwy podział z realną spłatą — i pilnuję, żebyś nie dopłacił do cudzych roszczeń.',
     intro: 'Samo stwierdzenie, że coś odziedziczyliście, to dopiero połowa drogi — zostajecie współwłaścicielami „w ułamkach”, a to stan niewygodny: nie sprzedasz swojej części domu, nie zdecydujesz sam. Dopiero dział spadku zamienia tę abstrakcję w konkret: „to mieszkanie jest Twoje, a Ty spłacasz rodzeństwo”. Sposób, w jaki to przeprowadzimy, i to, jak wyceni się nieruchomość, przesądzają o dziesiątkach tysięcy złotych. Prowadzę całą sprawę tak, żeby wyszła po Twojej stronie.',
@@ -1306,6 +1316,7 @@ const SERVICE_CONTENT = {
   },
 
   'stwierdzenie-nabycia-spadku': {
+    metaDesc: 'Musisz formalnie potwierdzić, że dziedziczysz? Przeprowadzam stwierdzenie nabycia spadku w sądzie albo u notariusza, żebyś mógł zająć się majątkiem.',
     h1: 'Stwierdzenie nabycia spadku',
     subtitle: 'Zmarł ktoś bliski i musisz formalnie potwierdzić, że dziedziczysz? Przeprowadzam stwierdzenie nabycia spadku — w sądzie albo u notariusza — żebyś mógł zająć się majątkiem: sprzedać, przepisać, podzielić.',
     intro: 'Po śmierci bliskiej osoby samo pokrewieństwo nie wystarczy, żeby zarządzać majątkiem — potrzebny jest dokument, który urzędowo potwierdza, kto i w jakiej części dziedziczy. Bez niego nie sprzedasz odziedziczonego mieszkania, nie wypłacisz pieniędzy z konta, nie przepiszesz księgi. Prowadzę tę sprawę najszybszą możliwą drogą i mówię wprost, czy wystarczy notariusz, czy konieczny jest sąd.',
@@ -1351,6 +1362,7 @@ const SERVICE_CONTENT = {
   },
 
   'podzial-majatku-po-rozwodzie': {
+    metaDesc: 'Zostało wspólne mieszkanie, dom albo kredyt? Prowadzę podział majątku z nieruchomością: komu przypadnie, uczciwa spłata i zwrot Twoich pieniędzy.',
     h1: 'Podział majątku po rozwodzie',
     subtitle: 'Zostało wspólne mieszkanie, dom albo kredyt i nie wiecie, jak to rozdzielić? Prowadzę podział majątku, w którym najważniejsza jest nieruchomość — walczę o to, komu przypadnie, o uczciwą spłatę i o zwrot Twoich pieniędzy.',
     intro: 'Po rozwodzie najtrudniejsze bywa nie samo rozstanie, lecz podział tego, co wspólne — a zwykle najcenniejsza jest nieruchomość, często obciążona kredytem. Choć zasadą jest podział po połowie, o rzeczywistym wyniku decydują szczegóły: kto zatrzyma mieszkanie, jak policzy się spłatę, czyj był wkład własny i kto spłacał raty. To właśnie tam rozgrywa się walka o setki tysięcy złotych. Prowadzę podział majątku skupiony na nieruchomości i pilnuję, żeby te szczegóły zagrały po Twojej stronie.',
@@ -1710,6 +1722,7 @@ const SERVICE_CONTENT = {
   },
 
   'rekojmia-wady-lokalu': {
+    metaDesc: 'Po odbiorze albo po latach wyszły usterki w mieszkaniu od dewelopera? Egzekwuję rękojmię: naprawę, obniżenie ceny albo odstąpienie od umowy.',
     h1: 'Rękojmia za wady lokalu',
     subtitle: 'Po odbiorze albo po latach wyszły usterki w mieszkaniu od dewelopera? Egzekwuję rękojmię — naprawę, obniżenie ceny albo, przy poważnych wadach, odstąpienie od umowy.',
     intro: 'Za wady kupionego mieszkania deweloper odpowiada z mocy prawa przez pięć lat od wydania lokalu — i tej odpowiedzialności nie może wyłączyć w umowie. Problem w tym, że deweloperzy często grają na zwłokę i zmęczenie nabywcy, licząc, że machniesz ręką na „kilka krzywizn”. Egzekwuję rękojmię skutecznie: zgłaszam wady, stawiam żądania i, gdy trzeba, idę z tym do sądu.',
@@ -1841,6 +1854,7 @@ const SERVICE_CONTENT = {
   },
 
   'spory-o-metraz': {
+    metaDesc: 'Mieszkanie okazało się mniejsze, niż zapisano w umowie? Sprawdzam rzeczywisty metraż i rozliczenie różnicy w cenie.',
     h1: 'Spory o powierzchnię (metraż) lokalu',
     subtitle: 'Mieszkanie okazało się mniejsze, niż zapisano w umowie? Sprawdzam rzeczywisty metraż i odzyskuję różnicę w cenie — a przy dużej rozbieżności także prawo do odstąpienia.',
     intro: 'Różnica między metrażem z umowy a rzeczywistym potrafi sięgać kilku metrów — a przy dzisiejszych cenach to nierzadko kilkadziesiąt tysięcy złotych. Umowy deweloperskie zwykle dopuszczają niewielkie odchylenie (najczęściej ok. 2%), ale nawet w jego granicach należy się rozliczenie powykonawcze różnicy ceny, a powyżej — często również prawo odstąpienia od umowy. Sprawdzam, ile naprawdę masz metrów, i egzekwuję zwrot nadpłaty.',
@@ -1884,6 +1898,7 @@ const SERVICE_CONTENT = {
   },
 
   'klauzule-abuzywne-deweloper': {
+    metaDesc: 'Umowa deweloperska pełna zapisów na korzyść dewelopera? Wskazuję niedozwolone postanowienia, które Cię nie wiążą, przed podpisem albo w sporze.',
     h1: 'Klauzule abuzywne w umowie deweloperskiej',
     subtitle: 'Umowa deweloperska pełna zapisów na korzyść dewelopera? Wskazuję niedozwolone postanowienia, które Cię nie wiążą — i wykorzystuję to przed podpisem albo w sporze.',
     intro: 'Umowy deweloperskie pisze deweloper, więc naturalnie zabezpieczają jego, nie Ciebie. Część zapisów bywa jednak niedozwolona — jako klauzule abuzywne, które kształtują prawa konsumenta sprzecznie z dobrymi obyczajami i rażąco naruszają jego interesy. Takie postanowienia z mocy prawa nie wiążą konsumenta, nawet jeśli je podpisał. Wskazuję je, tłumaczę skutki i wykorzystuję — czy to negocjując umowę przed podpisem, czy podważając zapis w trwającym już sporze.',
@@ -2145,6 +2160,7 @@ const SERVICE_CONTENT = {
   },
 
   'wykup-dzialki-resztkowej': {
+    metaDesc: 'Po wywłaszczeniu części gruntu została Ci bezużyteczna „resztówka”? Żądam jej wykupu przez inwestora.',
     h1: 'Wykup działki resztkowej',
     subtitle: 'Po wywłaszczeniu części gruntu została Ci bezużyteczna „resztówka”? Żądam jej wykupu przez inwestora — bo skoro nie da się jej wykorzystać jak dawniej, nie powinieneś zostać z nią sam.',
     intro: 'Przy inwestycjach drogowych i innych celach publicznych zwykle zajmuje się tylko fragment nieruchomości. Problem w tym, że pozostała część — tak zwana resztówka — bywa za mała, ma nieużyteczny kształt albo traci dojazd i przestaje nadawać się do dotychczasowego użytku. Prawo przewiduje na to rozwiązanie: gdy resztówka nie nadaje się już do prawidłowego wykorzystania na dotychczasowe cele, na Twoje żądanie inwestor ma ją wykupić. Prowadzę tę sprawę — od wniosku po sąd, jeśli inwestor odmawia.',
@@ -2233,6 +2249,7 @@ const SERVICE_CONTENT = {
   },
 
   'zgoda-kowr': {
+    metaDesc: 'Nie jesteś rolnikiem, a chcesz kupić większą działkę rolną? Prowadzę wniosek o zgodę Dyrektora Generalnego KOWR, od ogłoszenia po decyzję.',
     h1: 'Zgoda KOWR na nabycie ziemi rolnej',
     subtitle: 'Nie jesteś rolnikiem, a chcesz kupić większą działkę rolną? Prowadzę cały wniosek o zgodę Dyrektora Generalnego KOWR — od ogłoszenia po decyzję — żeby transakcja doszła do skutku i była ważna.',
     intro: 'Ziemię rolną co do zasady może kupić rolnik indywidualny. Jeżeli nim nie jesteś, a działka przekracza ustawowy próg powierzchni, do zawarcia ważnej umowy potrzebna jest zgoda Dyrektora Generalnego KOWR wydawana w drodze decyzji administracyjnej. To sformalizowana procedura z ogłoszeniem na portalu erolnik, terminami i przesłankami, których niespełnienie oznacza odmowę albo — co gorsza — nieważność transakcji. Prowadzę ten wniosek kompleksowo, tak by zakup po prostu się udał.',
@@ -2320,6 +2337,7 @@ const SERVICE_CONTENT = {
   },
 
   'dzierzawa-rolna': {
+    metaDesc: 'Wydzierżawiasz albo dzierżawisz grunt rolny? Przygotowuję i sprawdzam umowy (czas trwania, czynsz, wypowiedzenie, zabezpieczenia) i prowadzę spory.',
     h1: 'Umowy dzierżawy rolnej',
     subtitle: 'Wydzierżawiasz albo dzierżawisz grunt rolny? Przygotowuję i sprawdzam umowy — czas trwania, czynsz, wypowiedzenie, zabezpieczenia — i prowadzę spory, gdy druga strona nie wywiązuje się z ustaleń.',
     intro: 'Dzierżawa rolna wygląda na prostą, dopóki wszystko idzie gładko — problem zaczyna się przy zaległym czynszu, dewastacji gruntu, sporze o zakończenie umowy albo o pierwokup dzierżawcy. Dobra umowa przewiduje te sytuacje z góry: precyzyjnie reguluje czynsz i jego waloryzację, czas trwania, zasady wypowiedzenia, obowiązki co do stanu gruntu i zabezpieczenia. Przygotowuję i opiniuję umowy dzierżawy rolnej po obu stronach oraz prowadzę spory, gdy dochodzi do konfliktu.',
@@ -2363,6 +2381,7 @@ const SERVICE_CONTENT = {
   },
 
   'odrolnienie': {
+    metaDesc: 'Chcesz budować na działce rolnej? Przeprowadzam zmianę przeznaczenia gruntu i wyłączenie z produkcji rolnej. Pilnuję, żebyś nie przepłacił za opłaty.',
     h1: 'Odrolnienie i wyłączenie z produkcji rolnej',
     subtitle: 'Chcesz budować na działce rolnej albo wykorzystać ją nierolniczo? Przeprowadzam zmianę przeznaczenia i wyłączenie z produkcji rolnej — i pilnuję, żebyś nie przepłacił za opłaty, które często da się obniżyć do zera.',
     intro: 'Zanim na gruncie rolnym powstanie dom albo inwestycja, trzeba zwykle przejść dwa etapy: zmianę przeznaczenia gruntu na nierolny (w planie miejscowym lub przez warunki zabudowy) i wyłączenie go z produkcji rolnej decyzją starosty. Z tym drugim wiążą się opłaty — jednorazowa należność i opłaty roczne — które nominalnie potrafią przerażać. Kluczowa jest jednak zasada, o której inwestorzy często nie wiedzą: należność pomniejsza się o wartość rynkową gruntu, więc w praktyce bardzo często wynosi zero. Przeprowadzam całą procedurę i pilnuję, by opłaty były policzone na Twoją korzyść.',

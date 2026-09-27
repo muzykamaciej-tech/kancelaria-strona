@@ -48,6 +48,7 @@ Object.assign(window.SERVICE_CONTENT, {
   },
 
   'dzierzawa-oze': {
+    metaDesc: 'Firma OZE chce wydzierżawić Twój grunt na 25–30 lat pod panele albo wiatraki? Analizuję i negocjuję umowę po Twojej stronie.',
     h1: 'Dzierżawa pod fotowoltaikę i wiatraki',
     subtitle: 'Firma OZE chce wydzierżawić Twój grunt na 25–30 lat pod panele albo wiatraki? Analizuję i negocjuję umowę po Twojej stronie — żeby czynsz był uczciwy, a grunt bezpieczny przez całą dekadę.',
     intro: 'Dzierżawa pod fotowoltaikę czy wiatraki potrafi dać właścicielowi stały, atrakcyjny dochód — ale to umowa wiążąca ziemię na kilkadziesiąt lat, pisana przez inwestora i pełna pułapek: symboliczny czynsz w wieloletnim okresie „przygotowań”, brak waloryzacji, słabe zabezpieczenie demontażu, zapisy pozwalające inwestorowi wyjść bez kosztów. Czytam i negocjuję taką umowę po Twojej stronie, żeby dochód był realny, a grunt wrócił do Ciebie w dobrym stanie.',

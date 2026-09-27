@@ -5,6 +5,7 @@
 const BLOG = [
   {
     slug: 'warunki-zabudowy-2026-lublin',
+    metaDesc: 'Od 1 września 2026 r. zmieniają się zasady wydawania decyzji o warunkach zabudowy. Co z działkami pod Lublinem, co z wydaną już WZ i jak się zabezpieczyć.',
     title: 'Warunki zabudowy 2026 w Lublinie i okolicy — czy stracisz prawo do budowy na działce?',
     excerpt: 'Od kilku miesięcy w mojej kancelarii powtarza się jedno pytanie: „Panie mecenasie, mam działkę pod Lublinem, budowę planowałem za rok, może dwa — czy zdążę?”. Niepokój jest uzasadniony. Od 1 września 2026 roku zmieniają się zasady wydawania decyzji o warunkach zabudowy i dla części działek może to oznaczać, że budowa stanie się — przynajmniej na jakiś czas — po prostu niemożliwa.',
     date: '15 czerwca 2026', iso: '2026-06-15', readTime: '6 min',
@@ -65,6 +66,7 @@ const BLOG = [
   },
   {
     slug: 'warunki-zabudowy-dla-czesci-dzialki',
+    metaDesc: 'Urząd żąda warunków zabudowy dla całej działki? Zasadą jest, że WZ dotyczy działki jako całości. Kiedy orzecznictwo dopuszcza WZ tylko dla jej części.',
     title: 'Ustalenie warunków zabudowy dla części działki – czy to w ogóle możliwe?',
     excerpt: 'Kupiłeś lub odziedziczyłeś dużą działkę. Chcesz wybudować dom, ale interesuje Cię zagospodarowanie tylko jednego, niewielkiego narożnika nieruchomości, na przykład tego z dostępem do drogi. Składasz wniosek o ustalenie warunków zabudowy (tzw. „wuzetkę”) i... zderzasz się ze ścianą. Urząd twierdzi, że musisz ustalić warunki dla całej działki. Czy urzędnicy mają rację? A może prawo zostawia nam furtkę?',
     date: '2 marca 2026', iso: '2026-03-02', updated: '9 kwietnia 2026', readTime: '3 min',
@@ -92,6 +94,7 @@ const BLOG = [
   },
   {
     slug: 'wydruki-ksiag-wieczystych-i-alerty-krs-2026',
+    metaDesc: 'Samodzielnie wydrukowany elektroniczny odpis z księgi wieczystej z mocą dokumentu z sądu i alerty KRS w aplikacji mObywatel. Co zmieniają nowe przepisy.',
     title: 'Rewolucja w urzędach 2026: Wydruki Ksiąg Wieczystych z mocą urzędową i Alerty KRS w Twoim telefonie',
     excerpt: 'Koniec z wizytami w sądach i czekaniem na papierowe dokumenty z pieczątką. Ustawa z 9 stycznia 2026 r. wprowadza potężne zmiany, które odczuje każdy inwestor, przedsiębiorca i nabywca nieruchomości. Cyfryzacja przyspiesza – już niedługo samodzielnie wydrukowany odpis z Księgi Wieczystej zastąpi ten urzędowy, a o każdym nowym wpisie w KRS Twojej spółki dowiesz się ze swojej aplikacji mObywatel.',
     date: '1 marca 2026', iso: '2026-03-01', updated: '9 kwietnia 2026', readTime: '2 min',

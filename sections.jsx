@@ -850,6 +850,7 @@ function Footer({ setRoute }) {
             <ul className="footer-links">
               <li><window.NavLink route="blok" slug="warunki-zabudowy-planowanie">Plan ogólny i warunki zabudowy</window.NavLink></li>
               <li><window.NavLink route="blok" slug="sluzebnosci-odszkodowania">Słupy na działce i służebność przesyłu</window.NavLink></li>
+              <li><window.NavLink route="usluga" slug="droga-konieczna">Droga konieczna i spory z sąsiadem</window.NavLink></li>
               <li><window.NavLink route="blok" slug="sprawdzenie-przed-zakupem">Sprawdzenie nieruchomości przed zakupem</window.NavLink></li>
               <li><window.NavLink route="blok" slug="roszczenia-deweloper">Spory z deweloperem</window.NavLink></li>
               <li><window.NavLink route="blok" slug="wspolwlasnosc-podzialy">Współwłasność i dział spadku</window.NavLink></li>

@@ -257,6 +257,7 @@ Object.assign(window.SERVICE_CONTENT, {
   },
 
   'obsluga-prawna-tbs-sim-kooperatyw': {
+    metaDesc: 'Realizujesz społeczne budownictwo czynszowe albo inwestycję kooperatywy? Prowadzę obsługę prawną: od struktury i umów po najem, partycypacje i rozliczenia.',
     h1: 'Obsługa prawna TBS, SIM i kooperatyw mieszkaniowych',
     subtitle: 'Realizujesz społeczne budownictwo czynszowe albo inwestycję kooperatywy? Prowadzę obsługę prawną tych szczególnych form — od struktury i umów po najem, partycypacje i rozliczenia.',
     intro: 'Społeczne formy mieszkalnictwa rządzą się własnymi przepisami — innymi niż zwykła deweloperka czy najem komercyjny. Towarzystwa budownictwa społecznego i zastępujące je w nowych projektach społeczne inicjatywy mieszkaniowe działają na podstawie ustawy o społecznych formach rozwoju mieszkalnictwa, a kooperatywy mieszkaniowe — na podstawie odrębnej ustawy obowiązującej od 2023 roku. Każda z tych form ma inne zasady finansowania, umów i rozliczeń. Obsługuję je prawnie, żeby projekt był bezpieczny i zgodny z reżimem, w którym działa.',
@@ -304,6 +305,7 @@ Object.assign(window.SERVICE_CONTENT, {
 Object.assign(window.SERVICE_CONTENT, {
 
   'obsluga-prawna-funduszy-prs': {
+    metaDesc: 'Budujesz albo kupujesz portfele najmu instytucjonalnego? Prowadzę due diligence, transakcje pakietowe i dokumentację najmu.',
     h1: 'Obsługa prawna inwestorów instytucjonalnych i funduszy (PRS)',
     subtitle: 'Budujesz albo kupujesz portfele najmu instytucjonalnego? Prowadzę due diligence, transakcje pakietowe i dokumentację najmu — z myślą o skali i bezpieczeństwie inwestycji.',
     intro: 'Inwestycja instytucjonalna w najem to gra o dużą stawkę, w której ryzyko kryje się w szczegółach: w stanie prawnym pakietu, w konstrukcji transakcji, w umowach najmu i w zabezpieczeniach. Fundusze i inwestorzy PRS potrzebują partnera, który przeprowadzi rzetelne due diligence, zbuduje bezpieczną strukturę transakcji i przygotuje dokumentację najmu odporną na masową skalę. Wspieram takie podmioty na każdym etapie — od analizy po zarządzanie portfelem.',
@@ -346,6 +348,7 @@ Object.assign(window.SERVICE_CONTENT, {
   },
 
   'obsluga-prawna-inwestorow-flipping': {
+    metaDesc: 'Kupujesz, remontujesz i sprzedajesz w tempie rynku? Prowadzę szybkie due diligence, umowy inwestycyjne i cesje, żeby prawo nie hamowało Twojego obrotu.',
     h1: 'Obsługa prawna inwestorów i firm flippingowych',
     subtitle: 'Kupujesz, remontujesz i sprzedajesz w tempie rynku? Prowadzę szybkie due diligence, umowy inwestycyjne i cesje — tak, żeby prawo nie hamowało Twojego obrotu.',
     intro: 'Flipping i inwestowanie w nieruchomości żyją tempem: okazja pojawia się i znika w kilka dni, a każdy przestój kosztuje. Jednocześnie pośpiech to najczęstsza przyczyna kosztownych błędów — w stanie prawnym, w umowie, w cesji, w rozliczeniu. Potrzebujesz prawnika, który nadąża za rynkiem i daje szybkie, jednoznaczne odpowiedzi. Wspieram profesjonalnych inwestorów tak, by transakcje były i szybkie, i bezpieczne.',
@@ -388,6 +391,7 @@ Object.assign(window.SERVICE_CONTENT, {
   },
 
   'obsluga-prawna-deweloperow-oze': {
+    metaDesc: 'Budujesz portfel gruntów pod fotowoltaikę i wiatraki? Prowadzę umowy dzierżawy, służebności, cesje i zabezpieczenia, żeby projekt był bankowalny.',
     h1: 'Obsługa prawna deweloperów OZE i firm dzierżawiących grunty',
     subtitle: 'Budujesz portfel gruntów pod fotowoltaikę i wiatraki? Prowadzę umowy dzierżawy, służebności, cesje i zabezpieczenia — tak, by projekt był bankowalny i odporny na spory z właścicielami.',
     intro: 'Projekt OZE stoi na gruncie — dosłownie i prawnie. O jego wartości i bankowalności decydują umowy dzierżawy, służebności przesyłu i drogowe, prawidłowo skonstruowane warunki zawieszające oraz cesje na spółki celowe i finansujących. Błąd w tytule prawnym do gruntu potrafi zablokować przyłączenie albo finansowanie całego przedsięwzięcia. Wspieram deweloperów OZE i firmy dzierżawiące grunty od zabezpieczenia terenu po zamknięcie finansowe.',
@@ -472,6 +476,7 @@ Object.assign(window.SERVICE_CONTENT, {
   },
 
   'obsluga-prawna-najemcow-komercyjnych': {
+    metaDesc: 'Wynajmujesz lokale pod działalność lub sieć? Negocjuję umowy najmu po stronie najemcy: czynsz, indeksację, fit-out i bezpieczne wyjście z umowy.',
     h1: 'Obsługa prawna najemców komercyjnych i sieci handlowych',
     subtitle: 'Wynajmujesz lokale albo powierzchnie pod działalność i sieć? Negocjuję umowy najmu po stronie najemcy — czynsz, indeksację, fit-out i bezpieczne wyjście z umowy.',
     intro: 'Umowy najmu komercyjnego pisze wynajmujący, więc naturalnie zabezpieczają jego. Dla najemcy — zwłaszcza sieci z wieloma lokalizacjami — kluczowe jest coś innego: przewidywalny czynsz i indeksacja, rozsądny podział kosztów fit-outu, elastyczność przy zmianach oraz realna możliwość wyjścia, gdy lokalizacja przestaje się opłacać. Negocjuję i porządkuję najmy po stronie najemcy, żeby warunki były uczciwe i policzalne.',
@@ -514,6 +519,7 @@ Object.assign(window.SERVICE_CONTENT, {
   },
 
   'obsluga-prawna-przedsiebiorstw-rolnych': {
+    metaDesc: 'Prowadzisz duże gospodarstwo albo zarządzasz areałem? Obsługuję obrót ziemią i KOWR, dzierżawy, projekty OZE, scalenia i sukcesję.',
     h1: 'Obsługa prawna przedsiębiorstw rolnych i właścicieli dużych areałów',
     subtitle: 'Prowadzisz duże gospodarstwo albo zarządzasz areałem? Obsługuję obrót ziemią i KOWR, dzierżawy, projekty OZE, scalenia i sukcesję — kompleksowo, z myślą o skali i ciągłości.',
     intro: 'Duży areał to duże pieniądze i duże ryzyka: obrót ziemią pod reżimem KOWR, dzierżawy, projekty OZE na gruntach, scalenia i podziały, wreszcie sukcesja, od której zależy przetrwanie gospodarstwa w kolejnym pokoleniu. Każdy z tych obszarów rządzi się osobnymi przepisami, a błąd potrafi kosztować grunt albo jego wartość. Obsługuję przedsiębiorstwa rolne i właścicieli dużych areałów kompleksowo — łącząc transakcje, kontrakty i planowanie sukcesji.',

@@ -804,7 +804,7 @@ function LandingHero() {
               <GoogleBadge />
               <ul className="trust-points">
                 <li><LIcon name="shield-check" size={16} /> Tajemnica adwokacka</li>
-                <li><LIcon name="map-pin" size={16} /> Lublin · cała Polska zdalnie</li>
+                <li><LIcon name="map-pin" size={16} /> Lublin i cała Polska</li>
                 <li><LIcon name="wallet" size={16} /> Wycena z góry, na piśmie</li>
               </ul>
             </div>

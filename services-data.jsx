@@ -5,6 +5,7 @@
 const SERVICE_BLOCKS = [
   {
     id: 'sprawdzenie-przed-zakupem', n: '1', icon: 'search-check',
+    metaDesc: 'Zanim wpłacisz zadatek i podpiszesz umowę, sprawdzam, co naprawdę kupujesz: księgę wieczystą, dokumenty i realny stan prawny nieruchomości.',
     title: 'Sprawdzenie nieruchomości przed zakupem',
     tagline: 'Zanim podpiszesz — sprawdźmy, co kupujesz.',
     intro: 'Najczęstsze i najważniejsze sprawy. Zanim wpłacisz zadatek i podpiszesz umowę, sprawdzam, co naprawdę kupujesz — księgę wieczystą, dokumenty i realny stan prawny nieruchomości.',

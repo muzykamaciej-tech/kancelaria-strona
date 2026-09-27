@@ -221,9 +221,18 @@ function fitTitle(cands) {
   const c = cands.filter(Boolean);
   return c.find((t) => t.length <= 60) || c.slice().sort((a, b) => a.length - b.length)[0];
 }
+/* title usługi/bloku: „{nazwa} – adwokat, Lublin”, potem „{nazwa} – Lublin”, na końcu sama nazwa;
+   myślnik z nazwy („Kaucja — rozliczenie”) zamieniony na dwukropek, żeby nie mieszać go z półpauzą sufiksu */
+function localTitle(names) {
+  const n = names.filter(Boolean).map((t) => t.replace(/ — /g, ': '));
+  return fitTitle([...n.map((t) => t + LOCAL_SUFFIX), ...n.map((t) => t + ' – Lublin'), ...n]);
+}
 const SEO_TITLE_SERVICE = {
   'odszkodowanie-sluzebnosc-przesylu': 'Odszkodowanie za słupy na działce – adwokat, Lublin',
   'plan-ogolny': 'Plan ogólny gminy: uwagi i skarga – adwokat, Lublin',
+  'eksmisja': 'Eksmisja lokatora: od pozwu po egzekucję – adwokat, Lublin',
+  'zachowek': 'Zachowek: dochodzenie i obrona – adwokat, Lublin',
+  'ograniczenie-korzystania-nieruchomosci': 'Ograniczenie korzystania z nieruchomości – adwokat, Lublin',
 };
 const SEO_TITLE_BLOCK = {
   'sluzebnosci-odszkodowania': 'Służebności, słupy i odszkodowania – adwokat, Lublin',
@@ -239,7 +248,7 @@ const LANDING_SOCIAL = {
   ogDescription: 'Nie musisz znać się na prawie, żeby bezpiecznie kupować i inwestować. Adwokat w Lublinie, wyłącznie prawo nieruchomości. Wycena sprawy w 24 h robocze.',
   twitterDescription: 'Adwokat w Lublinie, wyłącznie prawo nieruchomości. Opisz sprawę, w 24 h robocze odpiszę z wyceną. Sprawy z całej Polski zdalnie.',
 };
-const LANDING_META = 'Adwokat i doktor nauk prawnych w Lublinie. Wyłącznie prawo nieruchomości: plan ogólny i WZ, słupy na działce, zakup, spory. Wycena sprawy w 24 h robocze.';
+const LANDING_META = 'Kancelaria Nieruchomości w Lublinie. Adwokat i dr nauk prawnych, wyłącznie prawo nieruchomości: plan ogólny i WZ, słupy, zakup, spory. Wycena w 24 h robocze.';
 
 function setMetaForView(route, ids) {
   ids = ids || {};
@@ -247,24 +256,24 @@ function setMetaForView(route, ids) {
     setMeta('Obsługa prawna nieruchomości – adwokat, Lublin', 'Wyłącznie prawo nieruchomości: zakup, umowy, plan ogólny i WZ, słupy, najem, współwłasność, spory z deweloperem. Kancelaria w Lublinie, sprawy z całej Polski.');
   } else if (route === 'blok') {
     const b = window.getBlock(ids.blockId);
-    if (b) setMeta(SEO_TITLE_BLOCK[b.id] || fitTitle([b.title + LOCAL_SUFFIX, b.title + ' | ' + SITE_NAME, b.title]), truncMeta(b.intro || b.tagline, 155));
+    if (b) setMeta(SEO_TITLE_BLOCK[b.id] || localTitle([b.title]), b.metaDesc || truncMeta(b.intro || b.tagline, 155));
     else setMeta('Usługi — prawo nieruchomości | ' + SITE_NAME, null);
   } else if (route === 'usluga') {
     const s = window.getService(ids.serviceSlug);
     const c = (window.SERVICE_CONTENT || {})[ids.serviceSlug];
     const title = (c && c.h1) || (s && s.title) || 'Usługa';
     const desc = (c && (c.subtitle || c.intro)) || (s && s.desc) || LANDING_META;
-    setMeta(SEO_TITLE_SERVICE[ids.serviceSlug] || fitTitle([title + LOCAL_SUFFIX, s && (s.title + LOCAL_SUFFIX), title, s && s.title]), truncMeta(desc, 155));
+    setMeta(SEO_TITLE_SERVICE[ids.serviceSlug] || localTitle([title, s && s.title]), (c && c.metaDesc) || truncMeta(desc, 155));
   } else if (route === 'blog') {
     setMeta('Skarbnica wiedzy: poradniki o prawie nieruchomości', 'Praktyczne wpisy o prawie nieruchomości — jak bezpiecznie kupować, sprawdzać umowy i chronić swój kapitał.');
   } else if (route === 'blogpost') {
     const p = (window.BLOG || []).find((x) => x.slug === ids.blogSlug) || (window.BLOG || [])[0];
-    if (p) setMeta(fitTitle([p.title + ' | ' + SITE_NAME, p.title]), truncMeta(p.excerpt, 155), {
+    if (p) setMeta(fitTitle([p.title + ' | ' + SITE_NAME, p.title]), p.metaDesc || truncMeta(p.excerpt, 155), {
       ogTitle: p.title, type: 'article', published: p.iso, modified: postModifiedIso(p),
       image: p.cover ? absUrl(p.cover) : null, imageWidth: p.cover ? 1200 : null, imageHeight: p.cover ? 654 : null, imageAlt: p.cover ? p.title : null,
     });
   } else if (route === 'faq') {
-    setMeta('FAQ — najczęstsze pytania | ' + SITE_NAME, 'Odpowiedzi na najczęstsze pytania o współpracę: bezpłatna analiza sprawy, poufność, wycena i przebieg spraw z nieruchomości.');
+    setMeta('FAQ — najczęstsze pytania | ' + SITE_NAME, 'Odpowiedzi na najczęstsze pytania o współpracę: pierwszy kontakt, wycena, poufność i przebieg spraw z nieruchomości.');
   } else if (route === 'kontakt') {
     setMeta('Kontakt – adwokat od nieruchomości, Lublin, ul. Cicha 4/5', 'Kancelaria adwokacka: ul. Cicha 4/5, 20-078 Lublin. Spotkania także w Warszawie, ul. Bracka 20/7A. Opisz sprawę w formularzu, odpiszę w 24 h robocze.');
   } else if (route === 'o-mnie') {
@@ -272,7 +281,7 @@ function setMetaForView(route, ids) {
   } else if (route === 'notfound') {
     setMeta('Nie znaleziono strony | ' + SITE_NAME, 'Tej strony nie ma pod tym adresem. Przejdź do usług, poradników albo opisz swoją sprawę.');
   } else if (route === 'kalkulator') {
-    setMeta('Kalkulator: ile należy Ci się za słupy i rury na działce', 'Orientacyjny przedział wynagrodzenia za służebność przesyłu i bezumowne korzystanie z działki — słupy, linie, gazociąg, wodociąg. Bez danych osobowych, w kilka sekund.');
+    setMeta('Kalkulator: ile należy Ci się za słupy i rury na działce', 'Orientacyjny przedział wynagrodzenia za służebność przesyłu i bezumowne korzystanie z działki — słupy, linie, gazociąg, wodociąg. Bez danych osobowych.');
   } else if (route === 'polityka-prywatnosci') {
     setMeta('Polityka prywatności | ' + SITE_NAME, 'Jak Kancelaria Nieruchomości przetwarza i chroni Twoje dane osobowe — administrator, cele i podstawy prawne, tajemnica adwokacka oraz Twoje prawa.');
   } else if (route === 'regulamin') {
@@ -327,7 +336,7 @@ function buildJsonLd(route, ids) {
     if (!s || !b) return null;
     const c = (window.SERVICE_CONTENT || {})[ids.serviceSlug] || {};
     return { '@context': 'https://schema.org', '@graph': [
-      { '@type': 'Service', name: c.h1 || s.title, description: truncMeta(c.subtitle || s.desc, 300), serviceType: 'Legal service', provider: { '@id': ORG_ID }, areaServed: AREA_SERVED, url: SITE_BASE + buildPath('usluga', ids), offers: { '@type': 'Offer', description: 'Bezpłatna wstępna analiza sprawy w 24 h robocze; wycena przed zleceniem.' } },
+      { '@type': 'Service', name: c.h1 || s.title, description: truncMeta(c.subtitle || s.desc, 300), serviceType: 'Legal service', provider: { '@id': ORG_ID }, areaServed: AREA_SERVED, url: SITE_BASE + buildPath('usluga', ids), offers: { '@type': 'Offer', description: 'Wycena sprawy w 24 h robocze, przed zleceniem.' } },
       crumbs([{ name: 'Start', path: '/' }, { name: 'Usługi', path: '/uslugi' }, { name: b.title, path: '/uslugi/' + b.id }, { name: s.title, path: buildPath('usluga', ids) }]) ] };
   }
   if (route === 'blok') {

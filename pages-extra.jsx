@@ -36,13 +36,14 @@ function OMniePage({ setRoute }) {
 function OMnieIntro() {
   const NL = window.NavLink;
   const areas = [
-    ['warunki-zabudowy-planowanie', 'Plan ogólny gminy i warunki zabudowy (WZ)'],
-    ['sluzebnosci-odszkodowania', 'Słupy, linie i gazociągi na działce: służebność przesyłu i wynagrodzenie za bezumowne korzystanie'],
-    ['sprawdzenie-przed-zakupem', 'Sprawdzenie działki, domu lub mieszkania przed zakupem'],
-    ['roszczenia-deweloper', 'Spory z deweloperem: wady lokalu, kary za opóźnienie'],
-    ['wspolwlasnosc-podzialy', 'Współwłasność, dział spadku i podział majątku z nieruchomością'],
-    ['najem', 'Najem: zaległy czynsz, kaucja, eksmisja'],
-    ['grunty-rolne-oze', 'Grunty rolne, dzierżawa, zgoda KOWR'],
+    ['blok', 'warunki-zabudowy-planowanie', 'Plan ogólny gminy i warunki zabudowy (WZ)'],
+    ['blok', 'sluzebnosci-odszkodowania', 'Słupy, linie i gazociągi na działce: służebność przesyłu i wynagrodzenie za bezumowne korzystanie'],
+    ['usluga', 'droga-konieczna', 'Droga konieczna i spory z sąsiadem'],
+    ['blok', 'sprawdzenie-przed-zakupem', 'Sprawdzenie działki, domu lub mieszkania przed zakupem'],
+    ['blok', 'roszczenia-deweloper', 'Spory z deweloperem: wady lokalu, kary za opóźnienie'],
+    ['blok', 'wspolwlasnosc-podzialy', 'Współwłasność, dział spadku i podział majątku z nieruchomością'],
+    ['blok', 'najem', 'Najem: zaległy czynsz, kaucja, eksmisja'],
+    ['blok', 'grunty-rolne-oze', 'Grunty rolne, dzierżawa, zgoda KOWR'],
   ];
   return (
     <section className="section-py">
@@ -50,16 +51,13 @@ function OMnieIntro() {
         <span className="eyebrow">Prawnik od nieruchomości w Lublinie</span>
         <h2 className="h2 mt-4">Czym się zajmuję i jak pracuję.</h2>
         <div className="prose prose-article prose-legal mt-6">
-          <p>Pod nazwą Mecenas od Nieruchomości prowadzę kancelarię adwokacką w Lublinie, przy ul. Cichej 4/5. Zajmuję się wyłącznie prawem nieruchomości i procesem inwestycyjno-budowlanym. Sprawy klientów spoza Lublina prowadzę zdalnie, w całej Polsce.</p>
+          <p>Prowadzę w Lublinie, przy ul. Cichej 4/5, Kancelarię Nieruchomości (marka Mecenas od Nieruchomości). Zajmuję się wyłącznie prawem nieruchomości i procesem inwestycyjno-budowlanym. Sprawy klientów spoza Lublina prowadzę zdalnie, w całej Polsce. Jestem adwokatem Izby Adwokackiej w Lublinie (wpis nr LUB/ADW/1702, sprawdzisz go w <a href="https://rejestradwokatow.pl/adwokat/muzyka-maciej-35358" target="_blank" rel="noopener">Krajowym Rejestrze Adwokatów</a>).</p>
           <h3>Z czym przychodzą klienci</h3>
-          <ul>{areas.map(([id, t]) => <li key={id}><NL route="blok" slug={id}>{t}</NL></li>)}</ul>
-          <h3>Wykształcenie i doświadczenie</h3>
-          <p>Prawo studiowałem na Uniwersytecie Jagiellońskim. Doktorat z postępowania cywilnego obroniłem na UMCS w Lublinie. Doświadczenie zawodowe zdobywałem w kancelarii SPCG. Pracowałem naukowo w Katedrze Prawa Rolnego i Gospodarki Gruntami UMCS.</p>
-          <p>Jako wykładowca Okręgowej Rady Adwokackiej w Lublinie uczę aplikantów adwokackich postępowania sądowoadministracyjnego (skargi do WSA i NSA). Jestem adwokatem Izby Adwokackiej w Lublinie, wpis nr LUB/ADW/1702. Wpis sprawdzisz w <a href="https://rejestradwokatow.pl/adwokat/muzyka-maciej-35358" target="_blank" rel="noopener">Krajowym Rejestrze Adwokatów</a>.</p>
+          <ul>{areas.map(([route, id, t]) => <li key={id}><NL route={route} slug={id}>{t}</NL></li>)}</ul>
           <h3>Jak wygląda pierwszy kontakt</h3>
           <ol>
             <li>Opisujesz sprawę w formularzu na dole strony. Wystarczy kilka zdań.</li>
-            <li>W ciągu 24 h roboczych odpisuję mailem: co wynika z opisu, co proponuję zrobić i ile to kosztuje.</li>
+            <li>W ciągu 24 h roboczych odpisuję (albo oddzwaniam, jeśli wybierzesz telefon): co wynika z opisu, co proponuję zrobić i ile to kosztuje.</li>
             <li>Decydujesz, czy zlecasz sprawę. Do tego momentu nic nie płacisz.</li>
           </ol>
           <p>Nie obiecuję wyniku sprawy. Piszę wprost, co przemawia za nią, a co przeciw niej. Kontakt prowadzę przede wszystkim mailowo. Gdy sprawa wymaga spotkania, spotykamy się w Lublinie albo w Warszawie (ul. Bracka 20/7A).</p>
