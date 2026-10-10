@@ -648,7 +648,7 @@ function ReportShowcase() {
           <div className="report-showcase-copy">
             <span className="eyebrow">Mój wyróżnik</span>
             <h2 className="display mt-4">
-              Raport w trzech<br />
+              Raport w trzech{' '}<br />
               <span className="italic" style={{ color: 'var(--text-body)' }}>kolorach.</span>
             </h2>
             <p className="lead mt-6" style={{ maxWidth: '34rem' }}>

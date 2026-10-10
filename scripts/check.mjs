@@ -1,6 +1,8 @@
 /* check.mjs — automated verification of dist/ (run after `npm run build`).
    Static: canonical, titles, JSON-LD parses, internal links resolve, every sitemap URL reachable
-   from the home page through real <a href> links, no leftover #/ links.
+   from the home page through real <a href> links, no leftover #/ links; titles frozen in scripts/frozen-titles.json;
+   service/pillar pages with the content standard (main[data-std]): legal-basis links only to eli.gov.pl, dates not
+   in the future, dates in JSON-LD visible on the page, no FAQ question / H2 / paragraph copied from other pages.
    Browser: legacy #/ URLs land on the right path, client-side navigation works, no JS errors.
    --visual: full-page screenshots of key routes, production (old #/ URLs) vs local build, with pixel diff.
    Report: .check/report.json (+ .check/visual/*.png). Exit code 1 on any hard failure. */
@@ -31,7 +33,56 @@ const fail = [], warn = [];
   if (built !== now) fail.push(`dist/ is stale: built from sources ${built}, sources now ${now} (run npm run build)`);
 }
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}($|T)/;
-const jsonDates = (o, out = []) => { if (o && typeof o === 'object') for (const [k, v] of Object.entries(o)) { if (/^date(Published|Modified|Created)$/.test(k)) out.push(v); else jsonDates(v, out); } return out; };
+const jsonDates = (o, out = []) => { if (o && typeof o === 'object') for (const [k, v] of Object.entries(o)) { if (/^(date(Published|Modified|Created)|lastReviewed)$/.test(k)) out.push(v); else jsonDates(v, out); } return out; };
+/* "today" in Polish time: toISOString() is UTC, so after 22:00 in summer today's date would look like the future */
+const TODAY = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Warsaw' });
+const jsonNodes = (o, out = []) => { if (Array.isArray(o)) o.forEach((x) => jsonNodes(x, out)); else if (o && typeof o === 'object') { if (o['@type']) out.push(o); Object.values(o).forEach((v) => jsonNodes(v, out)); } return out; };
+
+/* Minimal HTML tree for the prerendered pages (React output: every element closed, attributes quoted). */
+const VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
+const ENT = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: '\u00a0' };
+const decodeEnt = (t) => t.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (m, e) => e[0] === '#' ? String.fromCodePoint(e[1].toLowerCase() === 'x' ? parseInt(e.slice(2), 16) : parseInt(e.slice(1), 10)) : (ENT[e] !== undefined ? ENT[e] : m));
+function parseHtml(h) {
+  const root = { tag: '#root', attrs: {}, children: [], parent: null };
+  let cur = root;
+  const re = /<!--[\s\S]*?-->|<!doctype[^>]*>|<(\/?)([a-zA-Z][a-zA-Z0-9-]*)((?:[^>"']|"[^"]*"|'[^']*')*)>|([^<]+)/gi;
+  let m;
+  while ((m = re.exec(h))) {
+    if (m[4] !== undefined) { cur.children.push(m[4]); continue; }
+    if (!m[2]) continue;
+    const tag = m[2].toLowerCase();
+    if (m[1]) { let n = cur; while (n && n.tag !== tag) n = n.parent; if (n && n.parent) cur = n.parent; continue; }
+    const attrs = {};
+    for (const a of m[3].matchAll(/([^\s=\/]+)(?:="([^"]*)"|='([^']*)')?/g)) attrs[a[1].toLowerCase()] = decodeEnt(a[2] !== undefined ? a[2] : a[3] !== undefined ? a[3] : '');
+    const el = { tag, attrs, children: [], parent: cur };
+    cur.children.push(el);
+    if (tag === 'script' || tag === 'style') { const end = h.indexOf('</' + tag, re.lastIndex); el.children.push(h.slice(re.lastIndex, end < 0 ? h.length : end)); re.lastIndex = end < 0 ? h.length : end; continue; }
+    if (!VOID.has(tag) && !/\/\s*$/.test(m[3])) cur = el;
+  }
+  return root;
+}
+const elText = (n) => typeof n === 'string' ? decodeEnt(n) : (n.tag === 'script' || n.tag === 'style' || n.tag === 'svg' ? '' : n.children.map(elText).join(''));
+const norm = (t) => t.replace(/[\s\u00a0]+/g, ' ').trim();
+const hasClass = (n, c) => typeof n !== 'string' && (' ' + (n.attrs.class || '') + ' ').includes(' ' + c + ' ');
+const findAll = (n, pred, out = []) => { if (typeof n !== 'string') { if (pred(n)) out.push(n); n.children.forEach((ch) => findAll(ch, pred, out)); } return out; };
+const closest = (n, pred) => { for (let x = n.parent; x; x = x.parent) if (pred(x)) return x; return null; };
+const words = (t) => t.split(' ').filter(Boolean).length;
+/* paragraphs that may repeat on many pages: the disclaimer under the document list and the default form leads */
+const KT_PARAGRAPH_OK = new Set([
+  'Nie masz wszystkich dokumentów? Napisz, co masz. Do wstępnej analizy i oferty zwykle wystarczy kilka zdań i jeden dokument. Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów; szczegółowa analiza to zakres oferty.',
+  'Kupujesz, sprzedajesz, inwestujesz albo masz spór o nieruchomość? Opisz sprawę. W ciągu 24 h roboczych odpiszę, co trzeba w niej zrobić — audyt, pismo czy sprawa sądowa — i od razu prześlę ofertę z ceną i terminem.',
+  'Napisz w kilku zdaniach, z czym się mierzysz — w ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną. Do jej akceptacji nic nie płacisz.',
+].map(norm));
+/* page text pieces compared across /uslugi/* pages (KT): FAQ questions, content H2, paragraphs and list items ≥ 12 words.
+   Modules (report, calculator, plan alert, related services, guides) and the form itself are left out. */
+function stdPieces(main) {
+  const inModule = (n) => closest(n, (x) => hasClass(x, 'report-showcase') || hasClass(x, 'tool-teaser') || x.attrs.id === 'plan-alert' || hasClass(x, 'case-form-card'));
+  const faq = findAll(main, (n) => hasClass(n, 'faq-acc-item')).map((it) => { const b = it.children.find((x) => typeof x !== 'string' && x.tag === 'button'); return b ? norm(elText(b)) : ''; }).filter(Boolean);
+  const h2 = findAll(main, (n) => n.tag === 'h2' && (closest(n, (x) => hasClass(x, 'service-section-body')) || closest(n, (x) => x.tag === 'section' && findAll(x, (y) => hasClass(y, 'eyebrow') && norm(elText(y)) === 'Usługi w tym obszarze').length > 0))).map((n) => norm(elText(n)));
+  const paras = findAll(main, (n) => ((n.tag === 'p' && (hasClass(n, 'lead') || hasClass(n, 'body')) && n.attrs['data-asof'] === undefined) || hasClass(n, 'faq-acc-body') || (n.tag === 'li' && closest(n, (x) => hasClass(x, 'service-section-body')) && !closest(n, (x) => x.attrs['data-law-list'] !== undefined))) && !inModule(n))
+    .map((n) => norm(elText(n))).filter((t) => words(t) >= 12 && !KT_PARAGRAPH_OK.has(t));
+  return { faq, h2, paras };
+}
 const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]);
 const htmlFiles = walk(DIST).filter((f) => f.endsWith('.html'));
 const toPath = (f) => { const r = '/' + path.relative(DIST, f).replace(/\.html$/, ''); return r === '/index' ? '/' : r; };
@@ -69,6 +120,67 @@ for (const f of htmlFiles) {
   if (hashLinks.length) fail.push(`${p}: legacy #/ links: ${[...new Set(hashLinks)].slice(0, 5).join(', ')}`);
   const bodyText = h.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ');
   pages[p] = { title, desc, canonical, noindex, internal: [...new Set(internal.map((l) => l.split('#')[0]))], words: bodyText.split(/\s+/).filter(Boolean).length };
+
+  /* service and pillar pages: parsed once for the standard checks below */
+  if (p.startsWith('/uslugi/')) {
+    const main = findAll(parseHtml(h), (n) => n.tag === 'main')[0];
+    if (main) {
+      const std = main.attrs['data-std'];
+      const route = jsonld.map((j) => { try { return JSON.parse(j); } catch (e) { return null; } }).filter(Boolean);
+      const nodes = jsonNodes(route);
+      pages[p].std = std || null;
+      pages[p].pieces = stdPieces(main);
+      if (std !== undefined && (!/^\d{4}-\d{2}-\d{2}$/.test(std) || std > TODAY)) fail.push(`${p}: updated "${std}" is not a past ISO date (today ${TODAY}, Europe/Warsaw)`);
+      /* „Podstawa prawna”: links only to eli.gov.pl, asOf/updated ISO and not in the future */
+      for (const ul of findAll(main, (n) => n.attrs['data-law-list'] !== undefined)) {
+        const as = findAll(ul, (n) => n.tag === 'a');
+        if (!as.length) fail.push(`${p}: legal basis list without links`);
+        as.filter((a) => !/^https:\/\/eli\.gov\.pl\/eli\/(DU|MP)\/\d{4}\/\d+\/ogl$/.test(a.attrs.href || '')).forEach((a) => fail.push(`${p}: legal basis link "${a.attrs.href}" is not an ELI address (https://eli.gov.pl/eli/DU/RRRR/poz/ogl)`));
+      }
+      const asOfEl = findAll(main, (n) => n.attrs['data-asof'] !== undefined);
+      for (const el of asOfEl) for (const k of ['data-asof', 'data-updated']) {
+        const v = el.attrs[k];
+        if (v === undefined) continue;
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(v)) fail.push(`${p}: ${k} "${v}" is not YYYY-MM-DD`);
+        else if (v > TODAY) fail.push(`${p}: ${k} ${v} is in the future (today ${TODAY}, Europe/Warsaw)`);
+      }
+      /* JSON-LD dates must be the dates shown on the page */
+      const shown = asOfEl[0] ? asOfEl[0].attrs : {};
+      for (const n of nodes) {
+        if (n.dateModified !== undefined && /WebPage|CollectionPage/.test(n['@type']) && n.dateModified !== shown['data-updated']) fail.push(`${p}: JSON-LD dateModified ${n.dateModified} is not the date shown on the page (${shown['data-updated'] || 'none'})`);
+        if (n.lastReviewed !== undefined && n.lastReviewed !== shown['data-asof']) fail.push(`${p}: JSON-LD lastReviewed ${n.lastReviewed} is not the date shown on the page (${shown['data-asof'] || 'none'})`);
+      }
+      if (std === undefined && nodes.some((n) => /^(WebPage|CollectionPage|FAQPage)$/.test(n['@type']))) fail.push(`${p}: WebPage/FAQPage in JSON-LD, but the page data has no \`updated\` (main[data-std]); add updated: 'YYYY-MM-DD'`);
+    }
+  }
+  /* FAQPage may not hold more questions than the page shows (+1 for „W skrócie”) */
+  for (const j of jsonld) {
+    let d; try { d = JSON.parse(j); } catch (e) { continue; }
+    for (const n of jsonNodes(d).filter((x) => x['@type'] === 'FAQPage')) {
+      const qn = (n.mainEntity || []).length;
+      if (qn > faqItems + 1) fail.push(`${p}: FAQPage has ${qn} questions, the page shows ${faqItems}`);
+    }
+  }
+}
+
+/* titles frozen until the 23.10.2026 reading (Search Console); H1 changes go to h1Full, never to h1 */
+const FROZEN = path.join(ROOT, 'scripts', 'frozen-titles.json');
+if (fs.existsSync(FROZEN)) for (const [p, t] of Object.entries(JSON.parse(fs.readFileSync(FROZEN, 'utf8')))) {
+  if (!pages[p]) fail.push(`${p}: frozen page missing from dist/`);
+  else if (pages[p].title !== t) fail.push(`${p}: <title> "${pages[p].title}" ≠ zamrożony "${t}" (odczyt 23.10.2026; nowy H1 wpisz w h1Full, nie w h1)`);
+}
+
+/* KT: pages with the content standard may not repeat FAQ questions, content H2 or paragraphs of other service pages */
+{
+  const svc = Object.entries(pages).filter(([p, d]) => p.startsWith('/uslugi/') && d.pieces);
+  const where = { faq: new Map(), h2: new Map(), paras: new Map() };
+  for (const [p, d] of svc) for (const k of Object.keys(where)) for (const t of new Set(d.pieces[k])) where[k].set(t, (where[k].get(t) || []).concat(p));
+  for (const [p, d] of svc.filter(([, x]) => x.std)) {
+    for (const t of new Set(d.pieces.faq)) { const o = where.faq.get(t).filter((x) => x !== p); if (o.length) fail.push(`${p}: FAQ question also on ${o.slice(0, 3).join(', ')}${o.length > 3 ? ` (+${o.length - 3})` : ''}: "${t}"`); }
+    if (d.pieces.faq.length !== new Set(d.pieces.faq).size) fail.push(`${p}: the same FAQ question twice on the page`);
+    for (const t of new Set(d.pieces.h2)) { const o = where.h2.get(t); if (o.length > 3) fail.push(`${p}: H2 on ${o.length} service pages (max 3): "${t}"`); }
+    for (const t of new Set(d.pieces.paras)) { const o = where.paras.get(t).filter((x) => x !== p); if (o.length) fail.push(`${p}: paragraph also on ${o.slice(0, 3).join(', ')}: "${t.slice(0, 90)}…"`); }
+  }
 }
 for (const [p, d] of Object.entries(pages)) for (const l of d.internal) if (!exists(l)) fail.push(`${p}: broken internal link ${l}`);
 
@@ -79,6 +191,12 @@ const sitemapXml = fs.readFileSync(path.join(DIST, 'sitemap.xml'), 'utf8');
 const sitemap = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(ORIGIN, '') || '/');
 [...sitemapXml.matchAll(/<lastmod>([^<]*)<\/lastmod>/g)].filter((m) => !ISO_DATE.test(m[1])).forEach((m) => fail.push(`sitemap: lastmod "${m[1]}" is not YYYY-MM-DD`));
 sitemap.forEach((p) => { if (!pages[p]) fail.push(`sitemap URL without page: ${p}`); });
+/* lastmod of a standard page = its `updated` (KF); other service pages have none */
+{
+  const lm = Object.fromEntries([...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>(?:<lastmod>([^<]*)<\/lastmod>)?/g)].map((m) => [m[1].replace(ORIGIN, '') || '/', m[2] || null]));
+  for (const [p, d] of Object.entries(pages)) if (p.startsWith('/uslugi/') && (lm[p] || null) !== (d.std || null)) fail.push(`${p}: sitemap lastmod ${lm[p] || 'none'} ≠ updated ${d.std || 'none'}`);
+  Object.entries(lm).filter(([, v]) => v && v > TODAY).forEach(([p, v]) => fail.push(`sitemap: ${p} lastmod ${v} is in the future (today ${TODAY})`));
+}
 
 /* reachability through real links, from the home page */
 const seen = new Set(['/']), depth = { '/': 0 }, q = ['/'];

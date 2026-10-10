@@ -265,46 +265,6 @@ const SERVICE_CONTENT = {
     },
   },
 
-  /* ===== Rękojmia za wady lokalu (usługa w Bloku 12) ===== */
-  'rekojmia-wady-lokalu': {
-    subtitle: 'Odebrałeś mieszkanie i wyszły usterki — pękające ściany, nieszczelne okna, wadliwe instalacje? Z tytułu rękojmi możesz żądać naprawy, obniżenia ceny, a w skrajnych przypadkach odstąpienia od umowy. Egzekwuję to za Ciebie.',
-    intro: 'Wady lokalu to nie „uroda nowego budownictwa”, tylko odpowiedzialność dewelopera. Rękojmia daje Ci konkretne uprawnienia, a deweloperzy liczą na to, że ich nie znasz albo zniechęcisz się po pierwszym „to normalne”. Zgłaszam wady formalnie, pilnuję terminów i prowadzę sprawę aż do skutecznej naprawy lub rozliczenia.',
-    when: [
-      'Po odbiorze lub w trakcie użytkowania ujawniły się wady lokalu.',
-      'Deweloper ignoruje zgłoszenia, zwleka albo odsyła Cię od firmy do firmy.',
-      'Usterki dotyczą instalacji, wilgoci, okien, posadzek lub wykończenia.',
-      'Deweloper twierdzi, że wada „mieści się w normie” lub wynika z użytkowania.',
-      'Zbliża się koniec okresu rękojmi i chcesz zabezpieczyć roszczenia.',
-    ],
-    doFor: [
-      'Oceniam, czy usterki to wady w rozumieniu rękojmi i które uprawnienie najlepiej wybrać.',
-      'Przygotowuję formalne zgłoszenie wad i żądanie wraz z terminem usunięcia.',
-      'Pilnuję terminów rękojmi, by roszczenia nie wygasły.',
-      'Prowadzę korespondencję i negocjacje z deweloperem.',
-      'Organizuję dowody — opinie, ekspertyzy, dokumentację wad.',
-      'Reprezentuję Cię w sprawie sądowej o naprawę, obniżenie ceny lub odstąpienie.',
-    ],
-    steps: [
-      'Opisujesz wady i przesyłasz zdjęcia oraz umowę i protokół odbioru.',
-      'W ciągu 24 h roboczych mówię, co trzeba zrobić, i wysyłam ofertę z zakresem, ceną i terminem.',
-      'Oceniam roszczenie i wybieram najkorzystniejszą drogę.',
-      'Kieruję formalne żądanie do dewelopera i prowadzę sprawę.',
-      'Doprowadzam do naprawy, obniżenia ceny lub rozliczenia — w razie potrzeby przez sąd.',
-    ],
-    need: [
-      'Umowę deweloperską / umowę sprzedaży lokalu.',
-      'Protokół odbioru i wcześniejsze zgłoszenia wad.',
-      'Zdjęcia i opis usterek (kiedy się pojawiły).',
-      'Korespondencję z deweloperem w sprawie wad.',
-    ],
-    faq: [
-      { q: 'Jak długo trwa rękojmia na mieszkanie?', a: 'Co do zasady pięć lat od wydania lokalu. To, kiedy zgłosisz wadę i jak udokumentujesz moment jej ujawnienia, ma znaczenie — dlatego warto działać formalnie i na czas.' },
-      { q: 'Deweloper mówi, że to nie wada. Co wtedy?', a: 'Oceniam to niezależnie, w razie potrzeby z opinią specjalisty. Stanowisko dewelopera nie przesądza sprawy — liczy się stan faktyczny i prawo, nie jego interpretacja.' },
-      { q: 'Czy mogę żądać obniżenia ceny zamiast naprawy?', a: 'Tak, rękojmia daje kilka uprawnień, w tym obniżenie ceny. Doradzam, które jest dla Ciebie najkorzystniejsze w danej sytuacji.' },
-      { q: 'Czy rękojmia dotyczy też części wspólnych?', a: 'Tak — dach, elewacja, garaż czy instalacje wspólne także są objęte. Takie roszczenia często prowadzi wspólnota; pomagam i właścicielom, i wspólnotom.' },
-    ],
-  },
-
   /* ===== Umowa przedwstępna (Blok 1) ===== */
   'analiza-umowy-przedwstepnej': {
     h1: 'Umowa przedwstępna',

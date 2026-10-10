@@ -66,8 +66,8 @@ function CaseFormBand({ eyebrow, heading, lead }) {
           <div className="case-form-text">
             <span className="eyebrow">Bezpłatna wstępna analiza</span>
             <h2 className="display display--xl mt-6">
-              Bezpłatnie<br />
-              powiem, co<br />
+              Bezpłatnie{' '}<br />
+              powiem, co{' '}<br />
               <span className="accent">trzeba zrobić.</span>
             </h2>
             <p className="lead mt-6" style={{ maxWidth: '32rem' }}>
@@ -174,7 +174,7 @@ function UslugiOverview({ setRoute }) {
           <div className="mt-8 section-head--center" style={{ maxWidth: '48rem', marginInline: 'auto' }}>
             <span className="eyebrow">Usługi prawne</span>
             <h1 className="display mt-4">
-              Obsługa prawna nieruchomości,<br />
+              Obsługa prawna nieruchomości,{' '}<br />
               <span className="italic" style={{ color: 'var(--text-body)' }}>pełen zakres spraw.</span>
             </h1>
             <p className="lead mt-6">
@@ -230,8 +230,9 @@ function UslugiOverview({ setRoute }) {
 function PillarPage({ blockId, setRoute }) {
   const block = window.getBlock(blockId) || window.SERVICE_BLOCKS[0];
   const bc = window.BLOCK_CONTENT ? window.BLOCK_CONTENT[block.id] : null;
+  const other = seeAlsoFor(bc && bc.seeAlso, block.id);
   return (
-    <main id="main-content" data-screen-label={`Blok — ${block.title}`}>
+    <main id="main-content" data-screen-label={`Blok — ${block.title}`} data-std={stdDate(bc)}>
       <section className="bg-dark relative overflow-hidden" style={{ paddingBlock: '3rem 4.5rem' }}>
         <div className="orb" style={{ width: 560, height: 560, top: -200, right: -160, opacity: 'calc(0.18 * var(--ambient-on))' }} />
         <div className="wrap relative" style={{ zIndex: 2 }}>
@@ -260,17 +261,19 @@ function PillarPage({ blockId, setRoute }) {
         <div className="wrap">
           <div className="section-head--center">
             <span className="eyebrow">Usługi w tym obszarze</span>
-            <h2 className="h2 mt-4">Rodzaje spraw.</h2>
+            <h2 className="h2 mt-4">{h2For(bc, 'servicesHeading', 'services', 'Rodzaje spraw.')}</h2>
           </div>
           <div className="svc-grid mt-8">
             {block.services.map((s) => (
               <SvcCard key={s.slug} service={s} route="usluga" slug={s.slug} />
             ))}
           </div>
+          <OtherAreaServices services={other} />
         </div>
       </section>
 
       {bc && <ServiceSections c={bc} />}
+      <RelatedGuides posts={guidesFor(bc)} heading={h2For(bc, 'guidesHeading', null, block.title + ': poradniki.')} />
       {block.id === 'sluzebnosci-odszkodowania' && window.KalkulatorTeaser && <window.KalkulatorTeaser setRoute={setRoute} />}
       {block.id === 'warunki-zabudowy-planowanie' && window.PlanAlertBand && <window.PlanAlertBand />}
 
@@ -309,10 +312,107 @@ function svcItem(it, i, iconName) {
   return <li key={i}><SIcon name={iconName} size={18} style={{ color: 'var(--brand-primary)' }} /><span>{it}</span></li>;
 }
 
+/* ============================================================
+   Standard podstrony (.check/uslugi-seo/12-zmiany-szablonu.md). Każde pole jest opcjonalne:
+   bez niego strona renderuje się dokładnie jak wcześniej.
+   ============================================================ */
+/* H2 sekcji: własne pole strony → wzór z c.topic (tylko FAQ, podstawa prawna, dokumenty, kafle obszaru)
+   → dotychczasowy tekst. Wzór w mianowniku po dwukropku, bez odmiany. */
+const SECTION_H2 = {
+  faq: (t) => `${t}: najczęstsze pytania.`,
+  law: (t) => `${t}: podstawa prawna.`,
+  docs: (t) => `${t}: co przesłać do wstępnej analizy.`,
+  services: (t) => `${t}: rodzaje spraw.`,
+};
+function h2For(c, field, key, legacy) {
+  if (c && c[field]) return c[field];
+  if (c && c.topic && key && SECTION_H2[key]) return SECTION_H2[key](c.topic);
+  return legacy;
+}
+/* '2026-10-10' → '10.10.2026' */
+function isoPl(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso || ''));
+  return m ? m[3] + '.' + m[2] + '.' + m[1] : String(iso || '');
+}
+/* strona w standardzie = ma `updated` (data zmiany treści); znacznik data-std na <main> czyta scripts/check.mjs (KT) */
+function stdDate(c) { return c && c.updated ? c.updated : undefined; }
+/* Poradniki tylko z jawnej listy `guides` (slugi wpisów), w podanej kolejności. Nieznany slug = błąd w konsoli,
+   a błąd w konsoli zatrzymuje prerender (literówka nie znika po cichu). */
+function guidesFor(c) {
+  if (!c || !Array.isArray(c.guides)) return [];
+  const B = window.BLOG || [];
+  return c.guides.map((g) => {
+    const p = B.find((x) => x.slug === g);
+    if (!p) console.error('guides: brak wpisu o slugu "' + g + '"');
+    return p;
+  }).filter(Boolean);
+}
+/* Usługi z innych obszarów (`seeAlso`): slugi usług; pełna ścieżka z briefu też działa (liczy się ostatni człon). */
+function seeAlsoFor(list, blockId) {
+  return (Array.isArray(list) ? list : []).map((x) => {
+    const slug = String(x).split('/').filter(Boolean).pop();
+    const s = window.getService(slug);
+    if (!s) { console.error('seeAlso: brak usługi o slugu "' + x + '"'); return null; }
+    if ((window.getBlockOfService(slug) || {}).id === blockId) { console.error('seeAlso: "' + x + '" jest w tym samym obszarze (pokazuje ją już siatka obszaru)'); return null; }
+    return s;
+  }).filter(Boolean);
+}
+function OtherAreaServices({ services }) {
+  if (!services || !services.length) return null;
+  return (
+    <React.Fragment>
+      <div className="section-head--center" style={{ marginTop: '3rem' }}>
+        <span className="eyebrow">Powiązane sprawy z innych obszarów</span>
+      </div>
+      <div className="svc-grid mt-8">
+        {services.map((s) => <SvcCard key={s.slug} service={s} route="usluga" slug={s.slug} />)}
+      </div>
+    </React.Fragment>
+  );
+}
+function RelatedGuides({ posts, heading }) {
+  const Card = window.BlogTeaserCard;
+  if (!Card || !posts || !posts.length) return null;
+  return (
+    <section className="section-py">
+      <div className="wrap">
+        <div className="section-head--center">
+          <span className="eyebrow">Poradniki</span>
+          <h2 className="h2 mt-4">{heading}</h2>
+        </div>
+        <div className="grid grid-3 mt-8" style={{ gap: 'var(--d-gap)' }}>
+          {posts.map((p) => <Card key={p.slug} post={p} />)}
+        </div>
+      </div>
+    </section>
+  );
+}
+const HIDEABLE_MODULES = ['report', 'calc', 'planAlert'];
+function hiddenModules(c) {
+  const list = c && Array.isArray(c.hideModules) ? c.hideModules : [];
+  list.filter((m) => !HIDEABLE_MODULES.includes(m)).forEach((m) => console.error('hideModules: nieznany moduł "' + m + '" (dozwolone: ' + HIDEABLE_MODULES.join(', ') + ')'));
+  return list;
+}
+
 /* Builds the ordered content sections for a full service / umbrella page.
    Data-driven so service pages and pillar umbrellas share one visual language. */
 function buildServiceSections(c) {
   const blocks = [];
+  /* „W skrócie”: pytanie klienta (H2), odpowiedź i tabela faktów (nagłówek wiersza = <th scope="row">) */
+  if (c.short && c.short.a) blocks.push({
+    eyebrow: 'W skrócie',
+    title: c.short.q,
+    node: (
+      <React.Fragment>
+        <p className="lead mt-6">{c.short.a}</p>
+        {c.short.facts && c.short.facts.length > 0 && (
+          <div className="prose-legal mt-8"><div className="prose-table-wrap"><table><tbody>
+            {c.short.facts.map(([k, v], i) => <tr key={i}><th scope="row">{k}</th><td>{v}</td></tr>)}
+          </tbody></table></div></div>
+        )}
+      </React.Fragment>
+    ),
+  });
   if (c.intro) blocks.push({
     eyebrow: 'Na czym to polega',
     title: c.introHeading || (c.intro.split('. ')[0].replace(/\.$/, '') + '.'),
@@ -320,7 +420,7 @@ function buildServiceSections(c) {
   });
   if (c.when) blocks.push({
     eyebrow: c.whenTitle || 'Kiedy to potrzebne',
-    title: c.whenHeading === undefined ? 'Najczęstsze sytuacje.' : c.whenHeading,
+    title: h2For(c, 'whenHeading', null, c.whenHeading === undefined ? 'Najczęstsze sytuacje.' : ''),
     node: <ul className="check-list mt-8">{c.when.map((w, i) => svcItem(w, i, 'check'))}</ul>,
   });
   if (c.levels) {
@@ -359,7 +459,7 @@ function buildServiceSections(c) {
   } else if (c.doFor) {
     blocks.push({
       eyebrow: c.doForEyebrow || 'Co dla Ciebie robię',
-      title: c.doForTitle || 'Konkretny zakres pracy.',
+      title: h2For(c, 'doForTitle', null, 'Konkretny zakres pracy.'),
       node: (
         <ul className="deliverables mt-8">
           {c.doFor.map((d, i) => (
@@ -383,7 +483,7 @@ function buildServiceSections(c) {
   }));
   if (c.steps) blocks.push({
     eyebrow: 'Krok po kroku',
-    title: `Proces w ${c.steps.length} krokach.`,
+    title: h2For(c, 'stepsHeading', null, `Proces w ${c.steps.length} krokach.`),
     node: (
       <ol className="process-list mt-8">
         {c.steps.map((s, i) => (
@@ -413,8 +513,33 @@ function buildServiceSections(c) {
   });
   if (c.faq) blocks.push({
     eyebrow: 'Najczęstsze pytania',
-    title: 'Zanim napiszesz.',
+    title: h2For(c, 'faqHeading', 'faq', 'Zanim napiszesz.'),
     node: <SFAQAccordion items={c.faq} startOpen={0} />,
+  });
+  /* „Podstawa prawna”: przepisy z linkiem do ELI, data stanu prawnego, data aktualizacji i autor.
+     data-law-list, data-asof i data-updated czyta scripts/check.mjs (linki tylko do eli.gov.pl, daty nie z przyszłości). */
+  if (c.law && c.law.items && c.law.items.length) blocks.push({
+    eyebrow: 'Podstawa prawna',
+    title: h2For(c, 'lawHeading', 'law', 'Przepisy, na których opieram sprawę.'),
+    node: (
+      <React.Fragment>
+        <ul className="check-list prose-legal mt-8" data-law-list="">
+          {c.law.items.map((it, i) => (
+            <li key={i}>
+              <SIcon name="scale" size={18} style={{ color: 'var(--brand-primary)' }} />
+              <span>
+                <a href={'https://eli.gov.pl/eli/' + it.eli + '/ogl'} target="_blank" rel="noopener">{it.ref}</a>
+                {' — ' + it.act}{it.tj ? ` (t.j. ${it.tj})` : ''}{it.note ? `: ${it.note}` : ''}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="body mt-6 prose-legal" data-asof={c.law.asOf} data-updated={c.updated || undefined}>
+          {'Stan prawny na ' + isoPl(c.law.asOf) + '.'}{c.updated ? ' Aktualizacja: ' + isoPl(c.updated) + '.' : ''}{' Autor: '}
+          <window.NavLink route="o-mnie">adw. dr Maciej Muzyka</window.NavLink>.
+        </p>
+      </React.Fragment>
+    ),
   });
   return blocks;
 }
@@ -449,14 +574,15 @@ const BLOCK_DOCS = {
   'roszczenia-deweloper': ['Umowa deweloperska i protokół odbioru', 'Zgłoszenia wad i odpowiedzi dewelopera', 'Zdjęcia usterek', 'Terminy z umowy i faktyczne daty odbioru'],
 };
 
-function DocsToSend({ blockId, n }) {
-  const docs = BLOCK_DOCS[blockId];
-  if (!docs) return null;
+function DocsToSend({ blockId, n, docs, title }) {
+  /* własna lista usługi (`docs`) albo wspólna lista obszaru */
+  const list = docs && docs.length ? docs : BLOCK_DOCS[blockId];
+  if (!list) return null;
   return (
     <section className="section-py docs-to-send">
       <div className="wrap">
-        <NumberedBlock n={n} eyebrow="Co przesłać do wstępnej analizy" title="Wystarczy to, co masz.">
-          <ul className="check-list mt-8">{docs.map((d, i) => <li key={i}><SIcon name="file-text" size={18} style={{ color: 'var(--brand-primary)' }} /><span>{d}</span></li>)}</ul>
+        <NumberedBlock n={n} eyebrow="Co przesłać do wstępnej analizy" title={title || 'Wystarczy to, co masz.'}>
+          <ul className="check-list mt-8">{list.map((d, i) => <li key={i}><SIcon name="file-text" size={18} style={{ color: 'var(--brand-primary)' }} /><span>{d}</span></li>)}</ul>
           <p className="body mt-6">Nie masz wszystkich dokumentów? Napisz, co masz. Do wstępnej analizy i oferty zwykle wystarczy kilka zdań i jeden dokument. Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów; szczegółowa analiza to zakres oferty.</p>
           <button className="btn btn-primary mt-6" onClick={() => spScrollToForm()}>
             Opisz sprawę i dołącz dokumenty <SIcon name="arrow-right" size={16} />
@@ -470,20 +596,25 @@ function DocsToSend({ blockId, n }) {
 /* ============================================================
    Related services grid — shared by FULL and LITE service pages
    ============================================================ */
-function RelatedServices({ block, slug, setRoute }) {
-  if (block.services.filter((s) => s.slug !== slug).length === 0) { return null; }
+function RelatedServices({ block, slug, setRoute, extra }) {
+  const same = block.services.filter((s) => s.slug !== slug);
+  const other = seeAlsoFor(extra, block.id);
+  if (same.length === 0 && other.length === 0) { return null; }
   return (
     <section className="section-py bg-light">
       <div className="wrap">
-        <div className="section-head--center">
-          <span className="eyebrow">Inne usługi w tym obszarze</span>
-          <h2 className="h2 mt-4">{block.title}</h2>
-        </div>
-        <div className="svc-grid mt-8">
-          {block.services.filter((s) => s.slug !== slug).slice(0, 6).map((s) => (
-            <SvcCard key={s.slug} service={s} route="usluga" slug={s.slug} />
-          ))}
-        </div>
+        {same.length > 0 && <React.Fragment>
+          <div className="section-head--center">
+            <span className="eyebrow">Inne usługi w tym obszarze</span>
+            <h2 className="h2 mt-4">{block.title}</h2>
+          </div>
+          <div className="svc-grid mt-8">
+            {same.slice(0, 6).map((s) => (
+              <SvcCard key={s.slug} service={s} route="usluga" slug={s.slug} />
+            ))}
+          </div>
+        </React.Fragment>}
+        <OtherAreaServices services={other} />
       </div>
     </section>);
 }
@@ -494,9 +625,10 @@ function ServicePage({ slug, setRoute }) {
   if (!service) { return <UslugiOverview setRoute={setRoute} />; }
   const c = window.SERVICE_CONTENT[slug];
   const isFull = !!c;
+  const hide = hiddenModules(c);
 
   return (
-    <main id="main-content" data-screen-label={`Usługa — ${service.title}`}>
+    <main id="main-content" data-screen-label={`Usługa — ${service.title}`} data-std={stdDate(c)}>
       {/* Hero */}
       <section className="bg-light" style={{ paddingBlock: '3rem 4rem', borderBottom: '1px solid var(--slate-100)' }}>
         <div className="wrap">
@@ -515,7 +647,8 @@ function ServicePage({ slug, setRoute }) {
                 {block.title}
               </window.NavLink>
             </div>
-            <h1 className="display">{c && c.h1 ? c.h1 : service.title}</h1>
+            {/* H1 = h1Full (pełniejszy nagłówek), a <title> dalej liczy się z c.h1 (app.jsx), więc się nie zmienia */}
+            <h1 className="display">{(c && (c.h1Full || c.h1)) || service.title}</h1>
             <p className="lead mt-6">{c ? c.subtitle : service.desc}</p>
             <div className="flex gap-3 mt-8" style={{ flexWrap: 'wrap', justifyContent: 'center' }}>
               <button className="btn btn-primary" onClick={() => spScrollToForm()}>
@@ -565,14 +698,16 @@ function ServicePage({ slug, setRoute }) {
         </React.Fragment>
       )}
 
-      {!(c && c.need) && <DocsToSend blockId={block.id} n={String((isFull ? buildServiceSections(c).length : 1) + 1)} />}
+      {!(c && c.need) && <DocsToSend blockId={block.id} n={String((isFull ? buildServiceSections(c).length : 1) + 1)} docs={c && c.docs} title={h2For(c, 'docsHeading', 'docs', 'Wystarczy to, co masz.')} />}
 
-      <RelatedServices block={block} slug={slug} setRoute={setRoute} />
+      <RelatedGuides posts={guidesFor(c)} heading={h2For(c, 'guidesHeading', null, service.title + ': poradniki.')} />
 
-      {REPORT_SERVICE_SLUGS.has(slug) && window.ReportShowcase &&
+      <RelatedServices block={block} slug={slug} setRoute={setRoute} extra={c && c.seeAlso} />
+
+      {REPORT_SERVICE_SLUGS.has(slug) && !hide.includes('report') && window.ReportShowcase &&
       <window.ReportShowcase />}
-      {block.id === 'sluzebnosci-odszkodowania' && window.KalkulatorTeaser && <window.KalkulatorTeaser setRoute={setRoute} />}
-      {block.id === 'warunki-zabudowy-planowanie' && window.PlanAlertBand && <window.PlanAlertBand />}
+      {block.id === 'sluzebnosci-odszkodowania' && !hide.includes('calc') && window.KalkulatorTeaser && <window.KalkulatorTeaser setRoute={setRoute} />}
+      {block.id === 'warunki-zabudowy-planowanie' && !hide.includes('planAlert') && window.PlanAlertBand && <window.PlanAlertBand />}
 
       <CaseFormBand
         heading={c && c.cta ? c.cta.heading : 'Opisz swoją sprawę.'}
@@ -606,7 +741,7 @@ function FaqPageV3({ setRoute }) {
           <Breadcrumb trail={[{ label: 'Start', route: 'landing' }, { label: 'FAQ' }]} />
           <div className="mt-8" style={{ maxWidth: '46rem' }}>
             <span className="eyebrow">FAQ · {total} pytań</span>
-            <h1 className="display mt-4">Wszystko, co warto<br /><span className="italic" style={{ color: 'var(--text-body)' }}>wiedzieć przed startem.</span></h1>
+            <h1 className="display mt-4">Wszystko, co warto{' '}<br /><span className="italic" style={{ color: 'var(--text-body)' }}>wiedzieć przed startem.</span></h1>
             <p className="lead mt-6">
               Jak wygląda współpraca, co obejmuje bezpłatna wstępna analiza, jak chronię Twoje dane i jak ustalam koszt. Jeśli czegoś tu brakuje — po prostu zapytaj w formularzu.
             </p>

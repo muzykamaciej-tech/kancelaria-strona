@@ -326,6 +326,34 @@ function personEntity() {
     workLocation: { '@type': 'Place', name: 'Lublin', address: { '@type': 'PostalAddress', streetAddress: 'ul. Cicha 4/5', postalCode: '20-078', addressLocality: 'Lublin', addressCountry: 'PL' } },
   };
 }
+/* Strony w standardzie (12-zmiany-szablonu.md, KE): nowe węzły tylko przy `updated` albo `law`.
+   Bez tych pól JSON-LD trasy jest taki jak wcześniej. */
+function isStdPage(c) { return !!(c && (c.updated || c.law)); }
+const FAQ_SKIP = new Set(['Czy zajmiesz się tym zdalnie?']);
+/* FAQPage: „W skrócie” + FAQ strony, tylko na stronie sprawdzonej (law.asOf przy widocznej sekcji „Podstawa prawna”);
+   tylko odpowiedzi tekstowe */
+function pageFaq(c) {
+  if (!c || !c.law || !c.law.asOf || !(c.law.items && c.law.items.length)) return [];
+  const list = (c.short && c.short.q && c.short.a ? [{ q: c.short.q, a: c.short.a }] : []).concat(c.faq || []);
+  return list.filter((f) => f && typeof f.q === 'string' && typeof f.a === 'string' && !FAQ_SKIP.has(f.q))
+    .map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }));
+}
+/* WebPage / CollectionPage: daty, autor i źródła tylko wtedy, gdy są widoczne na stronie (sekcja „Podstawa prawna”) */
+function stdPageNode(type, c, url, name) {
+  const lawShown = !!(c.law && c.law.items && c.law.items.length);
+  const seen = {};
+  const citation = lawShown ? c.law.items.filter((it) => it.eli && !seen[it.eli] && (seen[it.eli] = 1)).map((it) => {
+    const u = 'https://eli.gov.pl/eli/' + it.eli + '/ogl';
+    return { '@type': 'Legislation', name: it.act, legislationIdentifier: u, legislationJurisdiction: 'PL', url: u };
+  }) : [];
+  return {
+    '@type': type, '@id': url, url, name, inLanguage: 'pl', breadcrumb: { '@id': url + '#okruszki' },
+    dateModified: lawShown && c.updated ? c.updated : undefined,
+    lastReviewed: lawShown && c.law.asOf ? c.law.asOf : undefined,
+    author: lawShown ? { '@id': PERSON_ID } : undefined,
+    citation: citation.length ? citation : undefined,
+  };
+}
 function buildJsonLd(route, ids) {
   ids = ids || {};
   if (route === 'faq') {
@@ -335,13 +363,31 @@ function buildJsonLd(route, ids) {
     const s = window.getService(ids.serviceSlug); const b = window.getBlockOfService(ids.serviceSlug);
     if (!s || !b) return null;
     const c = (window.SERVICE_CONTENT || {})[ids.serviceSlug] || {};
+    const path = buildPath('usluga', ids), url = SITE_BASE + path;
+    const trail = crumbs([{ name: 'Start', path: '/' }, { name: 'Usługi', path: '/uslugi' }, { name: b.title, path: '/uslugi/' + b.id }, { name: s.title, path }]);
+    if (!isStdPage(c)) return { '@context': 'https://schema.org', '@graph': [
+      { '@type': 'Service', name: c.h1Full || c.h1 || s.title, description: truncMeta(c.subtitle || s.desc, 300), serviceType: 'Legal service', provider: { '@id': ORG_ID }, areaServed: AREA_SERVED, url, offers: { '@type': 'Offer', description: 'Bezpłatna wstępna analiza sprawy i oferta w 24 h robocze.' } },
+      trail ] };
+    const name = c.h1Full || c.h1 || s.title, faq = pageFaq(c);
     return { '@context': 'https://schema.org', '@graph': [
-      { '@type': 'Service', name: c.h1 || s.title, description: truncMeta(c.subtitle || s.desc, 300), serviceType: 'Legal service', provider: { '@id': ORG_ID }, areaServed: AREA_SERVED, url: SITE_BASE + buildPath('usluga', ids), offers: { '@type': 'Offer', description: 'Bezpłatna wstępna analiza sprawy i oferta w 24 h robocze.' } },
-      crumbs([{ name: 'Start', path: '/' }, { name: 'Usługi', path: '/uslugi' }, { name: b.title, path: '/uslugi/' + b.id }, { name: s.title, path: buildPath('usluga', ids) }]) ] };
+      Object.assign(stdPageNode('WebPage', c, url, name), { about: { '@id': url + '#usluga' } }),
+      { '@type': 'Service', '@id': url + '#usluga', name, description: truncMeta(c.subtitle || s.desc, 300), serviceType: b.title, provider: { '@id': ORG_ID }, areaServed: AREA_SERVED, url, offers: { '@type': 'Offer', description: 'Bezpłatna wstępna analiza sprawy i oferta z ceną i terminem w ciągu 24 h roboczych.' } },
+      faq.length ? { '@type': 'FAQPage', '@id': url + '#faq', mainEntity: faq } : null,
+      Object.assign(trail, { '@id': url + '#okruszki' }),
+    ].filter(Boolean) };
   }
   if (route === 'blok') {
     const b = window.getBlock(ids.blockId); if (!b) return null;
-    return { '@context': 'https://schema.org', '@graph': [crumbs([{ name: 'Start', path: '/' }, { name: 'Usługi', path: '/uslugi' }, { name: b.title, path: '/uslugi/' + b.id }])] };
+    const bc = (window.BLOCK_CONTENT || {})[b.id] || {};
+    const path = '/uslugi/' + b.id, url = SITE_BASE + path;
+    const trail = crumbs([{ name: 'Start', path: '/' }, { name: 'Usługi', path: '/uslugi' }, { name: b.title, path }]);
+    if (!isStdPage(bc)) return { '@context': 'https://schema.org', '@graph': [trail] };
+    const faq = pageFaq(bc);
+    return { '@context': 'https://schema.org', '@graph': [
+      Object.assign(stdPageNode('CollectionPage', bc, url, bc.h1 || b.title), { mainEntity: { '@type': 'ItemList', itemListElement: b.services.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: url + '/' + x.slug, name: x.title })) } }),
+      faq.length ? { '@type': 'FAQPage', '@id': url + '#faq', mainEntity: faq } : null,
+      Object.assign(trail, { '@id': url + '#okruszki' }),
+    ].filter(Boolean) };
   }
   if (route === 'blogpost') {
     const p = (window.BLOG || []).find((x) => x.slug === ids.blogSlug); if (!p) return null;

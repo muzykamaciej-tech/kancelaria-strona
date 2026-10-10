@@ -605,23 +605,28 @@ function BlogTeaser({ setRoute }) {
           </div>
         </div>
         <div className="grid grid-3 mt-12" style={{ gap: 'var(--d-gap)' }}>
-          {window.BLOG.map((post, i) => (
-            <window.NavLink key={post.slug} className="card card-hover blog-teaser-card" route="blogpost" slug={post.slug} style={{ textAlign: 'left' }}>
-              <span className="tag tag-info">{post.category}</span>
-              <h3 className="font-bold mt-4" style={{ color: 'var(--text-main)', fontSize: '1.125rem', lineHeight: 1.3 }}>{post.title}</h3>
-              <div className="small mt-4 flex items-center gap-2">
-                <span>{post.date}</span>
-                <span>·</span>
-                <span>{post.readTime} czytania</span>
-              </div>
-              <div className="blog-teaser-arrow">
-                <Icon name="arrow-up-right" size={16} />
-              </div>
-            </window.NavLink>
-          ))}
+          {window.BLOG.map((post) => <BlogTeaserCard key={post.slug} post={post} />)}
         </div>
       </div>
     </section>
+  );
+}
+
+/* One blog card: home teaser and the „Poradniki” module on service and pillar pages (service-pages.jsx) */
+function BlogTeaserCard({ post }) {
+  return (
+    <window.NavLink className="card card-hover blog-teaser-card" route="blogpost" slug={post.slug} style={{ textAlign: 'left' }}>
+      <span className="tag tag-info">{post.category}</span>
+      <h3 className="font-bold mt-4" style={{ color: 'var(--text-main)', fontSize: '1.125rem', lineHeight: 1.3 }}>{post.title}</h3>
+      <div className="small mt-4 flex items-center gap-2">
+        <span>{post.date}</span>
+        <span>·</span>
+        <span>{post.readTime} czytania</span>
+      </div>
+      <div className="blog-teaser-arrow">
+        <Icon name="arrow-up-right" size={16} />
+      </div>
+    </window.NavLink>
   );
 }
 
@@ -692,5 +697,5 @@ Object.assign(window, {
   HomePage, UslugiPage, ServiceDetailPage,
   BlogPage, BlogPostPage,
   FAQPage, FAQAccordion,
-  KontaktPage, LeadFormBand,
+  KontaktPage, LeadFormBand, BlogTeaserCard,
 });

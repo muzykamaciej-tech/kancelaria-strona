@@ -242,8 +242,8 @@ function PlanAlertBand() {
       <div className="wrap plan-alert">
         <div>
           <span className="eyebrow on-dark">Plan ogólny w Twojej gminie</span>
-          <h2 className="h2 mt-4" style={{ color: '#fff' }}>Powiadomię Cię, gdy Twoja gmina wyłoży plan ogólny.</h2>
-          <p className="lead mt-6" style={{ color: 'var(--text-on-dark-2)' }}>Od 1 września 2026 r. o możliwości zabudowy działki przesądza plan ogólny. Uwagi do projektu można składać tylko w krótkim oknie po jego wyłożeniu — kto je przegapi, traci wpływ. Podaj gminę i e-mail: gdy pojawi się projekt albo zbliży się termin uwag, dostaniesz krótką wiadomość, co to znaczy dla Twojej działki i co zrobić.</p>
+          <h2 className="h2 mt-4" style={{ color: '#fff' }}>Powiadomię Cię, gdy Twoja gmina rozpocznie konsultacje projektu planu ogólnego.</h2>
+          <p className="lead mt-6" style={{ color: 'var(--text-on-dark-2)' }}>Od 1 września 2026 r. o możliwości zabudowy działki przesądza plan ogólny. Uwagi do projektu można składać tylko w krótkim oknie, w czasie konsultacji społecznych — kto je przegapi, traci wpływ. Podaj gminę i e-mail: gdy pojawi się projekt albo zbliży się termin uwag, dostaniesz krótką wiadomość, co to znaczy dla Twojej działki i co zrobić.</p>
         </div>
         <div className="plan-alert-form">
           {status === 'sent' ?

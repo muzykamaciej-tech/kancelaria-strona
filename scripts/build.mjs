@@ -58,6 +58,15 @@ for (const f of jsxFiles) {
 }
 const joined = parts.join('\n;\n');
 const min = await esbuild.transform(joined, { loader: 'js', minify: true, target: 'es2019', legalComments: 'none', charset: 'utf8' });
+/* A duplicated key in a data literal (SERVICE_CONTENT, BLOCK_CONTENT…) silently drops the first entry:
+   esbuild warns, so stop the build and name the file. */
+{
+  const starts = []; let line = 1;
+  parts.forEach((p, i) => { starts.push([line, jsxFiles[i]]); line += p.split('\n').length + 1; });
+  const fileAt = (l) => (starts.filter(([s]) => s <= l).pop() || [0, '?'])[1];
+  const dup = (min.warnings || []).filter((w) => /Duplicate key/.test(w.text));
+  if (dup.length) throw new Error('zdublowane klucze w danych (pierwszy wpis ginie bez ostrzeżenia): ' + dup.map((w) => `${w.text} [${w.location ? fileAt(w.location.line) : '?'}]`).join('; '));
+}
 const appName = `app.${hash(min.code)}.js`;
 fs.writeFileSync(path.join(DIST, appName), min.code);
 

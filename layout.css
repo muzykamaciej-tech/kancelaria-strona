@@ -1018,14 +1018,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   border-bottom: 2px solid var(--slate-200);
   font-size: 0.9375rem;
 }
-.prose-legal tbody td {
+.prose-legal tbody td,
+.prose-legal tbody th {
   padding: 0.875rem 1rem;
   border-bottom: 1px solid var(--slate-100);
   vertical-align: top;
   line-height: 1.55;
 }
-.prose-legal tbody tr:last-child td { border-bottom: none; }
-.prose-legal tbody tr:nth-child(even) td { background: var(--slate-50); }
+/* nagłówek wiersza (<th scope="row">), np. tabela faktów „W skrócie” na stronach usług. Bez min-width kolumna
+   na telefonie zwęża się do 2–3 liter, bo .prose-legal łamie słowa w dowolnym miejscu (overflow-wrap: anywhere). */
+.prose-legal tbody th { font-weight: 700; text-align: left; color: var(--text-main); width: 35%; min-width: 7.5rem; overflow-wrap: break-word; hyphens: auto; }
+.prose-legal tbody tr:last-child td,
+.prose-legal tbody tr:last-child th { border-bottom: none; }
+.prose-legal tbody tr:nth-child(even) td,
+.prose-legal tbody tr:nth-child(even) th { background: var(--slate-50); }
 
 .post-callout {
   background: var(--brand-primary-light);

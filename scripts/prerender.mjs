@@ -50,20 +50,23 @@ const probe = await newPage();
 await probe.goto(BASE + '/', { waitUntil: 'domcontentloaded', timeout: 60000 });
 await probe.waitForSelector('#app main', { timeout: 30000 });
 const data = await probe.evaluate(() => ({
-  blocks: window.SERVICE_BLOCKS.map((b) => ({ id: b.id, title: b.title, tagline: b.tagline || '', services: b.services.map((s) => ({ slug: s.slug, title: s.title, desc: s.desc || '' })) })),
+  blocks: window.SERVICE_BLOCKS.map((b) => ({ id: b.id, title: b.title, tagline: b.tagline || '',
+    updated: ((window.BLOCK_CONTENT || {})[b.id] || {}).updated || null,
+    services: b.services.map((s) => ({ slug: s.slug, title: s.title, desc: s.desc || '', updated: ((window.SERVICE_CONTENT || {})[s.slug] || {}).updated || null })) })),
   blog: (window.BLOG || []).map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt || '', iso: p.iso, modified: window.postModifiedIso(p) })),
 }));
 await probe.close();
 
-/* lastmod only where there is a real date (blog: published/updated). A build date on every other page would
-   change on each build without any content change, and Google stops trusting lastmod that is not accurate. */
+/* lastmod only where there is a real date (blog: published/updated; service and pillar pages: `updated`, set by hand
+   when that page's content changes). A build date on every other page would change on each build without any
+   content change, and Google stops trusting lastmod that is not accurate. */
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 const routes = [
   { path: '/', priority: '1.0' },
   { path: '/uslugi', priority: '0.8' },
   ...data.blocks.flatMap((b) => [
-    { path: `/uslugi/${b.id}`, priority: '0.8' },
-    ...b.services.map((s) => ({ path: `/uslugi/${b.id}/${s.slug}`, priority: '0.7' })),
+    { path: `/uslugi/${b.id}`, priority: '0.8', lastmod: b.updated || undefined },
+    ...b.services.map((s) => ({ path: `/uslugi/${b.id}/${s.slug}`, priority: '0.7', lastmod: s.updated || undefined })),
   ]),
   { path: '/blog', priority: '0.7' },
   ...data.blog.map((p) => ({ path: `/blog/${p.slug}`, lastmod: p.modified, priority: '0.6' })),
@@ -139,6 +142,9 @@ fs.rmSync(path.join(DIST, '__shell.html'));
 /* 3. sitemap.xml, robots.txt, llms.txt */
 const indexable = routes.filter((r) => !r.noindex);
 indexable.filter((r) => r.lastmod && !ISO_DATE.test(r.lastmod)).forEach((r) => failures.push(`${r.path}: lastmod "${r.lastmod}" is not YYYY-MM-DD`));
+/* a date from the future is a typo; "today" in Polish time (toISOString() is UTC: after 22:00 in summer today would look like the future) */
+const today = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Warsaw' });
+indexable.filter((r) => r.lastmod && r.lastmod > today).forEach((r) => failures.push(`${r.path}: lastmod ${r.lastmod} is in the future (today ${today}, Europe/Warsaw)`));
 fs.writeFileSync(path.join(DIST, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   indexable.map((r) => `  <url><loc>${ORIGIN}${r.path === '/' ? '/' : r.path}</loc>${r.lastmod ? `<lastmod>${r.lastmod}</lastmod>` : ''}<priority>${r.priority}</priority></url>`).join('\n') +
