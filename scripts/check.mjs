@@ -79,7 +79,7 @@ function stdPieces(main) {
   const inModule = (n) => closest(n, (x) => hasClass(x, 'report-showcase') || hasClass(x, 'tool-teaser') || x.attrs.id === 'plan-alert' || hasClass(x, 'case-form-card'));
   const faq = findAll(main, (n) => hasClass(n, 'faq-acc-item')).map((it) => { const b = it.children.find((x) => typeof x !== 'string' && x.tag === 'button'); return b ? norm(elText(b)) : ''; }).filter(Boolean);
   const h2 = findAll(main, (n) => n.tag === 'h2' && (closest(n, (x) => hasClass(x, 'service-section-body')) || closest(n, (x) => x.tag === 'section' && findAll(x, (y) => hasClass(y, 'eyebrow') && norm(elText(y)) === 'Usługi w tym obszarze').length > 0))).map((n) => norm(elText(n)));
-  const paras = findAll(main, (n) => ((n.tag === 'p' && (hasClass(n, 'lead') || hasClass(n, 'body')) && n.attrs['data-asof'] === undefined) || hasClass(n, 'faq-acc-body') || (n.tag === 'li' && closest(n, (x) => hasClass(x, 'service-section-body')) && !closest(n, (x) => x.attrs['data-law-list'] !== undefined))) && !inModule(n))
+  const paras = findAll(main, (n) => ((n.tag === 'p' && (hasClass(n, 'lead') || hasClass(n, 'body')) && n.attrs['data-asof'] === undefined && n.attrs['data-updated'] === undefined) || hasClass(n, 'faq-acc-body') || (n.tag === 'li' && closest(n, (x) => hasClass(x, 'service-section-body')) && !closest(n, (x) => x.attrs['data-law-list'] !== undefined))) && !inModule(n))
     .map((n) => norm(elText(n))).filter((t) => words(t) >= 12 && !KT_PARAGRAPH_OK.has(t));
   return { faq, h2, paras };
 }
@@ -137,7 +137,7 @@ for (const f of htmlFiles) {
         if (!as.length) fail.push(`${p}: legal basis list without links`);
         as.filter((a) => !/^https:\/\/eli\.gov\.pl\/eli\/(DU|MP)\/\d{4}\/\d+\/ogl$/.test(a.attrs.href || '')).forEach((a) => fail.push(`${p}: legal basis link "${a.attrs.href}" is not an ELI address (https://eli.gov.pl/eli/DU/RRRR/poz/ogl)`));
       }
-      const asOfEl = findAll(main, (n) => n.attrs['data-asof'] !== undefined);
+      const asOfEl = findAll(main, (n) => n.attrs['data-asof'] !== undefined || n.attrs['data-updated'] !== undefined);
       for (const el of asOfEl) for (const k of ['data-asof', 'data-updated']) {
         const v = el.attrs[k];
         if (v === undefined) continue;

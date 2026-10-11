@@ -5,7 +5,7 @@
 const SERVICE_BLOCKS = [
   {
     id: 'sprawdzenie-przed-zakupem', n: '1', icon: 'search-check',
-    metaDesc: 'Zanim wpłacisz zadatek i podpiszesz umowę, sprawdzam, co naprawdę kupujesz: księgę wieczystą, dokumenty i realny stan prawny nieruchomości.',
+    metaDesc: 'Przed zakupem działki albo mieszkania sprawdzam księgę wieczystą, plan dla działki i umowę: rezerwacyjną, przedwstępną albo deweloperską.',
     title: 'Sprawdzenie nieruchomości przed zakupem',
     tagline: 'Zanim podpiszesz — sprawdźmy, co kupujesz.',
     intro: 'Najczęstsze i najważniejsze sprawy. Zanim wpłacisz zadatek i podpiszesz umowę, sprawdzam, co naprawdę kupujesz — księgę wieczystą, dokumenty i realny stan prawny nieruchomości.',
@@ -18,6 +18,7 @@ const SERVICE_BLOCKS = [
   },
   {
     id: 'transakcje-umowy', n: '2', icon: 'file-signature',
+    metaDesc: 'Przygotowuję umowę, negocjuję i sprawdzam akt notarialny przed podpisem. Notariusz czuwa nad słusznymi interesami wszystkich stron, ja tylko nad Twoimi.',
     title: 'Obsługa transakcji i umowy',
     tagline: 'Od oferty do aktu — i wszystko, co trzeba podpisać po drodze.',
     intro: 'Prowadzę Cię przez całą transakcję — od oferty i umowy przedwstępnej, przez negocjacje, po bezpieczny akt notarialny i rozliczenie.',
@@ -32,6 +33,7 @@ const SERVICE_BLOCKS = [
   },
   {
     id: 'warunki-zabudowy-planowanie', n: '3', icon: 'map',
+    metaDesc: 'Bez planu miejscowego budujesz na podstawie WZ, a z wniosku od 1.09.2026 wyda się je tylko w gminie z planem ogólnym. Sprawdź, czy to WZ, uwaga czy skarga.',
     title: 'Warunki zabudowy i planowanie przestrzenne',
     tagline: 'Czy i co można zbudować na tej działce.',
     intro: 'Sprawdzam i wywalczam to, co wolno zbudować na Twojej działce — warunki zabudowy, plan ogólny, MPZP i roszczenia, gdy plan obniża wartość gruntu.',
@@ -44,6 +46,7 @@ const SERVICE_BLOCKS = [
   },
   {
     id: 'proces-budowlany', n: '4', icon: 'hard-hat',
+    metaDesc: 'Na odwołanie od decyzji budowlanej masz co do zasady 14 dni od doręczenia, na wniosek o legalizację samowoli 30 dni. Prowadzę sprawy przed starostą i PINB.',
     title: 'Proces budowlany i samowole',
     tagline: 'Pozwolenia, samowole, spory z wykonawcą — cały proces budowlany.',
     intro: 'Prowadzę cały proces budowlany od strony prawnej — pozwolenia, zgłoszenia, legalizacje samowoli i spory z wykonawcą lub nadzorem budowlanym.',
@@ -58,6 +61,7 @@ const SERVICE_BLOCKS = [
   },
   {
     id: 'ksiegi-wieczyste-stan-prawny', n: '5', icon: 'scroll-text',
+    metaDesc: 'Brak księgi albo błąd we wpisie? Prawo z księgi wieczystej domniemywa się jako zgodne z rzeczywistym stanem prawnym. Błąd usuniesz wnioskiem albo pozwem.',
     title: 'Księgi wieczyste, stan prawny i użytkowanie wieczyste',
     tagline: 'Porządkujemy papiery — księgi, granice, własność.',
     intro: 'Porządkuję papiery: księgi wieczyste, hipoteki, granice, użytkowanie wieczyste i nieuregulowane stany prawne — tak, żeby nieruchomość była naprawdę Twoja.',
@@ -69,6 +73,7 @@ const SERVICE_BLOCKS = [
   },
   {
     id: 'wspolwlasnosc-podzialy', n: '6', icon: 'split',
+    metaDesc: 'Sprawy działowe to zniesienie współwłasności, dział spadku i podział majątku po rozwodzie. Wniosek do sądu złożysz, nawet gdy pozostali się nie zgadzają.',
     title: 'Współwłasność i sprawy działowe',
     tagline: 'Wspólna nieruchomość, spadek, podział po rozwodzie.',
     intro: 'Pomagam wyjść ze wspólnej nieruchomości i podzielić majątek — po spadku, rozwodzie albo gdy współwłaściciele nie potrafią się dogadać.',
@@ -82,6 +87,7 @@ const SERVICE_BLOCKS = [
   },
   {
     id: 'najem', n: '7', icon: 'key-round',
+    metaDesc: 'Prowadzę sprawy najmu nieruchomości: umowy, kaucje, zaległy czynsz i eksmisje. Najemcę mieszkania chroni ustawa o ochronie praw lokatorów, a biura umowa.',
     title: 'Najem nieruchomości',
     tagline: 'Bezpieczny najem — dla wynajmującego i dla najemcy.',
     intro: 'Zabezpieczam najem po obu stronach — skrojona pod Ciebie umowa zamiast szablonu z internetu, najem okazjonalny, eksmisja i windykacja czynszu.',
@@ -96,6 +102,7 @@ const SERVICE_BLOCKS = [
   },
   {
     id: 'sluzebnosci-odszkodowania', n: '8', icon: 'zap',
+    metaDesc: 'Słup, gazociąg albo przejazd? Gdy sąd ustanawia służebność przesyłu lub drogę konieczną, należy Ci się wynagrodzenie, a za decyzję starosty odszkodowanie.',
     title: 'Służebności i odszkodowania (przesył, wywłaszczenia)',
     tagline: 'Słupy, rury i drogi na Twojej działce — odzyskaj należne pieniądze.',
     intro: 'Słupy, linie, rury i drogi na Twojej działce to pieniądze, które Ci się należą. Dochodzę wynagrodzeń za przesył, bezumowne korzystanie i wywłaszczenia.',
@@ -110,6 +117,7 @@ const SERVICE_BLOCKS = [
   },
   {
     id: 'grunty-rolne-oze', n: '9', icon: 'sprout',
+    metaDesc: 'Prawo rolne rozstrzyga, kto kupi ziemię rolną, kiedy KOWR ma pierwokup i kiedy grunt trzeba odrolnić. Sprawdzam działkę i umowę dzierżawy przed podpisem.',
     title: 'Grunty rolne i OZE',
     tagline: 'Ziemia rolna, KOWR, dzierżawy pod fotowoltaikę i wiatraki.',
     intro: 'Prowadzę sprawy ziemi rolnej — UKUR i KOWR, status rolnika, odrolnienie oraz długoletnie dzierżawy pod fotowoltaikę i wiatraki.',
@@ -124,6 +132,7 @@ const SERVICE_BLOCKS = [
   },
   {
     id: 'obsluga-podmiotow-profesjonalnych', n: '10', icon: 'briefcase',
+    metaDesc: 'Prowadzę stałą obsługę prawną firm z rynku nieruchomości: wzory umów, pisma i spory. Odpowiadam w 24 h roboczych, cenę podaję w ofercie.',
     title: 'Podmioty profesjonalne rynku nieruchomości',
     tagline: 'Stała, abonamentowa obsługa firm i instytucji rynku nieruchomości.',
     intro: 'Stała, abonamentowa obsługa prawna firm i instytucji rynku nieruchomości — od deweloperów i biur, po fundusze, wykonawców i przedsiębiorstwa rolne.',
@@ -148,6 +157,7 @@ const SERVICE_BLOCKS = [
   },
   {
     id: 'roszczenia-deweloper', n: '11', icon: 'gavel',
+    metaDesc: 'Spór z deweloperem: kara z umowy za opóźnienie, 30 dni na usunięcie uznanych usterek z protokołu i 5 lat rękojmi od wydania lokalu. Ustalam, czego żądać.',
     title: 'Roszczenia i spory z deweloperem',
     tagline: 'Deweloper zawiódł? Dochodzę tego, co Ci się należy.',
     intro: 'Deweloper się spóźnił, lokal ma wady albo metraż się nie zgadza? Dochodzę kar umownych, roszczeń z rękojmi i gwarancji — aż do sądu.',

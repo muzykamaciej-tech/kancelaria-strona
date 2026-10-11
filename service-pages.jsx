@@ -534,8 +534,8 @@ function buildServiceSections(c) {
             </li>
           ))}
         </ul>
-        <p className="body mt-6 prose-legal" data-asof={c.law.asOf} data-updated={c.updated || undefined}>
-          {'Stan prawny na ' + isoPl(c.law.asOf) + '.'}{c.updated ? ' Aktualizacja: ' + isoPl(c.updated) + '.' : ''}{' Autor: '}
+        <p className="body mt-6 prose-legal" data-asof={c.law.asOf || undefined} data-updated={c.updated || undefined}>
+          {c.law.asOf ? 'Stan prawny na ' + isoPl(c.law.asOf) + '.' : ''}{c.updated ? (c.law.asOf ? ' ' : '') + 'Aktualizacja: ' + isoPl(c.updated) + '.' : ''}{' Autor: '}
           <window.NavLink route="o-mnie">adw. dr Maciej Muzyka</window.NavLink>.
         </p>
       </React.Fragment>
