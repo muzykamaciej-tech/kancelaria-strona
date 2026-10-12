@@ -1,0 +1,181 @@
+/* Oferta „Obsługa prawna flipów mieszkaniowych” – A4, 2 strony. Kolory w :root, treść w content.json. */
+@font-face { font-family: 'Fraunces'; src: url('fonts/Fraunces-Regular.ttf') format('truetype'); font-weight: 400; }
+@font-face { font-family: 'Fraunces'; src: url('fonts/Fraunces-Medium.ttf') format('truetype'); font-weight: 500 700; }
+@font-face { font-family: 'Source Sans 3'; src: url('fonts/SourceSans3-Regular.ttf') format('truetype'); font-weight: 400; }
+@font-face { font-family: 'Source Sans 3'; src: url('fonts/SourceSans3-Medium.ttf') format('truetype'); font-weight: 500; }
+@font-face { font-family: 'Source Sans 3'; src: url('fonts/SourceSans3-SemiBold.ttf') format('truetype'); font-weight: 600 700; }
+
+:root {
+  --navy: #1F2A44;
+  --brass: #B08D57;
+  --brass-light: #CFAE7C;   /* mosiądz na granatowym tle */
+  --paper: #F7F4EE;
+  --ink: #2B2B2B;
+  --beige: #EFE9DF;
+  --line: #DCD2C1;
+  --muted: #6E6A63;
+  --off: #BDB8AF;
+  --m: 15mm;                /* margines boczny */
+}
+
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  background: #8a8780;
+  font-family: 'Source Sans 3', sans-serif; font-size: 9.5pt; line-height: 1.32; color: var(--ink);
+  font-feature-settings: 'kern', 'liga', 'calt';
+  hyphens: manual; -webkit-hyphens: manual;
+  text-rendering: geometricPrecision;
+}
+@media print { body { background: none; } }
+@media screen { .page { margin: 8mm auto; box-shadow: 0 2mm 8mm rgba(0,0,0,.25); } }
+
+.page {
+  width: 210mm; height: 297mm; overflow: hidden; position: relative;
+  background: var(--paper);
+  break-after: page; page-break-after: always;
+  display: flex; flex-direction: column;
+}
+.page:last-child { break-after: auto; page-break-after: auto; }
+
+h1, h2, .serif, .card-title, .amount, .num, .cta-text, .p2-title, .h3 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  letter-spacing: -0.005em;
+}
+.ic { width: 5.2mm; height: 5.2mm; stroke: var(--navy); stroke-width: 1.4; flex: none; }
+
+/* ========== STRONA 1 ========== */
+.p1-head {
+  height: 23mm; flex: none; padding: 1mm var(--m) 0;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { height: 13mm; width: auto; display: block; }
+.tag {
+  font-size: 8pt; letter-spacing: .16em; text-transform: uppercase; color: var(--brass); font-weight: 500;
+  padding-left: 5mm; border-left: .6pt solid var(--brass); line-height: 1.5;
+}
+
+.hero { position: relative; height: 68mm; flex: none; overflow: hidden; }
+.hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
+.hero-shade {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(31,42,68,.93) 0%, rgba(31,42,68,.86) 40%, rgba(31,42,68,.45) 62%, rgba(31,42,68,0) 80%);
+}
+.hero-text {
+  position: absolute; left: var(--m); top: 0; bottom: 0; width: 112mm;
+  display: flex; flex-direction: column; justify-content: center; color: #fff;
+}
+.eyebrow { font-size: 7.8pt; letter-spacing: .16em; text-transform: uppercase; color: var(--brass-light); font-weight: 500; margin-bottom: 3.2mm; }
+h1 { font-size: 25pt; line-height: 1.08; font-weight: 400; max-width: 105mm; }
+.rule { display: block; width: 14mm; height: .9pt; background: var(--brass-light); margin: 4.2mm 0 3.8mm; }
+.lead { font-size: 10.5pt; line-height: 1.42; color: rgba(255,255,255,.92); max-width: 100mm; }
+
+.p1-main { flex: 1; padding: 7.5mm var(--m) 0; display: flex; flex-direction: column; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4.5mm; align-items: stretch; }
+.card {
+  position: relative; display: flex; flex-direction: column;
+  background: var(--beige); border: .6pt solid var(--line); border-radius: 6px; padding: 2.6mm;
+}
+.card-img { height: 28mm; background: var(--paper); border-radius: 4px; overflow: hidden; flex: none; }
+.card-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.card-body { padding: 3.6mm 1.4mm 1.6mm; display: flex; flex-direction: column; flex: 1; }
+.kicker { font-size: 7.8pt; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); font-weight: 600; }
+.card-title { font-size: 15pt; line-height: 1.12; color: var(--navy); margin-top: 1mm; min-height: 2.24em; }
+.price { margin-top: 2.4mm; padding-bottom: 3mm; border-bottom: .6pt solid var(--line); display: flex; align-items: baseline; gap: 1.6mm; flex-wrap: wrap; }
+.amount { font-size: 22pt; line-height: 1; color: var(--navy); font-weight: 500; }
+.unit { font-size: 8pt; color: var(--muted); }
+.label { font-size: 7.6pt; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--navy); margin-top: 3mm; margin-bottom: 1.1mm; }
+.forwhom { color: var(--ink); }
+.items { list-style: none; }
+.items li { position: relative; padding-left: 3.6mm; margin-top: 1.1mm; }
+.items li::before { content: ''; position: absolute; left: 0; top: .66em; width: 2mm; height: .8pt; background: var(--brass); }
+
+.card.featured { background: var(--navy); border-color: var(--navy); color: #fff; }
+.featured .card-img { background: var(--paper); }
+.featured .kicker, .featured .label { color: var(--brass-light); }
+.featured .card-title, .featured .amount { color: #fff; }
+.featured .unit { color: rgba(255,255,255,.72); }
+.featured .price { border-bottom-color: rgba(255,255,255,.22); }
+.featured .forwhom, .featured .items li { color: rgba(255,255,255,.92); }
+.featured .items li::before { background: var(--brass-light); }
+.badge {
+  position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); z-index: 2;
+  background: var(--brass); color: #fff; font-size: 7.6pt; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  padding: 1.1mm 3.4mm; border-radius: 3px; white-space: nowrap;
+}
+
+.highlights {
+  list-style: none; margin-top: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4.5mm;
+  border-top: .6pt solid var(--line); border-bottom: .6pt solid var(--line); padding: 3.4mm 0;
+}
+.highlights li { display: flex; gap: 2.6mm; align-items: center; color: var(--navy); line-height: 1.3; }
+.highlights .ic { width: 6.4mm; height: 6.4mm; stroke-width: 1.25; }
+
+.p1-foot { flex: none; padding: 3.6mm var(--m) 6.5mm; }
+.fcols { display: grid; grid-template-columns: 1fr 1fr; text-align: center; font-size: 8.4pt; line-height: 1.45; color: var(--ink); }
+.fcols p + p { border-left: .6pt solid var(--line); }
+.fcols strong { font-weight: 600; color: var(--navy); }
+.fnote { text-align: center; font-size: 7.5pt; color: var(--muted); margin-top: 2.6mm; letter-spacing: .02em; }
+
+/* ========== STRONA 2 ========== */
+.p2 { padding: 10.5mm var(--m) 0; }
+.p2-head { flex: none; margin-bottom: 2.6mm; }
+.p2-title { font-size: 19pt; line-height: 1.1; color: var(--navy); font-weight: 400; }
+.strip { display: block; width: 100%; height: 22mm; object-fit: cover; border-radius: 4px; margin-top: 4mm; }
+
+.cmp { width: 100%; border-collapse: separate; border-spacing: 0; flex: none; }
+.c-pk { width: 20.5mm; }
+.cmp th, .cmp td { padding: .7mm 2.2mm; vertical-align: middle; text-align: left; font-weight: 400; }
+.cmp th.pk { background: var(--beige); text-align: center; border-radius: 6px 6px 0 0; padding: 1.6mm .6mm; vertical-align: bottom; }
+.cmp th.pk + th.pk { border-left: 1mm solid var(--paper); }
+.cmp th.pk.f { background: var(--navy); color: #fff; }
+.pk-name { display: block; font-weight: 600; color: var(--navy); line-height: 1.2; font-size: 9pt; letter-spacing: .01em; }
+.f .pk-name { color: #fff; }
+
+.cmp tr.sec th.item, .cmp tr.sec > th[colspan] {
+  padding: 2.2mm 0 .7mm; font-size: 7.8pt; letter-spacing: .15em; text-transform: uppercase; font-weight: 600; color: var(--brass);
+  vertical-align: bottom;
+}
+.cmp tr.sec th { border-bottom: .8pt solid var(--navy); }
+.cmp tbody td { background: #fff; line-height: 1.22; }
+.cmp tbody tr.alt td { background: var(--beige); }
+.cmp td.item { padding-left: 2.2mm; }
+.cmp td.mark { text-align: center; padding-left: .5mm; padding-right: .5mm; }
+.cmp tbody td.f { border-left: .9pt solid var(--navy); border-right: .9pt solid var(--navy); }
+.tick { width: 4.2mm; height: 4.2mm; stroke: var(--navy); stroke-width: 2.2; vertical-align: middle; }
+.no { color: var(--off); }
+.price-row th, .price-row td { border-top: 1pt solid var(--navy); padding-top: 1.6mm; padding-bottom: 1.6mm; }
+.price-row th { font-weight: 600; color: var(--navy); padding-left: 0; }
+.price-row td { font-family: 'Fraunces', serif; font-size: 12pt; color: var(--navy); white-space: nowrap; text-align: center; padding-left: 0; padding-right: 0; }
+.price-row td.f { background: var(--navy); color: #fff; border-radius: 0 0 6px 6px; }
+
+.h3 { font-size: 12pt; color: var(--navy); font-weight: 500; margin-bottom: 1.8mm; }
+
+.steps { margin-top: 3.6mm; flex: none; }
+.steps ol { list-style: none; display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 4mm; }
+.steps li { display: grid; grid-template-columns: 6.6mm 1fr; gap: 2.2mm; align-items: start; }
+.num {
+  display: flex; align-items: center; justify-content: center; width: 6.6mm; height: 6.6mm; border-radius: 50%;
+  background: var(--brass); color: #fff; font-size: 10.5pt; line-height: 1;
+}
+.steps p { line-height: 1.3; }
+
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 7mm; margin-top: 3.6mm; margin-bottom: 4mm; flex: none; font-size: 9.5pt; }
+.two ul { list-style: none; }
+.two li { position: relative; padding-left: 3.6mm; line-height: 1.3; margin-bottom: 1mm; }
+.two li::before { content: ''; position: absolute; left: 0; top: .66em; width: 2mm; height: .8pt; background: var(--brass); }
+.extras b { font-weight: 600; color: var(--navy); }
+.terms li:last-child { font-weight: 600; color: var(--navy); }
+
+.cta {
+  margin-top: auto; flex: none; background: var(--navy); color: #fff; border-radius: 6px;
+  padding: 4.2mm 6.5mm; display: grid; grid-template-columns: 1fr auto; gap: 7mm; align-items: center;
+}
+.cta-text { font-size: 11.5pt; line-height: 1.32; font-weight: 400; }
+.cta-contacts { list-style: none; font-size: 11pt; font-weight: 500; }
+.cta-contacts li { display: flex; align-items: center; gap: 2.4mm; white-space: nowrap; }
+.cta-contacts li + li { margin-top: 1.4mm; }
+.cta .ic { stroke: var(--brass-light); width: 4.4mm; height: 4.4mm; stroke-width: 1.6; }
+
+.pnum { flex: none; height: 7.5mm; display: flex; align-items: center; justify-content: center; font-size: 8pt; color: var(--muted); letter-spacing: .1em; }
