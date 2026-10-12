@@ -23,6 +23,7 @@ function typo(input) {
   s = s.replace(/(^|[\s(„])(adw\.|dr|ul\.|m\.in\.|nr) /g, `$1$2${NB}`); // skróty
   for (let i = 0; i < 2; i++) s = s.replace(/(^|[\s („])([aiouwzAIOUWZ]) /g, `$1$2${NB}`); // spójniki/przyimki jednoliterowe
   s = s.replace(/ –/g, `${NB}–`);                                     // półpauza nie zaczyna wiersza
+  s = s.replace(/ \+ VAT/g, `${NB}+${NB}VAT`);                       // „3 zł + VAT/km” w jednym kawałku
   return s;
 }
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -67,7 +68,7 @@ const page1 = `
         <p class="tag">${t(P1.headerTag)}</p>
       </div>
       <div class="hero-text">
-        <p class="eyebrow">${t(P1.eyebrow)}</p>
+        ${P1.eyebrow ? `<p class="eyebrow">${t(P1.eyebrow)}</p>` : ''}
         <h1>${title}</h1>
         <p class="lead">${t(P1.lead)}</p>
       </div>

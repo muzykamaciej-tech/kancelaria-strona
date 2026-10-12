@@ -15,9 +15,8 @@
   },
   "page1": {
     "headerTag": "Oferta dla inwestorów i flipperów",
-    "eyebrow": "Kancelaria Nieruchomości · Lublin i cała Polska online",
     "title": "Obsługa prawna flipów mieszkaniowych",
-    "lead": "Kupują Państwo, remontują i sprzedają mieszkania? Przejmuję prawną stronę każdego flipa – od sprawdzenia lokalu przed zakupem po zamknięcie sprzedaży. Stała cena za mieszkanie, znana przed rozpoczęciem współpracy.",
+    "lead": "Kupują Państwo, remontują i sprzedają mieszkania? Przejmuję prawną stronę każdego flipa – od sprawdzenia lokalu przed zakupem po zamknięcie sprzedaży. Cena dotyczy jednego mieszkania i znają ją Państwo z góry.",
     "priceUnit": "zł netto / mieszkanie",
     "forWhomLabel": "Dla kogo",
     "itemsLabel": "W pakiecie",
@@ -252,7 +251,7 @@
       "items": [
         {
           "label": "Obecność adwokata przy akcie notarialnym",
-          "price": "600 zł netto"
+          "price": "600 zł netto + kilometrówka poza Lublinem 3 zł + VAT/km"
         },
         {
           "label": "Tryb pilny (raport w 24 godziny)",
