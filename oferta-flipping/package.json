@@ -1,0 +1,13 @@
+{
+  "name": "oferta-flipping",
+  "private": true,
+  "description": "Oferta PDF „Obsługa prawna flipów mieszkaniowych” – HTML + CSS z content.json, PDF przez Playwright/Chromium.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/build.mjs --png"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}

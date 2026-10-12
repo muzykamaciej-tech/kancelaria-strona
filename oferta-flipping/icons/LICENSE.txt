@@ -1,0 +1,1 @@
+Ikony: Lucide (lucide-static 0.460.0), licencja ISC – https://lucide.dev
