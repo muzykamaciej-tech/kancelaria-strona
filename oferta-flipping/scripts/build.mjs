@@ -35,42 +35,49 @@ const icon = (name, cls = 'ic') => fs.readFileSync(path.join(ROOT, 'icons', `${n
 /* ---------- strona 1 ---------- */
 const P1 = C.page1, P2 = C.page2, F = C.firm;
 
+const check = icon('check', 'tick');
+
+// tytuł: końcówka z titleAccent idzie do drugiego wiersza w jasnym błękicie (jak na okładkach bloga)
+const title = (() => {
+  const a = P1.titleAccent;
+  if (!a || !P1.title.endsWith(a)) return t(P1.title);
+  return `${t(P1.title.slice(0, -a.length).trim())}<br><span class="accent">${t(a)}</span>`;
+})();
+
 const card = (p) => `
       <article class="card${p.featured ? ' featured' : ''}">
         ${p.badge ? `<span class="badge">${t(p.badge)}</span>` : ''}
-        <div class="card-img"><img src="${p.image}" alt=""></div>
-        <div class="card-body">
-          <p class="kicker">${t(p.name)}</p>
-          <h2 class="card-title">${t(p.subtitle)}</h2>
-          <p class="price"><span class="amount">${money(p.price)}</span><span class="unit">${t(P1.priceUnit)}</span></p>
-          <h3 class="label">${t(P1.forWhomLabel)}</h3>
-          <p class="forwhom">${t(p.forWhom)}</p>
-          <h3 class="label">${t(P1.itemsLabel)}</h3>
-          <ul class="items">${p.items.map((i) => `<li>${t(i)}</li>`).join('')}</ul>
-        </div>
+        <div class="card-art">${icon(p.icon, 'art')}</div>
+        <p class="kicker">${t(p.name)}</p>
+        <h2 class="card-title">${t(p.subtitle)}</h2>
+        <p class="price"><span class="amount">${money(p.price)}</span><span class="unit">${t(P1.priceUnit)}</span></p>
+        <h3 class="label">${t(P1.forWhomLabel)}</h3>
+        <p class="forwhom">${t(p.forWhom)}</p>
+        <h3 class="label">${t(P1.itemsLabel)}</h3>
+        <ul class="items">${p.items.map((i) => `<li>${check}<span>${t(i)}</span></li>`).join('')}</ul>
       </article>`;
 
 const page1 = `
   <section class="page p1">
-    <header class="p1-head">
-      <img class="logo" src="assets/logo-granat.png" alt="${esc(F.name)}">
-      <p class="tag">${t(P1.headerTag)}</p>
-    </header>
-    <div class="hero">
+    <header class="hero">
       <img class="hero-img" src="assets/hero.jpg" alt="">
       <div class="hero-shade"></div>
+      <div class="hero-top">
+        <img class="logo" src="assets/logo-on-dark.png" alt="${esc(F.name)}">
+        <p class="tag">${t(P1.headerTag)}</p>
+      </div>
       <div class="hero-text">
         <p class="eyebrow">${t(P1.eyebrow)}</p>
-        <h1>${t(P1.title)}</h1>
-        <span class="rule"></span>
+        <h1>${title}</h1>
         <p class="lead">${t(P1.lead)}</p>
       </div>
-    </div>
+      <p class="hero-url">${esc(F.www)}</p>
+    </header>
     <main class="p1-main">
       <div class="cards">${P1.packages.map(card).join('')}
       </div>
       <ul class="highlights">
-        ${P1.highlights.map((h) => `<li>${icon(h.icon)}<span>${t(h.text)}</span></li>`).join('\n        ')}
+        ${P1.highlights.map((h) => `<li><span class="tile">${icon(h.icon)}</span><span>${t(h.text)}</span></li>`).join('\n        ')}
       </ul>
     </main>
     <footer class="p1-foot">
@@ -83,7 +90,6 @@ const page1 = `
   </section>`;
 
 /* ---------- strona 2 ---------- */
-const check = icon('check', 'tick');
 const dash = '<span class="no">–</span>';
 const pk = P1.packages;
 const col = (i, extra = '') => `${extra}${pk[i].featured ? ' f' : ''}`.trim();
@@ -96,8 +102,8 @@ const tableRows = P2.sections.map((sec, si) => `${si ? `
 const page2 = `
   <section class="page p2">
     <header class="p2-head">
+      <p class="eyebrow">${t(P2.eyebrow)}</p>
       <h2 class="p2-title">${t(P2.title)}</h2>
-      ${P2.showStrip ? `<img class="strip" src="${P2.strip}" alt="">` : ''}
     </header>
     <table class="cmp">
       <colgroup><col class="c-item">${pk.map(() => '<col class="c-pk">').join('')}</colgroup>
@@ -142,7 +148,7 @@ const html = `<!doctype html>
 <html lang="pl">
 <head>
 <meta charset="utf-8">
-<title>${t(P1.title)} – ${t(F.nameLine1)}</title>
+<title>${esc(typo(P1.title))} – ${esc(typo(F.nameLine1))}</title>
 <meta name="author" content="${esc(F.name)}">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -163,7 +169,7 @@ await page.evaluate(() => document.fonts.ready);
 
 const report = await page.evaluate(() => {
   const out = { fonts: {}, overflow: [], pages: document.querySelectorAll('.page').length };
-  for (const f of ['Fraunces', 'Source Sans 3']) out.fonts[f] = document.fonts.check(`12px "${f}"`) && [...document.fonts].some((x) => x.family.replace(/"/g, '') === f && x.status === 'loaded');
+  for (const f of ['Lora']) out.fonts[f] = document.fonts.check(`12px "${f}"`) && [...document.fonts].some((x) => x.family.replace(/"/g, '') === f && x.status === 'loaded');
   document.querySelectorAll('.page').forEach((pg, n) => {
     const P = pg.getBoundingClientRect();
     pg.querySelectorAll('*').forEach((el) => {

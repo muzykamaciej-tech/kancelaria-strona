@@ -2,7 +2,6 @@
   "output": "Oferta-obsluga-flipow-Kancelaria-Nieruchomosci.pdf",
   "validUntil": "31 marca 2027 r.",
   "currency": "zł",
-
   "firm": {
     "name": "Kancelaria Nieruchomości adw. dr Maciej Muzyka",
     "nameLine1": "Kancelaria Nieruchomości",
@@ -14,7 +13,6 @@
     "email": "maciej.muzyka@mecenasodnieruchomosci.pl",
     "www": "mecenasodnieruchomosci.pl"
   },
-
   "page1": {
     "headerTag": "Oferta dla inwestorów i flipperów",
     "eyebrow": "Kancelaria Nieruchomości · Lublin i cała Polska online",
@@ -30,7 +28,6 @@
         "name": "Pakiet Podstawowy",
         "subtitle": "Bezpieczny zakup",
         "price": 1500,
-        "image": "assets/pakiet-podstawowy.jpg",
         "forWhom": "Gdy chcą Państwo kupić mieszkanie i mieć pewność, że nie kryje ono problemów prawnych.",
         "items": [
           "analiza księgi wieczystej i dokumentów lokalu",
@@ -38,7 +35,8 @@
           "przegląd umowy przedwstępnej lub rezerwacyjnej",
           "pisemny raport ryzyk z rekomendacją: kupić, negocjować albo zrezygnować",
           "rozmowa omawiająca raport"
-        ]
+        ],
+        "icon": "file-search"
       },
       {
         "id": "rozszerzony",
@@ -48,7 +46,6 @@
         "price": 2900,
         "featured": true,
         "badge": "Polecany",
-        "image": "assets/pakiet-rozszerzony.jpg",
         "forWhom": "Gdy chcą Państwo bezpiecznie kupić mieszkanie i zabezpieczyć remont.",
         "items": [
           "wszystko z pakietu Podstawowego",
@@ -56,7 +53,8 @@
           "przegląd projektu aktu notarialnego zakupu",
           "umowa z ekipą remontową dla tego mieszkania",
           "protokół odbioru prac remontowych"
-        ]
+        ],
+        "icon": "paint-roller"
       },
       {
         "id": "pelny",
@@ -64,7 +62,6 @@
         "name": "Pakiet Pełny",
         "subtitle": "Od zakupu do sprzedaży",
         "price": 4900,
-        "image": "assets/pakiet-pelny.jpg",
         "forWhom": "Gdy chcą Państwo mieć prawnika przy całym flipie – od zakupu po roszczenia kupującego.",
         "items": [
           "wszystko z pakietu Rozszerzonego",
@@ -72,52 +69,172 @@
           "przegląd projektu aktu sprzedaży",
           "protokół zdawczo-odbiorczy z wykazem wyposażenia",
           "obsługa reklamacji kupującego przez 12 miesięcy"
-        ]
+        ],
+        "icon": "key-round"
       }
     ],
     "highlights": [
-      { "icon": "calculator", "text": "Stała cena za mieszkanie – wliczają ją Państwo w kalkulację flipa" },
-      { "icon": "messages-square", "text": "Rozmowa z adwokatem w każdym pakiecie, online lub w Lublinie" },
-      { "icon": "file-check", "text": "Dokumenty dopasowane do konkretnego mieszkania, nie ogólne wzory" }
+      {
+        "icon": "calculator",
+        "text": "Stała cena za mieszkanie – wliczają ją Państwo w kalkulację flipa"
+      },
+      {
+        "icon": "messages-square",
+        "text": "Rozmowa z adwokatem w każdym pakiecie, online lub w Lublinie"
+      },
+      {
+        "icon": "file-check",
+        "text": "Dokumenty dopasowane do konkretnego mieszkania, nie ogólne wzory"
+      }
     ],
-    "footerNote": "Ceny netto, do kwot dolicza się 23% VAT"
+    "footerNote": "Ceny netto, do kwot dolicza się 23% VAT",
+    "titleAccent": "flipów mieszkaniowych"
   },
-
   "page2": {
     "title": "Co dokładnie obejmuje każdy pakiet",
-    "showStrip": false,
-    "strip": "assets/pasek-schody.jpg",
     "priceRowLabel": "Cena netto za mieszkanie",
     "sections": [
       {
         "title": "Przed zakupem",
         "rows": [
-          { "label": "Analiza księgi wieczystej (wszystkie działy)", "in": [true, true, true] },
-          { "label": "Weryfikacja dokumentów lokalu: podstawa nabycia sprzedającego, zaświadczenie ze wspólnoty lub spółdzielni, informacja o osobach zameldowanych", "in": [true, true, true] },
-          { "label": "Sprawdzenie sprzedającego w rejestrach (m.in. postępowania upadłościowe i egzekucyjne)", "in": [true, true, true] },
-          { "label": "Przegląd umowy przedwstępnej lub rezerwacyjnej od sprzedającego", "in": [true, true, true] },
-          { "label": "Pisemny raport ryzyk z rekomendacją", "in": [true, true, true] },
-          { "label": "Rozmowa omawiająca raport (online lub w kancelarii)", "in": [true, true, true] }
+          {
+            "label": "Analiza księgi wieczystej (wszystkie działy)",
+            "in": [
+              true,
+              true,
+              true
+            ]
+          },
+          {
+            "label": "Weryfikacja dokumentów lokalu: podstawa nabycia sprzedającego, zaświadczenie ze wspólnoty lub spółdzielni, informacja o osobach zameldowanych",
+            "in": [
+              true,
+              true,
+              true
+            ]
+          },
+          {
+            "label": "Sprawdzenie sprzedającego w rejestrach (m.in. postępowania upadłościowe i egzekucyjne)",
+            "in": [
+              true,
+              true,
+              true
+            ]
+          },
+          {
+            "label": "Przegląd umowy przedwstępnej lub rezerwacyjnej od sprzedającego",
+            "in": [
+              true,
+              true,
+              true
+            ]
+          },
+          {
+            "label": "Pisemny raport ryzyk z rekomendacją",
+            "in": [
+              true,
+              true,
+              true
+            ]
+          },
+          {
+            "label": "Rozmowa omawiająca raport (online lub w kancelarii)",
+            "in": [
+              true,
+              true,
+              true
+            ]
+          }
         ]
       },
       {
         "title": "Zakup i remont",
         "rows": [
-          { "label": "Przygotowanie lub negocjacja umowy przedwstępnej (zadatek, terminy, wydanie lokalu)", "in": [false, true, true] },
-          { "label": "Przegląd projektu aktu notarialnego zakupu i uwagi dla notariusza", "in": [false, true, true] },
-          { "label": "Umowa z ekipą remontową: zakres, harmonogram, kary za opóźnienie, odbiory, gwarancja wykonawcy", "in": [false, true, true] },
-          { "label": "Protokół odbioru prac remontowych", "in": [false, true, true] },
-          { "label": "Wsparcie mailowe i telefoniczne w trakcie zakupu i remontu", "in": [false, true, true] }
+          {
+            "label": "Przygotowanie lub negocjacja umowy przedwstępnej (zadatek, terminy, wydanie lokalu)",
+            "in": [
+              false,
+              true,
+              true
+            ]
+          },
+          {
+            "label": "Przegląd projektu aktu notarialnego zakupu i uwagi dla notariusza",
+            "in": [
+              false,
+              true,
+              true
+            ]
+          },
+          {
+            "label": "Umowa z ekipą remontową: zakres, harmonogram, kary za opóźnienie, odbiory, gwarancja wykonawcy",
+            "in": [
+              false,
+              true,
+              true
+            ]
+          },
+          {
+            "label": "Protokół odbioru prac remontowych",
+            "in": [
+              false,
+              true,
+              true
+            ]
+          },
+          {
+            "label": "Wsparcie mailowe i telefoniczne w trakcie zakupu i remontu",
+            "in": [
+              false,
+              true,
+              true
+            ]
+          }
         ]
       },
       {
         "title": "Sprzedaż i po sprzedaży",
         "rows": [
-          { "label": "Umowa rezerwacyjna i przedwstępna z kupującym", "in": [false, false, true] },
-          { "label": "Przegląd projektu aktu sprzedaży", "in": [false, false, true] },
-          { "label": "Protokół zdawczo-odbiorczy z wykazem wyposażenia i opisem stanu lokalu", "in": [false, false, true] },
-          { "label": "Klauzula informacyjna RODO dla kupujących", "in": [false, false, true] },
-          { "label": "Obsługa reklamacji kupującego przez 12 miesięcy od wydania lokalu (odpowiedzi, wezwania do wykonawcy, negocjacje)", "in": [false, false, true] }
+          {
+            "label": "Umowa rezerwacyjna i przedwstępna z kupującym",
+            "in": [
+              false,
+              false,
+              true
+            ]
+          },
+          {
+            "label": "Przegląd projektu aktu sprzedaży",
+            "in": [
+              false,
+              false,
+              true
+            ]
+          },
+          {
+            "label": "Protokół zdawczo-odbiorczy z wykazem wyposażenia i opisem stanu lokalu",
+            "in": [
+              false,
+              false,
+              true
+            ]
+          },
+          {
+            "label": "Klauzula informacyjna RODO dla kupujących",
+            "in": [
+              false,
+              false,
+              true
+            ]
+          },
+          {
+            "label": "Obsługa reklamacji kupującego przez 12 miesięcy od wydania lokalu (odpowiedzi, wezwania do wykonawcy, negocjacje)",
+            "in": [
+              false,
+              false,
+              true
+            ]
+          }
         ]
       }
     ],
@@ -133,11 +250,26 @@
     "extras": {
       "title": "Usługi dodatkowe",
       "items": [
-        { "label": "Obecność adwokata przy akcie notarialnym", "price": "600 zł netto" },
-        { "label": "Tryb pilny (raport w 24 godziny)", "price": "+30% ceny pakietu" },
-        { "label": "Kolejne godziny pracy ponad zakres pakietu", "price": "400 zł netto/h" },
-        { "label": "Mieszkania z lokatorami, udziałami lub nieuregulowanym spadkiem", "price": "wycena indywidualna" },
-        { "label": "Kilka mieszkań rocznie", "price": "pakiety na 3 i 6 mieszkań z rabatem do 25%" }
+        {
+          "label": "Obecność adwokata przy akcie notarialnym",
+          "price": "600 zł netto"
+        },
+        {
+          "label": "Tryb pilny (raport w 24 godziny)",
+          "price": "+30% ceny pakietu"
+        },
+        {
+          "label": "Kolejne godziny pracy ponad zakres pakietu",
+          "price": "400 zł netto/h"
+        },
+        {
+          "label": "Mieszkania z lokatorami, udziałami lub nieuregulowanym spadkiem",
+          "price": "wycena indywidualna"
+        },
+        {
+          "label": "Kilka mieszkań rocznie",
+          "price": "pakiety na 3 i 6 mieszkań z rabatem do 25%"
+        }
       ]
     },
     "terms": {
@@ -154,6 +286,7 @@
     "cta": {
       "text": "Mają Państwo upatrzone mieszkanie? Proszę przesłać numer księgi wieczystej lub link do ogłoszenia – odpowiem z propozycją pakietu."
     },
-    "pageNumber": "2"
+    "pageNumber": "2",
+    "eyebrow": "Zakres pakietów"
   }
 }

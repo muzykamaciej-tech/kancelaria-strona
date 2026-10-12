@@ -1,23 +1,20 @@
-# Grafiki – źródła (Higgsfield, 12.10.2026)
+# Grafiki – źródła
 
-Wygenerowane przez Higgsfield MCP, jedna partia 6 obrazów, zużyte 12 kredytów (saldo 1161 → 1149).
-Wszystkie bez tekstu, logotypów i twarzy. Pliki tutaj są już przycięte i skompresowane (JPG).
+## Wersja 2 (12.10.2026, styl marki z `Design/design.md`)
 
-| Plik | Model | Job ID | Obróbka |
-|---|---|---|---|
-| `hero.jpg` | GPT Image 2.5, 21:9, 2k, quality high | `487a4cd6-87f6-40ce-984e-8363e1a5b5fa` (wariant 1 z 2) | 2688×1152 → kadr 2688×1024 → 2480×945, JPG q80 |
-| – (odrzucony) | GPT Image 2.5, 21:9, 2k, high | `709ea071-0a43-4922-902f-bd3c98df5262` (wariant 2) | kominek i drzwi po prawej, mniej pustej ściany pod tekst |
-| `pakiet-podstawowy.jpg` | Recraft V4.1, 1:1, kolory #1F2A44/#B08D57 | `b3466427-ea88-4c27-9f09-e0211bdfbbc0` | tło wyrównane do #F7F4EE, kadr 1024×580 → 800×453 |
-| `pakiet-rozszerzony.jpg` | Recraft V4.1, 1:1 | `33337c37-9844-4644-9c46-881c3ecfba58` | jw. |
-| `pakiet-pelny.jpg` | Recraft V4.1, 1:1 | `bcaf73d2-601c-447a-92ca-bde3706dc38e` | jw. + ciaśniejszy kadr (motyw był mniejszy niż w dwóch pozostałych) |
-| `pasek-schody.jpg` | GPT Image 2.5, 21:9, 2k, high | `fed9a98e-583e-4b41-975d-605be2a4a851` | kadr 5:1 → 2400×480; w PDF wyłączony (`page2.showStrip: false`), bo brak miejsca |
+| Plik | Źródło | Obróbka |
+|---|---|---|
+| `hero.jpg` | Higgsfield, GPT Image 2.5, 21:9, 2k, quality high, job `ac1ec6d4-1f6b-4139-834d-8b3fb5a2f6c1` (wariant 2 z 2) | 2688×1152 → 2480×1063, jasność +8%, JPG q82 |
+| – (odrzucony) | job `618e6be1-4bd3-4fc5-bd92-94373f94b0c1` (wariant 1) | nienaturalny blok ściany po lewej |
+| `logo-on-dark.png` | `assets/logo-on-dark.png` ze strony (białe, jasnobłękitne linie) | przycięte do treści, 1100 px szer. |
+| `logo.png` | `assets/logo.png` ze strony | jw. (zapas na wersję jasną) |
 
-Recraft V4.1 nie ma parametru seed; spójność stylu ilustracji zapewnia ten sam model, paleta (`colors`) i wspólny opis stylu w prompcie.
+Ilustracje kart zastąpione ikonami Lucide (`icons/file-search.svg`, `paint-roller.svg`, `key-round.svg`) na polu w kolorze `#E0EDFA` (Rozszerzony: biała ikona na `#0E53A5`), jak kafelki ikon na stronie.
 
-`logo-granat.png` – `assets/logo.png` ze strony, przekolorowany na granat #1F2A44 (kształt bez zmian).
+Zużycie: 2 obrazy, ok. 5,5 kredytu (saldo 1149 przed generowaniem).
 
-## Prompty
+Prompt hero: „Freshly renovated apartment interior in a historic European tenement building at blue hour, tall window on the right with soft city lights outside, light herringbone parquet, minimal modern furniture, a set of keys on a small table, deep navy blue monochrome color grading, moody cinematic low-key light, quiet and elegant, the left half of the frame is a calm dark empty wall for text, editorial architectural photography, high detail, no people, no text, no letters, no logos, no watermark”
 
-1. Hero: „Bright freshly renovated apartment interior in a historic European tenement building, tall windows with soft morning light, light oak herringbone parquet, white walls, minimal Scandinavian furniture, a few plants, calm warm muted palette with navy and brass accents, editorial architectural photography, high detail, wide composition with calm empty wall area on the left side, no people, no text, no logos, no signs, no writing, no watermark”
-2. Ilustracje: motyw z briefu (a/b/c) + „Minimal elegant line-and-flat illustration, navy #1F2A44 and brass #B08D57 on warm cream background #F7F4EE, generous negative space, centered composition, subtle paper texture, no text, no letters, no numbers, no logos”
-3. Pasek: „Close-up architectural detail of a renovated historic tenement staircase with ornamental wrought-iron railing and wooden handrail, soft natural light, muted warm cream and navy tones with brass details, shallow depth of field, horizontal panoramic composition, editorial architectural photography, no people, no text, no signs, no logos, no watermark”
+## Wersja 1 (wycofana)
+
+Jasne wnętrze (GPT Image 2.5, job `487a4cd6-…`), trzy ilustracje Recraft V4.1 granat/mosiądz (`b3466427-…`, `33337c37-…`, `bcaf73d2-…`) i pasek ze schodami (`fed9a98e-…`), 12 kredytów. Pliki usunięte z repo, są w historii git (commit 31fc53a).
