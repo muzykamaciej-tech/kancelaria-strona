@@ -1,0 +1,815 @@
+<script>
+/* Widoki.html — karty rekordów (zapytanie, klient, sprawa), zespół i dostępy, ustawienia,
+   import rejestrów, pierwsza konfiguracja, obsługa zdarzeń i start aplikacji. */
+
+function notFound() {
+  return `<div class="empty"><b>Nie znaleziono rekordu</b>Mógł zostać usunięty albo należy do kancelarii, do której nie masz dostępu.<br><br><button class="btn" data-go="pulpit">Wróć na pulpit</button></div>`;
+}
+function backLink(route, label) { return `<button class="back" data-go="${route}">${ic('back')}${esc(label)}</button>`; }
+function kv(table, r, skip) {
+  skip = skip || [];
+  const items = fieldsOf(table).filter((fd) => !fd.hidden && skip.indexOf(fd.k) < 0 && r[fd.k] && (!fd.model || fd.model === firmOf(r.kancelaria).model));
+  if (!items.length) return '<div class="empty small">Brak danych</div>';
+  return `<dl class="kv">${items.map((fd) => `<dt>${esc(fd.l)}</dt><dd>${fieldValue(table, fd, r)}</dd>`).join('')}</dl>`;
+}
+function fieldValue(table, fd, r) {
+  const v = r[fd.k];
+  switch (fd.t) {
+    case 'date': return fmtDate(v, true);
+    case 'datetime': return fmtDT(v);
+    case 'money': return `<span class="num">${money(v)}</span>`;
+    case 'check': return v ? 'tak' : '';
+    case 'email': return `<a href="mailto:${attr(v)}">${esc(v)}</a>`;
+    case 'tel': return `<a href="tel:${attr(String(v).replace(/\s/g, ''))}">${esc(v)}</a>`;
+    case 'url': return `<a href="${attr(v)}" target="_blank" rel="noopener">${esc(/drive\.google|docs\.google/.test(v) ? 'Otwórz na Dysku' : v)} ${ic('ext').replace('<svg', '<svg width="13" height="13"')}</a>`;
+    case 'user': return esc(personName(v));
+    case 'users': return esc(String(v).split(',').filter(Boolean).map(personName).join(', '));
+    case 'ref': { const x = byId(fd.ref, r.kancelaria, v); const route = { klienci: 'klient', sprawy: 'sprawa', zapytania: 'zapytanie' }[fd.ref]; return x ? `<a href="#" data-go="${route}/${x.kancelaria}/${x.id}">${esc(refLabel(fd.ref, x))}</a>` : '<span class="muted">—</span>'; }
+    case 'textarea': return `<div class="pre">${esc(v)}</div>`;
+    default: return fd.k === 'sygn_akt' ? `<span class="mono">${esc(v)}</span>` : esc(v);
+  }
+}
+function tabsHtml(key, tabs) {
+  const cur = S.tab[key] || tabs[0][0];
+  return { cur, html: `<div class="tabs" role="tablist">${tabs.map(([k, l, n]) => `<button role="tab" data-tab="${k}" data-tkey="${attr(key)}" class="${k === cur ? 'on' : ''}">${esc(l)}${n !== undefined && n !== '' ? `<span class="n">${n}</span>` : ''}</button>`).join('')}</div>` };
+}
+
+/* ---------- Gmail i historia (ładowane na żądanie) ---------- */
+function gmailPanel(key, emails) {
+  emails = uniq(emails.filter(Boolean));
+  if (!emails.length) return '<div class="empty">Brak adresu e-mail.</div>';
+  const c = S.cache.gmail[key];
+  if (!c) return `<div class="empty"><button class="btn" data-act="gmail" data-key="${attr(key)}" data-emails="${attr(emails.join(','))}">${ic('mail')}Pokaż korespondencję z Gmaila</button><div class="small" style="margin-top:6px">Twoja skrzynka: wiadomości od i do ${esc(emails.join(', '))}</div></div>`;
+  if (c === 'loading') return '<div class="empty"><span class="spin"></span></div>';
+  if (c.error) return `<div class="empty">${esc(c.error)}</div>`;
+  if (!c.length) return `<div class="empty">W Twojej skrzynce nie ma wiadomości z adresem ${esc(emails.join(', '))}.</div>`;
+  return c.map((m) => `<a class="mail" href="${attr(m.url)}" target="_blank" rel="noopener"><span class="s">${esc(m.subject)}${m.count > 1 ? ` <span class="muted">(${m.count})</span>` : ''}</span><span class="m">${esc(m.from)} · ${fmtDT(m.date)}</span><span class="m">${esc(m.snippet)}</span></a>`).join('');
+}
+async function loadGmail(key, emails) {
+  S.cache.gmail[key] = 'loading'; render();
+  try { S.cache.gmail[key] = await call('apiGmail', emails); } catch (e) { S.cache.gmail[key] = { error: e.message }; }
+  render();
+}
+function histPanel(t, firm, id) {
+  const key = t + ':' + firm + ':' + id, c = S.cache.hist[key];
+  if (!c) { S.cache.hist[key] = 'loading'; call('apiHistory', firm, t, id).then((h) => { S.cache.hist[key] = h; render(); }, (e) => { S.cache.hist[key] = { error: e.message }; render(); }); return '<div class="empty"><span class="spin"></span></div>'; }
+  if (c === 'loading') return '<div class="empty"><span class="spin"></span></div>';
+  if (c.error) return `<div class="empty">${esc(c.error)}</div>`;
+  if (!c.length) return '<div class="empty">Brak zapisanych zmian.</div>';
+  return c.map((h) => {
+    let ch = '';
+    if (h.akcja === 'zmiana') {
+      try {
+        const d = JSON.parse(h.zmiany || '{}');
+        ch = Object.keys(d).map((k) => `<div class="ch">${esc(fdef(t, k).l || k)}: <s>${esc(String(d[k][0]).slice(0, 80)) || '—'}</s> → ${esc(String(d[k][1]).slice(0, 120)) || '—'}</div>`).join('');
+      } catch (e) { ch = ''; }
+    }
+    return `<div class="hist"><b>${esc(h.akcja)}</b> · ${esc(shortName(h.kto))} · <span class="muted">${fmtDT(h.ts)}</span>${ch}</div>`;
+  }).join('');
+}
+
+/* ---------- Szablony wiadomości ---------- */
+function signature(firm) {
+  const f = firmOf(firm), me = S.boot.me || {};
+  const person = /adw|r\.\s?pr|apl/.test(me.tytul || '') ? (me.tytul + ' ' + me.imie_nazwisko).trim() : [me.imie_nazwisko, me.tytul].filter(Boolean).join('\n');
+  const footer = f.podpis ? f.podpis.split('\n').filter((l) => norm(l) !== norm(person)).join('\n') : [f.nazwa_krotka, f.adres, f.telefon && 'tel. ' + f.telefon].filter(Boolean).join('\n');
+  return person + '\n' + footer;
+}
+function offerMail(z) {
+  const f = firmOf(z.kancelaria);
+  const body = ['Dzień dobry,', '', 'dziękuję za opisanie sprawy. Poniżej wstępna analiza: co w tej sprawie trzeba zrobić.', '', z.analiza || '[wstępna analiza]', '',
+    'Oferta:', '• zakres: ' + (z.analiza ? 'jak wyżej' : '[zakres]'), '• wynagrodzenie: ' + (z.oferta_kwota ? money(z.oferta_kwota) : '[kwota]') + (z.oferta_model ? ' (' + z.oferta_model.toLowerCase() + ')' : ''),
+    '• termin: ' + (z.oferta_termin || '[termin]'), '', 'Do akceptacji oferty nic Pan/Pani nie płaci. Jeśli oferta odpowiada, wystarczy odpisać na tę wiadomość.', '',
+    'Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów.', '', 'Z wyrazami szacunku', signature(z.kancelaria)].join('\n');
+  return gmailCompose(z.email, 'Wstępna analiza sprawy i oferta – ' + f.nazwa_krotka, body);
+}
+function consultMail(z) {
+  const f = firmOf(z.kancelaria);
+  const body = ['Dzień dobry,', '', 'dziękujemy za kontakt z kancelarią. Konsultacja trwa 60 minut, w kancelarii (' + (f.adres || '') + ') albo online.', '',
+    f.link_rezerwacji ? 'Dogodny termin można wybrać tutaj: ' + f.link_rezerwacji : 'Proponujemy termin: [data i godzina].', '',
+    'Prosimy o zabranie lub przesłanie dokumentów dotyczących sprawy.', '', 'Z wyrazami szacunku', signature(z.kancelaria)].join('\n');
+  return gmailCompose(z.email, 'Konsultacja – ' + f.nazwa_krotka, body);
+}
+
+/* ---------- Karta zapytania ---------- */
+VIEWS.zapytanie = function (firm, id) {
+  const z = byId('zapytania', firm, id);
+  if (!z) return notFound();
+  const f = firmOf(firm), w = perm().write, open = zType(z) === 'open';
+  const hits = conflictHits(z.nazwa, z).filter((h) => !(h.r.id === z.klient_id && h.role === 'Klient'));
+  const offerStatus = (dict(firm, 'status_zapytania').find((d) => /^Oferta/i.test(d.v)) || {}).v;
+  const statuses = dict(firm, 'status_zapytania');
+  const acts = [];
+  if (w && open) {
+    if (f.model === 'analiza') {
+      if (z.email) acts.push(`<a class="btn primary" href="${attr(offerMail(z))}" target="_blank" rel="noopener">${ic('send')}Napisz analizę i ofertę</a>`);
+      if (offerStatus && z.status !== offerStatus && !z.odpowiedz) acts.push(`<button class="btn" data-act="zap-status" data-v="${attr(offerStatus)}">${ic('check')}Oferta wysłana</button>`);
+    } else if (z.email) acts.push(`<a class="btn primary" href="${attr(consultMail(z))}" target="_blank" rel="noopener">${ic('send')}Zaproś na konsultację</a>`);
+    acts.push(`<button class="btn" data-act="zap-accept">${ic('briefcase')}Przyjmij — załóż sprawę</button>`);
+    acts.push(`<button class="btn ghost" data-act="zap-close">Zamknij bez zlecenia</button>`);
+  }
+  if (w) acts.push(`<button class="btn ghost" data-act="edit" data-t="zapytania" data-firm="${firm}" data-id="${id}">${ic('edit')}Edytuj</button>`);
+  const kl = byId('klienci', firm, z.klient_id), sp = byId('sprawy', firm, z.sprawa_id);
+  const tb = tabsHtml('zap:' + firm + ':' + id, [['opis', 'Sprawa'], ['mail', 'E-maile'], ['hist', 'Historia']]);
+  const body = tb.cur === 'mail' ? `<section class="panel">${gmailPanel('z:' + firm + ':' + id, [z.email])}</section>`
+    : tb.cur === 'hist' ? `<section class="panel">${histPanel('zapytania', firm, id)}</section>`
+    : `<div class="grid-2"><div class="stack">
+        <section class="panel"><div class="panel-h"><h2>Opis od klienta</h2>${z.pilne ? chip('bad', 'pilne terminy') : ''}</div><div class="panel-b pre">${esc(z.opis) || '<span class="muted">brak opisu</span>'}</div></section>
+        <section class="panel"><div class="panel-h"><h2>${f.model === 'analiza' ? 'Wstępna analiza i oferta' : 'Konsultacja i oferta'}</h2>${w ? `<button class="btn sm" data-act="edit" data-t="zapytania" data-firm="${firm}" data-id="${id}">Uzupełnij</button>` : ''}</div>
+          <div class="panel-b">${kv('zapytania', z, ['nazwa', 'email', 'telefon', 'kontakt', 'opis', 'status', 'kanal', 'kategoria', 'data_wplywu', 'pilne', 'opiekun', 'klient_id', 'sprawa_id', 'folder', 'strona_www', 'kw', 'konflikt'])}</div></section>
+      </div><div class="stack">
+        <section class="panel"><div class="panel-h"><h2>Kontakt</h2></div><div class="panel-b">${kv('zapytania', z, ['nazwa', 'opis', 'status', 'analiza', 'oferta_kwota', 'oferta_model', 'oferta_termin', 'odpowiedz', 'przypomnienie', 'powod', 'termin_odpowiedzi', 'konflikt', 'konsultacja'])}</div></section>
+        <section class="panel"><div class="panel-h"><h2>Konflikt interesów</h2>${chip(z.konflikt === 'Brak konfliktu' ? 'ok' : z.konflikt === 'Konflikt – odmowa' ? 'bad' : 'warn', esc(z.konflikt || 'Nie sprawdzono'))}</div>
+          ${hits.length ? `<ul class="rows">${hits.slice(0, 8).map((h) => `<li data-go="${h.go}">${chip(h.cls, h.role)}${firmTag(h.r.kancelaria)}<div class="main-txt"><b>${esc(h.label)}</b><span>${esc(h.sub)}</span></div></li>`).join('')}</ul>`
+            : `<div class="panel-b small muted">W bazie nie ma klienta, strony przeciwnej ani innego zapytania o nazwie „${esc(z.nazwa)}”.</div>`}
+          ${w && z.konflikt !== 'Brak konfliktu' ? `<div class="panel-b" style="border-top:1px solid var(--line)"><button class="btn sm" data-act="zap-nokonflikt">${ic('check')}Sprawdzone: brak konfliktu</button> <button class="btn sm ghost" data-go="konflikt" data-act="conflict-q" data-q="${attr(z.nazwa)}">Szukaj szerzej</button></div>` : ''}
+        </section>
+      </div></div>`;
+  return `${backLink('zapytania', 'Zapytania')}
+    <div class="rec-head"><div class="t"><h1>${esc(z.nazwa)}</h1>
+      <div class="meta">${firmTag(firm)}${w && statuses.length ? `<select class="inp mini" data-act-change="zap-status-sel" aria-label="Status">${statuses.map((d) => `<option${d.v === z.status ? ' selected' : ''}>${esc(d.v)}</option>`).join('')}</select>` : statusChip('zapytania', z)}
+        ${slaChip(z)}<span>${esc(z.kategoria || '')}</span><span>wpłynęło ${fmtDT(z.data_wplywu)} · ${esc(z.kanal || '')}</span>
+        ${z.opiekun ? `<span>prowadzi ${esc(shortName(z.opiekun))}</span>` : ''}
+        ${z.folder ? `<a href="${attr(z.folder)}" target="_blank" rel="noopener">${ic('folder').replace('<svg', '<svg width="14" height="14"')} folder zgłoszenia</a>` : ''}
+        ${kl ? `<a href="#" data-go="klient/${firm}/${kl.id}">klient: ${esc(kl.nazwa)}</a>` : ''}${sp ? `<a href="#" data-go="sprawa/${firm}/${sp.id}">sprawa ${esc(caseNo(sp))}</a>` : ''}</div></div>
+      <div class="actions">${acts.join('')}</div></div>${tb.html}${body}`;
+};
+
+function acceptModal(z) {
+  const firm = z.kancelaria, team = teamFor(firm);
+  const opt = (list, v) => list.map((x) => `<option${x === v ? ' selected' : ''}>${esc(x)}</option>`).join('');
+  openModal(`<form class="modal" id="acc-form"><div class="modal-h"><h2>Przyjęcie sprawy: ${esc(z.nazwa)}</h2><button type="button" class="icon-btn" data-act="close">${ic('x')}</button></div>
+    <div class="modal-b"><div class="form">
+      <div class="fld wide"><label for="a-tytul">Przedmiot sprawy</label><input class="inp" id="a-tytul" name="tytul" value="${attr(z.kategoria || '')}" required></div>
+      <div class="fld"><label for="a-numer">Nr teczki</label><input class="inp mono" id="a-numer" name="numer" placeholder="puste = kolejny numer"><span class="help">Puste: kolejny numer wspólnej Listy Spraw. „P”: seria P (bez teczki).</span></div>
+      <div class="fld"><label for="a-prow">Prowadzący</label><select class="inp" id="a-prow" name="prowadzacy">${team.map((m) => `<option value="${attr(m.email)}"${m.email === (z.opiekun || S.boot.email) ? ' selected' : ''}>${esc(m.imie_nazwisko)}</option>`).join('')}</select></div>
+      <div class="fld"><label for="a-kat">Kategoria</label><select class="inp" id="a-kat" name="kategoria"><option></option>${opt(dict(firm, 'kategoria').map((d) => d.v), z.kategoria)}</select></div>
+      <div class="fld"><label for="a-rodzaj">Rodzaj</label><select class="inp" id="a-rodzaj" name="rodzaj"><option></option>${opt(dict(firm, 'rodzaj_sprawy').map((d) => d.v), '')}</select></div>
+      <div class="fld wide"><label for="a-sp">Strona przeciwna / uczestnicy</label><input class="inp" id="a-sp" name="strona_przeciwna"><span class="help">Po tym polu działa sprawdzanie konfliktu interesów.</span></div>
+      <div class="fld"><label for="a-model">Model wynagrodzenia</label><select class="inp" id="a-model" name="wyn_model"><option></option>${opt(dict(firm, 'model_wynagrodzenia').map((d) => d.v), z.oferta_model)}</select></div>
+      <div class="fld"><label for="a-kwota">Wynagrodzenie (zł)</label><input class="inp" id="a-kwota" name="wynagrodzenie" type="number" step="0.01" value="${attr(z.oferta_kwota || '')}"></div>
+      <div class="fld wide"><label class="check"><input type="checkbox" name="folder" checked> Załóż folder sprawy na Dysku („(nr) Klient - przedmiot” z podfolderem „0. Umowa i rozliczenia z Klientem”)</label></div>
+    </div><p class="note">${z.klient_id ? 'Sprawa zostanie przypięta do istniejącego klienta.' : 'Powstanie też karta klienta z danymi z zapytania.'} Zapytanie dostanie status „przyjęte”.</p></div>
+    <div class="modal-f"><button type="button" class="btn" data-act="close">Anuluj</button><button class="btn primary" type="submit">Załóż sprawę</button></div></form>`);
+}
+function closeZapModal(z) {
+  const lost = dict(z.kancelaria, 'status_zapytania').filter((d) => d.t === 'lost');
+  openModal(`<form class="modal narrow" id="zclose-form"><div class="modal-h"><h2>Zamknij zapytanie</h2></div><div class="modal-b"><div class="form">
+    <div class="fld wide"><label for="zc-st">Wynik</label><select class="inp" id="zc-st" name="status">${lost.map((d) => `<option>${esc(d.v)}</option>`).join('')}</select></div>
+    <div class="fld wide"><label for="zc-p">Powód (do statystyk)</label><input class="inp" id="zc-p" name="powod" placeholder="np. za drogo, wybrał innego pełnomocnika, wartość sporu poniżej minimum"></div></div></div>
+    <div class="modal-f"><button type="button" class="btn" data-act="close">Anuluj</button><button class="btn primary" type="submit">Zamknij zapytanie</button></div></form>`);
+}
+
+/* ---------- Karta klienta ---------- */
+VIEWS.klient = function (firm, id) {
+  const k = byId('klienci', firm, id);
+  if (!k) return notFound();
+  const w = perm().write;
+  const sp = S.data.sprawy.filter((s) => s.kancelaria === firm && s.klient_id === id);
+  const zp = S.data.zapytania.filter((z) => z.kancelaria === firm && (z.klient_id === id || (k.email && z.email && z.email.toLowerCase() === k.email.toLowerCase())));
+  const um = S.data.umowy.filter((u) => u.kancelaria === firm && u.klient_id === id);
+  const tb = tabsHtml('kl:' + firm + ':' + id, [['sprawy', 'Sprawy', sp.length], ['zap', 'Zapytania', zp.length], ['umowy', 'Umowy', um.length], ['mail', 'E-maile'], ['hist', 'Historia']]);
+  const pre = attr(JSON.stringify({ klient_id: id }));
+  let body = '';
+  if (tb.cur === 'sprawy') body = `<section class="panel">${tableHtml('kl-sp', [
+    { k: 'numer', l: 'Nr', v: (s) => `<span class="teczka">${esc(caseNo(s) || '—')}</span>` }, { k: 'tytul', l: 'Sprawa', cls: 'wrap', v: (s) => `<b>${esc(s.tytul)}</b><span class="sub">${esc(s.sygn_akt)}</span>` },
+    { k: 'status', l: 'Status', v: (s) => statusChip('sprawy', s) }, { k: 'prowadzacy', l: 'Prowadzi', v: (s) => esc(shortName(s.prowadzacy)) }], sp, (s) => 'sprawa/' + firm + '/' + s.id, { empty: 'Klient nie ma spraw' })}</section>`;
+  if (tb.cur === 'zap') body = `<section class="panel">${zp.length ? `<ul class="rows">${zp.map((z) => `<li data-go="zapytanie/${firm}/${z.id}"><div class="main-txt"><b>${esc(z.kategoria || z.nazwa)}</b><span>${fmtDT(z.data_wplywu)} · ${esc((z.opis || '').slice(0, 100))}</span></div>${statusChip('zapytania', z)}</li>`).join('')}</ul>` : '<div class="empty">Brak zapytań</div>'}</section>`;
+  if (tb.cur === 'umowy') body = `<section class="panel">${tableHtml('kl-um', [{ k: 'nr', l: 'L.p.', v: (u) => `<span class="mono">${esc(u.nr)}</span>` }, { k: 'data_zawarcia', l: 'Zawarta', v: (u) => fmtDate(u.data_zawarcia) }, { k: 'przedmiot', l: 'Przedmiot', cls: 'wrap' }, { k: 'rozliczone', l: 'Rozliczone' }], um, (u) => 'edit/umowy/' + firm + ':' + u.id, { empty: 'Brak umów' })}</section>`;
+  if (tb.cur === 'mail') body = `<section class="panel">${gmailPanel('k:' + firm + ':' + id, [k.email])}</section>`;
+  if (tb.cur === 'hist') body = `<section class="panel">${histPanel('klienci', firm, id)}</section>`;
+  return `${backLink('klienci', 'Klienci')}
+    <div class="rec-head"><div class="t"><h1>${esc(k.nazwa)}</h1><div class="meta">${firmTag(firm)}<span>${esc(k.typ)}</span>
+      ${k.email ? `<a href="mailto:${attr(k.email)}">${esc(k.email)}</a>` : ''}${k.telefon ? `<a href="tel:${attr(k.telefon.replace(/\s/g, ''))}">${esc(k.telefon)}</a>` : ''}
+      ${k.opiekun ? `<span>opiekun: ${esc(shortName(k.opiekun))}</span>` : ''}</div></div>
+      <div class="actions">${w ? `<button class="btn primary" data-act="new" data-t="sprawy" data-firm="${firm}" data-pre="${pre}">${ic('plus')}Nowa sprawa</button>
+        <button class="btn" data-act="new" data-t="umowy" data-firm="${firm}" data-pre="${pre}">Umowa</button>` : ''}
+        ${k.email ? `<a class="btn" href="${attr(gmailCompose(k.email, '', 'Dzień dobry,\n\n\n\nZ wyrazami szacunku\n' + signature(firm)))}" target="_blank" rel="noopener">${ic('mail')}Napisz</a>` : ''}
+        <button class="btn ghost" data-act="conflict-q" data-q="${attr(k.nazwa)}">${ic('scale')}Konflikt</button>
+        ${w ? `<button class="btn ghost" data-act="edit" data-t="klienci" data-firm="${firm}" data-id="${id}">${ic('edit')}Edytuj</button>` : ''}</div></div>
+    <div class="grid-2" style="margin-bottom:16px"><section class="panel"><div class="panel-h"><h2>Dane klienta</h2></div><div class="panel-b">${kv('klienci', k, ['nazwa', 'notatki'])}</div></section>
+      <section class="panel"><div class="panel-h"><h2>Notatki</h2></div><div class="panel-b pre">${esc(k.notatki) || '<span class="muted">brak</span>'}</div></section></div>
+    ${tb.html}${body}`;
+};
+
+/* ---------- Karta sprawy ---------- */
+VIEWS.sprawa = function (firm, id) {
+  const s = byId('sprawy', firm, id);
+  if (!s) return notFound();
+  const w = perm().write, k = byId('klienci', firm, s.klient_id);
+  const of = (t) => S.data[t].filter((r) => r.kancelaria === firm && r.sprawa_id === id);
+  const te = of('terminy').sort((a, b) => (a.data + a.godzina < b.data + b.godzina ? -1 : 1));
+  const ko = of('korespondencja'), cz = of('czynnosci'), um = of('umowy'), ro = of('rozliczenia');
+  const h = sum(cz, 'czas'), hUnb = sum(cz.filter((c) => c.rozliczone === 'nie'), 'czas');
+  const pre = attr(JSON.stringify({ sprawa_id: id }));
+  const tb = tabsHtml('sp:' + firm + ':' + id, [['info', 'Przegląd'], ['terminy', 'Terminy', te.filter((t) => t.status === 'Otwarty').length], ['kor', 'Korespondencja', ko.length], ['czas', 'Czas pracy', h ? hrs(h) : ''], ['rozl', 'Umowy i rozliczenia', um.length + ro.length || ''], ['mail', 'E-maile'], ['hist', 'Historia']]);
+  const addBtn = (t, label) => w ? `<button class="btn sm" data-act="new" data-t="${t}" data-firm="${firm}" data-pre="${pre}">${ic('plus')}${label}</button>` : '';
+  let body = '';
+  if (tb.cur === 'info') {
+    const open = te.filter((t) => t.status === 'Otwarty');
+    body = `<div class="grid-2"><section class="panel"><div class="panel-h"><h2>Dane sprawy</h2></div><div class="panel-b">${kv('sprawy', s, ['tytul', 'notatki', 'nastepny_krok'])}</div></section>
+      <div class="stack">
+        <section class="panel"><div class="panel-h"><h2>Następny krok</h2></div><div class="panel-b">${esc(s.nastepny_krok) || '<span class="muted">nie wpisano</span>'}</div></section>
+        <section class="panel"><div class="panel-h"><h2>Otwarte terminy</h2>${addBtn('terminy', 'Termin')}</div>${open.length ? `<ul class="rows">${open.slice(0, 5).map((t) => `<li data-go="edit/terminy/${firm}:${t.id}">${dateBox(t.data, t.data < today() ? 'bad' : t.data <= SH.addDays(today(), 2) ? 'warn' : '')}<div class="main-txt"><b>${esc(t.opis)}</b><span>${esc([t.godzina, t.typ, t.podstawa].filter(Boolean).join(' · '))}</span></div>${chip(t.data < today() ? 'bad' : '', relDay(t.data))}</li>`).join('')}</ul>` : '<div class="empty small">Brak otwartych terminów</div>'}</section>
+        ${k ? `<section class="panel"><div class="panel-h"><h2>Klient</h2><a href="#" data-go="klient/${firm}/${k.id}" class="small">karta klienta</a></div><div class="panel-b">${kv('klienci', k, ['notatki', 'rodo', 'aml', 'zrodlo', 'opiekun', 'typ'])}</div></section>` : ''}
+        <section class="panel"><div class="panel-h"><h2>Notatki</h2></div><div class="panel-b pre">${esc(s.notatki) || '<span class="muted">brak</span>'}</div></section>
+      </div></div>`;
+  }
+  if (tb.cur === 'terminy') body = `<div class="grid-2"><section class="panel"><div class="panel-h"><h2>Terminy sprawy</h2>${addBtn('terminy', 'Termin')}</div>
+      ${te.length ? `<ul class="rows">${te.map((t) => `<li data-go="edit/terminy/${firm}:${t.id}">${dateBox(t.data, t.status === 'Otwarty' && t.data < today() ? 'bad' : '')}<div class="main-txt"><b>${t.status === 'Wykonany' ? '<s>' + esc(t.opis) + '</s>' : esc(t.opis)}</b><span>${esc([fmtDate(t.data, true), t.godzina, t.typ, t.miejsce, t.podstawa].filter(Boolean).join(' · '))}</span></div>
+        ${t.status === 'Otwarty' && w ? `<button class="btn sm" data-act="term-done" data-firm="${firm}" data-id="${t.id}" title="Wykonany">${ic('check')}</button>` : statusChip('terminy', t)}
+        <a class="btn sm ghost" href="${attr(calLink(t, s))}" target="_blank" rel="noopener" title="Dodaj do Kalendarza Google">${ic('calendar')}</a></li>`).join('')}</ul>` : '<div class="empty">Brak terminów</div>'}</section>
+      <div class="stack" data-calc-sprawa="${attr(id)}">${calcPanel()}</div></div>`;
+  if (tb.cur === 'kor') body = `<section class="panel"><div class="panel-h"><h2>Korespondencja w sprawie</h2>${addBtn('korespondencja', 'Pismo')}</div>${tableHtml('sp-ko', [
+    { k: 'nr', l: 'Nr', v: (r) => `<span class="mono">${esc(r.nr)}</span>` }, { k: 'data', l: 'Data', v: (r) => fmtDate(r.data) },
+    { k: 'kierunek', l: 'Kier.', v: (r) => (r.kierunek === 'Przychodząca' ? '↘' : '↗') }, { k: 'kontrahent', l: 'Nadawca / adresat', cls: 'wrap', v: (r) => `<b>${esc(r.kontrahent)}</b><span class="sub">${esc(r.opis)}</span>` },
+    { k: 'data_doreczenia', l: 'Doręczono', v: (r) => fmtDate(r.data_doreczenia) }, { k: 'plik', l: '', nosort: true, v: (r) => (r.plik ? `<a href="${attr(r.plik)}" target="_blank" rel="noopener">skan</a>` : '') }], ko, (r) => 'edit/korespondencja/' + firm + ':' + r.id, { sort: { k: 'data', dir: 'desc' }, empty: 'Brak pism' })}</section>`;
+  if (tb.cur === 'czas') body = `<section class="panel"><div class="panel-h"><h2>Czas pracy</h2><span class="muted">${hrs(h)}${s.stawka ? ' · ' + money(h * s.stawka) + ' wg stawki ' + money(s.stawka) + '/h' : ''}${hUnb ? ' · nierozliczone ' + hrs(hUnb) : ''}</span>${addBtn('czynnosci', 'Czynność')}</div>${tableHtml('sp-cz', [
+    { k: 'data', l: 'Data', v: (r) => fmtDate(r.data) }, { k: 'opis', l: 'Czynność', cls: 'wrap' }, { k: 'czas', l: 'Czas', s: (r) => +r.czas, v: (r) => `<span class="num">${hrs(r.czas)}</span>` },
+    { k: 'osoba', l: 'Kto', v: (r) => esc(shortName(r.osoba)) }, { k: 'rozliczone', l: 'Rozliczone', v: (r) => chip(r.rozliczone === 'tak' ? 'ok' : r.rozliczone === 'nie' ? 'warn' : '', esc(r.rozliczone)) }], cz, (r) => 'edit/czynnosci/' + firm + ':' + r.id, { sort: { k: 'data', dir: 'desc' }, empty: 'Brak zapisanych czynności', foot: cz.length ? `<td></td><td>Razem</td><td class="num">${hrs(h)}</td><td></td><td></td>` : '' })}</section>`;
+  if (tb.cur === 'rozl') body = `<div class="stack"><section class="panel"><div class="panel-h"><h2>Umowy</h2>${addBtn('umowy', 'Umowa')}</div>${tableHtml('sp-um', [
+      { k: 'nr', l: 'L.p.', v: (u) => `<span class="mono">${esc(u.nr)}</span>` }, { k: 'data_zawarcia', l: 'Zawarta', v: (u) => fmtDate(u.data_zawarcia) }, { k: 'przedmiot', l: 'Przedmiot', cls: 'wrap' },
+      { k: 'model', l: 'Rozliczenie', v: (u) => esc(u.model) + (u.kwota ? `<span class="sub">${money(u.kwota)}</span>` : '') }, { k: 'rozliczone', l: 'Rozliczone' }], um, (u) => 'edit/umowy/' + firm + ':' + u.id, { empty: 'Brak umów' })}</section>
+    <section class="panel"><div class="panel-h"><h2>Rozliczenia</h2><span class="muted">${money(sum(ro.filter((r) => r.status === 'Opłacona'), 'kwota')) || '0 zł'} opłacone</span>${addBtn('rozliczenia', 'Pozycja')}</div>${tableHtml('sp-ro', [
+      { k: 'data', l: 'Data', v: (r) => fmtDate(r.data) }, { k: 'typ', l: 'Typ', v: (r) => esc(r.typ) + (r.numer ? `<span class="sub mono">${esc(r.numer)}</span>` : '') },
+      { k: 'kwota', l: 'Kwota', s: (r) => +r.kwota, v: (r) => `<span class="num">${money(r.kwota)}</span>` }, { k: 'status', l: 'Status', v: (r) => statusChip('rozliczenia', r) }], ro, (r) => 'edit/rozliczenia/' + firm + ':' + r.id, { sort: { k: 'data', dir: 'desc' }, empty: 'Brak rozliczeń' })}</section></div>`;
+  if (tb.cur === 'mail') body = `<section class="panel">${gmailPanel('s:' + firm + ':' + id, [k && k.email])}</section>`;
+  if (tb.cur === 'hist') body = `<section class="panel">${histPanel('sprawy', firm, id)}</section>`;
+  return `${backLink('sprawy', 'Sprawy')}
+    <div class="rec-head"><div class="t"><div class="meta"><span class="teczka">${esc(caseNo(s) || 'bez nr')}</span>${firmTag(firm)}${statusChip('sprawy', s)}${s.etap ? `<span>${esc(s.etap)}</span>` : ''}</div>
+      <h1>${esc(s.tytul)}</h1>
+      <div class="meta">${k ? `<a href="#" data-go="klient/${firm}/${k.id}">${esc(k.nazwa)}</a>` : ''}${s.strona_przeciwna ? `<span>⟷ ${esc(s.strona_przeciwna)}</span>` : ''}
+        ${s.organ || s.sygn_akt ? `<span>${esc(s.organ)} <span class="mono">${esc(s.sygn_akt)}</span></span>` : ''}<span>prowadzi ${esc(shortName(s.prowadzacy))}</span></div></div>
+      <div class="actions">${w ? `<button class="btn primary" data-act="edit" data-t="sprawy" data-firm="${firm}" data-id="${id}">${ic('edit')}Edytuj</button>` : ''}
+        ${s.folder ? `<a class="btn" href="${attr(s.folder)}" target="_blank" rel="noopener">${ic('folder')}Folder</a>` : (w ? `<button class="btn" data-act="folder" data-firm="${firm}" data-id="${id}">${ic('folder')}Załóż folder</button>` : '')}
+        ${addBtn('terminy', 'Termin')}${addBtn('korespondencja', 'Pismo')}${addBtn('czynnosci', 'Czas')}</div></div>
+    ${tb.html}${body}`;
+};
+
+/* ---------- Zespół i dostępy ---------- */
+VIEWS.zespol = function () {
+  const admin = perm().admin, roles = S.boot.schema.roles;
+  const team = (S.boot.team || []).slice().sort((a, b) => (a.aktywny === 'nie') - (b.aktywny === 'nie') || (a.imie_nazwisko < b.imie_nazwisko ? -1 : 1));
+  const cols = [
+    { k: 'imie_nazwisko', l: 'Osoba', v: (m) => `<b>${esc(m.imie_nazwisko)}</b><span class="sub">${esc(m.tytul)}</span>` },
+    { k: 'email', l: 'Konto Google', v: (m) => `<a href="mailto:${attr(m.email)}">${esc(m.email)}</a><span class="sub">${esc(m.telefon)}</span>` },
+    { k: 'kancelarie', l: 'Kancelarie', v: (m) => String(m.kancelarie || '').split(',').filter(Boolean).map(firmTag).join(' ') },
+    { k: 'rola', l: 'Rola', v: (m) => esc((roles[m.rola] || {}).label || m.rola) },
+    { k: 'aktywny', l: 'Dostęp', v: (m) => (m.aktywny === 'nie' ? chip('', 'wyłączony') : chip('ok', 'aktywny')) }
+  ];
+  const url = S.boot.url || '';
+  return `<div class="page-head"><div class="t"><h1>Zespół i dostępy</h1><span class="sub">Kto widzi dane której kancelarii i co może zmieniać</span></div>
+    <div class="actions">${admin ? `<button class="btn primary" data-act="team-edit">${ic('plus')}Dodaj osobę</button>` : ''}</div></div>
+    <div class="grid-2"><section class="panel">${tableHtml('team', cols, team, (m) => (admin ? 'team/' + m.email : ''), { sort: null })}</section>
+    <div class="stack"><section class="panel"><div class="panel-h"><h2>Link do aplikacji</h2></div><div class="panel-b">
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp mono small" id="app-url" readonly value="${attr(url)}" style="flex:1;min-width:200px"><button class="btn" data-act="copy" data-src="app-url">Kopiuj</button></div>
+      <p class="small muted" style="margin-top:8px">Działa w każdej przeglądarce, na komputerze i telefonie. Logowanie kontem Google z listy obok.</p></div></section>
+    <section class="panel"><div class="panel-h"><h2>Jak działają dostępy</h2></div><div class="panel-b small" style="display:flex;flex-direction:column;gap:8px">
+      <div><b>Każda kancelaria ma osobny arkusz z danymi.</b> Osoba widzi tylko kancelarie zaznaczone przy jej nazwisku. Google pilnuje tego samodzielnie: bez udostępnionego arkusza nie da się odczytać danych nawet z pominięciem aplikacji.</div>
+      <div><b>Role:</b> ${Object.keys(roles).map((r) => `${esc(roles[r].label)} (${roles[r].admin ? 'zespół, ustawienia, import' : roles[r].del ? 'dodaje, zmienia i usuwa' : roles[r].write ? 'dodaje i zmienia, bez usuwania' : 'tylko podgląd'})`).join('; ')}.</div>
+      <div><b>Dodanie osoby</b> udostępnia jej arkusz kancelarii i folder spraw. Wyłączenie dostępu zabiera udostępnienia.</div>
+      <div><b>Gmail</b> w kartach klientów pokazuje wiadomości ze skrzynki osoby, która akurat korzysta z aplikacji.</div></div></section></div></div>`;
+};
+VIEWS.team = function (email) {
+  const m = (S.boot.team || []).find((x) => x.email === email);
+  setTimeout(() => teamModal(m), 0);
+  S.route = 'zespol';
+  return VIEWS.zespol();
+};
+function teamModal(m) {
+  if (!perm().admin) return;
+  m = m || { email: '', imie_nazwisko: '', tytul: '', telefon: '', rola: 'prawnik', kancelarie: myFirms().join(','), aktywny: 'tak' };
+  const roles = S.boot.schema.roles, sel = String(m.kancelarie || '').split(',');
+  openModal(`<form class="modal" id="team-form"><div class="modal-h"><h2>${m.email ? esc(m.imie_nazwisko) : 'Nowa osoba w zespole'}</h2><button type="button" class="icon-btn" data-act="close">${ic('x')}</button></div>
+    <div class="modal-b"><div class="form">
+      <div class="fld wide"><label for="tm-email">Konto Google (e-mail)</label><input class="inp" id="tm-email" name="email" type="email" value="${attr(m.email)}" ${m.email ? 'readonly' : ''} required placeholder="imie.nazwisko@kancelariarodzinna.com"></div>
+      <div class="fld"><label for="tm-name">Imię i nazwisko</label><input class="inp" id="tm-name" name="imie_nazwisko" value="${attr(m.imie_nazwisko)}"></div>
+      <div class="fld"><label for="tm-t">Tytuł / funkcja</label><input class="inp" id="tm-t" name="tytul" value="${attr(m.tytul)}" placeholder="adw., apl. adw., asystentka…"></div>
+      <div class="fld"><label for="tm-tel">Telefon</label><input class="inp" id="tm-tel" name="telefon" value="${attr(m.telefon)}"></div>
+      <div class="fld"><label for="tm-r">Rola</label><select class="inp" id="tm-r" name="rola">${Object.keys(roles).map((r) => `<option value="${r}"${r === m.rola ? ' selected' : ''}>${esc(roles[r].label)}</option>`).join('')}</select></div>
+      <div class="fld wide"><label>Kancelarie</label><div class="checks">${(S.boot.firms || []).map((f) => `<label><input type="checkbox" name="k" value="${attr(f.kod)}" ${sel.indexOf(f.kod) >= 0 ? 'checked' : ''}> ${esc(f.nazwa_krotka)}</label>`).join('')}</div></div>
+      <div class="fld wide"><label class="check"><input type="checkbox" name="aktywny" ${m.aktywny !== 'nie' ? 'checked' : ''}> Dostęp aktywny</label></div>
+    </div><p class="note">Zapis od razu udostępnia (albo zabiera) arkusze i foldery spraw zaznaczonych kancelarii temu kontu Google.</p></div>
+    <div class="modal-f"><button type="button" class="btn" data-act="close">Anuluj</button><button class="btn primary" type="submit">Zapisz i nadaj dostęp</button></div></form>`);
+}
+
+/* ---------- Ustawienia ---------- */
+const FIRM_FIELDS = [['nazwa', 'Pełna nazwa'], ['nazwa_krotka', 'Nazwa krótka'], ['forma', 'Forma prawna (do umów)'], ['adres', 'Adres'], ['nip', 'NIP'], ['strona', 'Strona www'], ['email', 'E-mail kancelarii'], ['telefon', 'Telefon'],
+  ['model', 'Pierwszy kontakt'], ['sla_h', 'Czas na odpowiedź (h robocze)'], ['stawka', 'Domyślna stawka (zł/h)'], ['link_rezerwacji', 'Link do rezerwacji konsultacji'], ['kolor', 'Kolor'], ['podpis', 'Stopka wiadomości'], ['folder_id', 'Folder na sprawy (link)'], ['import_folder', 'Folder „Zgłoszenia ze strony” (link)']];
+VIEWS.ustawienia = function () {
+  if (!perm().admin) return notFound();
+  const A = S.boot.admin || {};
+  const firms = S.boot.firms || [];
+  const dScope = fv('dict', 'scope', '*'), dName = fv('dict', 'name', 'kategoria');
+  const allNames = uniq((A.slowniki || []).map((r) => r.slownik)).sort();
+  const items = (A.slowniki || []).filter((r) => r.kancelaria === dScope && r.slownik === dName).sort((a, b) => +a.kolejnosc - +b.kolejnosc);
+  const typed = /^status_/.test(dName);
+  return `<div class="page-head"><div class="t"><h1>Ustawienia</h1><span class="sub">Kancelarie, słowniki, numeracja rejestrów</span></div>
+    <div class="actions"><a class="btn" href="${attr(A.settingsUrl || '#')}" target="_blank" rel="noopener">${ic('ext')}Arkusz ustawień</a><button class="btn" data-act="resync">${ic('key')}Odśwież udostępnienia</button></div></div>
+    <div class="grid-2" style="margin-bottom:16px">${firms.map((f) => `<section class="panel"><div class="panel-h">${firmTag(f.kod)}<h2>${esc(f.nazwa)}</h2><button class="btn sm" data-act="firm-edit" data-firm="${attr(f.kod)}">${ic('edit')}Edytuj</button></div>
+      <div class="panel-b"><dl class="kv"><dt>Forma</dt><dd>${esc(f.forma)}</dd><dt>Adres</dt><dd>${esc(f.adres)}</dd><dt>Kontakt</dt><dd>${esc([f.email, f.telefon].filter(Boolean).join(' · '))}</dd>
+        <dt>Pierwszy kontakt</dt><dd>${f.model === 'analiza' ? 'Formularz → bezpłatna wstępna analiza i oferta w ' + esc(f.sla_h || '24') + ' h robocze' : 'Konsultacja' + (f.link_rezerwacji ? ' (rezerwacja: ' + esc(f.link_rezerwacji) + ')' : '')}</dd>
+        <dt>Stawka</dt><dd>${f.stawka ? money(f.stawka) + '/h' : '—'}</dd>
+        <dt>Dane</dt><dd>${f.db_url ? `<a href="${attr(f.db_url)}" target="_blank" rel="noopener">arkusz bazy</a>` : `<b style="color:var(--bad)">brak bazy</b> <button class="btn sm" data-act="firm-db" data-firm="${attr(f.kod)}">Załóż bazę na moim koncie</button>`}${f.folder_url ? ` · <a href="${attr(f.folder_url)}" target="_blank" rel="noopener">folder spraw</a>` : ''}</dd></dl></div></section>`).join('')}</div>
+    <div class="grid-2"><section class="panel"><div class="panel-h"><h2>Słowniki</h2></div><div class="panel-b">
+      <div class="toolbar" style="padding:0 0 12px;border:0">${filterSelect('dict', 'scope', [['*', 'Wspólne']].concat(firms.map((f) => [f.kod, f.nazwa_krotka])), 'Zakres')}${filterSelect('dict', 'name', allNames.map((n) => [n, n.replace(/_/g, ' ')]), 'Słownik')}</div>
+      <textarea class="inp" id="dict-txt" rows="10" style="font-family:var(--font-mono);font-size:13px">${esc(items.map((r) => r.wartosc + (typed && r.typ ? ' | ' + r.typ : '')).join('\n'))}</textarea>
+      <p class="note" style="margin:8px 0">Jedna pozycja w wierszu, w kolejności wyświetlania.${typed ? ' Po „|” typ: open (w toku), won (przyjęte), lost (zamknięte bez zlecenia), closed (sprawa zakończona).' : ''} Pusty słownik kancelarii = używane są wspólne.</p>
+      <button class="btn primary" data-act="dict-save">Zapisz słownik</button></div></section>
+    <div class="stack"><section class="panel"><div class="panel-h"><h2>Numeracja wspólna</h2></div><div class="panel-b">
+      <p class="small muted" style="margin-top:0">Ostatnie nadane numery. Nowa sprawa dostaje kolejny numer teczki (jak w „Liście Spraw”), nowa umowa kolejny numer NN/RRRR.</p>
+      ${Object.keys(A.seq || {}).sort().map((k) => `<div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><label class="small" style="flex:1" for="seq-${k}">${esc({ SEQ_TECZKA: 'Nr teczki (Lista Spraw)', SEQ_P: 'Seria P' }[k] || k.replace(/^SEQ_/, '').replace(/_/g, ' ').toLowerCase())}</label><input class="inp mini mono" id="seq-${k}" value="${attr(A.seq[k])}" style="width:90px"><button class="btn sm" data-act="seq-save" data-k="${k}">Zapisz</button></div>`).join('') || '<div class="small muted">Liczniki pojawią się po pierwszej sprawie lub umowie.</div>'}
+    </div></section>
+    <section class="panel"><div class="panel-h"><h2>Automatyczny import zgłoszeń</h2></div><div class="panel-b small">Ręcznie: przycisk „Pobierz zgłoszenia ze strony” w Zapytaniach. Automatycznie co 15 minut: w edytorze Apps Script wybierz funkcję <span class="mono">wlaczAutoImport</span> i kliknij „Uruchom” (raz).</div></section></div></div>`;
+};
+function firmModal(code) {
+  const f = firmOf(code);
+  openModal(`<form class="modal" id="firm-form" data-firm="${attr(code)}"><div class="modal-h"><h2>${esc(f.nazwa_krotka)}</h2><button type="button" class="icon-btn" data-act="close">${ic('x')}</button></div>
+    <div class="modal-b"><div class="form">${FIRM_FIELDS.map(([k, l]) => `<div class="fld${k === 'podpis' || k === 'nazwa' || k === 'forma' ? ' wide' : ''}"><label for="ff-${k}">${esc(l)}</label>${
+      k === 'model' ? `<select class="inp" id="ff-model" name="model"><option value="analiza"${f.model === 'analiza' ? ' selected' : ''}>Wstępna analiza + oferta (termin w h roboczych)</option><option value="konsultacja"${f.model === 'konsultacja' ? ' selected' : ''}>Konsultacja (rezerwacja)</option></select>`
+      : k === 'podpis' ? `<textarea class="inp" id="ff-podpis" name="podpis">${esc(f.podpis)}</textarea>`
+      : `<input class="inp" id="ff-${k}" name="${k}" value="${attr(k === 'folder_id' ? f.folder_url || '' : k === 'import_folder' && f.import_folder ? 'https://drive.google.com/drive/folders/' + f.import_folder : f[k] || '')}">`}</div>`).join('')}</div></div>
+    <div class="modal-f"><button type="button" class="btn" data-act="close">Anuluj</button><button class="btn primary" type="submit">Zapisz</button></div></form>`);
+}
+
+/* ---------- Import rejestrów ---------- */
+const KAT_GUESS = {
+  KR: [[/rozw|separac/, 'Rozwód i separacja'], [/alimen/, 'Alimenty'], [/podzia|rozdzielno|majat/, 'Podział majątku / rozdzielność'], [/kontakt/, 'Kontakty z dzieckiem'], [/wladz|piecz|miejsc|istotn/, 'Władza rodzicielska / miejsce pobytu'],
+    [/przemoc|niebiesk/, 'Przemoc domowa'], [/karn|zne[cs]|pobic|nek|wykrocz|oskarz|stalk/, 'Sprawy karne i wykroczenia'], [/spad|zachow/, 'Spadki i zachowek'], [/darowiz/, 'Darowizny'], [/przysposob/, 'Przysposobienie'], [/zaplat|cywil|odszkod/, 'Zapłata / cywilne'], [/mediac/, 'Mediacja']],
+  KN: [[/przesyl|slup|bezumown|linia|gazociag|wodociag/, 'Przesył i bezumowne korzystanie'], [/drog|sluzebn/, 'Droga konieczna i służebności'], [/zasiedz|ksieg|kw\b|granic|uzytkowan/, 'Księgi wieczyste i stan prawny'],
+    [/\bwz\b|warunk|plan|mpzp|wsa|nsa/, 'Warunki zabudowy i planowanie'], [/najem|najm|eksmis|czynsz/, 'Najem i eksmisja'], [/budow|wykonaw|samowol|pinb/, 'Proces budowlany i samowole'],
+    [/wspolwlas|dzial|spadk|zachow/, 'Współwłasność, spadki, podziały'], [/deweloper|rekojm|wad/, 'Spory z deweloperem'], [/roln|oze|kowr|dzierzaw|fotowolt/, 'Grunty rolne i OZE'], [/wywlaszcz|zrid|specustaw/, 'Wywłaszczenia i odszkodowania'],
+    [/audyt|zakup|due dilig/, 'Sprawdzenie przed zakupem (audyt)'], [/umow|sprzeda|przedwstep|transakc/, 'Transakcje i umowy'], [/stala obslug|obsluga prawn/, 'Obsługa podmiotów (B2B)']]
+};
+function guessKat(firm, text) { const t = norm(text); const hit = (KAT_GUESS[firm] || []).find(([re]) => re.test(t)); return hit && dict(firm, 'kategoria').some((d) => d.v === hit[1]) ? hit[1] : ''; }
+function guessMember(name) {
+  const parts = norm(name).split(/[\s.,]+/).filter((p) => p.length > 2);
+  if (!parts.length) return '';
+  const m = (S.boot.team || []).find((x) => parts.some((p) => norm(x.imie_nazwisko).split(/\s+/).indexOf(p) >= 0 && p === parts[parts.length - 1]))
+    || (S.boot.team || []).find((x) => parts.every((p) => norm(x.imie_nazwisko).indexOf(p) >= 0));
+  return m ? m.email : '';
+}
+function guessModel(txt) {
+  const t = norm(txt);
+  if (!t) return ['', ''];
+  const h = /(\d+(?:[.,]\d+)?)\s*(?:h|godz)/.exec(t);
+  if (/success/.test(t) && /rycz/.test(t)) return ['Ryczałt + success fee', ''];
+  if (/success|premi/.test(t)) return ['Success fee', ''];
+  if (h) return ['Pakiet godzin', h[1].replace(',', '.')];
+  if (/godzin/.test(t)) return ['Godzinowe', ''];
+  if (/rycz/.test(t)) return ['Ryczałt', ''];
+  if (/etap/.test(t)) return ['Etapowe', ''];
+  if (/abonam|stal/.test(t)) return ['Stała obsługa (abonament)', ''];
+  return ['', ''];
+}
+const isGrey = (c) => { const m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/.exec(c || ''); if (!m) return false; const [r, g, b] = m.slice(1).map((x) => parseInt(x, 16)); return Math.max(r, g, b) - Math.min(r, g, b) < 18 && r < 240; };
+const IMP = { src: null };
+
+VIEWS.import = function () {
+  if (!perm().admin) return notFound();
+  const src = IMP.src;
+  const pick = (kind, label, hint) => {
+    const c = (src && src[kind]) || [];
+    return `<div class="fld"><label for="imp-${kind}">${esc(label)}</label><div style="display:flex;gap:8px;flex-wrap:wrap">
+      ${c.length ? `<select class="inp" id="imp-${kind}" style="flex:1;min-width:200px">${c.map((f) => `<option value="${attr(f.id)}">${esc(f.name)}</option>`).join('')}<option value="">— wklej link —</option></select>` : ''}
+      <input class="inp" id="imp-${kind}-link" placeholder="${attr(hint)}" style="flex:1;min-width:200px"></div></div>`;
+  };
+  const firmSel = (id, def) => `<select class="inp mini" id="${id}">${myFirms().map((k) => `<option value="${k}"${k === def ? ' selected' : ''}>${esc(firmOf(k).nazwa_krotka)}</option>`).join('')}</select>`;
+  const stateBlock = (kind) => IMP[kind] ? importMapping(kind) : '';
+  return `<div class="page-head"><div class="t"><h1>Import rejestrów</h1><span class="sub">Przeniesienie istniejących list do CRM. Wiersze już zaimportowane są pomijane, więc import można powtórzyć.</span></div>
+    <div class="actions"><button class="btn" data-act="imp-find">${ic('search')}Znajdź pliki na moim Dysku</button></div></div>
+    <div class="stack">
+      <section class="panel"><div class="panel-h"><h2>1. Zgłoszenia z formularza strony</h2>${firmTag('KN')}</div><div class="panel-b">
+        <p class="small muted" style="margin-top:0">Foldery „RRRR-MM-DD GG.MM — Imię Nazwisko” z plikiem opis-sprawy.txt w „Zgłoszenia ze strony”. Zapisy na powiadomienia o planie ogólnym są pomijane.</p>
+        ${pick('zgloszenia', 'Folder zgłoszeń', 'link do folderu (puste = z ustawień kancelarii)')}
+        <div style="margin-top:10px"><button class="btn primary" data-act="imp-www">Importuj nowe zgłoszenia</button></div>${IMP.wwwRes ? `<p class="banner info" style="margin-top:12px">${esc(IMP.wwwRes)}</p>` : ''}</div></section>
+      <section class="panel"><div class="panel-h"><h2>2. Lista Spraw (wspólny rejestr teczek)</h2></div><div class="panel-b">
+        <p class="small muted" style="margin-top:0">Kolumny: K, Klient, Rodzaj sprawy, Sygnatura akt, Opiekun sprawy, adres mailowy, numer telefonu. Plik XLSX zostanie tymczasowo skopiowany jako Arkusz Google i usunięty po odczycie.</p>
+        ${pick('lista', 'Plik', 'link do pliku Lista Spraw')}
+        <div style="margin-top:10px"><button class="btn" data-act="imp-analyze" data-kind="lista">Analizuj</button></div>${stateBlock('lista')}</div></section>
+      <section class="panel"><div class="panel-h"><h2>3. Rejestr Umów</h2></div><div class="panel-b">
+        <p class="small muted" style="margin-top:0">Kolumny: L.p., Data zawarcia, Klient/Strona umowy, Adres, Przedmiot umowy, Zaliczka, Rozliczone. Najlepiej po imporcie Listy Spraw: umowy przypną się do istniejących klientów.</p>
+        ${pick('umowy', 'Plik', 'link do Rejestru Umów')}
+        <div style="margin-top:10px"><button class="btn" data-act="imp-analyze" data-kind="umowy">Analizuj</button></div>${stateBlock('umowy')}</div></section>
+      <section class="panel"><div class="panel-h"><h2>4. Notatki spraw z Obsidiana</h2>${firmTag('KN')}</div><div class="panel-b">
+        <p class="small muted" style="margin-top:0">Pliki .md z folderu „Notatki spraw” (pola: numer, klient, przedmiot, typ, etap, sygnatura, termin, rozliczenie, opiekun, status). Status „lead” trafia do Zapytań, termin do Terminów.</p>
+        ${pick('notatki', 'Folder', 'link do folderu Notatki spraw')}
+        <div style="margin-top:10px"><button class="btn" data-act="imp-analyze" data-kind="notatki">Analizuj</button></div>${stateBlock('notatki')}</div></section>
+    </div>`;
+};
+function srcId(kind) { const l = ($('#imp-' + kind + '-link') || {}).value; const s = ($('#imp-' + kind) || {}).value; return (l && l.trim()) || s || ''; }
+
+/* Mapowanie po analizie: kancelaria i osoba dla opiekunów, status dla kolorów/statusów. */
+function importMapping(kind) {
+  const st = IMP[kind], firms = myFirms();
+  const firmOpts = (v) => `<option value="">pomiń</option>` + firms.map((k) => `<option value="${k}"${k === v ? ' selected' : ''}>${esc(k)}</option>`).join('');
+  const userOpts = (firm, v) => `<option value="">— (ja + notatka)</option>` + (S.boot.team || []).map((m) => `<option value="${attr(m.email)}"${m.email === v ? ' selected' : ''}>${esc(m.imie_nazwisko)}</option>`).join('');
+  const statusOpts = (v, extra) => (extra || []).concat(dict(firms[0], 'status_sprawy').map((d) => d.v)).map((x) => `<option${x === v ? ' selected' : ''}>${esc(x)}</option>`).join('');
+  let html = `<div class="banner info" style="margin-top:14px">${esc(st.file || '')}: ${st.rows.length} wierszy do importu</div>`;
+  if (kind === 'lista' || kind === 'notatki') {
+    html += `<h3 style="margin:14px 0 8px">Opiekunowie → kancelaria i osoba</h3><div class="table-wrap"><table class="t"><thead><tr><th class="nosort">W pliku</th><th class="nosort">Wierszy</th><th class="nosort">Kancelaria</th><th class="nosort">Osoba w CRM</th></tr></thead><tbody>
+      ${Object.keys(st.op).map((o) => `<tr><td>${esc(o || '(pusty)')}</td><td class="num">${st.opCount[o]}</td><td><select class="inp mini" data-imp="${kind}" data-map="opFirm" data-k="${attr(o)}">${firmOpts(st.op[o].firm)}</select></td><td><select class="inp mini" data-imp="${kind}" data-map="opUser" data-k="${attr(o)}">${userOpts(st.op[o].firm, st.op[o].user)}</select></td></tr>`).join('')}</tbody></table></div>`;
+  }
+  if (kind === 'lista') {
+    html += `<h3 style="margin:14px 0 8px">Kolor komórki „Klient” → status sprawy</h3><p class="small muted">W pliku nie ma legendy kolorów — przypisz je sam. Domyślnie szare = zakończone.</p><div class="table-wrap"><table class="t"><thead><tr><th class="nosort">Kolor</th><th class="nosort">Wierszy</th><th class="nosort">Status</th></tr></thead><tbody>
+      ${Object.keys(st.colors).map((c) => `<tr><td><span style="display:inline-block;width:42px;height:18px;border-radius:4px;border:1px solid var(--line-strong);background:${attr(c)}"></span> <span class="mono small">${esc(c)}</span></td><td class="num">${st.colorCount[c]}</td><td><select class="inp mini" data-imp="lista" data-map="colors" data-k="${attr(c)}">${statusOpts(st.colors[c])}</select></td></tr>`).join('')}</tbody></table></div>`;
+  }
+  if (kind === 'notatki') {
+    html += `<h3 style="margin:14px 0 8px">Status notatki → rekord w CRM</h3><div class="table-wrap"><table class="t"><thead><tr><th class="nosort">Status</th><th class="nosort">Plików</th><th class="nosort">Import jako</th></tr></thead><tbody>
+      ${Object.keys(st.stat).map((s) => `<tr><td>${esc(s || '(pusty)')}</td><td class="num">${st.statCount[s]}</td><td><select class="inp mini" data-imp="notatki" data-map="stat" data-k="${attr(s)}">${statusOpts(st.stat[s], ['Zapytanie', 'pomiń'])}</select></td></tr>`).join('')}</tbody></table></div>`;
+  }
+  if (kind === 'umowy') {
+    html += `<div class="form" style="margin-top:12px"><div class="fld"><label for="imp-um-firm">Kancelaria domyślna</label><select class="inp" id="imp-um-firm" data-imp="umowy" data-map="firm">${firms.map((k) => `<option value="${k}"${k === st.firm ? ' selected' : ''}>${esc(firmOf(k).nazwa_krotka)}</option>`).join('')}</select></div>
+      <div class="fld"><label class="check" style="margin-top:20px"><input type="checkbox" data-imp="umowy" data-map="byClient" ${st.byClient ? 'checked' : ''}> umowa do kancelarii klienta, jeśli klient jest już w bazie</label></div></div>`;
+  }
+  const items = buildImportItems(kind);
+  html += `<h3 style="margin:14px 0 8px">Podgląd (pierwsze 6)</h3><div class="table-wrap"><table class="t"><thead><tr><th class="nosort">Kanc.</th><th class="nosort">Rekord</th><th class="nosort">Klient</th><th class="nosort">Szczegóły</th></tr></thead><tbody>
+    ${items.slice(0, 6).map((it) => `<tr><td>${firmTag(it.kancelaria)}</td><td>${esc(TB()[it.table].one)} ${esc(it.rec.numer || it.rec.nr || '')}</td><td>${esc((it.klient && it.klient.nazwa) || it.rec.nazwa || '')}</td><td class="small">${esc([it.rec.tytul || it.rec.przedmiot || it.rec.opis, it.rec.status, it.rec.kategoria, shortName(it.rec.prowadzacy)].filter(Boolean).join(' · ').slice(0, 160))}</td></tr>`).join('')}</tbody></table></div>
+    <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn primary" data-act="imp-commit" data-kind="${kind}">Importuj ${items.length} pozycji</button><span class="small muted">${st.rows.length - items.length ? (st.rows.length - items.length) + ' pominiętych (bez kancelarii)' : ''}</span></div>
+    ${st.result ? `<p class="banner info" style="margin-top:12px">${esc(st.result)}</p>` : ''}`;
+  return html;
+}
+function prepImport(kind, res) {
+  const st = { file: res.file || res.folder, rows: res.rows };
+  if (kind === 'lista' || kind === 'notatki') {
+    st.op = {}; st.opCount = {};
+    res.rows.forEach((r) => { const o = r.opiekun || ''; st.opCount[o] = (st.opCount[o] || 0) + 1; if (!st.op[o]) { const u = guessMember(o); st.op[o] = { firm: kind === 'notatki' ? 'KN' : 'KR', user: u }; } });
+    Object.keys(st.op).forEach((o) => { if (myFirms().indexOf(st.op[o].firm) < 0) st.op[o].firm = myFirms()[0]; });
+  }
+  if (kind === 'lista') {
+    st.colors = {}; st.colorCount = {};
+    res.rows.forEach((r) => { st.colorCount[r.kolor] = (st.colorCount[r.kolor] || 0) + 1; st.colors[r.kolor] = isGrey(r.kolor) ? 'Zakończona' : 'Aktywna'; });
+  }
+  if (kind === 'notatki') {
+    st.stat = {}; st.statCount = {};
+    res.rows.forEach((r) => { const s = norm(r.status).trim(); st.statCount[s] = (st.statCount[s] || 0) + 1; st.stat[s] = /lead|ofert/.test(s) ? 'Zapytanie' : /zakoncz|zamkn|rozlicz/.test(s) ? 'Zakończona' : 'Aktywna'; });
+  }
+  if (kind === 'umowy') { st.firm = myFirms().indexOf('KR') >= 0 ? 'KR' : myFirms()[0]; st.byClient = true; }
+  IMP[kind] = st;
+}
+function buildImportItems(kind) {
+  const st = IMP[kind], out = [];
+  if (kind === 'lista') st.rows.forEach((r) => {
+    const m = st.op[r.opiekun || ''] || {}; if (!m.firm) return;
+    out.push({ kancelaria: m.firm, table: 'sprawy', klient: { nazwa: r.klient, email: r.email, telefon: r.telefon, zrodlo: '' }, rec: {
+      numer: r.numer, tytul: r.rodzaj || 'Sprawa z Listy Spraw', kategoria: guessKat(m.firm, r.rodzaj), sygn_akt: r.sygn, status: st.colors[r.kolor] || 'Aktywna',
+      prowadzacy: m.user || '', notatki: r.opiekun && !m.user ? 'Opiekun w Liście Spraw: ' + r.opiekun : '', zrodlo_id: 'lista:' + (r.numer || r.klient) } });
+  });
+  if (kind === 'umowy') {
+    const byName = {};
+    S.data.klienci.forEach((k) => { byName[norm(k.nazwa)] = k.kancelaria; });
+    st.rows.forEach((r) => {
+      const firm = (st.byClient && byName[norm(r.klient)]) || st.firm;
+      const [model, godz] = guessModel(r.zaliczka);
+      const roz = dict(firm, 'rozliczone').map((d) => d.v);
+      const rz = norm(r.rozliczone).trim();
+      out.push({ kancelaria: firm, table: 'umowy', klient: { nazwa: r.klient, adres: r.adres }, rec: {
+        nr: r.nr, data_zawarcia: r.data, przedmiot: r.przedmiot || 'Umowa o świadczenie pomocy prawnej', model, godziny: godz,
+        kwota: /^\d+([.,]\d+)?$/.test(r.zaliczka.replace(/\s|zł/g, '')) ? r.zaliczka.replace(/\s|zł/g, '').replace(',', '.') : '',
+        rozliczone: roz.find((v) => norm(v) === rz) || (rz ? (/dopl|kwot/.test(rz) ? 'do dopłaty' : 'nie') : 'nie'),
+        notatki: [r.zaliczka && !model ? 'Zaliczka/rozliczenie: ' + r.zaliczka : '', r.rozliczone && !roz.some((v) => norm(v) === rz) ? 'Rozliczone (w rejestrze): ' + r.rozliczone : ''].filter(Boolean).join('\n'),
+        zrodlo_id: 'umowy:' + (r.nr || r.klient + r.data) } });
+    });
+  }
+  if (kind === 'notatki') st.rows.forEach((r) => {
+    const m = st.op[r.opiekun || ''] || {}, as = st.stat[norm(r.status).trim()];
+    if (!m.firm || as === 'pomiń') return;
+    const note = [r.etap && 'Etap: ' + r.etap, r.rozliczenie && 'Rozliczenie: ' + r.rozliczenie, r.ostatni_ruch && 'Ostatni ruch: ' + r.ostatni_ruch, 'Notatka Obsidian: ' + r.url, r.tresc].filter(Boolean).join('\n');
+    if (as === 'Zapytanie') {
+      out.push({ kancelaria: m.firm, table: 'zapytania', klient: null, rec: { nazwa: r.klient || r.plik, data_wplywu: (r.ostatni_ruch || today()) + 'T09:00', kanal: 'Inne',
+        status: /ofert/.test(norm(r.etap)) ? ((dict(m.firm, 'status_zapytania').find((d) => /^Oferta/.test(d.v)) || {}).v || '') : ((dict(m.firm, 'status_zapytania')[1] || {}).v || ''),
+        kategoria: guessKat(m.firm, r.typ + ' ' + r.przedmiot), opis: [r.przedmiot, note].filter(Boolean).join('\n\n'), opiekun: m.user || '', zrodlo_id: 'md:' + r.id } });
+      return;
+    }
+    const [model] = guessModel(r.rozliczenie);
+    const etap = dict(m.firm, 'etap_sprawy').find((d) => norm(d.v) === norm(r.etap));
+    out.push({ kancelaria: m.firm, table: 'sprawy', klient: r.klient ? { nazwa: r.klient } : null, termin: r.termin ? { data: r.termin, opis: r.termin_opis || 'Termin (z notatki)' } : null, rec: {
+      numer: r.numer, tytul: r.przedmiot || r.plik, kategoria: guessKat(m.firm, r.typ + ' ' + r.przedmiot), status: as, etap: etap ? etap.v : '', nastepny_krok: etap ? '' : r.etap,
+      sygn_akt: r.sygnatura, prowadzacy: m.user || '', wyn_model: model, notatki: note.slice(0, 5000), zrodlo_id: 'md:' + r.id } });
+  });
+  return out;
+}
+
+/* ---------- Pierwsza konfiguracja ---------- */
+function renderSetup() {
+  const b = S.boot;
+  if (!b.canSetup) return `<div class="center"><div class="box"><h1>CRM Kancelarii</h1><section class="panel"><div class="panel-b">
+    <p>Aplikacja nie jest jeszcze skonfigurowana. Pierwszą konfigurację uruchamia właściciel projektu Apps Script.</p><p class="muted">Zalogowano jako ${esc(b.email || 'nieznane konto')}.</p></div></section></div></div>`;
+  if (!S.setup) S.setup = { firms: b.firms.map((f) => Object.assign({ create: true, folder_id: '', import_folder: '' }, f)), team: b.team.map((m) => Object.assign({}, m)).concat([1, 2, 3].map(() => ({ email: '', imie_nazwisko: '', tytul: '', rola: 'asystent', kancelarie: '', on: false, blank: true }))), me: { imie_nazwisko: 'Maciej Muzyka', tytul: 'adw. dr', telefon: '+48 884 784 984' } };
+  const st = S.setup, roles = b.schema.roles;
+  const fIn = (i, k, l, ph) => `<div class="fld"><label for="sf-${i}-${k}">${esc(l)}</label><input class="inp" id="sf-${i}-${k}" value="${attr(st.firms[i][k] || '')}" placeholder="${attr(ph || '')}"></div>`;
+  return `<div class="center"><div class="box">
+    <div><h1>Konfiguracja CRM</h1><p class="muted">Zalogowano jako <b>${esc(b.email)}</b> — to konto zostanie administratorem. Na Twoim Dysku powstanie folder „CRM Kancelarii”: arkusz zespołu i ustawień oraz osobny arkusz danych każdej kancelarii. Dane kancelarii poprawisz później w Ustawieniach.</p></div>
+    <section class="panel"><div class="panel-h"><h2>Administrator</h2></div><div class="panel-b"><div class="form">
+      <div class="fld"><label for="sm-n">Imię i nazwisko</label><input class="inp" id="sm-n" value="${attr(st.me.imie_nazwisko)}"></div>
+      <div class="fld"><label for="sm-t">Tytuł</label><input class="inp" id="sm-t" value="${attr(st.me.tytul)}"></div>
+      <div class="fld"><label for="sm-p">Telefon</label><input class="inp" id="sm-p" value="${attr(st.me.telefon)}"></div></div></div></section>
+    ${st.firms.map((f, i) => `<section class="panel"><div class="panel-h">${firmTag(f.kod)}<h2>${esc(f.nazwa)}</h2></div><div class="panel-b"><div class="form">
+      ${fIn(i, 'nazwa', 'Pełna nazwa')}${fIn(i, 'nazwa_krotka', 'Nazwa krótka')}${fIn(i, 'email', 'E-mail')}${fIn(i, 'telefon', 'Telefon')}${fIn(i, 'adres', 'Adres')}${fIn(i, 'stawka', 'Stawka (zł/h)')}
+      ${f.model === 'analiza' ? fIn(i, 'sla_h', 'Odpowiedź w (h robocze)') : fIn(i, 'link_rezerwacji', 'Link do rezerwacji konsultacji')}
+      ${fIn(i, 'folder_id', 'Istniejący folder na sprawy (link)', 'puste = nowy folder')}
+      ${f.model === 'analiza' ? fIn(i, 'import_folder', 'Folder „Zgłoszenia ze strony” (link)', 'puste = wyszukaj po nazwie') : ''}
+      <div class="fld wide"><label class="check"><input type="checkbox" id="sf-${i}-create" ${f.create ? 'checked' : ''}> Załóż teraz arkusz danych tej kancelarii na tym koncie</label>
+        <span class="help">Odznacz, jeśli dane tej kancelarii mają leżeć na koncie w jej domenie — wtedy załóż bazę później w Ustawieniach, logując się tamtym kontem.</span></div>
+    </div></div></section>`).join('')}
+    <div><button class="btn" data-act="setup-hints">${ic('search')}Wyszukaj istniejące foldery na moim Dysku</button></div>
+    <section class="panel"><div class="panel-h"><h2>Zespół — kto dostanie dostęp</h2><span class="muted">ze stron kancelarii; puste wiersze na pozostałe osoby</span></div>
+      <div class="table-wrap"><table class="t"><thead><tr><th class="nosort">Dodaj</th><th class="nosort">Osoba</th><th class="nosort">Konto Google</th><th class="nosort">Rola</th><th class="nosort">Kancelarie</th></tr></thead><tbody>
+      ${st.team.map((m, i) => `<tr><td><input type="checkbox" id="st-${i}-on" ${m.on ? 'checked' : ''} aria-label="Dodaj"></td><td>${m.blank ? `<input class="inp mini" id="st-${i}-name" value="${attr(m.imie_nazwisko)}" placeholder="imię i nazwisko"> <input class="inp mini" id="st-${i}-tytul" value="${attr(m.tytul)}" placeholder="funkcja" style="margin-top:4px">` : `<b>${esc(m.imie_nazwisko)}</b><span class="sub">${esc(m.tytul)}</span>`}</td>
+        <td><input class="inp mini" id="st-${i}-email" value="${attr(m.email)}" placeholder="brak — wpisz" style="min-width:230px"></td>
+        <td><select class="inp mini" id="st-${i}-rola">${Object.keys(roles).map((r) => `<option value="${r}"${r === m.rola ? ' selected' : ''}>${esc(roles[r].label)}</option>`).join('')}</select></td>
+        <td><div class="checks">${st.firms.map((f) => `<label><input type="checkbox" id="st-${i}-k-${f.kod}" ${String(m.kancelarie).split(',').indexOf(f.kod) >= 0 ? 'checked' : ''}> ${f.kod}</label>`).join('')}</div></td></tr>`).join('')}
+      </tbody></table></div><div class="panel-b"><p class="note" style="margin:0">Zaznaczone osoby dostaną dostęp do arkuszy i folderów spraw zaznaczonych kancelarii (Google może wysłać im powiadomienie o udostępnieniu). Zespół zmienisz później w „Zespół i dostępy”.</p></div></section>
+    <section class="panel"><div class="panel-h"><h2>Numeracja</h2></div><div class="panel-b"><div class="form">
+      <div class="fld"><label for="ss-t">Ostatni nr teczki w „Liście Spraw”</label><input class="inp mono" id="ss-t" placeholder="np. 592"><span class="help">Import Listy Spraw ustawi to sam.</span></div>
+      <div class="fld"><label for="ss-p">Ostatni numer serii P</label><input class="inp mono" id="ss-p" placeholder="np. 27"></div></div></div></section>
+    <div style="display:flex;gap:10px;align-items:center"><button class="btn primary" data-act="setup-go" style="padding:10px 18px">Utwórz CRM</button><span class="small muted">Trwa ok. pół minuty.</span></div>
+  </div></div>`;
+}
+function readSetup() {
+  const st = S.setup, v = (id) => (($('#' + id) || {}).value || '').trim(), c = (id) => !!($('#' + id) || {}).checked;
+  st.me = { imie_nazwisko: v('sm-n'), tytul: v('sm-t'), telefon: v('sm-p') };
+  st.firms.forEach((f, i) => { ['nazwa', 'nazwa_krotka', 'email', 'telefon', 'adres', 'stawka', 'sla_h', 'link_rezerwacji', 'folder_id', 'import_folder'].forEach((k) => { if ($('#sf-' + i + '-' + k)) f[k] = v('sf-' + i + '-' + k); }); f.create = c('sf-' + i + '-create'); });
+  st.team.forEach((m, i) => { if (m.blank) { m.imie_nazwisko = v('st-' + i + '-name'); m.tytul = v('st-' + i + '-tytul'); } m.on = c('st-' + i + '-on'); m.email = v('st-' + i + '-email'); m.rola = v('st-' + i + '-rola'); m.kancelarie = st.firms.filter((f) => c('st-' + i + '-k-' + f.kod)).map((f) => f.kod).join(','); });
+  st.seq = {}; if (/^\d+$/.test(v('ss-t'))) st.seq.SEQ_TECZKA = v('ss-t'); if (/^\d+$/.test(v('ss-p'))) st.seq.SEQ_P = v('ss-p');
+  return st;
+}
+function renderDenied() {
+  const b = S.boot;
+  return `<div class="center"><div class="box" style="max-width:560px"><h1>Brak dostępu</h1><section class="panel"><div class="panel-b">
+    <p>${esc(b.message)}</p><p class="muted">Zalogowano jako <b>${esc(b.email || '—')}</b>.</p>
+    <p><a class="btn" href="https://accounts.google.com/AccountChooser?continue=${encodeURIComponent(b.url || '')}" target="_top">Przełącz konto Google</a></p></div></section></div></div>`;
+}
+
+/* ---------- Szybkie dodawanie ---------- */
+function quickMenu() {
+  const [view, firm, id] = S.route.split('/');
+  const ctx = view === 'sprawa' ? { firm, pre: { sprawa_id: id } } : view === 'klient' ? { firm, pre: { klient_id: id } } : { firm: defaultFirm(), pre: {} };
+  const item = (t, label, sub, usePre) => `<button class="btn" style="justify-content:flex-start;width:100%" data-act="new" data-t="${t}" data-firm="${attr(ctx.firm)}" data-pre="${attr(JSON.stringify(usePre ? ctx.pre : {}))}">${esc(label)}<span class="muted small" style="margin-left:auto">${esc(sub)}</span></button>`;
+  const inCase = view === 'sprawa';
+  openModal(`<div class="modal narrow"><div class="modal-h"><h2>Dodaj</h2><button class="icon-btn" data-act="close">${ic('x')}</button></div><div class="modal-b" style="display:flex;flex-direction:column;gap:8px">
+    ${item('zapytania', 'Zapytanie', 'telefon, e-mail, polecenie')}${item('klienci', 'Klient', '')}${item('sprawy', 'Sprawa', view === 'klient' ? 'dla tego klienta' : '', view === 'klient')}
+    ${item('terminy', 'Termin', inCase ? 'w tej sprawie' : '', inCase)}${item('korespondencja', 'Pismo', inCase ? 'w tej sprawie' : 'przychodzące / wychodzące', inCase)}
+    ${item('czynnosci', 'Czynność (czas pracy)', inCase ? 'w tej sprawie' : '', inCase)}${item('umowy', 'Umowa', '', inCase || view === 'klient')}${item('rozliczenia', 'Rozliczenie', inCase ? 'w tej sprawie' : '', inCase)}
+  </div></div>`);
+}
+
+/* ---------- Zdarzenia ---------- */
+let searchTimer = null, filtTimer = null;
+function setFilt(id, key, val) { S.filt[id] = S.filt[id] || {}; S.filt[id][key] = val; S.limit[id] = 0; }
+function rerenderKeepFocus() {
+  const a = document.activeElement;
+  const sel = a && a.dataset && a.dataset.filt ? `[data-filt="${a.dataset.filt}"][data-key="${a.dataset.key}"]` : null;
+  const pos = a && a.selectionStart;
+  render();
+  if (sel) { const el = $(sel); if (el) { el.focus(); try { el.setSelectionRange(pos, pos); } catch (e) { /* — */ } } }
+}
+
+const ACTIONS = {
+  menu: () => $('.shell').classList.toggle('nav-open'),
+  refresh: (el) => busy(el, () => reload()),
+  quick: quickMenu,
+  close: closeModal,
+  more: (el) => { S.limit[el.dataset.tid] = 1e9; render(); },
+  new: (el) => { closeModal(); openForm(el.dataset.t, null, { firm: el.dataset.firm || undefined, prefill: el.dataset.pre ? JSON.parse(el.dataset.pre) : {} }); },
+  edit: (el) => { const r = byId(el.dataset.t, el.dataset.firm, el.dataset.id); if (r) openForm(el.dataset.t, r); },
+  delete: (el) => {
+    const t = el.dataset.t, firm = el.dataset.firm, id = el.dataset.id;
+    confirmBox('Usunąć ' + TB()[t].one + '?', '<p>Usunięcia nie da się cofnąć w aplikacji (kopia trafia do historii w arkuszu).</p>', 'Usuń', async () => {
+      try { await call('apiDelete', t, firm, id); } catch (e) { toast(e.message, true); return; }
+      dropRec(t, firm, id); closeModal(); toast('Usunięto');
+      if (S.route.indexOf(id) >= 0) go({ sprawy: 'sprawy', klienci: 'klienci', zapytania: 'zapytania' }[t] || 'pulpit'); else render();
+    }, true);
+  },
+  'term-done': (el) => busy(el, async () => { const r = await call('apiSave', 'terminy', { kancelaria: el.dataset.firm, id: el.dataset.id, status: 'Wykonany' }); upsert('terminy', r); toast('Termin wykonany'); render(); }),
+  'calc-save': (el) => { const wrap = el.closest('[data-calc-sprawa]'); const firm = S.route.split('/')[1]; openForm('terminy', null, { firm: wrap ? firm : undefined, prefill: { data: el.dataset.end, podstawa: el.dataset.basis, opis: el.dataset.label, typ: 'Termin procesowy', sprawa_id: wrap ? wrap.dataset.calcSprawa : '' } }); },
+  gmail: (el) => loadGmail(el.dataset.key, el.dataset.emails.split(',')),
+  folder: (el) => busy(el, async () => { const s = await call('apiFolder', el.dataset.firm, el.dataset.id); upsert('sprawy', s); toast('Założono folder sprawy'); render(); }),
+  'conflict-q': (el) => { setFilt('kf', 'q', el.dataset.q); go('konflikt'); },
+  'zap-status': (el) => zapUpdate({ status: el.dataset.v }, el),
+  'zap-nokonflikt': (el) => zapUpdate({ konflikt: 'Brak konfliktu' }, el),
+  'zap-accept': () => { const [, f, id] = S.route.split('/'); acceptModal(byId('zapytania', f, id)); },
+  'zap-close': () => { const [, f, id] = S.route.split('/'); closeZapModal(byId('zapytania', f, id)); },
+  'import-www': (el) => busy(el, async () => { const r = await call('apiImportWebsite', 'KN', ''); r.records.forEach((x) => upsert('zapytania', x)); toast(r.imported ? 'Nowe zgłoszenia: ' + r.imported : 'Brak nowych zgłoszeń'); render(); }),
+  'team-edit': () => teamModal(null),
+  'firm-edit': (el) => firmModal(el.dataset.firm),
+  'firm-db': (el) => confirmBox('Założyć bazę na tym koncie?', `<p>Arkusz danych kancelarii powstanie na Dysku konta <b>${esc(S.boot.email)}</b> i zostanie udostępniony jej zespołowi oraz administratorom.</p>`, 'Załóż bazę', async () => {
+    try { await call('apiCreateDb', el.dataset.firm); closeModal(); await reload(true); toast('Baza założona'); } catch (e) { toast(e.message, true); }
+  }),
+  'dict-save': (el) => busy(el, async () => {
+    const scope = fv('dict', 'scope', '*'), name = fv('dict', 'name', 'kategoria');
+    const items = $('#dict-txt').value.split('\n').map((l) => l.trim()).filter(Boolean).map((l) => { const [v, t] = l.split('|').map((x) => x.trim()); return { v, t: t || '' }; });
+    await call('apiDictSave', scope, name, items); await reload(true); toast('Słownik zapisany');
+  }),
+  'seq-save': (el) => busy(el, async () => { const k = el.dataset.k; S.boot.admin.seq = await call('apiSeqSave', k, $('#seq-' + k).value.trim()); toast('Zapisano licznik'); }),
+  resync: (el) => busy(el, async () => { const r = await call('apiResync'); shareReport(r); }),
+  copy: async (el) => { const inp = $('#' + el.dataset.src); try { await navigator.clipboard.writeText(inp.value); toast('Skopiowano'); } catch (e) { inp.select(); toast('Zaznaczono — skopiuj skrótem Ctrl+C'); } },
+  'imp-find': (el) => busy(el, async () => { IMP.src = await call('apiImportSources'); render(); toast('Znalezione pliki są na listach wyboru'); }),
+  'imp-www': (el) => busy(el, async () => { const r = await call('apiImportWebsite', 'KN', srcId('zgloszenia')); r.records.forEach((x) => upsert('zapytania', x)); IMP.wwwRes = `Zaimportowano ${r.imported}, już były ${r.skipped}, pominięte zapisy na powiadomienia: ${r.alerts}.`; render(); }),
+  'imp-analyze': (el) => busy(el, async () => {
+    const kind = el.dataset.kind, id = srcId(kind);
+    if (!id) { toast('Wskaż plik lub folder (link albo „Znajdź pliki”).', true); return; }
+    const fn = { lista: 'apiImportListaAnalyze', umowy: 'apiImportUmowyAnalyze', notatki: 'apiImportNotesAnalyze' }[kind];
+    prepImport(kind, await call(fn, id)); render();
+  }),
+  'imp-commit': (el) => busy(el, async () => {
+    const kind = el.dataset.kind, items = buildImportItems(kind);
+    if (!items.length) { toast('Nic do zaimportowania.', true); return; }
+    const rep = await call('apiImportCommit', kind, items);
+    IMP[kind].result = Object.keys(rep).map((k) => k + ': ' + Object.keys(rep[k]).map((x) => x + ' ' + rep[k][x]).join(', ')).join(' · ');
+    await reload(true);
+  }),
+  'setup-hints': (el) => busy(el, async () => {
+    readSetup();
+    const h = await call('apiSetupHints');
+    S.setup.firms.forEach((f) => { const x = h[f.kod] || {}; if (x.folder && !f.folder_id) f.folder_id = x.folder.url; if (x.import_folder && !f.import_folder) f.import_folder = x.import_folder.url; });
+    render(); toast('Uzupełniono znalezione foldery');
+  }),
+  'setup-go': (el) => busy(el, async () => {
+    const st = readSetup();
+    const res = await call('apiSetup', { me: st.me, firms: st.firms, team: st.team.filter((m) => m.on && m.email), seq: st.seq });
+    await reload(true);
+    if (res && res.shareLog && res.shareLog.length) shareReport(res.shareLog);
+  })
+};
+async function zapUpdate(patch, el) {
+  const [, f, id] = S.route.split('/');
+  const z = byId('zapytania', f, id);
+  await busy(el, async () => { const r = await call('apiSave', 'zapytania', Object.assign({ kancelaria: f, id, _ver: z.zmieniono }, patch)); upsert('zapytania', r); toast('Zapisano'); render(); });
+}
+function shareReport(list) {
+  openModal(`<div class="modal"><div class="modal-h"><h2>Udostępnienia</h2><button class="icon-btn" data-act="close">${ic('x')}</button></div><div class="modal-b">
+    ${list.map((x) => `<div style="margin-bottom:10px"><b>${esc(x.email)}</b><div class="small muted">${(x.log || []).map(esc).join('<br>') || 'bez zmian'}</div></div>`).join('')}</div>
+    <div class="modal-f"><button class="btn primary" data-act="close">OK</button></div></div>`);
+}
+
+document.addEventListener('click', (e) => {
+  if (e.target.closest('a[target="_blank"], a[href^="mailto:"], a[href^="tel:"], a[target="_top"]')) return;
+  const pick = e.target.closest('[data-pick]');
+  if (pick) {
+    const box = pick.closest('.combo'), firm = S.form ? S.form.firm : defaultFirm();
+    const id = pick.dataset.pick, r = id ? byId(box.dataset.ref, firm, id) : null;
+    $('input[type=hidden]', box).value = id;
+    if (r) $('.combo-q', box).value = refLabel(box.dataset.ref, r);
+    $('.combo-list', box).hidden = true;
+    return;
+  }
+  const el = e.target.closest('[data-act],[data-go],[data-sort],[data-filt-set],[data-scope],[data-tab]');
+  if (!e.target.closest('.search')) { const r = $('.search-res'); if (r) r.hidden = true; }
+  if (!el) return;
+  if (el.dataset.act && ACTIONS[el.dataset.act]) { e.preventDefault(); ACTIONS[el.dataset.act](el); if (!el.dataset.go) return; }
+  if (el.dataset.go !== undefined) {
+    e.preventDefault();
+    const g = el.dataset.go;
+    if (!g) return;
+    if ($('.search-res')) $('.search-res').hidden = true;
+    if (g.indexOf('edit/') === 0) { const [, t, key] = g.split('/'); const [firm, id] = key.split(':'); const r = byId(t, firm, id); if (r) openForm(t, r); return; }
+    if (g.indexOf('team/') === 0) { teamModal((S.boot.team || []).find((m) => m.email === g.slice(5))); return; }
+    if ($('#q')) $('#q').value = '';
+    closeModal();
+    go(g);
+    return;
+  }
+  if (el.dataset.sort && !el.classList.contains('nosort')) {
+    const id = el.dataset.tid, cur = S.sort[id];
+    S.sort[id] = { k: el.dataset.sort, dir: cur && cur.k === el.dataset.sort && cur.dir === 'asc' ? 'desc' : 'asc' };
+    render(); return;
+  }
+  if (el.dataset.filtSet) { setFilt(el.dataset.filtSet, el.dataset.key, el.dataset.val); render(); return; }
+  if (el.dataset.scope) { S.firm = el.dataset.scope; try { localStorage.setItem('crm.firm', S.firm); } catch (x) { /* — */ } render(); return; }
+  if (el.dataset.tab) { S.tab[el.dataset.tkey] = el.dataset.tab; render(); }
+});
+document.addEventListener('mousedown', (e) => { if (e.target.closest('.combo-list')) e.preventDefault(); });
+document.addEventListener('input', (e) => {
+  const el = e.target;
+  if (el.id === 'q') { clearTimeout(searchTimer); searchTimer = setTimeout(() => renderSearch(el.value), 80); return; }
+  if (el.classList.contains('combo-q')) { comboUpdate(el); return; }
+  if (el.dataset.filt && (el.type === 'search' || el.type === 'text')) {
+    clearTimeout(filtTimer);
+    filtTimer = setTimeout(() => { setFilt(el.dataset.filt, el.dataset.key, el.value); rerenderKeepFocus(); }, 160);
+    return;
+  }
+  if (['c-start', 'c-n'].indexOf(el.id) >= 0) calcUpdate();
+});
+document.addEventListener('focusin', (e) => { if (e.target.classList && e.target.classList.contains('combo-q')) comboUpdate(e.target, !e.target.value); });
+document.addEventListener('focusout', (e) => {
+  if (e.target.classList && e.target.classList.contains('combo-q')) { const l = e.target.closest('.combo').querySelector('.combo-list'); setTimeout(() => { l.hidden = true; }, 120); }
+});
+document.addEventListener('change', (e) => {
+  const el = e.target;
+  if (el.dataset.filt && (el.tagName === 'SELECT' || el.type === 'checkbox')) { setFilt(el.dataset.filt, el.dataset.key, el.type === 'checkbox' ? (el.checked ? '1' : '') : el.value); render(); return; }
+  if (el.dataset.actChange === 'form-firm') {
+    Object.assign(S.form.values, readForm());
+    fieldsOf(S.form.table).forEach((fd) => { if (fd.t === 'ref' || fd.t === 'user' || fd.t === 'users') S.form.values[fd.k] = ''; });
+    S.form.firm = el.value;
+    Object.assign(S.form.values, Object.fromEntries(Object.entries(defaultsFor(S.form.table, el.value)).filter(([k]) => !S.form.values[k] || ['opiekun', 'prowadzacy', 'odpowiedzialny', 'osoba', 'status', 'stawka'].indexOf(k) >= 0)));
+    $('.scrim').innerHTML = formHtml(S.form);
+    return;
+  }
+  if (el.dataset.actChange === 'zap-status-sel') { zapUpdate({ status: el.value }, el); return; }
+  if (el.id === 'c-preset') { const p = PRESETS[+el.value]; if (p && p[2]) { $('#c-n').value = p[2]; $('#c-u').value = p[3]; } calcUpdate(); return; }
+  if (el.id === 'c-u' || el.id === 'c-start') { calcUpdate(); return; }
+  if (el.dataset.imp) {
+    const st = IMP[el.dataset.imp], map = el.dataset.map, k = el.dataset.k;
+    if (map === 'opFirm') st.op[k].firm = el.value;
+    else if (map === 'opUser') st.op[k].user = el.value;
+    else if (map === 'colors') st.colors[k] = el.value;
+    else if (map === 'stat') st.stat[k] = el.value;
+    else if (map === 'firm') st.firm = el.value;
+    else if (map === 'byClient') st.byClient = el.checked;
+    render();
+  }
+});
+document.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const f = e.target, btn = e.submitter || f.querySelector('[type=submit]');
+  if (f.id === 'frm') { submitForm(btn); return; }
+  if (f.id === 'acc-form') {
+    const [, firm, id] = S.route.split('/');
+    const d = Object.fromEntries(new FormData(f).entries());
+    d.folder = !!f.elements.folder.checked;
+    await busy(btn, async () => {
+      const r = await call('apiAccept', firm, id, d);
+      if (r.klient) upsert('klienci', r.klient);
+      upsert('sprawy', r.sprawa); upsert('zapytania', r.zapytanie);
+      closeModal(); toast('Założono sprawę ' + caseNo(r.sprawa)); go('sprawa/' + firm + '/' + r.sprawa.id);
+    });
+    return;
+  }
+  if (f.id === 'zclose-form') { await zapUpdate({ status: f.elements.status.value, powod: f.elements.powod.value }, btn); closeModal(); return; }
+  if (f.id === 'team-form') {
+    const d = { email: f.elements.email.value, imie_nazwisko: f.elements.imie_nazwisko.value, tytul: f.elements.tytul.value, telefon: f.elements.telefon.value, rola: f.elements.rola.value,
+      kancelarie: $$('input[name=k]:checked', f).map((x) => x.value).join(','), aktywny: f.elements.aktywny.checked ? 'tak' : 'nie' };
+    await busy(btn, async () => { const r = await call('apiTeamSave', d); closeModal(); await reload(true); shareReport([{ email: d.email, log: r.shareLog }]); });
+    return;
+  }
+  if (f.id === 'firm-form') {
+    const d = Object.fromEntries(new FormData(f).entries()); d.kod = f.dataset.firm;
+    await busy(btn, async () => { await call('apiFirmSave', d); closeModal(); await reload(true); toast('Zapisano dane kancelarii'); });
+  }
+});
+document.addEventListener('keydown', (e) => {
+  const inField = /INPUT|TEXTAREA|SELECT/.test((e.target.tagName || ''));
+  if (e.key === '/' && !inField && $('#q')) { e.preventDefault(); $('#q').focus(); return; }
+  if (e.key === 'Escape') { if ($('.scrim')) closeModal(); else if ($('.search-res')) $('.search-res').hidden = true; return; }
+  if (e.key === 'Enter' && e.target.id === 'q') { const a = $('.search-res a'); if (a) { e.preventDefault(); a.click(); } return; }
+  if (e.key === 'Enter' && e.target.classList.contains('combo-q')) { e.preventDefault(); const p = e.target.closest('.combo').querySelector('[data-pick]'); if (p) p.click(); }
+});
+
+function afterRender() {
+  if ($('#calc')) calcUpdate();
+  const [view, firm, id] = S.route.split('/');
+  const tabKey = { sprawa: 'sp', klient: 'kl', zapytanie: 'zap' }[view];
+  if (tabKey && S.tab[tabKey + ':' + firm + ':' + id] === 'mail') {
+    const key = { sp: 's', kl: 'k', zap: 'z' }[tabKey] + ':' + firm + ':' + id;
+    const btn = $(`[data-act="gmail"][data-key="${key}"]`);
+    if (btn && !S.cache.gmail[key]) loadGmail(key, btn.dataset.emails.split(','));
+  }
+}
+
+/* ---------- Start ---------- */
+function applyBoot() {
+  S.data = S.boot.data || {};
+  ((S.boot.schema && S.boot.schema.order) || []).forEach((t) => { S.data[t] = S.data[t] || []; });
+  reindex();
+  if (S.firm !== 'all' && myFirms().indexOf(S.firm) < 0) S.firm = 'all';
+  if (myFirms().length < 2) S.firm = 'all';
+  S.loadedAt = Date.now();
+}
+async function reload(silent) {
+  S.boot = await call('bootstrap');
+  S.now = warsawNow();
+  applyBoot();
+  S.cache.hist = {};
+  if (S.boot.state !== 'ok') $('#app').innerHTML = '';
+  render();
+  if (!silent) toast('Dane odświeżone');
+}
+async function start() {
+  S.now = warsawNow();
+  try { S.boot = await call('bootstrap'); } catch (e) {
+    $('#app').innerHTML = `<div class="center"><div class="box"><div class="banner">Nie udało się wczytać danych: ${esc(e.message)}</div><button class="btn" onclick="location.reload()">Spróbuj ponownie</button></div></div>`;
+    return;
+  }
+  applyBoot();
+  const useGas = window.google && google.script && google.script.url;
+  if (useGas) {
+    google.script.url.getLocation((loc) => { if (loc.hash) S.route = loc.hash; render(); });
+    if (google.script.history) google.script.history.setChangeHandler((ev) => routeFromHash(ev.location.hash));
+  } else {
+    if (location.hash.length > 1) S.route = decodeURIComponent(location.hash.slice(1));
+    window.addEventListener('popstate', () => routeFromHash(decodeURIComponent(location.hash)));
+    render();
+  }
+  /* Co minutę: zegar (24 h robocze, terminy). Po powrocie do karty po >3 min — świeże dane. */
+  setInterval(() => {
+    S.now = warsawNow();
+    const busyUi = $('.scrim') || (document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName));
+    if (!busyUi && S.boot.state === 'ok') render();
+  }, 60000);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && Date.now() - S.loadedAt > 180000 && !$('.scrim') && S.boot.state === 'ok') reload(true).catch(() => {});
+  });
+}
+start();
+</script>

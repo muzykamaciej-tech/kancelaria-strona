@@ -1,0 +1,846 @@
+<script>
+/* Aplikacja.html — rdzeń interfejsu: stan, komunikacja z serwerem, nawigacja, pulpit, listy,
+   formularze generowane ze schematu (Konfiguracja.js). Widoki rekordów, zespół, ustawienia
+   i import są w Widoki.html. Bez bibliotek: szablony w literałach i jedno delegowanie zdarzeń. */
+'use strict';
+
+const S = {
+  boot: null, data: {}, idx: {}, route: 'pulpit', tab: {}, firm: 'all', sort: {}, filt: {},
+  now: '', form: null, cache: { gmail: {}, hist: {} }, limit: {}, loadedAt: 0
+};
+try { S.firm = localStorage.getItem('crm.firm') || 'all'; } catch (e) { /* bez pamięci przeglądarki */ }
+
+/* ---------- Narzędzia ---------- */
+const $ = (sel, root) => (root || document).querySelector(sel);
+const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+const esc = (s) => String(s === null || s === undefined ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const attr = esc;
+const norm = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ł/g, 'l');
+const uniq = (a) => Array.from(new Set(a));
+
+function warsawNow() {
+  try {
+    const p = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Warsaw', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date());
+    return p.replace(' ', 'T').slice(0, 16);
+  } catch (e) { return SH.isoOf(Date.now()); }
+}
+const today = () => S.now.slice(0, 10);
+const MON = ['sty', 'lut', 'mar', 'kwi', 'maj', 'cze', 'lip', 'sie', 'wrz', 'paź', 'lis', 'gru'];
+const WD = ['nd', 'pn', 'wt', 'śr', 'cz', 'pt', 'sb'];
+function fmtDate(s, withWd) {
+  const t = SH.parse(s); if (isNaN(t)) return s ? esc(s) : '';
+  const d = new Date(t), y = d.getUTCFullYear();
+  return (withWd ? WD[d.getUTCDay()] + ' ' : '') + d.getUTCDate() + ' ' + MON[d.getUTCMonth()] + (String(y) !== today().slice(0, 4) ? ' ' + y : '');
+}
+function fmtDT(s) {
+  if (!s) return '';
+  const hm = String(s).slice(11, 16);
+  return fmtDate(s) + (hm ? ', ' + hm : '');
+}
+function relDay(ymd) {
+  const n = SH.diffDays(today(), String(ymd).slice(0, 10));
+  if (isNaN(n)) return '';
+  if (n === 0) return 'dziś'; if (n === 1) return 'jutro'; if (n === -1) return 'wczoraj';
+  if (n > 1) return 'za ' + n + ' dni';
+  return -n + ' dni temu';
+}
+function minutesTo(iso) { return Math.round((SH.parse(iso) - SH.parse(S.now)) / 60000); }
+function dur(min) {
+  if (min < 60) return min + ' min';
+  const h = Math.floor(min / 60);
+  if (h < 48) return h + ' h' + (min % 60 && h < 10 ? ' ' + (min % 60) + ' min' : '');
+  return Math.floor(h / 24) + ' dni';
+}
+const nf = new Intl.NumberFormat('pl-PL', { maximumFractionDigits: 2 });
+const money = (v) => (v === '' || v === undefined || v === null || isNaN(+v)) ? '' : nf.format(+v) + ' zł';
+const hrs = (v) => nf.format(+v || 0) + ' h';
+const sum = (list, k) => list.reduce((a, r) => a + (+r[k] || 0), 0);
+const chip = (cls, txt) => `<span class="chip ${cls || ''}">${txt}</span>`;
+const firmTag = (code) => code ? `<span class="firm ${attr(code)}" title="${attr(firmOf(code).nazwa_krotka)}">${esc(code)}</span>` : '';
+
+const ICONS = {
+  home: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+  inbox: '<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
+  users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+  briefcase: '<rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+  calendar: '<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  mail: '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+  clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+  wallet: '<path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>',
+  file: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4M16 13H8M16 17H8M10 9H8"/>',
+  scale: '<path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1ZM2 16l3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10M12 3v18M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>',
+  settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+  key: '<circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/>',
+  upload: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>',
+  search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  plus: '<path d="M5 12h14M12 5v14"/>',
+  menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
+  back: '<path d="m15 18-6-6 6-6"/>',
+  ext: '<path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+  check: '<path d="M20 6 9 17l-5-5"/>',
+  folder: '<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>',
+  refresh: '<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/>',
+  x: '<path d="M18 6 6 18M6 6l12 12"/>',
+  send: '<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
+  edit: '<path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>',
+  trash: '<path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+  calc: '<rect width="16" height="20" x="4" y="2" rx="2"/><path d="M8 6h8M16 14v4M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"/>',
+  phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>'
+};
+const ic = (n) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ''}</svg>`;
+
+/* ---------- Serwer ---------- */
+function parseErr(e) {
+  const msg = String((e && e.message) || e || '');
+  const m = /^(?:\w*(?:Error|Exception): )?([A-Z_]{2,}): ([\s\S]*)$/.exec(msg);
+  return m ? { code: m[1], message: m[2] } : { code: 'ERR', message: msg || 'Nieznany błąd.' };
+}
+function call(fn, ...args) {
+  return new Promise((resolve, reject) => {
+    google.script.run.withSuccessHandler(resolve).withFailureHandler((e) => reject(parseErr(e)))[fn](...args);
+  });
+}
+
+/* ---------- Dane ---------- */
+const TB = () => S.boot.schema.tables;
+const fieldsOf = (t) => TB()[t].fields;
+const fdef = (t, k) => fieldsOf(t).find((f) => f.k === k) || {};
+function firmOf(code) { return (S.boot.firms || []).find((f) => f.kod === code) || { kod: code, nazwa_krotka: code, nazwa: code }; }
+const myFirms = () => S.boot.myFirms || [];
+const perm = () => S.boot.perm || {};
+const dict = (firm, name) => ((S.boot.dicts || {})[firm] || {})[name] || [];
+function dictType(firm, name, v) { const d = dict(firm, name).find((x) => x.v === v); return d ? d.t : ''; }
+function member(email) { return (S.boot.team || []).find((m) => m.email === email); }
+function personName(email) { const m = member(email); return m ? m.imie_nazwisko : (email || ''); }
+function shortName(email) {
+  if (!email) return '';
+  const m = member(email);
+  if (!m) return email.split('@')[0];
+  const p = String(m.imie_nazwisko).split(' ');
+  return p.length > 1 ? p[0][0] + '. ' + p.slice(1).join(' ') : m.imie_nazwisko;
+}
+const teamFor = (firm) => (S.boot.team || []).filter((m) => m.aktywny !== 'nie' && String(m.kancelarie || '').split(',').indexOf(firm) >= 0);
+const inScope = (r) => S.firm === 'all' || r.kancelaria === S.firm;
+const rows = (t) => (S.data[t] || []).filter(inScope);
+function reindex() {
+  S.idx = {};
+  Object.keys(S.data).forEach((t) => { const m = new Map(); S.data[t].forEach((r) => m.set(r.kancelaria + ':' + r.id, r)); S.idx[t] = m; });
+}
+const byId = (t, firm, id) => (id && S.idx[t] ? S.idx[t].get(firm + ':' + id) : null);
+function upsert(t, rec) {
+  const arr = S.data[t], i = arr.findIndex((r) => r.id === rec.id && r.kancelaria === rec.kancelaria);
+  if (i >= 0) arr[i] = rec; else arr.push(rec);
+  S.idx[t].set(rec.kancelaria + ':' + rec.id, rec);
+  delete S.cache.hist[t + ':' + rec.kancelaria + ':' + rec.id];
+}
+function dropRec(t, firm, id) {
+  S.data[t] = S.data[t].filter((r) => !(r.id === id && r.kancelaria === firm));
+  S.idx[t].delete(firm + ':' + id);
+}
+const isOpenCase = (s) => dictType(s.kancelaria, 'status_sprawy', s.status) !== 'closed';
+const zType = (z) => dictType(z.kancelaria, 'status_zapytania', z.status) || 'open';
+const needsReply = (z) => zType(z) === 'open' && !z.odpowiedz && !z.konsultacja;
+const waitsOffer = (z) => zType(z) === 'open' && !!z.odpowiedz;
+const caseNo = (s) => s && s.numer ? (/^\d+$/.test(s.numer) ? '(' + s.numer + ')' : s.numer) : '';
+const clientName = (firm, id) => { const k = byId('klienci', firm, id); return k ? k.nazwa : ''; };
+function caseLabel(s) { return s ? [caseNo(s), s.tytul].filter(Boolean).join(' ') : ''; }
+function refLabel(t, r) {
+  if (!r) return '';
+  if (t === 'klienci') return r.nazwa;
+  if (t === 'sprawy') { const k = clientName(r.kancelaria, r.klient_id); return caseLabel(r) + (k ? ' — ' + k : ''); }
+  if (t === 'zapytania') return r.nazwa + (r.data_wplywu ? ' (' + fmtDate(r.data_wplywu) + ')' : '');
+  return r[TB()[t].title] || r.id;
+}
+function defaultFirm() { return S.firm !== 'all' && myFirms().indexOf(S.firm) >= 0 ? S.firm : myFirms()[0]; }
+
+/* Najbliższy otwarty termin sprawy i „ostatni ruch” (najświeższa zmiana, czynność, pismo). */
+function nextTerm(s) {
+  return S.data.terminy.filter((t) => t.kancelaria === s.kancelaria && t.sprawa_id === s.id && t.status === 'Otwarty')
+    .sort((a, b) => (a.data + a.godzina < b.data + b.godzina ? -1 : 1))[0];
+}
+function lastMove(s) {
+  let d = String(s.zmieniono || s.utworzono || '').slice(0, 10);
+  ['czynnosci', 'korespondencja', 'terminy'].forEach((t) => S.data[t].forEach((r) => {
+    if (r.kancelaria === s.kancelaria && r.sprawa_id === s.id) { const x = String(r.zmieniono || r.data || '').slice(0, 10); if (x > d) d = x; }
+  }));
+  return d;
+}
+
+/* ---------- Nawigacja ---------- */
+const NAV = [
+  ['pulpit', 'Pulpit', 'home'], ['zapytania', 'Zapytania', 'inbox'], ['klienci', 'Klienci', 'users'], ['sprawy', 'Sprawy', 'briefcase'],
+  ['terminy', 'Terminy', 'calendar'], ['korespondencja', 'Korespondencja', 'mail'], ['czas', 'Czas pracy', 'clock'],
+  ['umowy', 'Rejestr umów', 'file'], ['rozliczenia', 'Rozliczenia', 'wallet'], ['konflikt', 'Konflikt interesów', 'scale']
+];
+function go(route) {
+  if (S.route === route) { render(); return; }
+  S.route = route;
+  try {
+    if (window.google && google.script && google.script.history) google.script.history.push(null, null, route);
+    else history.pushState(null, '', '#' + route);
+  } catch (e) { /* — */ }
+  render();
+  const w = $('.work'); if (w) w.scrollTop = 0;
+  $('.shell') && $('.shell').classList.remove('nav-open');
+}
+function routeFromHash(h) { h = String(h || '').replace(/^#/, ''); if (h) { S.route = h; render(); } }
+
+/* ---------- Szkielet ---------- */
+function render() {
+  if (!S.boot) return;
+  const app = $('#app');
+  if (S.boot.state === 'setup') { app.innerHTML = renderSetup(); return; }
+  if (S.boot.state === 'denied') { app.innerHTML = renderDenied(); return; }
+  if (!$('.shell')) app.innerHTML = shellHtml();
+  $('.nav').innerHTML = navHtml();
+  $('.top .seg-wrap').innerHTML = firmSeg();
+  const [view, a, b] = S.route.split('/');
+  const V = VIEWS[view] || VIEWS.pulpit;
+  let html;
+  try { html = V(a, b); } catch (e) { console.error(e); html = `<div class="banner">Błąd widoku: ${esc(e.message)}</div>`; }
+  $('.work').innerHTML = (S.boot.errors || []).map((e) => `<div class="banner">${esc(e)}</div>`).join('') + html;
+  afterRender();
+}
+function shellHtml() {
+  return `<div class="shell"><nav class="nav" aria-label="Menu"></nav><div class="main">
+    <header class="top">
+      <button class="icon-btn menu-btn" data-act="menu" aria-label="Menu">${ic('menu')}</button>
+      <div class="search">${ic('search')}<input id="q" type="search" placeholder="Szukaj: klient, sprawa, nr teczki, sygnatura…" autocomplete="off" aria-label="Szukaj"><div class="search-res" hidden></div></div>
+      <div class="seg-wrap"></div>
+      <div class="spacer"></div>
+      <button class="icon-btn" data-act="refresh" title="Odśwież dane">${ic('refresh')}</button>
+      ${perm().write ? `<button class="btn primary" data-act="quick">${ic('plus')}<span>Dodaj</span></button>` : ''}
+    </header>
+    <main class="work"></main></div></div><div class="toasts"></div>`;
+}
+function navHtml() {
+  const z = rows('zapytania').filter(needsReply);
+  const over = z.filter((x) => x.termin_odpowiedzi && minutesTo(x.termin_odpowiedzi) < 0).length;
+  const t = rows('terminy').filter((x) => x.status === 'Otwarty' && x.data <= today()).length;
+  const counts = { zapytania: [z.length, over > 0], terminy: [t, t > 0] };
+  const cur = S.route.split('/')[0];
+  const alias = { zapytanie: 'zapytania', klient: 'klienci', sprawa: 'sprawy' };
+  const on = (k) => (alias[cur] || cur) === k ? ' on' : '';
+  const link = ([k, l, i]) => `<a href="#${k}" data-go="${k}" class="${on(k).trim()}">${ic(i)}<span>${l}</span>${counts[k] && counts[k][0] ? `<span class="count${counts[k][1] ? ' hot' : ''}">${counts[k][0]}</span>` : ''}</a>`;
+  const me = S.boot.me || {};
+  return `<div class="brand"><b>${esc(S.boot.schema.app.name)}</b><span>${myFirms().map((k) => esc(firmOf(k).nazwa_krotka)).join(' · ')}</span></div>
+    ${NAV.map(link).join('')}
+    <div class="sep"></div>
+    ${link(['zespol', 'Zespół i dostępy', 'key'])}
+    ${perm().admin ? link(['ustawienia', 'Ustawienia', 'settings']) + link(['import', 'Import rejestrów', 'upload']) : ''}
+    <div class="grow"></div>
+    <div class="who"><b>${esc((me.tytul ? me.tytul + ' ' : '') + (me.imie_nazwisko || S.boot.email))}</b>${esc(S.boot.email)}<br>${esc((S.boot.schema.roles[S.boot.role] || {}).label || '')}</div>`;
+}
+function firmSeg() {
+  const f = myFirms();
+  if (f.length < 2) return '';
+  const b = (k, l) => `<button data-scope="${k}" class="${S.firm === k ? 'on' : ''}">${l}</button>`;
+  return `<div class="seg" role="group" aria-label="Kancelaria">${b('all', 'Obie')}${f.map((k) => b(k, `<span class="l">${esc(firmOf(k).nazwa_krotka.replace(/^Kancelaria /, ''))}</span><span class="s">${esc(k)}</span>`)).join('')}</div>`;
+}
+
+/* ---------- Komunikaty, okna ---------- */
+function toast(msg, bad) {
+  const box = $('.toasts') || document.body.appendChild(Object.assign(document.createElement('div'), { className: 'toasts' }));
+  const el = document.createElement('div');
+  el.className = 'toast' + (bad ? ' bad' : '');
+  el.textContent = msg;
+  box.appendChild(el);
+  setTimeout(() => el.remove(), bad ? 7000 : 3200);
+}
+function openModal(html, cls) {
+  closeModal();
+  const s = document.createElement('div');
+  s.className = 'scrim';
+  s.innerHTML = html.indexOf('class="modal') >= 0 ? html : `<div class="modal ${cls || ''}">${html}</div>`;
+  s.addEventListener('mousedown', (e) => { if (e.target === s) closeModal(); });
+  document.body.appendChild(s);
+  const first = s.querySelector('input:not([type=hidden]):not([disabled]), select, textarea');
+  if (first && !('ontouchstart' in window)) first.focus();
+  return s;
+}
+function closeModal() { $$('.scrim').forEach((s) => s.remove()); S.form = null; }
+function confirmBox(title, text, okLabel, onOk, danger) {
+  openModal(`<div class="modal narrow"><div class="modal-h"><h2>${esc(title)}</h2></div><div class="modal-b">${text}</div>
+    <div class="modal-f"><button class="btn" data-act="close">Anuluj</button><button class="btn ${danger ? 'danger' : 'primary'}" id="cf-ok">${esc(okLabel)}</button></div></div>`);
+  $('#cf-ok').onclick = async (e) => { e.target.disabled = true; try { await onOk(); } finally { if (e.target) e.target.disabled = false; } };
+}
+async function busy(btn, fn) {
+  if (btn) btn.disabled = true;
+  try { return await fn(); } catch (e) { toast(e.message || String(e), true); throw e; } finally { if (btn) btn.disabled = false; }
+}
+
+/* ---------- Tabele ---------- */
+function tableHtml(id, cols, list, open, opts) {
+  opts = opts || {};
+  const st = S.sort[id] || opts.sort || null;
+  let data = list.slice();
+  if (st) {
+    const c = cols.find((x) => x.k === st.k);
+    if (c) {
+      const key = c.s || ((r) => r[c.k]);
+      data.sort((a, b) => { const x = key(a), y = key(b); return (x < y ? -1 : x > y ? 1 : 0) * (st.dir === 'desc' ? -1 : 1); });
+    }
+  }
+  const lim = S.limit[id] || 250, more = data.length - lim;
+  if (more > 0) data = data.slice(0, lim);
+  if (!list.length) return `<div class="empty"><b>${esc(opts.empty || 'Brak pozycji')}</b>${opts.emptyHint || ''}</div>`;
+  const th = cols.map((c) => `<th data-sort="${c.k}" data-tid="${id}" class="${c.nosort ? 'nosort' : ''} ${c.cls || ''}">${esc(c.l)}${st && st.k === c.k ? `<span class="arr">${st.dir === 'desc' ? '↓' : '↑'}</span>` : ''}</th>`).join('');
+  const tr = data.map((r) => `<tr data-go="${attr(open(r))}">${cols.map((c) => `<td class="${c.cls || ''}">${c.v ? c.v(r) : esc(r[c.k])}</td>`).join('')}</tr>`).join('');
+  return `<div class="table-wrap"><table class="t cards"><thead><tr>${th}</tr></thead><tbody>${tr}</tbody>${opts.foot ? `<tfoot><tr>${opts.foot}</tr></tfoot>` : ''}</table></div>
+    ${more > 0 ? `<div class="empty"><button class="btn sm" data-act="more" data-tid="${id}">Pokaż wszystkie (jeszcze ${more})</button></div>` : ''}`;
+}
+function filterSelect(id, key, options, label) {
+  const v = (S.filt[id] || {})[key] || '';
+  return `<select class="inp mini" data-filt="${id}" data-key="${key}" aria-label="${attr(label)}">${options.map(([val, l]) => `<option value="${attr(val)}"${val === v ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
+}
+const fv = (id, key, d) => ((S.filt[id] || {})[key] !== undefined ? S.filt[id][key] : d);
+function searchBox(id, ph) {
+  return `<input class="inp mini q" type="search" data-filt="${id}" data-key="q" value="${attr(fv(id, 'q', ''))}" placeholder="${attr(ph || 'Filtruj…')}">`;
+}
+function matchQ(id, r, keys) {
+  const q = norm(fv(id, 'q', '')).trim();
+  if (!q) return true;
+  const hay = norm(keys.map((k) => (typeof k === 'function' ? k(r) : r[k])).join(' '));
+  return q.split(/\s+/).every((w) => hay.indexOf(w) >= 0);
+}
+
+/* ---------- Chipy statusów ---------- */
+function statusChip(table, r) {
+  if (table === 'zapytania') { const t = zType(r); return chip(t === 'won' ? 'ok' : t === 'lost' ? '' : 'info', esc(r.status)); }
+  if (table === 'sprawy') return chip(isOpenCase(r) ? (r.status === 'Aktywna' ? 'ok' : 'warn') : '', esc(r.status));
+  if (table === 'terminy') return chip(r.status === 'Wykonany' ? 'ok' : r.status === 'Otwarty' ? (r.data < today() ? 'bad' : '') : '', esc(r.status));
+  if (table === 'rozliczenia') return chip({ 'Opłacona': 'ok', 'Zaległa': 'bad', 'Wystawiona': 'info', 'Do wystawienia': 'warn' }[r.status] || '', esc(r.status));
+  return esc(r.status || '');
+}
+function slaChip(z) {
+  if (zType(z) !== 'open') return '';
+  if (z.odpowiedz) {
+    if (z.przypomnienie && z.przypomnienie <= today()) return chip('warn', 'przypomnieć się ' + relDay(z.przypomnienie));
+    return chip('', 'oferta ' + relDay(z.odpowiedz.slice(0, 10)));
+  }
+  if (z.konsultacja) return chip('info', 'konsultacja ' + fmtDT(z.konsultacja));
+  if (!z.termin_odpowiedzi) return chip('', 'wpłynęło ' + relDay(z.data_wplywu));
+  const m = minutesTo(z.termin_odpowiedzi);
+  if (m < 0) return chip('bad', 'po terminie ' + dur(-m));
+  if (m < 240) return chip('warn', 'zostało ' + dur(m));
+  return chip('', '<span class="hide-sm">odpowiedź </span>do ' + fmtDT(z.termin_odpowiedzi));
+}
+function dateBox(ymd, cls) {
+  const t = SH.parse(ymd); if (isNaN(t)) return '';
+  const d = new Date(t);
+  return `<div class="date-box ${cls || ''}"><i>${WD[d.getUTCDay()]}</i><b>${d.getUTCDate()}</b></div>`;
+}
+
+/* ---------- Pulpit ---------- */
+const VIEWS = {};
+VIEWS.pulpit = function () {
+  const me = S.boot.email, z = rows('zapytania'), sp = rows('sprawy');
+  const reply = z.filter(needsReply).sort((a, b) => ((a.termin_odpowiedzi || a.data_wplywu) < (b.termin_odpowiedzi || b.data_wplywu) ? -1 : 1));
+  const overdue = reply.filter((x) => x.termin_odpowiedzi && minutesTo(x.termin_odpowiedzi) < 0);
+  const offers = z.filter(waitsOffer).sort((a, b) => ((a.przypomnienie || '9') < (b.przypomnienie || '9') ? -1 : 1));
+  const horizon = SH.addDays(today(), 14);
+  const terms = rows('terminy').filter((t) => t.status === 'Otwarty' && t.data <= horizon).map((t) => ({ kind: 't', d: t.data, h: t.godzina, r: t }));
+  z.filter((x) => zType(x) === 'open' && x.konsultacja && x.konsultacja.slice(0, 10) >= today() && x.konsultacja.slice(0, 10) <= horizon)
+    .forEach((x) => terms.push({ kind: 'k', d: x.konsultacja.slice(0, 10), h: x.konsultacja.slice(11, 16), r: x }));
+  terms.sort((a, b) => (a.d + (a.h || '') < b.d + (b.h || '') ? -1 : 1));
+  const termsLate = terms.filter((t) => t.d < today()).length;
+  const week = terms.filter((t) => t.d >= today() && t.d <= SH.addDays(today(), 7)).length;
+  const active = sp.filter(isOpenCase);
+  const mine = active.filter((s) => s.prowadzacy === me || String(s.zespol || '').indexOf(me) >= 0);
+  const since = SH.addDays(today(), -90);
+  const decided = z.filter((x) => zType(x) !== 'open' && String(x.zmieniono || x.data_wplywu).slice(0, 10) >= since);
+  const won = decided.filter((x) => zType(x) === 'won').length;
+  const stale = active.map((s) => ({ s, d: lastMove(s) })).filter((x) => x.d && SH.diffDays(x.d, today()) > 30).sort((a, b) => (a.d < b.d ? -1 : 1));
+  const hour = +S.now.slice(11, 13);
+  const first = String((S.boot.me || {}).imie_nazwisko || '').split(' ')[0];
+
+  const stat = (k, v, d, alert) => `<div class="stat${alert ? ' alert' : ''}"><span class="k">${k}</span><span class="v">${v}</span><span class="d">${d}</span></div>`;
+  const zRow = (x) => `<li data-go="zapytanie/${x.kancelaria}/${x.id}">${firmTag(x.kancelaria)}<div class="main-txt"><b>${esc(x.nazwa)}${x.pilne ? ' · <span style="color:var(--bad)">pilne</span>' : ''}</b><span>${esc(x.kategoria || x.kanal || '')}${x.opis ? ' — ' + esc(x.opis.slice(0, 90)) : ''}</span></div>${slaChip(x)}</li>`;
+  const tRow = (t) => {
+    const late = t.d < today(), soon = t.d <= SH.addDays(today(), 2);
+    if (t.kind === 'k') return `<li data-go="zapytanie/${t.r.kancelaria}/${t.r.id}">${dateBox(t.d, soon ? 'warn' : '')}<div class="main-txt"><b>Konsultacja: ${esc(t.r.nazwa)}</b><span>${esc(t.h)} · ${esc(t.r.kategoria || '')}</span></div>${firmTag(t.r.kancelaria)}</li>`;
+    const s = byId('sprawy', t.r.kancelaria, t.r.sprawa_id);
+    return `<li data-go="${s ? 'sprawa/' + s.kancelaria + '/' + s.id : 'terminy'}">${dateBox(t.d, late ? 'bad' : soon ? 'warn' : '')}<div class="main-txt"><b>${esc(t.r.opis)}</b><span>${esc([t.h, t.r.typ, s ? caseLabel(s) : '', shortName(t.r.odpowiedzialny)].filter(Boolean).join(' · '))}</span></div>${late ? chip('bad', relDay(t.d)) : chip('', relDay(t.d))}</li>`;
+  };
+  return `<div class="page-head"><div class="t"><h1>${hour < 12 ? 'Dzień dobry' : hour < 18 ? 'Dzień dobry' : 'Dobry wieczór'}${first ? ', ' + esc(first) : ''}</h1>
+      <span class="sub">${fmtDate(today(), true).replace(/^(\S+)/, (m) => ({ pn: 'poniedziałek', wt: 'wtorek', 'śr': 'środa', cz: 'czwartek', pt: 'piątek', sb: 'sobota', nd: 'niedziela' }[m] || m))} · ${S.firm === 'all' ? 'obie kancelarie' : esc(firmOf(S.firm).nazwa_krotka)}${SH.holidayName(today()) ? ' · ' + esc(SH.holidayName(today())) : ''}</span></div></div>
+    <div class="stats">
+      ${stat('Zapytania do odpowiedzi', reply.length, overdue.length ? `<b style="color:var(--bad)">${overdue.length} po terminie 24 h</b>` : 'wszystkie w terminie', overdue.length > 0)}
+      ${stat('Terminy w 7 dni', week, termsLate ? `<b style="color:var(--bad)">${termsLate} zaległe</b>` : 'zaległych brak', termsLate > 0)}
+      ${stat('Sprawy aktywne', active.length, `w tym ${mine.length} Twoich`)}
+      ${stat('Przyjęte zapytania (90 dni)', decided.length ? Math.round((won / decided.length) * 100) + '%' : '—', decided.length ? `${won} z ${decided.length} rozstrzygniętych` : 'brak rozstrzygniętych')}
+    </div>
+    <div class="grid-2">
+      <div class="stack">
+        <section class="panel"><div class="panel-h"><h2>Do odpowiedzi</h2><span class="muted hide-sm">wstępna analiza i oferta w 24 h robocze</span><a href="#zapytania" data-go="zapytania" class="small">wszystkie</a></div>
+          ${reply.length ? `<ul class="rows">${reply.slice(0, 8).map(zRow).join('')}</ul>` : '<div class="empty"><b>Nic nie czeka na odpowiedź</b>Nowe zgłoszenia ze strony pojawią się tutaj.</div>'}</section>
+        <section class="panel"><div class="panel-h"><h2>Oferty czekające na decyzję</h2><span class="muted">${offers.length}</span></div>
+          ${offers.length ? `<ul class="rows">${offers.slice(0, 8).map(zRow).join('')}</ul>` : '<div class="empty">Brak wysłanych ofert bez odpowiedzi.</div>'}</section>
+      </div>
+      <div class="stack">
+        <section class="panel"><div class="panel-h"><h2>Terminy i konsultacje — 14 dni</h2><a href="#terminy" data-go="terminy" class="small">kalendarz</a></div>
+          ${terms.length ? `<ul class="rows">${terms.slice(0, 10).map(tRow).join('')}</ul>` : '<div class="empty"><b>Brak terminów w najbliższych dwóch tygodniach</b></div>'}</section>
+        <section class="panel"><div class="panel-h"><h2>Moje sprawy</h2><span class="muted">${mine.length}</span></div>
+          ${mine.length ? `<ul class="rows">${mine.slice(0, 8).map((s) => { const n = nextTerm(s); return `<li data-go="sprawa/${s.kancelaria}/${s.id}">${firmTag(s.kancelaria)}<div class="main-txt"><b>${esc(caseLabel(s))}</b><span>${esc(clientName(s.kancelaria, s.klient_id))}${s.nastepny_krok ? ' · ' + esc(s.nastepny_krok) : ''}</span></div>${n ? chip(n.data < today() ? 'bad' : '', fmtDate(n.data)) : ''}</li>`; }).join('')}</ul>` : '<div class="empty">Nie prowadzisz żadnej aktywnej sprawy.</div>'}</section>
+        ${stale.length ? `<section class="panel"><div class="panel-h"><h2>Bez ruchu od 30 dni</h2><span class="muted">${stale.length}</span></div><ul class="rows">${stale.slice(0, 6).map((x) => `<li data-go="sprawa/${x.s.kancelaria}/${x.s.id}">${firmTag(x.s.kancelaria)}<div class="main-txt"><b>${esc(caseLabel(x.s))}</b><span>${esc(shortName(x.s.prowadzacy))}</span></div>${chip('warn', relDay(x.d))}</li>`).join('')}</ul></section>` : ''}
+      </div>
+    </div>`;
+};
+
+/* ---------- Zapytania ---------- */
+VIEWS.zapytania = function () {
+  const id = 'zap', mode = fv(id, 'mode', 'lejek'), grp = fv(id, 'g', 'open');
+  let list = rows('zapytania').filter((z) => matchQ(id, z, ['nazwa', 'email', 'telefon', 'opis', 'kategoria']));
+  const head = `<div class="page-head"><div class="t"><h1>Zapytania</h1><span class="sub">Pierwszy kontakt: zgłoszenie → wstępna analiza → oferta → sprawa</span></div>
+    <div class="actions">${perm().admin ? '<button class="btn" data-act="import-www">' + ic('upload') + 'Pobierz zgłoszenia ze strony</button>' : ''}${perm().write ? `<button class="btn primary" data-act="new" data-t="zapytania">${ic('plus')}Nowe zapytanie</button>` : ''}</div></div>`;
+  const bar = `<div class="toolbar">${searchBox(id, 'Szukaj w zapytaniach…')}
+    <div class="seg"><button data-filt-set="${id}" data-key="mode" data-val="lejek" class="${mode === 'lejek' ? 'on' : ''}">Lejek</button><button data-filt-set="${id}" data-key="mode" data-val="lista" class="${mode === 'lista' ? 'on' : ''}">Lista</button></div>
+    ${mode === 'lista' ? filterSelect(id, 'g', [['open', 'W toku'], ['won', 'Przyjęte'], ['lost', 'Zamknięte bez zlecenia'], ['all', 'Wszystkie']], 'Status') : ''}</div>`;
+  if (mode === 'lejek') {
+    const open = list.filter((z) => zType(z) === 'open');
+    const firms = S.firm === 'all' ? myFirms() : [S.firm];
+    const cols = uniq([].concat(...firms.map((k) => dict(k, 'status_zapytania').filter((d) => d.t === 'open').map((d) => d.v))));
+    open.forEach((z) => { if (cols.indexOf(z.status) < 0) cols.push(z.status); });
+    const card = (z) => `<div class="card" data-go="zapytanie/${z.kancelaria}/${z.id}"><div class="r1">${firmTag(z.kancelaria)}<b>${esc(z.nazwa)}</b>${z.pilne ? chip('bad', 'pilne') : ''}</div>
+      ${z.opis ? `<div class="ds">${esc(z.opis)}</div>` : ''}<div class="r3">${z.kategoria ? chip('', esc(z.kategoria)) : ''}${slaChip(z)}</div></div>`;
+    const recent = list.filter((z) => zType(z) !== 'open').sort((a, b) => (a.zmieniono < b.zmieniono ? 1 : -1)).slice(0, 6);
+    return head + `<section class="panel">${bar}<div class="panel-b"><div class="board">${cols.map((c) => {
+      const items = open.filter((z) => z.status === c).sort((a, b) => ((a.termin_odpowiedzi || a.data_wplywu) < (b.termin_odpowiedzi || b.data_wplywu) ? -1 : 1));
+      return `<div class="col"><div class="col-h">${esc(c)}<span class="n">${items.length}</span></div><div class="col-b">${items.map(card).join('') || '<div class="empty small">pusto</div>'}</div></div>`;
+    }).join('')}</div></div></section>
+    ${recent.length ? `<section class="panel" style="margin-top:16px"><div class="panel-h"><h2>Ostatnio zamknięte</h2></div><ul class="rows">${recent.map((z) => `<li data-go="zapytanie/${z.kancelaria}/${z.id}">${firmTag(z.kancelaria)}<div class="main-txt"><b>${esc(z.nazwa)}</b><span>${esc(z.kategoria || '')}${z.powod ? ' · ' + esc(z.powod) : ''}</span></div>${statusChip('zapytania', z)}</li>`).join('')}</ul></section>` : ''}`;
+  }
+  if (grp !== 'all') list = list.filter((z) => zType(z) === grp);
+  const cols = [
+    { k: 'data_wplywu', l: 'Wpłynęło', v: (z) => `<span class="nowrap">${fmtDT(z.data_wplywu)}</span>` },
+    { k: 'nazwa', l: 'Kto', v: (z) => `${firmTag(z.kancelaria)} <b>${esc(z.nazwa)}</b><span class="sub">${esc(z.email || z.telefon || '')}</span>` },
+    { k: 'kategoria', l: 'Kategoria', cls: 'wrap', v: (z) => esc(z.kategoria) + (z.opis ? `<span class="sub">${esc(z.opis.slice(0, 110))}</span>` : '') },
+    { k: 'kanal', l: 'Kanał', cls: 'hide-m' },
+    { k: 'status', l: 'Status', v: (z) => statusChip('zapytania', z) + ' ' + slaChip(z) },
+    { k: 'opiekun', l: 'Prowadzi', cls: 'hide-m', v: (z) => esc(shortName(z.opiekun)) }
+  ];
+  return head + `<section class="panel">${bar}${tableHtml(id, cols, list, (z) => 'zapytanie/' + z.kancelaria + '/' + z.id, { sort: { k: 'data_wplywu', dir: 'desc' }, empty: 'Brak zapytań' })}</section>`;
+};
+
+/* ---------- Klienci ---------- */
+VIEWS.klienci = function () {
+  const id = 'kl';
+  const list = rows('klienci').filter((k) => matchQ(id, k, ['nazwa', 'email', 'telefon', 'identyfikator', 'adres']));
+  const cnt = {};
+  S.data.sprawy.forEach((s) => { const key = s.kancelaria + ':' + s.klient_id; cnt[key] = cnt[key] || [0, 0]; cnt[key][1]++; if (isOpenCase(s)) cnt[key][0]++; });
+  const cols = [
+    { k: 'nazwa', l: 'Klient', v: (k) => `${firmTag(k.kancelaria)} <b>${esc(k.nazwa)}</b><span class="sub">${esc(k.typ)}</span>` },
+    { k: 'email', l: 'Kontakt', v: (k) => `${esc(k.email)}<span class="sub">${esc(k.telefon)}</span>` },
+    { k: 'sprawy', l: 'Sprawy', s: (k) => (cnt[k.kancelaria + ':' + k.id] || [0, 0])[1], v: (k) => { const c = cnt[k.kancelaria + ':' + k.id]; return c ? `${c[0]} aktywne / ${c[1]}` : '<span class="muted">—</span>'; } },
+    { k: 'opiekun', l: 'Opiekun', cls: 'hide-m', v: (k) => esc(shortName(k.opiekun)) },
+    { k: 'zrodlo', l: 'Źródło', cls: 'hide-m' },
+    { k: 'utworzono', l: 'Dodany', cls: 'hide-m', v: (k) => fmtDate(k.utworzono) }
+  ];
+  return `<div class="page-head"><div class="t"><h1>Klienci</h1><span class="sub">${list.length} w widoku</span></div>
+    <div class="actions">${perm().write ? `<button class="btn primary" data-act="new" data-t="klienci">${ic('plus')}Nowy klient</button>` : ''}</div></div>
+    <section class="panel"><div class="toolbar">${searchBox(id, 'Nazwisko, e-mail, telefon, PESEL/NIP…')}</div>
+    ${tableHtml(id, cols, list, (k) => 'klient/' + k.kancelaria + '/' + k.id, { sort: { k: 'nazwa', dir: 'asc' }, empty: 'Brak klientów' })}</section>`;
+};
+
+/* ---------- Sprawy ---------- */
+VIEWS.sprawy = function () {
+  const id = 'sp', me = S.boot.email;
+  const g = fv(id, 'g', 'open'), who = fv(id, 'who', ''), kat = fv(id, 'kat', '');
+  let list = rows('sprawy').filter((s) => matchQ(id, s, ['numer', 'tytul', 'sygn_akt', 'organ', 'strona_przeciwna', (r) => clientName(r.kancelaria, r.klient_id)]));
+  if (g !== 'all') list = list.filter((s) => (g === 'open') === isOpenCase(s));
+  if (who === 'me') list = list.filter((s) => s.prowadzacy === me || String(s.zespol || '').indexOf(me) >= 0);
+  else if (who) list = list.filter((s) => s.prowadzacy === who);
+  if (kat) list = list.filter((s) => s.kategoria === kat);
+  const people = uniq(rows('sprawy').map((s) => s.prowadzacy).filter(Boolean)).map((e) => [e, shortName(e)]).sort((a, b) => (a[1] < b[1] ? -1 : 1));
+  const kats = uniq(rows('sprawy').map((s) => s.kategoria).filter(Boolean)).sort();
+  const numKey = (s) => (/^\d+$/.test(s.numer) ? ('00000' + s.numer).slice(-6) : 'Z' + s.numer);
+  const cols = [
+    { k: 'numer', l: 'Nr', s: numKey, v: (s) => `<span class="teczka">${esc(caseNo(s) || '—')}</span>` },
+    { k: 'tytul', l: 'Sprawa', cls: 'wrap', v: (s) => `${firmTag(s.kancelaria)} <b>${esc(s.tytul)}</b><span class="sub">${esc(clientName(s.kancelaria, s.klient_id))}${s.strona_przeciwna ? ' ⟷ ' + esc(s.strona_przeciwna) : ''}</span>` },
+    { k: 'sygn_akt', l: 'Sąd / sygnatura', cls: 'hide-m', v: (s) => (s.sygn_akt ? `<span class="mono">${esc(s.sygn_akt)}</span>` : '') + `<span class="sub">${esc(s.organ)}</span>` },
+    { k: 'prowadzacy', l: 'Prowadzi', v: (s) => esc(shortName(s.prowadzacy)) },
+    { k: 'status', l: 'Status', v: (s) => statusChip('sprawy', s) + (s.etap ? `<span class="sub">${esc(s.etap)}</span>` : '') },
+    { k: 'termin', l: 'Najbliższy termin', s: (s) => { const n = nextTerm(s); return n ? n.data : '9999'; }, v: (s) => { const n = nextTerm(s); return n ? `${chip(n.data < today() ? 'bad' : n.data <= SH.addDays(today(), 3) ? 'warn' : '', fmtDate(n.data))}<span class="sub">${esc(n.opis)}</span>` : ''; } }
+  ];
+  return `<div class="page-head"><div class="t"><h1>Sprawy</h1><span class="sub">${list.length} w widoku · numeracja teczek wspólna dla obu kancelarii</span></div>
+    <div class="actions">${perm().write ? `<button class="btn primary" data-act="new" data-t="sprawy">${ic('plus')}Nowa sprawa</button>` : ''}</div></div>
+    <section class="panel"><div class="toolbar">${searchBox(id, 'Nr teczki, klient, sygnatura, strona przeciwna…')}
+      ${filterSelect(id, 'g', [['open', 'W toku'], ['closed', 'Zakończone'], ['all', 'Wszystkie']], 'Status')}
+      ${filterSelect(id, 'who', [['', 'Wszyscy prowadzący'], ['me', 'Moje']].concat(people), 'Prowadzący')}
+      ${kats.length ? filterSelect(id, 'kat', [['', 'Wszystkie kategorie']].concat(kats.map((k) => [k, k])), 'Kategoria') : ''}</div>
+    ${tableHtml(id, cols, list, (s) => 'sprawa/' + s.kancelaria + '/' + s.id, { sort: { k: 'numer', dir: 'desc' }, empty: 'Brak spraw w tym widoku' })}</section>`;
+};
+
+/* ---------- Terminy + kalkulator ---------- */
+VIEWS.terminy = function () {
+  const id = 'te', me = S.boot.email, who = fv(id, 'who', ''), done = fv(id, 'done', '');
+  let list = rows('terminy').filter((t) => matchQ(id, t, ['opis', 'miejsce', 'typ', (r) => caseLabel(byId('sprawy', r.kancelaria, r.sprawa_id))]));
+  if (who === 'me') list = list.filter((t) => t.odpowiedzialny === me);
+  if (!done) list = list.filter((t) => t.status === 'Otwarty');
+  list.sort((a, b) => (a.data + a.godzina < b.data + b.godzina ? -1 : 1));
+  const groups = [['Zaległe', (t) => t.status === 'Otwarty' && t.data < today()], ['Dziś', (t) => t.data === today()], ['Jutro', (t) => t.data === SH.addDays(today(), 1)],
+    ['Najbliższe 7 dni', (t) => t.data > SH.addDays(today(), 1) && t.data <= SH.addDays(today(), 7)], ['Później', (t) => t.data > SH.addDays(today(), 7)], ['Wcześniejsze', (t) => t.data < today() && t.status !== 'Otwarty']];
+  const used = new Set();
+  const item = (t) => {
+    const s = byId('sprawy', t.kancelaria, t.sprawa_id), late = t.status === 'Otwarty' && t.data < today();
+    return `<li data-go="edit/terminy/${t.kancelaria}:${t.id}">${dateBox(t.data, late ? 'bad' : t.data <= SH.addDays(today(), 2) && t.status === 'Otwarty' ? 'warn' : '')}
+      <div class="main-txt"><b>${t.status === 'Wykonany' ? '<s>' + esc(t.opis) + '</s>' : esc(t.opis)}</b><span>${esc([fmtDate(t.data, true), t.godzina, t.typ, t.miejsce].filter(Boolean).join(' · '))}${s ? ` · <a href="#" data-go="sprawa/${s.kancelaria}/${s.id}">${esc(caseLabel(s))}</a>` : ''}</span></div>
+      ${firmTag(t.kancelaria)}<span class="small muted hide-m">${esc(shortName(t.odpowiedzialny))}</span>
+      ${t.status === 'Otwarty' && perm().write ? `<button class="btn sm" data-act="term-done" data-firm="${t.kancelaria}" data-id="${t.id}" title="Oznacz jako wykonany">${ic('check')}</button>` : ''}
+      <a class="btn sm ghost" href="${attr(calLink(t, s))}" target="_blank" rel="noopener" title="Dodaj do Kalendarza Google" data-stop="1">${ic('calendar')}</a></li>`;
+  };
+  const body = groups.map(([label, test]) => {
+    const g = list.filter((t) => !used.has(t) && test(t)); g.forEach((t) => used.add(t));
+    return g.length ? `<section class="panel"><div class="panel-h"><h2>${label}</h2><span class="muted">${g.length}</span></div><ul class="rows">${g.map(item).join('')}</ul></section>` : '';
+  }).join('');
+  return `<div class="page-head"><div class="t"><h1>Terminy</h1><span class="sub">Terminy procesowe, rozprawy, spotkania, przedawnienia</span></div>
+    <div class="actions">${perm().write ? `<button class="btn primary" data-act="new" data-t="terminy">${ic('plus')}Nowy termin</button>` : ''}</div></div>
+    <div class="grid-2"><div class="stack">
+      <div class="toolbar panel" style="border-radius:var(--r-lg)">${searchBox(id, 'Szukaj…')}${filterSelect(id, 'who', [['', 'Wszyscy'], ['me', 'Moje']], 'Kto')}
+        <label class="check small"><input type="checkbox" data-filt="${id}" data-key="done" ${done ? 'checked' : ''}> pokaż wykonane</label></div>
+      ${body || '<section class="panel"><div class="empty"><b>Brak terminów</b>Dodaj termin albo policz go kalkulatorem obok.</div></section>'}
+    </div><div class="stack">${calcPanel()}</div></div>`;
+};
+
+/* Kalkulator terminów: art. 111–115 KC (art. 165 § 1 KPC, art. 57 KPA, art. 83 PPSA). Pomocniczy. */
+const PRESETS = [
+  ['', 'Własny termin', 0, 'd'],
+  ['Apelacja (KPC) — 2 tyg. od doręczenia wyroku z uzasadnieniem', 'art. 369 § 1 KPC', 2, 'w'],
+  ['Zażalenie (KPC) — 1 tydz. od doręczenia postanowienia', 'art. 394 § 2 KPC', 1, 'w'],
+  ['Wniosek o uzasadnienie wyroku — 1 tydz.', 'art. 328 § 1 KPC', 1, 'w'],
+  ['Sprzeciw od nakazu zapłaty (upominawczy) — 2 tyg.', 'art. 505 § 1 KPC', 2, 'w'],
+  ['Zarzuty od nakazu zapłaty (nakazowy) — 2 tyg.', 'art. 491 § 1 KPC', 2, 'w'],
+  ['Sprzeciw od wyroku zaocznego — 2 tyg.', 'art. 344 § 2 KPC', 2, 'w'],
+  ['Uzupełnienie braków formalnych — 7 dni', 'art. 130 § 1 KPC', 7, 'd'],
+  ['Skarga kasacyjna do SN — 2 mies.', 'art. 398⁵ § 1 KPC', 2, 'm'],
+  ['Odwołanie od decyzji (KPA) — 14 dni', 'art. 129 § 2 KPA', 14, 'd'],
+  ['Zażalenie na postanowienie (KPA) — 7 dni', 'art. 141 § 2 KPA', 7, 'd'],
+  ['Skarga do WSA — 30 dni', 'art. 53 § 1 PPSA', 30, 'd'],
+  ['Skarga kasacyjna do NSA — 30 dni', 'art. 177 § 1 PPSA', 30, 'd']
+];
+function calcPanel(pre) {
+  pre = pre || {};
+  return `<section class="panel" id="calc"><div class="panel-h">${ic('calc')}<h2>Kalkulator terminu</h2></div><div class="panel-b">
+    <div class="form">
+      <div class="fld"><label for="c-start">Doręczenie / zdarzenie</label><input class="inp" type="date" id="c-start" value="${attr(pre.start || today())}"></div>
+      <div class="fld"><label for="c-preset">Rodzaj</label><select class="inp" id="c-preset">${PRESETS.map((p, i) => `<option value="${i}">${esc(p[0] || p[1])}</option>`).join('')}</select></div>
+      <div class="fld"><label for="c-n">Długość</label><input class="inp" type="number" min="1" id="c-n" value="14"></div>
+      <div class="fld"><label for="c-u">Jednostka</label><select class="inp" id="c-u"><option value="d">dni</option><option value="w">tygodnie</option><option value="m">miesiące</option><option value="y">lata</option></select></div>
+    </div>
+    <div id="c-out"></div>
+    <p class="note" style="margin-top:12px">Liczy według art. 111–112 i 115 KC: dzień doręczenia się nie liczy, a termin kończący się w sobotę lub święto przechodzi na następny dzień roboczy. Wynik jest pomocniczy: zawsze sprawdź datę doręczenia i przepis.</p>
+  </div></section>`;
+}
+function calcUpdate() {
+  const out = $('#c-out'); if (!out) return;
+  const r = SH.termEnd($('#c-start').value, $('#c-n').value, $('#c-u').value);
+  if (!r) { out.innerHTML = ''; return; }
+  const p = PRESETS[+$('#c-preset').value] || PRESETS[0];
+  const basis = (p[1] && p[0] ? p[1] + '; ' : '') + 'zdarzenie ' + fmtDate($('#c-start').value) + ' + ' + $('#c-n').value + ' ' + { d: 'dni', w: 'tydz.', m: 'mies.', y: 'lat' }[$('#c-u').value];
+  out.innerHTML = `<div class="calc-res"><div class="muted small">Ostatni dzień terminu</div><div class="big">${fmtDate(r.end, true)} <span class="mono small">${r.end}</span></div>
+    <ol>${r.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>
+    ${perm().write ? `<div style="margin-top:10px"><button class="btn sm primary" data-act="calc-save" data-end="${r.end}" data-basis="${attr(basis)}" data-label="${attr(p[0] ? p[0].split(' — ')[0] : 'Termin')}">${ic('plus')}Zapisz jako termin</button></div>` : ''}</div>`;
+}
+
+/* ---------- Korespondencja, czas pracy, umowy, rozliczenia ---------- */
+VIEWS.korespondencja = function () {
+  const id = 'ko', dir = fv(id, 'dir', ''), yr = fv(id, 'yr', today().slice(0, 4));
+  let list = rows('korespondencja').filter((r) => matchQ(id, r, ['nr', 'kontrahent', 'opis', 'nr_nadania', (x) => caseLabel(byId('sprawy', x.kancelaria, x.sprawa_id))]));
+  if (dir) list = list.filter((r) => r.kierunek === dir);
+  if (yr) list = list.filter((r) => String(r.data).slice(0, 4) === yr);
+  const years = uniq(rows('korespondencja').map((r) => String(r.data).slice(0, 4)).concat([today().slice(0, 4)])).sort().reverse();
+  const cols = [
+    { k: 'nr', l: 'Nr', v: (r) => `<span class="mono">${esc(r.nr)}</span>` },
+    { k: 'data', l: 'Data', v: (r) => `<span class="nowrap">${fmtDate(r.data)}</span>` },
+    { k: 'kierunek', l: 'Kier.', v: (r) => chip(r.kierunek === 'Przychodząca' ? 'info' : '', r.kierunek === 'Przychodząca' ? '↘ przych.' : '↗ wych.') },
+    { k: 'kontrahent', l: 'Nadawca / adresat', cls: 'wrap', v: (r) => `${firmTag(r.kancelaria)} <b>${esc(r.kontrahent)}</b><span class="sub">${esc(r.opis)}</span>` },
+    { k: 'sprawa', l: 'Sprawa', cls: 'hide-m', s: (r) => caseLabel(byId('sprawy', r.kancelaria, r.sprawa_id)), v: (r) => esc(caseLabel(byId('sprawy', r.kancelaria, r.sprawa_id))) },
+    { k: 'sposob', l: 'Doręczenie', cls: 'hide-m', v: (r) => esc(r.sposob) + (r.data_doreczenia ? `<span class="sub">dor. ${fmtDate(r.data_doreczenia)}</span>` : '') }
+  ];
+  return `<div class="page-head"><div class="t"><h1>Rejestr korespondencji</h1><span class="sub">Pisma przychodzące i wychodzące, numeracja P/RRRR/NNN i W/RRRR/NNN</span></div>
+    <div class="actions">${perm().write ? `<button class="btn primary" data-act="new" data-t="korespondencja">${ic('plus')}Nowe pismo</button>` : ''}</div></div>
+    <section class="panel"><div class="toolbar">${searchBox(id)}${filterSelect(id, 'dir', [['', 'Oba kierunki'], ['Przychodząca', 'Przychodzące'], ['Wychodząca', 'Wychodzące']], 'Kierunek')}
+      ${filterSelect(id, 'yr', [['', 'Wszystkie lata']].concat(years.map((y) => [y, y])), 'Rok')}</div>
+    ${tableHtml(id, cols, list, (r) => 'edit/korespondencja/' + r.kancelaria + ':' + r.id, { sort: { k: 'nr', dir: 'desc' }, empty: 'Brak pism w rejestrze' })}</section>`;
+};
+
+VIEWS.czas = function () {
+  const id = 'cz', me = S.boot.email, who = fv(id, 'who', 'me'), mon = fv(id, 'mon', today().slice(0, 7)), roz = fv(id, 'roz', '');
+  let list = rows('czynnosci').filter((r) => matchQ(id, r, ['opis', (x) => caseLabel(byId('sprawy', x.kancelaria, x.sprawa_id)), (x) => clientName(x.kancelaria, (byId('sprawy', x.kancelaria, x.sprawa_id) || {}).klient_id)]));
+  if (who === 'me') list = list.filter((r) => r.osoba === me); else if (who) list = list.filter((r) => r.osoba === who);
+  if (mon) list = list.filter((r) => String(r.data).slice(0, 7) === mon);
+  if (roz) list = list.filter((r) => r.rozliczone === roz);
+  const months = uniq(rows('czynnosci').map((r) => String(r.data).slice(0, 7)).concat([today().slice(0, 7)])).sort().reverse();
+  const people = uniq(rows('czynnosci').map((r) => r.osoba).filter(Boolean)).map((e) => [e, shortName(e)]);
+  const value = list.reduce((a, r) => { const s = byId('sprawy', r.kancelaria, r.sprawa_id); return a + (+r.czas || 0) * (+(s && s.stawka) || 0); }, 0);
+  const cols = [
+    { k: 'data', l: 'Data', v: (r) => `<span class="nowrap">${fmtDate(r.data)}</span>` },
+    { k: 'opis', l: 'Czynność', cls: 'wrap', v: (r) => `<b>${esc(r.opis)}</b><span class="sub">${firmTag(r.kancelaria)} ${esc(caseLabel(byId('sprawy', r.kancelaria, r.sprawa_id)))}</span>` },
+    { k: 'czas', l: 'Czas', s: (r) => +r.czas, v: (r) => `<span class="num">${hrs(r.czas)}</span>` },
+    { k: 'osoba', l: 'Kto', cls: 'hide-m', v: (r) => esc(shortName(r.osoba)) },
+    { k: 'rozliczone', l: 'Rozliczone', v: (r) => chip(r.rozliczone === 'tak' ? 'ok' : r.rozliczone === 'nie' ? 'warn' : '', esc(r.rozliczone)) }
+  ];
+  return `<div class="page-head"><div class="t"><h1>Czas pracy</h1><span class="sub">Ewidencja czynności do rozliczeń godzinowych (wcześniej: arkusze „Rozliczenie godzinowe”)</span></div>
+    <div class="actions">${perm().write ? `<button class="btn primary" data-act="new" data-t="czynnosci">${ic('plus')}Dodaj czynność</button>` : ''}</div></div>
+    <section class="panel"><div class="toolbar">${searchBox(id, 'Czynność, sprawa, klient…')}
+      ${filterSelect(id, 'who', [['me', 'Moje'], ['', 'Wszyscy']].concat(people.filter((p) => p[0] !== me)), 'Kto')}
+      ${filterSelect(id, 'mon', [['', 'Cały okres']].concat(months.map((m) => [m, fmtDate(m + '-01').replace(/^1 /, '')])), 'Miesiąc')}
+      ${filterSelect(id, 'roz', [['', 'Wszystkie'], ['nie', 'Nierozliczone'], ['tak', 'Rozliczone']], 'Rozliczenie')}
+      <span class="info">${hrs(sum(list, 'czas'))}${value ? ' · wartość wg stawek ' + money(value) : ''}</span></div>
+    ${tableHtml(id, cols, list, (r) => 'edit/czynnosci/' + r.kancelaria + ':' + r.id, { sort: { k: 'data', dir: 'desc' }, empty: 'Brak czynności w tym okresie', foot: `<td></td><td>Razem</td><td class="num">${hrs(sum(list, 'czas'))}</td><td class="hide-m"></td><td></td>` })}</section>`;
+};
+
+VIEWS.umowy = function () {
+  const id = 'um', yr = fv(id, 'yr', ''), roz = fv(id, 'roz', '');
+  let list = rows('umowy').filter((r) => matchQ(id, r, ['nr', 'przedmiot', (x) => clientName(x.kancelaria, x.klient_id)]));
+  if (yr) list = list.filter((r) => String(r.nr).slice(-4) === yr || String(r.data_zawarcia).slice(0, 4) === yr);
+  if (roz) list = list.filter((r) => r.rozliczone === roz);
+  const years = uniq(rows('umowy').map((r) => String(r.data_zawarcia).slice(0, 4)).filter(Boolean)).sort().reverse();
+  const nrKey = (r) => { const m = /^(\d+)\/(\d{4})$/.exec(r.nr || ''); return m ? m[2] + ('0000' + m[1]).slice(-4) : String(r.data_zawarcia); };
+  const cols = [
+    { k: 'nr', l: 'L.p.', s: nrKey, v: (r) => `<span class="mono">${esc(r.nr)}</span>` },
+    { k: 'data_zawarcia', l: 'Zawarta', v: (r) => `<span class="nowrap">${fmtDate(r.data_zawarcia)}</span>` },
+    { k: 'klient', l: 'Klient / strona', s: (r) => clientName(r.kancelaria, r.klient_id), v: (r) => `${firmTag(r.kancelaria)} <b>${esc(clientName(r.kancelaria, r.klient_id))}</b>` },
+    { k: 'przedmiot', l: 'Przedmiot', cls: 'wrap' },
+    { k: 'model', l: 'Rozliczenie', v: (r) => esc(r.model) + (r.godziny ? ` · ${esc(r.godziny)} h` : '') + (r.kwota ? `<span class="sub">${money(r.kwota)}</span>` : '') },
+    { k: 'rozliczone', l: 'Rozliczone', v: (r) => chip(r.rozliczone === 'tak' ? 'ok' : r.rozliczone === 'nie' ? 'warn' : 'info', esc(r.rozliczone)) }
+  ];
+  return `<div class="page-head"><div class="t"><h1>Rejestr umów</h1><span class="sub">Umowy o świadczenie pomocy prawnej · numeracja NN/RRRR wspólna dla obu kancelarii</span></div>
+    <div class="actions">${perm().write ? `<button class="btn primary" data-act="new" data-t="umowy">${ic('plus')}Nowa umowa</button>` : ''}</div></div>
+    <section class="panel"><div class="toolbar">${searchBox(id)}${filterSelect(id, 'yr', [['', 'Wszystkie lata']].concat(years.map((y) => [y, y])), 'Rok')}
+      ${filterSelect(id, 'roz', [['', 'Rozliczone: wszystkie']].concat(uniq([].concat(...myFirms().map((k) => dict(k, 'rozliczone').map((d) => d.v)))).map((v) => [v, v])), 'Rozliczone')}</div>
+    ${tableHtml(id, cols, list, (r) => 'edit/umowy/' + r.kancelaria + ':' + r.id, { sort: { k: 'nr', dir: 'desc' }, empty: 'Rejestr umów jest pusty', emptyHint: perm().admin ? '<br>Zaimportuj „Rejestr Umów” w menu Import rejestrów.' : '' })}</section>`;
+};
+
+VIEWS.rozliczenia = function () {
+  const id = 'ro', st = fv(id, 'st', '');
+  let list = rows('rozliczenia').filter((r) => matchQ(id, r, ['numer', 'typ', 'notatki', (x) => caseLabel(byId('sprawy', x.kancelaria, x.sprawa_id))]));
+  if (st) list = list.filter((r) => r.status === st);
+  const all = rows('rozliczenia');
+  const toIssue = all.filter((r) => r.status === 'Do wystawienia'), unpaid = all.filter((r) => r.status === 'Wystawiona' || r.status === 'Zaległa');
+  const overdue = unpaid.filter((r) => r.termin_platnosci && r.termin_platnosci < today());
+  const unbilled = rows('czynnosci').filter((c) => c.rozliczone === 'nie');
+  const unbilledVal = unbilled.reduce((a, c) => { const s = byId('sprawy', c.kancelaria, c.sprawa_id); return a + (+c.czas || 0) * (+(s && s.stawka) || 0); }, 0);
+  const cols = [
+    { k: 'data', l: 'Data', v: (r) => `<span class="nowrap">${fmtDate(r.data)}</span>` },
+    { k: 'typ', l: 'Typ', v: (r) => esc(r.typ) + (r.numer ? `<span class="sub mono">${esc(r.numer)}</span>` : '') },
+    { k: 'sprawa', l: 'Sprawa', cls: 'wrap', s: (r) => caseLabel(byId('sprawy', r.kancelaria, r.sprawa_id)), v: (r) => { const s = byId('sprawy', r.kancelaria, r.sprawa_id); return `${firmTag(r.kancelaria)} ${esc(caseLabel(s))}<span class="sub">${esc(s ? clientName(s.kancelaria, s.klient_id) : '')}</span>`; } },
+    { k: 'kwota', l: 'Kwota', s: (r) => +r.kwota, v: (r) => `<span class="num">${money(r.kwota)}</span>` },
+    { k: 'status', l: 'Status', v: (r) => statusChip('rozliczenia', r) + (r.termin_platnosci ? `<span class="sub">płatne do ${fmtDate(r.termin_platnosci)}</span>` : '') }
+  ];
+  const stat = (k, v, d, alert) => `<div class="stat${alert ? ' alert' : ''}"><span class="k">${k}</span><span class="v">${v}</span><span class="d">${d}</span></div>`;
+  return `<div class="page-head"><div class="t"><h1>Rozliczenia</h1><span class="sub">Zaliczki, faktury (Fakturownia / KSeF) i wpłaty przypisane do spraw</span></div>
+    <div class="actions">${perm().write ? `<button class="btn primary" data-act="new" data-t="rozliczenia">${ic('plus')}Dodaj pozycję</button>` : ''}</div></div>
+    <div class="stats">${stat('Do wystawienia', money(sum(toIssue, 'kwota')) || '0 zł', toIssue.length + ' pozycji')}
+      ${stat('Wystawione, nieopłacone', money(sum(unpaid, 'kwota')) || '0 zł', overdue.length ? `<b style="color:var(--bad)">${overdue.length} po terminie</b>` : unpaid.length + ' pozycji', overdue.length > 0)}
+      ${stat('Godziny nierozliczone', hrs(sum(unbilled, 'czas')), unbilledVal ? 'ok. ' + money(unbilledVal) + ' wg stawek' : 'brak stawek')}
+      ${stat('Opłacone w tym miesiącu', money(sum(all.filter((r) => r.status === 'Opłacona' && String(r.data).slice(0, 7) === today().slice(0, 7)), 'kwota')) || '0 zł', fmtDate(today().slice(0, 7) + '-01').replace(/^1 /, ''))}</div>
+    <section class="panel"><div class="toolbar">${searchBox(id)}${filterSelect(id, 'st', [['', 'Wszystkie statusy'], ['Do wystawienia', 'Do wystawienia'], ['Wystawiona', 'Wystawione'], ['Zaległa', 'Zaległe'], ['Opłacona', 'Opłacone']], 'Status')}</div>
+    ${tableHtml(id, cols, list, (r) => 'edit/rozliczenia/' + r.kancelaria + ':' + r.id, { sort: { k: 'data', dir: 'desc' }, empty: 'Brak rozliczeń' })}</section>`;
+};
+
+/* „edit/tabela/KOD:id” — szybka edycja z listy (pozycje bez własnej karty). */
+VIEWS.edit = function (t, key) {
+  const [firm, id] = String(key || '').split(':');
+  const r = byId(t, firm, id);
+  setTimeout(() => { if (r) openForm(t, r); }, 0);
+  S.route = ({ korespondencja: 'korespondencja', czynnosci: 'czas', umowy: 'umowy', rozliczenia: 'rozliczenia', terminy: 'terminy' })[t] || 'pulpit';
+  return VIEWS[S.route]();
+};
+
+/* ---------- Konflikt interesów ---------- */
+function conflictHits(query, exclude) {
+  const words = norm(query).replace(/[^a-z0-9@. ]/g, ' ').split(/\s+/).filter((w) => w.length > 1);
+  if (!words.length) return [];
+  const hit = (txt) => { const h = norm(txt); return words.every((w) => h.indexOf(w) >= 0); };
+  const out = [];
+  S.data.klienci.forEach((k) => { if (k !== exclude && hit([k.nazwa, k.email, k.identyfikator, k.telefon].join(' '))) out.push({ role: 'Klient', cls: 'info', r: k, go: 'klient/' + k.kancelaria + '/' + k.id, label: k.nazwa, sub: [k.email, k.identyfikator].filter(Boolean).join(' · ') }); });
+  S.data.sprawy.forEach((s) => { if (s.strona_przeciwna && hit(s.strona_przeciwna)) out.push({ role: 'Strona przeciwna', cls: 'bad', r: s, go: 'sprawa/' + s.kancelaria + '/' + s.id, label: s.strona_przeciwna, sub: caseLabel(s) + ' — klient: ' + clientName(s.kancelaria, s.klient_id) }); });
+  S.data.zapytania.forEach((z) => { if (z !== exclude && hit([z.nazwa, z.email].join(' '))) out.push({ role: 'Zapytanie', cls: '', r: z, go: 'zapytanie/' + z.kancelaria + '/' + z.id, label: z.nazwa, sub: (z.kategoria || '') + ' · ' + z.status }); });
+  return out;
+}
+VIEWS.konflikt = function () {
+  const q = fv('kf', 'q', '');
+  const hits = q ? conflictHits(q) : [];
+  return `<div class="page-head"><div class="t"><h1>Konflikt interesów</h1><span class="sub">Przeszukuje klientów, strony przeciwne w sprawach i zapytania${myFirms().length > 1 ? ' w obu kancelariach' : ''}</span></div></div>
+    <section class="panel"><div class="panel-b"><div class="fld"><label for="kf-q">Imię i nazwisko, nazwa firmy, PESEL/NIP albo e-mail</label>
+      <input class="inp" id="kf-q" type="search" data-filt="kf" data-key="q" value="${attr(q)}" placeholder="np. Kowalski Jan" style="font-size:16px"></div>
+      <p class="note" style="margin-top:10px">Wyszukiwanie obejmuje tylko kancelarie, do których masz dostęp, i tylko dane wpisane do CRM. Trafienie „Strona przeciwna” wymaga decyzji przed przyjęciem sprawy.</p></div>
+      ${q ? (hits.length ? `<ul class="rows">${hits.map((h) => `<li data-go="${h.go}">${chip(h.cls, h.role)}${firmTag(h.r.kancelaria)}<div class="main-txt"><b>${esc(h.label)}</b><span>${esc(h.sub)}</span></div></li>`).join('')}</ul>` : `<div class="empty"><b>Brak trafień dla „${esc(q)}”</b>W bazie nie ma klienta, strony przeciwnej ani zapytania o tej nazwie.</div>`) : ''}
+    </section>`;
+};
+
+/* ---------- Wyszukiwarka globalna ---------- */
+function globalResults(q) {
+  const w = norm(q).split(/\s+/).filter(Boolean);
+  if (!w.length) return [];
+  const ok = (txt) => { const h = norm(txt); return w.every((x) => h.indexOf(x) >= 0); };
+  const res = [];
+  rows('sprawy').forEach((s) => { if (ok([s.numer, caseNo(s), s.tytul, s.sygn_akt, clientName(s.kancelaria, s.klient_id), s.strona_przeciwna].join(' '))) res.push(['Sprawy', 'sprawa/' + s.kancelaria + '/' + s.id, caseLabel(s), clientName(s.kancelaria, s.klient_id) + (s.sygn_akt ? ' · ' + s.sygn_akt : ''), s.kancelaria]); });
+  rows('klienci').forEach((k) => { if (ok([k.nazwa, k.email, k.telefon, k.identyfikator].join(' '))) res.push(['Klienci', 'klient/' + k.kancelaria + '/' + k.id, k.nazwa, k.email || k.telefon, k.kancelaria]); });
+  rows('zapytania').forEach((z) => { if (ok([z.nazwa, z.email, z.telefon, z.opis].join(' '))) res.push(['Zapytania', 'zapytanie/' + z.kancelaria + '/' + z.id, z.nazwa, z.status + ' · ' + fmtDate(z.data_wplywu), z.kancelaria]); });
+  return res.slice(0, 30);
+}
+function renderSearch(q) {
+  const box = $('.search-res'); if (!box) return;
+  const res = globalResults(q);
+  if (!q.trim()) { box.hidden = true; return; }
+  let html = '', last = '';
+  res.forEach((r, i) => {
+    if (r[0] !== last) { html += `<div class="grp">${r[0]}</div>`; last = r[0]; }
+    html += `<a href="#${attr(r[1])}" data-go="${attr(r[1])}" class="${i === 0 ? 'sel' : ''}">${firmTag(r[4])}<span><b>${esc(r[2])}</b> <span class="muted small">${esc(r[3] || '')}</span></span></a>`;
+  });
+  box.innerHTML = html || '<div class="empty small">Brak wyników</div>';
+  box.hidden = false;
+}
+
+/* ---------- Formularze ze schematu ---------- */
+function defaultsFor(t, firm) {
+  const o = {}, f = firmOf(firm);
+  fieldsOf(t).forEach((fd) => {
+    const d = fd.def;
+    if (d === undefined) return;
+    if (d === '@now') o[fd.k] = S.now;
+    else if (d === '@today') o[fd.k] = today();
+    else if (d === '@me') o[fd.k] = teamFor(firm).some((m) => m.email === S.boot.email) ? S.boot.email : '';
+    else if (d === '@stawka') o[fd.k] = f.stawka || '';
+    else if (d === '@first') o[fd.k] = fd.dict ? ((dict(firm, fd.dict)[0] || {}).v || '') : (fd.opts || [])[0] || '';
+    else o[fd.k] = d;
+  });
+  return o;
+}
+function visibleFields(t, firm, isNew) {
+  const model = firmOf(firm).model;
+  return fieldsOf(t).filter((fd) => !fd.hidden && (!fd.model || fd.model === model) && (!fd.auto || !isNew));
+}
+function inputHtml(t, fd, v, firm) {
+  const n = attr(fd.k), val = attr(v || ''), id = 'f-' + n;
+  const req = fd.req ? ' required' : '';
+  if (fd.auto) return `<input class="inp" id="${id}" value="${attr(fd.t === 'datetime' ? fmtDT(v) : v)}" disabled>`;
+  switch (fd.t) {
+    case 'textarea': return `<textarea class="inp" id="${id}" name="${n}"${req}>${esc(v)}</textarea>`;
+    case 'money': case 'number': return `<input class="inp" id="${id}" name="${n}" type="number" inputmode="decimal" step="${fd.step || '0.01'}" value="${val}"${req}>`;
+    case 'date': return `<input class="inp" id="${id}" name="${n}" type="date" value="${val}"${req}>`;
+    case 'datetime': return `<input class="inp" id="${id}" name="${n}" type="datetime-local" value="${attr(String(v || '').slice(0, 16))}"${req}>`;
+    case 'time': return `<input class="inp" id="${id}" name="${n}" type="time" value="${val}">`;
+    case 'check': return `<label class="check"><input type="checkbox" id="${id}" name="${n}" ${v ? 'checked' : ''}> tak</label>`;
+    case 'email': case 'tel': case 'url': return `<input class="inp" id="${id}" name="${n}" type="${fd.t}" value="${val}"${req}${fd.t === 'url' ? ' placeholder="https://"' : ''}>`;
+    case 'select': {
+      const opts = fd.dict ? dict(firm, fd.dict).map((d) => d.v) : (fd.opts || []);
+      if (v && opts.indexOf(v) < 0) opts.push(v);
+      return `<select class="inp" id="${id}" name="${n}"${req}>${fd.req ? '' : '<option value=""></option>'}${opts.map((o) => `<option${o === v ? ' selected' : ''}>${esc(o)}</option>`).join('')}</select>`;
+    }
+    case 'user': {
+      const team = teamFor(firm);
+      if (v && !team.some((m) => m.email === v)) team.push({ email: v, imie_nazwisko: v });
+      return `<select class="inp" id="${id}" name="${n}"${req}><option value=""></option>${team.map((m) => `<option value="${attr(m.email)}"${m.email === v ? ' selected' : ''}>${esc(m.imie_nazwisko)}</option>`).join('')}</select>`;
+    }
+    case 'users': {
+      const sel = String(v || '').split(',');
+      return `<div class="checks" data-users="${n}">${teamFor(firm).map((m) => `<label><input type="checkbox" value="${attr(m.email)}" ${sel.indexOf(m.email) >= 0 ? 'checked' : ''}> ${esc(m.imie_nazwisko)}</label>`).join('')}</div>`;
+    }
+    case 'ref': {
+      const r = byId(fd.ref, firm, v);
+      return `<div class="combo" data-ref="${attr(fd.ref)}" data-name="${n}"><input class="inp combo-q" id="${id}" type="text" value="${attr(refLabel(fd.ref, r))}" placeholder="Zacznij pisać…" autocomplete="off"${req}><input type="hidden" name="${n}" value="${attr(r ? v : '')}"><div class="combo-list" hidden></div></div>`;
+    }
+    default: return `<input class="inp" id="${id}" name="${n}" type="text" value="${val}"${req}>`;
+  }
+}
+function formHtml(st) {
+  const t = st.table, T = TB()[t];
+  const firms = myFirms();
+  const title = st.isNew ? 'Nowy: ' + T.one : T.one.charAt(0).toUpperCase() + T.one.slice(1) + (st.values[T.title] ? ': ' + st.values[T.title] : '');
+  const flds = visibleFields(t, st.firm, st.isNew).map((fd) => `<div class="fld${fd.wide || fd.t === 'users' ? ' wide' : ''}"><label for="f-${attr(fd.k)}">${esc(fd.l)}${fd.req && !fd.auto ? ' <span class="req">*</span>' : ''}</label>${inputHtml(t, fd, st.values[fd.k], st.firm)}${fd.help ? `<span class="help">${esc(fd.help)}</span>` : ''}</div>`).join('');
+  const firmSel = st.isNew && firms.length > 1
+    ? `<div class="fld wide"><label for="f-firm">Kancelaria</label><select class="inp" id="f-firm" data-act-change="form-firm">${firms.map((k) => `<option value="${attr(k)}"${k === st.firm ? ' selected' : ''}>${esc(firmOf(k).nazwa_krotka)}</option>`).join('')}</select></div>`
+    : `<div class="fld wide"><span class="small muted">${firmTag(st.firm)} ${esc(firmOf(st.firm).nazwa_krotka)}${st.values.utworzono ? ' · dodał(a) ' + esc(shortName(st.values.utworzyl)) + ' ' + fmtDate(st.values.utworzono) : ''}</span></div>`;
+  return `<form class="modal" id="frm" novalidate><div class="modal-h"><h2>${esc(title)}</h2><button type="button" class="icon-btn" data-act="close" aria-label="Zamknij">${ic('x')}</button></div>
+    <div class="modal-b"><div class="form">${firmSel}${flds}</div></div>
+    <div class="modal-f">${!st.isNew && perm().del ? `<button type="button" class="btn danger left" data-act="delete" data-t="${t}" data-firm="${attr(st.firm)}" data-id="${attr(st.values.id)}">${ic('trash')}Usuń</button>` : ''}
+      <button type="button" class="btn" data-act="close">Anuluj</button>${perm().write ? '<button type="submit" class="btn primary">Zapisz</button>' : ''}</div></form>`;
+}
+function openForm(t, rec, opts) {
+  opts = opts || {};
+  if (!perm().write && (!rec || !rec.id)) return;
+  const isNew = !rec || !rec.id;
+  const firm = (rec && rec.kancelaria) || opts.firm || defaultFirm();
+  const values = Object.assign({}, isNew ? defaultsFor(t, firm) : {}, opts.prefill || {}, rec || {});
+  const st = { table: t, isNew, firm, values, opts, ver: rec && rec.zmieniono };
+  openModal(formHtml(st));
+  S.form = st;
+}
+function readForm() {
+  const st = S.form, f = $('#frm'), out = {};
+  visibleFields(st.table, st.firm, st.isNew).forEach((fd) => {
+    if (fd.auto) return;
+    if (fd.t === 'users') { out[fd.k] = $$(`[data-users="${fd.k}"] input:checked`, f).map((x) => x.value).join(','); return; }
+    const el = f.elements[fd.k];
+    if (!el) return;
+    if (fd.t === 'check') out[fd.k] = el.checked ? 'tak' : '';
+    else out[fd.k] = el.value;
+    if (fd.t === 'ref') out['_q_' + fd.k] = $(`.combo[data-name="${fd.k}"] .combo-q`, f).value.trim();
+  });
+  return out;
+}
+async function submitForm(btn) {
+  const st = S.form, f = $('#frm');
+  const vals = readForm();
+  let bad = null;
+  visibleFields(st.table, st.firm, st.isNew).forEach((fd) => {
+    if (fd.auto || !fd.req) return;
+    const ok = fd.t === 'ref' ? (vals[fd.k] || (fd.ref === 'klienci' && vals['_q_' + fd.k])) : String(vals[fd.k] || '').trim();
+    const el = f.querySelector('#f-' + fd.k);
+    if (el) el.classList.toggle('err', !ok);
+    if (!ok && !bad) bad = fd;
+  });
+  if (bad) { toast('Uzupełnij pole „' + bad.l + '”.', true); const el = f.querySelector('#f-' + bad.k); if (el) el.focus(); return; }
+  await busy(btn, async () => {
+    for (const fd of fieldsOf(st.table)) {
+      if (fd.t === 'ref' && fd.ref === 'klienci' && !vals[fd.k] && vals['_q_' + fd.k]) {
+        const k = await call('apiSave', 'klienci', { kancelaria: st.firm, nazwa: vals['_q_' + fd.k] });
+        upsert('klienci', k);
+        vals[fd.k] = k.id;
+      }
+    }
+    Object.keys(vals).forEach((k) => { if (k.indexOf('_q_') === 0) delete vals[k]; });
+    const payload = Object.assign({}, vals, { kancelaria: st.firm });
+    if (!st.isNew) { payload.id = st.values.id; payload._ver = st.ver; }
+    const saved = await call('apiSave', st.table, payload);
+    upsert(st.table, saved);
+    const after = st.opts && st.opts.after;
+    closeModal();
+    toast(st.isNew ? 'Dodano: ' + TB()[st.table].one : 'Zapisano zmiany');
+    if (after) after(saved); else render();
+  });
+}
+function comboUpdate(input, showAll) {
+  const box = input.closest('.combo'), list = $('.combo-list', box), t = box.dataset.ref, firm = S.form ? S.form.firm : defaultFirm();
+  const q = norm(input.value).trim();
+  const hidden = $('input[type=hidden]', box);
+  const cur = byId(t, firm, hidden.value);
+  if (cur && refLabel(t, cur) !== input.value) hidden.value = '';
+  const cands = S.data[t].filter((r) => r.kancelaria === firm && (showAll || !q || norm(refLabel(t, r)).indexOf(q) >= 0))
+    .sort((a, b) => (refLabel(t, a) < refLabel(t, b) ? -1 : 1)).slice(0, 40);
+  let html = cands.map((r) => `<div data-pick="${attr(r.id)}">${esc(refLabel(t, r))}${t === 'klienci' && (r.email || r.telefon) ? `<span class="sub">${esc(r.email || r.telefon)}</span>` : ''}</div>`).join('');
+  if (t === 'klienci' && q && !cands.some((r) => norm(r.nazwa) === q)) html += `<div class="new" data-pick="">＋ Nowy klient: „${esc(input.value.trim())}” (zapisze się razem z formularzem)</div>`;
+  list.innerHTML = html || '<div class="muted">Brak pasujących</div>';
+  list.hidden = false;
+}
+
+/* ---------- Linki do Gmaila i Kalendarza ---------- */
+function gmailCompose(to, subject, body) {
+  return 'https://mail.google.com/mail/?authuser=' + encodeURIComponent(S.boot.email) + '&view=cm&fs=1&to=' + encodeURIComponent(to || '') +
+    '&su=' + encodeURIComponent(subject || '') + '&body=' + encodeURIComponent(body || '');
+}
+function calLink(t, s) {
+  const d = String(t.data).replace(/-/g, '');
+  let dates;
+  if (t.godzina) {
+    const [h, m] = t.godzina.split(':').map(Number), end = h * 60 + m + 60;
+    dates = d + 'T' + t.godzina.replace(':', '') + '00/' + d + 'T' + SH.pad(Math.floor(end / 60) % 24) + SH.pad(end % 60) + '00';
+  } else dates = d + '/' + SH.addDays(t.data, 1).replace(/-/g, '');
+  const title = (t.typ === 'Termin procesowy' ? 'TERMIN – ' : '') + t.opis + (s ? ' – ' + caseLabel(s) : '');
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE&authuser=' + encodeURIComponent(S.boot.email) + '&text=' + encodeURIComponent(title) +
+    '&dates=' + dates + '&ctz=Europe/Warsaw&location=' + encodeURIComponent(t.miejsce || '') + '&details=' + encodeURIComponent([t.podstawa, t.notatki, s && s.sygn_akt ? 'Sygn. ' + s.sygn_akt : ''].filter(Boolean).join('\n'));
+}
+</script>

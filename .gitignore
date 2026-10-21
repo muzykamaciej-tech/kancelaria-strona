@@ -2,3 +2,7 @@
 .check/
 node_modules/
 .dist-build/
+crm/demo/
+crm/dev/out/
+crm/.clasp.json
+crm/.deployment-id

@@ -56,3 +56,12 @@ Potem commit razem z `dist/`. Najpierw push na gałąź roboczą (podgląd), a n
 | `scripts/check.mjs` | canonical, JSON-LD, linki, osiągalność, 404, stare `#/`; `--visual` porównuje zrzuty z produkcją |
 | `scripts/serve.mjs` | lokalny podgląd: `node scripts/serve.mjs dist 4173` |
 | `scripts/verify-dist.mjs` | krok „build” na Vercel: blokuje nieaktualny `dist/` |
+
+## CRM kancelarii (`crm/`)
+
+Osobna aplikacja Google Apps Script dla obu kancelarii (KN i KR). Nie wchodzi do builda strony ani do `dist/`. Dane klientów są w Arkuszach na Dysku, nigdy w repozytorium (jest publiczne).
+
+- Kod: `crm/src/`. Schemat danych to `Konfiguracja.js`; formularze i karty budują się z niego.
+- Po zmianie uruchom `node crm/dev/test-server.mjs` i `node crm/dev/build-demo.mjs && node crm/dev/test-ui.mjs`. Oba muszą dać `fail 0`.
+- Wdrożenie: `bash crm/wdroz.sh` (clasp; adres aplikacji się nie zmienia). Szczegóły: `crm/README.md`.
+
