@@ -243,7 +243,16 @@ function apiImportCommit(kind, items) {
       var existing = readTables_(ss, ['klienci', 'sprawy', 'zapytania', 'umowy', 'terminy', 'zadania']);
       var clients = {}, seen = {}, updated = 0;
       existing.klienci.forEach(function (k) { clients[normName_(k.nazwa)] = k; });
-      ['sprawy', 'zapytania', 'umowy', 'terminy', 'zadania'].forEach(function (t) { existing[t].forEach(function (r) { if (r.zrodlo_id) seen[r.zrodlo_id] = { table: t, rec: r }; }); });
+      /* zrodlo_id może mieć kilka identyfikatorów (scalone duplikaty z kalendarza), rozdzielonych spacją. */
+      ['sprawy', 'zapytania', 'umowy', 'terminy', 'zadania'].forEach(function (t) {
+        existing[t].forEach(function (r) { String(r.zrodlo_id || '').split(/\s+/).forEach(function (z) { if (z) seen[z] = { table: t, rec: r }; }); });
+      });
+      /* Rekord usunięty w CRM nie wraca przy ponownym imporcie: jego zrodlo_id jest w Historii („usunięcie”). */
+      var hs = ss.getSheetByName(HISTORY_SHEET);
+      if (hs) readSheet_(hs).forEach(function (h) {
+        if (h.akcja !== 'usunięcie' || String(h.zmiany).indexOf('zrodlo_id') < 0) return;
+        try { String(JSON.parse(h.zmiany).zrodlo_id || '').split(/\s+/).forEach(function (z) { if (z && !seen[z]) seen[z] = { table: h.tabela, rec: {} }; }); } catch (e) { /* stary wpis */ }
+      });
       var newClients = [], recs = { sprawy: [], zapytania: [], umowy: [], terminy: [], zadania: [] }, skipped = 0;
       /* Numery wierszy po id: jeden odczyt kolumny na arkusz, także przy setkach zmian. */
       var rowMaps = {};
@@ -273,17 +282,35 @@ function apiImportCommit(kind, items) {
       var syncTerm = function (old, rec) {
         if (old.status !== 'Otwarty' && old.status !== 'Do weryfikacji') return false;
         var ch = {};
-        if (rec.status === 'Wykonany' || rec.status === 'Nieaktualny') ch.status = rec.status;
+        /* Status z tytułu przenosimy tylko wtedy, gdy tytuł w kalendarzu się zmienił — status poprawiony
+           w podglądzie importu (np. „(wykonanie kontaktów)” to nie znacznik) zostaje. */
+        if ((rec.status === 'Wykonany' || rec.status === 'Nieaktualny') && !(rec.podstawa && rec.podstawa === old.podstawa)) {
+          ch.status = rec.status;
+          if (rec.podstawa) ch.podstawa = rec.podstawa;
+        }
         if (rec.data && rec.data !== old.data && (old.zrodlo_data || old.data) === old.data) {
           ch.data = rec.data; ch.zrodlo_data = rec.data;
           if (!ch.status && old.status === 'Do weryfikacji' && rec.data >= todayYmd) ch.status = 'Otwarty';
         }
-        if (!Object.keys(ch).length || !change('terminy', old.id, ch)) return false;
+        if (!Object.keys(ch).length) {
+          /* Kalendarz i CRM znów mają tę samą datę: kolejne przesunięcia w kalendarzu będą przenoszone. */
+          if (rec.data && rec.data === old.data && old.zrodlo_data && old.zrodlo_data !== rec.data) change('terminy', old.id, { zrodlo_data: rec.data });
+          return false;
+        }
+        if (!change('terminy', old.id, ch)) return false;
         var oldPrep = sh_().addWorkingDays(old.data, -days);
         existing.zadania.forEach(function (z) {
-          if (z.termin_id !== old.id || TASK_OPEN.indexOf(z.status) < 0) return;
-          if (ch.status === 'Nieaktualny') change('zadania', z.id, { status: 'Anulowane' });
-          else if (ch.data && z.termin === oldPrep) {
+          /* Tylko zadania „Przygotować: …” (z importu i z „Zleć przygotowanie”), nie zadania dopisane ręcznie. */
+          if (z.termin_id !== old.id || TASK_OPEN.indexOf(z.status) < 0 || String(z.tytul).indexOf('Przygotować:') !== 0) return;
+          if (ch.status === 'Nieaktualny') {
+            change('zadania', z.id, { status: 'Anulowane' });
+            saveCore_(c, f, ss, 'komentarze', { zadanie_id: z.id, tresc: 'Anulowane: termin odwołany w kalendarzu (import).' });
+            return;
+          }
+          if (!ch.data) return;
+          /* Data nieruszona ręcznie: wyliczona z terminu albo przycięta do dnia utworzenia (termin był blisko). */
+          var made = String(z.utworzono || '').slice(0, 10);
+          if (z.termin === oldPrep || (oldPrep < made && z.termin === made)) {
             var due = sh_().addWorkingDays(ch.data, -days);
             change('zadania', z.id, { termin: due < todayYmd ? todayYmd : due });
           }
@@ -311,6 +338,7 @@ function apiImportCommit(kind, items) {
         (it.alt || []).forEach(function (z) { if (z) seen[z] = { table: it.table, rec: it.rec }; });
         if (it.table === 'zadania') { recs.zadania.push(task(it.rec)); return; }
         var rec = buildNew_(c, f, it.table, it.rec);
+        if (rec.zrodlo_id && it.alt && it.alt.length) rec.zrodlo_id = [rec.zrodlo_id].concat(it.alt).join(' ');
         if (it.klient && it.klient.nazwa) {
           var key = normName_(it.klient.nazwa), k = clients[key];
           if (!k) {

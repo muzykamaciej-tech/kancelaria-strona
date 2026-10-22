@@ -113,6 +113,9 @@ function applySharing_(s, m) {
 function applySharingFor_(s, m, email) {
   if (!email || email === me_()) return [];
   var active = m.aktywny !== 'nie' && emailAllowed_(s.kancelarie, email);
+  /* Adresu, który ma teraz inna aktywna osoba (np. alias przeniesiony z wyłączonego konta), nie odbieramy. */
+  var holder = active ? null : memberOf_(s, email);
+  if (holder && holder.email !== String(m.email).toLowerCase()) return [];
   var firms = active ? splitList_(m.kancelarie) : [];
   var editor = m.rola !== 'odczyt';
   var log = [];

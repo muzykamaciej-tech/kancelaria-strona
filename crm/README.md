@@ -74,6 +74,8 @@ node crm/dev/test-ui.mjs                 # test podglądu w Chromium (fail 0) + 
 bash crm/wdroz.sh                        # wgranie zmian; adres aplikacji bez zmian
 ```
 
+Po wgraniu nowej wersji otwórz aplikację kontem administratora: przy pierwszym otwarciu sama poprawi udostępnienia, jeśli zmieniły się zasady dostępu (tak jest przy przejściu na 0.2.1).
+
 Schemat danych (tabele, pola, słowniki, zespół z papieru firmowego) jest w `src/Konfiguracja.js`. Nowe pole wystarczy dopisać tam: kolumna w arkuszu doda się sama, a formularz i karta zbudują się ze schematu.
 
 `crm/` nie wchodzi do builda strony: `scripts/source-hash.mjs` liczy tylko pliki z katalogu głównego i `assets/`.
@@ -90,7 +92,7 @@ Kalendarz sekretariatu musi być widoczny dla konta, którym uruchamiasz import 
   - dopisane „(zrobione)” zamyka termin;
   - „(ODWOŁANA)” unieważnia termin i anuluje jego zadanie przygotowania;
   - przesunięcie wpisu zmienia datę terminu i zadania przygotowania, chyba że ktoś poprawił datę w CRM (wtedy CRM ma pierwszeństwo).
-  Terminów zamkniętych w CRM kalendarz już nie zmienia. Każda zmiana z importu trafia do Historii.
+  Terminów zamkniętych w CRM kalendarz już nie zmienia. Termin usunięty w CRM nie wraca przy kolejnym imporcie. Zadania dopisane ręcznie do terminu import zostawia bez zmian. Każda zmiana z importu trafia do Historii.
 
 ## Do ustalenia i następne kroki
 

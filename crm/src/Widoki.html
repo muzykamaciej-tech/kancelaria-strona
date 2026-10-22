@@ -312,8 +312,8 @@ function parseQuick(text) {
      „dziś”, „jutro” i „pojutrze” są jednoznaczne i działają w każdym miejscu. */
   const words = String(text || '').trim().split(/\s+/).filter(Boolean);
   let tail = words.length;
-  /* Słowo z kropką („pt.”) i skrót wielkimi literami („SR” = sąd rejonowy) to nie dzień tygodnia. */
-  const dateWord = (w) => !/\.$/.test(w) && !/^[A-ZĄĆĘŁŃÓŚŹŻ]{2,}$/.test(w) && quickDate(w);
+  /* Skrót wielkimi literami („SR” = sąd rejonowy) to nie dzień tygodnia. */
+  const dateWord = (w) => !/^[A-ZĄĆĘŁŃÓŚŹŻ]{2,}$/.test(w) && quickDate(w);
   while (tail > 0 && (/^[#@!]/.test(words[tail - 1]) || /^do$/i.test(words[tail - 1]) || (dateWord(words[tail - 1]) && !/^(z|ze|od|dnia)$/i.test(words[tail - 2] || '')))) tail--;
   words.forEach((w, i) => {
     let m;
@@ -335,7 +335,7 @@ function parseQuick(text) {
       return;
     }
     if (w === '!') { out.pilne = 'tak'; return; }
-    const d = (i >= tail && dateWord(w)) || /^(dzi[sś](iaj)?|jutro|pojutrze)$/i.test(w) ? quickDate(w) : '';
+    const d = (i >= tail && dateWord(w)) || /^(dzi[sś](iaj)?|jutro|pojutrze)[.,!]?$/i.test(w) ? quickDate(w) : '';
     if (d) { out.termin = d; if (title.length && /^do$/i.test(title[title.length - 1])) title.pop(); return; }
     title.push(w);
   });
@@ -454,7 +454,7 @@ function taskModalHtml(t) {
       ${panel === 'przekaz' ? `<div class="fld"><label for="tk-to">Komu</label><select class="inp" id="tk-to">${teamFor(t.kancelaria).filter((x) => x.email !== t.przypisane && (ROLE_WRITE(x.rola))).map((x) => `<option value="${attr(x.email)}">${esc(x.imie_nazwisko)}${x.stanowisko ? ' — ' + esc(x.stanowisko) : ''}</option>`).join('')}</select></div>` : ''}
       ${panel === 'przesun' ? `<div class="fld"><label for="tk-date">Nowy termin</label><input class="inp" type="date" id="tk-date" value="${attr(t.termin || today())}"></div>` : ''}
       <div class="fld"><label for="tk-note">${esc(need[panel])}</label><textarea class="inp" id="tk-note" rows="2"></textarea></div>
-      <div class="actions"><button class="btn primary" data-act="task-do" data-a="${panel}" data-go-now="1">Zatwierdź: ${esc({ zwroc: 'zwróć do poprawy', odrzuc: 'odrzuć', anuluj: 'anuluj zadanie', przekaz: 'przekaż', przesun: 'zmień termin' }[panel])}</button><button class="btn ghost" data-act="task-panel" data-a="">Wróć</button></div></div>` : '';
+      <div class="actions"><button class="btn primary" data-act="task-do" data-a="${panel}" data-go-now="1">${esc({ zwroc: 'Zwróć do poprawy', odrzuc: 'Odrzuć', anuluj: 'Anuluj zadanie', przekaz: 'Przekaż', przesun: 'Zmień termin' }[panel])}</button><button class="btn ghost" data-act="task-panel" data-a="">Wróć</button></div></div>` : '';
   const kom = komentarzeOf(t);
   const hist = S.task && S.task.hist ? `<div class="task-hist">${histPanel('zadania', t.kancelaria, t.id)}</div>` : '';
   return `<div class="modal wide"><div class="modal-h"><h2>${t.pilne ? '<span class="bang">!</span> ' : ''}${esc(t.tytul)}</h2><button type="button" class="icon-btn" data-act="close" aria-label="Zamknij">${ic('x')}</button></div>
@@ -464,7 +464,7 @@ function taskModalHtml(t) {
       ${s || term ? `<div class="task-links">${s ? `<a href="#" data-go="sprawa/${s.kancelaria}/${s.id}">${ic('briefcase').replace('<svg', '<svg width="14" height="14"')} ${esc(caseLabel(s))}${s.klient_id ? ' — ' + esc(clientName(s.kancelaria, s.klient_id)) : ''}</a>` : ''}
         ${term ? `<span>${ic('calendar').replace('<svg', '<svg width="14" height="14"')} termin procesowy: <b>${fmtDate(term.data, true)}</b> — ${esc(term.opis)}${term.status !== 'Otwarty' ? ' (' + esc(term.status) + ')' : ''}</span>` : ''}</div>` : ''}
       ${t.opis ? `<div class="pre task-desc">${esc(t.opis)}</div>` : ''}
-      ${acts.length ? `<div class="actions task-acts">${acts.join('')}</div>` : ''}
+      ${acts.length && !panelHtml ? `<div class="actions task-acts">${acts.join('')}</div>` : ''}
       ${panelHtml}
       <h3 class="task-h">Komentarze <span class="muted small">${kom.length || ''}</span></h3>
       <div class="kom-list">${kom.map((k) => `<div class="kom"><div class="small"><b>${esc(shortName(k.utworzyl))}</b> <span class="muted">${fmtDT(k.utworzono)}</span></div><div class="pre">${esc(k.tresc)}</div></div>`).join('') || '<div class="small muted">Brak komentarzy.</div>'}</div>
@@ -763,9 +763,7 @@ function calSection() {
 }
 function calStripKey(title) { return norm(String(title).replace(/[(\[][^()\[\]]{0,25}[)\]]/g, ' ')).replace(/\s+/g, ' ').trim(); }
 /* Duplikaty scalamy tylko wtedy, gdy różnią się samym znacznikiem „(zrobione)” — numer teczki i „(ODWOŁANA)” zostają w kluczu. */
-function calDedupKey(title) {
-  return norm(title).replace(/[(\[]\s*(?:zrobion|wykonan|zrob\.)[^)\]]*[)\]]/g, ' ').replace(/^\s*(?:zrobion|wykonan)[a-z]*\s*[-–—:]?\s*/, '').replace(/[^a-z0-9]+/g, ' ').trim();
-}
+function calDedupKey(title) { return norm(SH.stripDone(title)).replace(/[^a-z0-9]+/g, ' ').trim(); }
 function matchTermin(firm, p) {
   const cases = S.data.sprawy.filter((s) => s.kancelaria === firm), none = { id: '', conf: '', how: '' };
   if (p.teczka) { const s = cases.find((x) => String(x.numer).toUpperCase() === p.teczka); if (s) return { id: s.id, conf: 'pewne', how: 'nr teczki' }; }
@@ -775,7 +773,9 @@ function matchTermin(firm, p) {
   if (!toks.length) return none;
   const split = (ws) => ws.reduce((a, x) => a.concat([x], x.split('-')), []);
   const hits = S.data.klienci.filter((k) => k.kancelaria === firm).map((k) => {
-    const words = String(k.nazwa).split(/\s+/).filter(Boolean), parts = split(words), sur = split(words.length > 1 ? words.slice(1) : words);
+    /* Nazwisko = słowa po pierwszym, bez spójników i imion po nich („Anna i Piotr Wiśniewscy” → Wiśniewscy). */
+    const words = String(k.nazwa).split(/\s+/).filter(Boolean), parts = split(words), conj = (w) => /^(i|oraz)$/i.test(w || '');
+    const sur = split(words.length > 1 ? words.filter((w, i) => i > 0 && !conj(w) && !conj(words[i - 1])) : words);
     return { k, n: toks.filter((t) => parts.some((x) => SH.nameMatch(x, t))).length, sur: toks.some((t) => sur.some((x) => SH.nameMatch(x, t))) };
   }).filter((x) => x.n);
   if (!hits.length) return none;
@@ -963,11 +963,20 @@ const ACTIONS = {
     const r = await call('apiTask', el.dataset.firm, el.dataset.id, 'zrobione', { _ver: t && t.zmieniono });
     upsert('zadania', r.zadanie); if (r.komentarz) upsert('komentarze', r.komentarz);
     toast(r.zadanie.status === 'Do sprawdzenia' ? 'Oddano do sprawdzenia: ' + shortName(r.zadanie.zlecil) : 'Zrobione');
+    mailWarn(r.powiadomiono);
     render();
   }),
   'task-do': (el) => taskDo(el),
   'task-panel': (el) => { if (S.task) openTaskModal(S.task.firm, S.task.id, el.dataset.a || ''); },
-  'task-hist': () => { if (S.task) { S.task.hist = !S.task.hist; openTaskModal(S.task.firm, S.task.id, S.task.panel); } },
+  /* Przełącza tylko sekcję historii — wpisany komentarz i notatka w panelu zostają. */
+  'task-hist': (el) => {
+    const st = S.task, t = st && byId('zadania', st.firm, st.id);
+    if (!t) return;
+    st.hist = !st.hist;
+    const box = $('.scrim .task-hist'); if (box) box.remove();
+    if (st.hist) $('.scrim .modal-b').insertAdjacentHTML('beforeend', `<div class="task-hist">${histPanel('zadania', t.kancelaria, t.id)}</div>`);
+    el.textContent = st.hist ? 'Ukryj historię' : 'Historia zmian';
+  },
   'task-edit': () => { const st = S.task; const t = st && byId('zadania', st.firm, st.id); if (t) openForm('zadania', t); },
   'task-tab': (el) => setFilt('zad', 'tab', el.dataset.tabName),
   'term-task': (el) => {
@@ -1123,7 +1132,8 @@ document.addEventListener('input', (e) => {
   if (el.classList.contains('combo-q')) {
     comboUpdate(el);
     const box = el.closest('.combo');
-    if (box.dataset.impcal !== undefined && IMP.cal && !el.value.trim()) { const row = IMP.cal.rows[+box.dataset.impcal]; row.sprawa_id = ''; row.conf = ''; }
+    /* Tekst zmieniony bez wyboru z listy = brak sprawy (comboUpdate czyści ukryte pole), jak w formularzach. */
+    if (box.dataset.impcal !== undefined && IMP.cal && !$('input[type=hidden]', box).value) { const row = IMP.cal.rows[+box.dataset.impcal]; row.sprawa_id = ''; row.conf = ''; }
     return;
   }
   if (el.dataset.filt && (el.type === 'search' || el.type === 'text')) {
@@ -1149,7 +1159,7 @@ document.addEventListener('change', (e) => {
     return;
   }
   if (el.dataset.actChange === 'zap-status-sel') { zapUpdate({ status: el.value }, el); return; }
-  if (el.name === 'przypisane' && S.form && S.form.table === 'zadania') { const cb = $('#f-sprawdzenie'); if (cb && !cb.disabled) cb.checked = defaultReview(el.value) === 'tak'; return; }
+  if (el.name === 'przypisane' && S.form && S.form.table === 'zadania') { const cb = $('#f-sprawdzenie'); if (cb && !cb.disabled && S.form.isNew) cb.checked = defaultReview(el.value) === 'tak'; return; }
   if (el.id === 'cal-id' || el.id === 'cal-from') { IMP.cal = Object.assign(IMP.cal || {}, el.id === 'cal-id' ? { calId: el.value.trim() } : { from: el.value }); return; }
   if (el.id === 'cal-file' && el.files && el.files[0]) { calReadFile(el.files[0]); return; }
   if (el.dataset.cal !== undefined && IMP.cal) {
@@ -1210,7 +1220,12 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') { if ($('.scrim')) closeModal(); else if ($('.search-res')) $('.search-res').hidden = true; return; }
   if (e.key === 'Enter' && e.target.dataset && e.target.dataset.qa) { e.preventDefault(); quickSave(e.target); return; }
   if (e.key === 'Enter' && e.target.id === 'q') { const a = $('.search-res a'); if (a) { e.preventDefault(); a.click(); } return; }
-  if (e.key === 'Enter' && e.target.classList.contains('combo-q')) { e.preventDefault(); const p = e.target.closest('.combo').querySelector('[data-pick]'); if (p) p.click(); }
+  if (e.key === 'Enter' && e.target.classList.contains('combo-q')) {
+    e.preventDefault();
+    /* Tylko z widocznej listy — po kliknięciu pozycji lista jest ukryta i Enter nie może podmienić wyboru. */
+    const l = e.target.closest('.combo').querySelector('.combo-list'), p = !l.hidden && l.querySelector('[data-pick]');
+    if (p) p.click();
+  }
 });
 
 function afterRender() {
@@ -1265,7 +1280,8 @@ async function start() {
     if (!busyUi && S.boot.state === 'ok') render();
   }, 60000);
   document.addEventListener('visibilitychange', () => {
-    const typing = document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+    /* Odświeżenie pomijamy tylko przy niezapisanym tekście; puste szybkie dodawanie czy wyszukiwarka nie blokują. */
+    const a = document.activeElement, typing = a && /INPUT|TEXTAREA|SELECT/.test(a.tagName) && a.id !== 'q' && !a.dataset.filt && !(a.dataset.qa && !a.value.trim());
     if (document.visibilityState === 'visible' && Date.now() - S.loadedAt > 180000 && !$('.scrim') && !typing && S.boot.state === 'ok') reload(true).catch(() => {});
   });
 }

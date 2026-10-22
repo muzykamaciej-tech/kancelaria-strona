@@ -46,6 +46,12 @@ function apiSetup(p) {
   if (settingsId_()) fail_('ALREADY', 'Aplikacja jest już skonfigurowana.');
   if (!isScriptEditor_()) fail_('FORBIDDEN', 'Pierwszą konfigurację uruchamia właściciel projektu Apps Script.');
   p = p || {};
+  /* Konto spoza domen kancelarii zablokowałoby się zaraz po konfiguracji (ctx_ wpuszcza tylko konta służbowe). */
+  var setupFirms = (p.firms && p.firms.length ? p.firms : DEFAULT_FIRMS).map(function (x) { return { email: String(x.email || '') }; });
+  var extra = splitList_(p.dozwolone).map(function (d) { return d.toLowerCase().replace(/^@/, ''); });
+  if (!emailAllowed_(setupFirms, email) && extra.indexOf(email.split('@')[1]) < 0) {
+    fail_('INVALID', 'Konto ' + email + ' jest spoza domen kancelarii (' + allowedDomains_(setupFirms).join(', ') + '). Zaloguj się kontem służbowym i otwórz aplikację ponownie.');
+  }
   return withLock_(function () {
     var now = nowIso_();
     var root = DriveApp.createFolder('CRM Kancelarii');
@@ -105,7 +111,7 @@ function apiSetup(p) {
     });
     appendRows_(set.getSheetByName(SETTINGS_TABLES.zespol.sheet), team);
 
-    props_().setProperties({ SETTINGS_ID: set.getId(), ROOT_FOLDER_ID: root.getId() });
+    props_().setProperties({ SETTINGS_ID: set.getId(), ROOT_FOLDER_ID: root.getId(), SHARING_VERSION: '2' });
     Object.keys(p.seq || {}).forEach(function (k) {
       if (/^SEQ_[A-Z0-9_]+$/.test(k) && /^\d+$/.test(String(p.seq[k]))) props_().setProperty(k, String(p.seq[k]));
     });
@@ -197,6 +203,14 @@ function apiFirmSave(f) {
       next[k] = k === 'folder_id' || k === 'import_folder' ? idFromLink_(f[k]) : String(f[k]).trim();
     });
     if (!/^(analiza|konsultacja)$/.test(next.model)) next.model = 'analiza';
+    /* Adres kancelarii wyznacza też domenę kont zespołu: zmiana nie może nikogo odciąć. */
+    var after = c.s.kancelarie.map(function (x) { return x.kod === f.kod ? next : x; });
+    var lost = c.s.zespol.filter(function (m) {
+      return m.aktywny !== 'nie' && [m.email].concat(splitList_(m.aliasy)).some(function (e) { return emailAllowed_(c.s.kancelarie, e) && !emailAllowed_(after, e); });
+    });
+    if (!emailAllowed_(after, c.login) || lost.length) {
+      fail_('INVALID', 'Adres e-mail kancelarii wyznacza też domenę kont zespołu. Po tej zmianie bez dostępu zostaliby: ' + (lost.map(function (m) { return m.imie_nazwisko; }).join(', ') || c.login) + '. Najpierw dodaj ich domenę w Ustawieniach.');
+    }
     writeRow_(sh, row, next);
     log_(set, c.email, 'kancelarie', f.kod, 'zmiana', diff_(cur, next));
     dropSettingsCache_();
@@ -265,6 +279,20 @@ function apiAllowedSave(list) {
   requireFullAdmin_(c);
   var items = splitList_(list).map(function (x) { return x.toLowerCase().replace(/^@/, ''); })
     .filter(function (x) { return /^[a-z0-9.-]+\.[a-z]{2,}$/.test(x); });
+  var old = props_().getProperty('ALLOWED_DOMAINS') || '', before = allowedDomains_(c.s.kancelarie);
   props_().setProperty('ALLOWED_DOMAINS', items.join(','));
-  return allowedDomains_(c.s.kancelarie);
+  var now = allowedDomains_(c.s.kancelarie);
+  if (!emailAllowed_(c.s.kancelarie, c.login)) {
+    props_().setProperty('ALLOWED_DOMAINS', old);
+    fail_('INVALID', 'Twoje konto ' + c.login + ' byłoby wtedy spoza domen i straciłbyś dostęp. Zostaw jego domenę na liście.');
+  }
+  /* Osobom z usuniętej domeny odbieramy też udostępnienia w Dysku, nie tylko logowanie. */
+  var gone = before.filter(function (d) { return now.indexOf(d) < 0; });
+  if (gone.length) {
+    var s = loadSettings_(true);
+    s.zespol.forEach(function (m) {
+      if ([m.email].concat(splitList_(m.aliasy)).some(function (e) { return gone.indexOf(String(e).toLowerCase().split('@')[1]) >= 0; })) applySharing_(s, m);
+    });
+  }
+  return now;
 }

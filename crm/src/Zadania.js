@@ -9,8 +9,10 @@ function checkAssignee_(c, f, email) {
   if (!m) fail_('INVALID', 'Osoby „' + email + '” nie ma w aktywnym zespole.');
   if (splitList_(m.kancelarie).indexOf(f.kod) < 0) fail_('INVALID', m.imie_nazwisko + ' nie ma dostępu do kancelarii ' + f.kod + ', więc nie może dostać tego zadania.');
   if (!ROLES[m.rola] || !ROLES[m.rola].write) fail_('INVALID', m.imie_nazwisko + ' ma dostęp tylko do odczytu.');
+  if (!emailAllowed_(c.s.kancelarie, m.email)) fail_('INVALID', m.imie_nazwisko + ' ma konto spoza domen kancelarii i nie zaloguje się do CRM.');
   return m;
 }
+function canAct_(c, f, email) { try { checkAssignee_(c, f, email); return true; } catch (e) { return false; } }
 
 /* Zadanie zmienia osoba, która je wykonuje, zleciła albo założyła, oraz administrator. */
 function taskCanTouch_(c, t) {
@@ -29,7 +31,7 @@ function taskAuto_(c, f, rec, before) {
   if (!before || before.przypisane !== to) {
     var m = checkAssignee_(c, f, to);
     rec.przypisane = m.email;
-    rec.zlecil = keepRequester_(c, before);
+    rec.zlecil = keepRequester_(c, f, before);
     rec.przekazano = nowMinute_();
     rec.status = m.email === c.email ? 'W toku' : 'Nowe';
     rec.wykonano = ''; rec.wykonal = '';
@@ -38,10 +40,11 @@ function taskAuto_(c, f, rec, before) {
   if (!rec.status) rec.status = 'Nowe';
 }
 
-/* Wykonawca, który przekazuje zadanie dalej, nie staje się zlecającym: sprawdza i zatwierdza nadal
-   pierwotny zlecający (inaczej przekazanie „tam i z powrotem” omijałoby kontrolę). */
-function keepRequester_(c, t) {
-  return t && !c.perm.admin && t.przypisane === c.email && t.zlecil && t.zlecil !== c.email ? t.zlecil : c.email;
+/* Wykonawca, który przekazuje dalej zadanie „wraca do sprawdzenia”, nie staje się zlecającym: sprawdza
+   nadal pierwotny zlecający (inaczej przekazanie „tam i z powrotem” omijałoby kontrolę). Bez sprawdzenia
+   albo gdy zlecający nie ma już dostępu, zlecającym zostaje osoba przekazująca. */
+function keepRequester_(c, f, t) {
+  return t && t.sprawdzenie && !c.perm.admin && t.przypisane === c.email && t.zlecil && t.zlecil !== c.email && canAct_(c, f, t.zlecil) ? t.zlecil : c.email;
 }
 
 function teczkaOf_(ss, sprawaId) {
@@ -79,14 +82,17 @@ function apiTask(firm, id, action, p) {
       case 'zrobione':
         need(t.status === 'Nowe' || t.status === 'W toku', 'To zadanie jest zamknięte albo czeka na sprawdzenie.');
         need(t.przypisane === me || t.zlecil === me || admin, 'Zamyka osoba, która wykonuje albo zleciła zadanie, lub administrator.');
-        if (t.sprawdzenie && t.zlecil && t.zlecil !== t.przypisane && t.zlecil !== me) {
+        var review = t.sprawdzenie && t.zlecil && t.zlecil !== t.przypisane && t.zlecil !== me;
+        if (review && canAct_(c, f, t.zlecil)) {
           next.status = 'Do sprawdzenia';
           notify = { to: t.zlecil, kind: 'sprawdz' };
           comment = note ? 'Do sprawdzenia: ' + note : '';
         } else {
+          /* Zlecający, który odszedł albo stracił dostęp, nie blokuje zadania w „Do sprawdzenia”. */
           next.status = 'Zrobione'; next.wykonano = now; next.wykonal = t.przypisane || me;
           if (t.zlecil && t.zlecil !== me) notify = { to: t.zlecil, kind: 'zrobione' };
-          comment = note;
+          else if (t.przypisane && t.przypisane !== me) notify = { to: t.przypisane, kind: 'zrobione' };
+          comment = [note, review ? 'Bez sprawdzenia: zlecający nie ma już dostępu do zadań tej kancelarii.' : ''].filter(Boolean).join('\n');
         }
         break;
       case 'zatwierdz':
@@ -109,7 +115,7 @@ function apiTask(firm, id, action, p) {
         need(taskCanTouch_(c, t), 'Przekazuje osoba, która wykonuje albo zleciła zadanie, lub administrator.');
         var m = checkAssignee_(c, f, String(p.do || '').toLowerCase());
         if (m.email === t.przypisane) fail_('INVALID', 'To zadanie już jest u tej osoby.');
-        next.przypisane = m.email; next.zlecil = keepRequester_(c, t); next.przekazano = now;
+        next.przypisane = m.email; next.zlecil = keepRequester_(c, f, t); next.przekazano = now;
         next.status = m.email === me ? 'W toku' : 'Nowe';
         comment = 'Przekazane: ' + m.imie_nazwisko + (note ? ' — ' + note : '');
         if (m.email !== me) notify = { to: m.email, kind: 'nowe' };
@@ -140,6 +146,7 @@ function apiTask(firm, id, action, p) {
         need(taskCanTouch_(c, t), 'Otwiera osoba, która wykonywała albo zleciła zadanie, lub administrator.');
         try { next.przypisane = checkAssignee_(c, f, t.przypisane).email; } catch (e) { next.przypisane = me; }
         next.status = next.przypisane === me ? 'W toku' : 'Nowe'; next.wykonano = ''; next.wykonal = '';
+        if (next.przypisane !== me) { next.przekazano = now; notify = { to: next.przypisane, kind: 'otwarte' }; }
         comment = note ? 'Ponownie otwarte: ' + note : '';
         break;
       case 'przesun':
@@ -177,7 +184,8 @@ function apiTask(firm, id, action, p) {
 
 var NOTIFY_SUBJECT_ = {
   nowe: 'Nowe zadanie', sprawdz: 'Do sprawdzenia', zrobione: 'Zrobione', zwrot: 'Do poprawy', zatwierdzone: 'Zatwierdzone',
-  odrzucone: 'Odrzucone zadanie', anulowane: 'Anulowane zadanie', komentarz: 'Komentarz do zadania', termin: 'Zmiana terminu'
+  odrzucone: 'Odrzucone zadanie', anulowane: 'Anulowane zadanie', komentarz: 'Komentarz do zadania', termin: 'Zmiana terminu',
+  otwarte: 'Ponownie otwarte zadanie'
 };
 
 /* E-mail z konta osoby, która wykonała akcję. Tylko na konta w domenach kancelarii

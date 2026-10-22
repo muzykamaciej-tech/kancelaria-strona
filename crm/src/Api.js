@@ -54,6 +54,10 @@ function bootstrap() {
   try { c = ctx_(); } catch (e) {
     return { state: 'denied', email: email, message: String(e.message).replace(/^[A-Z_]+: /, ''), url: ScriptApp.getService().getUrl() };
   }
+  /* Jednorazowo po aktualizacji do 0.2.1: arkusz ustawień edytują już tylko pełni administratorzy. */
+  if (c.full && props_().getProperty('SHARING_VERSION') !== '2') {
+    try { var s2 = loadSettings_(true); s2.zespol.forEach(function (m) { applySharing_(s2, m); }); props_().setProperty('SHARING_VERSION', '2'); } catch (e) { console.warn('Migracja udostępnień: ' + e); }
+  }
   var data = {}, errors = [];
   TABLE_ORDER.forEach(function (t) { data[t] = []; });
   c.firms.forEach(function (code) {

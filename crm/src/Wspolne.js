@@ -134,10 +134,17 @@ function sharedFactory_() {
   /* Czynności pisane wielką literą nie są nazwiskiem klienta. */
   var ACTS = { apelacja: 1, pozew: 1, wniosek: 1, odpowiedz: 1, zazalenie: 1, skarga: 1, sprzeciw: 1, pismo: 1, rozprawa: 1, oplata: 1, uzupelnienie: 1,
     odwolanie: 1, stanowisko: 1, replika: 1, wezwanie: 1, zarzuty: 1, cofniecie: 1, wyrok: 1, posiedzenie: 1, przedluzka: 1, termin: 1, kasacja: 1 };
+  /* Znaczniki wykonania: „(zrobione)”, „(zrobione 12.10)”, „[wykonane]”, „(zrob.)”, „zrobione - TERMIN…”, „… zrobione”.
+     Tylko formy stanu (zrobion-e/a/y/o, wykonan-e/a/y/o) — „(wykonanie kontaktów)” to treść, nie znacznik. */
+  var DONE_BR = /[(\[]\s*(?:zrobion[aeyo]|zrob\.?|wykonan[aeyo]|wykonano)\b[^)\]]*[)\]]/gi;
+  var DONE_HEAD = /^\s*(?:zrobion[aeyo]|wykonan[aeyo])\b\s*[-:]?\s*/i, DONE_TAIL = /[\s-]*\bzrobion[aeyo]\s*$/i;
+  function stripDone(title) {
+    return String(title || '').replace(/[\u2013\u2014]/g, '-').replace(DONE_BR, ' ').replace(DONE_HEAD, '').replace(DONE_TAIL, '').replace(/\s+/g, ' ').trim();
+  }
   function parseTermin(title, names) {
     var t = String(title || '').replace(/[\u2013\u2014]/g, '-').replace(/\s+/g, ' ').trim();
     var out = { title: t, isTermin: false, done: false, cancel: false, teczka: '', sygn: '', klient: '', czynnosc: '', prawnik: '' };
-    out.done = /[(\[]\s*(?:zrobion\w*|zrob\.?|wykonan\w*|wykonano)\b[^)\]]*[)\]]/i.test(t) || /^(?:zrobione|wykonane)\b/i.test(t) || /\bzrobione$/i.test(t);
+    out.done = new RegExp(DONE_BR.source, 'i').test(t) || DONE_HEAD.test(t) || DONE_TAIL.test(t);
     out.cancel = /[(\[]\s*(?:odwo[lł]an[aeyio]*|nieaktualn[aeyio]*|anulowan[aeyio]*|przesuni[eę]t[aeyio]*)\s*[)\]]/i.test(t);
     var head = /^((?:[(\[][^)\]]*[)\]]\s*[-:]?\s*)*)(?:(?:zrobione|wykonane)\s*[-:]?\s*)?TERMIN\b\s*[-:]*\s*/i.exec(t);
     if (!head) return out;
@@ -212,7 +219,7 @@ function sharedFactory_() {
   return {
     pad: pad, parse: parse, ymdOf: ymdOf, isoOf: isoOf, easter: easter, holidays: holidays, holidayName: holidayName,
     isWorkingDay: isWorkingDay, addWorkingHours: addWorkingHours, termEnd: termEnd, addDays: addDays, diffDays: diffDays,
-    addWorkingDays: addWorkingDays, warsawWall: warsawWall, norm: norm, nameMatch: nameMatch, parseTermin: parseTermin, parseIcs: parseIcs,
+    addWorkingDays: addWorkingDays, warsawWall: warsawWall, norm: norm, nameMatch: nameMatch, parseTermin: parseTermin, stripDone: stripDone, parseIcs: parseIcs,
     WEEKDAYS: WEEKDAYS
   };
 }

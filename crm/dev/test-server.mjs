@@ -314,5 +314,80 @@ as(U.OWNER, () => api.apiTeamSave({ email: 'stary@kancelariarodzinna.com', imie_
 ok(as(U.OWNER, () => api.apiTeamSave({ email: 'nowy2@kancelariarodzinna.com', imie_nazwisko: 'Nowy', rola: 'odczyt', kancelarie: 'KR', aliasy: 'biuro.kr@kancelariarodzinna.com' })).team.some((m) => m.email === 'nowy2@kancelariarodzinna.com'), 'alias osoby nieaktywnej można przypisać innej');
 throws(() => as(U.OWNER, () => api.apiTeamSave({ email: 'nowy3@kancelariarodzinna.com', rola: 'odczyt', kancelarie: 'KR', aliasy: 'BIURO.KR@kancelariarodzinna.com' })), 'INVALID', 'zajęty alias rozpoznany bez względu na wielkość liter');
 
+
+/* ---------- Drugi przegląd: regresje ---------- */
+const krDb = boot.firms.find((f) => f.kod === 'KR').db_url.split('/d/')[1].split('/')[0];
+as(U.OWNER, () => api.apiResync());
+ok(mock.st.files[krDb].viewers.has('biuro.kr@kancelariarodzinna.com'), 'alias przeniesiony z konta wyłączonego zostaje udostępniony po „Udostępnij ponownie”');
+/* Przekazanie zadania bez kontroli: przekazująca zostaje zlecającą (zachowuje kontrolę). */
+const ownT = as(U.OWNER, () => api.apiSave('zadania', { kancelaria: 'KR', tytul: 'Pismo do sądu', przypisane: U.KPK }));
+r = as(U.KPK, () => api.apiTask('KR', ownT.id, 'przekaz', { do: U.JUN2 }));
+eq(r.zadanie.zlecil, U.KPK, 'przekazanie zadania bez sprawdzenia: przekazująca zostaje zlecającą');
+const ownT2 = as(U.KPK, () => api.apiSave('zadania', { kancelaria: 'KR', id: ownT.id, sprawdzenie: 'tak', _ver: r.zadanie.zmieniono }));
+eq(ownT2.sprawdzenie, 'tak', '…i może włączyć „wraca do sprawdzenia”');
+/* Zamknięcie i ponowne otwarcie przez zlecającego: e-mail do wykonawcy. */
+const ex = as(U.MB, () => api.apiSave('zadania', { kancelaria: 'KR', tytul: 'Wezwanie do zapłaty', przypisane: U.JUN2 }));
+as(U.JUN2, () => api.apiTask('KR', ex.id, 'przyjmij', {}));
+mock.st.sent.length = 0;
+as(U.MB, () => api.apiTask('KR', ex.id, 'zrobione', { komentarz: 'Zrobiłem sam' }));
+ok(mock.st.sent.some((m) => m.to === U.JUN2 && /Zrobione/.test(m.subject)), 'zlecający zamyka: e-mail do wykonawcy');
+mock.st.sent.length = 0;
+as(U.MB, () => api.apiTask('KR', ex.id, 'otworz', {}));
+ok(mock.st.sent.some((m) => m.to === U.JUN2 && /Ponownie otwarte/.test(m.subject)), 'ponowne otwarcie: e-mail do wykonawcy');
+/* Zlecający, który odszedł, nie blokuje zadania w „Do sprawdzenia”. */
+const dep = as(U.MB, () => api.apiSave('zadania', { kancelaria: 'KR', tytul: 'Projekt umowy', przypisane: U.JUN2, sprawdzenie: 'tak' }));
+as(U.JUN2, () => api.apiTask('KR', dep.id, 'przyjmij', {}));
+as(U.OWNER, () => api.apiTeamSave({ email: U.MB, imie_nazwisko: 'Maciej Bednarek', stanowisko: 'Starszy prawnik', rola: 'prawnik', kancelarie: 'KR', aktywny: 'nie' }));
+r = as(U.JUN2, () => api.apiTask('KR', dep.id, 'zrobione', {}));
+eq([r.zadanie.status, /Bez sprawdzenia/.test(r.komentarz.tresc)], ['Zrobione', true], 'zlecający bez dostępu: zadanie zamknięte z adnotacją');
+as(U.OWNER, () => api.apiTeamSave({ email: U.MB, imie_nazwisko: 'Maciej Bednarek', stanowisko: 'Starszy prawnik', rola: 'prawnik', kancelarie: 'KR' }));
+/* Domeny: zmiana adresu kancelarii nikogo nie odetnie; usunięcie domeny odbiera też Dysk. */
+throws(() => as(U.OWNER, () => api.apiFirmSave({ kod: 'KR', email: 'kancelaria.rodzinna@gmail.com' })), 'INVALID', 'zmiana adresu kancelarii odcinająca zespół zablokowana');
+as(U.OWNER, () => api.apiAllowedSave(''));
+ok(!mock.st.files[knDb].editors.has(U.JUN1) && !mock.st.files[knDb].viewers.has(U.JUN1), 'usunięcie domeny: odebrane udostępnienie bazy');
+as(U.OWNER, () => api.apiAllowedSave('example.com'));
+as(U.OWNER, () => api.apiResync());
+{
+  const m3 = createGasMock({ user: 'wlasciciel@gmail.com', owner: 'wlasciciel@gmail.com', gmail: demoGmail() });
+  const a3 = createServer(m3.globals);
+  throws(() => a3.apiSetup({}), 'INVALID', 'konfiguracja kontem spoza domen kancelarii zablokowana (zanim cokolwiek powstanie)');
+  eq(a3.bootstrap().state, 'setup', 'po odmowie: nadal ekran konfiguracji');
+}
+/* Kalendarz: znaczniki, duplikaty, rekordy usunięte, zadania dopisane ręcznie. */
+eq([pt('TERMIN - Jabłoński wniosek (wykonanie kontaktów)').done, pt('TERMIN - Kowalski apelacja (zrobione - KW)').done, pt('TERMIN - Kowalski apelacja - zrobione').done], [false, true, true], '„(wykonanie …)” to treść, nie znacznik wykonania');
+eq(SH.stripDone('(zrobione 12.10) TERMIN - Kowalski apelacja - zrobione'), 'TERMIN - Kowalski apelacja', 'stripDone: znaczniki na początku, w nawiasie i na końcu');
+const ci = (o) => Object.assign({ kancelaria: 'KR', table: 'terminy' }, o);
+rc = as(U.OWNER, () => api.apiImportCommit('kalendarz', [ci({ alt: ['cal:dup-b'], rec: { opis: 'apelacja', data: '2026-12-01', typ: 'Termin procesowy', status: 'Otwarty', odpowiedzialny: U.KPK, zrodlo_id: 'cal:dup-a', zrodlo_data: '2026-12-01', podstawa: 'Import z kalendarza: TERMIN - X apelacja' }, zadanie: { tytul: 'Przygotować: apelacja', przypisane: U.KPK, termin: '2026-11-26' } })]));
+rc = as(U.OWNER, () => api.apiImportCommit('kalendarz', [ci({ rec: { opis: 'apelacja', data: '2026-12-01', typ: 'Termin procesowy', status: 'Otwarty', odpowiedzialny: U.KPK, zrodlo_id: 'cal:dup-b', zrodlo_data: '2026-12-01' } })]));
+eq([rc.KR.terminy || 0, rc.KR.pominiete], [0, 1], 'scalony duplikat: drugi identyfikator zapamiętany, bez drugiego terminu');
+const dupT = as(U.OWNER, () => api.bootstrap()).data.terminy.find((t) => /cal:dup-a/.test(t.zrodlo_id));
+const manual = as(U.KPK, () => api.apiSave('zadania', { kancelaria: 'KR', tytul: 'Napisać apelację (projekt)', przypisane: U.JUN2, termin_id: dupT.id }));
+rc = as(U.OWNER, () => api.apiImportCommit('kalendarz', [ci({ rec: { opis: 'apelacja', data: '2026-12-01', typ: 'Termin procesowy', status: 'Wykonany', odpowiedzialny: U.KPK, zrodlo_id: 'cal:dup-a', podstawa: 'Import z kalendarza: TERMIN - X apelacja (wykonanie kontaktów)' } })]));
+eq(rc.KR.zaktualizowane, 1, 'zmieniony tytuł ze znacznikiem: status przeniesiony');
+const dupT2 = as(U.OWNER, () => api.bootstrap()).data.terminy.find((t) => t.id === dupT.id);
+eq(dupT2.status, 'Wykonany', 'termin zamknięty z kalendarza');
+const dupT3 = as(U.OWNER, () => api.apiImportCommit('kalendarz', [ci({ rec: { opis: 'b', data: '2026-12-08', typ: 'Termin procesowy', status: 'Otwarty', odpowiedzialny: U.KPK, zrodlo_id: 'cal:corr', zrodlo_data: '2026-12-08', podstawa: 'Import z kalendarza: TERMIN - Y (wykonanie wyroku)' } })]));
+rc = as(U.OWNER, () => api.apiImportCommit('kalendarz', [ci({ rec: { opis: 'b', data: '2026-12-08', typ: 'Termin procesowy', status: 'Wykonany', odpowiedzialny: U.KPK, zrodlo_id: 'cal:corr', podstawa: 'Import z kalendarza: TERMIN - Y (wykonanie wyroku)' } })]));
+eq(rc.KR.zaktualizowane || 0, 0, 'status poprawiony w podglądzie (ten sam tytuł) nie jest nadpisywany przy ponownym imporcie');
+const odw = as(U.OWNER, () => api.apiImportCommit('kalendarz', [ci({ rec: { opis: 'c', data: '2026-12-15', typ: 'Termin procesowy', status: 'Otwarty', odpowiedzialny: U.KPK, zrodlo_id: 'cal:odw', zrodlo_data: '2026-12-15', podstawa: 'Import z kalendarza: TERMIN - Z' }, zadanie: { tytul: 'Przygotować: c', przypisane: U.KPK, termin: '2026-12-10' } })]));
+const odwT = as(U.OWNER, () => api.bootstrap()).data.terminy.find((t) => t.zrodlo_id === 'cal:odw');
+const hand = as(U.KPK, () => api.apiSave('zadania', { kancelaria: 'KR', tytul: 'Notatka dla klienta', przypisane: U.JUN2, termin_id: odwT.id }));
+as(U.OWNER, () => api.apiImportCommit('kalendarz', [ci({ rec: { opis: 'c', data: '2026-12-15', typ: 'Termin procesowy', status: 'Nieaktualny', odpowiedzialny: U.KPK, zrodlo_id: 'cal:odw', podstawa: 'Import z kalendarza: (ODWOŁANA) TERMIN - Z' } })]));
+const afterOdw = as(U.OWNER, () => api.bootstrap()).data.zadania;
+eq([afterOdw.find((z) => z.tytul === 'Przygotować: c').status, afterOdw.find((z) => z.id === hand.id).status], ['Anulowane', 'Nowe'], 'odwołanie anuluje tylko zadanie przygotowania, nie zadania dopisane ręcznie');
+/* Rekord usunięty w CRM nie wraca. */
+const delT = as(U.OWNER, () => api.apiImportCommit('kalendarz', [ci({ rec: { opis: 'd', data: '2026-12-22', typ: 'Termin procesowy', status: 'Otwarty', odpowiedzialny: U.KPK, zrodlo_id: 'cal:del' } })]));
+const delId = as(U.OWNER, () => api.bootstrap()).data.terminy.find((t) => t.zrodlo_id === 'cal:del').id;
+as(U.OWNER, () => api.apiDelete('terminy', 'KR', delId));
+rc = as(U.OWNER, () => api.apiImportCommit('kalendarz', [ci({ rec: { opis: 'd', data: '2026-12-22', typ: 'Termin procesowy', status: 'Otwarty', odpowiedzialny: U.KPK, zrodlo_id: 'cal:del' } })]));
+eq([rc.KR.terminy || 0, rc.KR.pominiete], [0, 1], 'termin usunięty w CRM nie wraca przy ponownym imporcie');
+/* Po zgodzie dat kalendarz znowu przesuwa termin. */
+const sy = () => as(U.OWNER, () => api.bootstrap()).data.terminy.find((t) => t.zrodlo_id === 'cal:sync');
+as(U.OWNER, () => api.apiImportCommit('kalendarz', [ci({ rec: { opis: 'e', data: '2027-01-05', typ: 'Termin procesowy', status: 'Otwarty', odpowiedzialny: U.KPK, zrodlo_id: 'cal:sync', zrodlo_data: '2027-01-05' } })]));
+as(U.OWNER, () => api.apiSave('terminy', { kancelaria: 'KR', id: sy().id, data: '2027-01-12', _ver: sy().zmieniono }));
+as(U.OWNER, () => api.apiImportCommit('kalendarz', [ci({ rec: { opis: 'e', data: '2027-01-12', typ: 'Termin procesowy', status: 'Otwarty', odpowiedzialny: U.KPK, zrodlo_id: 'cal:sync' } })]));
+as(U.OWNER, () => api.apiImportCommit('kalendarz', [ci({ rec: { opis: 'e', data: '2027-01-19', typ: 'Termin procesowy', status: 'Otwarty', odpowiedzialny: U.KPK, zrodlo_id: 'cal:sync' } })]));
+eq(sy().data, '2027-01-19', 'po zgodzie dat z CRM kolejne przesunięcie w kalendarzu jest przenoszone');
+
 console.log(`pass ${pass}, fail ${fail}`);
 process.exit(fail ? 1 : 0);
