@@ -102,6 +102,10 @@ ok((await page.locator('#qa-pulpit-hint').textContent()).includes('Maciej Bednar
 await page.press('#qa-pulpit', 'Enter');
 await page.waitForSelector('.toast:has-text("Zlecono: Maciej Bednarek")', { timeout: 5000 });
 ok(true, 'szybkie dodawanie: zlecono');
+await page.fill('#qa-pulpit', 'Zadzwonić do sądu @Maciej jutro');
+await page.waitForTimeout(100);
+ok((await page.locator('#qa-pulpit-hint').textContent()).includes('pasuje do'), 'szybkie dodawanie: @Maciej pasuje do dwóch osób — prośba o nazwisko');
+await page.fill('#qa-pulpit', '');
 /* Własne zadanie: odhaczenie w karcie zadania */
 await page.click('.nav a[data-go="zadania"]');
 await page.click('li.task:has-text("Przejrzeć i wysłać draft oferty")');
@@ -110,6 +114,9 @@ await shot(page, '10-zadanie-karta');
 await page.click('.modal [data-act="task-do"][data-a="zrobione"]');
 await page.waitForSelector('.toast:has-text("Zrobione")', { timeout: 5000 });
 ok(await page.locator('.modal .chip:has-text("Zrobione")').count() > 0, 'zadanie zamknięte w karcie');
+await page.click('.modal [data-act="task-hist"]');
+await page.waitForSelector('.modal .task-hist .hist', { timeout: 5000 }).catch(() => {});
+ok(await page.locator('.modal .task-hist .hist').count() > 0, 'karta zadania: historia zmian wczytana w oknie');
 await page.click('.modal [data-act="close"]');
 /* Import kalendarza */
 await page.click('.nav a[data-go="import"]');
@@ -117,11 +124,26 @@ await page.click('[data-act="cal-load"]');
 await page.waitForSelector('[data-act="cal-commit"]', { timeout: 5000 });
 ok(/wpisów TERMIN/.test(await page.locator('.banner.info').last().textContent()), 'kalendarz: podsumowanie wczytanych wpisów');
 ok(await page.locator('.chip:has-text("pewne")').count() >= 3, 'kalendarz: pewne dopasowania do spraw');
+await page.fill('.combo[data-impcal] .combo-q >> nth=0', 'Podział majątku');
+await page.waitForTimeout(100);
+await page.press('.combo[data-impcal] .combo-q >> nth=0', 'Enter');
+await page.waitForTimeout(200);
+ok((await page.inputValue('.combo[data-impcal] .combo-q >> nth=0')).includes('Podział majątku'), 'kalendarz: Enter po wpisaniu wybiera sprawę, nie „bez sprawy”');
+ok(await page.locator('.chip:has-text("ręcznie")').count() >= 1, 'kalendarz: ręczny wybór sprawy oznaczony');
 await shot(page, '11-import-kalendarza');
 await page.click('[data-act="cal-commit"]');
 await page.waitForSelector('.banner.info:has-text("KR:")', { timeout: 8000 });
 await page.click('.nav a[data-go="terminy"]');
 ok(await page.locator('h2:has-text("Do weryfikacji")').count() === 1, 'terminy: grupa do weryfikacji po imporcie');
+await page.click('.nav a[data-go="pulpit"]');
+ok(await page.locator('a:has-text("z importu kalendarza do weryfikacji")').count() === 1, 'pulpit: terminy do weryfikacji jednym odnośnikiem, nie listą');
+/* Plik .ics: zawinięcie linii rozcina „ź” (2 bajty UTF-8) — po wczytaniu litera ma być cała. */
+await page.click('.nav a[data-go="import"]');
+const icsDay = new Date(Date.now() + 5 * 86400000).toISOString().slice(0, 10).replace(/-/g, '');
+const icsBuf = Buffer.concat([Buffer.from('BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nDTSTART;VALUE=DATE:' + icsDay + '\r\nUID:plik-1\r\nSUMMARY:TERMIN - Nowak odpowied'), Buffer.from([0xc5]), Buffer.from('\r\n '), Buffer.from([0xba]), Buffer.from(' na pozew\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n')]);
+await page.setInputFiles('#cal-file', { name: 'test.ics', mimeType: 'text/calendar', buffer: icsBuf });
+await page.waitForSelector('.toast:has-text("Wczytano 1")', { timeout: 5000 }).catch(() => {});
+ok(await page.locator('td:has-text("odpowiedź na pozew")').count() > 0, 'plik .ics: polska litera rozcięta zawinięciem linii wczytana poprawnie');
 /* Wspólniczka: zwrot do poprawy */
 await page.selectOption('#demo-as', 'katarzyna.popik@kancelariarodzinna.com');
 await page.waitForSelector('.shell');
@@ -146,6 +168,13 @@ ok(await page.locator('.seg').count() === 0, 'KR: brak przełącznika kancelarii
 await page.click('.nav a[data-go="sprawy"]');
 ok(await page.locator('.firm.KN').count() === 0, 'KR: brak spraw KN');
 ok(await page.locator('.nav a[data-go="ustawienia"]').count() === 0, 'KR: brak ustawień');
+await page.click('.nav a[data-go="zadania"]');
+await page.click('li.task:has-text("Przygotować świadków do rozprawy")');
+await page.click('.modal [data-act="task-edit"]');
+await page.waitForSelector('#f-sprawdzenie');
+ok(await page.locator('#f-sprawdzenie').isDisabled(), 'edycja zadania przez wykonawcę: „wraca do sprawdzenia” zablokowane');
+await page.click('#frm [data-act="close"]');
+await page.click('.nav a[data-go="sprawy"]');
 await shot(page, '05-dostep-kr');
 await page.selectOption('#demo-as', 'ktos.obcy@gmail.com');
 await page.waitForTimeout(900);

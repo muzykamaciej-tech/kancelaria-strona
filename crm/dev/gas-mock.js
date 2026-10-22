@@ -194,6 +194,25 @@
       getAllCalendars: () => Object.keys(st.calendars).filter((id) => calAccess(st.calendars[id])).map((id) => calObj(st.calendars[id], id)),
       getDefaultCalendar: () => calObj(st.calendars[st.user] || (st.calendars[st.user] = { name: st.user, owner: st.user, events: [] }), st.user)
     };
+    /* Usługa zaawansowana Calendar v3: widzi każdy kalendarz udostępniony kontu. */
+    const ymdAdd = (ymd, n) => new Date(Date.parse(ymd + 'T00:00:00Z') + n * 86400000).toISOString().slice(0, 10);
+    const Calendar = {
+      Calendars: { get: (id) => { const c = st.calendars[id]; if (!calAccess(c)) throw new Error('API call to calendar.calendars.get failed with error: Not Found'); return { id, summary: c.name }; } },
+      Events: {
+        list: (id, o) => {
+          const c = st.calendars[id];
+          if (!calAccess(c)) throw new Error('API call to calendar.events.list failed with error: Not Found');
+          const from = new Date(o.timeMin), to = new Date(o.timeMax);
+          const items = c.events.filter((e) => new Date(e.start) < to && new Date(e.end || e.start) >= from).map((e) => {
+            const days = Math.max(1, Math.round((new Date(e.end || e.start) - new Date(e.start)) / 86400000));
+            return { id: String(e.id).replace(/@.*/, ''), iCalUID: e.id, summary: e.title, description: e.description, status: e.status || 'confirmed', recurringEventId: e.recurringEventId,
+              start: e.allDay ? { date: e.start.slice(0, 10) } : { dateTime: e.start }, end: e.allDay ? { date: ymdAdd(e.start.slice(0, 10), days) } : { dateTime: e.end || e.start } };
+          });
+          const off = +(o.pageToken || 0), n = Math.min(o.maxResults || 250, st.calPage || 2500);
+          return { items: items.slice(off, off + n), nextPageToken: off + n < items.length ? String(off + n) : undefined };
+        }
+      }
+    };
     const MailApp = {
       sendEmail: (o) => { if (!o || !o.to) throw new Error('Brak adresata.'); st.sent.push(Object.assign({ from: st.user }, o)); },
       getRemainingDailyQuota: () => 100
@@ -202,7 +221,7 @@
       st,
       setUser(e) { st.user = String(e).toLowerCase(); },
       globals: {
-        SpreadsheetApp, DriveApp, Utilities, ScriptApp, Gmail, CalendarApp, MailApp,
+        SpreadsheetApp, DriveApp, Utilities, ScriptApp, Gmail, Calendar, CalendarApp, MailApp,
         Session: { getActiveUser: () => ({ getEmail: () => st.user }), getEffectiveUser: () => ({ getEmail: () => st.user }) },
         PropertiesService: { getScriptProperties: () => props },
         CacheService: { getScriptCache: () => cache },

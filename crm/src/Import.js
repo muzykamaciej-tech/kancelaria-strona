@@ -120,7 +120,7 @@ function openSource_(fileId) {
   var file = DriveApp.getFileById(fileId);
   if (file.getMimeType() === MimeType.GOOGLE_SHEETS) return { ss: SpreadsheetApp.openById(fileId), tmp: null };
   if (typeof Drive === 'undefined') fail_('NO_DRIVE', 'Plik to XLSX. Otwórz go w Dysku i wybierz Plik → Zapisz jako Arkusz Google, potem wskaż kopię.');
-  var copy = Drive.Files.copy({ name: '(tymczasowe) import CRM – ' + file.getName(), mimeType: MimeType.GOOGLE_SHEETS }, fileId);
+  var copy = Drive.Files.copy({ name: '(tymczasowe) import CRM – ' + file.getName(), mimeType: MimeType.GOOGLE_SHEETS }, fileId, { supportsAllDrives: true });
   return { ss: SpreadsheetApp.openById(copy.id), tmp: copy.id };
 }
 function closeSource_(src) { if (src.tmp) { try { DriveApp.getFileById(src.tmp).setTrashed(true); } catch (e) { /* — */ } } }
@@ -245,6 +245,51 @@ function apiImportCommit(kind, items) {
       existing.klienci.forEach(function (k) { clients[normName_(k.nazwa)] = k; });
       ['sprawy', 'zapytania', 'umowy', 'terminy', 'zadania'].forEach(function (t) { existing[t].forEach(function (r) { if (r.zrodlo_id) seen[r.zrodlo_id] = { table: t, rec: r }; }); });
       var newClients = [], recs = { sprawy: [], zapytania: [], umowy: [], terminy: [], zadania: [] }, skipped = 0;
+      /* Numery wierszy po id: jeden odczyt kolumny na arkusz, także przy setkach zmian. */
+      var rowMaps = {};
+      var rowOf = function (t, id) {
+        if (!rowMaps[t]) {
+          var sh = ensureSheet_(ss, TABLES[t].sheet, tableKeys_(t)), col = headOf_(sh).indexOf('id') + 1, lr = sh.getLastRow(), m = {};
+          if (col && lr > 1) sh.getRange(2, col, lr - 1, 1).getValues().forEach(function (v, i) { m[norm_(v[0])] = i + 2; });
+          rowMaps[t] = { sh: sh, m: m };
+        }
+        return { sh: rowMaps[t].sh, row: rowMaps[t].m[id] || -1 };
+      };
+      var change = function (t, id, ch) {
+        var r = rowOf(t, id);
+        if (r.row < 0) return false;
+        var before = readRow_(r.sh, r.row), after = {};
+        Object.keys(before).forEach(function (k) { after[k] = before[k]; });
+        Object.keys(ch).forEach(function (k) { after[k] = ch[k]; });
+        after.zmieniono = nowIso_(); after.zmienil = c.email;
+        writeRow_(r.sh, r.row, after);
+        log_(ss, c.email, t, id, 'zmiana', diff_(before, after));
+        return true;
+      };
+      /* Ponowny import kalendarza. Kalendarz zmienia tylko terminy, które w CRM są wciąż otwarte:
+         „(zrobione)” zamyka, „(ODWOŁANA)” unieważnia (z zadaniami przygotowania), przesunięcie zmienia datę,
+         o ile w CRM nikt jej nie poprawił. Każda zmiana trafia do Historii. */
+      var days = +APP.prepDays || 3, todayYmd = today_();
+      var syncTerm = function (old, rec) {
+        if (old.status !== 'Otwarty' && old.status !== 'Do weryfikacji') return false;
+        var ch = {};
+        if (rec.status === 'Wykonany' || rec.status === 'Nieaktualny') ch.status = rec.status;
+        if (rec.data && rec.data !== old.data && (old.zrodlo_data || old.data) === old.data) {
+          ch.data = rec.data; ch.zrodlo_data = rec.data;
+          if (!ch.status && old.status === 'Do weryfikacji' && rec.data >= todayYmd) ch.status = 'Otwarty';
+        }
+        if (!Object.keys(ch).length || !change('terminy', old.id, ch)) return false;
+        var oldPrep = sh_().addWorkingDays(old.data, -days);
+        existing.zadania.forEach(function (z) {
+          if (z.termin_id !== old.id || TASK_OPEN.indexOf(z.status) < 0) return;
+          if (ch.status === 'Nieaktualny') change('zadania', z.id, { status: 'Anulowane' });
+          else if (ch.data && z.termin === oldPrep) {
+            var due = sh_().addWorkingDays(ch.data, -days);
+            change('zadania', z.id, { termin: due < todayYmd ? todayYmd : due });
+          }
+        });
+        return true;
+      };
       /* Zadania z importu: te same reguły co w aplikacji; adresat spoza kancelarii → importujący. */
       var task = function (data) {
         var z = buildNew_(c, f, 'zadania', data);
@@ -254,25 +299,16 @@ function apiImportCommit(kind, items) {
       };
       byFirm[code].forEach(function (it) {
         if (!TABLES[it.table] || !recs[it.table]) return;
+        /* it.alt: identyfikatory scalonych duplikatów (np. osobny wpis „(zrobione) TERMIN …” obok pierwotnego). */
         var prev = it.rec.zrodlo_id && seen[it.rec.zrodlo_id];
+        if (!prev && it.alt) (it.alt || []).some(function (z) { prev = z && seen[z]; return !!prev; });
         if (prev) {
-          /* Ponowny import kalendarza: dopisane „(zrobione)” zamyka termin (zmiana trafia do Historii). */
-          if (it.table === 'terminy' && it.rec.status === 'Wykonany' && prev.rec.status !== 'Wykonany') {
-            var sht = ensureSheet_(ss, TABLES.terminy.sheet, tableKeys_('terminy')), rowt = findRow_(sht, 'id', prev.rec.id);
-            if (rowt > 0) {
-              var before = readRow_(sht, rowt), after = {};
-              Object.keys(before).forEach(function (k) { after[k] = before[k]; });
-              after.status = 'Wykonany'; after.zmieniono = nowIso_(); after.zmienil = c.email;
-              writeRow_(sht, rowt, after);
-              log_(ss, c.email, 'terminy', after.id, 'zmiana', diff_(before, after));
-              updated++;
-              return;
-            }
-          }
-          skipped++;
+          if (it.table === 'terminy' && prev.table === 'terminy' && prev.rec.id && syncTerm(prev.rec, it.rec)) updated++;
+          else skipped++;
           return;
         }
         if (it.rec.zrodlo_id) seen[it.rec.zrodlo_id] = { table: it.table, rec: it.rec };
+        (it.alt || []).forEach(function (z) { if (z) seen[z] = { table: it.table, rec: it.rec }; });
         if (it.table === 'zadania') { recs.zadania.push(task(it.rec)); return; }
         var rec = buildNew_(c, f, it.table, it.rec);
         if (it.klient && it.klient.nazwa) {
@@ -327,20 +363,50 @@ function apiCalendarEvents(calId, fromYmd, toYmd) {
   var c = ctx_();
   requireAdmin_(c);
   calId = String(calId || APP.calendarId).trim();
-  if (typeof CalendarApp === 'undefined') fail_('NO_CAL', 'Usługa Kalendarza nie jest dostępna.');
-  var cal = CalendarApp.getCalendarById(calId);
-  if (!cal) fail_('NO_CAL', 'Konto ' + c.login + ' nie widzi kalendarza ' + calId + '. Udostępnij go temu kontu („Udostępnij ze wszystkimi szczegółami wydarzeń”) albo wczytaj plik .ics z eksportu kalendarza.');
-  var from = new Date((fromYmd || '2025-01-01') + 'T00:00:00'), to = new Date((toYmd || '2028-12-31') + 'T23:59:59');
-  var evs = cal.getEvents(from, to).map(function (ev) {
-    var all = ev.isAllDayEvent();
-    var st = all ? ev.getAllDayStartDate() : ev.getStartTime();
-    var en = all && ev.getAllDayEndDate ? ev.getAllDayEndDate() : ev.getEndTime();
-    var hours = Math.round((en.getTime() - st.getTime()) / 360000) / 10;
-    return {
-      uid: ev.getId(), title: ev.getTitle(), desc: String(ev.getDescription() || '').slice(0, 500), allDay: all, recurring: false,
-      start: Utilities.formatDate(st, APP.tz, all ? 'yyyy-MM-dd' : "yyyy-MM-dd'T'HH:mm"), date: Utilities.formatDate(st, APP.tz, 'yyyy-MM-dd'),
-      hours: all ? Math.max(24, hours) : hours
-    };
-  }).filter(function (e) { return e.allDay || e.hours >= 23; });
-  return { calendar: cal.getName(), events: evs.slice(0, 3000) };
+  var ymd = /^\d{4}-\d{2}-\d{2}$/, now = new Date();
+  fromYmd = ymd.test(fromYmd || '') ? fromYmd : '2025-01-01';
+  toYmd = ymd.test(toYmd || '') ? toYmd : (now.getFullYear() + 3) + Utilities.formatDate(now, APP.tz, '-MM-dd');
+  var noCal = function () {
+    fail_('NO_CAL', 'Konto ' + c.login + ' nie widzi kalendarza ' + calId + '. Udostępnij go temu kontu („Udostępnij ze wszystkimi szczegółami wydarzeń”) albo wczytaj plik .ics z eksportu kalendarza.');
+  };
+  var fmt = function (d, all) { return Utilities.formatDate(d, APP.tz, all ? 'yyyy-MM-dd' : "yyyy-MM-dd'T'HH:mm"); };
+  var evs = [], name = calId;
+  if (typeof Calendar !== 'undefined' && Calendar.Events) {
+    /* Usługa zaawansowana widzi kalendarz udostępniony kontu, także niedodany do „Innych kalendarzy”.
+       Klucz importu to iCalUID (ten sam co UID w pliku .ics) — nie zmienia się po przesunięciu wpisu. */
+    try { name = Calendar.Calendars.get(calId).summary || calId; } catch (e) { noCal(); }
+    var token;
+    do {
+      var res = Calendar.Events.list(calId, {
+        timeMin: fromYmd + 'T00:00:00Z', timeMax: toYmd + 'T23:59:59Z', singleEvents: true, maxResults: 2500, pageToken: token,
+        fields: 'nextPageToken,items(id,iCalUID,summary,description,start,end,recurringEventId,status)'
+      });
+      (res.items || []).forEach(function (ev) {
+        if (ev.status === 'cancelled' || !ev.start) return;
+        var all = !!ev.start.date, end = ev.end || ev.start;
+        var hours = all ? Math.max(24, Math.round((Date.parse(end.date || ev.start.date) - Date.parse(ev.start.date)) / 3600000))
+          : Math.round((Date.parse(end.dateTime) - Date.parse(ev.start.dateTime)) / 360000) / 10;
+        if (!all && !(hours >= 23)) return;
+        var st = all ? null : new Date(ev.start.dateTime);
+        evs.push({ uid: ev.iCalUID || ev.id, title: ev.summary || '', desc: String(ev.description || '').slice(0, 500), allDay: all, recurring: !!ev.recurringEventId,
+          start: all ? ev.start.date : fmt(st, false), date: all ? ev.start.date : fmt(st, true), hours: hours });
+      });
+      token = res.nextPageToken;
+    } while (token && evs.length < 5000);
+  } else {
+    if (typeof CalendarApp === 'undefined') fail_('NO_CAL', 'Usługa Kalendarza nie jest dostępna.');
+    var cal = CalendarApp.getCalendarById(calId);
+    if (!cal) noCal();
+    name = cal.getName();
+    cal.getEvents(new Date(fromYmd + 'T00:00:00'), new Date(toYmd + 'T23:59:59')).forEach(function (ev) {
+      var all = ev.isAllDayEvent();
+      var st = all ? ev.getAllDayStartDate() : ev.getStartTime();
+      var en = all && ev.getAllDayEndDate ? ev.getAllDayEndDate() : ev.getEndTime();
+      var hours = Math.round((en.getTime() - st.getTime()) / 360000) / 10;
+      if (!all && hours < 23) return;
+      evs.push({ uid: ev.getId(), title: ev.getTitle(), desc: String(ev.getDescription() || '').slice(0, 500), allDay: all,
+        recurring: !!(ev.isRecurringEvent && ev.isRecurringEvent()), start: fmt(st, all), date: fmt(st, true), hours: all ? Math.max(24, hours) : hours });
+    });
+  }
+  return { calendar: name, events: evs.slice(0, 5000) };
 }

@@ -20,7 +20,12 @@ function taskCanTouch_(c, t) {
 /* Z autoFields_: nowe zadanie albo zmiana osoby w formularzu = przekazanie. */
 function taskAuto_(c, f, rec, before) {
   if (before && !taskCanTouch_(c, before)) fail_('FORBIDDEN', 'To zadanie zmienia osoba, która je wykonuje albo zleciła, lub administrator.');
+  /* „Wraca do sprawdzenia” ustawia zlecający: wykonawca nie wyłączy kontroli edycją formularza. */
+  if (before && (rec.sprawdzenie || '') !== (before.sprawdzenie || '') && before.zlecil && before.zlecil !== c.email && !c.perm.admin) {
+    fail_('FORBIDDEN', '„Wraca do sprawdzenia” może zmienić osoba, która zleciła zadanie.');
+  }
   var to = String(rec.przypisane || '').toLowerCase();
+  if (before && before.przypisane !== to && TASK_OPEN.indexOf(before.status) < 0) fail_('INVALID', 'To zadanie jest zamknięte. Najpierw otwórz je ponownie, potem przekaż.');
   if (!before || before.przypisane !== to) {
     var m = checkAssignee_(c, f, to);
     rec.przypisane = m.email;
@@ -83,6 +88,7 @@ function apiTask(firm, id, action, p) {
         need(t.zlecil === me || admin, 'Zatwierdza osoba, która zleciła zadanie, albo administrator.');
         next.status = 'Zrobione'; next.wykonano = now; next.wykonal = t.przypisane;
         comment = note ? 'Zatwierdzone: ' + note : '';
+        if (t.przypisane && t.przypisane !== me) notify = { to: t.przypisane, kind: 'zatwierdzone' };
         break;
       case 'zwroc':
         need(t.status === 'Do sprawdzenia', 'To zadanie nie czeka na sprawdzenie.');
@@ -109,7 +115,9 @@ function apiTask(firm, id, action, p) {
         needNote('dlaczego');
         var back = t.zlecil && t.zlecil !== t.przypisane ? t.zlecil : '';
         need(!!back, 'Nie ma komu oddać tego zadania. Przekaż je albo poproś zlecającego o anulowanie.');
-        next.przypisane = back; next.zlecil = me; next.przekazano = now; next.status = 'Nowe';
+        back = checkAssignee_(c, f, back).email;
+        /* Zadanie wraca do zlecającego jako jego własne (nowe): to on decyduje, komu je dać albo czy anulować. */
+        next.przypisane = back; next.zlecil = back; next.przekazano = now; next.status = 'Nowe';
         comment = 'Odrzucone: ' + note;
         notify = { to: back, kind: 'odrzucone' };
         break;
@@ -124,14 +132,17 @@ function apiTask(firm, id, action, p) {
       case 'otworz':
         need(!open, 'To zadanie jest otwarte.');
         need(taskCanTouch_(c, t), 'Otwiera osoba, która wykonywała albo zleciła zadanie, lub administrator.');
-        next.status = t.przypisane === me ? 'W toku' : 'Nowe'; next.wykonano = ''; next.wykonal = '';
+        try { next.przypisane = checkAssignee_(c, f, t.przypisane).email; } catch (e) { next.przypisane = me; }
+        next.status = next.przypisane === me ? 'W toku' : 'Nowe'; next.wykonano = ''; next.wykonal = '';
         comment = note ? 'Ponownie otwarte: ' + note : '';
         break;
       case 'przesun':
         need(taskCanTouch_(c, t), 'Termin zmienia osoba, która wykonuje albo zleciła zadanie, lub administrator.');
         if (p.termin && isNaN(sh_().parse(p.termin))) fail_('INVALID', 'Niepoprawna data.');
         next.termin = String(p.termin || '');
-        comment = note;
+        comment = note || (next.termin !== t.termin ? 'Nowy termin: ' + (next.termin || 'bez terminu') : '');
+        var party = t.przypisane === me ? t.zlecil : t.przypisane;
+        if (party && party !== me && next.termin !== t.termin) notify = { to: party, kind: 'termin' };
         break;
       case 'komentarz':
         needNote('treść');
@@ -153,14 +164,14 @@ function apiTask(firm, id, action, p) {
     next.kancelaria = f.kod;
     return { zadanie: next, komentarz: kom, notify: notify };
   });
-  if (res.notify) notifyTask_(c, f, res.zadanie, res.notify.kind, res.notify.to, note, res.notify.teczka);
+  res.powiadomiono = res.notify ? notifyTask_(c, f, res.zadanie, res.notify.kind, res.notify.to, note, res.notify.teczka) : null;
   delete res.notify;
   return res;
 }
 
 var NOTIFY_SUBJECT_ = {
-  nowe: 'Nowe zadanie', sprawdz: 'Do sprawdzenia', zrobione: 'Zrobione', zwrot: 'Do poprawy',
-  odrzucone: 'Odrzucone zadanie', anulowane: 'Anulowane zadanie', komentarz: 'Komentarz do zadania'
+  nowe: 'Nowe zadanie', sprawdz: 'Do sprawdzenia', zrobione: 'Zrobione', zwrot: 'Do poprawy', zatwierdzone: 'Zatwierdzone',
+  odrzucone: 'Odrzucone zadanie', anulowane: 'Anulowane zadanie', komentarz: 'Komentarz do zadania', termin: 'Zmiana terminu'
 };
 
 /* E-mail z konta osoby, która wykonała akcję. Tylko na konta w domenach kancelarii
@@ -171,7 +182,8 @@ function notifyTask_(c, f, t, kind, to, note, teczka) {
     if (!to || to === c.email || typeof MailApp === 'undefined') return false;
     var m = memberOf_(c.s, to);
     if (!m || m.powiadomienia === 'nie' || !emailAllowed_(c.s.kancelarie, m.email)) return false;
-    var url = ScriptApp.getService().getUrl() + '#zadanie/' + f.kod + '/' + t.id;
+    if (splitList_(m.kancelarie).indexOf(f.kod) < 0) return false;
+    var url = appUrl_() + '#zadanie/' + f.kod + '/' + t.id;
     var body = [
       (c.member.imie_nazwisko || c.email) + ': ' + NOTIFY_SUBJECT_[kind].toLowerCase() + ' (' + f.nazwa_krotka + ')', '',
       t.tytul,
@@ -183,7 +195,14 @@ function notifyTask_(c, f, t, kind, to, note, teczka) {
     MailApp.sendEmail({ to: m.email, subject: '[CRM ' + f.kod + '] ' + NOTIFY_SUBJECT_[kind] + ': ' + String(t.tytul).slice(0, 90), body: body, name: 'CRM Kancelarii' });
     return true;
   } catch (e) {
+    /* 'blad' (a nie false) — interfejs ostrzeże, że osoba może nie wiedzieć o zadaniu. */
     console.warn('Powiadomienie nie wysłane: ' + e);
-    return false;
+    return 'blad';
   }
+}
+
+/* Adres aplikacji do linków w e-mailach: zawsze wersja produkcyjna /exec w postaci ogólnej,
+   bo adres z domeną (/a/macros/<domena>/) bywa niedostępny dla kont z drugiej kancelarii. */
+function appUrl_() {
+  return String(ScriptApp.getService().getUrl() || '').replace(/\/a\/macros\/[^/]+\/s\//, '/macros/s/').replace(/\/dev$/, '/exec');
 }

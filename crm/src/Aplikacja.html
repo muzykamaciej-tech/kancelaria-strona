@@ -35,7 +35,7 @@ function fmtDate(s, withWd) {
 function fmtDT(s) {
   if (!s) return '';
   const hm = String(s).slice(11, 16);
-  return fmtDate(s) + (hm ? ', ' + hm : '');
+  return fmtDate(s) + (hm ? ', ' + esc(hm) : '');
 }
 function relDay(ymd) {
   const n = SH.diffDays(today(), String(ymd).slice(0, 10));
@@ -227,7 +227,7 @@ function shellHtml() {
 function navHtml() {
   const z = rows('zapytania').filter(needsReply);
   const over = z.filter((x) => x.termin_odpowiedzi && minutesTo(x.termin_odpowiedzi) < 0).length;
-  const t = rows('terminy').filter((x) => (x.status === 'Otwarty' && x.data <= today()) || x.status === 'Do weryfikacji').length;
+  const t = rows('terminy').filter((x) => x.status === 'Otwarty' && x.data <= today()).length;
   const mt = myTasks(), mtLate = mt.filter((x) => x.termin && x.termin < today()).length;
   const mtNow = mt.filter((x) => x.status === 'Nowe' || (x.termin && x.termin <= today())).length + rows('zadania').filter((x) => x.status === 'Do sprawdzenia' && x.zlecil === me()).length;
   const counts = { zapytania: [z.length, over > 0], terminy: [t, t > 0], zadania: [mtNow, mtLate > 0] };
@@ -352,7 +352,8 @@ VIEWS.pulpit = function () {
   const overdue = reply.filter((x) => x.termin_odpowiedzi && minutesTo(x.termin_odpowiedzi) < 0);
   const offers = z.filter(waitsOffer).sort((a, b) => ((a.przypomnienie || '9') < (b.przypomnienie || '9') ? -1 : 1));
   const horizon = SH.addDays(today(), 14);
-  const terms = rows('terminy').filter((t) => (t.status === 'Otwarty' && t.data <= horizon) || t.status === 'Do weryfikacji').map((t) => ({ kind: 't', d: t.data, h: t.godzina, r: t }));
+  const terms = rows('terminy').filter((t) => t.status === 'Otwarty' && t.data <= horizon).map((t) => ({ kind: 't', d: t.data, h: t.godzina, r: t }));
+  const toVerify = rows('terminy').filter((t) => t.status === 'Do weryfikacji').length;
   z.filter((x) => zType(x) === 'open' && x.konsultacja && x.konsultacja.slice(0, 10) >= today() && x.konsultacja.slice(0, 10) <= horizon)
     .forEach((x) => terms.push({ kind: 'k', d: x.konsultacja.slice(0, 10), h: x.konsultacja.slice(11, 16), r: x }));
   terms.sort((a, b) => (a.d + (a.h || '') < b.d + (b.h || '') ? -1 : 1));
@@ -402,7 +403,8 @@ VIEWS.pulpit = function () {
       </div>
       <div class="stack">
         <section class="panel"><div class="panel-h"><h2>Terminy i konsultacje — 14 dni</h2><a href="#terminy" data-go="terminy" class="small">kalendarz</a></div>
-          ${terms.length ? `<ul class="rows">${terms.slice(0, 10).map(tRow).join('')}</ul>` : '<div class="empty"><b>Brak terminów w najbliższych dwóch tygodniach</b></div>'}</section>
+          ${terms.length ? `<ul class="rows">${terms.slice(0, 10).map(tRow).join('')}</ul>` : '<div class="empty"><b>Brak terminów w najbliższych dwóch tygodniach</b></div>'}
+          ${toVerify ? `<div class="panel-b small" style="border-top:1px solid var(--line)"><a href="#terminy" data-go="terminy"><b>${toVerify}</b> ${toVerify === 1 ? 'przeszły termin' : 'przeszłych terminów'} z importu kalendarza do weryfikacji</a> <span class="muted">(czy zostały wykonane)</span></div>` : ''}</section>
         <section class="panel"><div class="panel-h"><h2>Moje sprawy</h2><span class="muted">${mine.length}</span></div>
           ${mine.length ? `<ul class="rows">${mine.slice(0, 8).map((s) => { const n = nextTerm(s); return `<li data-go="sprawa/${s.kancelaria}/${s.id}">${firmTag(s.kancelaria)}<div class="main-txt"><b>${esc(caseLabel(s))}</b><span>${esc(clientName(s.kancelaria, s.klient_id))}${s.nastepny_krok ? ' · ' + esc(s.nastepny_krok) : ''}</span></div>${n ? chip(n.data < today() ? 'bad' : '', fmtDate(n.data)) : ''}</li>`; }).join('')}</ul>` : '<div class="empty">Nie prowadzisz żadnej aktywnej sprawy.</div>'}</section>
         ${stale.length ? `<section class="panel"><div class="panel-h"><h2>Bez ruchu od 30 dni</h2><span class="muted">${stale.length}</span></div><ul class="rows">${stale.slice(0, 6).map((x) => `<li data-go="sprawa/${x.s.kancelaria}/${x.s.id}">${firmTag(x.s.kancelaria)}<div class="main-txt"><b>${esc(caseLabel(x.s))}</b><span>${esc(shortName(x.s.prowadzacy))}</span></div>${chip('warn', relDay(x.d))}</li>`).join('')}</ul></section>` : ''}
@@ -777,7 +779,13 @@ function formHtml(st) {
   const t = st.table, T = TB()[t];
   const firms = myFirms();
   const title = st.isNew ? 'Nowy: ' + T.one : T.one.charAt(0).toUpperCase() + T.one.slice(1) + (st.values[T.title] ? ': ' + st.values[T.title] : '');
-  const flds = visibleFields(t, st.firm, st.isNew).map((fd) => `<div class="fld${fd.wide || fd.t === 'users' ? ' wide' : ''}"><label for="f-${attr(fd.k)}">${esc(fd.l)}${fd.req && !fd.auto ? ' <span class="req">*</span>' : ''}</label>${inputHtml(t, fd, st.values[fd.k], st.firm)}${fd.help ? `<span class="help">${esc(fd.help)}</span>` : ''}</div>`).join('');
+  /* „Wraca do zlecającego” zmienia tylko zlecający albo administrator (serwer pilnuje tego samego). */
+  const lockReview = t === 'zadania' && !st.isNew && st.values.zlecil && st.values.zlecil !== me() && !perm().admin;
+  const flds = visibleFields(t, st.firm, st.isNew).map((fd) => {
+    let inp = inputHtml(t, fd, st.values[fd.k], st.firm), help = fd.help || '';
+    if (lockReview && fd.k === 'sprawdzenie') { inp = inp.replace('<input type="checkbox"', '<input type="checkbox" disabled'); help = 'Zmienia ' + shortName(st.values.zlecil) + ' (zlecający).'; }
+    return `<div class="fld${fd.wide || fd.t === 'users' ? ' wide' : ''}"><label for="f-${attr(fd.k)}">${esc(fd.l)}${fd.req && !fd.auto ? ' <span class="req">*</span>' : ''}</label>${inp}${help ? `<span class="help">${esc(help)}</span>` : ''}</div>`;
+  }).join('');
   const firmSel = st.isNew && firms.length > 1
     ? `<div class="fld wide"><label for="f-firm">Kancelaria</label><select class="inp" id="f-firm" data-act-change="form-firm">${firms.map((k) => `<option value="${attr(k)}"${k === st.firm ? ' selected' : ''}>${esc(firmOf(k).nazwa_krotka)}</option>`).join('')}</select></div>`
     : `<div class="fld wide"><span class="small muted">${firmTag(st.firm)} ${esc(firmOf(st.firm).nazwa_krotka)}${st.values.utworzono ? ' · dodał(a) ' + esc(shortName(st.values.utworzyl)) + ' ' + fmtDate(st.values.utworzono) : ''}</span></div>`;
@@ -837,6 +845,7 @@ async function submitForm(btn) {
     const after = st.opts && st.opts.after;
     closeModal();
     toast(st.isNew ? 'Dodano: ' + TB()[st.table].one : 'Zapisano zmiany');
+    if (typeof mailWarn === 'function') mailWarn(saved._powiadomiono);
     if (after) after(saved); else render();
   });
 }
@@ -850,7 +859,8 @@ function comboUpdate(input, showAll) {
     .sort((a, b) => (refLabel(t, a) < refLabel(t, b) ? -1 : 1)).slice(0, 40);
   let html = cands.map((r) => `<div data-pick="${attr(r.id)}">${esc(refLabel(t, r))}${t === 'klienci' && (r.email || r.telefon) ? `<span class="sub">${esc(r.email || r.telefon)}</span>` : ''}</div>`).join('');
   if (t === 'klienci' && q && !cands.some((r) => norm(r.nazwa) === q)) html += `<div class="new" data-pick="">＋ Nowy klient: „${esc(input.value.trim())}” (zapisze się razem z formularzem)</div>`;
-  if (box.dataset.impcal !== undefined) html = '<div data-pick="">— bez sprawy —</div>' + html;
+  /* Import kalendarza: „bez sprawy” na górze tylko przy pustym polu, żeby Enter po wpisaniu wybierał sprawę. */
+  if (box.dataset.impcal !== undefined) html = q ? (html || '<div class="muted">Brak pasujących</div>') + '<div data-pick="">— bez sprawy —</div>' : '<div data-pick="">— bez sprawy —</div>' + html;
   list.innerHTML = html || '<div class="muted">Brak pasujących</div>';
   list.hidden = false;
 }

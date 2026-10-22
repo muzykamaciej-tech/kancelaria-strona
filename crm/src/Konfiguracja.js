@@ -119,7 +119,8 @@ var TABLES = {
       { k: 'miejsce', l: 'Miejsce / sala / link', t: 'text' },
       { k: 'podstawa', l: 'Podstawa i sposób liczenia', t: 'text', wide: true },
       { k: 'notatki', l: 'Notatki', t: 'textarea', wide: true },
-      { k: 'zrodlo_id', l: 'Identyfikator importu', t: 'text', hidden: true }
+      { k: 'zrodlo_id', l: 'Identyfikator importu', t: 'text', hidden: true },
+      { k: 'zrodlo_data', l: 'Data w kalendarzu przy imporcie', t: 'date', hidden: true }
     ]
   },
 

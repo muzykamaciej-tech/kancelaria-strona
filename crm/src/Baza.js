@@ -66,6 +66,8 @@ function rowsFromValues_(vals) {
     for (var c = 0; c < head.length; c++) {
       if (!head[c]) continue;
       var v = norm_(row[c]);
+      /* Identyfikatory trafiają do atrybutów HTML: ręczna edycja arkusza nie może wstrzyknąć kodu. */
+      if (head[c] === 'id' || (/_id$/.test(head[c]) && head[c] !== 'zrodlo_id')) v = v.replace(/[^A-Za-z0-9_-]/g, '');
       if (v !== '') any = true;
       o[head[c]] = v;
     }

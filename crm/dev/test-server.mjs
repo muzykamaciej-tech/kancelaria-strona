@@ -224,5 +224,61 @@ calItems[1].rec.status = 'Wykonany';
 rc = as(U.KPK, () => api.apiImportCommit('kalendarz', calItems));
 eq([rc.KR.zaktualizowane, rc.KR.pominiete], [1, 1], 'ponowny import: dopisane „(zrobione)” zamyka termin, reszta pominięta');
 
+/* Ponowny import: przesunięcie w kalendarzu zmienia datę i zadanie przygotowania; poprawka w CRM ma pierwszeństwo. */
+const termX1 = () => as(U.KPK, () => api.bootstrap()).data.terminy.find((t) => t.zrodlo_id === 'cal:x1:2026-11-03');
+const prepX1 = () => as(U.KPK, () => api.bootstrap()).data.zadania.find((z) => z.tytul === 'Przygotować: zażalenie');
+const later = (d) => (d < today ? today : d);
+calItems[0].rec.data = '2026-11-10';
+rc = as(U.KPK, () => api.apiImportCommit('kalendarz', calItems));
+eq([rc.KR.zaktualizowane, termX1().data, termX1().zrodlo_data], [1, '2026-11-10', '2026-11-10'], 'ponowny import: przesunięty termin dostaje nową datę, bez duplikatu');
+eq(prepX1().termin, later('2026-11-05'), 'zadanie przygotowania przesunięte razem z terminem (3 dni robocze)');
+const tx = termX1();
+as(U.KPK, () => api.apiSave('terminy', { kancelaria: 'KR', id: tx.id, data: '2026-11-12', _ver: tx.zmieniono }));
+calItems[0].rec.data = '2026-11-17';
+rc = as(U.KPK, () => api.apiImportCommit('kalendarz', calItems));
+eq([rc.KR.zaktualizowane || 0, termX1().data], [0, '2026-11-12'], 'data poprawiona w CRM nie jest nadpisywana z kalendarza');
+calItems[0].rec.status = 'Nieaktualny';
+rc = as(U.KPK, () => api.apiImportCommit('kalendarz', calItems));
+eq([termX1().status, prepX1().status], ['Nieaktualny', 'Anulowane'], '„(ODWOŁANA)” unieważnia termin i anuluje zadanie przygotowania');
+calItems[0].rec.status = 'Otwarty';
+rc = as(U.KPK, () => api.apiImportCommit('kalendarz', calItems));
+eq([termX1().status, rc.KR.zaktualizowane || 0], ['Nieaktualny', 0], 'zamknięty w CRM termin nie wraca do otwartych');
+ok(as(U.KPK, () => api.apiHistory('KR', 'terminy', tx.id)).length >= 3, 'zmiany z importu są w Historii terminu');
+
+/* Kalendarz: usługa zaawansowana (iCalUID, stronicowanie, domyślny zakres) i zapasowo CalendarApp. */
+mock.st.calendars[U.SEKRETARIAT].readers = [U.OWNER, U.KPK];
+mock.st.calPage = 3;
+const calAdv = as(U.KPK, () => api.apiCalendarEvents('', '', ''));
+eq([calAdv.events.length, calAdv.calendar], [10, 'Sekretariat KR'], 'kalendarz: stronicowanie i domyślny zakres dat (do 3 lat naprzód)');
+ok(calAdv.events.every((e) => /@google\.com$/.test(e.uid)), 'klucz importu = iCalUID (zgodny z UID z pliku .ics)');
+ok(calAdv.events.some((e) => e.allDay && e.hours === 24), 'wydarzenie całodniowe: 24 h');
+mock.st.calendars[U.SEKRETARIAT].events.push({ id: 'cal-rec@google.com', title: 'TERMIN - co tydzień', allDay: true, start: SH.addDays(today, 5) + 'T00:00:00', end: SH.addDays(today, 6) + 'T00:00:00', recurringEventId: 'serie1' });
+ok(as(U.KPK, () => api.apiCalendarEvents('', '', '')).events.some((e) => e.recurring), 'wystąpienia serii oznaczone jako cykliczne');
+delete mock.st.calPage;
+const apiNoAdv = createServer(Object.assign({}, mock.globals, { Calendar: undefined }));
+eq(as(U.KPK, () => apiNoAdv.apiCalendarEvents('', '', '')).events.length, 11, 'kalendarz bez usługi zaawansowanej: CalendarApp');
+
+/* Administrator jednej kancelarii (KR) nie rusza drugiej ani ustawień wspólnych. */
+const kpkNew = as(U.KPK, () => api.apiTeamSave({ email: 'nowy.kr@kancelariarodzinna.com', imie_nazwisko: 'Nowy KR', rola: 'prawnik', kancelarie: 'KN,KR' }));
+eq(kpkNew.team.find((m) => m.email === 'nowy.kr@kancelariarodzinna.com').kancelarie, 'KR', 'administrator KR nie nada dostępu do KN');
+throws(() => as(U.KPK, () => api.apiTeamSave({ email: U.JUN1, rola: 'odczyt', kancelarie: 'KR' })), 'FORBIDDEN', 'administrator KR nie zmieni osoby z dostępem do KN');
+throws(() => as(U.KPK, () => api.apiFirmSave({ kod: 'KN', telefon: '1' })), 'FORBIDDEN', 'administrator KR nie edytuje danych KN');
+throws(() => as(U.KPK, () => api.apiCreateDb('KN')), 'FORBIDDEN', 'administrator KR nie zakłada bazy KN');
+throws(() => as(U.KPK, () => api.apiSeqSave('SEQ_TECZKA', 1)), 'FORBIDDEN', 'wspólna numeracja: tylko administrator obu kancelarii');
+throws(() => as(U.KPK, () => api.apiAllowedSave('gmail.com')), 'FORBIDDEN', 'domeny: tylko administrator obu kancelarii');
+throws(() => as(U.KPK, () => api.apiDictSave('*', 'typ_terminu', ['X'])), 'FORBIDDEN', 'wspólne słowniki: tylko administrator obu kancelarii');
+throws(() => as(U.KPK, () => api.apiResync()), 'FORBIDDEN', 'ponowne udostępnienie wszystkim: tylko administrator obu kancelarii');
+
+/* Wyłączenie dostępu działa także dla konta spoza domen; alias osoby nieaktywnej można przenieść. */
+as(U.OWNER, () => api.apiAllowedSave('example.com,partner.pl'));
+as(U.OWNER, () => api.apiTeamSave({ email: 'ext@partner.pl', imie_nazwisko: 'Zewnętrzny', rola: 'odczyt', kancelarie: 'KN', aliasy: 'wspolny@partner.pl' }));
+as(U.OWNER, () => api.apiAllowedSave('example.com'));
+const off = as(U.OWNER, () => api.apiTeamSave({ email: 'ext@partner.pl', imie_nazwisko: 'Zewnętrzny', rola: 'odczyt', kancelarie: 'KN', aktywny: 'nie' }));
+eq(off.team.find((m) => m.email === 'ext@partner.pl').aktywny, 'nie', 'wyłączenie konta spoza domen');
+throws(() => as(U.OWNER, () => api.apiTeamSave({ email: 'ext@partner.pl', rola: 'odczyt', kancelarie: 'KN' })), 'INVALID', 'ponowne włączenie konta spoza domen zablokowane');
+as(U.OWNER, () => api.apiTeamSave({ email: 'stary@kancelariarodzinna.com', imie_nazwisko: 'Stary', rola: 'odczyt', kancelarie: 'KR', aliasy: 'Biuro.KR@kancelariarodzinna.com', aktywny: 'nie' }));
+ok(as(U.OWNER, () => api.apiTeamSave({ email: 'nowy2@kancelariarodzinna.com', imie_nazwisko: 'Nowy', rola: 'odczyt', kancelarie: 'KR', aliasy: 'biuro.kr@kancelariarodzinna.com' })).team.some((m) => m.email === 'nowy2@kancelariarodzinna.com'), 'alias osoby nieaktywnej można przypisać innej');
+throws(() => as(U.OWNER, () => api.apiTeamSave({ email: 'nowy3@kancelariarodzinna.com', rola: 'odczyt', kancelarie: 'KR', aliasy: 'BIURO.KR@kancelariarodzinna.com' })), 'INVALID', 'zajęty alias rozpoznany bez względu na wielkość liter');
+
 console.log(`pass ${pass}, fail ${fail}`);
 process.exit(fail ? 1 : 0);

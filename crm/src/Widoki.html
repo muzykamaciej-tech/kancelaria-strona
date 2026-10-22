@@ -52,7 +52,13 @@ async function loadGmail(key, emails) {
 }
 function histPanel(t, firm, id) {
   const key = t + ':' + firm + ':' + id, c = S.cache.hist[key];
-  if (!c) { S.cache.hist[key] = 'loading'; call('apiHistory', firm, t, id).then((h) => { S.cache.hist[key] = h; render(); }, (e) => { S.cache.hist[key] = { error: e.message }; render(); }); return '<div class="empty"><span class="spin"></span></div>'; }
+  if (!c) {
+    /* Karta zadania jest w oknie, którego render() nie odświeża — historię wstawiamy tam osobno. */
+    const done = () => { render(); const box = $('.scrim .task-hist'); if (box && S.task && t === 'zadania' && S.task.firm === firm && S.task.id === id) box.innerHTML = histPanel(t, firm, id); };
+    S.cache.hist[key] = 'loading';
+    call('apiHistory', firm, t, id).then((h) => { S.cache.hist[key] = h; done(); }, (e) => { S.cache.hist[key] = { error: e.message }; done(); });
+    return '<div class="empty"><span class="spin"></span></div>';
+  }
   if (c === 'loading') return '<div class="empty"><span class="spin"></span></div>';
   if (c.error) return `<div class="empty">${esc(c.error)}</div>`;
   if (!c.length) return '<div class="empty">Brak zapisanych zmian.</div>';
@@ -254,7 +260,7 @@ VIEWS.sprawa = function (firm, id) {
 const TASK_CHIP = { 'Nowe': 'info', 'W toku': '', 'Do sprawdzenia': 'warn', 'Zrobione': 'ok', 'Anulowane': '' };
 function dueChip(t) {
   if (!t.termin || !isOpenTask(t)) return '';
-  const h = t.godzina ? ' ' + t.godzina : '';
+  const h = t.godzina ? ' ' + esc(t.godzina) : '';
   if (t.termin < today()) return chip('bad', 'zaległe ' + relDay(t.termin));
   if (t.termin === today()) return chip('warn', 'dziś' + h);
   if (t.termin === SH.addDays(today(), 1)) return chip('', 'jutro' + h);
@@ -311,9 +317,14 @@ function parseQuick(text) {
       return;
     }
     if ((m = /^@(.+)$/.exec(w))) {
-      const q = norm(m[1]);
-      out.who = q === 'ja' ? member(me()) : (S.boot.team || []).filter((x) => x.aktywny !== 'nie').find((x) => norm(x.imie_nazwisko).split(/[\s-]+/).some((p) => p.indexOf(q) === 0)) || null;
-      if (!out.who) out.errors.push('nie znam osoby @' + m[1]);
+      /* @Julia, @Bednarek, @Maciej.B — przy dwóch pasujących osobach prosimy o doprecyzowanie, zamiast zgadywać. */
+      const q = norm(m[1]).replace(/[.,;:]+$/, ''), pieces = q.split(/[._]+/).filter(Boolean);
+      if (q === 'ja') { out.who = member(me()); return; }
+      const parts = (x) => norm(x.imie_nazwisko).split(/[\s-]+/);
+      const cands = (S.boot.team || []).filter((x) => x.aktywny !== 'nie' && pieces.length && pieces.every((pc) => parts(x).some((p) => p.indexOf(pc) === 0)));
+      const exact = cands.filter((x) => parts(x).indexOf(q) >= 0);
+      out.who = cands.length === 1 ? cands[0] : exact.length === 1 ? exact[0] : null;
+      if (!out.who) out.errors.push(cands.length > 1 ? '@' + m[1] + ' pasuje do: ' + cands.map((x) => x.imie_nazwisko).join(', ') + ' — dopisz nazwisko (np. @' + parts(cands[0]).slice(-1)[0] + ')' : 'nie znam osoby @' + m[1]);
       return;
     }
     if (w === '!') { out.pilne = 'tak'; return; }
@@ -349,6 +360,7 @@ async function quickSave(el) {
     const t = await call('apiSave', 'zadania', { kancelaria: q.firm, tytul: q.tytul, przypisane: q.przypisane, termin: q.termin, sprawa_id: q.sprawa ? q.sprawa.id : '', pilne: q.pilne, sprawdzenie: defaultReview(q.przypisane) });
     upsert('zadania', t);
     toast(t.przypisane === me() ? 'Dodano zadanie' : 'Zlecono: ' + personName(t.przypisane));
+    mailWarn(t._powiadomiono);
     el.value = '';
     const id = el.id;
     render();
@@ -407,7 +419,8 @@ VIEWS.zadanie = function (firm, id) {
 function openTaskModal(firm, id, panel) {
   const t = byId('zadania', firm, id);
   if (!t) { toast('Nie ma takiego zadania (mogło zostać usunięte).', true); return; }
-  S.task = { firm, id, panel: panel || '' };
+  const hist = !!(S.task && S.task.firm === firm && S.task.id === id && S.task.hist);
+  S.task = { firm, id, panel: panel || '', hist };
   const sc = $('.scrim');
   if (sc && sc.dataset.task === firm + ':' + id) { sc.innerHTML = taskModalHtml(t); return; }
   const s = openModal(taskModalHtml(t));
@@ -452,19 +465,21 @@ function taskModalHtml(t) {
     <div class="modal-f">${w && touch ? `<button class="btn ghost left" data-act="task-edit">${ic('edit')}Edytuj</button>` : ''}<button class="btn ghost" data-act="task-hist">${S.task && S.task.hist ? 'Ukryj historię' : 'Historia zmian'}</button><button class="btn" data-act="close">Zamknij</button></div></div>`;
 }
 const ROLE_WRITE = (r) => !!((S.boot.schema.roles[r] || {}).write);
+function mailWarn(v) { if (v === 'blad') toast('Nie udało się wysłać powiadomienia e-mail. Daj znać tej osobie inną drogą.', true); }
 async function taskDo(el) {
   const st = S.task || {}, a = el.dataset.a, t = byId('zadania', st.firm, st.id);
   if (!t) return;
   if (el.dataset.panel && st.panel !== a) { st.panel = a; openTaskModal(st.firm, st.id, a); const n = $('#tk-note'); if (n) n.focus(); return; }
   const p = { _ver: t.zmieniono };
   if (a === 'komentarz') { p.komentarz = ($('#tk-new') || {}).value || ''; if (!p.komentarz.trim()) { toast('Wpisz treść komentarza.', true); return; } }
-  else p.komentarz = ($('#tk-note') || {}).value || '';
+  else p.komentarz = el.dataset.goNow && st.panel === a ? ($('#tk-note') || {}).value || '' : '';
   if (a === 'przekaz') p.do = ($('#tk-to') || {}).value || '';
   if (a === 'przesun') p.termin = ($('#tk-date') || {}).value || '';
   await busy(el, async () => {
     const r = await call('apiTask', st.firm, st.id, a, p);
     upsert('zadania', r.zadanie);
     if (r.komentarz) upsert('komentarze', r.komentarz);
+    mailWarn(r.powiadomiono);
     toast({ przyjmij: 'Przyjęto zadanie', zrobione: r.zadanie.status === 'Do sprawdzenia' ? 'Oddano do sprawdzenia' : 'Zrobione', zatwierdz: 'Zatwierdzono', zwroc: 'Zwrócono do poprawy', przekaz: 'Przekazano: ' + personName(r.zadanie.przypisane), odrzuc: 'Odrzucono — wraca do zlecającego', anuluj: 'Anulowano zadanie', otworz: 'Otwarto ponownie', przesun: 'Zmieniono termin', komentarz: 'Dodano komentarz' }[a] || 'Zapisano');
     st.panel = '';
     render();
@@ -738,6 +753,10 @@ function calSection() {
     ${st && st.events ? calMapping() : ''}</div></section>`;
 }
 function calStripKey(title) { return norm(String(title).replace(/[(\[][^()\[\]]{0,25}[)\]]/g, ' ')).replace(/\s+/g, ' ').trim(); }
+/* Duplikaty scalamy tylko wtedy, gdy różnią się samym znacznikiem „(zrobione)” — numer teczki i „(ODWOŁANA)” zostają w kluczu. */
+function calDedupKey(title) {
+  return norm(title).replace(/[(\[]\s*(?:zrobion|wykonan|zrob\.)[^)\]]*[)\]]/g, ' ').replace(/^\s*(?:zrobion|wykonan)[a-z]*\s*[-–—:]?\s*/, '').replace(/[^a-z0-9]+/g, ' ').trim();
+}
 function matchTermin(firm, p) {
   const cases = S.data.sprawy.filter((s) => s.kancelaria === firm), none = { id: '', conf: '', how: '' };
   if (p.teczka) { const s = cases.find((x) => String(x.numer).toUpperCase() === p.teczka); if (s) return { id: s.id, conf: 'pewne', how: 'nr teczki' }; }
@@ -745,16 +764,18 @@ function matchTermin(firm, p) {
   if (p.sygn) { const s = cases.find((x) => x.sygn_akt && ns(x.sygn_akt) === ns(p.sygn)); if (s) return { id: s.id, conf: 'pewne', how: 'sygnatura' }; }
   const toks = (p.klient ? p.klient.split(/\s+/) : (p.czynnosc.match(/[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]{2,}(?:-[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)?/g) || [])).filter((w) => w.length >= 3);
   if (!toks.length) return none;
+  const split = (ws) => ws.reduce((a, x) => a.concat([x], x.split('-')), []);
   const hits = S.data.klienci.filter((k) => k.kancelaria === firm).map((k) => {
-    const parts = String(k.nazwa).split(/\s+/).reduce((a, x) => a.concat([x], x.split('-')), []);
-    return { k, n: toks.filter((t) => parts.some((x) => SH.nameMatch(x, t))).length };
+    const words = String(k.nazwa).split(/\s+/).filter(Boolean), parts = split(words), sur = split(words.length > 1 ? words.slice(1) : words);
+    return { k, n: toks.filter((t) => parts.some((x) => SH.nameMatch(x, t))).length, sur: toks.some((t) => sur.some((x) => SH.nameMatch(x, t))) };
   }).filter((x) => x.n);
   if (!hits.length) return none;
   const best = Math.max(...hits.map((x) => x.n)), top = hits.filter((x) => x.n === best);
   const cand = cases.filter((s) => top.some((x) => x.k.id === s.klient_id));
   if (!cand.length) return { id: '', conf: '', how: 'klient bez sprawy' };
   const pool = cand.filter(isOpenCase).length ? cand.filter(isOpenCase) : cand;
-  if (pool.length === 1 && top.length === 1) return { id: pool[0].id, conf: 'pewne', how: 'klient' };
+  /* „Pewne” tylko po nazwisku albo imieniu i nazwisku; samo imię to najwyżej „prawdopodobne”. */
+  if (pool.length === 1 && top.length === 1 && (best >= 2 || top[0].sur)) return { id: pool[0].id, conf: 'pewne', how: 'klient' };
   const words = norm(p.czynnosc).split(/[^a-z0-9]+/).filter((w) => w.length > 4);
   const scored = pool.map((s) => ({ s, sc: words.filter((w) => norm(s.tytul + ' ' + s.kategoria).indexOf(w.slice(0, 5)) >= 0).length })).sort((a, b) => b.sc - a.sc);
   return { id: scored[0].s.id, conf: 'prawdopodobne', how: 'klient, ' + pool.length + ' spraw' };
@@ -763,18 +784,23 @@ function calBuildRows() {
   const st = IMP.cal, names = (S.boot.team || []).map((m) => m.imie_nazwisko), byKey = {};
   st.events.forEach((e) => {
     if (!(e.allDay || e.hours >= 23) || e.recurring) return;
-    const p = SH.parseTermin(e.title, names), key = e.date + '|' + calStripKey(e.title).replace(/^zrobione\s*/, '');
+    const p = SH.parseTermin(e.title, names), key = e.date + '|' + calDedupKey(e.title);
     const prev = byKey[key];
-    if (prev) { prev.p.done = prev.p.done || p.done; prev.dups++; return; }
-    byKey[key] = { e, p, dups: 0 };
+    if (prev) { prev.p.done = prev.p.done || p.done; prev.dups++; if (e.uid) prev.uids.push(e.uid); return; }
+    byKey[key] = { e, p, dups: 0, uids: e.uid ? [e.uid] : [] };
   });
   st.rows = Object.values(byKey).map((x) => {
     const p = x.p, m = p.isTermin ? matchTermin(st.firm, p) : { id: '', conf: '', how: '' };
     const s = byId('sprawy', st.firm, m.id), pr = p.prawnik ? (S.boot.team || []).find((t) => t.imie_nazwisko === p.prawnik) : null;
     const status = p.cancel ? 'Nieaktualny' : p.done ? 'Wykonany' : x.e.date < today() ? 'Do weryfikacji' : 'Otwarty';
-    return { e: x.e, p, dups: x.dups, inc: p.isTermin, sprawa_id: m.id, conf: m.conf, how: m.how, status,
-      odp: (s && s.prowadzacy) || (pr && pr.email) || me() };
+    return { e: x.e, p, dups: x.dups, uids: x.uids.sort(), inc: p.isTermin, sprawa_id: m.id, conf: m.conf, how: m.how, status,
+      odp: calOdp(st.firm, s && s.prowadzacy, pr && pr.email) };
   }).sort((a, b) => (a.e.date < b.e.date ? 1 : -1));
+}
+/* Odpowiedzialny musi być na liście osób kancelarii — inaczej lista pokazałaby kogoś innego, niż trafi do zapisu. */
+function calOdp(firm, ...pref) {
+  const team = teamFor(firm).map((m) => m.email);
+  return pref.find((e) => e && team.indexOf(e) >= 0) || (team.indexOf(me()) >= 0 ? me() : team[0] || '');
 }
 function calMapping() {
   const st = IMP.cal;
@@ -810,8 +836,10 @@ function calItems() {
   return st.rows.filter((r) => r.inc).map((r) => {
     const s = byId('sprawy', st.firm, r.sprawa_id);
     const opis = (r.p.isTermin ? (s ? r.p.czynnosc || r.p.title : [r.p.klient, r.p.czynnosc].filter(Boolean).join(' - ')) : r.e.title) || r.e.title;
-    const it = { kancelaria: st.firm, table: 'terminy', rec: { opis: opis.slice(0, 300), data: r.e.date, typ: 'Termin procesowy', status: r.status, sprawa_id: r.sprawa_id, odpowiedzialny: r.odp,
-      podstawa: 'Import z kalendarza: ' + r.e.title, zrodlo_id: 'cal:' + (r.e.uid || calStripKey(r.e.title)) + ':' + r.e.date } };
+    /* Klucz to UID wpisu (stały także po przesunięciu w kalendarzu); przy scalonych duplikatach serwer sprawdza też pozostałe. */
+    const ids = r.uids.length ? r.uids.map((u) => 'cal:' + u) : ['cal:' + calDedupKey(r.e.title) + ':' + r.e.date];
+    const it = { kancelaria: st.firm, table: 'terminy', alt: ids.slice(1), rec: { opis: opis.slice(0, 300), data: r.e.date, typ: 'Termin procesowy', status: r.status, sprawa_id: r.sprawa_id, odpowiedzialny: r.odp,
+      podstawa: 'Import z kalendarza: ' + r.e.title, zrodlo_id: ids[0], zrodlo_data: r.e.date } };
     if (st.tasks && r.status === 'Otwarty') {
       const due = SH.addWorkingDays(r.e.date, -days);
       it.zadanie = { tytul: 'Przygotować: ' + opis.slice(0, 200), przypisane: r.odp, termin: due < today() ? today() : due, sprawdzenie: defaultReview(r.odp) };
@@ -827,12 +855,20 @@ function calReadFile(file) {
   const r = new FileReader();
   r.onload = () => {
     const from = ($('#cal-from') || {}).value || '';
-    const evs = SH.parseIcs(String(r.result)).filter((e) => (e.allDay || e.hours >= 23) && (!from || e.date >= from));
+    /* Zawijanie linii w .ics jest co 75 bajtów i potrafi rozciąć polską literę — łączymy linie przed dekodowaniem UTF-8. */
+    const b = new Uint8Array(r.result), out = new Uint8Array(b.length);
+    let n = 0;
+    for (let i = 0; i < b.length; i++) {
+      if (b[i] === 13 && b[i + 1] === 10 && (b[i + 2] === 32 || b[i + 2] === 9)) { i += 2; continue; }
+      if (b[i] === 10 && (b[i + 1] === 32 || b[i + 1] === 9)) { i += 1; continue; }
+      out[n++] = b[i];
+    }
+    const evs = SH.parseIcs(new TextDecoder('utf-8').decode(out.subarray(0, n))).filter((e) => (e.allDay || e.hours >= 23) && (!from || e.date >= from));
     calSetEvents('Plik ' + file.name, evs);
     toast('Wczytano ' + evs.length + ' wydarzeń całodniowych i 24-godzinnych');
   };
   r.onerror = () => toast('Nie udało się odczytać pliku.', true);
-  r.readAsText(file);
+  r.readAsArrayBuffer(file);
 }
 
 /* ---------- Pierwsza konfiguracja ---------- */
@@ -1037,7 +1073,7 @@ document.addEventListener('click', (e) => {
     $('input[type=hidden]', box).value = id;
     if (r) $('.combo-q', box).value = refLabel(box.dataset.ref, r);
     $('.combo-list', box).hidden = true;
-    if (box.dataset.impcal !== undefined && IMP.cal) { const row = IMP.cal.rows[+box.dataset.impcal]; row.sprawa_id = id; row.conf = id ? 'ręcznie' : ''; const s = byId('sprawy', firm, id); if (s && s.prowadzacy) row.odp = s.prowadzacy; render(); }
+    if (box.dataset.impcal !== undefined && IMP.cal) { const row = IMP.cal.rows[+box.dataset.impcal]; row.sprawa_id = id; row.conf = id ? 'ręcznie' : ''; const s = byId('sprawy', firm, id); row.odp = calOdp(firm, s && s.prowadzacy, row.odp); render(); }
     return;
   }
   const el = e.target.closest('[data-act],[data-go],[data-sort],[data-filt-set],[data-scope],[data-tab]');
@@ -1072,7 +1108,12 @@ document.addEventListener('input', (e) => {
   const el = e.target;
   if (el.id === 'q') { clearTimeout(searchTimer); searchTimer = setTimeout(() => renderSearch(el.value), 80); return; }
   if (el.dataset.qa) { quickHint(el); return; }
-  if (el.classList.contains('combo-q')) { comboUpdate(el); return; }
+  if (el.classList.contains('combo-q')) {
+    comboUpdate(el);
+    const box = el.closest('.combo');
+    if (box.dataset.impcal !== undefined && IMP.cal && !el.value.trim()) { const row = IMP.cal.rows[+box.dataset.impcal]; row.sprawa_id = ''; row.conf = ''; }
+    return;
+  }
   if (el.dataset.filt && (el.type === 'search' || el.type === 'text')) {
     clearTimeout(filtTimer);
     filtTimer = setTimeout(() => { setFilt(el.dataset.filt, el.dataset.key, el.value); rerenderKeepFocus(); }, 160);
@@ -1096,7 +1137,8 @@ document.addEventListener('change', (e) => {
     return;
   }
   if (el.dataset.actChange === 'zap-status-sel') { zapUpdate({ status: el.value }, el); return; }
-  if (el.name === 'przypisane' && S.form && S.form.table === 'zadania') { const cb = $('#f-sprawdzenie'); if (cb) cb.checked = defaultReview(el.value) === 'tak'; return; }
+  if (el.name === 'przypisane' && S.form && S.form.table === 'zadania') { const cb = $('#f-sprawdzenie'); if (cb && !cb.disabled) cb.checked = defaultReview(el.value) === 'tak'; return; }
+  if (el.id === 'cal-id' || el.id === 'cal-from') { IMP.cal = Object.assign(IMP.cal || {}, el.id === 'cal-id' ? { calId: el.value.trim() } : { from: el.value }); return; }
   if (el.id === 'cal-file' && el.files && el.files[0]) { calReadFile(el.files[0]); return; }
   if (el.dataset.cal !== undefined && IMP.cal) {
     const k = el.dataset.cal, i = el.dataset.i;

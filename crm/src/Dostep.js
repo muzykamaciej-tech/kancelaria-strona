@@ -36,10 +36,15 @@ function ctx_() {
   try { s = loadSettings_(); } catch (e) { fail_('DENIED', 'Twoje konto (' + email + ') nie ma dostępu do CRM. Poproś administratora o dodanie do zespołu.'); }
   var m = memberOf_(s, email);
   if (!m) fail_('DENIED', 'Twoje konto (' + email + ') nie jest na liście zespołu CRM. Poproś administratora o dodanie.');
+  if (!emailAllowed_(s.kancelarie, email)) fail_('DENIED', 'Konto ' + email + ' jest spoza domen kancelarii. Zaloguj się kontem służbowym.');
   var role = ROLES[m.rola] ? m.rola : 'odczyt';
   var firms = splitList_(m.kancelarie).filter(function (k) { return s.kancelarie.some(function (f) { return f.kod === k; }); });
+  var perm = ROLES[role];
+  /* Administrator wszystkich kancelarii („pełny”) zarządza też wspólnymi ustawieniami; administrator jednej
+     kancelarii — tylko jej zespołem i danymi. */
+  var full = !!perm.admin && s.kancelarie.every(function (f) { return firms.indexOf(f.kod) >= 0; });
   /* email = konto główne osoby (tożsamość w zadaniach i historii), login = konto, którym otwarto aplikację. */
-  return { email: m.email, login: email, member: m, role: role, perm: ROLES[role], firms: firms, s: s };
+  return { email: m.email, login: email, member: m, role: role, perm: perm, full: full, firms: firms, s: s };
 }
 
 /* Aktywny członek zespołu po adresie konta głównego albo jednego z aliasów (drugie konto tej samej osoby). */
@@ -77,8 +82,13 @@ function requireFirm_(c, code, write) {
   return f;
 }
 
-function requireAdmin_(c) {
+function requireAdmin_(c, code) {
   if (!c.perm.admin) fail_('FORBIDDEN', 'Tylko administrator może to zrobić.');
+  if (code && c.firms.indexOf(code) < 0) fail_('FORBIDDEN', 'Nie administrujesz tą kancelarią.');
+}
+function requireFullAdmin_(c) {
+  requireAdmin_(c);
+  if (!c.full) fail_('FORBIDDEN', 'To ustawienie dotyczy obu kancelarii — zmienia je administrator z dostępem do wszystkich.');
 }
 
 /* Właściciel lub współedytor projektu skryptu — tylko on może uruchomić pierwszą konfigurację. */
@@ -96,7 +106,7 @@ function applySharing_(s, m) {
 
 function applySharingFor_(s, m, email) {
   if (!email || email === me_()) return [];
-  var active = m.aktywny !== 'nie';
+  var active = m.aktywny !== 'nie' && emailAllowed_(s.kancelarie, email);
   var firms = active ? splitList_(m.kancelarie) : [];
   var editor = m.rola !== 'odczyt';
   var log = [];

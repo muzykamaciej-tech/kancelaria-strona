@@ -115,27 +115,31 @@ function sharedFactory_() {
   function norm(s) {
     return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\u0142/g, 'l');
   }
-  /* Nazwiska w różnych przypadkach: „Kowalska” = „Kowalskiej”, „Nowak” = „Nowakowi”. */
+  /* Nazwiska w różnych przypadkach: „Kowalska” = „Kowalskiej”, „Nowak” = „Nowakowi”, ale
+     „Kowal” ≠ „Kowalski” i „Kowalski” ≠ „Kowalczyk”: po wspólnym rdzeniu mogą zostać tylko końcówki fleksyjne. */
+  var ENDINGS = { '': 1, a: 1, y: 1, i: 1, e: 1, u: 1, ej: 1, iej: 1, ego: 1, iego: 1, emu: 1, iemu: 1, owi: 1, em: 1, iem: 1, om: 1, ow: 1, ach: 1, ami: 1, ich: 1, im: 1, imi: 1, ie: 1, owie: 1, ze: 1, ce: 1 };
   function nameMatch(a, b) {
-    a = norm(a); b = norm(b);
+    a = norm(a).replace(/[^a-z]/g, ''); b = norm(b).replace(/[^a-z]/g, '');
     if (!a || !b) return false;
     if (a === b) return true;
     var n = Math.min(a.length, b.length), p = 0;
-    if (n < 4) return false;
     while (p < n && a[p] === b[p]) p++;
-    return p >= Math.max(4, n - 3);
+    return p >= 3 && Math.min(a.length, b.length) >= 3 && !!ENDINGS[a.slice(p)] && !!ENDINGS[b.slice(p)];
   }
 
   /* Tytuł wpisu z kalendarza: „(zrobione) TERMIN - Jan Kowalski - apelacja (593)”.
      Zwraca: czy to TERMIN, czy wykonany / odwołany, nr teczki, sygnaturę, klienta, czynność, prawnika
      (gdy tytuł kończy się „ - Imię Nazwisko” kogoś z listy names). */
   var STOP = { EPU: 1, KW: 1, SR: 1, SO: 1, SA: 1, US: 1, ZUS: 1, KRS: 1, WSA: 1, NSA: 1, SKO: 1, TERMIN: 1, PI: 1, UPO: 1, KRZ: 1 };
+  /* Czynności pisane wielką literą nie są nazwiskiem klienta. */
+  var ACTS = { apelacja: 1, pozew: 1, wniosek: 1, odpowiedz: 1, zazalenie: 1, skarga: 1, sprzeciw: 1, pismo: 1, rozprawa: 1, oplata: 1, uzupelnienie: 1,
+    odwolanie: 1, stanowisko: 1, replika: 1, wezwanie: 1, zarzuty: 1, cofniecie: 1, wyrok: 1, posiedzenie: 1, przedluzka: 1, termin: 1, kasacja: 1 };
   function parseTermin(title, names) {
     var t = String(title || '').replace(/[\u2013\u2014]/g, '-').replace(/\s+/g, ' ').trim();
     var out = { title: t, isTermin: false, done: false, cancel: false, teczka: '', sygn: '', klient: '', czynnosc: '', prawnik: '' };
-    out.done = /[(\[]\s*(?:zrobione|zrobiony|zrobiona|zrob\.?|wykonane?|wykonany)\s*[)\]]/i.test(t) || /^zrobione\b/i.test(t) || /\bzrobione$/i.test(t);
+    out.done = /[(\[]\s*(?:zrobion\w*|zrob\.?|wykonan\w*|wykonano)\b[^)\]]*[)\]]/i.test(t) || /^(?:zrobione|wykonane)\b/i.test(t) || /\bzrobione$/i.test(t);
     out.cancel = /[(\[]\s*(?:odwo[lł]an[aeyio]*|nieaktualn[aeyio]*|anulowan[aeyio]*|przesuni[eę]t[aeyio]*)\s*[)\]]/i.test(t);
-    var head = /^((?:[(\[][^)\]]*[)\]]\s*)*)(?:zrobione\s+)?TERMIN\b\s*[-:]?\s*/i.exec(t);
+    var head = /^((?:[(\[][^)\]]*[)\]]\s*[-:]?\s*)*)(?:(?:zrobione|wykonane)\s*[-:]?\s*)?TERMIN\b\s*[-:]*\s*/i.exec(t);
     if (!head) return out;
     out.isTermin = true;
     var rest = t.slice(head[0].length);
@@ -153,7 +157,7 @@ function sharedFactory_() {
     for (var i = 0; i < words.length && kl.length < 3; i++) {
       var w = words[i];
       if (!w || w === '-') { if (kl.length) break; continue; }
-      if (STOP[w.toUpperCase()] || !/^[A-ZĄĆĘŁŃÓŚŹŻ][A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ'’]+(?:-[A-ZĄĆĘŁŃÓŚŹŻ][A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ'’]+)?$/.test(w)) break;
+      if (STOP[w.toUpperCase()] || ACTS[norm(w)] || !/^[A-ZĄĆĘŁŃÓŚŹŻ][A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ'’]+(?:-[A-ZĄĆĘŁŃÓŚŹŻ][A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ'’]+)?$/.test(w)) break;
       kl.push(w);
     }
     out.klient = kl.join(' ');
@@ -164,8 +168,9 @@ function sharedFactory_() {
   /* Plik .ics (eksport Kalendarza Google) → wydarzenia z datą/godziną ścienną w Polsce. */
   function parseIcs(text) {
     var lines = String(text || '').replace(/\r\n[ \t]/g, '').replace(/\n[ \t]/g, '').split(/\r?\n/);
-    var evs = [], cur = null;
-    function unesc(v) { return v.replace(/\\n/gi, '\n').replace(/\\,/g, ',').replace(/\\;/g, ';').replace(/\\\\/g, '\\'); }
+    var evs = [], cur = null, nested = 0;
+    function unesc(v) { return v.replace(/\\([\\;,nN])/g, function (m, c) { return c === 'n' || c === 'N' ? '\n' : c; }); }
+    function colon(line) { var q = false; for (var i = 0; i < line.length; i++) { if (line[i] === '"') q = !q; else if (line[i] === ':' && !q) return i; } return -1; }
     function when(params, v) {
       var m = /^(\d{4})(\d{2})(\d{2})(?:T(\d{2})(\d{2})(\d{2})?(Z)?)?/.exec(v);
       if (!m) return null;
@@ -174,10 +179,14 @@ function sharedFactory_() {
       return { allDay: false, wall: m[7] ? warsawWall(ms) : ms };
     }
     lines.forEach(function (line) {
-      if (/^BEGIN:VEVENT/i.test(line)) { cur = {}; return; }
+      if (/^BEGIN:VEVENT/i.test(line)) { cur = {}; nested = 0; return; }
       if (/^END:VEVENT/i.test(line)) { if (cur) evs.push(cur); cur = null; return; }
       if (!cur) return;
-      var c = line.indexOf(':');
+      /* Bloki zagnieżdżone (VALARM) mają własne SUMMARY/DESCRIPTION — nie są częścią wydarzenia. */
+      if (/^BEGIN:/i.test(line)) { nested++; return; }
+      if (/^END:/i.test(line)) { nested = Math.max(0, nested - 1); return; }
+      if (nested) return;
+      var c = colon(line);
       if (c < 0) return;
       var key = line.slice(0, c), val = line.slice(c + 1), name = key.split(';')[0].toUpperCase(), params = key.slice(name.length);
       if (name === 'SUMMARY') cur.title = unesc(val);
@@ -186,7 +195,7 @@ function sharedFactory_() {
       else if (name === 'DTSTART') cur.s = when(params, val);
       else if (name === 'DTEND') cur.e = when(params, val);
       else if (name === 'DURATION') cur.dur = val;
-      else if (name === 'RRULE') cur.recurring = true;
+      else if (name === 'RRULE' || name === 'RECURRENCE-ID') cur.recurring = true;
       else if (name === 'STATUS') cur.status = val.trim().toUpperCase();
     });
     return evs.filter(function (e) { return e.s && e.status !== 'CANCELLED'; }).map(function (e) {

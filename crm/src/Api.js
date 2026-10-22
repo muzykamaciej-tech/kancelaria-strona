@@ -61,7 +61,7 @@ function bootstrap() {
     if (!f.db_id) { errors.push(f.nazwa_krotka + ': baza nie jest jeszcze założona.'); return; }
     try {
       var ss = SpreadsheetApp.openById(f.db_id);
-      if (c.perm.admin) migrateFirmDb_(ss);
+      if (c.perm.admin) { try { migrateFirmDb_(ss); } catch (e) { console.warn('migracja ' + code + ': ' + e); } }
       var got = readTables_(ss, TABLE_ORDER);
       TABLE_ORDER.forEach(function (t) {
         (got[t] || []).forEach(function (r) { r.kancelaria = code; data[t].push(r); });
@@ -71,9 +71,10 @@ function bootstrap() {
     }
   });
   var admin = !!c.perm.admin;
+  var visibleFirms = c.s.kancelarie.filter(function (f) { return c.full || c.firms.indexOf(f.kod) >= 0; });
   return {
     state: 'ok', email: c.email, login: c.login, me: c.member, role: c.role, perm: c.perm,
-    firms: c.s.kancelarie.filter(function (f) { return admin || c.firms.indexOf(f.kod) >= 0; }).map(publicFirm_),
+    firms: visibleFirms.map(publicFirm_), full: c.full,
     myFirms: c.firms,
     team: c.s.zespol.map(function (m) { return { email: m.email, imie_nazwisko: m.imie_nazwisko, tytul: m.tytul, stanowisko: m.stanowisko || '', rola: m.rola, kancelarie: m.kancelarie, telefon: m.telefon, aktywny: m.aktywny, aliasy: m.aliasy || '', powiadomienia: m.powiadomienia || '' }; }),
     dicts: dictsFor_(c.s.slowniki, c.s.kancelarie.map(function (f) { return f.kod; })),
@@ -88,7 +89,15 @@ function bootstrap() {
 /* Nowe zakładki z kolejnych wersji (np. Zadania, Komentarze) zakłada administrator przy starcie. */
 function migrateFirmDb_(ss) {
   var have = ss.getSheets().map(function (sh) { return sh.getName(); });
-  TABLE_ORDER.forEach(function (t) { if (have.indexOf(TABLES[t].sheet) < 0) ensureSheet_(ss, TABLES[t].sheet, tableKeys_(t)); });
+  var missing = TABLE_ORDER.filter(function (t) { return have.indexOf(TABLES[t].sheet) < 0; });
+  if (!missing.length) return;
+  var lock = LockService.getScriptLock();
+  if (!lock.tryLock(5000)) return;
+  try {
+    var now = ss.getSheets().map(function (sh) { return sh.getName(); });
+    missing.forEach(function (t) { if (now.indexOf(TABLES[t].sheet) < 0) ensureSheet_(ss, TABLES[t].sheet, tableKeys_(t)); });
+    SpreadsheetApp.flush();
+  } finally { lock.releaseLock(); }
 }
 
 /* ---------- Zapis ---------- */
@@ -118,6 +127,7 @@ function cleanRecord_(table, rec) {
     if (fd.t === 'email' && v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) fail_('INVALID', fd.l + ': niepoprawny adres e-mail.');
     if ((fd.t === 'date' || fd.t === 'datetime') && v && isNaN(sh_().parse(v))) fail_('INVALID', fd.l + ': niepoprawna data.');
     if (fd.t === 'url' && v && !/^https?:\/\//i.test(v)) fail_('INVALID', fd.l + ': link musi zaczynać się od https://');
+    if (fd.t === 'time' && v && !/^([01]\d|2[0-3]):[0-5]\d$/.test(v)) fail_('INVALID', fd.l + ': godzina w formacie GG:MM.');
     out[fd.k] = v.slice(0, 20000);
   });
   return out;
@@ -224,8 +234,9 @@ function apiSave(table, rec) {
     if (r._assigned) r._teczka = teczkaOf_(ss, r.sprawa_id);
     return r;
   });
-  if (out._assigned) notifyTask_(c, f, out, 'nowe', out.przypisane, out.opis || '', out._teczka);
+  var mailed = out._assigned ? notifyTask_(c, f, out, 'nowe', out.przypisane, out.opis || '', out._teczka) : null;
   delete out._assigned; delete out._teczka;
+  if (mailed !== null) out._powiadomiono = mailed;
   return out;
 }
 

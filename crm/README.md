@@ -18,7 +18,7 @@ Wersja 0.2: zadania z delegowaniem w zespole i import terminów z kalendarza.
 | Rejestr umów | Numeracja NN/RRRR wspólna dla obu kancelarii, tak jak w „Rejestrze Umów” |
 | Rozliczenia | Zaliczki, faktury i wpłaty przypięte do spraw: do wystawienia, zaległe, godziny nierozliczone |
 | Konflikt interesów | Szuka w klientach, stronach przeciwnych i zapytaniach obu kancelarii |
-| Zespół i dostępy | Kto widzi którą kancelarię i z jaką rolą: administrator, prawnik, asystent, tylko odczyt |
+| Zespół i dostępy | Kto widzi którą kancelarię i z jaką rolą: administrator, prawnik, asystent, tylko odczyt. Administrator jednej kancelarii zarządza tylko jej zespołem i danymi; ustawienia wspólne (numeracja, domeny, wspólne słowniki) zmienia administrator obu kancelarii. |
 | Import rejestrów | Zgłoszenia ze strony, „Lista Spraw”, „Rejestr Umów”, notatki spraw z Obsidiana, wpisy „TERMIN - …” z Kalendarza Google albo z pliku .ics. Powtórny import pomija wiersze już przeniesione, a przy terminach zamyka te, przy których w kalendarzu dopisano „(zrobione)”. |
 
 ## Gdzie są dane i jak działa dostęp
@@ -84,8 +84,13 @@ Kalendarz sekretariatu musi być widoczny dla konta, którym uruchamiasz import 
 
 - Brane są wydarzenia całodniowe i trwające co najmniej 23 h (zespół wpisywał je też jako 07:00–07:00).
 - Tytuł: „TERMIN - klient czynność”. „(zrobione)” na początku lub na końcu oznacza wykonany, „(ODWOŁANA)” nieaktualny. Przeszłe wpisy bez znacznika dostają status „Do weryfikacji”.
-- Dopasowanie do sprawy: numer teczki „(593)”, sygnatura, nazwisko klienta (także odmienione). W podglądzie każdą sprawę można zmienić przed zapisem.
+- Dopasowanie do sprawy: numer teczki „(593)”, sygnatura, nazwisko klienta (także odmienione). „Pewne” tylko po numerze, sygnaturze albo nazwisku; samo imię daje „prawdopodobne”. W podglądzie każdą sprawę można zmienić przed zapisem.
 - Opcja: przy każdym otwartym terminie zadanie „Przygotować: …” dla prowadzącego, 3 dni robocze wcześniej.
+- Import można powtarzać. Kluczem jest identyfikator wpisu w kalendarzu (ten sam w Kalendarzu Google i w pliku .ics). Dla terminów wciąż otwartych w CRM:
+  - dopisane „(zrobione)” zamyka termin;
+  - „(ODWOŁANA)” unieważnia termin i anuluje jego zadanie przygotowania;
+  - przesunięcie wpisu zmienia datę terminu i zadania przygotowania, chyba że ktoś poprawił datę w CRM (wtedy CRM ma pierwszeństwo).
+  Terminów zamkniętych w CRM kalendarz już nie zmienia. Każda zmiana z importu trafia do Historii.
 
 ## Do ustalenia i następne kroki
 

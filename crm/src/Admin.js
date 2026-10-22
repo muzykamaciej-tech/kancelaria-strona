@@ -82,7 +82,11 @@ function apiSetup(p) {
     var codes = firms.map(function (f) { return f.kod; });
     if (p.dozwolone) props_().setProperty('ALLOWED_DOMAINS', splitList_(p.dozwolone).join(','));
     var me = p.me || {};
-    var team = [{ email: email, imie_nazwisko: me.imie_nazwisko || email, tytul: me.tytul || '', stanowisko: me.stanowisko || 'Wspólnik', rola: 'admin', kancelarie: codes.join(','), telefon: me.telefon || '', aktywny: 'tak', aliasy: splitList_(me.aliasy).join(','), powiadomienia: 'tak', dodano: now, dodal: email }];
+    var teamEmails = (p.team || []).map(function (m) { return String(m.email || '').trim().toLowerCase(); });
+    var myAliases = splitList_(me.aliasy).map(function (a) { return a.toLowerCase(); }).filter(function (a) {
+      return a !== email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(a) && emailAllowed_(firms, a) && teamEmails.indexOf(a) < 0;
+    });
+    var team = [{ email: email, imie_nazwisko: me.imie_nazwisko || email, tytul: me.tytul || '', stanowisko: me.stanowisko || 'Wspólnik', rola: 'admin', kancelarie: codes.join(','), telefon: me.telefon || '', aktywny: 'tak', aliasy: myAliases.join(','), powiadomienia: 'tak', dodano: now, dodal: email }];
     var skipped = [];
     (p.team || []).forEach(function (m) {
       var e = String(m.email || '').trim().toLowerCase();
@@ -102,7 +106,7 @@ function apiSetup(p) {
     });
     dropSettingsCache_();
     var s = loadSettings_(true);
-    var shareLog = team.slice(1).map(function (m) { return { email: m.email, log: applySharing_(s, m) }; }).concat(skipped);
+    var shareLog = team.map(function (m) { return { email: m.email, log: applySharing_(s, m) }; }).filter(function (x) { return x.log.length; }).concat(skipped);
     log_(set, email, 'konfiguracja', '', 'utworzenie', { kancelarie: codes.join(','), zespol: team.length });
     return { shareLog: shareLog };
   });
@@ -117,13 +121,22 @@ function apiTeamSave(m) {
   if (!ROLES[m.rola]) fail_('INVALID', 'Wybierz rolę.');
   if (email === c.email && (m.rola !== 'admin' || m.aktywny === 'nie')) fail_('INVALID', 'Nie możesz odebrać sobie roli administratora.');
   var aliasy = splitList_(m.aliasy).map(function (a) { return a.toLowerCase(); }).filter(function (a) { return a !== email; });
+  var active = m.aktywny !== 'nie';
   [email].concat(aliasy).forEach(function (e) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) fail_('INVALID', 'Niepoprawny adres: ' + e);
-    if (!emailAllowed_(c.s.kancelarie, e)) fail_('INVALID', 'Konto ' + e + ' jest spoza domen kancelarii (' + allowedDomains_(c.s.kancelarie).join(', ') + '). Dane klientów udostępniamy tylko kontom służbowym; wyjątek dodasz w Ustawieniach.');
+    if (active && !emailAllowed_(c.s.kancelarie, e)) fail_('INVALID', 'Konto ' + e + ' jest spoza domen kancelarii (' + allowedDomains_(c.s.kancelarie).join(', ') + '). Dane klientów udostępniamy tylko kontom służbowym; wyjątek dodasz w Ustawieniach.');
   });
-  var taken = c.s.zespol.filter(function (x) { return x.email !== email && aliasy.concat([email]).some(function (a) { return x.email === a || splitList_(x.aliasy).indexOf(a) >= 0; }); })[0];
+  var taken = c.s.zespol.filter(function (x) {
+    return x.email !== email && x.aktywny !== 'nie' && aliasy.concat([email]).some(function (a) { return x.email === a || splitList_(x.aliasy).map(function (y) { return y.toLowerCase(); }).indexOf(a) >= 0; });
+  })[0];
   if (taken) fail_('INVALID', 'Ten adres jest już przypisany do: ' + taken.imie_nazwisko + '.');
-  var codes = c.s.kancelarie.map(function (f) { return f.kod; });
+  /* Administrator jednej kancelarii zarządza tylko jej zespołem: nie nada dostępu do innej kancelarii
+     i nie zmieni osób, które mają dostęp także gdzie indziej. */
+  var codes = c.full ? c.s.kancelarie.map(function (f) { return f.kod; }) : c.firms;
+  var existing = c.s.zespol.filter(function (x) { return x.email === email; })[0];
+  if (!c.full && existing && splitList_(existing.kancelarie).some(function (k) { return c.firms.indexOf(k) < 0; })) {
+    fail_('FORBIDDEN', 'Ta osoba ma dostęp także do innej kancelarii. Zmiany wprowadza administrator obu kancelarii.');
+  }
   var rec = {
     email: email, imie_nazwisko: String(m.imie_nazwisko || '').trim() || email, tytul: String(m.tytul || '').trim(),
     stanowisko: STANOWISKA.indexOf(m.stanowisko) >= 0 ? m.stanowisko : '',
@@ -159,7 +172,7 @@ function apiTeamSave(m) {
 /* Ponowne nadanie udostępnień wszystkim (np. po zmianie arkusza bazy albo folderu spraw). */
 function apiResync() {
   var c = ctx_();
-  requireAdmin_(c);
+  requireFullAdmin_(c);
   var s = loadSettings_(true);
   return s.zespol.map(function (m) { return { email: m.email, log: applySharing_(s, m) }; });
 }
@@ -168,7 +181,7 @@ var FIRM_EDITABLE_ = ['nazwa', 'nazwa_krotka', 'forma', 'adres', 'nip', 'strona'
 
 function apiFirmSave(f) {
   var c = ctx_();
-  requireAdmin_(c);
+  requireAdmin_(c, f && f.kod);
   return withLock_(function () {
     var set = SpreadsheetApp.openById(settingsId_());
     var sh = set.getSheetByName(SETTINGS_TABLES.kancelarie.sheet);
@@ -192,7 +205,7 @@ function apiFirmSave(f) {
    o ile kancelaria nie ma jeszcze bazy. Udostępnia ją członkom tej kancelarii i administratorom. */
 function apiCreateDb(code) {
   var c = ctx_();
-  requireAdmin_(c);
+  requireAdmin_(c, code);
   return withLock_(function () {
     var f = firm_(c, code);
     if (f.db_id) fail_('ALREADY', 'Ta kancelaria ma już bazę.');
@@ -217,7 +230,7 @@ function apiCreateDb(code) {
 
 function apiDictSave(scope, name, items) {
   var c = ctx_();
-  requireAdmin_(c);
+  if (scope === '*') requireFullAdmin_(c); else requireAdmin_(c, scope);
   if (!/^[a-z_]+$/.test(name)) fail_('INVALID', 'Zła nazwa słownika.');
   return withLock_(function () {
     var set = SpreadsheetApp.openById(settingsId_());
@@ -237,16 +250,16 @@ function apiDictSave(scope, name, items) {
 
 function apiSeqSave(name, value) {
   var c = ctx_();
-  requireAdmin_(c);
+  requireFullAdmin_(c);
   if (!/^SEQ_[A-Z0-9_]+$/.test(name) || !/^\d+$/.test(String(value))) fail_('INVALID', 'Zła nazwa albo wartość licznika.');
   props_().setProperty(name, String(value));
   return seqValues_();
 }
 
-/* Dodatkowe domeny albo pojedyncze adresy dopuszczone do zespołu (np. domena współpracującej kancelarii). */
+/* Dodatkowe domeny dopuszczone do zespołu (np. domena współpracującej kancelarii). */
 function apiAllowedSave(list) {
   var c = ctx_();
-  requireAdmin_(c);
+  requireFullAdmin_(c);
   var items = splitList_(list).map(function (x) { return x.toLowerCase().replace(/^@/, ''); })
     .filter(function (x) { return /^[a-z0-9.-]+\.[a-z]{2,}$/.test(x); });
   props_().setProperty('ALLOWED_DOMAINS', items.join(','));
