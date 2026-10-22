@@ -173,11 +173,35 @@
         }
       }
     };
+    /* ---------- Kalendarz (odczyt) i poczta (powiadomienia) ----------
+       Kalendarz: { id: { name, owner, readers: [], events: [{ id, title, description, allDay, start, end }] } };
+       getCalendarById zwraca null bez dostępu, jak prawdziwy CalendarApp. */
+    st.calendars = opts.calendars || {};
+    st.sent = [];
+    const evObj = (e) => ({
+      getId: () => e.id, getTitle: () => e.title, getDescription: () => e.description || '', getLocation: () => e.location || '',
+      isAllDayEvent: () => !!e.allDay, getAllDayStartDate: () => new Date(e.start), getStartTime: () => new Date(e.start),
+      getEndTime: () => new Date(e.end || e.start), getColor: () => e.color || '', getLastUpdated: () => new Date(e.updated || e.start)
+    });
+    const calObj = (c, id) => ({
+      getId: () => id, getName: () => c.name,
+      getEvents: (from, to) => c.events.filter((e) => new Date(e.start) < to && new Date(e.end || e.start) >= from).map(evObj)
+    });
+    const calAccess = (c) => c && (c.owner === st.user || (c.readers || []).indexOf(st.user) >= 0);
+    const CalendarApp = {
+      getCalendarById: (id) => (calAccess(st.calendars[id]) ? calObj(st.calendars[id], id) : null),
+      getAllCalendars: () => Object.keys(st.calendars).filter((id) => calAccess(st.calendars[id])).map((id) => calObj(st.calendars[id], id)),
+      getDefaultCalendar: () => calObj(st.calendars[st.user] || (st.calendars[st.user] = { name: st.user, owner: st.user, events: [] }), st.user)
+    };
+    const MailApp = {
+      sendEmail: (o) => { if (!o || !o.to) throw new Error('Brak adresata.'); st.sent.push(Object.assign({ from: st.user }, o)); },
+      getRemainingDailyQuota: () => 100
+    };
     return {
       st,
       setUser(e) { st.user = String(e).toLowerCase(); },
       globals: {
-        SpreadsheetApp, DriveApp, Utilities, ScriptApp, Gmail,
+        SpreadsheetApp, DriveApp, Utilities, ScriptApp, Gmail, CalendarApp, MailApp,
         Session: { getActiveUser: () => ({ getEmail: () => st.user }), getEffectiveUser: () => ({ getEmail: () => st.user }) },
         PropertiesService: { getScriptProperties: () => props },
         CacheService: { getScriptCache: () => cache },

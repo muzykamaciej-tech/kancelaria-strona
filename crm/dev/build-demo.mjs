@@ -15,7 +15,7 @@ const SERVER_FILES = ['Konfiguracja.js', 'Wspolne.js', 'Baza.js', 'Dostep.js', '
 export function serverBundle() {
   const src = SERVER_FILES.map(read).join('\n\n');
   const names = [...src.matchAll(/^function ([A-Za-z][A-Za-z0-9]*[A-Za-z0-9])\s*\(/gm)].map((m) => m[1]);
-  const globals = ['SpreadsheetApp', 'DriveApp', 'Utilities', 'ScriptApp', 'Gmail', 'Session', 'PropertiesService', 'CacheService', 'LockService', 'MimeType', 'HtmlService'];
+  const globals = ['SpreadsheetApp', 'DriveApp', 'Utilities', 'ScriptApp', 'Gmail', 'CalendarApp', 'MailApp', 'Session', 'PropertiesService', 'CacheService', 'LockService', 'MimeType', 'HtmlService'];
   return `function createServer(G) {\n  var ${globals.map((g) => `${g} = G.${g}`).join(', ')};\n${src}\n  return { ${names.join(', ')}, _priv: { parseFormText_: parseFormText_, sharedFactory_: sharedFactory_, idFromLink_: idFromLink_, parseFrontmatter_: parseFrontmatter_ } };\n}\nif (typeof module !== 'undefined' && module.exports) module.exports = { createServer };\n`;
 }
 
