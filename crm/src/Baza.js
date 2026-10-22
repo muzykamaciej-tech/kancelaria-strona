@@ -42,6 +42,8 @@ function ensureSheet_(ss, name, keys) {
     sh.getRange(1, 1, 1, head.length).setFontWeight('bold').setBackground('#E2E8F0');
     sh.setFrozenRows(1);
   }
+  /* Ręczna edycja arkusza pokazuje ostrzeżenie „zmieniaj przez CRM” (aplikacji nie blokuje). */
+  if (fresh) { try { sh.protect().setDescription('Dane CRM — zmieniaj przez aplikację').setWarningOnly(true); } catch (e) { /* bez uprawnień */ } }
   return sh;
 }
 
@@ -150,7 +152,7 @@ function log_(ss, email, table, id, action, changes) {
 function diff_(before, after) {
   var ch = {};
   Object.keys(after).forEach(function (k) {
-    if (SYS_FIELDS.indexOf(k) >= 0) return;
+    if (SYS_FIELDS.indexOf(k) >= 0 || k.charAt(0) === '_') return;
     var a = before[k] === undefined ? '' : String(before[k]), b = String(after[k] === undefined ? '' : after[k]);
     if (a !== b) ch[k] = [a, b];
   });

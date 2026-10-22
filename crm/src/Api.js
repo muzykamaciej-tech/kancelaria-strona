@@ -60,7 +60,9 @@ function bootstrap() {
     var f = firm_(c, code);
     if (!f.db_id) { errors.push(f.nazwa_krotka + ': baza nie jest jeszcze założona.'); return; }
     try {
-      var got = readTables_(SpreadsheetApp.openById(f.db_id), TABLE_ORDER);
+      var ss = SpreadsheetApp.openById(f.db_id);
+      if (c.perm.admin) migrateFirmDb_(ss);
+      var got = readTables_(ss, TABLE_ORDER);
       TABLE_ORDER.forEach(function (t) {
         (got[t] || []).forEach(function (r) { r.kancelaria = code; data[t].push(r); });
       });
@@ -70,16 +72,23 @@ function bootstrap() {
   });
   var admin = !!c.perm.admin;
   return {
-    state: 'ok', email: c.email, me: c.member, role: c.role, perm: c.perm,
+    state: 'ok', email: c.email, login: c.login, me: c.member, role: c.role, perm: c.perm,
     firms: c.s.kancelarie.filter(function (f) { return admin || c.firms.indexOf(f.kod) >= 0; }).map(publicFirm_),
     myFirms: c.firms,
-    team: c.s.zespol.map(function (m) { return { email: m.email, imie_nazwisko: m.imie_nazwisko, tytul: m.tytul, rola: m.rola, kancelarie: m.kancelarie, telefon: m.telefon, aktywny: m.aktywny }; }),
+    team: c.s.zespol.map(function (m) { return { email: m.email, imie_nazwisko: m.imie_nazwisko, tytul: m.tytul, stanowisko: m.stanowisko || '', rola: m.rola, kancelarie: m.kancelarie, telefon: m.telefon, aktywny: m.aktywny, aliasy: m.aliasy || '', powiadomienia: m.powiadomienia || '' }; }),
     dicts: dictsFor_(c.s.slowniki, c.s.kancelarie.map(function (f) { return f.kod; })),
     schema: publicSchema_(),
     data: data, errors: errors, now: nowMinute_(),
     url: ScriptApp.getService().getUrl(),
-    admin: admin ? { seq: seqValues_(), settingsUrl: 'https://docs.google.com/spreadsheets/d/' + settingsId_() + '/edit', slowniki: c.s.slowniki } : null
+    admin: admin ? { seq: seqValues_(), settingsUrl: 'https://docs.google.com/spreadsheets/d/' + settingsId_() + '/edit', slowniki: c.s.slowniki,
+      domeny: allowedDomains_(c.s.kancelarie), domenyDodatkowe: props_().getProperty('ALLOWED_DOMAINS') || '' } : null
   };
+}
+
+/* Nowe zakładki z kolejnych wersji (np. Zadania, Komentarze) zakłada administrator przy starcie. */
+function migrateFirmDb_(ss) {
+  var have = ss.getSheets().map(function (sh) { return sh.getName(); });
+  TABLE_ORDER.forEach(function (t) { if (have.indexOf(TABLES[t].sheet) < 0) ensureSheet_(ss, TABLES[t].sheet, tableKeys_(t)); });
 }
 
 /* ---------- Zapis ---------- */
@@ -159,6 +168,7 @@ function autoFields_(c, f, table, rec, before) {
     var y = String(rec.data || today_()).slice(0, 4), dir = rec.kierunek === 'Wychodząca' ? 'W' : 'P';
     rec.nr = dir + '/' + y + '/' + ('00' + nextSeq_('SEQ_KOR_' + dir + '_' + y)).slice(-3);
   }
+  if (table === 'zadania') taskAuto_(c, f, rec, before);
   if (table === 'zapytania') {
     if (f.model === 'analiza' && +f.sla_h > 0 && (created || before.data_wplywu !== rec.data_wplywu)) {
       rec.termin_odpowiedzi = sh_().addWorkingHours(rec.data_wplywu, +f.sla_h);
@@ -206,23 +216,40 @@ function saveCore_(c, f, ss, table, rec) {
 function apiSave(table, rec) {
   var c = ctx_();
   if (!TABLES[table]) fail_('BAD_TABLE', 'Nieznana tabela.');
+  if (table === 'komentarze') fail_('FORBIDDEN', 'Komentarze dodaje się przy zadaniu.');
   var f = requireFirm_(c, rec && rec.kancelaria, true);
-  return withLock_(function () { return saveCore_(c, f, SpreadsheetApp.openById(f.db_id), table, rec); });
+  var out = withLock_(function () {
+    var ss = SpreadsheetApp.openById(f.db_id);
+    var r = saveCore_(c, f, ss, table, rec);
+    if (r._assigned) r._teczka = teczkaOf_(ss, r.sprawa_id);
+    return r;
+  });
+  if (out._assigned) notifyTask_(c, f, out, 'nowe', out.przypisane, out.opis || '', out._teczka);
+  delete out._assigned; delete out._teczka;
+  return out;
 }
 
 /* Co odwołuje się do rekordu — usuwanie blokowane, żeby nie zostawić „sierot”. */
 var REFS_ = {
   klienci: [['sprawy', 'klient_id'], ['umowy', 'klient_id']],
-  sprawy: [['terminy', 'sprawa_id'], ['korespondencja', 'sprawa_id'], ['czynnosci', 'sprawa_id'], ['rozliczenia', 'sprawa_id'], ['umowy', 'sprawa_id']]
+  sprawy: [['terminy', 'sprawa_id'], ['zadania', 'sprawa_id'], ['korespondencja', 'sprawa_id'], ['czynnosci', 'sprawa_id'], ['rozliczenia', 'sprawa_id'], ['umowy', 'sprawa_id']],
+  terminy: [['zadania', 'termin_id']],
+  zadania: [['komentarze', 'zadanie_id']]
 };
 
 function apiDelete(table, firm, id) {
   var c = ctx_();
   if (!TABLES[table]) fail_('BAD_TABLE', 'Nieznana tabela.');
   var f = requireFirm_(c, firm, true);
-  if (!c.perm.del) fail_('FORBIDDEN', 'Twoja rola nie pozwala usuwać.');
+  if (table === 'komentarze' && !c.perm.admin) fail_('FORBIDDEN', 'Komentarze usuwa tylko administrator.');
+  if (table !== 'zadania' && !c.perm.del) fail_('FORBIDDEN', 'Twoja rola nie pozwala usuwać.');
   return withLock_(function () {
     var ss = SpreadsheetApp.openById(f.db_id);
+    if (table === 'zadania' && !c.perm.admin) {
+      var shz = ensureSheet_(ss, TABLES.zadania.sheet, tableKeys_('zadania')), rz = findRow_(shz, 'id', id);
+      var tz = rz > 0 ? readRow_(shz, rz) : null;
+      if (tz && !(tz.utworzyl === c.email && tz.status === 'Nowe')) fail_('FORBIDDEN', 'Usunąć można tylko własne, jeszcze nieprzyjęte zadanie. Pozostałe anuluj.');
+    }
     var refs = REFS_[table] || [];
     if (refs.length) {
       var got = readTables_(ss, refs.map(function (r) { return r[0]; }));
@@ -325,7 +352,7 @@ function apiGmail(emails) {
       id: t.id, subject: hdr(first, 'Subject') || '(bez tematu)', from: hdr(last, 'From'), count: msgs.length,
       date: last.internalDate ? Utilities.formatDate(new Date(+last.internalDate), APP.tz, "yyyy-MM-dd'T'HH:mm") : '',
       snippet: dec(last.snippet || t.snippet),
-      url: 'https://mail.google.com/mail/?authuser=' + encodeURIComponent(c.email) + '#all/' + t.id
+      url: 'https://mail.google.com/mail/?authuser=' + encodeURIComponent(c.login) + '#all/' + t.id
     };
   });
 }

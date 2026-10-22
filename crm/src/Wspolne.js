@@ -95,11 +95,114 @@ function sharedFactory_() {
   }
 
   function addDays(ymd, n) { var t = parse(ymd); return isNaN(t) ? '' : ymdOf(t + n * DAY); }
+  /* n dni roboczych w przód (n > 0) albo wstecz (n < 0). */
+  function addWorkingDays(ymd, n) {
+    var t = parse(ymd), step = n < 0 ? -1 : 1, left = Math.abs(n);
+    if (isNaN(t)) return '';
+    while (left > 0) { t += step * DAY; if (isWorkingDay(t)) left--; }
+    return ymdOf(t);
+  }
+
+  /* Czas ścienny w Polsce dla chwili UTC: CEST od ostatniej niedzieli marca 01:00 UTC
+     do ostatniej niedzieli października 01:00 UTC (bez zależności od Intl). */
+  function lastSunday(y, m) { var d = new Date(Date.UTC(y, m + 1, 0)); return Date.UTC(y, m, d.getUTCDate() - d.getUTCDay(), 1); }
+  function warsawWall(utcMs) {
+    var y = new Date(utcMs).getUTCFullYear();
+    var summer = utcMs >= lastSunday(y, 2) && utcMs < lastSunday(y, 9);
+    return utcMs + (summer ? 2 : 1) * 3600000;
+  }
+
+  function norm(s) {
+    return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\u0142/g, 'l');
+  }
+  /* Nazwiska w różnych przypadkach: „Kowalska” = „Kowalskiej”, „Nowak” = „Nowakowi”. */
+  function nameMatch(a, b) {
+    a = norm(a); b = norm(b);
+    if (!a || !b) return false;
+    if (a === b) return true;
+    var n = Math.min(a.length, b.length), p = 0;
+    if (n < 4) return false;
+    while (p < n && a[p] === b[p]) p++;
+    return p >= Math.max(4, n - 3);
+  }
+
+  /* Tytuł wpisu z kalendarza: „(zrobione) TERMIN - Jan Kowalski - apelacja (593)”.
+     Zwraca: czy to TERMIN, czy wykonany / odwołany, nr teczki, sygnaturę, klienta, czynność, prawnika
+     (gdy tytuł kończy się „ - Imię Nazwisko” kogoś z listy names). */
+  var STOP = { EPU: 1, KW: 1, SR: 1, SO: 1, SA: 1, US: 1, ZUS: 1, KRS: 1, WSA: 1, NSA: 1, SKO: 1, TERMIN: 1, PI: 1, UPO: 1, KRZ: 1 };
+  function parseTermin(title, names) {
+    var t = String(title || '').replace(/[\u2013\u2014]/g, '-').replace(/\s+/g, ' ').trim();
+    var out = { title: t, isTermin: false, done: false, cancel: false, teczka: '', sygn: '', klient: '', czynnosc: '', prawnik: '' };
+    out.done = /[(\[]\s*(?:zrobione|zrobiony|zrobiona|zrob\.?|wykonane?|wykonany)\s*[)\]]/i.test(t) || /^zrobione\b/i.test(t) || /\bzrobione$/i.test(t);
+    out.cancel = /[(\[]\s*(?:odwo[lł]an[aeyio]*|nieaktualn[aeyio]*|anulowan[aeyio]*|przesuni[eę]t[aeyio]*)\s*[)\]]/i.test(t);
+    var head = /^((?:[(\[][^)\]]*[)\]]\s*)*)(?:zrobione\s+)?TERMIN\b\s*[-:]?\s*/i.exec(t);
+    if (!head) return out;
+    out.isTermin = true;
+    var rest = t.slice(head[0].length);
+    var tk = /\(\s*(P\d{1,3}|\d{3,4})\s*\)|#(P?\d{1,4})\b/i.exec(rest);
+    if (tk) out.teczka = String(tk[1] || tk[2]).toUpperCase();
+    var sg = /\b([IVXL]{1,5})\s+([A-Z][A-Za-z]{0,4})\s+(\d{1,6})\/(\d{2,4})\b/.exec(rest);
+    if (sg) out.sygn = sg[1] + ' ' + sg[2] + ' ' + sg[3] + '/' + sg[4];
+    rest = rest.replace(/#P?\d{1,4}\b/gi, ' ').replace(/[(\[][^()\[\]]{0,25}[)\]]/g, ' ').replace(/\s+/g, ' ').trim();
+    (names || []).some(function (nm) {
+      var m = new RegExp('\\s-\\s*(' + String(nm).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')\\s*$', 'i').exec(rest);
+      if (m) { out.prawnik = nm; rest = rest.slice(0, m.index).trim(); }
+      return !!m;
+    });
+    var words = rest.split(' '), kl = [];
+    for (var i = 0; i < words.length && kl.length < 3; i++) {
+      var w = words[i];
+      if (!w || w === '-') { if (kl.length) break; continue; }
+      if (STOP[w.toUpperCase()] || !/^[A-ZĄĆĘŁŃÓŚŹŻ][A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ'’]+(?:-[A-ZĄĆĘŁŃÓŚŹŻ][A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ'’]+)?$/.test(w)) break;
+      kl.push(w);
+    }
+    out.klient = kl.join(' ');
+    out.czynnosc = words.slice(kl.length).join(' ').replace(/^\s*-\s*/, '').replace(/\s+-\s*$/, '').trim();
+    return out;
+  }
+
+  /* Plik .ics (eksport Kalendarza Google) → wydarzenia z datą/godziną ścienną w Polsce. */
+  function parseIcs(text) {
+    var lines = String(text || '').replace(/\r\n[ \t]/g, '').replace(/\n[ \t]/g, '').split(/\r?\n/);
+    var evs = [], cur = null;
+    function unesc(v) { return v.replace(/\\n/gi, '\n').replace(/\\,/g, ',').replace(/\\;/g, ';').replace(/\\\\/g, '\\'); }
+    function when(params, v) {
+      var m = /^(\d{4})(\d{2})(\d{2})(?:T(\d{2})(\d{2})(\d{2})?(Z)?)?/.exec(v);
+      if (!m) return null;
+      if (!m[4] || /VALUE=DATE(?!-)/i.test(params)) return { allDay: true, wall: Date.UTC(+m[1], +m[2] - 1, +m[3]) };
+      var ms = Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]);
+      return { allDay: false, wall: m[7] ? warsawWall(ms) : ms };
+    }
+    lines.forEach(function (line) {
+      if (/^BEGIN:VEVENT/i.test(line)) { cur = {}; return; }
+      if (/^END:VEVENT/i.test(line)) { if (cur) evs.push(cur); cur = null; return; }
+      if (!cur) return;
+      var c = line.indexOf(':');
+      if (c < 0) return;
+      var key = line.slice(0, c), val = line.slice(c + 1), name = key.split(';')[0].toUpperCase(), params = key.slice(name.length);
+      if (name === 'SUMMARY') cur.title = unesc(val);
+      else if (name === 'DESCRIPTION') cur.desc = unesc(val);
+      else if (name === 'UID') cur.uid = val.trim();
+      else if (name === 'DTSTART') cur.s = when(params, val);
+      else if (name === 'DTEND') cur.e = when(params, val);
+      else if (name === 'DURATION') cur.dur = val;
+      else if (name === 'RRULE') cur.recurring = true;
+      else if (name === 'STATUS') cur.status = val.trim().toUpperCase();
+    });
+    return evs.filter(function (e) { return e.s && e.status !== 'CANCELLED'; }).map(function (e) {
+      var end = e.e ? e.e.wall : NaN;
+      if (isNaN(end) && e.dur) { var d = /P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?)?/.exec(e.dur) || []; end = e.s.wall + ((+d[1] || 0) * 24 + (+d[2] || 0)) * 3600000 + (+d[3] || 0) * 60000; }
+      if (isNaN(end)) end = e.s.wall + (e.s.allDay ? DAY : 0);
+      return { uid: e.uid || '', title: e.title || '', desc: e.desc || '', allDay: e.s.allDay, recurring: !!e.recurring,
+        start: e.s.allDay ? ymdOf(e.s.wall) : isoOf(e.s.wall), date: ymdOf(e.s.wall), hours: Math.round((end - e.s.wall) / 360000) / 10 };
+    });
+  }
   function diffDays(aYmd, bYmd) { return Math.round((parse(bYmd) - parse(aYmd)) / DAY); }
 
   return {
     pad: pad, parse: parse, ymdOf: ymdOf, isoOf: isoOf, easter: easter, holidays: holidays, holidayName: holidayName,
     isWorkingDay: isWorkingDay, addWorkingHours: addWorkingHours, termEnd: termEnd, addDays: addDays, diffDays: diffDays,
+    addWorkingDays: addWorkingDays, warsawWall: warsawWall, norm: norm, nameMatch: nameMatch, parseTermin: parseTermin, parseIcs: parseIcs,
     WEEKDAYS: WEEKDAYS
   };
 }

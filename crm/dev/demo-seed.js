@@ -1,12 +1,16 @@
-/* demo-seed.js — fikcyjne dane do podglądu i testów (osoby i firmy wymyślone; zespół kancelarii
-   jak na stronach). Daty liczone od „dziś”, żeby pulpit zawsze pokazywał terminy, zaległości
-   i zapytania w biegu 24 h roboczych. */
+/* demo-seed.js — fikcyjne dane do podglądu i testów (klienci i sprawy wymyśleni; zespół jak na
+   stronach kancelarii, młodsi prawnicy pod nazwami zastępczymi — prawdziwe imiona można podać przy
+   budowaniu prywatnego podglądu: build-demo.mjs --names plik.json). Daty liczone od „dziś”. */
 (function (root) {
+  const NAMES = (root && root.DEMO_NAMES) || {};
   const OWNER = 'maciej.muzyka@mecenasodnieruchomosci.pl';
-  const JULIA = 'asystentka@example.com';
   const KPK = 'katarzyna.popik@kancelariarodzinna.com';
   const KW = 'katarzyna.walaszek@kancelariarodzinna.com';
   const MB = 'maciej.bednarek@kancelariarodzinna.com';
+  const JUN1 = 'mlodszy.prawnik.a@example.com';
+  const JUN2 = 'mlodszy.prawnik.b@example.com';
+  const JULIA = JUN1;
+  const SEKRETARIAT = 'sekretariat@kancelariarodzinna.com';
 
   function demoGmail() {
     return [
@@ -24,15 +28,15 @@
     const nextWorking = (n) => { let x = todayYmd, k = 0; while (k < n) { x = SH.addDays(x, 1); if (SH.isWorkingDay(SH.parse(x))) k++; } return x; };
 
     as(OWNER, () => api.apiSetup({
-      me: { imie_nazwisko: 'Maciej Muzyka', tytul: 'adw. dr', telefon: '+48 884 784 984' },
+      me: { imie_nazwisko: 'Maciej Muzyka', tytul: 'adw. dr', telefon: '+48 884 784 984', stanowisko: 'Wspólnik' },
       team: [
-        { email: JULIA, imie_nazwisko: 'Anna Asystentka', tytul: 'asystentka / sekretariat', rola: 'asystent', kancelarie: 'KN,KR' },
-        { email: KPK, imie_nazwisko: 'Katarzyna Popik-Konarzewska', tytul: 'adw. dr hab.', rola: 'prawnik', kancelarie: 'KR' },
-        { email: 'kazimierz.konarzewski@kancelariarodzinna.com', imie_nazwisko: 'Kazimierz Konarzewski', tytul: 'adw.', rola: 'prawnik', kancelarie: 'KR' },
-        { email: MB, imie_nazwisko: 'Maciej Bednarek', tytul: 'adw.', rola: 'prawnik', kancelarie: 'KR' },
-        { email: KW, imie_nazwisko: 'Katarzyna Walaszek', tytul: 'apl. adw.', rola: 'prawnik', kancelarie: 'KR' },
-        { email: 'sekretariat@kancelariarodzinna.com', imie_nazwisko: 'Sekretariat KR', tytul: 'sekretariat', rola: 'asystent', kancelarie: 'KR' }
+        { email: KPK, imie_nazwisko: 'Katarzyna Popik-Konarzewska', tytul: 'adw. dr hab.', stanowisko: 'Wspólnik', rola: 'admin', kancelarie: 'KR' },
+        { email: KW, imie_nazwisko: 'Katarzyna Walaszek', tytul: 'apl. adw.', stanowisko: 'Starszy prawnik', rola: 'prawnik', kancelarie: 'KR' },
+        { email: MB, imie_nazwisko: 'Maciej Bednarek', tytul: 'adw.', stanowisko: 'Starszy prawnik', rola: 'prawnik', kancelarie: 'KR' },
+        { email: JUN1, imie_nazwisko: NAMES.JUN1 || 'Młodsza Prawniczka A', tytul: '', stanowisko: 'Młodszy prawnik', rola: 'asystent', kancelarie: 'KN,KR' },
+        { email: JUN2, imie_nazwisko: NAMES.JUN2 || 'Młodsza Prawniczka B', tytul: '', stanowisko: 'Młodszy prawnik', rola: 'asystent', kancelarie: 'KR' }
       ],
+      dozwolone: 'example.com',
       seq: { SEQ_TECZKA: '592', SEQ_P: '27', SEQ_UMOWA_2026: '96' }
     }));
 
@@ -121,10 +125,54 @@
     S('rozliczenia', KR({ typ: 'Zaliczka', kwota: '4500', data: d(-34), sprawa_id: r2.id, status: 'Opłacona' }), JULIA);
     S('rozliczenia', KR({ typ: 'Koszty (opłata sądowa, skarbowa)', kwota: '17', data: d(-34), sprawa_id: r2.id, status: 'Opłacona', notatki: 'opłata skarbowa od pełnomocnictwa' }), JULIA);
 
+    /* ---- Zadania i delegowanie ---- */
+    const T = (rec, who) => S('zadania', rec, who);
+    const A = (firm, id, action, p, who) => as(who, () => api.apiTask(firm, id, action, p || {}));
+    const t1 = T(KN({ tytul: 'Projekt wezwania do opróżnienia lokalu', przypisane: JUN1, termin: nextWorking(2), sprawa_id: s5.id, sprawdzenie: 'tak', opis: '1. Sprawdzić daty z umowy najmu\n2. Wezwanie z terminem 14 dni\n3. Do mojego sprawdzenia przed wysyłką' }));
+    A('KN', t1.id, 'przyjmij', {}, JUN1);
+    A('KN', t1.id, 'komentarz', { komentarz: 'Czy dołączyć zestawienie zaległości z ostatnich 4 miesięcy?' }, JUN1);
+    T(KN({ tytul: 'Kwerenda w starostwie: mapa ewidencyjna i wypis z MPZP', przypisane: JUN1, termin: d(-1), sprawa_id: s2.id }));
+    T(KN({ tytul: 'Przejrzeć i wysłać draft oferty (droga konieczna)', przypisane: OWNER, termin: todayYmd, pilne: 'tak' }));
+    T(KN({ tytul: 'Podpisać pełnomocnictwo i substytucję', przypisane: OWNER, termin: nextWorking(1), sprawa_id: s1.id }), JUN1);
+    const t5 = T(KN({ tytul: 'Odpis z księgi wieczystej i mapa działki', przypisane: JUN1, termin: d(-3), sprawa_id: s2.id }));
+    A('KN', t5.id, 'zrobione', {}, JUN1);
+    const t6 = T(KR({ tytul: 'Wniosek dowodowy — świadkowie (projekt)', przypisane: JUN2, termin: nextWorking(1), sprawa_id: r1.id, sprawdzenie: 'tak' }), KPK);
+    A('KR', t6.id, 'przyjmij', {}, JUN2);
+    A('KR', t6.id, 'zrobione', { komentarz: 'Projekt w folderze sprawy, dwie wersje uzasadnienia do wyboru.' }, JUN2);
+    const t7 = T(KR({ tytul: 'Przygotować świadków do rozprawy', przypisane: KW, termin: todayYmd, sprawa_id: r1.id }), KPK);
+    A('KR', t7.id, 'przyjmij', {}, KW);
+    T(KR({ tytul: 'Faktura za dojazd do sądu', przypisane: OWNER, termin: nextWorking(3) }), KW);
+    const apel = as(KPK, () => api.bootstrap()).data.terminy.find((x) => x.sprawa_id === r5.id);
+    T(KR({ tytul: 'Projekt apelacji', przypisane: JUN2, termin: SH.addWorkingDays(apel.data, -3), sprawa_id: r5.id, termin_id: apel.id, sprawdzenie: 'tak' }), KPK);
+    const t9 = T(KR({ tytul: 'Zarejestrować korespondencję z Portalu Informacyjnego', przypisane: JUN2, termin: d(-2) }), KW);
+    A('KR', t9.id, 'przyjmij', {}, JUN2);
+    const braki = as(MB, () => api.bootstrap()).data.terminy.find((x) => x.sprawa_id === r2.id);
+    T(KR({ tytul: 'Zestawienie kosztów utrzymania do uzupełnienia braków', przypisane: MB, termin: SH.addWorkingDays(braki.data, -1), sprawa_id: r2.id, termin_id: braki.id }), MB);
+
     mock.setUser(OWNER);
   }
 
-  const out = { seedDemo, demoGmail, DEMO_USERS: { OWNER, JULIA, KW, KPK, MB } };
+  /* Kalendarz sekretariatu do podglądu importu: wpisy jak w praktyce zespołu (07:00–07:00,
+     „(zrobione)” na początku, duplikat, wpis odwołany, wpis bez prefiksu). Nazwiska fikcyjne. */
+  function demoCalendars(SH, todayYmd) {
+    const at7 = (ymd) => { const t = SH.parse(ymd) + 7 * 3600000; const off = SH.warsawWall(t - 3600000) - (t - 3600000); return new Date(t - off).toISOString(); };
+    const ev = (id, title, n, hours, allDay) => {
+      const day = SH.addDays(todayYmd, n);
+      const start = allDay ? day + 'T00:00:00' : at7(day);
+      return { id: 'cal-' + id + '@google.com', title, allDay: !!allDay, start, end: new Date(new Date(start).getTime() + (hours || 24) * 3600000).toISOString() };
+    };
+    return {
+      [SEKRETARIAT]: { name: 'Sekretariat KR', owner: SEKRETARIAT, readers: [OWNER, KPK], events: [
+        ev(1, '(zrobione) TERMIN - Nowicka wniosek o uzasadnienie', -40), ev(2, 'TERMIN - Nowicka wniosek o uzasadnienie', -40),
+        ev(3, '(zrobione)TERMIN - Krzysztof Adamczyk odpowiedź na zażalenie', -30), ev(4, 'TERMIN - Sikora uzupełnienie kosztów', -12),
+        ev(5, 'TERMIN - Monika Nowicka - stanowisko w sprawie kontaktów', 4), ev(6, 'TERMIN - wniosek o uzasadnienie Jabłoński kontakty', 6),
+        ev(7, 'TERMIN - Górska zażalenie na postanowienie o zabezpieczeniu', 9, 24, true), ev(8, 'TERMIN - Nowak EPU', 3),
+        ev(9, 'Adamczyk REPLIKA', 8), ev(10, '(ODWOŁANA) TERMIN - Sikora wnioski dowodowe', 2), ev(11, 'Nowicka - konsultacja', 1, 1)
+      ] }
+    };
+  }
+
+  const out = { seedDemo, demoGmail, demoCalendars, DEMO_USERS: { OWNER, JULIA, JUN1, JUN2, KW, KPK, MB, SEKRETARIAT } };
   if (typeof module !== 'undefined' && module.exports) module.exports = out;
   else Object.assign(root, out);
 })(this);

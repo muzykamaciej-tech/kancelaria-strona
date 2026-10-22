@@ -85,6 +85,9 @@ const ICONS = {
   edit: '<path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>',
   trash: '<path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
   calc: '<rect width="16" height="20" x="4" y="2" rx="2"/><path d="M8 6h8M16 14v4M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"/>',
+  tasks: '<path d="M11 6h9M11 12h9M11 18h9"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/>',
+  forward: '<path d="m15 17 5-5-5-5"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/>',
+  msg: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
   phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>'
 };
 const ic = (n) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ''}</svg>`;
@@ -141,6 +144,13 @@ const isOpenCase = (s) => dictType(s.kancelaria, 'status_sprawy', s.status) !== 
 const zType = (z) => dictType(z.kancelaria, 'status_zapytania', z.status) || 'open';
 const needsReply = (z) => zType(z) === 'open' && !z.odpowiedz && !z.konsultacja;
 const waitsOffer = (z) => zType(z) === 'open' && !!z.odpowiedz;
+const me = () => S.boot.email;
+const login = () => S.boot.login || S.boot.email;
+const isOpenTask = (t) => (S.boot.schema.taskOpen || ['Nowe', 'W toku', 'Do sprawdzenia']).indexOf(t.status) >= 0;
+const taskCanTouch = (t) => !!(perm().admin || [t.przypisane, t.zlecil, t.utworzyl].indexOf(me()) >= 0);
+const myTasks = () => rows('zadania').filter((t) => t.przypisane === me() && isOpenTask(t));
+const taskDueKey = (t) => (t.termin || '9999-99-99') + (t.godzina || '') + (t.pilne ? '0' : '1');
+function openTasksForTerm(term) { return S.data.zadania.filter((z) => z.kancelaria === term.kancelaria && z.termin_id === term.id && isOpenTask(z)); }
 const caseNo = (s) => s && s.numer ? (/^\d+$/.test(s.numer) ? '(' + s.numer + ')' : s.numer) : '';
 const clientName = (firm, id) => { const k = byId('klienci', firm, id); return k ? k.nazwa : ''; };
 function caseLabel(s) { return s ? [caseNo(s), s.tytul].filter(Boolean).join(' ') : ''; }
@@ -149,6 +159,7 @@ function refLabel(t, r) {
   if (t === 'klienci') return r.nazwa;
   if (t === 'sprawy') { const k = clientName(r.kancelaria, r.klient_id); return caseLabel(r) + (k ? ' — ' + k : ''); }
   if (t === 'zapytania') return r.nazwa + (r.data_wplywu ? ' (' + fmtDate(r.data_wplywu) + ')' : '');
+  if (t === 'terminy') return fmtDate(r.data) + ' — ' + r.opis;
   return r[TB()[t].title] || r.id;
 }
 function defaultFirm() { return S.firm !== 'all' && myFirms().indexOf(S.firm) >= 0 ? S.firm : myFirms()[0]; }
@@ -168,7 +179,7 @@ function lastMove(s) {
 
 /* ---------- Nawigacja ---------- */
 const NAV = [
-  ['pulpit', 'Pulpit', 'home'], ['zapytania', 'Zapytania', 'inbox'], ['klienci', 'Klienci', 'users'], ['sprawy', 'Sprawy', 'briefcase'],
+  ['pulpit', 'Pulpit', 'home'], ['zadania', 'Zadania', 'tasks'], ['zapytania', 'Zapytania', 'inbox'], ['klienci', 'Klienci', 'users'], ['sprawy', 'Sprawy', 'briefcase'],
   ['terminy', 'Terminy', 'calendar'], ['korespondencja', 'Korespondencja', 'mail'], ['czas', 'Czas pracy', 'clock'],
   ['umowy', 'Rejestr umów', 'file'], ['rozliczenia', 'Rozliczenia', 'wallet'], ['konflikt', 'Konflikt interesów', 'scale']
 ];
@@ -216,20 +227,22 @@ function shellHtml() {
 function navHtml() {
   const z = rows('zapytania').filter(needsReply);
   const over = z.filter((x) => x.termin_odpowiedzi && minutesTo(x.termin_odpowiedzi) < 0).length;
-  const t = rows('terminy').filter((x) => x.status === 'Otwarty' && x.data <= today()).length;
-  const counts = { zapytania: [z.length, over > 0], terminy: [t, t > 0] };
+  const t = rows('terminy').filter((x) => (x.status === 'Otwarty' && x.data <= today()) || x.status === 'Do weryfikacji').length;
+  const mt = myTasks(), mtLate = mt.filter((x) => x.termin && x.termin < today()).length;
+  const mtNow = mt.filter((x) => x.status === 'Nowe' || (x.termin && x.termin <= today())).length + rows('zadania').filter((x) => x.status === 'Do sprawdzenia' && x.zlecil === me()).length;
+  const counts = { zapytania: [z.length, over > 0], terminy: [t, t > 0], zadania: [mtNow, mtLate > 0] };
   const cur = S.route.split('/')[0];
-  const alias = { zapytanie: 'zapytania', klient: 'klienci', sprawa: 'sprawy' };
+  const alias = { zapytanie: 'zapytania', klient: 'klienci', sprawa: 'sprawy', zadanie: 'zadania' };
   const on = (k) => (alias[cur] || cur) === k ? ' on' : '';
   const link = ([k, l, i]) => `<a href="#${k}" data-go="${k}" class="${on(k).trim()}">${ic(i)}<span>${l}</span>${counts[k] && counts[k][0] ? `<span class="count${counts[k][1] ? ' hot' : ''}">${counts[k][0]}</span>` : ''}</a>`;
-  const me = S.boot.me || {};
+  const prof = S.boot.me || {};
   return `<div class="brand"><b>${esc(S.boot.schema.app.name)}</b><span>${myFirms().map((k) => esc(firmOf(k).nazwa_krotka)).join(' · ')}</span></div>
     ${NAV.map(link).join('')}
     <div class="sep"></div>
     ${link(['zespol', 'Zespół i dostępy', 'key'])}
     ${perm().admin ? link(['ustawienia', 'Ustawienia', 'settings']) + link(['import', 'Import rejestrów', 'upload']) : ''}
     <div class="grow"></div>
-    <div class="who"><b>${esc((me.tytul ? me.tytul + ' ' : '') + (me.imie_nazwisko || S.boot.email))}</b>${esc(S.boot.email)}<br>${esc((S.boot.schema.roles[S.boot.role] || {}).label || '')}</div>`;
+    <div class="who"><b>${esc((prof.tytul ? prof.tytul + ' ' : '') + (prof.imie_nazwisko || S.boot.email))}</b>${esc(login())}<br>${esc((S.boot.schema.roles[S.boot.role] || {}).label || '')}</div>`;
 }
 function firmSeg() {
   const f = myFirms();
@@ -339,11 +352,15 @@ VIEWS.pulpit = function () {
   const overdue = reply.filter((x) => x.termin_odpowiedzi && minutesTo(x.termin_odpowiedzi) < 0);
   const offers = z.filter(waitsOffer).sort((a, b) => ((a.przypomnienie || '9') < (b.przypomnienie || '9') ? -1 : 1));
   const horizon = SH.addDays(today(), 14);
-  const terms = rows('terminy').filter((t) => t.status === 'Otwarty' && t.data <= horizon).map((t) => ({ kind: 't', d: t.data, h: t.godzina, r: t }));
+  const terms = rows('terminy').filter((t) => (t.status === 'Otwarty' && t.data <= horizon) || t.status === 'Do weryfikacji').map((t) => ({ kind: 't', d: t.data, h: t.godzina, r: t }));
   z.filter((x) => zType(x) === 'open' && x.konsultacja && x.konsultacja.slice(0, 10) >= today() && x.konsultacja.slice(0, 10) <= horizon)
     .forEach((x) => terms.push({ kind: 'k', d: x.konsultacja.slice(0, 10), h: x.konsultacja.slice(11, 16), r: x }));
   terms.sort((a, b) => (a.d + (a.h || '') < b.d + (b.h || '') ? -1 : 1));
-  const termsLate = terms.filter((t) => t.d < today()).length;
+  const termsLate = terms.filter((t) => t.d < today() && t.r.status === 'Otwarty').length;
+  const mt = myTasks().sort((a, b) => (taskDueKey(a) < taskDueKey(b) ? -1 : 1));
+  const mtLate = mt.filter((t) => t.termin && t.termin < today()).length, mtNew = mt.filter((t) => t.status === 'Nowe').length;
+  const toReview = rows('zadania').filter((t) => t.status === 'Do sprawdzenia' && t.zlecil === me);
+  const waiting = rows('zadania').filter((t) => t.zlecil === me && t.przypisane !== me && (t.status === 'Nowe' || t.status === 'W toku'));
   const week = terms.filter((t) => t.d >= today() && t.d <= SH.addDays(today(), 7)).length;
   const active = sp.filter(isOpenCase);
   const mine = active.filter((s) => s.prowadzacy === me || String(s.zespol || '').indexOf(me) >= 0);
@@ -360,18 +377,24 @@ VIEWS.pulpit = function () {
     const late = t.d < today(), soon = t.d <= SH.addDays(today(), 2);
     if (t.kind === 'k') return `<li data-go="zapytanie/${t.r.kancelaria}/${t.r.id}">${dateBox(t.d, soon ? 'warn' : '')}<div class="main-txt"><b>Konsultacja: ${esc(t.r.nazwa)}</b><span>${esc(t.h)} · ${esc(t.r.kategoria || '')}</span></div>${firmTag(t.r.kancelaria)}</li>`;
     const s = byId('sprawy', t.r.kancelaria, t.r.sprawa_id);
-    return `<li data-go="${s ? 'sprawa/' + s.kancelaria + '/' + s.id : 'terminy'}">${dateBox(t.d, late ? 'bad' : soon ? 'warn' : '')}<div class="main-txt"><b>${esc(t.r.opis)}</b><span>${esc([t.h, t.r.typ, s ? caseLabel(s) : '', shortName(t.r.odpowiedzialny)].filter(Boolean).join(' · '))}</span></div>${late ? chip('bad', relDay(t.d)) : chip('', relDay(t.d))}</li>`;
+    const noTask = t.r.typ === 'Termin procesowy' && t.r.status === 'Otwarty' && !openTasksForTerm(t.r).length;
+    const flag = t.r.status === 'Do weryfikacji' ? chip('warn', 'do weryfikacji') : late ? chip('bad', relDay(t.d)) : chip('', relDay(t.d));
+    return `<li data-go="${s ? 'sprawa/' + s.kancelaria + '/' + s.id : 'terminy'}">${dateBox(t.d, t.r.status === 'Do weryfikacji' ? '' : late ? 'bad' : soon ? 'warn' : '')}<div class="main-txt"><b>${esc(t.r.opis)}</b><span>${esc([t.h, t.r.typ, s ? caseLabel(s) : '', shortName(t.r.odpowiedzialny)].filter(Boolean).join(' · '))}</span></div>${noTask ? chip('warn', 'bez zadania') : ''}${flag}</li>`;
   };
   return `<div class="page-head"><div class="t"><h1>${hour < 12 ? 'Dzień dobry' : hour < 18 ? 'Dzień dobry' : 'Dobry wieczór'}${first ? ', ' + esc(first) : ''}</h1>
       <span class="sub">${fmtDate(today(), true).replace(/^(\S+)/, (m) => ({ pn: 'poniedziałek', wt: 'wtorek', 'śr': 'środa', cz: 'czwartek', pt: 'piątek', sb: 'sobota', nd: 'niedziela' }[m] || m))} · ${S.firm === 'all' ? 'obie kancelarie' : esc(firmOf(S.firm).nazwa_krotka)}${SH.holidayName(today()) ? ' · ' + esc(SH.holidayName(today())) : ''}</span></div></div>
     <div class="stats">
+      ${stat('Moje zadania', mt.length, mtLate ? `<b style="color:var(--bad)">${mtLate} zaległe</b>${mtNew ? ' · ' + mtNew + ' nowe' : ''}` : mtNew ? mtNew + ' nowe do przyjęcia' : 'bez zaległości', mtLate > 0)}
       ${stat('Zapytania do odpowiedzi', reply.length, overdue.length ? `<b style="color:var(--bad)">${overdue.length} po terminie 24 h</b>` : 'wszystkie w terminie', overdue.length > 0)}
       ${stat('Terminy w 7 dni', week, termsLate ? `<b style="color:var(--bad)">${termsLate} zaległe</b>` : 'zaległych brak', termsLate > 0)}
       ${stat('Sprawy aktywne', active.length, `w tym ${mine.length} Twoich`)}
-      ${stat('Przyjęte zapytania (90 dni)', decided.length ? Math.round((won / decided.length) * 100) + '%' : '—', decided.length ? `${won} z ${decided.length} rozstrzygniętych` : 'brak rozstrzygniętych')}
     </div>
     <div class="grid-2">
       <div class="stack">
+        <section class="panel"><div class="panel-h"><h2>Moje zadania</h2><a href="#zadania" data-go="zadania" class="small">wszystkie</a></div>
+          ${perm().write ? quickAddHtml('qa-pulpit') : ''}
+          ${mt.length ? `<ul class="rows">${mt.slice(0, 8).map((t) => taskRow(t)).join('')}</ul>` : '<div class="empty"><b>Nie masz otwartych zadań</b>Dodaj zadanie jedną linijką powyżej albo zleć je komuś: @imię.</div>'}
+          ${toReview.length || waiting.length ? `<div class="panel-b small" style="border-top:1px solid var(--line);display:flex;gap:14px;flex-wrap:wrap">${toReview.length ? `<a href="#zadania" data-go="zadania" data-act="task-tab" data-tab-name="sprawdz"><b>${toReview.length}</b> do sprawdzenia przeze mnie</a>` : ''}${waiting.length ? `<a href="#zadania" data-go="zadania" data-act="task-tab" data-tab-name="zlecone"><b>${waiting.length}</b> zleconych czeka na wykonanie</a>` : ''}</div>` : ''}</section>
         <section class="panel"><div class="panel-h"><h2>Do odpowiedzi</h2><span class="muted hide-sm">wstępna analiza i oferta w 24 h robocze</span><a href="#zapytania" data-go="zapytania" class="small">wszystkie</a></div>
           ${reply.length ? `<ul class="rows">${reply.slice(0, 8).map(zRow).join('')}</ul>` : '<div class="empty"><b>Nic nie czeka na odpowiedź</b>Nowe zgłoszenia ze strony pojawią się tutaj.</div>'}</section>
         <section class="panel"><div class="panel-h"><h2>Oferty czekające na decyzję</h2><span class="muted">${offers.length}</span></div>
@@ -391,7 +414,9 @@ VIEWS.pulpit = function () {
 VIEWS.zapytania = function () {
   const id = 'zap', mode = fv(id, 'mode', 'lejek'), grp = fv(id, 'g', 'open');
   let list = rows('zapytania').filter((z) => matchQ(id, z, ['nazwa', 'email', 'telefon', 'opis', 'kategoria']));
-  const head = `<div class="page-head"><div class="t"><h1>Zapytania</h1><span class="sub">Pierwszy kontakt: zgłoszenie → wstępna analiza → oferta → sprawa</span></div>
+  const since = SH.addDays(today(), -90), decided = rows('zapytania').filter((x) => zType(x) !== 'open' && String(x.zmieniono || x.data_wplywu).slice(0, 10) >= since);
+  const won = decided.filter((x) => zType(x) === 'won').length;
+  const head = `<div class="page-head"><div class="t"><h1>Zapytania</h1><span class="sub">Pierwszy kontakt: zgłoszenie → wstępna analiza → oferta → sprawa${decided.length ? ` · przyjęte w 90 dni: ${Math.round((won / decided.length) * 100)}% (${won} z ${decided.length})` : ''}</span></div>
     <div class="actions">${perm().admin ? '<button class="btn" data-act="import-www">' + ic('upload') + 'Pobierz zgłoszenia ze strony</button>' : ''}${perm().write ? `<button class="btn primary" data-act="new" data-t="zapytania">${ic('plus')}Nowe zapytanie</button>` : ''}</div></div>`;
   const bar = `<div class="toolbar">${searchBox(id, 'Szukaj w zapytaniach…')}
     <div class="seg"><button data-filt-set="${id}" data-key="mode" data-val="lejek" class="${mode === 'lejek' ? 'on' : ''}">Lejek</button><button data-filt-set="${id}" data-key="mode" data-val="lista" class="${mode === 'lista' ? 'on' : ''}">Lista</button></div>
@@ -476,9 +501,9 @@ VIEWS.terminy = function () {
   const id = 'te', me = S.boot.email, who = fv(id, 'who', ''), done = fv(id, 'done', '');
   let list = rows('terminy').filter((t) => matchQ(id, t, ['opis', 'miejsce', 'typ', (r) => caseLabel(byId('sprawy', r.kancelaria, r.sprawa_id))]));
   if (who === 'me') list = list.filter((t) => t.odpowiedzialny === me);
-  if (!done) list = list.filter((t) => t.status === 'Otwarty');
+  if (!done) list = list.filter((t) => t.status === 'Otwarty' || t.status === 'Do weryfikacji');
   list.sort((a, b) => (a.data + a.godzina < b.data + b.godzina ? -1 : 1));
-  const groups = [['Zaległe', (t) => t.status === 'Otwarty' && t.data < today()], ['Dziś', (t) => t.data === today()], ['Jutro', (t) => t.data === SH.addDays(today(), 1)],
+  const groups = [['Do weryfikacji (z importu kalendarza)', (t) => t.status === 'Do weryfikacji'], ['Zaległe', (t) => t.status === 'Otwarty' && t.data < today()], ['Dziś', (t) => t.data === today()], ['Jutro', (t) => t.data === SH.addDays(today(), 1)],
     ['Najbliższe 7 dni', (t) => t.data > SH.addDays(today(), 1) && t.data <= SH.addDays(today(), 7)], ['Później', (t) => t.data > SH.addDays(today(), 7)], ['Wcześniejsze', (t) => t.data < today() && t.status !== 'Otwarty']];
   const used = new Set();
   const item = (t) => {
@@ -486,7 +511,8 @@ VIEWS.terminy = function () {
     return `<li data-go="edit/terminy/${t.kancelaria}:${t.id}">${dateBox(t.data, late ? 'bad' : t.data <= SH.addDays(today(), 2) && t.status === 'Otwarty' ? 'warn' : '')}
       <div class="main-txt"><b>${t.status === 'Wykonany' ? '<s>' + esc(t.opis) + '</s>' : esc(t.opis)}</b><span>${esc([fmtDate(t.data, true), t.godzina, t.typ, t.miejsce].filter(Boolean).join(' · '))}${s ? ` · <a href="#" data-go="sprawa/${s.kancelaria}/${s.id}">${esc(caseLabel(s))}</a>` : ''}</span></div>
       ${firmTag(t.kancelaria)}<span class="small muted hide-m">${esc(shortName(t.odpowiedzialny))}</span>
-      ${t.status === 'Otwarty' && perm().write ? `<button class="btn sm" data-act="term-done" data-firm="${t.kancelaria}" data-id="${t.id}" title="Oznacz jako wykonany">${ic('check')}</button>` : ''}
+      ${t.status !== 'Wykonany' && t.status !== 'Nieaktualny' && perm().write ? `${!openTasksForTerm(t).length ? `<button class="btn sm" data-act="term-task" data-firm="${t.kancelaria}" data-id="${t.id}" title="Zleć przygotowanie (zadanie)">${ic('forward')}</button>` : `<span class="chip info" title="Otwarte zadanie przygotowania">zadanie</span>`}
+        <button class="btn sm" data-act="term-done" data-firm="${t.kancelaria}" data-id="${t.id}" title="Oznacz jako wykonany">${ic('check')}</button>` : ''}
       <a class="btn sm ghost" href="${attr(calLink(t, s))}" target="_blank" rel="noopener" title="Dodaj do Kalendarza Google" data-stop="1">${ic('calendar')}</a></li>`;
   };
   const body = groups.map(([label, test]) => {
@@ -679,6 +705,7 @@ function globalResults(q) {
   rows('sprawy').forEach((s) => { if (ok([s.numer, caseNo(s), s.tytul, s.sygn_akt, clientName(s.kancelaria, s.klient_id), s.strona_przeciwna].join(' '))) res.push(['Sprawy', 'sprawa/' + s.kancelaria + '/' + s.id, caseLabel(s), clientName(s.kancelaria, s.klient_id) + (s.sygn_akt ? ' · ' + s.sygn_akt : ''), s.kancelaria]); });
   rows('klienci').forEach((k) => { if (ok([k.nazwa, k.email, k.telefon, k.identyfikator].join(' '))) res.push(['Klienci', 'klient/' + k.kancelaria + '/' + k.id, k.nazwa, k.email || k.telefon, k.kancelaria]); });
   rows('zapytania').forEach((z) => { if (ok([z.nazwa, z.email, z.telefon, z.opis].join(' '))) res.push(['Zapytania', 'zapytanie/' + z.kancelaria + '/' + z.id, z.nazwa, z.status + ' · ' + fmtDate(z.data_wplywu), z.kancelaria]); });
+  rows('zadania').forEach((t) => { if (isOpenTask(t) && ok([t.tytul, t.opis, caseLabel(byId('sprawy', t.kancelaria, t.sprawa_id))].join(' '))) res.push(['Zadania', 'zadanie/' + t.kancelaria + '/' + t.id, t.tytul, shortName(t.przypisane) + (t.termin ? ' · ' + fmtDate(t.termin) : ''), t.kancelaria]); });
   return res.slice(0, 30);
 }
 function renderSearch(q) {
@@ -814,7 +841,7 @@ async function submitForm(btn) {
   });
 }
 function comboUpdate(input, showAll) {
-  const box = input.closest('.combo'), list = $('.combo-list', box), t = box.dataset.ref, firm = S.form ? S.form.firm : defaultFirm();
+  const box = input.closest('.combo'), list = $('.combo-list', box), t = box.dataset.ref, firm = box.dataset.firm || (S.form ? S.form.firm : defaultFirm());
   const q = norm(input.value).trim();
   const hidden = $('input[type=hidden]', box);
   const cur = byId(t, firm, hidden.value);
@@ -823,13 +850,14 @@ function comboUpdate(input, showAll) {
     .sort((a, b) => (refLabel(t, a) < refLabel(t, b) ? -1 : 1)).slice(0, 40);
   let html = cands.map((r) => `<div data-pick="${attr(r.id)}">${esc(refLabel(t, r))}${t === 'klienci' && (r.email || r.telefon) ? `<span class="sub">${esc(r.email || r.telefon)}</span>` : ''}</div>`).join('');
   if (t === 'klienci' && q && !cands.some((r) => norm(r.nazwa) === q)) html += `<div class="new" data-pick="">＋ Nowy klient: „${esc(input.value.trim())}” (zapisze się razem z formularzem)</div>`;
+  if (box.dataset.impcal !== undefined) html = '<div data-pick="">— bez sprawy —</div>' + html;
   list.innerHTML = html || '<div class="muted">Brak pasujących</div>';
   list.hidden = false;
 }
 
 /* ---------- Linki do Gmaila i Kalendarza ---------- */
 function gmailCompose(to, subject, body) {
-  return 'https://mail.google.com/mail/?authuser=' + encodeURIComponent(S.boot.email) + '&view=cm&fs=1&to=' + encodeURIComponent(to || '') +
+  return 'https://mail.google.com/mail/?authuser=' + encodeURIComponent(login()) + '&view=cm&fs=1&to=' + encodeURIComponent(to || '') +
     '&su=' + encodeURIComponent(subject || '') + '&body=' + encodeURIComponent(body || '');
 }
 function calLink(t, s) {
@@ -839,8 +867,9 @@ function calLink(t, s) {
     const [h, m] = t.godzina.split(':').map(Number), end = h * 60 + m + 60;
     dates = d + 'T' + t.godzina.replace(':', '') + '00/' + d + 'T' + SH.pad(Math.floor(end / 60) % 24) + SH.pad(end % 60) + '00';
   } else dates = d + '/' + SH.addDays(t.data, 1).replace(/-/g, '');
-  const title = (t.typ === 'Termin procesowy' ? 'TERMIN – ' : '') + t.opis + (s ? ' – ' + caseLabel(s) : '');
-  return 'https://calendar.google.com/calendar/render?action=TEMPLATE&authuser=' + encodeURIComponent(S.boot.email) + '&text=' + encodeURIComponent(title) +
-    '&dates=' + dates + '&ctz=Europe/Warsaw&location=' + encodeURIComponent(t.miejsce || '') + '&details=' + encodeURIComponent([t.podstawa, t.notatki, s && s.sygn_akt ? 'Sygn. ' + s.sygn_akt : ''].filter(Boolean).join('\n'));
+  const kl = s ? clientName(s.kancelaria, s.klient_id) : '';
+  const title = (t.typ === 'Termin procesowy' ? 'TERMIN - ' : '') + (kl ? kl + ' - ' : '') + t.opis + (s && s.numer ? ' ' + caseNo(s) : '');
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE&authuser=' + encodeURIComponent(login()) + '&text=' + encodeURIComponent(title) +
+    '&dates=' + dates + '&ctz=Europe/Warsaw&location=' + encodeURIComponent(t.miejsce || '') + '&details=' + encodeURIComponent([t.podstawa, t.notatki, s && s.sygn_akt ? 'Sygn. ' + s.sygn_akt : '', 'CRM: termin ' + t.kancelaria + '/' + t.id].filter(Boolean).join('\n'));
 }
 </script>

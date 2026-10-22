@@ -3,14 +3,22 @@
    wiersz 1 = klucze pól. Brakujące kolumny są dopisywane automatycznie, więc nowe pola
    w schemacie nie wymagają ręcznej migracji arkuszy. */
 
-var APP = { name: 'CRM Kancelarii', version: '0.1.0', tz: 'Europe/Warsaw' };
+var APP = { name: 'CRM Kancelarii', version: '0.2.0', tz: 'Europe/Warsaw', prepDays: 3, calendarId: 'sekretariat@kancelariarodzinna.com' };
 
 var ROLES = {
   admin:    { label: 'Administrator', write: true, del: true, admin: true },
-  prawnik:  { label: 'Prawnik', write: true, del: true },
-  asystent: { label: 'Asystent / sekretariat', write: true, del: false },
+  prawnik:  { label: 'Pełna edycja', write: true, del: true },
+  asystent: { label: 'Edycja bez usuwania', write: true, del: false },
   odczyt:   { label: 'Tylko odczyt', write: false, del: false }
 };
+
+/* Stanowisko opisuje miejsce w zespole (grupowanie, domyślne „wraca do sprawdzenia”),
+   rola — uprawnienia w aplikacji. */
+var STANOWISKA = ['Wspólnik', 'Starszy prawnik', 'Młodszy prawnik', 'Sekretariat', 'Współpracownik'];
+
+/* Statusy zadań: przejścia pilnuje serwer (Zadania.js), formularz ich nie zmienia. */
+var TASK_STATUSES = ['Nowe', 'W toku', 'Do sprawdzenia', 'Zrobione', 'Anulowane'];
+var TASK_OPEN = ['Nowe', 'W toku', 'Do sprawdzenia'];
 
 /* Pola systemowe dopisywane do każdej tabeli danych. */
 var SYS_FIELDS = ['id', 'utworzono', 'utworzyl', 'zmieniono', 'zmienil'];
@@ -105,12 +113,13 @@ var TABLES = {
       { k: 'data', l: 'Data', t: 'date', req: true },
       { k: 'godzina', l: 'Godzina', t: 'time' },
       { k: 'typ', l: 'Typ', t: 'select', dict: 'typ_terminu', req: true, def: '@first' },
-      { k: 'status', l: 'Status', t: 'select', opts: ['Otwarty', 'Wykonany', 'Nieaktualny'], def: 'Otwarty' },
+      { k: 'status', l: 'Status', t: 'select', opts: ['Otwarty', 'Wykonany', 'Nieaktualny', 'Do weryfikacji'], def: 'Otwarty' },
       { k: 'sprawa_id', l: 'Sprawa', t: 'ref', ref: 'sprawy' },
       { k: 'odpowiedzialny', l: 'Odpowiedzialny', t: 'user', def: '@me' },
       { k: 'miejsce', l: 'Miejsce / sala / link', t: 'text' },
       { k: 'podstawa', l: 'Podstawa i sposób liczenia', t: 'text', wide: true },
-      { k: 'notatki', l: 'Notatki', t: 'textarea', wide: true }
+      { k: 'notatki', l: 'Notatki', t: 'textarea', wide: true },
+      { k: 'zrodlo_id', l: 'Identyfikator importu', t: 'text', hidden: true }
     ]
   },
 
@@ -162,6 +171,35 @@ var TABLES = {
     ]
   },
 
+  zadania: {
+    sheet: 'Zadania', label: 'Zadania', one: 'zadanie', title: 'tytul',
+    fields: [
+      { k: 'tytul', l: 'Co zrobić', t: 'text', req: true, wide: true },
+      { k: 'przypisane', l: 'Kto robi', t: 'user', req: true, def: '@me' },
+      { k: 'termin', l: 'Do kiedy', t: 'date' },
+      { k: 'godzina', l: 'Godzina', t: 'time' },
+      { k: 'pilne', l: 'Pilne', t: 'check' },
+      { k: 'sprawdzenie', l: 'Po wykonaniu wraca do zlecającego do sprawdzenia', t: 'check', wide: true },
+      { k: 'sprawa_id', l: 'Sprawa', t: 'ref', ref: 'sprawy' },
+      { k: 'termin_id', l: 'Termin procesowy', t: 'ref', ref: 'terminy' },
+      { k: 'opis', l: 'Opis / kroki', t: 'textarea', wide: true },
+      { k: 'status', l: 'Status', t: 'select', opts: TASK_STATUSES, auto: true },
+      { k: 'zlecil', l: 'Zlecił(a)', t: 'user', auto: true },
+      { k: 'przekazano', l: 'Przekazano', t: 'datetime', auto: true },
+      { k: 'wykonal', l: 'Zrobił(a)', t: 'user', auto: true },
+      { k: 'wykonano', l: 'Zakończono', t: 'datetime', auto: true },
+      { k: 'zrodlo_id', l: 'Identyfikator importu', t: 'text', hidden: true }
+    ]
+  },
+
+  komentarze: {
+    sheet: 'Komentarze', label: 'Komentarze', one: 'komentarz', title: 'tresc',
+    fields: [
+      { k: 'zadanie_id', l: 'Zadanie', t: 'ref', ref: 'zadania', req: true },
+      { k: 'tresc', l: 'Komentarz', t: 'textarea', req: true, wide: true }
+    ]
+  },
+
   rozliczenia: {
     sheet: 'Rozliczenia', label: 'Rozliczenia', one: 'rozliczenie', title: 'numer',
     fields: [
@@ -178,11 +216,11 @@ var TABLES = {
 };
 
 /* Kolejność zakładek w arkuszu bazy kancelarii. */
-var TABLE_ORDER = ['zapytania', 'klienci', 'sprawy', 'terminy', 'korespondencja', 'czynnosci', 'umowy', 'rozliczenia'];
+var TABLE_ORDER = ['zapytania', 'klienci', 'sprawy', 'terminy', 'zadania', 'komentarze', 'korespondencja', 'czynnosci', 'umowy', 'rozliczenia'];
 
 /* Arkusz wspólny: zespół, kancelarie, słowniki. Historia jest w każdym arkuszu osobno. */
 var SETTINGS_TABLES = {
-  zespol:     { sheet: 'Zespół', keys: ['email', 'imie_nazwisko', 'tytul', 'rola', 'kancelarie', 'telefon', 'aktywny', 'dodano', 'dodal'] },
+  zespol:     { sheet: 'Zespół', keys: ['email', 'imie_nazwisko', 'tytul', 'stanowisko', 'rola', 'kancelarie', 'telefon', 'aktywny', 'aliasy', 'powiadomienia', 'dodano', 'dodal'] },
   kancelarie: { sheet: 'Kancelarie', keys: ['kod', 'nazwa', 'nazwa_krotka', 'forma', 'adres', 'nip', 'strona', 'email', 'telefon', 'kolor', 'model', 'sla_h', 'stawka', 'link_rezerwacji', 'podpis', 'db_id', 'folder_id', 'import_folder'] },
   slowniki:   { sheet: 'Słowniki', keys: ['kancelaria', 'slownik', 'wartosc', 'typ', 'kolejnosc'] }
 };
@@ -208,16 +246,15 @@ var DEFAULT_FIRMS = [
   }
 ];
 
-/* Zespół ze stron kancelarii (dane publiczne). Pozostałe osoby (asystentki, współpracownicy)
-   administrator dopisuje na ekranie konfiguracji. Każdą osobę trzeba świadomie zaznaczyć —
+/* Zespół ze stron kancelarii (dane publiczne). Pozostałe osoby (np. młodszych prawników)
+   administrator dopisuje na ekranie konfiguracji — repozytorium jest publiczne. Każdą osobę trzeba świadomie zaznaczyć —
    dopiero wtedy dostaje dostęp. */
 var DEFAULT_TEAM = [
-  { email: 'katarzyna.popik@kancelariarodzinna.com', imie_nazwisko: 'Katarzyna Popik-Konarzewska', tytul: 'adw. dr hab.', rola: 'prawnik', kancelarie: 'KR', on: true },
-  { email: 'kazimierz.konarzewski@kancelariarodzinna.com', imie_nazwisko: 'Kazimierz Konarzewski', tytul: 'adw.', rola: 'prawnik', kancelarie: 'KR', on: true },
-  { email: 'maciej.bednarek@kancelariarodzinna.com', imie_nazwisko: 'Maciej Bednarek', tytul: 'adw.', rola: 'prawnik', kancelarie: 'KR', on: true },
-  { email: 'katarzyna.walaszek@kancelariarodzinna.com', imie_nazwisko: 'Katarzyna Walaszek', tytul: 'apl. adw.', rola: 'prawnik', kancelarie: 'KR', on: true },
-  { email: 'sekretariat@kancelariarodzinna.com', imie_nazwisko: 'Sekretariat KR', tytul: 'sekretariat', rola: 'asystent', kancelarie: 'KR', on: true },
-  { email: 'maciej.muzyka@kancelariarodzinna.com', imie_nazwisko: 'Maciej Muzyka (konto KR)', tytul: 'adw. dr', rola: 'admin', kancelarie: 'KN,KR', on: false }
+  { email: 'katarzyna.popik@kancelariarodzinna.com', imie_nazwisko: 'Katarzyna Popik-Konarzewska', tytul: 'adw. dr hab.', stanowisko: 'Wspólnik', rola: 'admin', kancelarie: 'KR', on: true },
+  { email: 'katarzyna.walaszek@kancelariarodzinna.com', imie_nazwisko: 'Katarzyna Walaszek', tytul: 'apl. adw.', stanowisko: 'Starszy prawnik', rola: 'prawnik', kancelarie: 'KR', on: true },
+  { email: 'maciej.bednarek@kancelariarodzinna.com', imie_nazwisko: 'Maciej Bednarek', tytul: 'adw.', stanowisko: 'Starszy prawnik', rola: 'prawnik', kancelarie: 'KR', on: true },
+  { email: 'kazimierz.konarzewski@kancelariarodzinna.com', imie_nazwisko: 'Kazimierz Konarzewski', tytul: 'adw.', stanowisko: 'Współpracownik', rola: 'prawnik', kancelarie: 'KR', on: false },
+  { email: 'sekretariat@kancelariarodzinna.com', imie_nazwisko: 'Sekretariat KR (konto wspólne)', tytul: 'sekretariat', stanowisko: 'Sekretariat', rola: 'asystent', kancelarie: 'KR', on: false }
 ];
 
 /* Słowniki. typ: open / won / lost (statusy zapytań), open / closed (statusy spraw). */
@@ -260,5 +297,5 @@ var WEBSITE_SITUATION_MAP = {
 
 /* Schemat dla przeglądarki (bez funkcji). */
 function publicSchema_() {
-  return { app: APP, roles: ROLES, tables: TABLES, order: TABLE_ORDER };
+  return { app: APP, roles: ROLES, tables: TABLES, order: TABLE_ORDER, stanowiska: STANOWISKA, taskOpen: TASK_OPEN };
 }

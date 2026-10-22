@@ -72,6 +72,7 @@
       }
       getDataRange() { return this.getRange(1, 1, Math.max(this.getLastRow(), 1), Math.max(this.getLastColumn(), 1)); }
       setFrozenRows() { return this; }
+      protect() { const p = { setDescription: () => p, setWarningOnly: (v) => { this.warningOnly = v; return p; } }; return p; }
       deleteRow(r) { this.ss._assertWrite(); this.data.splice(r - 1, 1); this.maxRows--; return this; }
     }
     class Spreadsheet {

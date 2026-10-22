@@ -36,11 +36,11 @@ ok(await page.locator('.stat').count() === 4, 'pulpit: 4 kafle');
 ok(await page.locator('text=Do odpowiedzi').count() > 0, 'pulpit: lista do odpowiedzi');
 await shot(page, '01-pulpit');
 
-for (const v of ['zapytania', 'klienci', 'sprawy', 'terminy', 'korespondencja', 'czas', 'umowy', 'rozliczenia', 'konflikt', 'zespol', 'ustawienia', 'import']) {
+for (const v of ['zadania', 'zapytania', 'klienci', 'sprawy', 'terminy', 'korespondencja', 'czas', 'umowy', 'rozliczenia', 'konflikt', 'zespol', 'ustawienia', 'import']) {
   await page.click(`.nav a[data-go="${v}"]`);
   await page.waitForTimeout(120);
   await noViewError(page, v);
-  if (['zapytania', 'sprawy', 'terminy', 'zespol', 'ustawienia', 'import'].includes(v)) await shot(page, '02-' + v);
+  if (['zadania', 'zapytania', 'sprawy', 'terminy', 'zespol', 'ustawienia', 'import'].includes(v)) await shot(page, '02-' + v);
 }
 
 /* Karta sprawy i zakładki */
@@ -48,7 +48,7 @@ await page.click('.nav a[data-go="sprawy"]');
 await page.click('table.t tbody tr >> nth=0');
 await page.waitForSelector('.rec-head');
 await shot(page, '03-sprawa');
-for (const t of ['terminy', 'kor', 'czas', 'rozl', 'mail', 'hist']) {
+for (const t of ['zad', 'terminy', 'kor', 'czas', 'rozl', 'mail', 'hist']) {
   await page.click(`.tabs button[data-tab="${t}"]`);
   await page.waitForTimeout(500);
   await noViewError(page, 'sprawa/' + t);
@@ -94,20 +94,65 @@ await page.fill('#c-n', '1');
 await page.waitForTimeout(100);
 ok((await page.locator('#c-out .mono').textContent()).trim() === '2026-03-02', 'kalkulator: 31.01 + 1 mies. → 2.03.2026');
 
-/* Dostęp: aplikantka KR */
-await page.selectOption('#demo-as', { index: 2 });
+/* Zadania: szybkie dodawanie jedną linijką (sprawa po numerze, osoba po @, data słownie, pilne) */
+await page.click('.nav a[data-go="pulpit"]');
+await page.fill('#qa-pulpit', 'Sprawdzić akta #600 @Bednarek jutro !');
+await page.waitForTimeout(100);
+ok((await page.locator('#qa-pulpit-hint').textContent()).includes('Maciej Bednarek'), 'szybkie dodawanie: podpowiedź z osobą');
+await page.press('#qa-pulpit', 'Enter');
+await page.waitForSelector('.toast:has-text("Zlecono: Maciej Bednarek")', { timeout: 5000 });
+ok(true, 'szybkie dodawanie: zlecono');
+/* Własne zadanie: odhaczenie w karcie zadania */
+await page.click('.nav a[data-go="zadania"]');
+await page.click('li.task:has-text("Przejrzeć i wysłać draft oferty")');
+await page.waitForSelector('.modal [data-act="task-do"][data-a="zrobione"]');
+await shot(page, '10-zadanie-karta');
+await page.click('.modal [data-act="task-do"][data-a="zrobione"]');
+await page.waitForSelector('.toast:has-text("Zrobione")', { timeout: 5000 });
+ok(await page.locator('.modal .chip:has-text("Zrobione")').count() > 0, 'zadanie zamknięte w karcie');
+await page.click('.modal [data-act="close"]');
+/* Import kalendarza */
+await page.click('.nav a[data-go="import"]');
+await page.click('[data-act="cal-load"]');
+await page.waitForSelector('[data-act="cal-commit"]', { timeout: 5000 });
+ok(/wpisów TERMIN/.test(await page.locator('.banner.info').last().textContent()), 'kalendarz: podsumowanie wczytanych wpisów');
+ok(await page.locator('.chip:has-text("pewne")').count() >= 3, 'kalendarz: pewne dopasowania do spraw');
+await shot(page, '11-import-kalendarza');
+await page.click('[data-act="cal-commit"]');
+await page.waitForSelector('.banner.info:has-text("KR:")', { timeout: 8000 });
+await page.click('.nav a[data-go="terminy"]');
+ok(await page.locator('h2:has-text("Do weryfikacji")').count() === 1, 'terminy: grupa do weryfikacji po imporcie');
+/* Wspólniczka: zwrot do poprawy */
+await page.selectOption('#demo-as', 'katarzyna.popik@kancelariarodzinna.com');
+await page.waitForSelector('.shell');
+await page.waitForTimeout(600);
+await page.click('.nav a[data-go="zadania"]');
+await page.click('button[data-val="sprawdz"]');
+await page.click('li.task:has-text("Wniosek dowodowy")');
+await page.click('.modal [data-act="task-do"][data-a="zwroc"]');
+await page.fill('#tk-note', 'Dodaj świadka z przedszkola');
+await page.click('.modal [data-go-now="1"]');
+await page.waitForSelector('.toast:has-text("Zwrócono do poprawy")', { timeout: 5000 });
+ok(await page.locator('.modal .kom:has-text("Do poprawy: Dodaj świadka")').count() === 1, 'zwrot: komentarz w karcie zadania');
+await page.click('.modal [data-act="close"]');
+await page.click('button[data-val="zespol"]');
+ok(await page.locator('table.t tbody tr').count() >= 5, 'zadania: widok zespołu');
+await shot(page, '12-zadania-zespol');
+
+/* Dostęp: starsza prawniczka KR */
+await page.selectOption('#demo-as', 'katarzyna.walaszek@kancelariarodzinna.com');
 await page.waitForTimeout(900);
 ok(await page.locator('.seg').count() === 0, 'KR: brak przełącznika kancelarii');
 await page.click('.nav a[data-go="sprawy"]');
 ok(await page.locator('.firm.KN').count() === 0, 'KR: brak spraw KN');
 ok(await page.locator('.nav a[data-go="ustawienia"]').count() === 0, 'KR: brak ustawień');
 await shot(page, '05-dostep-kr');
-await page.selectOption('#demo-as', { index: 3 });
+await page.selectOption('#demo-as', 'ktos.obcy@gmail.com');
 await page.waitForTimeout(900);
 ok(await page.locator('h1:has-text("Brak dostępu")').count() === 1, 'obce konto: brak dostępu');
 
 /* Nowa instalacja */
-await page.selectOption('#demo-as', { index: 4 });
+await page.selectOption('#demo-as', 'setup');
 await page.waitForSelector('h1:has-text("Konfiguracja CRM")');
 await shot(page, '06-konfiguracja');
 await page.click('[data-act="setup-go"]');
@@ -116,7 +161,7 @@ await page.waitForSelector('.modal h2:has-text("Udostępnienia")');
 ok(await page.locator('.modal .small:has-text("edycja")').count() > 0, 'po konfiguracji: raport udostępnień');
 await page.click('.modal [data-act="close"]');
 await page.click('.nav a[data-go="zespol"]');
-ok(await page.locator('table.t tbody tr').count() >= 6, 'po konfiguracji: zespół dodany');
+ok(await page.locator('table.t tbody tr').count() >= 4, 'po konfiguracji: zespół dodany (administrator + 3 osoby ze stron)');
 await page.close();
 
 /* Telefon + tryb ciemny */

@@ -240,15 +240,40 @@ function apiImportCommit(kind, items) {
     report[code] = withLock_(function () {
       var ss = SpreadsheetApp.openById(f.db_id);
       var shK = ensureSheet_(ss, TABLES.klienci.sheet, tableKeys_('klienci'));
-      var existing = readTables_(ss, ['klienci', 'sprawy', 'zapytania', 'umowy']);
-      var clients = {}, seen = {};
+      var existing = readTables_(ss, ['klienci', 'sprawy', 'zapytania', 'umowy', 'terminy', 'zadania']);
+      var clients = {}, seen = {}, updated = 0;
       existing.klienci.forEach(function (k) { clients[normName_(k.nazwa)] = k; });
-      ['sprawy', 'zapytania', 'umowy'].forEach(function (t) { existing[t].forEach(function (r) { if (r.zrodlo_id) seen[r.zrodlo_id] = 1; }); });
-      var newClients = [], recs = { sprawy: [], zapytania: [], umowy: [], terminy: [] }, skipped = 0;
+      ['sprawy', 'zapytania', 'umowy', 'terminy', 'zadania'].forEach(function (t) { existing[t].forEach(function (r) { if (r.zrodlo_id) seen[r.zrodlo_id] = { table: t, rec: r }; }); });
+      var newClients = [], recs = { sprawy: [], zapytania: [], umowy: [], terminy: [], zadania: [] }, skipped = 0;
+      /* Zadania z importu: te same reguły co w aplikacji; adresat spoza kancelarii → importujący. */
+      var task = function (data) {
+        var z = buildNew_(c, f, 'zadania', data);
+        try { autoFields_(c, f, 'zadania', z, null); } catch (e) { z.przypisane = c.email; autoFields_(c, f, 'zadania', z, null); }
+        delete z._assigned;
+        return z;
+      };
       byFirm[code].forEach(function (it) {
         if (!TABLES[it.table] || !recs[it.table]) return;
-        if (it.rec.zrodlo_id && seen[it.rec.zrodlo_id]) { skipped++; return; }
-        seen[it.rec.zrodlo_id] = 1;
+        var prev = it.rec.zrodlo_id && seen[it.rec.zrodlo_id];
+        if (prev) {
+          /* Ponowny import kalendarza: dopisane „(zrobione)” zamyka termin (zmiana trafia do Historii). */
+          if (it.table === 'terminy' && it.rec.status === 'Wykonany' && prev.rec.status !== 'Wykonany') {
+            var sht = ensureSheet_(ss, TABLES.terminy.sheet, tableKeys_('terminy')), rowt = findRow_(sht, 'id', prev.rec.id);
+            if (rowt > 0) {
+              var before = readRow_(sht, rowt), after = {};
+              Object.keys(before).forEach(function (k) { after[k] = before[k]; });
+              after.status = 'Wykonany'; after.zmieniono = nowIso_(); after.zmienil = c.email;
+              writeRow_(sht, rowt, after);
+              log_(ss, c.email, 'terminy', after.id, 'zmiana', diff_(before, after));
+              updated++;
+              return;
+            }
+          }
+          skipped++;
+          return;
+        }
+        if (it.rec.zrodlo_id) seen[it.rec.zrodlo_id] = { table: it.table, rec: it.rec };
+        if (it.table === 'zadania') { recs.zadania.push(task(it.rec)); return; }
         var rec = buildNew_(c, f, it.table, it.rec);
         if (it.klient && it.klient.nazwa) {
           var key = normName_(it.klient.nazwa), k = clients[key];
@@ -272,6 +297,9 @@ function apiImportCommit(kind, items) {
         if (it.termin && it.termin.data && it.table === 'sprawy') {
           recs.terminy.push(buildNew_(c, f, 'terminy', { opis: it.termin.opis || 'Termin', data: it.termin.data, typ: 'Termin wewnętrzny', sprawa_id: rec.id, odpowiedzialny: rec.prowadzacy || c.email }));
         }
+        if (it.zadanie && it.table === 'terminy') {
+          recs.zadania.push(task(Object.assign({}, it.zadanie, { sprawa_id: rec.sprawa_id, termin_id: rec.id })));
+        }
       });
       appendRows_(shK, newClients);
       existing.klienci.filter(function (k) { return k._dirty; }).forEach(function (k) {
@@ -279,6 +307,7 @@ function apiImportCommit(kind, items) {
         if (row > 0) { delete k._dirty; writeRow_(shK, row, k); }
       });
       var counts = { klienci: newClients.length, pominiete: skipped };
+      if (updated) counts.zaktualizowane = updated;
       Object.keys(recs).forEach(function (t) {
         if (!recs[t].length) return;
         appendRows_(ensureSheet_(ss, TABLES[t].sheet, tableKeys_(t)), recs[t]);
@@ -289,4 +318,29 @@ function apiImportCommit(kind, items) {
     });
   });
   return report;
+}
+
+/* ---------- Kalendarz Google: wpisy „TERMIN - …” ----------
+   Zwraca wydarzenia całodniowe i trwające co najmniej 23 h (zespół wpisywał je jako 07:00–07:00).
+   Parsowanie tytułu, dopasowanie do spraw i podgląd są w przeglądarce (Wspolne.js: parseTermin). */
+function apiCalendarEvents(calId, fromYmd, toYmd) {
+  var c = ctx_();
+  requireAdmin_(c);
+  calId = String(calId || APP.calendarId).trim();
+  if (typeof CalendarApp === 'undefined') fail_('NO_CAL', 'Usługa Kalendarza nie jest dostępna.');
+  var cal = CalendarApp.getCalendarById(calId);
+  if (!cal) fail_('NO_CAL', 'Konto ' + c.login + ' nie widzi kalendarza ' + calId + '. Udostępnij go temu kontu („Udostępnij ze wszystkimi szczegółami wydarzeń”) albo wczytaj plik .ics z eksportu kalendarza.');
+  var from = new Date((fromYmd || '2025-01-01') + 'T00:00:00'), to = new Date((toYmd || '2028-12-31') + 'T23:59:59');
+  var evs = cal.getEvents(from, to).map(function (ev) {
+    var all = ev.isAllDayEvent();
+    var st = all ? ev.getAllDayStartDate() : ev.getStartTime();
+    var en = all && ev.getAllDayEndDate ? ev.getAllDayEndDate() : ev.getEndTime();
+    var hours = Math.round((en.getTime() - st.getTime()) / 360000) / 10;
+    return {
+      uid: ev.getId(), title: ev.getTitle(), desc: String(ev.getDescription() || '').slice(0, 500), allDay: all, recurring: false,
+      start: Utilities.formatDate(st, APP.tz, all ? 'yyyy-MM-dd' : "yyyy-MM-dd'T'HH:mm"), date: Utilities.formatDate(st, APP.tz, 'yyyy-MM-dd'),
+      hours: all ? Math.max(24, hours) : hours
+    };
+  }).filter(function (e) { return e.allDay || e.hours >= 23; });
+  return { calendar: cal.getName(), events: evs.slice(0, 3000) };
 }

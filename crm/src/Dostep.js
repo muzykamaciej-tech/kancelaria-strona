@@ -34,11 +34,33 @@ function ctx_() {
   if (!settingsId_()) fail_('SETUP', 'Aplikacja nie jest jeszcze skonfigurowana.');
   var s;
   try { s = loadSettings_(); } catch (e) { fail_('DENIED', 'Twoje konto (' + email + ') nie ma dostępu do CRM. Poproś administratora o dodanie do zespołu.'); }
-  var m = s.zespol.filter(function (x) { return x.email === email && x.aktywny !== 'nie'; })[0];
+  var m = memberOf_(s, email);
   if (!m) fail_('DENIED', 'Twoje konto (' + email + ') nie jest na liście zespołu CRM. Poproś administratora o dodanie.');
   var role = ROLES[m.rola] ? m.rola : 'odczyt';
   var firms = splitList_(m.kancelarie).filter(function (k) { return s.kancelarie.some(function (f) { return f.kod === k; }); });
-  return { email: email, member: m, role: role, perm: ROLES[role], firms: firms, s: s };
+  /* email = konto główne osoby (tożsamość w zadaniach i historii), login = konto, którym otwarto aplikację. */
+  return { email: m.email, login: email, member: m, role: role, perm: ROLES[role], firms: firms, s: s };
+}
+
+/* Aktywny członek zespołu po adresie konta głównego albo jednego z aliasów (drugie konto tej samej osoby). */
+function memberOf_(s, email) {
+  email = String(email || '').toLowerCase();
+  return s.zespol.filter(function (x) {
+    return x.aktywny !== 'nie' && (x.email === email || splitList_(x.aliasy).map(function (a) { return a.toLowerCase(); }).indexOf(email) >= 0);
+  })[0] || null;
+}
+
+/* Konta dopuszczone do zespołu i powiadomień: domeny z adresów kancelarii + lista ALLOWED_DOMAINS
+   (Ustawienia). Chroni przed udostępnieniem bazy klientów prywatnym skrzynkom. */
+function allowedDomains_(firms) {
+  var d = {};
+  (firms || []).forEach(function (f) { var m = /@([^@\s]+)$/.exec(String(f.email || '').trim()); if (m) d[m[1].toLowerCase()] = 1; });
+  splitList_(props_().getProperty('ALLOWED_DOMAINS')).forEach(function (x) { d[x.toLowerCase().replace(/^@/, '')] = 1; });
+  return Object.keys(d);
+}
+function emailAllowed_(firms, email) {
+  var dom = String(email || '').toLowerCase().split('@')[1] || '';
+  return allowedDomains_(firms).indexOf(dom) >= 0;
 }
 
 function firm_(c, code) {
@@ -67,13 +89,20 @@ function isScriptEditor_() {
 /* Udostępnienia w Dysku zgodne z wpisem w „Zespole”: arkusz ustawień (odczyt, administrator —
    edycja), arkusz bazy i folder spraw każdej kancelarii z listy (edycja albo odczyt). */
 function applySharing_(s, m) {
-  var email = String(m.email || '').toLowerCase();
+  return [m.email].concat(splitList_(m.aliasy)).reduce(function (log, e) {
+    return log.concat(applySharingFor_(s, m, String(e || '').toLowerCase()));
+  }, []);
+}
+
+function applySharingFor_(s, m, email) {
   if (!email || email === me_()) return [];
   var active = m.aktywny !== 'nie';
   var firms = active ? splitList_(m.kancelarie) : [];
   var editor = m.rola !== 'odczyt';
   var log = [];
+  var who = email === String(m.email).toLowerCase() ? '' : ' (' + email + ')';
   function grant(get, id, asEditor, label) {
+    label += who;
     if (!id) return;
     try {
       var f = get(id);
@@ -82,6 +111,7 @@ function applySharing_(s, m) {
     } catch (e) { log.push(label + ': BŁĄD ' + e.message); }
   }
   function revoke(get, id, label) {
+    label += who;
     if (!id) return;
     try { var f = get(id); try { f.removeEditor(email); } catch (e) { /* — */ } try { f.removeViewer(email); } catch (e) { /* — */ } log.push(label + ': brak dostępu'); }
     catch (e) { log.push(label + ': BŁĄD ' + e.message); }

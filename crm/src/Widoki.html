@@ -200,9 +200,10 @@ VIEWS.sprawa = function (firm, id) {
   const of = (t) => S.data[t].filter((r) => r.kancelaria === firm && r.sprawa_id === id);
   const te = of('terminy').sort((a, b) => (a.data + a.godzina < b.data + b.godzina ? -1 : 1));
   const ko = of('korespondencja'), cz = of('czynnosci'), um = of('umowy'), ro = of('rozliczenia');
+  const zd = of('zadania').sort((a, b) => (isOpenTask(a) === isOpenTask(b) ? (taskDueKey(a) < taskDueKey(b) ? -1 : 1) : isOpenTask(a) ? -1 : 1)), zdOpen = zd.filter(isOpenTask);
   const h = sum(cz, 'czas'), hUnb = sum(cz.filter((c) => c.rozliczone === 'nie'), 'czas');
   const pre = attr(JSON.stringify({ sprawa_id: id }));
-  const tb = tabsHtml('sp:' + firm + ':' + id, [['info', 'Przegląd'], ['terminy', 'Terminy', te.filter((t) => t.status === 'Otwarty').length], ['kor', 'Korespondencja', ko.length], ['czas', 'Czas pracy', h ? hrs(h) : ''], ['rozl', 'Umowy i rozliczenia', um.length + ro.length || ''], ['mail', 'E-maile'], ['hist', 'Historia']]);
+  const tb = tabsHtml('sp:' + firm + ':' + id, [['info', 'Przegląd'], ['zad', 'Zadania', zdOpen.length || ''], ['terminy', 'Terminy', te.filter((t) => t.status === 'Otwarty').length], ['kor', 'Korespondencja', ko.length], ['czas', 'Czas pracy', h ? hrs(h) : ''], ['rozl', 'Umowy i rozliczenia', um.length + ro.length || ''], ['mail', 'E-maile'], ['hist', 'Historia']]);
   const addBtn = (t, label) => w ? `<button class="btn sm" data-act="new" data-t="${t}" data-firm="${firm}" data-pre="${pre}">${ic('plus')}${label}</button>` : '';
   let body = '';
   if (tb.cur === 'info') {
@@ -210,14 +211,17 @@ VIEWS.sprawa = function (firm, id) {
     body = `<div class="grid-2"><section class="panel"><div class="panel-h"><h2>Dane sprawy</h2></div><div class="panel-b">${kv('sprawy', s, ['tytul', 'notatki', 'nastepny_krok'])}</div></section>
       <div class="stack">
         <section class="panel"><div class="panel-h"><h2>Następny krok</h2></div><div class="panel-b">${esc(s.nastepny_krok) || '<span class="muted">nie wpisano</span>'}</div></section>
+        <section class="panel"><div class="panel-h"><h2>Otwarte zadania</h2>${addBtn('zadania', 'Zadanie')}</div>${zdOpen.length ? `<ul class="rows">${zdOpen.slice(0, 6).map(taskRow).join('')}</ul>` : '<div class="empty small">Brak otwartych zadań</div>'}</section>
         <section class="panel"><div class="panel-h"><h2>Otwarte terminy</h2>${addBtn('terminy', 'Termin')}</div>${open.length ? `<ul class="rows">${open.slice(0, 5).map((t) => `<li data-go="edit/terminy/${firm}:${t.id}">${dateBox(t.data, t.data < today() ? 'bad' : t.data <= SH.addDays(today(), 2) ? 'warn' : '')}<div class="main-txt"><b>${esc(t.opis)}</b><span>${esc([t.godzina, t.typ, t.podstawa].filter(Boolean).join(' · '))}</span></div>${chip(t.data < today() ? 'bad' : '', relDay(t.data))}</li>`).join('')}</ul>` : '<div class="empty small">Brak otwartych terminów</div>'}</section>
         ${k ? `<section class="panel"><div class="panel-h"><h2>Klient</h2><a href="#" data-go="klient/${firm}/${k.id}" class="small">karta klienta</a></div><div class="panel-b">${kv('klienci', k, ['notatki', 'rodo', 'aml', 'zrodlo', 'opiekun', 'typ'])}</div></section>` : ''}
         <section class="panel"><div class="panel-h"><h2>Notatki</h2></div><div class="panel-b pre">${esc(s.notatki) || '<span class="muted">brak</span>'}</div></section>
       </div></div>`;
   }
+  if (tb.cur === 'zad') body = `<section class="panel"><div class="panel-h"><h2>Zadania w sprawie</h2><span class="muted">${zdOpen.length} otwarte</span>${addBtn('zadania', 'Zadanie')}</div>
+      ${zd.length ? `<ul class="rows">${zd.map(taskRow).join('')}</ul>` : '<div class="empty">Brak zadań w tej sprawie</div>'}</section>`;
   if (tb.cur === 'terminy') body = `<div class="grid-2"><section class="panel"><div class="panel-h"><h2>Terminy sprawy</h2>${addBtn('terminy', 'Termin')}</div>
       ${te.length ? `<ul class="rows">${te.map((t) => `<li data-go="edit/terminy/${firm}:${t.id}">${dateBox(t.data, t.status === 'Otwarty' && t.data < today() ? 'bad' : '')}<div class="main-txt"><b>${t.status === 'Wykonany' ? '<s>' + esc(t.opis) + '</s>' : esc(t.opis)}</b><span>${esc([fmtDate(t.data, true), t.godzina, t.typ, t.miejsce, t.podstawa].filter(Boolean).join(' · '))}</span></div>
-        ${t.status === 'Otwarty' && w ? `<button class="btn sm" data-act="term-done" data-firm="${firm}" data-id="${t.id}" title="Wykonany">${ic('check')}</button>` : statusChip('terminy', t)}
+        ${(t.status === 'Otwarty' || t.status === 'Do weryfikacji') && w ? `${openTasksForTerm(t).length ? chip('info', 'zadanie') : `<button class="btn sm" data-act="term-task" data-firm="${firm}" data-id="${t.id}" title="Zleć przygotowanie">${ic('forward')}</button>`}<button class="btn sm" data-act="term-done" data-firm="${firm}" data-id="${t.id}" title="Wykonany">${ic('check')}</button>` : statusChip('terminy', t)}
         <a class="btn sm ghost" href="${attr(calLink(t, s))}" target="_blank" rel="noopener" title="Dodaj do Kalendarza Google">${ic('calendar')}</a></li>`).join('')}</ul>` : '<div class="empty">Brak terminów</div>'}</section>
       <div class="stack" data-calc-sprawa="${attr(id)}">${calcPanel()}</div></div>`;
   if (tb.cur === 'kor') body = `<section class="panel"><div class="panel-h"><h2>Korespondencja w sprawie</h2>${addBtn('korespondencja', 'Pismo')}</div>${tableHtml('sp-ko', [
@@ -242,17 +246,239 @@ VIEWS.sprawa = function (firm, id) {
         ${s.organ || s.sygn_akt ? `<span>${esc(s.organ)} <span class="mono">${esc(s.sygn_akt)}</span></span>` : ''}<span>prowadzi ${esc(shortName(s.prowadzacy))}</span></div></div>
       <div class="actions">${w ? `<button class="btn primary" data-act="edit" data-t="sprawy" data-firm="${firm}" data-id="${id}">${ic('edit')}Edytuj</button>` : ''}
         ${s.folder ? `<a class="btn" href="${attr(s.folder)}" target="_blank" rel="noopener">${ic('folder')}Folder</a>` : (w ? `<button class="btn" data-act="folder" data-firm="${firm}" data-id="${id}">${ic('folder')}Załóż folder</button>` : '')}
-        ${addBtn('terminy', 'Termin')}${addBtn('korespondencja', 'Pismo')}${addBtn('czynnosci', 'Czas')}</div></div>
+        ${addBtn('zadania', 'Zadanie')}${addBtn('terminy', 'Termin')}${addBtn('korespondencja', 'Pismo')}${w ? `<button class="btn sm" data-act="plus15" data-firm="${firm}" data-id="${id}" title="Zapisz 15 minut pracy w sprawie">${ic('clock')}+15 min</button>` : ''}</div></div>
     ${tb.html}${body}`;
 };
+
+/* ---------- Zadania: lista, szybkie dodawanie, karta zadania ---------- */
+const TASK_CHIP = { 'Nowe': 'info', 'W toku': '', 'Do sprawdzenia': 'warn', 'Zrobione': 'ok', 'Anulowane': '' };
+function dueChip(t) {
+  if (!t.termin || !isOpenTask(t)) return '';
+  const h = t.godzina ? ' ' + t.godzina : '';
+  if (t.termin < today()) return chip('bad', 'zaległe ' + relDay(t.termin));
+  if (t.termin === today()) return chip('warn', 'dziś' + h);
+  if (t.termin === SH.addDays(today(), 1)) return chip('', 'jutro' + h);
+  return chip('', fmtDate(t.termin, true) + h);
+}
+const komentarzeOf = (t) => S.data.komentarze.filter((k) => k.kancelaria === t.kancelaria && k.zadanie_id === t.id).sort((a, b) => (a.utworzono < b.utworzono ? -1 : 1));
+const goesToReview = (t) => !!(t.sprawdzenie && t.zlecil && t.zlecil !== t.przypisane && t.zlecil !== me());
+function taskRow(t) {
+  const s = byId('sprawy', t.kancelaria, t.sprawa_id), mine = t.przypisane === me();
+  const canTick = perm().write && (t.status === 'Nowe' || t.status === 'W toku') && (mine || t.zlecil === me() || perm().admin);
+  const who = mine ? (t.zlecil && t.zlecil !== me() ? 'od ' + shortName(t.zlecil) : '') : '→ ' + shortName(t.przypisane);
+  const n = komentarzeOf(t).length;
+  const meta = [firmTag(t.kancelaria), esc(who), s ? `<a href="#" data-go="sprawa/${s.kancelaria}/${s.id}">${esc(caseLabel(s))}</a>` : '', n ? `<span class="nowrap">${ic('msg').replace('<svg', '<svg width="12" height="12"')} ${n}</span>` : ''].filter(Boolean).join(' · ');
+  return `<li class="task${isOpenTask(t) ? '' : ' done'}" data-go="zadanie/${t.kancelaria}/${t.id}">
+    ${canTick ? `<button class="tick" data-act="task-tick" data-firm="${t.kancelaria}" data-id="${t.id}" title="${goesToReview(t) ? 'Oddaj do sprawdzenia' : 'Zrobione'}" aria-label="${goesToReview(t) ? 'Oddaj do sprawdzenia' : 'Oznacz jako zrobione'}">${ic('check')}</button>`
+      : `<span class="tick${t.status === 'Zrobione' ? ' on' : ''}" aria-hidden="true">${t.status === 'Zrobione' ? ic('check') : ''}</span>`}
+    <div class="main-txt"><b>${t.pilne ? '<span class="bang">!</span> ' : ''}${esc(t.tytul)}</b><span>${meta}</span></div>
+    ${t.status !== 'W toku' ? chip(TASK_CHIP[t.status] || '', esc(t.status)) : ''}${dueChip(t)}</li>`;
+}
+function groupByDue(list) {
+  const g = [['Zaległe', (t) => t.termin && t.termin < today()], ['Dziś', (t) => t.termin === today()], ['Jutro', (t) => t.termin === SH.addDays(today(), 1)],
+    ['Najbliższe 7 dni', (t) => t.termin && t.termin > SH.addDays(today(), 1) && t.termin <= SH.addDays(today(), 7)], ['Później', (t) => t.termin > SH.addDays(today(), 7)], ['Bez terminu', (t) => !t.termin]];
+  const used = new Set();
+  return g.map(([l, test]) => { const items = list.filter((t) => !used.has(t) && test(t)).sort((a, b) => (taskDueKey(a) < taskDueKey(b) ? -1 : 1)); items.forEach((t) => used.add(t)); return [l, items]; }).filter((x) => x[1].length);
+}
+function defaultReview(assignee) {
+  const a = member(assignee) || {}, m = member(me()) || {};
+  return m.stanowisko === 'Wspólnik' && a.stanowisko === 'Młodszy prawnik' && assignee !== me() ? 'tak' : '';
+}
+
+/* Szybkie dodawanie jedną linijką: „Wyślij pozew #593 @Julia pt !”. */
+const QUICK_WD = { nd: 0, ndz: 0, niedz: 0, pn: 1, pon: 1, wt: 2, sr: 3, cz: 4, czw: 4, pt: 5, pia: 5, piat: 5, sb: 6, sob: 6 };
+function quickDate(w) {
+  const n = norm(w).replace(/[.,]$/, '');
+  if (n === 'dzis' || n === 'dzisiaj') return today();
+  if (n === 'jutro') return SH.addDays(today(), 1);
+  if (n === 'pojutrze') return SH.addDays(today(), 2);
+  if (Object.prototype.hasOwnProperty.call(QUICK_WD, n)) { const cur = new Date(SH.parse(today())).getUTCDay(); return SH.addDays(today(), (QUICK_WD[n] - cur + 7) % 7); }
+  const m = /^(\d{1,2})\.(\d{1,2})(?:\.(\d{2}|\d{4}))?$/.exec(n);
+  if (!m) return '';
+  const y = m[3] ? (m[3].length === 2 ? '20' + m[3] : m[3]) : today().slice(0, 4);
+  let d = y + '-' + SH.pad(+m[2]) + '-' + SH.pad(+m[1]);
+  if (!m[3] && d < today()) d = (+y + 1) + d.slice(4);
+  return isNaN(SH.parse(d)) || SH.ymdOf(SH.parse(d)) !== d ? '' : d;
+}
+function parseQuick(text) {
+  const out = { pilne: '', termin: '', sprawa: null, who: null, errors: [] }, title = [];
+  String(text || '').trim().split(/\s+/).filter(Boolean).forEach((w) => {
+    let m;
+    if ((m = /^#(P?\d{1,4})$/i.exec(w))) {
+      const nr = m[1].toUpperCase(), cands = S.data.sprawy.filter((s) => String(s.numer).toUpperCase() === nr);
+      out.sprawa = cands.find((s) => S.firm === 'all' || s.kancelaria === S.firm) || cands[0] || null;
+      if (!out.sprawa) out.errors.push('nie ma sprawy #' + nr);
+      return;
+    }
+    if ((m = /^@(.+)$/.exec(w))) {
+      const q = norm(m[1]);
+      out.who = q === 'ja' ? member(me()) : (S.boot.team || []).filter((x) => x.aktywny !== 'nie').find((x) => norm(x.imie_nazwisko).split(/[\s-]+/).some((p) => p.indexOf(q) === 0)) || null;
+      if (!out.who) out.errors.push('nie znam osoby @' + m[1]);
+      return;
+    }
+    if (w === '!') { out.pilne = 'tak'; return; }
+    const d = quickDate(w);
+    if (d) { out.termin = d; if (title.length && /^do$/i.test(title[title.length - 1])) title.pop(); return; }
+    title.push(w);
+  });
+  out.tytul = title.join(' ');
+  out.przypisane = out.who ? out.who.email : me();
+  const firmsOf = (e) => String((member(e) || {}).kancelarie || '').split(',').filter((k) => myFirms().indexOf(k) >= 0);
+  const af = firmsOf(out.przypisane);
+  out.firm = out.sprawa ? out.sprawa.kancelaria : S.firm !== 'all' && af.indexOf(S.firm) >= 0 ? S.firm : af.length === 1 ? af[0] : af.indexOf(defaultFirm()) >= 0 ? defaultFirm() : af[0] || defaultFirm();
+  if (af.indexOf(out.firm) < 0) out.errors.push(shortName(out.przypisane) + ' nie ma dostępu do ' + out.firm);
+  if (!out.tytul) out.errors.push('wpisz, co zrobić');
+  return out;
+}
+function quickAddHtml(id) {
+  return `<div class="qa"><input class="inp" id="${id}" data-qa="${id}" placeholder="Nowe zadanie, np.: Wyślij pozew #593 @Julia pt !" autocomplete="off" aria-label="Nowe zadanie">
+    <div class="small muted qa-hint" id="${id}-hint">#nr teczki · @osoba · dziś, jutro, pn–nd, 15.11 · ! pilne · Enter zapisuje</div></div>`;
+}
+function quickHint(el) {
+  const h = $('#' + el.id + '-hint'); if (!h) return;
+  if (!el.value.trim()) { h.className = 'small muted qa-hint'; h.innerHTML = '#nr teczki · @osoba · dziś, jutro, pn–nd, 15.11 · ! pilne · Enter zapisuje'; return; }
+  const q = parseQuick(el.value);
+  h.className = 'small qa-hint' + (q.errors.length ? ' bad' : '');
+  h.innerHTML = q.errors.length ? esc(q.errors.join(' · ')) : esc(['→ ' + personName(q.przypisane), q.termin ? fmtDate(q.termin, true) : 'bez terminu', q.sprawa ? caseLabel(q.sprawa) : '', q.firm, q.pilne ? 'pilne' : ''].filter(Boolean).join(' · ')) + ' · Enter';
+}
+async function quickSave(el) {
+  const q = parseQuick(el.value);
+  if (q.errors.length) { toast(q.errors.join(' · '), true); return; }
+  el.disabled = true;
+  try {
+    const t = await call('apiSave', 'zadania', { kancelaria: q.firm, tytul: q.tytul, przypisane: q.przypisane, termin: q.termin, sprawa_id: q.sprawa ? q.sprawa.id : '', pilne: q.pilne, sprawdzenie: defaultReview(q.przypisane) });
+    upsert('zadania', t);
+    toast(t.przypisane === me() ? 'Dodano zadanie' : 'Zlecono: ' + personName(t.przypisane));
+    el.value = '';
+    const id = el.id;
+    render();
+    const again = $('#' + id); if (again) again.focus();
+  } catch (e) { toast(e.message, true); } finally { el.disabled = false; }
+}
+
+VIEWS.zadania = function () {
+  const id = 'zad', tab = fv(id, 'tab', 'moje'), all = rows('zadania');
+  const zlecone = all.filter((t) => t.zlecil === me() && t.przypisane !== me() && isOpenTask(t));
+  const sprawdz = all.filter((t) => t.status === 'Do sprawdzenia' && t.zlecil === me());
+  const tabs = [['moje', 'Moje', myTasks().length], ['zlecone', 'Zleciłem', zlecone.length], ['sprawdz', 'Do sprawdzenia', sprawdz.length], ['zespol', 'Zespół'], ['wszystkie', 'Wszystkie'], ['zamkniete', 'Zakończone']];
+  const tabsHtml = `<div class="seg" role="tablist">${tabs.map(([k, l, n]) => `<button data-filt-set="${id}" data-key="tab" data-val="${k}" class="${tab === k ? 'on' : ''}">${l}${n ? ` <span class="muted">${n}</span>` : ''}</button>`).join('')}</div>`;
+  const grouped = (list, empty) => {
+    const g = groupByDue(list);
+    return g.length ? g.map(([l, items]) => `<section class="panel"><div class="panel-h"><h2>${esc(l)}</h2><span class="muted">${items.length}</span></div><ul class="rows">${items.map(taskRow).join('')}</ul></section>`).join('')
+      : `<section class="panel"><div class="empty"><b>${esc(empty)}</b></div></section>`;
+  };
+  let body = '';
+  if (tab === 'moje') body = grouped(myTasks(), 'Nie masz otwartych zadań');
+  if (tab === 'sprawdz') body = sprawdz.length ? `<section class="panel"><ul class="rows">${sprawdz.map(taskRow).join('')}</ul></section>` : '<section class="panel"><div class="empty"><b>Nic nie czeka na Twoje sprawdzenie</b></div></section>';
+  if (tab === 'zlecone') {
+    const people = uniq(zlecone.map((t) => t.przypisane));
+    body = people.length ? people.map((p) => { const items = zlecone.filter((t) => t.przypisane === p).sort((a, b) => (taskDueKey(a) < taskDueKey(b) ? -1 : 1)); return `<section class="panel"><div class="panel-h"><h2>${esc(personName(p))}</h2><span class="muted">${items.length}</span></div><ul class="rows">${items.map(taskRow).join('')}</ul></section>`; }).join('')
+      : '<section class="panel"><div class="empty"><b>Nie czekasz na żadne zlecone zadanie</b>Zleć zadanie: wpisz je wyżej z @imieniem osoby.</div></section>';
+  }
+  if (tab === 'zespol') {
+    const firms = S.firm === 'all' ? myFirms() : [S.firm];
+    const team = (S.boot.team || []).filter((m) => m.aktywny !== 'nie' && String(m.kancelarie).split(',').some((k) => firms.indexOf(k) >= 0));
+    const stat = (m) => { const o = all.filter((t) => t.przypisane === m.email && isOpenTask(t)); return { m, nowe: o.filter((t) => t.status === 'Nowe').length, toku: o.filter((t) => t.status === 'W toku').length, spr: o.filter((t) => t.status === 'Do sprawdzenia').length, late: o.filter((t) => t.termin && t.termin < today()).length, dzis: o.filter((t) => t.termin === today()).length, open: o.length }; };
+    const cols = [{ k: 'osoba', l: 'Osoba', s: (x) => x.m.imie_nazwisko, v: (x) => `<b>${esc(x.m.imie_nazwisko)}</b><span class="sub">${esc(x.m.stanowisko || x.m.tytul || '')}</span>` },
+      { k: 'open', l: 'Otwarte', v: (x) => `<span class="num">${x.open}</span>` }, { k: 'nowe', l: 'Nieprzyjęte', v: (x) => (x.nowe ? chip('info', x.nowe) : '0') },
+      { k: 'late', l: 'Zaległe', v: (x) => (x.late ? chip('bad', x.late) : '0') }, { k: 'dzis', l: 'Na dziś', v: (x) => String(x.dzis) }, { k: 'spr', l: 'Czeka na sprawdzenie', v: (x) => String(x.spr) }];
+    body = `<section class="panel">${tableHtml('zad-team', cols, team.map(stat), (x) => 'zad-osoba/' + x.m.email, { sort: { k: 'late', dir: 'desc' } })}</section>`;
+  }
+  if (tab === 'wszystkie' || tab === 'zamkniete') {
+    const who = fv(id, 'who', ''), people = uniq(all.map((t) => t.przypisane).filter(Boolean)).map((e) => [e, shortName(e)]).sort((a, b) => (a[1] < b[1] ? -1 : 1));
+    let list = all.filter((t) => (tab === 'zamkniete') !== isOpenTask(t)).filter((t) => matchQ(id, t, ['tytul', 'opis', (x) => caseLabel(byId('sprawy', x.kancelaria, x.sprawa_id))]));
+    if (who) list = list.filter((t) => t.przypisane === who);
+    if (tab === 'zamkniete') list = list.filter((t) => String(t.wykonano || t.zmieniono).slice(0, 10) >= SH.addDays(today(), -60)).sort((a, b) => (String(a.wykonano) < String(b.wykonano) ? 1 : -1));
+    body = `<section class="panel"><div class="toolbar">${searchBox(id, 'Szukaj w zadaniach…')}${filterSelect(id, 'who', [['', 'Wszystkie osoby']].concat(people), 'Osoba')}<span class="info">${list.length}</span></div></section>` +
+      (tab === 'zamkniete' ? (list.length ? `<section class="panel" style="margin-top:12px"><ul class="rows">${list.map(taskRow).join('')}</ul></section>` : '<section class="panel" style="margin-top:12px"><div class="empty">Brak zakończonych zadań z ostatnich 60 dni</div></section>')
+        : `<div class="stack" style="margin-top:12px">${grouped(list, 'Brak otwartych zadań')}</div>`);
+  }
+  return `<div class="page-head"><div class="t"><h1>Zadania</h1><span class="sub">Zlecaj, przyjmuj i oddawaj zadania w zespole. Każda zmiana zostaje w historii.</span></div>
+    <div class="actions">${perm().write ? `<button class="btn primary" data-act="new" data-t="zadania">${ic('plus')}Nowe zadanie</button>` : ''}</div></div>
+    ${perm().write ? `<section class="panel" style="margin-bottom:14px">${quickAddHtml('qa-zad')}</section>` : ''}
+    <div style="margin-bottom:14px;overflow-x:auto">${tabsHtml}</div><div class="stack">${body}</div>`;
+};
+VIEWS.zadanie = function (firm, id) {
+  setTimeout(() => openTaskModal(firm, id), 0);
+  S.route = 'zadania';
+  return VIEWS.zadania();
+};
+
+function openTaskModal(firm, id, panel) {
+  const t = byId('zadania', firm, id);
+  if (!t) { toast('Nie ma takiego zadania (mogło zostać usunięte).', true); return; }
+  S.task = { firm, id, panel: panel || '' };
+  const sc = $('.scrim');
+  if (sc && sc.dataset.task === firm + ':' + id) { sc.innerHTML = taskModalHtml(t); return; }
+  const s = openModal(taskModalHtml(t));
+  s.dataset.task = firm + ':' + id;
+}
+function taskModalHtml(t) {
+  const s = byId('sprawy', t.kancelaria, t.sprawa_id), term = byId('terminy', t.kancelaria, t.termin_id);
+  const m = me(), admin = perm().admin, w = perm().write, open = isOpenTask(t), touch = taskCanTouch(t), panel = (S.task || {}).panel;
+  const b = (a, label, cls, needs) => `<button class="btn ${cls || ''}" data-act="task-do" data-a="${a}"${needs ? ' data-panel="1"' : ''}>${label}</button>`;
+  const acts = [];
+  if (w) {
+    if (t.status === 'Nowe' && (t.przypisane === m || admin)) acts.push(b('przyjmij', 'Przyjmuję', 'primary'));
+    if ((t.status === 'Nowe' || t.status === 'W toku') && (t.przypisane === m || t.zlecil === m || admin)) acts.push(b('zrobione', goesToReview(t) ? 'Oddaj do sprawdzenia' : ic('check') + 'Zrobione', t.status === 'W toku' ? 'primary' : ''));
+    if (t.status === 'Do sprawdzenia' && (t.zlecil === m || admin)) { acts.push(b('zatwierdz', ic('check') + 'Zatwierdź', 'primary')); acts.push(b('zwroc', 'Zwróć do poprawy', '', true)); }
+    if (open && touch) acts.push(b('przekaz', ic('forward') + 'Przekaż', '', true));
+    if (t.status === 'Nowe' && t.przypisane === m && t.zlecil && t.zlecil !== m) acts.push(b('odrzuc', 'Odrzuć', '', true));
+    if (touch && open) acts.push(b('przesun', ic('calendar') + 'Termin', '', true));
+    if (open && (t.zlecil === m || t.utworzyl === m || admin)) acts.push(b('anuluj', 'Anuluj', 'ghost', true));
+    if (!open && touch) acts.push(b('otworz', 'Otwórz ponownie', ''));
+  }
+  const need = { zwroc: 'Co poprawić? (wymagane)', odrzuc: 'Dlaczego odrzucasz? (wymagane)', anuluj: 'Powód (opcjonalnie)', przekaz: 'Komentarz dla nowej osoby (opcjonalnie)', przesun: 'Komentarz (opcjonalnie)' };
+  const panelHtml = panel && need[panel] ? `<div class="task-panel">
+      ${panel === 'przekaz' ? `<div class="fld"><label for="tk-to">Komu</label><select class="inp" id="tk-to">${teamFor(t.kancelaria).filter((x) => x.email !== t.przypisane && (ROLE_WRITE(x.rola))).map((x) => `<option value="${attr(x.email)}">${esc(x.imie_nazwisko)}${x.stanowisko ? ' — ' + esc(x.stanowisko) : ''}</option>`).join('')}</select></div>` : ''}
+      ${panel === 'przesun' ? `<div class="fld"><label for="tk-date">Nowy termin</label><input class="inp" type="date" id="tk-date" value="${attr(t.termin || today())}"></div>` : ''}
+      <div class="fld"><label for="tk-note">${esc(need[panel])}</label><textarea class="inp" id="tk-note" rows="2"></textarea></div>
+      <div class="actions"><button class="btn primary" data-act="task-do" data-a="${panel}" data-go-now="1">Zatwierdź: ${esc({ zwroc: 'zwróć do poprawy', odrzuc: 'odrzuć', anuluj: 'anuluj zadanie', przekaz: 'przekaż', przesun: 'zmień termin' }[panel])}</button><button class="btn ghost" data-act="task-panel" data-a="">Wróć</button></div></div>` : '';
+  const kom = komentarzeOf(t);
+  const hist = S.task && S.task.hist ? `<div class="task-hist">${histPanel('zadania', t.kancelaria, t.id)}</div>` : '';
+  return `<div class="modal wide"><div class="modal-h"><h2>${t.pilne ? '<span class="bang">!</span> ' : ''}${esc(t.tytul)}</h2><button type="button" class="icon-btn" data-act="close" aria-label="Zamknij">${ic('x')}</button></div>
+    <div class="modal-b"><div class="meta task-meta">${firmTag(t.kancelaria)}${chip(TASK_CHIP[t.status] || '', esc(t.status))}${dueChip(t)}
+      <span>${t.zlecil && t.zlecil !== t.przypisane ? esc(shortName(t.zlecil)) + ' → ' : ''}<b>${esc(personName(t.przypisane))}</b>${t.przekazano ? ' · ' + fmtDT(t.przekazano) : ''}</span>
+      ${t.sprawdzenie ? chip('', 'wraca do sprawdzenia') : ''}${t.wykonano && !open ? `<span>zakończono ${fmtDT(t.wykonano)}${t.wykonal ? ' · ' + esc(shortName(t.wykonal)) : ''}</span>` : ''}</div>
+      ${s || term ? `<div class="task-links">${s ? `<a href="#" data-go="sprawa/${s.kancelaria}/${s.id}">${ic('briefcase').replace('<svg', '<svg width="14" height="14"')} ${esc(caseLabel(s))}${s.klient_id ? ' — ' + esc(clientName(s.kancelaria, s.klient_id)) : ''}</a>` : ''}
+        ${term ? `<span>${ic('calendar').replace('<svg', '<svg width="14" height="14"')} termin procesowy: <b>${fmtDate(term.data, true)}</b> — ${esc(term.opis)}${term.status !== 'Otwarty' ? ' (' + esc(term.status) + ')' : ''}</span>` : ''}</div>` : ''}
+      ${t.opis ? `<div class="pre task-desc">${esc(t.opis)}</div>` : ''}
+      ${acts.length ? `<div class="actions task-acts">${acts.join('')}</div>` : ''}
+      ${panelHtml}
+      <h3 class="task-h">Komentarze <span class="muted small">${kom.length || ''}</span></h3>
+      <div class="kom-list">${kom.map((k) => `<div class="kom"><div class="small"><b>${esc(shortName(k.utworzyl))}</b> <span class="muted">${fmtDT(k.utworzono)}</span></div><div class="pre">${esc(k.tresc)}</div></div>`).join('') || '<div class="small muted">Brak komentarzy.</div>'}</div>
+      ${w ? `<div class="kom-new"><textarea class="inp" id="tk-new" rows="2" placeholder="Napisz komentarz (dostanie go druga strona zadania)"></textarea><button class="btn" data-act="task-do" data-a="komentarz">${ic('msg')}Dodaj</button></div>` : ''}
+      ${hist}</div>
+    <div class="modal-f">${w && touch ? `<button class="btn ghost left" data-act="task-edit">${ic('edit')}Edytuj</button>` : ''}<button class="btn ghost" data-act="task-hist">${S.task && S.task.hist ? 'Ukryj historię' : 'Historia zmian'}</button><button class="btn" data-act="close">Zamknij</button></div></div>`;
+}
+const ROLE_WRITE = (r) => !!((S.boot.schema.roles[r] || {}).write);
+async function taskDo(el) {
+  const st = S.task || {}, a = el.dataset.a, t = byId('zadania', st.firm, st.id);
+  if (!t) return;
+  if (el.dataset.panel && st.panel !== a) { st.panel = a; openTaskModal(st.firm, st.id, a); const n = $('#tk-note'); if (n) n.focus(); return; }
+  const p = { _ver: t.zmieniono };
+  if (a === 'komentarz') { p.komentarz = ($('#tk-new') || {}).value || ''; if (!p.komentarz.trim()) { toast('Wpisz treść komentarza.', true); return; } }
+  else p.komentarz = ($('#tk-note') || {}).value || '';
+  if (a === 'przekaz') p.do = ($('#tk-to') || {}).value || '';
+  if (a === 'przesun') p.termin = ($('#tk-date') || {}).value || '';
+  await busy(el, async () => {
+    const r = await call('apiTask', st.firm, st.id, a, p);
+    upsert('zadania', r.zadanie);
+    if (r.komentarz) upsert('komentarze', r.komentarz);
+    toast({ przyjmij: 'Przyjęto zadanie', zrobione: r.zadanie.status === 'Do sprawdzenia' ? 'Oddano do sprawdzenia' : 'Zrobione', zatwierdz: 'Zatwierdzono', zwroc: 'Zwrócono do poprawy', przekaz: 'Przekazano: ' + personName(r.zadanie.przypisane), odrzuc: 'Odrzucono — wraca do zlecającego', anuluj: 'Anulowano zadanie', otworz: 'Otwarto ponownie', przesun: 'Zmieniono termin', komentarz: 'Dodano komentarz' }[a] || 'Zapisano');
+    st.panel = '';
+    render();
+    if ($('.scrim')) openTaskModal(st.firm, st.id);
+  });
+}
 
 /* ---------- Zespół i dostępy ---------- */
 VIEWS.zespol = function () {
   const admin = perm().admin, roles = S.boot.schema.roles;
   const team = (S.boot.team || []).slice().sort((a, b) => (a.aktywny === 'nie') - (b.aktywny === 'nie') || (a.imie_nazwisko < b.imie_nazwisko ? -1 : 1));
   const cols = [
-    { k: 'imie_nazwisko', l: 'Osoba', v: (m) => `<b>${esc(m.imie_nazwisko)}</b><span class="sub">${esc(m.tytul)}</span>` },
-    { k: 'email', l: 'Konto Google', v: (m) => `<a href="mailto:${attr(m.email)}">${esc(m.email)}</a><span class="sub">${esc(m.telefon)}</span>` },
+    { k: 'imie_nazwisko', l: 'Osoba', v: (m) => `<b>${esc(m.imie_nazwisko)}</b><span class="sub">${esc([m.stanowisko, m.tytul].filter(Boolean).join(' · '))}</span>` },
+    { k: 'email', l: 'Konto Google', v: (m) => `<a href="mailto:${attr(m.email)}">${esc(m.email)}</a>${m.aliasy ? `<span class="sub">też: ${esc(m.aliasy)}</span>` : ''}<span class="sub">${esc(m.telefon)}</span>` },
     { k: 'kancelarie', l: 'Kancelarie', v: (m) => String(m.kancelarie || '').split(',').filter(Boolean).map(firmTag).join(' ') },
     { k: 'rola', l: 'Rola', v: (m) => esc((roles[m.rola] || {}).label || m.rola) },
     { k: 'aktywny', l: 'Dostęp', v: (m) => (m.aktywny === 'nie' ? chip('', 'wyłączony') : chip('ok', 'aktywny')) }
@@ -267,7 +493,8 @@ VIEWS.zespol = function () {
     <section class="panel"><div class="panel-h"><h2>Jak działają dostępy</h2></div><div class="panel-b small" style="display:flex;flex-direction:column;gap:8px">
       <div><b>Każda kancelaria ma osobny arkusz z danymi.</b> Osoba widzi tylko kancelarie zaznaczone przy jej nazwisku. Google pilnuje tego samodzielnie: bez udostępnionego arkusza nie da się odczytać danych nawet z pominięciem aplikacji.</div>
       <div><b>Role:</b> ${Object.keys(roles).map((r) => `${esc(roles[r].label)} (${roles[r].admin ? 'zespół, ustawienia, import' : roles[r].del ? 'dodaje, zmienia i usuwa' : roles[r].write ? 'dodaje i zmienia, bez usuwania' : 'tylko podgląd'})`).join('; ')}.</div>
-      <div><b>Dodanie osoby</b> udostępnia jej arkusz kancelarii i folder spraw. Wyłączenie dostępu zabiera udostępnienia.</div>
+      <div><b>Dodanie osoby</b> udostępnia jej arkusz kancelarii i folder spraw. Wyłączenie dostępu zabiera udostępnienia. Do zespołu wchodzą tylko konta w domenach kancelarii.</div>
+      <div><b>Zadania</b> można zlecać każdemu z dostępem do danej kancelarii. Zadanie zmienia osoba, która je wykonuje albo zleciła, i administrator.</div>
       <div><b>Gmail</b> w kartach klientów pokazuje wiadomości ze skrzynki osoby, która akurat korzysta z aplikacji.</div></div></section></div></div>`;
 };
 VIEWS.team = function (email) {
@@ -278,17 +505,20 @@ VIEWS.team = function (email) {
 };
 function teamModal(m) {
   if (!perm().admin) return;
-  m = m || { email: '', imie_nazwisko: '', tytul: '', telefon: '', rola: 'prawnik', kancelarie: myFirms().join(','), aktywny: 'tak' };
-  const roles = S.boot.schema.roles, sel = String(m.kancelarie || '').split(',');
+  m = m || { email: '', imie_nazwisko: '', tytul: '', stanowisko: '', telefon: '', rola: 'prawnik', kancelarie: myFirms().join(','), aktywny: 'tak', aliasy: '', powiadomienia: 'tak' };
+  const roles = S.boot.schema.roles, sel = String(m.kancelarie || '').split(','), dom = ((S.boot.admin || {}).domeny || []).join(', ');
   openModal(`<form class="modal" id="team-form"><div class="modal-h"><h2>${m.email ? esc(m.imie_nazwisko) : 'Nowa osoba w zespole'}</h2><button type="button" class="icon-btn" data-act="close">${ic('x')}</button></div>
     <div class="modal-b"><div class="form">
-      <div class="fld wide"><label for="tm-email">Konto Google (e-mail)</label><input class="inp" id="tm-email" name="email" type="email" value="${attr(m.email)}" ${m.email ? 'readonly' : ''} required placeholder="imie.nazwisko@kancelariarodzinna.com"></div>
+      <div class="fld wide"><label for="tm-email">Konto Google (e-mail)</label><input class="inp" id="tm-email" name="email" type="email" value="${attr(m.email)}" ${m.email ? 'readonly' : ''} required placeholder="imie.nazwisko@kancelariarodzinna.com"><span class="help">Tylko konta w domenach: ${esc(dom)}.</span></div>
       <div class="fld"><label for="tm-name">Imię i nazwisko</label><input class="inp" id="tm-name" name="imie_nazwisko" value="${attr(m.imie_nazwisko)}"></div>
       <div class="fld"><label for="tm-t">Tytuł / funkcja</label><input class="inp" id="tm-t" name="tytul" value="${attr(m.tytul)}" placeholder="adw., apl. adw., asystentka…"></div>
+      <div class="fld"><label for="tm-st">Stanowisko</label><select class="inp" id="tm-st" name="stanowisko"><option value=""></option>${(S.boot.schema.stanowiska || []).map((x) => `<option${x === m.stanowisko ? ' selected' : ''}>${esc(x)}</option>`).join('')}</select><span class="help">Wspólnik zlecający zadanie młodszemu prawnikowi dostaje je domyślnie do sprawdzenia.</span></div>
       <div class="fld"><label for="tm-tel">Telefon</label><input class="inp" id="tm-tel" name="telefon" value="${attr(m.telefon)}"></div>
+      <div class="fld wide"><label for="tm-al">Inne konta tej osoby (aliasy)</label><input class="inp" id="tm-al" name="aliasy" value="${attr(m.aliasy || '')}" placeholder="np. drugie konto w domenie drugiej kancelarii"><span class="help">Logując się którymkolwiek z nich, osoba widzi te same „Moje zadania”.</span></div>
       <div class="fld"><label for="tm-r">Rola</label><select class="inp" id="tm-r" name="rola">${Object.keys(roles).map((r) => `<option value="${r}"${r === m.rola ? ' selected' : ''}>${esc(roles[r].label)}</option>`).join('')}</select></div>
       <div class="fld wide"><label>Kancelarie</label><div class="checks">${(S.boot.firms || []).map((f) => `<label><input type="checkbox" name="k" value="${attr(f.kod)}" ${sel.indexOf(f.kod) >= 0 ? 'checked' : ''}> ${esc(f.nazwa_krotka)}</label>`).join('')}</div></div>
-      <div class="fld wide"><label class="check"><input type="checkbox" name="aktywny" ${m.aktywny !== 'nie' ? 'checked' : ''}> Dostęp aktywny</label></div>
+      <div class="fld wide"><label class="check"><input type="checkbox" name="aktywny" ${m.aktywny !== 'nie' ? 'checked' : ''}> Dostęp aktywny</label>
+        <label class="check"><input type="checkbox" name="powiadomienia" ${m.powiadomienia !== 'nie' ? 'checked' : ''}> Powiadomienia e-mail o zadaniach</label></div>
     </div><p class="note">Zapis od razu udostępnia (albo zabiera) arkusze i foldery spraw zaznaczonych kancelarii temu kontu Google.</p></div>
     <div class="modal-f"><button type="button" class="btn" data-act="close">Anuluj</button><button class="btn primary" type="submit">Zapisz i nadaj dostęp</button></div></form>`);
 }
@@ -320,6 +550,9 @@ VIEWS.ustawienia = function () {
       <p class="small muted" style="margin-top:0">Ostatnie nadane numery. Nowa sprawa dostaje kolejny numer teczki (jak w „Liście Spraw”), nowa umowa kolejny numer NN/RRRR.</p>
       ${Object.keys(A.seq || {}).sort().map((k) => `<div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><label class="small" style="flex:1" for="seq-${k}">${esc({ SEQ_TECZKA: 'Nr teczki (Lista Spraw)', SEQ_P: 'Seria P' }[k] || k.replace(/^SEQ_/, '').replace(/_/g, ' ').toLowerCase())}</label><input class="inp mini mono" id="seq-${k}" value="${attr(A.seq[k])}" style="width:90px"><button class="btn sm" data-act="seq-save" data-k="${k}">Zapisz</button></div>`).join('') || '<div class="small muted">Liczniki pojawią się po pierwszej sprawie lub umowie.</div>'}
     </div></section>
+    <section class="panel"><div class="panel-h"><h2>Konta dopuszczone do zespołu</h2></div><div class="panel-b">
+      <p class="small muted" style="margin-top:0">Dane klientów udostępniamy tylko kontom służbowym. Domeny z adresów kancelarii: <b>${esc((A.domeny || []).join(', '))}</b>. Dodatkowe domeny (np. współpracującej kancelarii) wpisz poniżej, po przecinku.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="dom-extra" value="${attr(A.domenyDodatkowe || '')}" placeholder="np. giwkancelaria.pl" style="flex:1;min-width:200px"><button class="btn" data-act="dom-save">Zapisz</button></div></div></section>
     <section class="panel"><div class="panel-h"><h2>Automatyczny import zgłoszeń</h2></div><div class="panel-b small">Ręcznie: przycisk „Pobierz zgłoszenia ze strony” w Zapytaniach. Automatycznie co 15 minut: w edytorze Apps Script wybierz funkcję <span class="mono">wlaczAutoImport</span> i kliknij „Uruchom” (raz).</div></section></div></div>`;
 };
 function firmModal(code) {
@@ -395,6 +628,7 @@ VIEWS.import = function () {
         <p class="small muted" style="margin-top:0">Pliki .md z folderu „Notatki spraw” (pola: numer, klient, przedmiot, typ, etap, sygnatura, termin, rozliczenie, opiekun, status). Status „lead” trafia do Zapytań, termin do Terminów.</p>
         ${pick('notatki', 'Folder', 'link do folderu Notatki spraw')}
         <div style="margin-top:10px"><button class="btn" data-act="imp-analyze" data-kind="notatki">Analizuj</button></div>${stateBlock('notatki')}</div></section>
+      ${calSection()}
     </div>`;
 };
 function srcId(kind) { const l = ($('#imp-' + kind + '-link') || {}).value; const s = ($('#imp-' + kind) || {}).value; return (l && l.trim()) || s || ''; }
@@ -490,12 +724,123 @@ function buildImportItems(kind) {
   return out;
 }
 
+/* ---------- Import terminów z kalendarza („TERMIN - …”) ---------- */
+function calSection() {
+  const app = S.boot.schema.app, st = IMP.cal;
+  return `<section class="panel"><div class="panel-h"><h2>5. Terminy z kalendarza („TERMIN - …”)</h2></div><div class="panel-b">
+    <p class="small muted" style="margin-top:0">Wpisy całodniowe i 24-godzinne (np. 07:00–07:00) z tytułem zaczynającym się od „TERMIN”. „(zrobione)” → wykonany, „(ODWOŁANA)” → nieaktualny, przeszłe bez znacznika → do weryfikacji. Ponowny import dodaje tylko nowe wpisy i zamyka te, przy których dopisano „(zrobione)”.</p>
+    <div class="form">
+      <div class="fld"><label for="cal-id">Kalendarz Google (adres)</label><input class="inp" id="cal-id" value="${attr((st && st.calId) || app.calendarId || '')}"><span class="help">Konto, którym jesteś zalogowany, musi widzieć ten kalendarz ze szczegółami wydarzeń.</span></div>
+      <div class="fld"><label for="cal-from">Wpisy od dnia</label><input class="inp" type="date" id="cal-from" value="${attr((st && st.from) || SH.addDays(today(), -60))}"></div>
+      <div class="fld"><label for="cal-file">Albo plik .ics (Kalendarz → Ustawienia → Eksportuj)</label><input class="inp" type="file" id="cal-file" accept=".ics,text/calendar"></div>
+    </div>
+    <div style="margin-top:10px"><button class="btn" data-act="cal-load">${ic('calendar')}Wczytaj z kalendarza Google</button></div>
+    ${st && st.events ? calMapping() : ''}</div></section>`;
+}
+function calStripKey(title) { return norm(String(title).replace(/[(\[][^()\[\]]{0,25}[)\]]/g, ' ')).replace(/\s+/g, ' ').trim(); }
+function matchTermin(firm, p) {
+  const cases = S.data.sprawy.filter((s) => s.kancelaria === firm), none = { id: '', conf: '', how: '' };
+  if (p.teczka) { const s = cases.find((x) => String(x.numer).toUpperCase() === p.teczka); if (s) return { id: s.id, conf: 'pewne', how: 'nr teczki' }; }
+  const ns = (x) => norm(x).replace(/\s+/g, '');
+  if (p.sygn) { const s = cases.find((x) => x.sygn_akt && ns(x.sygn_akt) === ns(p.sygn)); if (s) return { id: s.id, conf: 'pewne', how: 'sygnatura' }; }
+  const toks = (p.klient ? p.klient.split(/\s+/) : (p.czynnosc.match(/[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]{2,}(?:-[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)?/g) || [])).filter((w) => w.length >= 3);
+  if (!toks.length) return none;
+  const hits = S.data.klienci.filter((k) => k.kancelaria === firm).map((k) => {
+    const parts = String(k.nazwa).split(/\s+/).reduce((a, x) => a.concat([x], x.split('-')), []);
+    return { k, n: toks.filter((t) => parts.some((x) => SH.nameMatch(x, t))).length };
+  }).filter((x) => x.n);
+  if (!hits.length) return none;
+  const best = Math.max(...hits.map((x) => x.n)), top = hits.filter((x) => x.n === best);
+  const cand = cases.filter((s) => top.some((x) => x.k.id === s.klient_id));
+  if (!cand.length) return { id: '', conf: '', how: 'klient bez sprawy' };
+  const pool = cand.filter(isOpenCase).length ? cand.filter(isOpenCase) : cand;
+  if (pool.length === 1 && top.length === 1) return { id: pool[0].id, conf: 'pewne', how: 'klient' };
+  const words = norm(p.czynnosc).split(/[^a-z0-9]+/).filter((w) => w.length > 4);
+  const scored = pool.map((s) => ({ s, sc: words.filter((w) => norm(s.tytul + ' ' + s.kategoria).indexOf(w.slice(0, 5)) >= 0).length })).sort((a, b) => b.sc - a.sc);
+  return { id: scored[0].s.id, conf: 'prawdopodobne', how: 'klient, ' + pool.length + ' spraw' };
+}
+function calBuildRows() {
+  const st = IMP.cal, names = (S.boot.team || []).map((m) => m.imie_nazwisko), byKey = {};
+  st.events.forEach((e) => {
+    if (!(e.allDay || e.hours >= 23) || e.recurring) return;
+    const p = SH.parseTermin(e.title, names), key = e.date + '|' + calStripKey(e.title).replace(/^zrobione\s*/, '');
+    const prev = byKey[key];
+    if (prev) { prev.p.done = prev.p.done || p.done; prev.dups++; return; }
+    byKey[key] = { e, p, dups: 0 };
+  });
+  st.rows = Object.values(byKey).map((x) => {
+    const p = x.p, m = p.isTermin ? matchTermin(st.firm, p) : { id: '', conf: '', how: '' };
+    const s = byId('sprawy', st.firm, m.id), pr = p.prawnik ? (S.boot.team || []).find((t) => t.imie_nazwisko === p.prawnik) : null;
+    const status = p.cancel ? 'Nieaktualny' : p.done ? 'Wykonany' : x.e.date < today() ? 'Do weryfikacji' : 'Otwarty';
+    return { e: x.e, p, dups: x.dups, inc: p.isTermin, sprawa_id: m.id, conf: m.conf, how: m.how, status,
+      odp: (s && s.prowadzacy) || (pr && pr.email) || me() };
+  }).sort((a, b) => (a.e.date < b.e.date ? 1 : -1));
+}
+function calMapping() {
+  const st = IMP.cal;
+  if (!st.rows) calBuildRows();
+  const all = st.rows, show = st.show || 'all';
+  const vis = all.map((r, i) => [r, i]).filter(([r]) => show === 'all' || (show === 'none' && !r.sprawa_id && r.inc) || (show === 'other' && !r.p.isTermin) || (show === 'open' && r.status === 'Otwarty'));
+  const inc = all.filter((r) => r.inc), tasks = inc.filter((r) => r.status === 'Otwarty').length;
+  const team = teamFor(st.firm), stOpts = ['Otwarty', 'Wykonany', 'Nieaktualny', 'Do weryfikacji'];
+  const cnt = (f) => all.filter(f).length;
+  return `<div class="banner info" style="margin-top:14px">${esc(st.source)}: ${cnt((r) => r.p.isTermin)} wpisów TERMIN (${cnt((r) => r.p.isTermin && r.sprawa_id)} z dopasowaną sprawą, ${cnt((r) => r.status === 'Wykonany')} wykonanych, ${cnt((r) => r.status === 'Do weryfikacji')} do weryfikacji, ${cnt((r) => r.status === 'Otwarty')} otwartych) i ${cnt((r) => !r.p.isTermin)} innych wydarzeń 24-godzinnych (domyślnie pomijane)${all.some((r) => r.dups) ? ' · duplikaty scalone' : ''}.</div>
+    <div class="form" style="margin-top:12px">
+      <div class="fld"><label for="cal-firm">Do kancelarii</label><select class="inp" id="cal-firm" data-cal="firm">${myFirms().map((k) => `<option value="${k}"${k === st.firm ? ' selected' : ''}>${esc(firmOf(k).nazwa_krotka)}</option>`).join('')}</select></div>
+      <div class="fld"><label for="cal-show">Pokaż</label><select class="inp" id="cal-show" data-cal="show">${[['all', 'wszystkie'], ['none', 'bez dopasowanej sprawy'], ['open', 'otwarte (przyszłe)'], ['other', 'wydarzenia bez „TERMIN”']].map(([v, l]) => `<option value="${v}"${v === show ? ' selected' : ''}>${l}</option>`).join('')}</select></div>
+      <div class="fld wide"><label class="check"><input type="checkbox" data-cal="tasks" ${st.tasks ? 'checked' : ''}> Dla otwartych terminów utwórz zadanie „Przygotować: …” u odpowiedzialnego (${esc(String(S.boot.schema.app.prepDays || 3))} dni robocze wcześniej)</label></div>
+    </div>
+    <div class="table-wrap" style="margin-top:8px"><table class="t"><thead><tr><th class="nosort">Import</th><th class="nosort">Data</th><th class="nosort">Wpis w kalendarzu</th><th class="nosort">Status</th><th class="nosort">Sprawa</th><th class="nosort">Odpowiedzialny</th></tr></thead><tbody>
+    ${vis.slice(0, st.limit || 150).map(([r, i]) => { const s = byId('sprawy', st.firm, r.sprawa_id); return `<tr>
+      <td><input type="checkbox" data-cal="inc" data-i="${i}" ${r.inc ? 'checked' : ''} aria-label="Importuj"></td>
+      <td class="nowrap">${fmtDate(r.e.date, true)}</td>
+      <td class="wrap"><b>${esc(r.p.klient || '—')}</b> ${esc(r.p.czynnosc || r.e.title)}<span class="sub">${esc(r.e.title)}${r.dups ? ' · ×' + (r.dups + 1) : ''}</span></td>
+      <td><select class="inp mini" data-cal="st" data-i="${i}">${stOpts.map((o) => `<option${o === r.status ? ' selected' : ''}>${o}</option>`).join('')}</select></td>
+      <td style="min-width:240px"><div class="combo" data-ref="sprawy" data-name="cal-${i}" data-firm="${attr(st.firm)}" data-impcal="${i}"><input class="inp mini combo-q" type="text" value="${attr(s ? refLabel('sprawy', s) : '')}" placeholder="wybierz sprawę…" autocomplete="off" style="width:100%"><input type="hidden" value="${attr(r.sprawa_id)}"><div class="combo-list" hidden></div></div>
+        ${r.conf ? `<span class="sub">${chip(r.conf === 'pewne' || r.conf === 'ręcznie' ? 'ok' : 'warn', esc(r.conf))} ${esc(r.how || '')}</span>` : r.p.isTermin ? `<span class="sub">${chip('warn', 'bez sprawy')}</span>` : ''}</td>
+      <td><select class="inp mini" data-cal="odp" data-i="${i}">${team.map((m) => `<option value="${attr(m.email)}"${m.email === r.odp ? ' selected' : ''}>${esc(shortName(m.email))}</option>`).join('')}</select></td></tr>`; }).join('')}
+    </tbody></table></div>
+    ${vis.length > (st.limit || 150) ? `<div class="empty"><button class="btn sm" data-act="cal-more">Pokaż wszystkie (${vis.length})</button></div>` : ''}
+    <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn primary" data-act="cal-commit">Importuj ${inc.length} terminów${st.tasks && tasks ? ' i ' + tasks + ' zadań' : ''}</button>
+      <span class="small muted">Do kancelarii: ${esc(firmOf(st.firm).nazwa_krotka)}. Wpisy bez sprawy trafią do Terminów bez powiązania.</span></div>
+    ${st.result ? `<p class="banner info" style="margin-top:12px">${esc(st.result)}</p>` : ''}`;
+}
+function calItems() {
+  const st = IMP.cal, days = +(S.boot.schema.app.prepDays || 3);
+  return st.rows.filter((r) => r.inc).map((r) => {
+    const s = byId('sprawy', st.firm, r.sprawa_id);
+    const opis = (r.p.isTermin ? (s ? r.p.czynnosc || r.p.title : [r.p.klient, r.p.czynnosc].filter(Boolean).join(' - ')) : r.e.title) || r.e.title;
+    const it = { kancelaria: st.firm, table: 'terminy', rec: { opis: opis.slice(0, 300), data: r.e.date, typ: 'Termin procesowy', status: r.status, sprawa_id: r.sprawa_id, odpowiedzialny: r.odp,
+      podstawa: 'Import z kalendarza: ' + r.e.title, zrodlo_id: 'cal:' + (r.e.uid || calStripKey(r.e.title)) + ':' + r.e.date } };
+    if (st.tasks && r.status === 'Otwarty') {
+      const due = SH.addWorkingDays(r.e.date, -days);
+      it.zadanie = { tytul: 'Przygotować: ' + opis.slice(0, 200), przypisane: r.odp, termin: due < today() ? today() : due, sprawdzenie: defaultReview(r.odp) };
+    }
+    return it;
+  });
+}
+function calSetEvents(source, events) {
+  IMP.cal = Object.assign(IMP.cal || {}, { source, events, rows: null, firm: (IMP.cal && IMP.cal.firm) || (myFirms().indexOf('KR') >= 0 ? 'KR' : defaultFirm()), tasks: IMP.cal && IMP.cal.tasks !== undefined ? IMP.cal.tasks : true, result: '' });
+  render();
+}
+function calReadFile(file) {
+  const r = new FileReader();
+  r.onload = () => {
+    const from = ($('#cal-from') || {}).value || '';
+    const evs = SH.parseIcs(String(r.result)).filter((e) => (e.allDay || e.hours >= 23) && (!from || e.date >= from));
+    calSetEvents('Plik ' + file.name, evs);
+    toast('Wczytano ' + evs.length + ' wydarzeń całodniowych i 24-godzinnych');
+  };
+  r.onerror = () => toast('Nie udało się odczytać pliku.', true);
+  r.readAsText(file);
+}
+
 /* ---------- Pierwsza konfiguracja ---------- */
 function renderSetup() {
   const b = S.boot;
   if (!b.canSetup) return `<div class="center"><div class="box"><h1>CRM Kancelarii</h1><section class="panel"><div class="panel-b">
     <p>Aplikacja nie jest jeszcze skonfigurowana. Pierwszą konfigurację uruchamia właściciel projektu Apps Script.</p><p class="muted">Zalogowano jako ${esc(b.email || 'nieznane konto')}.</p></div></section></div></div>`;
-  if (!S.setup) S.setup = { firms: b.firms.map((f) => Object.assign({ create: true, folder_id: '', import_folder: '' }, f)), team: b.team.map((m) => Object.assign({}, m)).concat([1, 2, 3].map(() => ({ email: '', imie_nazwisko: '', tytul: '', rola: 'asystent', kancelarie: '', on: false, blank: true }))), me: { imie_nazwisko: 'Maciej Muzyka', tytul: 'adw. dr', telefon: '+48 884 784 984' } };
+  if (!S.setup) S.setup = { firms: b.firms.map((f) => Object.assign({ create: true, folder_id: '', import_folder: '' }, f)), team: b.team.map((m) => Object.assign({}, m)).concat([1, 2, 3].map(() => ({ email: '', imie_nazwisko: '', tytul: '', stanowisko: 'Młodszy prawnik', rola: 'asystent', kancelarie: '', on: false, blank: true }))), me: { imie_nazwisko: 'Maciej Muzyka', tytul: 'adw. dr', telefon: '+48 884 784 984' } };
   const st = S.setup, roles = b.schema.roles;
   const fIn = (i, k, l, ph) => `<div class="fld"><label for="sf-${i}-${k}">${esc(l)}</label><input class="inp" id="sf-${i}-${k}" value="${attr(st.firms[i][k] || '')}" placeholder="${attr(ph || '')}"></div>`;
   return `<div class="center"><div class="box">
@@ -503,7 +848,8 @@ function renderSetup() {
     <section class="panel"><div class="panel-h"><h2>Administrator</h2></div><div class="panel-b"><div class="form">
       <div class="fld"><label for="sm-n">Imię i nazwisko</label><input class="inp" id="sm-n" value="${attr(st.me.imie_nazwisko)}"></div>
       <div class="fld"><label for="sm-t">Tytuł</label><input class="inp" id="sm-t" value="${attr(st.me.tytul)}"></div>
-      <div class="fld"><label for="sm-p">Telefon</label><input class="inp" id="sm-p" value="${attr(st.me.telefon)}"></div></div></div></section>
+      <div class="fld"><label for="sm-p">Telefon</label><input class="inp" id="sm-p" value="${attr(st.me.telefon)}"></div>
+      <div class="fld"><label for="sm-a">Twoje inne konta (aliasy)</label><input class="inp" id="sm-a" value="${attr(st.me.aliasy || '')}" placeholder="np. maciej.muzyka@kancelariarodzinna.com"></div></div></div></section>
     ${st.firms.map((f, i) => `<section class="panel"><div class="panel-h">${firmTag(f.kod)}<h2>${esc(f.nazwa)}</h2></div><div class="panel-b"><div class="form">
       ${fIn(i, 'nazwa', 'Pełna nazwa')}${fIn(i, 'nazwa_krotka', 'Nazwa krótka')}${fIn(i, 'email', 'E-mail')}${fIn(i, 'telefon', 'Telefon')}${fIn(i, 'adres', 'Adres')}${fIn(i, 'stawka', 'Stawka (zł/h)')}
       ${f.model === 'analiza' ? fIn(i, 'sla_h', 'Odpowiedź w (h robocze)') : fIn(i, 'link_rezerwacji', 'Link do rezerwacji konsultacji')}
@@ -514,12 +860,13 @@ function renderSetup() {
     </div></div></section>`).join('')}
     <div><button class="btn" data-act="setup-hints">${ic('search')}Wyszukaj istniejące foldery na moim Dysku</button></div>
     <section class="panel"><div class="panel-h"><h2>Zespół — kto dostanie dostęp</h2><span class="muted">ze stron kancelarii; puste wiersze na pozostałe osoby</span></div>
-      <div class="table-wrap"><table class="t"><thead><tr><th class="nosort">Dodaj</th><th class="nosort">Osoba</th><th class="nosort">Konto Google</th><th class="nosort">Rola</th><th class="nosort">Kancelarie</th></tr></thead><tbody>
+      <div class="table-wrap"><table class="t"><thead><tr><th class="nosort">Dodaj</th><th class="nosort">Osoba</th><th class="nosort">Konto Google</th><th class="nosort">Stanowisko</th><th class="nosort">Rola</th><th class="nosort">Kancelarie</th></tr></thead><tbody>
       ${st.team.map((m, i) => `<tr><td><input type="checkbox" id="st-${i}-on" ${m.on ? 'checked' : ''} aria-label="Dodaj"></td><td>${m.blank ? `<input class="inp mini" id="st-${i}-name" value="${attr(m.imie_nazwisko)}" placeholder="imię i nazwisko"> <input class="inp mini" id="st-${i}-tytul" value="${attr(m.tytul)}" placeholder="funkcja" style="margin-top:4px">` : `<b>${esc(m.imie_nazwisko)}</b><span class="sub">${esc(m.tytul)}</span>`}</td>
         <td><input class="inp mini" id="st-${i}-email" value="${attr(m.email)}" placeholder="brak — wpisz" style="min-width:230px"></td>
+        <td><select class="inp mini" id="st-${i}-stan">${(b.schema.stanowiska || []).map((x) => `<option${x === m.stanowisko ? ' selected' : ''}>${esc(x)}</option>`).join('')}</select></td>
         <td><select class="inp mini" id="st-${i}-rola">${Object.keys(roles).map((r) => `<option value="${r}"${r === m.rola ? ' selected' : ''}>${esc(roles[r].label)}</option>`).join('')}</select></td>
         <td><div class="checks">${st.firms.map((f) => `<label><input type="checkbox" id="st-${i}-k-${f.kod}" ${String(m.kancelarie).split(',').indexOf(f.kod) >= 0 ? 'checked' : ''}> ${f.kod}</label>`).join('')}</div></td></tr>`).join('')}
-      </tbody></table></div><div class="panel-b"><p class="note" style="margin:0">Zaznaczone osoby dostaną dostęp do arkuszy i folderów spraw zaznaczonych kancelarii (Google może wysłać im powiadomienie o udostępnieniu). Zespół zmienisz później w „Zespół i dostępy”.</p></div></section>
+      </tbody></table></div><div class="panel-b"><p class="note" style="margin:0">Zaznaczone osoby dostaną dostęp do arkuszy i folderów spraw zaznaczonych kancelarii (Google może wysłać im powiadomienie o udostępnieniu). Tylko konta w domenach kancelarii — prywatne skrzynki zostaną pominięte. Zespół zmienisz później w „Zespół i dostępy”.</p></div></section>
     <section class="panel"><div class="panel-h"><h2>Numeracja</h2></div><div class="panel-b"><div class="form">
       <div class="fld"><label for="ss-t">Ostatni nr teczki w „Liście Spraw”</label><input class="inp mono" id="ss-t" placeholder="np. 592"><span class="help">Import Listy Spraw ustawi to sam.</span></div>
       <div class="fld"><label for="ss-p">Ostatni numer serii P</label><input class="inp mono" id="ss-p" placeholder="np. 27"></div></div></div></section>
@@ -528,9 +875,9 @@ function renderSetup() {
 }
 function readSetup() {
   const st = S.setup, v = (id) => (($('#' + id) || {}).value || '').trim(), c = (id) => !!($('#' + id) || {}).checked;
-  st.me = { imie_nazwisko: v('sm-n'), tytul: v('sm-t'), telefon: v('sm-p') };
+  st.me = { imie_nazwisko: v('sm-n'), tytul: v('sm-t'), telefon: v('sm-p'), aliasy: v('sm-a'), stanowisko: 'Wspólnik' };
   st.firms.forEach((f, i) => { ['nazwa', 'nazwa_krotka', 'email', 'telefon', 'adres', 'stawka', 'sla_h', 'link_rezerwacji', 'folder_id', 'import_folder'].forEach((k) => { if ($('#sf-' + i + '-' + k)) f[k] = v('sf-' + i + '-' + k); }); f.create = c('sf-' + i + '-create'); });
-  st.team.forEach((m, i) => { if (m.blank) { m.imie_nazwisko = v('st-' + i + '-name'); m.tytul = v('st-' + i + '-tytul'); } m.on = c('st-' + i + '-on'); m.email = v('st-' + i + '-email'); m.rola = v('st-' + i + '-rola'); m.kancelarie = st.firms.filter((f) => c('st-' + i + '-k-' + f.kod)).map((f) => f.kod).join(','); });
+  st.team.forEach((m, i) => { if (m.blank) { m.imie_nazwisko = v('st-' + i + '-name'); m.tytul = v('st-' + i + '-tytul'); } m.on = c('st-' + i + '-on'); m.email = v('st-' + i + '-email'); m.rola = v('st-' + i + '-rola'); m.stanowisko = v('st-' + i + '-stan'); m.kancelarie = st.firms.filter((f) => c('st-' + i + '-k-' + f.kod)).map((f) => f.kod).join(','); });
   st.seq = {}; if (/^\d+$/.test(v('ss-t'))) st.seq.SEQ_TECZKA = v('ss-t'); if (/^\d+$/.test(v('ss-p'))) st.seq.SEQ_P = v('ss-p');
   return st;
 }
@@ -548,7 +895,7 @@ function quickMenu() {
   const item = (t, label, sub, usePre) => `<button class="btn" style="justify-content:flex-start;width:100%" data-act="new" data-t="${t}" data-firm="${attr(ctx.firm)}" data-pre="${attr(JSON.stringify(usePre ? ctx.pre : {}))}">${esc(label)}<span class="muted small" style="margin-left:auto">${esc(sub)}</span></button>`;
   const inCase = view === 'sprawa';
   openModal(`<div class="modal narrow"><div class="modal-h"><h2>Dodaj</h2><button class="icon-btn" data-act="close">${ic('x')}</button></div><div class="modal-b" style="display:flex;flex-direction:column;gap:8px">
-    ${item('zapytania', 'Zapytanie', 'telefon, e-mail, polecenie')}${item('klienci', 'Klient', '')}${item('sprawy', 'Sprawa', view === 'klient' ? 'dla tego klienta' : '', view === 'klient')}
+    ${item('zadania', 'Zadanie', inCase ? 'w tej sprawie' : 'dla siebie albo dla kogoś', inCase)}${item('zapytania', 'Zapytanie', 'telefon, e-mail, polecenie')}${item('klienci', 'Klient', '')}${item('sprawy', 'Sprawa', view === 'klient' ? 'dla tego klienta' : '', view === 'klient')}
     ${item('terminy', 'Termin', inCase ? 'w tej sprawie' : '', inCase)}${item('korespondencja', 'Pismo', inCase ? 'w tej sprawie' : 'przychodzące / wychodzące', inCase)}
     ${item('czynnosci', 'Czynność (czas pracy)', inCase ? 'w tej sprawie' : '', inCase)}${item('umowy', 'Umowa', '', inCase || view === 'klient')}${item('rozliczenia', 'Rozliczenie', inCase ? 'w tej sprawie' : '', inCase)}
   </div></div>`);
@@ -566,6 +913,25 @@ function rerenderKeepFocus() {
 }
 
 const ACTIONS = {
+  'task-tick': (el) => busy(el, async () => {
+    const t = byId('zadania', el.dataset.firm, el.dataset.id);
+    const r = await call('apiTask', el.dataset.firm, el.dataset.id, 'zrobione', { _ver: t && t.zmieniono });
+    upsert('zadania', r.zadanie); if (r.komentarz) upsert('komentarze', r.komentarz);
+    toast(r.zadanie.status === 'Do sprawdzenia' ? 'Oddano do sprawdzenia: ' + shortName(r.zadanie.zlecil) : 'Zrobione');
+    render();
+  }),
+  'task-do': (el) => taskDo(el),
+  'task-panel': (el) => { if (S.task) openTaskModal(S.task.firm, S.task.id, el.dataset.a || ''); },
+  'task-hist': () => { if (S.task) { S.task.hist = !S.task.hist; openTaskModal(S.task.firm, S.task.id, S.task.panel); } },
+  'task-edit': () => { const st = S.task; const t = st && byId('zadania', st.firm, st.id); if (t) openForm('zadania', t); },
+  'task-tab': (el) => setFilt('zad', 'tab', el.dataset.tabName),
+  'term-task': (el) => {
+    const term = byId('terminy', el.dataset.firm, el.dataset.id); if (!term) return;
+    const s = byId('sprawy', term.kancelaria, term.sprawa_id), days = +(S.boot.schema.app.prepDays || 3);
+    const who = (s && s.prowadzacy) || term.odpowiedzialny || me(), due = SH.addWorkingDays(term.data, -days);
+    openForm('zadania', null, { firm: term.kancelaria, prefill: { tytul: 'Przygotować: ' + term.opis, przypisane: who, termin: due < today() ? today() : due, sprawa_id: term.sprawa_id, termin_id: term.id, sprawdzenie: defaultReview(who) } });
+  },
+  plus15: (el) => openForm('czynnosci', null, { firm: el.dataset.firm, prefill: { sprawa_id: el.dataset.id, czas: '0.25' } }),
   menu: () => $('.shell').classList.toggle('nav-open'),
   refresh: (el) => busy(el, () => reload()),
   quick: quickMenu,
@@ -581,7 +947,11 @@ const ACTIONS = {
       if (S.route.indexOf(id) >= 0) go({ sprawy: 'sprawy', klienci: 'klienci', zapytania: 'zapytania' }[t] || 'pulpit'); else render();
     }, true);
   },
-  'term-done': (el) => busy(el, async () => { const r = await call('apiSave', 'terminy', { kancelaria: el.dataset.firm, id: el.dataset.id, status: 'Wykonany' }); upsert('terminy', r); toast('Termin wykonany'); render(); }),
+  'term-done': (el) => busy(el, async () => {
+    const t = byId('terminy', el.dataset.firm, el.dataset.id);
+    const r = await call('apiSave', 'terminy', { kancelaria: el.dataset.firm, id: el.dataset.id, status: 'Wykonany', _ver: t && t.zmieniono });
+    upsert('terminy', r); toast('Termin wykonany'); render();
+  }),
   'calc-save': (el) => { const wrap = el.closest('[data-calc-sprawa]'); const firm = S.route.split('/')[1]; openForm('terminy', null, { firm: wrap ? firm : undefined, prefill: { data: el.dataset.end, podstawa: el.dataset.basis, opis: el.dataset.label, typ: 'Termin procesowy', sprawa_id: wrap ? wrap.dataset.calcSprawa : '' } }); },
   gmail: (el) => loadGmail(el.dataset.key, el.dataset.emails.split(',')),
   folder: (el) => busy(el, async () => { const s = await call('apiFolder', el.dataset.firm, el.dataset.id); upsert('sprawy', s); toast('Założono folder sprawy'); render(); }),
@@ -602,8 +972,23 @@ const ACTIONS = {
     await call('apiDictSave', scope, name, items); await reload(true); toast('Słownik zapisany');
   }),
   'seq-save': (el) => busy(el, async () => { const k = el.dataset.k; S.boot.admin.seq = await call('apiSeqSave', k, $('#seq-' + k).value.trim()); toast('Zapisano licznik'); }),
+  'dom-save': (el) => busy(el, async () => { const d = await call('apiAllowedSave', ($('#dom-extra') || {}).value || ''); S.boot.admin.domeny = d; S.boot.admin.domenyDodatkowe = ($('#dom-extra') || {}).value || ''; toast('Zapisano: ' + d.join(', ')); render(); }),
   resync: (el) => busy(el, async () => { const r = await call('apiResync'); shareReport(r); }),
   copy: async (el) => { const inp = $('#' + el.dataset.src); try { await navigator.clipboard.writeText(inp.value); toast('Skopiowano'); } catch (e) { inp.select(); toast('Zaznaczono — skopiuj skrótem Ctrl+C'); } },
+  'cal-load': (el) => busy(el, async () => {
+    const id = ($('#cal-id') || {}).value || '', from = ($('#cal-from') || {}).value || '';
+    const res = await call('apiCalendarEvents', id, from, '');
+    IMP.cal = Object.assign(IMP.cal || {}, { calId: id, from });
+    calSetEvents('Kalendarz „' + res.calendar + '”', res.events);
+  }),
+  'cal-more': () => { IMP.cal.limit = 1e9; render(); },
+  'cal-commit': (el) => busy(el, async () => {
+    const items = calItems();
+    if (!items.length) { toast('Zaznacz wpisy do importu.', true); return; }
+    const rep = await call('apiImportCommit', 'kalendarz', items);
+    IMP.cal.result = Object.keys(rep).map((k) => k + ': ' + Object.keys(rep[k]).map((x) => x + ' ' + rep[k][x]).join(', ')).join(' · ');
+    await reload(true);
+  }),
   'imp-find': (el) => busy(el, async () => { IMP.src = await call('apiImportSources'); render(); toast('Znalezione pliki są na listach wyboru'); }),
   'imp-www': (el) => busy(el, async () => { const r = await call('apiImportWebsite', 'KN', srcId('zgloszenia')); r.records.forEach((x) => upsert('zapytania', x)); IMP.wwwRes = `Zaimportowano ${r.imported}, już były ${r.skipped}, pominięte zapisy na powiadomienia: ${r.alerts}.`; render(); }),
   'imp-analyze': (el) => busy(el, async () => {
@@ -647,11 +1032,12 @@ document.addEventListener('click', (e) => {
   if (e.target.closest('a[target="_blank"], a[href^="mailto:"], a[href^="tel:"], a[target="_top"]')) return;
   const pick = e.target.closest('[data-pick]');
   if (pick) {
-    const box = pick.closest('.combo'), firm = S.form ? S.form.firm : defaultFirm();
+    const box = pick.closest('.combo'), firm = box.dataset.firm || (S.form ? S.form.firm : defaultFirm());
     const id = pick.dataset.pick, r = id ? byId(box.dataset.ref, firm, id) : null;
     $('input[type=hidden]', box).value = id;
     if (r) $('.combo-q', box).value = refLabel(box.dataset.ref, r);
     $('.combo-list', box).hidden = true;
+    if (box.dataset.impcal !== undefined && IMP.cal) { const row = IMP.cal.rows[+box.dataset.impcal]; row.sprawa_id = id; row.conf = id ? 'ręcznie' : ''; const s = byId('sprawy', firm, id); if (s && s.prowadzacy) row.odp = s.prowadzacy; render(); }
     return;
   }
   const el = e.target.closest('[data-act],[data-go],[data-sort],[data-filt-set],[data-scope],[data-tab]');
@@ -665,6 +1051,8 @@ document.addEventListener('click', (e) => {
     if ($('.search-res')) $('.search-res').hidden = true;
     if (g.indexOf('edit/') === 0) { const [, t, key] = g.split('/'); const [firm, id] = key.split(':'); const r = byId(t, firm, id); if (r) openForm(t, r); return; }
     if (g.indexOf('team/') === 0) { teamModal((S.boot.team || []).find((m) => m.email === g.slice(5))); return; }
+    if (g.indexOf('zadanie/') === 0) { const [, f, id] = g.split('/'); openTaskModal(f, id); return; }
+    if (g.indexOf('zad-osoba/') === 0) { setFilt('zad', 'tab', 'wszystkie'); setFilt('zad', 'who', g.slice(10)); render(); return; }
     if ($('#q')) $('#q').value = '';
     closeModal();
     go(g);
@@ -683,6 +1071,7 @@ document.addEventListener('mousedown', (e) => { if (e.target.closest('.combo-lis
 document.addEventListener('input', (e) => {
   const el = e.target;
   if (el.id === 'q') { clearTimeout(searchTimer); searchTimer = setTimeout(() => renderSearch(el.value), 80); return; }
+  if (el.dataset.qa) { quickHint(el); return; }
   if (el.classList.contains('combo-q')) { comboUpdate(el); return; }
   if (el.dataset.filt && (el.type === 'search' || el.type === 'text')) {
     clearTimeout(filtTimer);
@@ -707,6 +1096,18 @@ document.addEventListener('change', (e) => {
     return;
   }
   if (el.dataset.actChange === 'zap-status-sel') { zapUpdate({ status: el.value }, el); return; }
+  if (el.name === 'przypisane' && S.form && S.form.table === 'zadania') { const cb = $('#f-sprawdzenie'); if (cb) cb.checked = defaultReview(el.value) === 'tak'; return; }
+  if (el.id === 'cal-file' && el.files && el.files[0]) { calReadFile(el.files[0]); return; }
+  if (el.dataset.cal !== undefined && IMP.cal) {
+    const k = el.dataset.cal, i = el.dataset.i;
+    if (k === 'firm') { IMP.cal.firm = el.value; IMP.cal.rows = null; }
+    else if (k === 'tasks') IMP.cal.tasks = el.checked;
+    else if (k === 'show') IMP.cal.show = el.value;
+    else if (k === 'inc') IMP.cal.rows[+i].inc = el.checked;
+    else if (k === 'st') IMP.cal.rows[+i].status = el.value;
+    else if (k === 'odp') IMP.cal.rows[+i].odp = el.value;
+    render(); return;
+  }
   if (el.id === 'c-preset') { const p = PRESETS[+el.value]; if (p && p[2]) { $('#c-n').value = p[2]; $('#c-u').value = p[3]; } calcUpdate(); return; }
   if (el.id === 'c-u' || el.id === 'c-start') { calcUpdate(); return; }
   if (el.dataset.imp) {
@@ -739,6 +1140,7 @@ document.addEventListener('submit', async (e) => {
   if (f.id === 'zclose-form') { await zapUpdate({ status: f.elements.status.value, powod: f.elements.powod.value }, btn); closeModal(); return; }
   if (f.id === 'team-form') {
     const d = { email: f.elements.email.value, imie_nazwisko: f.elements.imie_nazwisko.value, tytul: f.elements.tytul.value, telefon: f.elements.telefon.value, rola: f.elements.rola.value,
+      stanowisko: f.elements.stanowisko.value, aliasy: f.elements.aliasy.value, powiadomienia: f.elements.powiadomienia.checked ? 'tak' : 'nie',
       kancelarie: $$('input[name=k]:checked', f).map((x) => x.value).join(','), aktywny: f.elements.aktywny.checked ? 'tak' : 'nie' };
     await busy(btn, async () => { const r = await call('apiTeamSave', d); closeModal(); await reload(true); shareReport([{ email: d.email, log: r.shareLog }]); });
     return;
@@ -752,6 +1154,7 @@ document.addEventListener('keydown', (e) => {
   const inField = /INPUT|TEXTAREA|SELECT/.test((e.target.tagName || ''));
   if (e.key === '/' && !inField && $('#q')) { e.preventDefault(); $('#q').focus(); return; }
   if (e.key === 'Escape') { if ($('.scrim')) closeModal(); else if ($('.search-res')) $('.search-res').hidden = true; return; }
+  if (e.key === 'Enter' && e.target.dataset && e.target.dataset.qa) { e.preventDefault(); quickSave(e.target); return; }
   if (e.key === 'Enter' && e.target.id === 'q') { const a = $('.search-res a'); if (a) { e.preventDefault(); a.click(); } return; }
   if (e.key === 'Enter' && e.target.classList.contains('combo-q')) { e.preventDefault(); const p = e.target.closest('.combo').querySelector('[data-pick]'); if (p) p.click(); }
 });

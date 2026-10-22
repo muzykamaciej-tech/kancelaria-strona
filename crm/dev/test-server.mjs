@@ -137,5 +137,92 @@ const fm = P.parseFrontmatter_('---\nnumer: "(512)"\nklient: Jan Kowalski\ntags:
 eq([fm.meta.numer, fm.meta.tags, fm.body], ['(512)', 'sprawa', 'Treść notatki'], 'frontmatter Obsidiana');
 eq(P.idFromLink_('https://drive.google.com/drive/folders/1AbCdEfGhIjKlMnOpQrStU?usp=sharing'), '1AbCdEfGhIjKlMnOpQrStU', 'identyfikator z linku Dysku');
 
+/* ---------- Zadania i delegowanie ---------- */
+const KNB = as(U.OWNER, () => api.bootstrap());
+ok(KNB.data.zadania.length >= 10, 'zadania w danych: ' + KNB.data.zadania.length);
+const tRev = KNB.data.zadania.find((z) => z.tytul === 'Wniosek dowodowy — świadkowie (projekt)');
+eq(tRev.status, 'Do sprawdzenia', 'po wykonaniu z kontrolą: do sprawdzenia');
+ok(KNB.data.komentarze.some((k) => k.zadanie_id === tRev.id), 'komentarz przy oddaniu do sprawdzenia');
+ok(as(U.JUN2, () => api.bootstrap()).data.zadania.every((z) => z.kancelaria === 'KR'), 'osoba z KR nie widzi zadań KN');
+mock.st.sent.length = 0;
+const nt = as(U.OWNER, () => api.apiSave('zadania', { kancelaria: 'KN', tytul: 'Analiza umowy dzierżawy', przypisane: U.JUN1, termin: '2026-10-30', sprawdzenie: 'tak' }));
+eq([nt.status, nt.zlecil, nt.przypisane], ['Nowe', U.OWNER, U.JUN1], 'zlecenie: status Nowe, zlecił, przypisane');
+ok(mock.st.sent.length === 1 && /\[CRM KN\] Nowe zadanie: Analiza umowy dzierżawy/.test(mock.st.sent[0].subject) && mock.st.sent[0].to === U.JUN1, 'e-mail do adresata nowego zadania');
+ok(/#zadanie\/KN\//.test(mock.st.sent[0].body), 'e-mail z linkiem do zadania');
+throws(() => as(U.OWNER, () => api.apiSave('zadania', { kancelaria: 'KN', tytul: 'X', przypisane: U.KW })), 'INVALID', 'adresat bez dostępu do kancelarii');
+throws(() => as(U.OWNER, () => api.apiSave('zadania', { kancelaria: 'KN', tytul: 'X', przypisane: 'ktos@example.com' })), 'INVALID', 'adresat spoza zespołu');
+const own = as(U.OWNER, () => api.apiSave('zadania', { kancelaria: 'KN', tytul: 'Moje własne' }));
+eq([own.status, own.przypisane], ['W toku', U.OWNER], 'zadanie dla siebie od razu w toku');
+let r = as(U.JUN1, () => api.apiTask('KN', nt.id, 'przyjmij', {}));
+eq(r.zadanie.status, 'W toku', 'przyjęcie zadania');
+throws(() => as(U.JUN1, () => api.apiTask('KN', nt.id, 'zatwierdz', {})), 'FORBIDDEN', 'wykonawca nie zatwierdza sam');
+mock.st.sent.length = 0;
+r = as(U.JUN1, () => api.apiTask('KN', nt.id, 'zrobione', { komentarz: 'gotowe' }));
+eq(r.zadanie.status, 'Do sprawdzenia', 'oddanie do sprawdzenia');
+ok(mock.st.sent.some((m) => m.to === U.OWNER && /Do sprawdzenia/.test(m.subject)), 'e-mail do zlecającego: do sprawdzenia');
+throws(() => as(U.OWNER, () => api.apiTask('KN', nt.id, 'zwroc', {})), 'INVALID', 'zwrot wymaga komentarza');
+r = as(U.OWNER, () => api.apiTask('KN', nt.id, 'zwroc', { komentarz: 'Dopisz ryzyka wypowiedzenia' }));
+eq([r.zadanie.status, r.komentarz.tresc], ['W toku', 'Do poprawy: Dopisz ryzyka wypowiedzenia'], 'zwrot do poprawy z komentarzem');
+as(U.JUN1, () => api.apiTask('KN', nt.id, 'zrobione', {}));
+r = as(U.OWNER, () => api.apiTask('KN', nt.id, 'zatwierdz', {}));
+eq([r.zadanie.status, r.zadanie.wykonal], ['Zrobione', U.JUN1], 'zatwierdzenie: zrobione, wykonał wykonawca');
+throws(() => as(U.MB, () => api.apiTask('KN', nt.id, 'otworz', {})), 'FORBIDDEN', 'osoba bez dostępu do KN');
+throws(() => as(U.KW, () => api.apiTask('KR', tRev.id, 'zatwierdz', {})), 'FORBIDDEN', 'osoba trzecia nie zatwierdza');
+throws(() => as(U.MB, () => api.apiSave('zadania', { kancelaria: 'KR', id: tRev.id, tytul: 'zmiana' })), 'FORBIDDEN', 'osoba trzecia nie edytuje zadania');
+const t7 = KNB.data.zadania.find((z) => z.tytul === 'Przygotować świadków do rozprawy');
+r = as(U.KPK, () => api.apiTask('KR', t7.id, 'przekaz', { do: U.JUN2, komentarz: 'Kasia jest na rozprawie' }));
+eq([r.zadanie.przypisane, r.zadanie.zlecil, r.zadanie.status], [U.JUN2, U.KPK, 'Nowe'], 'przekazanie innej osobie');
+throws(() => as(U.JUN2, () => api.apiTask('KR', t7.id, 'odrzuc', {})), 'INVALID', 'odrzucenie wymaga powodu');
+r = as(U.JUN2, () => api.apiTask('KR', t7.id, 'odrzuc', { komentarz: 'jestem na urlopie' }));
+eq([r.zadanie.przypisane, r.zadanie.status], [U.KPK, 'Nowe'], 'odrzucone wraca do zlecającego');
+throws(() => as(U.KPK, () => api.apiTask('KR', t7.id, 'przyjmij', { _ver: 'stara-wersja' })), 'CONFLICT', 'równoczesna zmiana zadania');
+throws(() => as(U.OWNER, () => api.apiSave('komentarze', { kancelaria: 'KN', zadanie_id: nt.id, tresc: 'x' })), 'FORBIDDEN', 'komentarze tylko przez zadanie');
+const faktura = KNB.data.zadania.find((z) => z.tytul === 'Faktura za dojazd do sądu');
+throws(() => as(U.JUN2, () => api.apiDelete('zadania', 'KR', faktura.id)), 'FORBIDDEN', 'cudzego zadania nie usuniesz');
+eq(as(U.KW, () => api.apiDelete('zadania', 'KR', faktura.id)).ok, true, 'autor usuwa swoje nieprzyjęte zadanie');
+throws(() => as(U.OWNER, () => api.apiDelete('zadania', 'KN', nt.id)), 'IN_USE', 'zadanie z komentarzami: tylko anulowanie');
+as(U.OWNER, () => api.apiTeamSave({ email: U.JUN1, imie_nazwisko: 'Młodsza Prawniczka A', stanowisko: 'Młodszy prawnik', rola: 'asystent', kancelarie: 'KN,KR', powiadomienia: 'nie' }));
+mock.st.sent.length = 0;
+as(U.OWNER, () => api.apiSave('zadania', { kancelaria: 'KN', tytul: 'Cicho', przypisane: U.JUN1 }));
+eq(mock.st.sent.length, 0, 'wyłączone powiadomienia: bez e-maila');
+
+/* ---------- Domeny kont i aliasy ---------- */
+throws(() => as(U.OWNER, () => api.apiTeamSave({ email: 'ktos.prywatny@gmail.com', rola: 'prawnik', kancelarie: 'KN' })), 'INVALID', 'prywatny Gmail nie wejdzie do zespołu');
+as(U.OWNER, () => api.apiTeamSave({ email: U.OWNER, imie_nazwisko: 'Maciej Muzyka', stanowisko: 'Wspólnik', rola: 'admin', kancelarie: 'KN,KR', aliasy: 'maciej.muzyka@kancelariarodzinna.com' }));
+const viaAlias = as('maciej.muzyka@kancelariarodzinna.com', () => api.bootstrap());
+eq([viaAlias.state, viaAlias.email, viaAlias.login], ['ok', U.OWNER, 'maciej.muzyka@kancelariarodzinna.com'], 'logowanie drugim kontem = ta sama osoba');
+ok(mock.st.files[knDb].editors.has('maciej.muzyka@kancelariarodzinna.com'), 'alias dostaje udostępnienie bazy');
+throws(() => as(U.OWNER, () => api.apiTeamSave({ email: U.KW, rola: 'prawnik', kancelarie: 'KR', aliasy: 'maciej.muzyka@kancelariarodzinna.com' })), 'INVALID', 'alias zajęty przez inną osobę');
+
+/* ---------- Kalendarz: TERMIN - … ---------- */
+eq(SH.addWorkingDays('2026-11-12', -3), '2026-11-06', '3 dni robocze przed 12.11 (bez 11.11)');
+const pt = (t) => SH.parseTermin(t, ['Katarzyna Walaszek']);
+eq([pt('(zrobione)TERMIN - Kowalski wniosek o uzasadnienie').done, pt('(zrobione)TERMIN - Kowalski wniosek o uzasadnienie').klient], [true, 'Kowalski'], 'zrobione bez spacji');
+eq(pt('TERMIN – Jan Kowalski – apelacja I C 123/26 - Katarzyna Walaszek').prawnik, 'Katarzyna Walaszek', 'prawnik z końcówki tytułu');
+eq(pt('TERMIN – Jan Kowalski – apelacja I C 123/26 - Katarzyna Walaszek').sygn, 'I C 123/26', 'sygnatura z tytułu');
+eq([pt('TERMIN - wniosek o uzasadnienie Nowak Przemoc').klient, pt('TERMIN - Anna Nowak-Kowalska zażalenie (593)').teczka], ['', '593'], 'czynność przed klientem; numer teczki');
+eq([pt('(ODWOŁANA) TERMIN - Jan Kowalski EPU').cancel, pt('Jan Kowalski rozprawa').isTermin], [true, false], 'odwołany; wpis bez prefiksu');
+const ics = SH.parseIcs('BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nDTSTART:20251015T050000Z\r\nDTEND:20251016T050000Z\r\nSUMMARY:(zrobione) TERMIN - Kowalski wniosek\r\nUID:a1\r\nEND:VEVENT\r\nBEGIN:VEVENT\r\nDTSTART;VALUE=DATE:20260115\r\nSUMMARY:TERMIN - Nowak odpowied\r\n ź\r\nUID:a2\r\nEND:VEVENT\r\nEND:VCALENDAR');
+eq(ics.map((e) => [e.date, e.start, e.hours, e.title]), [['2025-10-15', '2025-10-15T07:00', 24, '(zrobione) TERMIN - Kowalski wniosek'], ['2026-01-15', '2026-01-15', 24, 'TERMIN - Nowak odpowiedź']], 'plik .ics: czas polski, zawijane linie, wydarzenie całodniowe');
+mock.st.calendars = require('./demo-seed.js').demoCalendars(SH, today);
+const cal = as(U.KPK, () => api.apiCalendarEvents('', '2025-01-01', '2027-12-31'));
+eq(cal.events.length, 10, 'kalendarz: wydarzenia ≥ 23 h (bez godzinnej konsultacji)');
+ok(cal.events.every((e) => /^\d{4}-\d{2}-\d{2}$/.test(e.date)), 'daty wydarzeń w strefie Warszawy');
+mock.st.calendars[U.SEKRETARIAT].readers = [];
+throws(() => as(U.KPK, () => api.apiCalendarEvents('', '2025-01-01', '2027-12-31')), 'NO_CAL', 'brak dostępu do kalendarza');
+throws(() => as(U.KW, () => api.apiCalendarEvents('', '', '')), 'FORBIDDEN', 'import tylko dla administratora');
+const r5 = KNB.data.sprawy.find((x) => x.tytul.indexOf('Oskarżyciel') === 0);
+const calItems = [
+  { kancelaria: 'KR', table: 'terminy', rec: { opis: 'zażalenie', data: '2026-11-03', typ: 'Termin procesowy', status: 'Otwarty', sprawa_id: r5.id, odpowiedzialny: U.KPK, zrodlo_id: 'cal:x1:2026-11-03' }, zadanie: { tytul: 'Przygotować: zażalenie', przypisane: U.JUN2, termin: '2026-10-29' } },
+  { kancelaria: 'KR', table: 'terminy', rec: { opis: 'odpowiedź', data: '2026-09-01', typ: 'Termin procesowy', status: 'Do weryfikacji', odpowiedzialny: U.KPK, zrodlo_id: 'cal:x2:2026-09-01' } }
+];
+let rc = as(U.KPK, () => api.apiImportCommit('kalendarz', calItems));
+eq([rc.KR.terminy, rc.KR.zadania], [2, 1], 'import kalendarza: 2 terminy i zadanie przygotowania');
+const prep = as(U.KPK, () => api.bootstrap()).data.zadania.find((z) => z.tytul === 'Przygotować: zażalenie');
+ok(prep && prep.termin_id && prep.status === 'Nowe' && prep.zlecil === U.KPK, 'zadanie przygotowania powiązane z terminem');
+calItems[1].rec.status = 'Wykonany';
+rc = as(U.KPK, () => api.apiImportCommit('kalendarz', calItems));
+eq([rc.KR.zaktualizowane, rc.KR.pominiete], [1, 1], 'ponowny import: dopisane „(zrobione)” zamyka termin, reszta pominięta');
+
 console.log(`pass ${pass}, fail ${fail}`);
 process.exit(fail ? 1 : 0);

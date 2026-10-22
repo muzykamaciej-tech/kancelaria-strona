@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 const DIR = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.join(DIR, '..', 'src');
 const read = (f) => fs.readFileSync(path.join(SRC, f), 'utf8');
-const SERVER_FILES = ['Konfiguracja.js', 'Wspolne.js', 'Baza.js', 'Dostep.js', 'Api.js', 'Admin.js', 'Import.js'];
+const SERVER_FILES = ['Konfiguracja.js', 'Wspolne.js', 'Baza.js', 'Dostep.js', 'Api.js', 'Zadania.js', 'Admin.js', 'Import.js'];
 
 export function serverBundle() {
   const src = SERVER_FILES.map(read).join('\n\n');
@@ -33,7 +33,7 @@ const DEMO_RUNTIME = `
   var today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Warsaw', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
   var mock, server, seeded;
   function fresh(seed) {
-    mock = createGasMock({ user: DEMO_USERS.OWNER, owner: DEMO_USERS.OWNER, gmail: demoGmail() });
+    mock = createGasMock({ user: DEMO_USERS.OWNER, owner: DEMO_USERS.OWNER, gmail: demoGmail(), calendars: demoCalendars(SH, today) });
     server = createServer(mock.globals);
     seeded = !!seed;
     if (seed) seedDemo(server, mock, SH, today);
@@ -60,8 +60,10 @@ const DEMO_RUNTIME = `
   window.google = { script: { run: runner(null, null) } };
   var USERS = [
     [DEMO_USERS.OWNER, 'Maciej Muzyka — administrator, obie kancelarie'],
-    [DEMO_USERS.JULIA, 'Asystentka — obie kancelarie, bez usuwania'],
-    [DEMO_USERS.KW, 'Katarzyna Walaszek — apl. adw., tylko Kancelaria Rodzinna'],
+    [DEMO_USERS.KPK, 'Katarzyna Popik-Konarzewska — wspólniczka, KR'],
+    [DEMO_USERS.KW, 'Katarzyna Walaszek — starsza prawniczka, KR'],
+    [DEMO_USERS.JUN1, (window.DEMO_NAMES && DEMO_NAMES.JUN1 || 'Młodsza prawniczka A') + ' — młodsza prawniczka, KN i KR'],
+    [DEMO_USERS.JUN2, (window.DEMO_NAMES && DEMO_NAMES.JUN2 || 'Młodsza prawniczka B') + ' — młodsza prawniczka, KR'],
     ['ktos.obcy@gmail.com', 'Konto spoza zespołu (brak dostępu)'],
     ['setup', 'Nowa instalacja — ekran konfiguracji']
   ];
@@ -90,12 +92,14 @@ const DEMO_CSS = `<style>
 @media (max-width: 560px) { .demo-pill span, .demo-pill label { display: none; } }
 </style>`;
 
-export function build(artifactOut) {
+export function build(artifactOut, namesFile) {
   const outDir = path.join(DIR, 'out');
   fs.mkdirSync(outDir, { recursive: true });
   const bundle = serverBundle();
   fs.writeFileSync(path.join(outDir, 'server-bundle.js'), bundle);
-  const demoScripts = ['<script>', fs.readFileSync(path.join(DIR, 'gas-mock.js'), 'utf8'), '</script>',
+  /* Prawdziwe imiona młodszych prawników tylko w prywatnym podglądzie (plik poza repozytorium). */
+  const names = namesFile ? fs.readFileSync(namesFile, 'utf8') : '{}';
+  const demoScripts = ['<script>window.DEMO_NAMES = ' + JSON.stringify(JSON.parse(names)) + ';</script>', '<script>', fs.readFileSync(path.join(DIR, 'gas-mock.js'), 'utf8'), '</script>',
     '<script>', bundle, '</script>', '<script>', fs.readFileSync(path.join(DIR, 'demo-seed.js'), 'utf8'), '</script>',
     '<script>', DEMO_RUNTIME, '</script>'].join('\n');
   let html = clientHtml(demoScripts).replace('</head>', DEMO_CSS + '\n</head>');
@@ -113,5 +117,8 @@ export function build(artifactOut) {
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
-  console.log('Zbudowano:', build(process.argv[2]));
+  const i = process.argv.indexOf('--names');
+  const names = i > 0 ? process.argv[i + 1] : '';
+  const out = process.argv.slice(2).filter((a, j, all) => a !== '--names' && all[j - 1] !== '--names')[0];
+  console.log('Zbudowano:', build(out, names));
 }

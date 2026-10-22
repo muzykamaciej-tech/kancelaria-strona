@@ -80,15 +80,18 @@ function apiSetup(p) {
     appendRows_(set.getSheetByName(SETTINGS_TABLES.slowniki.sheet), dictRows);
 
     var codes = firms.map(function (f) { return f.kod; });
+    if (p.dozwolone) props_().setProperty('ALLOWED_DOMAINS', splitList_(p.dozwolone).join(','));
     var me = p.me || {};
-    var team = [{ email: email, imie_nazwisko: me.imie_nazwisko || email, tytul: me.tytul || '', rola: 'admin', kancelarie: codes.join(','), telefon: me.telefon || '', aktywny: 'tak', dodano: now, dodal: email }];
+    var team = [{ email: email, imie_nazwisko: me.imie_nazwisko || email, tytul: me.tytul || '', stanowisko: me.stanowisko || 'Wspólnik', rola: 'admin', kancelarie: codes.join(','), telefon: me.telefon || '', aktywny: 'tak', aliasy: splitList_(me.aliasy).join(','), powiadomienia: 'tak', dodano: now, dodal: email }];
+    var skipped = [];
     (p.team || []).forEach(function (m) {
       var e = String(m.email || '').trim().toLowerCase();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) || team.some(function (x) { return x.email === e; })) return;
+      if (!emailAllowed_(firms, e)) { skipped.push({ email: e, log: ['Pominięto: konto spoza domen kancelarii (' + allowedDomains_(firms).join(', ') + ')'] }); return; }
       team.push({
-        email: e, imie_nazwisko: m.imie_nazwisko || e, tytul: m.tytul || '', rola: ROLES[m.rola] ? m.rola : 'odczyt',
-        kancelarie: splitList_(m.kancelarie).filter(function (k) { return codes.indexOf(k) >= 0; }).join(','),
-        telefon: m.telefon || '', aktywny: 'tak', dodano: now, dodal: email
+        email: e, imie_nazwisko: m.imie_nazwisko || e, tytul: m.tytul || '', stanowisko: STANOWISKA.indexOf(m.stanowisko) >= 0 ? m.stanowisko : '',
+        rola: ROLES[m.rola] ? m.rola : 'odczyt', kancelarie: splitList_(m.kancelarie).filter(function (k) { return codes.indexOf(k) >= 0; }).join(','),
+        telefon: m.telefon || '', aktywny: 'tak', aliasy: '', powiadomienia: 'tak', dodano: now, dodal: email
       });
     });
     appendRows_(set.getSheetByName(SETTINGS_TABLES.zespol.sheet), team);
@@ -99,7 +102,7 @@ function apiSetup(p) {
     });
     dropSettingsCache_();
     var s = loadSettings_(true);
-    var shareLog = team.slice(1).map(function (m) { return { email: m.email, log: applySharing_(s, m) }; });
+    var shareLog = team.slice(1).map(function (m) { return { email: m.email, log: applySharing_(s, m) }; }).concat(skipped);
     log_(set, email, 'konfiguracja', '', 'utworzenie', { kancelarie: codes.join(','), zespol: team.length });
     return { shareLog: shareLog };
   });
@@ -113,20 +116,31 @@ function apiTeamSave(m) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) fail_('INVALID', 'Podaj poprawny adres e-mail konta Google.');
   if (!ROLES[m.rola]) fail_('INVALID', 'Wybierz rolę.');
   if (email === c.email && (m.rola !== 'admin' || m.aktywny === 'nie')) fail_('INVALID', 'Nie możesz odebrać sobie roli administratora.');
+  var aliasy = splitList_(m.aliasy).map(function (a) { return a.toLowerCase(); }).filter(function (a) { return a !== email; });
+  [email].concat(aliasy).forEach(function (e) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) fail_('INVALID', 'Niepoprawny adres: ' + e);
+    if (!emailAllowed_(c.s.kancelarie, e)) fail_('INVALID', 'Konto ' + e + ' jest spoza domen kancelarii (' + allowedDomains_(c.s.kancelarie).join(', ') + '). Dane klientów udostępniamy tylko kontom służbowym; wyjątek dodasz w Ustawieniach.');
+  });
+  var taken = c.s.zespol.filter(function (x) { return x.email !== email && aliasy.concat([email]).some(function (a) { return x.email === a || splitList_(x.aliasy).indexOf(a) >= 0; }); })[0];
+  if (taken) fail_('INVALID', 'Ten adres jest już przypisany do: ' + taken.imie_nazwisko + '.');
   var codes = c.s.kancelarie.map(function (f) { return f.kod; });
   var rec = {
     email: email, imie_nazwisko: String(m.imie_nazwisko || '').trim() || email, tytul: String(m.tytul || '').trim(),
+    stanowisko: STANOWISKA.indexOf(m.stanowisko) >= 0 ? m.stanowisko : '',
     rola: m.rola, kancelarie: splitList_(m.kancelarie).filter(function (k) { return codes.indexOf(k) >= 0; }).join(','),
-    telefon: String(m.telefon || '').trim(), aktywny: m.aktywny === 'nie' ? 'nie' : 'tak'
+    telefon: String(m.telefon || '').trim(), aktywny: m.aktywny === 'nie' ? 'nie' : 'tak',
+    aliasy: aliasy.join(','), powiadomienia: m.powiadomienia === 'nie' ? 'nie' : 'tak'
   };
   return withLock_(function () {
     var set = SpreadsheetApp.openById(settingsId_());
-    var sh = set.getSheetByName(SETTINGS_TABLES.zespol.sheet);
+    var sh = ensureSheet_(set, SETTINGS_TABLES.zespol.sheet, SETTINGS_TABLES.zespol.keys);
     var row = findRow_(sh, 'email', email);
+    var dropped = [];
     if (row > 0) {
       var cur = readRow_(sh, row), next = {};
       Object.keys(cur).forEach(function (k) { next[k] = cur[k]; });
       Object.keys(rec).forEach(function (k) { next[k] = rec[k]; });
+      dropped = splitList_(cur.aliasy).filter(function (a) { return aliasy.indexOf(a.toLowerCase()) < 0; });
       writeRow_(sh, row, next);
       log_(set, c.email, 'zespol', email, 'zmiana', diff_(cur, next));
     } else {
@@ -136,7 +150,9 @@ function apiTeamSave(m) {
     }
     dropSettingsCache_();
     var s = loadSettings_(true);
-    return { team: s.zespol, shareLog: applySharing_(s, rec) };
+    var log = applySharing_(s, rec);
+    dropped.forEach(function (a) { log = log.concat(applySharingFor_(s, { email: email, aktywny: 'nie', kancelarie: '' }, a.toLowerCase())); });
+    return { team: s.zespol, shareLog: log };
   });
 }
 
@@ -225,4 +241,14 @@ function apiSeqSave(name, value) {
   if (!/^SEQ_[A-Z0-9_]+$/.test(name) || !/^\d+$/.test(String(value))) fail_('INVALID', 'Zła nazwa albo wartość licznika.');
   props_().setProperty(name, String(value));
   return seqValues_();
+}
+
+/* Dodatkowe domeny albo pojedyncze adresy dopuszczone do zespołu (np. domena współpracującej kancelarii). */
+function apiAllowedSave(list) {
+  var c = ctx_();
+  requireAdmin_(c);
+  var items = splitList_(list).map(function (x) { return x.toLowerCase().replace(/^@/, ''); })
+    .filter(function (x) { return /^[a-z0-9.-]+\.[a-z]{2,}$/.test(x); });
+  props_().setProperty('ALLOWED_DOMAINS', items.join(','));
+  return allowedDomains_(c.s.kancelarie);
 }
