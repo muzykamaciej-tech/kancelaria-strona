@@ -251,7 +251,7 @@ var DEFAULT_FIRMS = [
    administrator dopisuje na ekranie konfiguracji — repozytorium jest publiczne. Każdą osobę trzeba świadomie zaznaczyć —
    dopiero wtedy dostaje dostęp. */
 var DEFAULT_TEAM = [
-  { email: 'katarzyna.popik@kancelariarodzinna.com', imie_nazwisko: 'Katarzyna Popik-Konarzewska', tytul: 'adw. dr hab.', stanowisko: 'Wspólnik', rola: 'admin', kancelarie: 'KR', on: true },
+  { email: 'katarzyna.popik@kancelariarodzinna.com', imie_nazwisko: 'Katarzyna Popik-Konarzewska', tytul: 'adw. dr hab.', stanowisko: 'Wspólnik', rola: 'prawnik', kancelarie: 'KR', on: true },
   { email: 'katarzyna.walaszek@kancelariarodzinna.com', imie_nazwisko: 'Katarzyna Walaszek', tytul: 'apl. adw.', stanowisko: 'Starszy prawnik', rola: 'prawnik', kancelarie: 'KR', on: true },
   { email: 'maciej.bednarek@kancelariarodzinna.com', imie_nazwisko: 'Maciej Bednarek', tytul: 'adw.', stanowisko: 'Starszy prawnik', rola: 'prawnik', kancelarie: 'KR', on: true },
   { email: 'kazimierz.konarzewski@kancelariarodzinna.com', imie_nazwisko: 'Kazimierz Konarzewski', tytul: 'adw.', stanowisko: 'Współpracownik', rola: 'prawnik', kancelarie: 'KR', on: false },

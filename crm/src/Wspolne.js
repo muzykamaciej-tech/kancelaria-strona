@@ -153,15 +153,16 @@ function sharedFactory_() {
       if (m) { out.prawnik = nm; rest = rest.slice(0, m.index).trim(); }
       return !!m;
     });
-    var words = rest.split(' '), kl = [];
+    var words = rest.split(' '), kl = [], end = 0;
     for (var i = 0; i < words.length && kl.length < 3; i++) {
       var w = words[i];
-      if (!w || w === '-') { if (kl.length) break; continue; }
+      if (!w || w === '-') { if (kl.length) break; end = i + 1; continue; }
       if (STOP[w.toUpperCase()] || ACTS[norm(w)] || !/^[A-ZĄĆĘŁŃÓŚŹŻ][A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ'’]+(?:-[A-ZĄĆĘŁŃÓŚŹŻ][A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ'’]+)?$/.test(w)) break;
-      kl.push(w);
+      kl.push(w); end = i + 1;
     }
     out.klient = kl.join(' ');
-    out.czynnosc = words.slice(kl.length).join(' ').replace(/^\s*-\s*/, '').replace(/\s+-\s*$/, '').trim();
+    /* Czynność zaczyna się za ostatnim słowem klienta (pominięte „-” przed klientem nie przesuwają podziału). */
+    out.czynnosc = words.slice(end).join(' ').replace(/^\s*-\s*/, '').replace(/\s+-\s*$/, '').trim();
     return out;
   }
 

@@ -105,6 +105,13 @@ ok(true, 'szybkie dodawanie: zlecono');
 await page.fill('#qa-pulpit', 'Zadzwonić do sądu @Maciej jutro');
 await page.waitForTimeout(100);
 ok((await page.locator('#qa-pulpit-hint').textContent()).includes('pasuje do'), 'szybkie dodawanie: @Maciej pasuje do dwóch osób — prośba o nazwisko');
+await page.fill('#qa-pulpit', 'Przygotuj apelację cz. 2');
+await page.waitForTimeout(100);
+ok(/„Przygotuj apelację cz\. 2” · .* · bez terminu/.test(await page.locator('#qa-pulpit-hint').textContent()), 'szybkie dodawanie: „cz.” zostaje w tytule, nie jest datą');
+await page.fill('#qa-pulpit', 'Wniosek do SR o uzasadnienie pt');
+await page.waitForTimeout(100);
+const hintSr = await page.locator('#qa-pulpit-hint').textContent();
+ok(hintSr.includes('„Wniosek do SR o uzasadnienie”') && /pt \d/.test(hintSr), 'szybkie dodawanie: „SR” to sąd, data z końcówki');
 await page.fill('#qa-pulpit', '');
 /* Własne zadanie: odhaczenie w karcie zadania */
 await page.click('.nav a[data-go="zadania"]');

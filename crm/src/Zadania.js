@@ -29,13 +29,19 @@ function taskAuto_(c, f, rec, before) {
   if (!before || before.przypisane !== to) {
     var m = checkAssignee_(c, f, to);
     rec.przypisane = m.email;
-    rec.zlecil = c.email;
+    rec.zlecil = keepRequester_(c, before);
     rec.przekazano = nowMinute_();
     rec.status = m.email === c.email ? 'W toku' : 'Nowe';
     rec.wykonano = ''; rec.wykonal = '';
     if (m.email !== c.email) rec._assigned = 1;
   }
   if (!rec.status) rec.status = 'Nowe';
+}
+
+/* Wykonawca, który przekazuje zadanie dalej, nie staje się zlecającym: sprawdza i zatwierdza nadal
+   pierwotny zlecający (inaczej przekazanie „tam i z powrotem” omijałoby kontrolę). */
+function keepRequester_(c, t) {
+  return t && !c.perm.admin && t.przypisane === c.email && t.zlecil && t.zlecil !== c.email ? t.zlecil : c.email;
 }
 
 function teczkaOf_(ss, sprawaId) {
@@ -103,7 +109,7 @@ function apiTask(firm, id, action, p) {
         need(taskCanTouch_(c, t), 'Przekazuje osoba, która wykonuje albo zleciła zadanie, lub administrator.');
         var m = checkAssignee_(c, f, String(p.do || '').toLowerCase());
         if (m.email === t.przypisane) fail_('INVALID', 'To zadanie już jest u tej osoby.');
-        next.przypisane = m.email; next.zlecil = me; next.przekazano = now;
+        next.przypisane = m.email; next.zlecil = keepRequester_(c, t); next.przekazano = now;
         next.status = m.email === me ? 'W toku' : 'Nowe';
         comment = 'Przekazane: ' + m.imie_nazwisko + (note ? ' — ' + note : '');
         if (m.email !== me) notify = { to: m.email, kind: 'nowe' };

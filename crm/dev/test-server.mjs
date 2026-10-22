@@ -202,26 +202,27 @@ eq(pt('TERMIN – Jan Kowalski – apelacja I C 123/26 - Katarzyna Walaszek').pr
 eq(pt('TERMIN – Jan Kowalski – apelacja I C 123/26 - Katarzyna Walaszek').sygn, 'I C 123/26', 'sygnatura z tytułu');
 eq([pt('TERMIN - wniosek o uzasadnienie Nowak Przemoc').klient, pt('TERMIN - Anna Nowak-Kowalska zażalenie (593)').teczka], ['', '593'], 'czynność przed klientem; numer teczki');
 eq([pt('(ODWOŁANA) TERMIN - Jan Kowalski EPU').cancel, pt('Jan Kowalski rozprawa').isTermin], [true, false], 'odwołany; wpis bez prefiksu');
+eq([pt('TERMIN (593) - Jan Kowalski - apelacja').czynnosc, pt('TERMIN - - Kowalski apelacja').czynnosc, pt('TERMIN [zrobione] - Kowalski - apelacja').klient], ['apelacja', 'apelacja', 'Kowalski'], 'czynność za klientem także po pominiętym „-”');
 const ics = SH.parseIcs('BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nDTSTART:20251015T050000Z\r\nDTEND:20251016T050000Z\r\nSUMMARY:(zrobione) TERMIN - Kowalski wniosek\r\nUID:a1\r\nEND:VEVENT\r\nBEGIN:VEVENT\r\nDTSTART;VALUE=DATE:20260115\r\nSUMMARY:TERMIN - Nowak odpowied\r\n ź\r\nUID:a2\r\nEND:VEVENT\r\nEND:VCALENDAR');
 eq(ics.map((e) => [e.date, e.start, e.hours, e.title]), [['2025-10-15', '2025-10-15T07:00', 24, '(zrobione) TERMIN - Kowalski wniosek'], ['2026-01-15', '2026-01-15', 24, 'TERMIN - Nowak odpowiedź']], 'plik .ics: czas polski, zawijane linie, wydarzenie całodniowe');
 mock.st.calendars = require('./demo-seed.js').demoCalendars(SH, today);
-const cal = as(U.KPK, () => api.apiCalendarEvents('', '2025-01-01', '2027-12-31'));
+const cal = as(U.OWNER, () => api.apiCalendarEvents('', '2025-01-01', '2027-12-31'));
 eq(cal.events.length, 10, 'kalendarz: wydarzenia ≥ 23 h (bez godzinnej konsultacji)');
 ok(cal.events.every((e) => /^\d{4}-\d{2}-\d{2}$/.test(e.date)), 'daty wydarzeń w strefie Warszawy');
 mock.st.calendars[U.SEKRETARIAT].readers = [];
-throws(() => as(U.KPK, () => api.apiCalendarEvents('', '2025-01-01', '2027-12-31')), 'NO_CAL', 'brak dostępu do kalendarza');
+throws(() => as(U.OWNER, () => api.apiCalendarEvents('', '2025-01-01', '2027-12-31')), 'NO_CAL', 'brak dostępu do kalendarza');
 throws(() => as(U.KW, () => api.apiCalendarEvents('', '', '')), 'FORBIDDEN', 'import tylko dla administratora');
 const r5 = KNB.data.sprawy.find((x) => x.tytul.indexOf('Oskarżyciel') === 0);
 const calItems = [
   { kancelaria: 'KR', table: 'terminy', rec: { opis: 'zażalenie', data: '2026-11-03', typ: 'Termin procesowy', status: 'Otwarty', sprawa_id: r5.id, odpowiedzialny: U.KPK, zrodlo_id: 'cal:x1:2026-11-03' }, zadanie: { tytul: 'Przygotować: zażalenie', przypisane: U.JUN2, termin: '2026-10-29' } },
   { kancelaria: 'KR', table: 'terminy', rec: { opis: 'odpowiedź', data: '2026-09-01', typ: 'Termin procesowy', status: 'Do weryfikacji', odpowiedzialny: U.KPK, zrodlo_id: 'cal:x2:2026-09-01' } }
 ];
-let rc = as(U.KPK, () => api.apiImportCommit('kalendarz', calItems));
+let rc = as(U.OWNER, () => api.apiImportCommit('kalendarz', calItems));
 eq([rc.KR.terminy, rc.KR.zadania], [2, 1], 'import kalendarza: 2 terminy i zadanie przygotowania');
 const prep = as(U.KPK, () => api.bootstrap()).data.zadania.find((z) => z.tytul === 'Przygotować: zażalenie');
-ok(prep && prep.termin_id && prep.status === 'Nowe' && prep.zlecil === U.KPK, 'zadanie przygotowania powiązane z terminem');
+ok(prep && prep.termin_id && prep.status === 'Nowe' && prep.zlecil === U.OWNER, 'zadanie przygotowania powiązane z terminem');
 calItems[1].rec.status = 'Wykonany';
-rc = as(U.KPK, () => api.apiImportCommit('kalendarz', calItems));
+rc = as(U.OWNER, () => api.apiImportCommit('kalendarz', calItems));
 eq([rc.KR.zaktualizowane, rc.KR.pominiete], [1, 1], 'ponowny import: dopisane „(zrobione)” zamyka termin, reszta pominięta');
 
 /* Ponowny import: przesunięcie w kalendarzu zmienia datę i zadanie przygotowania; poprawka w CRM ma pierwszeństwo. */
@@ -229,45 +230,78 @@ const termX1 = () => as(U.KPK, () => api.bootstrap()).data.terminy.find((t) => t
 const prepX1 = () => as(U.KPK, () => api.bootstrap()).data.zadania.find((z) => z.tytul === 'Przygotować: zażalenie');
 const later = (d) => (d < today ? today : d);
 calItems[0].rec.data = '2026-11-10';
-rc = as(U.KPK, () => api.apiImportCommit('kalendarz', calItems));
+rc = as(U.OWNER, () => api.apiImportCommit('kalendarz', calItems));
 eq([rc.KR.zaktualizowane, termX1().data, termX1().zrodlo_data], [1, '2026-11-10', '2026-11-10'], 'ponowny import: przesunięty termin dostaje nową datę, bez duplikatu');
 eq(prepX1().termin, later('2026-11-05'), 'zadanie przygotowania przesunięte razem z terminem (3 dni robocze)');
 const tx = termX1();
 as(U.KPK, () => api.apiSave('terminy', { kancelaria: 'KR', id: tx.id, data: '2026-11-12', _ver: tx.zmieniono }));
 calItems[0].rec.data = '2026-11-17';
-rc = as(U.KPK, () => api.apiImportCommit('kalendarz', calItems));
+rc = as(U.OWNER, () => api.apiImportCommit('kalendarz', calItems));
 eq([rc.KR.zaktualizowane || 0, termX1().data], [0, '2026-11-12'], 'data poprawiona w CRM nie jest nadpisywana z kalendarza');
 calItems[0].rec.status = 'Nieaktualny';
-rc = as(U.KPK, () => api.apiImportCommit('kalendarz', calItems));
+rc = as(U.OWNER, () => api.apiImportCommit('kalendarz', calItems));
 eq([termX1().status, prepX1().status], ['Nieaktualny', 'Anulowane'], '„(ODWOŁANA)” unieważnia termin i anuluje zadanie przygotowania');
 calItems[0].rec.status = 'Otwarty';
-rc = as(U.KPK, () => api.apiImportCommit('kalendarz', calItems));
+rc = as(U.OWNER, () => api.apiImportCommit('kalendarz', calItems));
 eq([termX1().status, rc.KR.zaktualizowane || 0], ['Nieaktualny', 0], 'zamknięty w CRM termin nie wraca do otwartych');
 ok(as(U.KPK, () => api.apiHistory('KR', 'terminy', tx.id)).length >= 3, 'zmiany z importu są w Historii terminu');
 
 /* Kalendarz: usługa zaawansowana (iCalUID, stronicowanie, domyślny zakres) i zapasowo CalendarApp. */
 mock.st.calendars[U.SEKRETARIAT].readers = [U.OWNER, U.KPK];
 mock.st.calPage = 3;
-const calAdv = as(U.KPK, () => api.apiCalendarEvents('', '', ''));
+const calAdv = as(U.OWNER, () => api.apiCalendarEvents('', '', ''));
 eq([calAdv.events.length, calAdv.calendar], [10, 'Sekretariat KR'], 'kalendarz: stronicowanie i domyślny zakres dat (do 3 lat naprzód)');
 ok(calAdv.events.every((e) => /@google\.com$/.test(e.uid)), 'klucz importu = iCalUID (zgodny z UID z pliku .ics)');
 ok(calAdv.events.some((e) => e.allDay && e.hours === 24), 'wydarzenie całodniowe: 24 h');
 mock.st.calendars[U.SEKRETARIAT].events.push({ id: 'cal-rec@google.com', title: 'TERMIN - co tydzień', allDay: true, start: SH.addDays(today, 5) + 'T00:00:00', end: SH.addDays(today, 6) + 'T00:00:00', recurringEventId: 'serie1' });
-ok(as(U.KPK, () => api.apiCalendarEvents('', '', '')).events.some((e) => e.recurring), 'wystąpienia serii oznaczone jako cykliczne');
+ok(as(U.OWNER, () => api.apiCalendarEvents('', '', '')).events.some((e) => e.recurring), 'wystąpienia serii oznaczone jako cykliczne');
 delete mock.st.calPage;
 const apiNoAdv = createServer(Object.assign({}, mock.globals, { Calendar: undefined }));
-eq(as(U.KPK, () => apiNoAdv.apiCalendarEvents('', '', '')).events.length, 11, 'kalendarz bez usługi zaawansowanej: CalendarApp');
+eq(as(U.OWNER, () => apiNoAdv.apiCalendarEvents('', '', '')).events.length, 11, 'kalendarz bez usługi zaawansowanej: CalendarApp');
 
-/* Administrator jednej kancelarii (KR) nie rusza drugiej ani ustawień wspólnych. */
-const kpkNew = as(U.KPK, () => api.apiTeamSave({ email: 'nowy.kr@kancelariarodzinna.com', imie_nazwisko: 'Nowy KR', rola: 'prawnik', kancelarie: 'KN,KR' }));
-eq(kpkNew.team.find((m) => m.email === 'nowy.kr@kancelariarodzinna.com').kancelarie, 'KR', 'administrator KR nie nada dostępu do KN');
-throws(() => as(U.KPK, () => api.apiTeamSave({ email: U.JUN1, rola: 'odczyt', kancelarie: 'KR' })), 'FORBIDDEN', 'administrator KR nie zmieni osoby z dostępem do KN');
-throws(() => as(U.KPK, () => api.apiFirmSave({ kod: 'KN', telefon: '1' })), 'FORBIDDEN', 'administrator KR nie edytuje danych KN');
-throws(() => as(U.KPK, () => api.apiCreateDb('KN')), 'FORBIDDEN', 'administrator KR nie zakłada bazy KN');
-throws(() => as(U.KPK, () => api.apiSeqSave('SEQ_TECZKA', 1)), 'FORBIDDEN', 'wspólna numeracja: tylko administrator obu kancelarii');
-throws(() => as(U.KPK, () => api.apiAllowedSave('gmail.com')), 'FORBIDDEN', 'domeny: tylko administrator obu kancelarii');
-throws(() => as(U.KPK, () => api.apiDictSave('*', 'typ_terminu', ['X'])), 'FORBIDDEN', 'wspólne słowniki: tylko administrator obu kancelarii');
-throws(() => as(U.KPK, () => api.apiResync()), 'FORBIDDEN', 'ponowne udostępnienie wszystkim: tylko administrator obu kancelarii');
+/* Administruje tylko osoba z dostępem do wszystkich kancelarii: zespół i ustawienia są we wspólnym arkuszu. */
+throws(() => as(U.OWNER, () => api.apiTeamSave({ email: 'nowy.kr@kancelariarodzinna.com', imie_nazwisko: 'Nowy KR', rola: 'admin', kancelarie: 'KR' })), 'INVALID', 'rola administratora tylko z dostępem do wszystkich kancelarii');
+throws(() => as(U.KPK, () => api.apiTeamSave({ email: 'nowy.kr@kancelariarodzinna.com', imie_nazwisko: 'Nowy KR', rola: 'prawnik', kancelarie: 'KR' })), 'FORBIDDEN', 'wspólniczka jednej kancelarii nie zarządza zespołem');
+throws(() => as(U.KPK, () => api.apiFirmSave({ kod: 'KR', telefon: '1' })), 'FORBIDDEN', 'dane kancelarii zmienia administrator');
+throws(() => as(U.KPK, () => api.apiSeqSave('SEQ_TECZKA', 1)), 'FORBIDDEN', 'wspólna numeracja: tylko administrator');
+throws(() => as(U.KPK, () => api.apiAllowedSave('gmail.com')), 'FORBIDDEN', 'domeny: tylko administrator');
+throws(() => as(U.KPK, () => api.apiResync()), 'FORBIDDEN', 'ponowne udostępnienie: tylko administrator');
+eq(as(U.KPK, () => api.bootstrap()).role, 'prawnik', 'wspólniczka KR: pełna edycja w KR');
+ok(!mock.st.files[mock.globals.PropertiesService.getScriptProperties().getProperty('SETTINGS_ID')].editors.has(U.KPK), 'arkusz zespołu i ustawień: edycja tylko dla administratora');
+{
+  /* Konfiguracja: admin z jedną kancelarią zapisuje się jako „Pełna edycja”; aliasy właściciela sprawdzane. */
+  const m2 = createGasMock({ user: U.OWNER, owner: U.OWNER, gmail: demoGmail() });
+  const a2 = createServer(m2.globals);
+  const res = a2.apiSetup({ me: { imie_nazwisko: 'Maciej Muzyka', aliasy: 'maciej.muzyka@kancelariarodzinna.com, prywatny@gmail.com, ' + U.KW }, team: [{ email: U.KPK, imie_nazwisko: 'KPK', rola: 'admin', kancelarie: 'KR' }, { email: U.KW, imie_nazwisko: 'KW', rola: 'prawnik', kancelarie: 'KR' }] });
+  m2.setUser(U.KPK);
+  eq(a2.bootstrap().role, 'prawnik', 'konfiguracja: admin jednej kancelarii zapisany jako pełna edycja');
+  ok(res.shareLog.some((x) => x.email === U.KPK && /wszystkich kancelarii/.test(x.log.join(' '))), 'konfiguracja: informacja o zmianie roli');
+  m2.setUser(U.OWNER);
+  eq(a2.bootstrap().me.aliasy, 'maciej.muzyka@kancelariarodzinna.com', 'konfiguracja: alias spoza domen i adres członka zespołu odrzucone');
+  m2.setUser('maciej.muzyka@kancelariarodzinna.com');
+  eq(a2.bootstrap().email, U.OWNER, 'konfiguracja: alias właściciela działa od razu');
+}
+
+/* Odrzucenie i przekazanie przez wykonawcę nie zmieniają, kto sprawdza zadanie. */
+const mbT = as(U.MB, () => api.apiSave('zadania', { kancelaria: 'KR', tytul: 'Odpowiedź na pozew — projekt', przypisane: U.JUN2, sprawdzenie: 'tak' }));
+throws(() => as(U.JUN2, () => api.apiSave('zadania', { kancelaria: 'KR', id: mbT.id, sprawdzenie: '', _ver: mbT.zmieniono })), 'FORBIDDEN', 'wykonawca nie wyłączy kontroli w formularzu');
+r = as(U.JUN2, () => api.apiTask('KR', mbT.id, 'odrzuc', { komentarz: 'urlop' }));
+eq([r.zadanie.przypisane, r.zadanie.zlecil], [U.MB, U.MB], 'odrzucone: zadanie własne zlecającego, nie „zlecone” przez odrzucającego');
+throws(() => as(U.JUN2, () => api.apiTask('KR', mbT.id, 'anuluj', {})), 'FORBIDDEN', 'odrzucający nie anuluje cudzego zadania');
+as(U.MB, () => api.apiTask('KR', mbT.id, 'przyjmij', {}));
+eq(as(U.MB, () => api.apiTask('KR', mbT.id, 'zrobione', {})).zadanie.status, 'Zrobione', 'po odrzuceniu zlecający kończy zadanie bez sprawdzania przez odrzucającego');
+const mbT2 = as(U.MB, () => api.apiSave('zadania', { kancelaria: 'KR', tytul: 'Zestawienie dowodów', przypisane: U.JUN2, sprawdzenie: 'tak' }));
+r = as(U.JUN2, () => api.apiTask('KR', mbT2.id, 'przekaz', { do: U.KW }));
+eq([r.zadanie.przypisane, r.zadanie.zlecil], [U.KW, U.MB], 'wykonawca przekazuje dalej: sprawdza nadal pierwotny zlecający');
+throws(() => as(U.JUN2, () => api.apiTask('KR', mbT2.id, 'przekaz', { do: U.JUN2 })), 'FORBIDDEN', 'przekazanie „tam i z powrotem” nie omija kontroli');
+as(U.KW, () => api.apiTask('KR', mbT2.id, 'przyjmij', {}));
+eq(as(U.KW, () => api.apiTask('KR', mbT2.id, 'zrobione', {})).zadanie.status, 'Do sprawdzenia', 'po przekazaniu zadanie wraca do sprawdzenia zlecającemu');
+const mbT3 = as(U.MB, () => api.apiSave('zadania', { kancelaria: 'KR', tytul: 'Kwerenda akt', przypisane: U.JUN2, sprawdzenie: 'tak' }));
+const moved = as(U.JUN2, () => api.apiSave('zadania', { kancelaria: 'KR', id: mbT3.id, przypisane: U.KW, _ver: mbT3.zmieniono }));
+eq(moved.zlecil, U.MB, 'zmiana osoby w formularzu przez wykonawcę: zlecający bez zmian');
+const back = as(U.MB, () => api.apiTask('KR', mbT3.id, 'przekaz', { do: U.JUN2 })).zadanie;
+r = as(U.JUN2, () => api.apiTask('KR', back.id, 'przekaz', { do: U.MB }));
+eq([r.zadanie.przypisane, r.zadanie.zlecil, r.zadanie.status], [U.MB, U.MB, 'Nowe'], 'oddanie zlecającemu: jego własne zadanie');
 
 /* Wyłączenie dostępu działa także dla konta spoza domen; alias osoby nieaktywnej można przenieść. */
 as(U.OWNER, () => api.apiAllowedSave('example.com,partner.pl'));

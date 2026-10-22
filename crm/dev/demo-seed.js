@@ -30,7 +30,7 @@
     as(OWNER, () => api.apiSetup({
       me: { imie_nazwisko: 'Maciej Muzyka', tytul: 'adw. dr', telefon: '+48 884 784 984', stanowisko: 'Wspólnik' },
       team: [
-        { email: KPK, imie_nazwisko: 'Katarzyna Popik-Konarzewska', tytul: 'adw. dr hab.', stanowisko: 'Wspólnik', rola: 'admin', kancelarie: 'KR' },
+        { email: KPK, imie_nazwisko: 'Katarzyna Popik-Konarzewska', tytul: 'adw. dr hab.', stanowisko: 'Wspólnik', rola: 'prawnik', kancelarie: 'KR' },
         { email: KW, imie_nazwisko: 'Katarzyna Walaszek', tytul: 'apl. adw.', stanowisko: 'Starszy prawnik', rola: 'prawnik', kancelarie: 'KR' },
         { email: MB, imie_nazwisko: 'Maciej Bednarek', tytul: 'adw.', stanowisko: 'Starszy prawnik', rola: 'prawnik', kancelarie: 'KR' },
         { email: JUN1, imie_nazwisko: NAMES.JUN1 || 'Młodsza Prawniczka A', tytul: '', stanowisko: 'Młodszy prawnik', rola: 'asystent', kancelarie: 'KN,KR' },

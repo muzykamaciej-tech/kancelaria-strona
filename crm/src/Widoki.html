@@ -308,7 +308,14 @@ function quickDate(w) {
 }
 function parseQuick(text) {
   const out = { pilne: '', termin: '', sprawa: null, who: null, errors: [] }, title = [];
-  String(text || '').trim().split(/\s+/).filter(Boolean).forEach((w) => {
+  /* Datę bierzemy tylko z końcówki („… #593 @Julia pt !”), żeby „cz. 2”, „pt. Kowalski” czy „1.5 ha” zostały w tytule.
+     „dziś”, „jutro” i „pojutrze” są jednoznaczne i działają w każdym miejscu. */
+  const words = String(text || '').trim().split(/\s+/).filter(Boolean);
+  let tail = words.length;
+  /* Słowo z kropką („pt.”) i skrót wielkimi literami („SR” = sąd rejonowy) to nie dzień tygodnia. */
+  const dateWord = (w) => !/\.$/.test(w) && !/^[A-ZĄĆĘŁŃÓŚŹŻ]{2,}$/.test(w) && quickDate(w);
+  while (tail > 0 && (/^[#@!]/.test(words[tail - 1]) || /^do$/i.test(words[tail - 1]) || (dateWord(words[tail - 1]) && !/^(z|ze|od|dnia)$/i.test(words[tail - 2] || '')))) tail--;
+  words.forEach((w, i) => {
     let m;
     if ((m = /^#(P?\d{1,4})$/i.exec(w))) {
       const nr = m[1].toUpperCase(), cands = S.data.sprawy.filter((s) => String(s.numer).toUpperCase() === nr);
@@ -328,7 +335,7 @@ function parseQuick(text) {
       return;
     }
     if (w === '!') { out.pilne = 'tak'; return; }
-    const d = quickDate(w);
+    const d = (i >= tail && dateWord(w)) || /^(dzi[sś](iaj)?|jutro|pojutrze)$/i.test(w) ? quickDate(w) : '';
     if (d) { out.termin = d; if (title.length && /^do$/i.test(title[title.length - 1])) title.pop(); return; }
     title.push(w);
   });
@@ -342,7 +349,7 @@ function parseQuick(text) {
   return out;
 }
 function quickAddHtml(id) {
-  return `<div class="qa"><input class="inp" id="${id}" data-qa="${id}" placeholder="Nowe zadanie, np.: Wyślij pozew #593 @Julia pt !" autocomplete="off" aria-label="Nowe zadanie">
+  return `<div class="qa"><input class="inp" id="${id}" data-qa="${id}" value="${attr((S.qa || {})[id] || '')}" placeholder="Nowe zadanie, np.: Wyślij pozew #593 @Julia pt !" autocomplete="off" aria-label="Nowe zadanie">
     <div class="small muted qa-hint" id="${id}-hint">#nr teczki · @osoba · dziś, jutro, pn–nd, 15.11 · ! pilne · Enter zapisuje</div></div>`;
 }
 function quickHint(el) {
@@ -350,7 +357,7 @@ function quickHint(el) {
   if (!el.value.trim()) { h.className = 'small muted qa-hint'; h.innerHTML = '#nr teczki · @osoba · dziś, jutro, pn–nd, 15.11 · ! pilne · Enter zapisuje'; return; }
   const q = parseQuick(el.value);
   h.className = 'small qa-hint' + (q.errors.length ? ' bad' : '');
-  h.innerHTML = q.errors.length ? esc(q.errors.join(' · ')) : esc(['→ ' + personName(q.przypisane), q.termin ? fmtDate(q.termin, true) : 'bez terminu', q.sprawa ? caseLabel(q.sprawa) : '', q.firm, q.pilne ? 'pilne' : ''].filter(Boolean).join(' · ')) + ' · Enter';
+  h.innerHTML = q.errors.length ? esc(q.errors.join(' · ')) : esc(['„' + q.tytul + '”', '→ ' + personName(q.przypisane), q.termin ? fmtDate(q.termin, true) : 'bez terminu', q.sprawa ? caseLabel(q.sprawa) : '', q.firm, q.pilne ? 'pilne' : ''].filter(Boolean).join(' · ')) + ' · Enter';
 }
 async function quickSave(el) {
   const q = parseQuick(el.value);
@@ -362,6 +369,7 @@ async function quickSave(el) {
     toast(t.przypisane === me() ? 'Dodano zadanie' : 'Zlecono: ' + personName(t.przypisane));
     mailWarn(t._powiadomiono);
     el.value = '';
+    if (S.qa) delete S.qa[el.id];
     const id = el.id;
     render();
     const again = $('#' + id); if (again) again.focus();
@@ -469,7 +477,8 @@ function mailWarn(v) { if (v === 'blad') toast('Nie udało się wysłać powiado
 async function taskDo(el) {
   const st = S.task || {}, a = el.dataset.a, t = byId('zadania', st.firm, st.id);
   if (!t) return;
-  if (el.dataset.panel && st.panel !== a) { st.panel = a; openTaskModal(st.firm, st.id, a); const n = $('#tk-note'); if (n) n.focus(); return; }
+  /* Przyciski z panelem tylko go otwierają; akcję wykonuje wyłącznie „Zatwierdź” w panelu. */
+  if (el.dataset.panel) { if (st.panel !== a) { st.panel = a; openTaskModal(st.firm, st.id, a); } const n = $('#tk-note'); if (n) n.focus(); return; }
   const p = { _ver: t.zmieniono };
   if (a === 'komentarz') { p.komentarz = ($('#tk-new') || {}).value || ''; if (!p.komentarz.trim()) { toast('Wpisz treść komentarza.', true); return; } }
   else p.komentarz = el.dataset.goNow && st.panel === a ? ($('#tk-note') || {}).value || '' : '';
@@ -620,7 +629,7 @@ VIEWS.import = function () {
     const c = (src && src[kind]) || [];
     return `<div class="fld"><label for="imp-${kind}">${esc(label)}</label><div style="display:flex;gap:8px;flex-wrap:wrap">
       ${c.length ? `<select class="inp" id="imp-${kind}" style="flex:1;min-width:200px">${c.map((f) => `<option value="${attr(f.id)}">${esc(f.name)}</option>`).join('')}<option value="">— wklej link —</option></select>` : ''}
-      <input class="inp" id="imp-${kind}-link" placeholder="${attr(hint)}" style="flex:1;min-width:200px"></div></div>`;
+      <input class="inp" id="imp-${kind}-link" value="${attr((IMP.links || {})[kind] || '')}" placeholder="${attr(hint)}" style="flex:1;min-width:200px"></div></div>`;
   };
   const firmSel = (id, def) => `<select class="inp mini" id="${id}">${myFirms().map((k) => `<option value="${k}"${k === def ? ' selected' : ''}>${esc(firmOf(k).nazwa_krotka)}</option>`).join('')}</select>`;
   const stateBlock = (kind) => IMP[kind] ? importMapping(kind) : '';
@@ -1107,7 +1116,10 @@ document.addEventListener('mousedown', (e) => { if (e.target.closest('.combo-lis
 document.addEventListener('input', (e) => {
   const el = e.target;
   if (el.id === 'q') { clearTimeout(searchTimer); searchTimer = setTimeout(() => renderSearch(el.value), 80); return; }
-  if (el.dataset.qa) { quickHint(el); return; }
+  if (el.dataset.qa) { (S.qa = S.qa || {})[el.id] = el.value; quickHint(el); return; }
+  /* Pola importu trzymamy w stanie, bo każdy render() buduje widok od nowa. */
+  if (/^imp-\w+-link$/.test(el.id)) { (IMP.links = IMP.links || {})[el.id.slice(4, -5)] = el.value; return; }
+  if (el.id === 'cal-id' || el.id === 'cal-from') { IMP.cal = Object.assign(IMP.cal || {}, el.id === 'cal-id' ? { calId: el.value.trim() } : { from: el.value }); return; }
   if (el.classList.contains('combo-q')) {
     comboUpdate(el);
     const box = el.closest('.combo');
@@ -1253,7 +1265,8 @@ async function start() {
     if (!busyUi && S.boot.state === 'ok') render();
   }, 60000);
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' && Date.now() - S.loadedAt > 180000 && !$('.scrim') && S.boot.state === 'ok') reload(true).catch(() => {});
+    const typing = document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+    if (document.visibilityState === 'visible' && Date.now() - S.loadedAt > 180000 && !$('.scrim') && !typing && S.boot.state === 'ok') reload(true).catch(() => {});
   });
 }
 start();

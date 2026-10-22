@@ -92,9 +92,14 @@ function apiSetup(p) {
       var e = String(m.email || '').trim().toLowerCase();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) || team.some(function (x) { return x.email === e; })) return;
       if (!emailAllowed_(firms, e)) { skipped.push({ email: e, log: ['Pominięto: konto spoza domen kancelarii (' + allowedDomains_(firms).join(', ') + ')'] }); return; }
+      var ks = splitList_(m.kancelarie).filter(function (k) { return codes.indexOf(k) >= 0; }), rola = ROLES[m.rola] ? m.rola : 'odczyt';
+      if (rola === 'admin' && codes.some(function (k) { return ks.indexOf(k) < 0; })) {
+        rola = 'prawnik';
+        skipped.push({ email: e, log: ['Rola administratora wymaga dostępu do wszystkich kancelarii — zapisano jako „' + ROLES.prawnik.label + '”.'] });
+      }
       team.push({
         email: e, imie_nazwisko: m.imie_nazwisko || e, tytul: m.tytul || '', stanowisko: STANOWISKA.indexOf(m.stanowisko) >= 0 ? m.stanowisko : '',
-        rola: ROLES[m.rola] ? m.rola : 'odczyt', kancelarie: splitList_(m.kancelarie).filter(function (k) { return codes.indexOf(k) >= 0; }).join(','),
+        rola: rola, kancelarie: ks.join(','),
         telefon: m.telefon || '', aktywny: 'tak', aliasy: '', powiadomienia: 'tak', dodano: now, dodal: email
       });
     });
@@ -130,17 +135,15 @@ function apiTeamSave(m) {
     return x.email !== email && x.aktywny !== 'nie' && aliasy.concat([email]).some(function (a) { return x.email === a || splitList_(x.aliasy).map(function (y) { return y.toLowerCase(); }).indexOf(a) >= 0; });
   })[0];
   if (taken) fail_('INVALID', 'Ten adres jest już przypisany do: ' + taken.imie_nazwisko + '.');
-  /* Administrator jednej kancelarii zarządza tylko jej zespołem: nie nada dostępu do innej kancelarii
-     i nie zmieni osób, które mają dostęp także gdzie indziej. */
-  var codes = c.full ? c.s.kancelarie.map(function (f) { return f.kod; }) : c.firms;
-  var existing = c.s.zespol.filter(function (x) { return x.email === email; })[0];
-  if (!c.full && existing && splitList_(existing.kancelarie).some(function (k) { return c.firms.indexOf(k) < 0; })) {
-    fail_('FORBIDDEN', 'Ta osoba ma dostęp także do innej kancelarii. Zmiany wprowadza administrator obu kancelarii.');
+  var codes = c.s.kancelarie.map(function (f) { return f.kod; });
+  var ks = splitList_(m.kancelarie).filter(function (k) { return codes.indexOf(k) >= 0; });
+  if (m.rola === 'admin' && codes.some(function (k) { return ks.indexOf(k) < 0; })) {
+    fail_('INVALID', 'Administrator musi mieć dostęp do wszystkich kancelarii, bo zarządza wspólnym zespołem i ustawieniami. Wspólnikowi jednej kancelarii nadaj rolę „' + ROLES.prawnik.label + '”.');
   }
   var rec = {
     email: email, imie_nazwisko: String(m.imie_nazwisko || '').trim() || email, tytul: String(m.tytul || '').trim(),
     stanowisko: STANOWISKA.indexOf(m.stanowisko) >= 0 ? m.stanowisko : '',
-    rola: m.rola, kancelarie: splitList_(m.kancelarie).filter(function (k) { return codes.indexOf(k) >= 0; }).join(','),
+    rola: m.rola, kancelarie: ks.join(','),
     telefon: String(m.telefon || '').trim(), aktywny: m.aktywny === 'nie' ? 'nie' : 'tak',
     aliasy: aliasy.join(','), powiadomienia: m.powiadomienia === 'nie' ? 'nie' : 'tak'
   };

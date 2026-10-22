@@ -38,13 +38,19 @@ function ctx_() {
   if (!m) fail_('DENIED', 'Twoje konto (' + email + ') nie jest na liście zespołu CRM. Poproś administratora o dodanie.');
   if (!emailAllowed_(s.kancelarie, email)) fail_('DENIED', 'Konto ' + email + ' jest spoza domen kancelarii. Zaloguj się kontem służbowym.');
   var role = ROLES[m.rola] ? m.rola : 'odczyt';
+  /* Zespół i ustawienia obu kancelarii są w jednym arkuszu, który administrator edytuje swoim kontem.
+     Administrator tylko jednej kancelarii mógłby więc w arkuszu dopisać sobie drugą — dlatego taka rola
+     działa jak „Pełna edycja”, a administrować może tylko osoba z dostępem do wszystkich kancelarii. */
+  if (role === 'admin' && !fullAdmin_(s, m)) role = 'prawnik';
   var firms = splitList_(m.kancelarie).filter(function (k) { return s.kancelarie.some(function (f) { return f.kod === k; }); });
   var perm = ROLES[role];
-  /* Administrator wszystkich kancelarii („pełny”) zarządza też wspólnymi ustawieniami; administrator jednej
-     kancelarii — tylko jej zespołem i danymi. */
-  var full = !!perm.admin && s.kancelarie.every(function (f) { return firms.indexOf(f.kod) >= 0; });
+  var full = !!perm.admin;
   /* email = konto główne osoby (tożsamość w zadaniach i historii), login = konto, którym otwarto aplikację. */
   return { email: m.email, login: email, member: m, role: role, perm: perm, full: full, firms: firms, s: s };
+}
+
+function fullAdmin_(s, m) {
+  return m.rola === 'admin' && s.kancelarie.every(function (f) { return splitList_(m.kancelarie).indexOf(f.kod) >= 0; });
 }
 
 /* Aktywny członek zespołu po adresie konta głównego albo jednego z aliasów (drugie konto tej samej osoby). */
@@ -128,7 +134,7 @@ function applySharingFor_(s, m, email) {
   }
   var file = function (id) { return DriveApp.getFileById(id); };
   var folder = function (id) { return DriveApp.getFolderById(id); };
-  if (active) grant(file, settingsId_(), m.rola === 'admin', 'Ustawienia i zespół');
+  if (active) grant(file, settingsId_(), fullAdmin_(s, m), 'Ustawienia i zespół');
   else revoke(file, settingsId_(), 'Ustawienia i zespół');
   s.kancelarie.forEach(function (k) {
     var on = firms.indexOf(k.kod) >= 0;
