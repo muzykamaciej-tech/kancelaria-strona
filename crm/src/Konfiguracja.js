@@ -3,7 +3,7 @@
    wiersz 1 = klucze pól. Brakujące kolumny są dopisywane automatycznie, więc nowe pola
    w schemacie nie wymagają ręcznej migracji arkuszy. */
 
-var APP = { name: 'CRM Kancelarii', version: '0.2.0', tz: 'Europe/Warsaw', prepDays: 3, calendarId: 'sekretariat@kancelariarodzinna.com' };
+var APP = { name: 'CRM Kancelarii', version: '0.2.1', tz: 'Europe/Warsaw', prepDays: 3, calendarId: 'sekretariat@kancelariarodzinna.com' };
 
 var ROLES = {
   admin:    { label: 'Administrator', write: true, del: true, admin: true },
