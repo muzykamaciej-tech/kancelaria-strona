@@ -756,8 +756,6 @@ function LandingIntro({ setRoute }) {
 
           <div className="landing-intro-portrait">
             <div className="hero-portrait">
-              <span className="hero-portrait-ring" aria-hidden="true" />
-              <span className="hero-portrait-glow" aria-hidden="true" />
               <img
                 src="/assets/maciej-muzyka-hero-1000.webp"
                 srcSet="/assets/maciej-muzyka-hero-600.webp 600w, /assets/maciej-muzyka-hero-1000.webp 1000w"
@@ -784,7 +782,17 @@ function LandingHero() {
     <section id="formularz" className="landing-hero relative overflow-hidden">
       <div className="orb" style={{ width: 620, height: 620, top: -260, left: -180, opacity: 'calc(0.10 * var(--ambient-on))' }} />
       <div className="wrap relative" style={{ zIndex: 2 }}>
-        <div className="landing-hero-grid">
+        <div className="landing-hero-grid landing-hero-grid--photo">
+          <div className="landing-hero-photo">
+            <img
+              className="side-photo side-photo--fade-right"
+              src="/assets/maciej-muzyka-telefon-1000.webp"
+              srcSet="/assets/maciej-muzyka-telefon-600.webp 600w, /assets/maciej-muzyka-telefon-1000.webp 1000w"
+              sizes="(min-width: 980px) 40vw, 90vw"
+              alt="adw. dr Maciej Muzyka podczas rozmowy telefonicznej z klientem"
+              width="1000" height="1096" loading="lazy" decoding="async" />
+          </div>
+          <div className="landing-hero-main">
           <div className="landing-hero-text">
             <span className="eyebrow">Bezpłatna wstępna analiza</span>
             <h2 className="display display--xl mt-6">
@@ -808,6 +816,7 @@ function LandingHero() {
 
           <div className="landing-hero-form">
             <QualificationForm />
+          </div>
           </div>
         </div>
       </div>
@@ -1244,25 +1253,37 @@ function LandingFAQ({ setRoute }) {
    ============================================================ */
 function FinalCTA() {
   return (
-    <section className="section-py bg-dark relative overflow-hidden">
-      {window.PhotoBg && <window.PhotoBg name="biurko-dokumenty" variant="center" />}
-      <div className="orb" style={{ width: 520, height: 520, top: '10%', left: '-12%', opacity: 'calc(0.2 * var(--ambient-on))' }} />
-      <div className="wrap relative text-center" style={{ zIndex: 2, textAlign: 'center', maxWidth: '48rem', marginInline: 'auto' }}>
-        <span className="eyebrow on-dark" style={{ justifyContent: 'center' }}>Bezpłatnie · w 24 h</span>
-        <h2 className="display mt-4" style={{ color: '#fff' }}>
-          Lepiej zapytać teraz<br />
-          <span style={{ color: 'var(--brand-primary-light)' }}>niż żałować po podpisie.</span>
-        </h2>
-        <p className="lead mt-6" style={{ color: 'var(--text-on-dark-2)' }}>
-          Jeśli kupujesz, sprzedajesz albo coś Cię niepokoi w dokumentach — opisz sprawę. W ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem. Do jej akceptacji nic nie płacisz.
-        </p>
-        <div className="flex gap-3 mt-8 justify-center" style={{ flexWrap: 'wrap' }}>
-          <button className="btn btn-on-dark" onClick={() => lScrollToId('formularz')}>
-            Opisz swoją sprawę <SvgIcon name="arrow-right" size={16} />
-          </button>
-          <a className="btn btn-secondary" href="mailto:maciej.muzyka@mecenasodnieruchomosci.pl" style={{ background: 'transparent', color: '#fff', borderColor: 'rgba(255,255,255,0.3)' }}>
-            Napisz e-mail
-          </a>
+    <section className="section-py bg-dark relative overflow-hidden final-cta">
+      <div className="orb" style={{ width: 520, height: 520, top: '10%', right: '-12%', opacity: 'calc(0.2 * var(--ambient-on))' }} />
+      <div className="wrap relative" style={{ zIndex: 2 }}>
+        <div className="final-cta-grid">
+          <div className="final-cta-photo">
+            <img
+              className="side-photo side-photo--fade-right"
+              src="/assets/maciej-muzyka-smartfon-1000.webp"
+              srcSet="/assets/maciej-muzyka-smartfon-600.webp 600w, /assets/maciej-muzyka-smartfon-1000.webp 1000w"
+              sizes="(min-width: 980px) 36vw, 90vw"
+              alt="adw. dr Maciej Muzyka ze smartfonem"
+              width="1000" height="930" loading="lazy" decoding="async" />
+          </div>
+          <div className="final-cta-text">
+            <span className="eyebrow on-dark">Bezpłatnie · w 24 h</span>
+            <h2 className="display mt-4" style={{ color: '#fff' }}>
+              Lepiej zapytać teraz<br />
+              <span style={{ color: 'var(--brand-primary-light)' }}>niż żałować po podpisie.</span>
+            </h2>
+            <p className="lead mt-6" style={{ color: 'var(--text-on-dark-2)' }}>
+              Jeśli kupujesz, sprzedajesz albo coś Cię niepokoi w dokumentach — opisz sprawę. W ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem. Do jej akceptacji nic nie płacisz.
+            </p>
+            <div className="flex gap-3 mt-8" style={{ flexWrap: 'wrap' }}>
+              <button className="btn btn-on-dark" onClick={() => lScrollToId('formularz')}>
+                Opisz swoją sprawę <SvgIcon name="arrow-right" size={16} />
+              </button>
+              <a className="btn btn-secondary" href="mailto:maciej.muzyka@mecenasodnieruchomosci.pl" style={{ background: 'transparent', color: '#fff', borderColor: 'rgba(255,255,255,0.3)' }}>
+                Napisz e-mail
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>);

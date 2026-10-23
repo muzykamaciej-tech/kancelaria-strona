@@ -126,21 +126,16 @@
   .landing-intro-grid { grid-template-columns: 1.1fr 0.9fr; gap: clamp(2rem, 4vw, 4rem); }
 }
 
-/* Portret w nagłówku: wycięta postać (assets/maciej-muzyka-hero-*.webp, przezroczyste tło, wygaszony dół)
-   stoi na dolnej krawędzi sekcji; za nią poświata i okrąg w kolorach marki, podpis nachodzi na zdjęcie. */
+/* Portret w nagłówku: oryginalne zdjęcie (assets/maciej-muzyka-hero-*.webp) z brzegami wygaszonymi maską
+   w kolor tła sekcji — lewa krawędź i dół mocniej, góra i prawa delikatnie; podpis nachodzi na zdjęcie. */
 .landing-intro-portrait { display: flex; justify-content: center; }
-.hero-portrait { position: relative; width: 100%; max-width: 34rem; isolation: isolate; }
-.hero-portrait img { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
-.hero-portrait-glow {
-  position: absolute; z-index: 0; left: 50%; top: 4%; width: 92%; aspect-ratio: 1; transform: translateX(-50%);
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 45%, rgba(46,120,214,.55) 0%, rgba(14,83,165,.32) 38%, rgba(14,83,165,0) 70%);
-  filter: blur(6px);
-}
-.hero-portrait-ring {
-  position: absolute; z-index: 0; left: 50%; top: 1%; width: 78%; aspect-ratio: 1; transform: translateX(-50%);
-  border-radius: 50%; border: 1px solid rgba(127,176,234,.28);
-  box-shadow: 0 0 0 18px rgba(127,176,234,.04);
+.hero-portrait { position: relative; width: 100%; max-width: 34rem; }
+.hero-portrait img {
+  display: block; width: 100%; height: auto;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 22%, #000 90%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 12%, #000 72%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent 0%, #000 22%, #000 90%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 12%, #000 72%, transparent 100%);
+  mask-composite: intersect;
 }
 .hero-portrait-badge {
   position: absolute; z-index: 2; left: 0; bottom: 18%;
@@ -947,3 +942,45 @@ select.input { appearance: auto; cursor: pointer; }
   .hero-portrait-name { font-size: 1rem; }
   .hero-portrait-role { font-size: 0.72rem; }
 }
+
+/* Zdjęcia Macieja w sekcjach strony głównej: oryginał z brzegami wygaszonymi maską w kolor tła sekcji.
+   --fade-right: mocniej przy prawej krawędzi (zdjęcie po lewej, tekst po prawej). */
+.side-photo { display: block; width: 100%; height: auto; }
+.side-photo--fade-right {
+  filter: brightness(0.88) saturate(0.95);
+  -webkit-mask-image: radial-gradient(closest-side ellipse at 50% 48%, #000 58%, rgba(0,0,0,.5) 80%, transparent 100%);
+  mask-image: radial-gradient(closest-side ellipse at 50% 48%, #000 58%, rgba(0,0,0,.5) 80%, transparent 100%);
+}
+
+/* Sekcja z formularzem: zdjęcie po lewej (przyklejone przy przewijaniu), tekst i formularz po prawej */
+.landing-hero.overflow-hidden { overflow: clip; }
+.landing-hero-grid--photo { max-width: none; }
+.landing-hero-photo { max-width: 22rem; margin-inline: auto; width: 100%; }
+.landing-hero-main { display: flex; flex-direction: column; gap: 2.5rem; min-width: 0; }
+@media (min-width: 980px) {
+  .landing-hero-grid--photo { grid-template-columns: 0.85fr 1fr; gap: clamp(2rem, 4vw, 4.5rem); }
+  .landing-hero-photo { max-width: none; position: sticky; top: 7rem; }
+  .landing-hero-grid--photo .landing-hero-text { text-align: left; }
+  .landing-hero-grid--photo .landing-hero-text .eyebrow { justify-content: flex-start; }
+  .landing-hero-grid--photo .landing-hero-text .eyebrow::after { display: none; }
+  .landing-hero-grid--photo .landing-hero-text .lead { text-align: left; margin-inline: 0; }
+  .landing-hero-grid--photo .landing-hero-meta { align-items: flex-start; }
+  .landing-hero-grid--photo .landing-hero-text .trust-points { justify-content: flex-start; }
+}
+
+/* Sekcja końcowa: zdjęcie po lewej, tekst po prawej */
+.final-cta-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: center; }
+.final-cta-photo { max-width: 20rem; margin-inline: auto; width: 100%; }
+.final-cta-text { text-align: center; }
+.final-cta-text .eyebrow { justify-content: center; }
+.final-cta-text .flex { justify-content: center; }
+@media (min-width: 980px) {
+  .final-cta-grid { grid-template-columns: 0.8fr 1fr; gap: clamp(2rem, 4vw, 4.5rem); }
+  .final-cta-photo { max-width: none; }
+  .final-cta-text { text-align: left; }
+  .final-cta-text .eyebrow { justify-content: flex-start; }
+  .final-cta-text .eyebrow::after { display: none; }
+  .final-cta-text .flex { justify-content: flex-start; }
+}
+.final-cta-text .lead { text-align: center; margin-inline: auto; }
+@media (min-width: 980px) { .final-cta-text .lead { text-align: left; margin-inline: 0; } }
