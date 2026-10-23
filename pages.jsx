@@ -422,7 +422,7 @@ function BlogPostPage({ slug, setRoute }) {
       <article className="section-py">
         <div className="wrap" style={{ maxWidth: '46rem' }}>
           {post.cover && <img className="prose-cover" src={post.cover} alt="" width="1200" height="654" decoding="async" />}
-          <BlogBody blocks={post.body} />
+          <BlogBody blocks={post.body} service={relatedServicesFor(post)[0]} />
         </div>
       </article>
 
@@ -431,7 +431,7 @@ function BlogPostPage({ slug, setRoute }) {
           {window.KalkulatorTeaser && /przesy|słup|bezumowne|wynagrodzenie/i.test(t) && <window.KalkulatorTeaser setRoute={setRoute} />}
           {window.PlanAlertBand && /plan og|\bWZ\b|planowanie/i.test(t) && <window.PlanAlertBand />}
         </React.Fragment>); })()}
-      {post.related && post.related.length > 0 && <BlogRelatedServices slugs={post.related} setRoute={setRoute} />}
+      {relatedServicesFor(post).length > 0 && <BlogRelatedServices slugs={relatedServicesFor(post)} setRoute={setRoute} />}
 
       <section className="section-py bg-light">
         <div className="wrap">
@@ -468,22 +468,41 @@ function blogInline(text) {
 }
 
 /* Article body from block list — see blog-data.jsx for the format */
-function BlogBody({ blocks }) {
+function BlogBody({ blocks, service }) {
+  const svc = service && window.getService ? window.getService(service) : null;
+  /* odnośnik do głównej usługi zaraz po pierwszym akapicie: czytelnik poradnika trafia do usługi, zanim opuści stronę */
+  const callout = svc ? (
+    <p key="svc-callout" className="prose-note" data-svc-callout="">
+      Masz taką sprawę? Zobacz, jak pomagam: <window.NavLink route="usluga" slug={svc.slug}>{svc.title}</window.NavLink>.
+    </p>
+  ) : null;
   return (
     <div className="prose prose-article">
-      {(blocks || []).map((b, i) => {
-        const [t, v] = b;
-        if (t === 'lead') return <p key={i} className="lead">{blogInline(v)}</p>;
-        if (t === 'h2') return <h2 key={i}>{blogInline(v)}</h2>;
-        if (t === 'h3') return <h3 key={i}>{blogInline(v)}</h3>;
-        if (t === 'ul') return <ul key={i}>{v.map((li, k) => <li key={k}>{blogInline(li)}</li>)}</ul>;
-        if (t === 'ol') return <ol key={i}>{v.map((li, k) => <li key={k}>{blogInline(li)}</li>)}</ol>;
-        if (t === 'quote') return <blockquote key={i}>{blogInline(v)}</blockquote>;
-        if (t === 'note') return <p key={i} className="prose-note">{blogInline(v)}</p>;
-        return <p key={i}>{blogInline(v)}</p>;
+      {(blocks || []).flatMap((b, i) => {
+        const el = renderBlogBlock(b, i);
+        return i === 0 && callout ? [el, callout] : [el];
       })}
     </div>
   );
+}
+function renderBlogBlock(b, i) {
+  const [t, v] = b;
+  if (t === 'lead') return <p key={i} className="lead">{blogInline(v)}</p>;
+  if (t === 'h2') return <h2 key={i}>{blogInline(v)}</h2>;
+  if (t === 'h3') return <h3 key={i}>{blogInline(v)}</h3>;
+  if (t === 'ul') return <ul key={i}>{v.map((li, k) => <li key={k}>{blogInline(li)}</li>)}</ul>;
+  if (t === 'ol') return <ol key={i}>{v.map((li, k) => <li key={k}>{blogInline(li)}</li>)}</ol>;
+  if (t === 'quote') return <blockquote key={i}>{blogInline(v)}</blockquote>;
+  if (t === 'note') return <p key={i} className="prose-note">{blogInline(v)}</p>;
+  return <p key={i}>{blogInline(v)}</p>;
+}
+
+/* Usługi powiązane z wpisem: ręczna lista wpisu (related) plus usługi, które polecają ten wpis (guides), najwyżej 4 */
+function relatedServicesFor(post) {
+  const out = [...(post.related || [])];
+  const sc = window.SERVICE_CONTENT || {};
+  Object.keys(sc).forEach((slug) => { if ((sc[slug].guides || []).includes(post.slug) && !out.includes(slug)) out.push(slug); });
+  return out.filter((s) => window.getService && window.getService(s)).slice(0, 4);
 }
 
 /* Services related to the article — leads readers from the text to the right service page */

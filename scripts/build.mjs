@@ -40,11 +40,24 @@ function TweakToggle() { return null; }
 Object.assign(window, { useTweaks: useTweaks, TweaksPanel: TweaksPanel, TweakSection: TweakSection, TweakRadio: TweakRadio, TweakToggle: TweakToggle });
 `;
 
+/* Ocena z wizytówki Google do gotowego HTML: prerender nie ma dostępu do /api, więc bez tego
+   w HTML (dla Google i asystentów AI) zostaje wartość zapasowa z landing.jsx. Brak sieci = wartość z kodu. */
+let rating = null;
+try {
+  const r = await fetch('https://www.mecenasodnieruchomosci.pl/api/google-rating', { signal: AbortSignal.timeout(8000) });
+  const d = r.ok ? await r.json() : null;
+  if (d && typeof d.rating === 'number' && typeof d.count === 'number' && d.count > 0) rating = d;
+} catch (e) { /* offline build */ }
+console.log('build: ocena Google ' + (rating ? rating.rating + ' / ' + rating.count + ' opinii (z wizytówki)' : 'z wartości zapasowej w landing.jsx'));
+
 const parts = [];
 for (const f of jsxFiles) {
   if (f === 'tweaks-panel.jsx') { parts.push(`/* ${f} (production stub) */\n${TWEAKS_STUB}`); continue; }
   /* relative 'assets/…' paths break on nested URLs (/blog/x → /blog/assets/…); new content often uses them, so normalise */
-  const code = fs.readFileSync(rel(f), 'utf8').replace(/(["'`(])assets\//g, '$1/assets/');
+  let code = fs.readFileSync(rel(f), 'utf8').replace(/(["'`(])assets\//g, '$1/assets/');
+  if (f === 'landing.jsx' && rating) code = code
+    .replace(/const GOOGLE_RATING_FALLBACK = [\d.]+;/, `const GOOGLE_RATING_FALLBACK = ${rating.rating};`)
+    .replace(/const GOOGLE_REVIEWS_COUNT_FALLBACK = \d+;/, `const GOOGLE_REVIEWS_COUNT_FALLBACK = ${rating.count};`);
   const out = babel.transformSync(code, {
     filename: f,
     babelrc: false,

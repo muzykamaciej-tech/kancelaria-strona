@@ -283,7 +283,7 @@ window.BLOG.push(
     title: 'Słup energetyczny na działce: czy musisz płacić za jego przesunięcie?',
     metaTitle: 'Słup energetyczny na działce: kto płaci za przesunięcie?',
     excerpt: '„W 2007 roku kupiłem działkę budowlaną, na której końcu stoi słup linii średniego napięcia. Firma energetyczna twierdzi, że skablowanie linii i usunięcie słupa jest możliwe tylko na mój koszt. Czy to legalne? Czy naprawdę muszę płacić za ich infrastrukturę na mojej ziemi?”',
-    date: '19 stycznia 2026', iso: '2026-01-19', readTime: '2 min',
+    date: '19 stycznia 2026', iso: '2026-01-19', updated: '23 października 2026', updatedIso: '2026-10-23', readTime: '2 min',
     category: 'Służebność przesyłu', tags: ['Słupy na działce', 'Przesunięcie urządzeń', 'Pytanie klienta'],
     cover: '/assets/blog-slup-przesuniecie.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/słup-energetyczny-na-działce-czy-musisz-płacić-za-jego-przesunięcie',
@@ -306,7 +306,7 @@ window.BLOG.push(
       ['p', 'Jednak nawet w tej sytuacji nie jesteś bezbronny. Przysługują Ci konkretne roszczenia finansowe. Możesz domagać się od zakładu:'],
       ['ul', [
         'wykupienia fragmentu działki zajętej pod słup;',
-        'zapłaty odszkodowania za bezumowne korzystanie z gruntu (i to do 10 lat wstecz!);',
+        'zapłaty odszkodowania za bezumowne korzystanie z gruntu (co do zasady do 6 lat wstecz, art. 118 k.c.);',
         'ustalenia czynszu za to, że ich urządzenia stoją na Twojej ziemi w przyszłości.',
       ]],
       ['p', 'Warto też pamiętać, że odszkodowanie należy się również wtedy, gdy słup obniża wartość rynkową Twojej działki lub ogranicza jej funkcjonalność.'],

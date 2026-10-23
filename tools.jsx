@@ -34,7 +34,7 @@ function calcCompute({ device, land, length, price, years, hasTitle }) {
   const p = price > 0 ? price : l.price;
   const base = area * p;
   const serv = [base * d.k[0], base * d.k[1]];
-  const y = Math.min(10, Math.max(0, years));
+  const y = Math.min(6, Math.max(0, years)); /* przedawnienie co do zasady 6 lat (art. 118 k.c.), weryfikacja LEX 2.10.2026 */
   const back = hasTitle ? [0, 0] : [base * d.k[0] * CALC_RATE * y, base * d.k[1] * CALC_RATE * y];
   return { device: d, land: l, area, price: p, serv, back, total: [serv[0] + back[0], serv[1] + back[1]], years: y, hasTitle };
 }
@@ -58,7 +58,7 @@ function CalcResult({ r, setRoute }) {
           <li>Pas służebności: {r.device.area ? `${r.area} m² (typowa powierzchnia stacji z dojazdem)` : `${r.area.toLocaleString('pl-PL')} m² — długość × ${r.device.width} m typowej szerokości strefy`}.</li>
           <li>Wartość gruntu: {r.price.toLocaleString('pl-PL')} zł/m² ({r.land.label.toLowerCase()}).</li>
           <li>Współczynnik współkorzystania: {r.device.k[0]}–{r.device.k[1]} — jak bardzo urządzenie ogranicza Ciebie, a nie firmę.</li>
-          <li>Bezumowne korzystanie: ok. {Math.round(CALC_RATE * 100)}% wartości pasa rocznie, z uwzględnieniem współczynnika, maks. 10 lat wstecz.</li>
+          <li>Bezumowne korzystanie: ok. {Math.round(CALC_RATE * 100)}% wartości pasa rocznie, z uwzględnieniem współczynnika, co do zasady maks. 6 lat wstecz (art. 118 k.c.; przy roszczeniu związanym z działalnością gospodarczą może to być 3 lata).</li>
         </ul>
       </details>
       <p className="small calc-disclaimer mt-6">To orientacyjny przedział oparty na metodach stosowanych przez rzeczoznawców. Nie jest wyceną ani poradą prawną — ostateczna kwota zależy od operatu, stanu prawnego urządzeń (umowa, decyzja, zasiedzenie) i lokalnych cen. Wynik może różnić się w obie strony.</p>
@@ -73,7 +73,7 @@ function CalcResult({ r, setRoute }) {
 }
 
 function KalkulatorSlupyPage({ setRoute }) {
-  const [f, setF] = tUseState({ device: 'slup-sn', land: 'budowlana', length: '', price: '', years: '10', hasTitle: 'no' });
+  const [f, setF] = tUseState({ device: 'slup-sn', land: 'budowlana', length: '', price: '', years: '6', hasTitle: 'no' });
   const [res, setRes] = tUseState(null);
   const [err, setErr] = tUseState('');
   const Breadcrumb = window.Breadcrumb, Band = window.CaseFormBand, Strip = window.ServiceTrustStrip;
@@ -137,9 +137,9 @@ function KalkulatorSlupyPage({ setRoute }) {
               <label>
                 <span className="input-label">Od ilu lat bez umowy?</span>
                 <select className="input" value={f.years} onChange={up('years')}>
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((y) => <option key={y} value={String(y)}>{y === 10 ? '10 lat i więcej' : y === 1 ? '1 rok' : y < 5 ? `${y} lata` : `${y} lat`}</option>)}
+                  {[1, 2, 3, 4, 5, 6].map((y) => <option key={y} value={String(y)}>{y === 6 ? '6 lat i więcej' : y === 1 ? '1 rok' : y < 5 ? `${y} lata` : `${y} lat`}</option>)}
                 </select>
-                <span className="calc-hint">Roszczenie obejmuje maks. 10 lat wstecz.</span>
+                <span className="calc-hint">Co do zasady roszczenie obejmuje maks. 6 lat wstecz (art. 118 k.c.).</span>
               </label>
             </div>
             <div className="calc-field">
@@ -172,7 +172,7 @@ function KalkulatorSlupyPage({ setRoute }) {
           <div className="calc-how mt-10">
             <div className="card"><span className="kicker-num">1</span><h3 className="font-bold mt-3" style={{ color: 'var(--text-main)' }}>Pas i jego wartość</h3><p className="body mt-2">Powierzchnia pasa zajętego przez urządzenie i jego strefę ochronną razy wartość 1 m² Twojego gruntu. Działka budowlana to inna liga niż rolna.</p></div>
             <div className="card"><span className="kicker-num">2</span><h3 className="font-bold mt-3" style={{ color: 'var(--text-main)' }}>Współczynnik współkorzystania</h3><p className="body mt-2">Określa, jak bardzo urządzenie ogranicza Ciebie: od ok. 0,2 dla rury głęboko pod ziemią do 1,0 dla stacji, pod którą nie zrobisz nic.</p></div>
-            <div className="card"><span className="kicker-num">3</span><h3 className="font-bold mt-3" style={{ color: 'var(--text-main)' }}>Lata bez umowy</h3><p className="body mt-2">Za każdy rok bez tytułu prawnego — do 10 lat wstecz — należy się wynagrodzenie za bezumowne korzystanie. Po wyroku TK z grudnia 2025 r. firmy straciły argument „zasiedzieliśmy”.</p></div>
+            <div className="card"><span className="kicker-num">3</span><h3 className="font-bold mt-3" style={{ color: 'var(--text-main)' }}>Lata bez umowy</h3><p className="body mt-2">Za każdy rok bez tytułu prawnego należy się wynagrodzenie za bezumowne korzystanie, co do zasady do 6 lat wstecz (art. 118 k.c.). Firma, która twierdzi, że zasiedziała służebność, musi to udowodnić (art. 6 k.c.).</p></div>
           </div>
         </div>
       </section>

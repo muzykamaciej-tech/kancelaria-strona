@@ -6,7 +6,7 @@ window.BLOG.push(
     title: 'Słup, rura lub kable na działce bez umowy? Sprawdź, czy należy Ci się wynagrodzenie za bezumowne korzystanie',
     metaTitle: 'Słup lub rura na działce bez umowy – bezumowne korzystanie',
     excerpt: 'Jesteś właścicielem działki, płacisz za nią podatki, dbasz o nią. Ale przez środek Twojego ogrodu biegnie linia energetyczna albo pod ziemią zakopana jest rura gazowa. Nigdy nie wyraziłeś na to zgody, a na Twoje konto nie wpływa z tego tytułu ani złotówka. Czy przedsiębiorstwo przesyłowe może korzystać z Twojej własności „za darmo”?',
-    date: '20 stycznia 2026', iso: '2026-01-20', readTime: '3 min',
+    date: '20 stycznia 2026', iso: '2026-01-20', updated: '23 października 2026', updatedIso: '2026-10-23', readTime: '3 min',
     category: 'Służebność przesyłu', tags: ['Bezumowne korzystanie', 'Słupy na działce', 'Art. 224 KC'],
     cover: '/assets/blog-bezumowne-korzystanie.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/słup-rura-lub-kable-na-działce-bez-umowy-sprawdź-czy-należy-ci-się-wynagrodzenie-za-bezumowne-kor',
@@ -35,7 +35,7 @@ window.BLOG.push(
       ['p', 'Pan Marek, z moją pomocą, wystąpił z dwoma żądaniami:'],
       ['ol', [
         'ustanowienie służebności przesyłu na przyszłość (za odpowiednim wynagrodzeniem);',
-        'zapłata za bezumowne korzystanie z gruntu za ostatnie 10 lat (ponieważ roszczenia te przedawniają się z reguły po 10 latach).',
+        'zapłata za bezumowne korzystanie z gruntu co do zasady za ostatnie 6 lat (art. 118 k.c.; termin kończy się ostatniego dnia roku, a przy roszczeniu związanym z działalnością gospodarczą może wynosić 3 lata).',
       ]],
       ['p', 'Sąd przyznał rację Panu Markowi, potwierdzając, że wyłączną przyczyną roszczeń uzupełniających jest samo posiadanie cudzej rzeczy przez przedsiębiorstwo bez tytułu prawnego.'],
       ['h2', 'Jak oblicza się wysokość wynagrodzenia?'],

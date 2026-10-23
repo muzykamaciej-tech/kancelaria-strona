@@ -56,7 +56,7 @@ function fileToB64(file) {
 const GOOGLE_REVIEWS_URL = 'https://www.google.com/search?kgmid=/g/11kpjhpy44&hl=pl-US&q=Adwokat+dr+Maciej+Muzyka+-+Mecenas+od+Nieruchomo%C5%9Bci&shem=epsd1,ltae,rimspwouoe&shndl=30&source=sh/x/loc/osrp/m5/1&kgs=0d09a05fe2da440e&utm_source=epsd1,ltae,rimspwouoe,sh/x/loc/osrp/m5/1#mpd=~18068536807946905391/customers/reviews';
 /* Ocena z wizytówki Google — wartości zapasowe, nadpisywane danymi z /api/google-rating */
 const GOOGLE_RATING_FALLBACK = 5.0;
-const GOOGLE_REVIEWS_COUNT_FALLBACK = 63;
+const GOOGLE_REVIEWS_COUNT_FALLBACK = 66;
 let googleRatingPromise = null;
 function loadGoogleRating() {
   if (!googleRatingPromise) {

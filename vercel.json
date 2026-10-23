@@ -537,5 +537,15 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/favicon.ico",
+      "destination": "/assets/favicon.ico"
+    },
+    {
+      "source": "/9e62a1f5c7a86998050d9dd6474a028d.txt",
+      "destination": "/assets/9e62a1f5c7a86998050d9dd6474a028d.txt"
+    }
   ]
 }
