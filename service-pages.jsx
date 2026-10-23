@@ -127,9 +127,20 @@ function SvcCard({ service, onOpen, route, slug }) {
   );
 }
 
+/* Zdjęcie w tle sekcji (grafiki Higgsfield, assets/foto-<nazwa>-800|1600.webp). Warianty: 'center' (tekst na środku), 'soft' (tło nagłówka usługi), domyślny (tekst po lewej). */
+function PhotoBg({ name, variant, eager }) {
+  if (!name) return null;
+  return (
+    <div className={'photo-bg' + (variant ? ' photo-bg--' + variant : '')} aria-hidden="true">
+      <img src={`/assets/foto-${name}-1600.webp`} srcSet={`/assets/foto-${name}-800.webp 800w, /assets/foto-${name}-1600.webp 1600w`} sizes="100vw" alt="" width="1600" height="900" loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" />
+    </div>
+  );
+}
+
 function BlockCard({ block, setRoute, route, slug }) {
   const inner = (
     <React.Fragment>
+      <span className="block-card-photo" aria-hidden="true"><img src={`/assets/foto-${block.id}-800.webp`} alt="" width="800" height="450" loading="lazy" decoding="async" /></span>
       <span className="block-card-ic"><SIcon name={block.icon} size={26} /></span>
       <h3 className="block-card-title">{block.title}</h3>
       <p className="block-card-tag">{block.tagline}</p>
@@ -234,6 +245,7 @@ function PillarPage({ blockId, setRoute }) {
   return (
     <main id="main-content" data-screen-label={`Blok — ${block.title}`} data-std={stdDate(bc)}>
       <section className="bg-dark relative overflow-hidden" style={{ paddingBlock: '3rem 4.5rem' }}>
+        <PhotoBg name={block.id} variant="center" eager />
         <div className="orb" style={{ width: 560, height: 560, top: -200, right: -160, opacity: 'calc(0.18 * var(--ambient-on))' }} />
         <div className="wrap relative" style={{ zIndex: 2 }}>
           <Breadcrumb trail={[
@@ -630,8 +642,9 @@ function ServicePage({ slug, setRoute }) {
   return (
     <main id="main-content" data-screen-label={`Usługa — ${service.title}`} data-std={stdDate(c)}>
       {/* Hero */}
-      <section className="bg-light" style={{ paddingBlock: '3rem 4rem', borderBottom: '1px solid var(--slate-100)' }}>
-        <div className="wrap">
+      <section className="bg-light relative overflow-hidden" style={{ paddingBlock: '3rem 4rem', borderBottom: '1px solid var(--slate-100)' }}>
+        <PhotoBg name={block.id} variant="soft" eager />
+        <div className="wrap relative" style={{ zIndex: 2 }}>
           <Breadcrumb trail={[
             { label: 'Start', route: 'landing' },
             { label: 'Usługi', route: 'uslugi' },
@@ -828,5 +841,5 @@ function FaqPageV3({ setRoute }) {
 
 Object.assign(window, {
   UslugiOverview, PillarPage, ServicePage, FaqPageV3,
-  CaseFormBand, ServiceTrustStrip, SvcCard, BlockCard, Breadcrumb, spScrollToForm,
+  CaseFormBand, ServiceTrustStrip, SvcCard, BlockCard, PhotoBg, Breadcrumb, spScrollToForm,
 });

@@ -1329,3 +1329,36 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   border-color: var(--brand-primary);
   color: #fff;
 }
+
+/* -------------------------------------------------------------------------
+   Zdjęcia w tle sekcji (PhotoBg) – grafiki Higgsfield 10.2026.
+   Nakładka trzyma kontrast tekstu: tekst stoi na ciemnym gradiencie, zdjęcie jest tylko nastrojem.
+   ------------------------------------------------------------------------- */
+.photo-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.photo-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 70% center; opacity: .62; }
+.photo-bg::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(to top, var(--section-light, #0F172A) 0%, rgba(15,23,42,.6) 22%, transparent 50%),
+    linear-gradient(90deg, rgba(11,18,32,.97) 0%, rgba(11,18,32,.86) 38%, rgba(11,18,32,.42) 72%, rgba(11,18,32,.25) 100%);
+}
+.photo-bg--center img { object-position: 75% center; opacity: .55; }
+.photo-bg--center::after {
+  background:
+    radial-gradient(70% 80% at 50% 50%, rgba(11,18,32,.82) 0%, rgba(11,18,32,.62) 60%, rgba(11,18,32,.45) 100%),
+    linear-gradient(to top, rgba(11,18,32,.8) 0%, transparent 40%);
+}
+.photo-bg--soft img { opacity: .32; }
+.photo-bg--soft::after {
+  background:
+    radial-gradient(65% 85% at 50% 45%, rgba(15,23,42,.9) 0%, rgba(15,23,42,.72) 65%, rgba(15,23,42,.55) 100%),
+    linear-gradient(to top, rgba(15,23,42,.95) 0%, transparent 45%);
+}
+@media (max-width: 700px) {
+  .photo-bg img { object-position: 78% center; opacity: .4; }
+  .photo-bg::after { background: linear-gradient(to bottom, rgba(11,18,32,.78), rgba(11,18,32,.92)); }
+}
+
+/* Menu w jednej linii (logo 104 px spychało „Dla firm” i „Skarbnica wiedzy” do dwóch linii) */
+.nav-desktop a, .nav-desktop button { white-space: nowrap; }
+@media (min-width: 1100px) { .nav-logo img { height: clamp(58px, 3vw + 30px, 84px); } }

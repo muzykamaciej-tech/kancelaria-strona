@@ -1244,6 +1244,7 @@ function LandingFAQ({ setRoute }) {
 function FinalCTA() {
   return (
     <section className="section-py bg-dark relative overflow-hidden">
+      {window.PhotoBg && <window.PhotoBg name="biurko-dokumenty" variant="center" />}
       <div className="orb" style={{ width: 520, height: 520, top: '10%', left: '-12%', opacity: 'calc(0.2 * var(--ambient-on))' }} />
       <div className="wrap relative text-center" style={{ zIndex: 2, textAlign: 'center', maxWidth: '48rem', marginInline: 'auto' }}>
         <span className="eyebrow on-dark" style={{ justifyContent: 'center' }}>Bezpłatnie · w 24 h</span>

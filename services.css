@@ -368,3 +368,16 @@
   transition: color 140ms;
 }
 .footer-sitemap-col li button:hover { color: #fff; }
+
+/* Zdjęcie obszaru na górze karty (grafiki Higgsfield 10.2026) */
+.block-card { overflow: hidden; }
+.block-card-photo {
+  display: block; position: relative;
+  width: calc(100% + 3rem); height: 128px;
+  margin: -1.85rem -1.5rem 0;
+}
+.block-card-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 72% center; transition: transform 300ms ease; }
+.block-card-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(11,18,32,.05) 30%, var(--surface) 100%); }
+.block-card:hover .block-card-photo img { transform: scale(1.04); }
+.block-card-photo + .block-card-ic { margin-top: -30px; position: relative; z-index: 1; box-shadow: 0 6px 16px rgba(0,0,0,.35); background: #16213A; border: 1px solid rgba(148,163,184,.18); }
+.block-card:hover .block-card-photo + .block-card-ic { background: var(--brand-primary); }

@@ -686,8 +686,9 @@ function FAQTeaser({ setRoute }) {
 function KontaktPage({ setRoute }) {
   return (
     <main id="main-content" data-screen-label="07 Kontakt">
-      <section className="bg-light" style={{ paddingBlock: '3rem 2.5rem' }}>
-        <div className="wrap">
+      <section className="bg-light relative overflow-hidden" style={{ paddingBlock: '3rem 2.5rem' }}>
+        {window.PhotoBg && <window.PhotoBg name="kontakt-lublin" eager />}
+        <div className="wrap relative" style={{ zIndex: 2 }}>
           <window.NavLink className="btn-link" route="landing">
             <Icon name="arrow-left" size={16} /> Strona główna
           </window.NavLink>
