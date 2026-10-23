@@ -111,6 +111,7 @@ function Breadcrumb({ trail }) {
 function SvcCard({ service, onOpen, route, slug }) {
   const inner = (
     <React.Fragment>
+      {service.photo && <span className="svc-card-photo" aria-hidden="true"><img src={`/assets/foto-${service.slug}-800.webp`} alt="" width="800" height="450" loading="lazy" decoding="async" /></span>}
       <span className="svc-card-arrow"><SIcon name="arrow-up-right" size={15} /></span>
       <span className="svc-card-ic"><SIcon name={service.icon} size={24} /></span>
       <span className="svc-card-title">{service.title}</span>
@@ -118,7 +119,7 @@ function SvcCard({ service, onOpen, route, slug }) {
     </React.Fragment>
   );
   if (route) {
-    return <window.NavLink className="svc-card" route={route} slug={slug}>{inner}</window.NavLink>;
+    return <window.NavLink className={'svc-card' + (service.photo ? ' svc-card--photo' : '')} route={route} slug={slug}>{inner}</window.NavLink>;
   }
   return (
     <button className="svc-card" onClick={onOpen}>
@@ -643,7 +644,7 @@ function ServicePage({ slug, setRoute }) {
     <main id="main-content" data-screen-label={`Usługa — ${service.title}`} data-std={stdDate(c)}>
       {/* Hero */}
       <section className="bg-light relative overflow-hidden" style={{ paddingBlock: '3rem 4rem', borderBottom: '1px solid var(--slate-100)' }}>
-        <PhotoBg name={block.id} variant="soft" eager />
+        <PhotoBg name={service.photo ? slug : block.id} variant="soft" eager />
         <div className="wrap relative" style={{ zIndex: 2 }}>
           <Breadcrumb trail={[
             { label: 'Start', route: 'landing' },

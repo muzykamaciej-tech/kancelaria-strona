@@ -1362,3 +1362,70 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 /* Menu w jednej linii (logo 104 px spychało „Dla firm” i „Skarbnica wiedzy” do dwóch linii) */
 .nav-desktop a, .nav-desktop button { white-space: nowrap; }
 @media (min-width: 1100px) { .nav-logo img { height: clamp(58px, 3vw + 30px, 84px); } }
+
+/* -------------------------------------------------------------------------
+   Pasek menu – wersja uproszczona (23.10.2026): więcej powietrza, logo odsunięte,
+   „Usługi prawne” jako czysta lista bez ikon i kafelków.
+   ------------------------------------------------------------------------- */
+.nav-inner { gap: 3rem; }
+.nav-desktop { gap: 2.4rem; margin-left: auto; }
+.nav-desktop .nav-link { font-size: 0.875rem; letter-spacing: 0.06em; }
+.nav-desktop .nav-cta { margin-left: 0.8rem; }
+@media (min-width: 1100px) and (max-width: 1279px) { .nav-desktop { gap: 1.7rem; } .nav-inner { gap: 2rem; } }
+
+.mega-menu { min-width: 640px; }
+.mega-menu-inner { padding: 1.5rem 1.75rem 1.25rem; }
+.mega-menu-list {
+  list-style: none; margin: 0.75rem 0 0; padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: 2.5rem;
+}
+.mega-menu-list > li { border-bottom: 1px solid var(--slate-100); }
+.mega-menu-list > li:nth-last-child(-n+2) { border-bottom: none; }
+.mega-link {
+  display: block; padding: 0.7rem 0;
+  font-size: 0.975rem; font-weight: 600; line-height: 1.35;
+  color: var(--text-main); text-decoration: none;
+  transition: color 150ms, padding-left 150ms;
+}
+.mega-link:hover, .mega-link.active { color: var(--accent); padding-left: 0.35rem; }
+/* Lista usług otwiera się pod „Usługi prawne”, poniżej paska — nie zachodzi na logo */
+.nav-menu-host .mega-menu { left: -1.75rem; transform: none; padding-top: 1.9rem; min-width: 760px; }
+
+/* Skarbnica wiedzy: 3 najnowsze, kafelki kategorii, lista kategorii ze zdjęciem (10.2026) */
+.blog-newest { display: grid; grid-template-columns: 1fr; gap: var(--d-gap, 1.5rem); }
+@media (min-width: 760px) { .blog-newest { grid-template-columns: repeat(3, 1fr); } }
+a.blog-newest-card {
+  display: flex; flex-direction: column; overflow: hidden; color: inherit; text-decoration: none;
+  background: var(--surface); border: 1px solid var(--slate-100); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-quiet); transition: border-color 160ms, box-shadow 160ms, transform 160ms;
+}
+a.blog-newest-card:hover { border-color: var(--brand-primary); box-shadow: var(--shadow-card); transform: translateY(-3px); }
+.blog-newest-photo { display: block; aspect-ratio: 1200 / 654; overflow: hidden; }
+.blog-newest-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 300ms ease; }
+a.blog-newest-card:hover .blog-newest-photo img { transform: scale(1.04); }
+.blog-newest-body { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; padding: 1.25rem 1.4rem 1.5rem; }
+.blog-newest-title { font-size: 1.125rem; font-weight: 700; line-height: 1.3; color: var(--text-main); }
+
+.blog-cat-grid { display: grid; grid-template-columns: 1fr; gap: var(--d-gap, 1.5rem); }
+@media (min-width: 600px) { .blog-cat-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 960px) { .blog-cat-grid { grid-template-columns: repeat(3, 1fr); } }
+a.blog-cat-tile {
+  position: relative; display: flex; align-items: flex-end; min-height: 260px; overflow: hidden;
+  border-radius: var(--radius-lg); border: 1px solid var(--slate-100); color: #fff; text-decoration: none;
+  box-shadow: var(--shadow-card-quiet); transition: border-color 160ms, box-shadow 160ms, transform 160ms;
+}
+a.blog-cat-tile > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% center; transition: transform 400ms ease; }
+a.blog-cat-tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(7,12,23,.94) 0%, rgba(7,12,23,.6) 45%, rgba(7,12,23,.1) 100%); }
+a.blog-cat-tile:hover { border-color: var(--brand-primary); box-shadow: var(--shadow-card); transform: translateY(-3px); }
+a.blog-cat-tile:hover > img { transform: scale(1.05); }
+.blog-cat-tile-body { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 0.4rem; padding: 1.4rem 1.5rem 1.5rem; }
+.blog-cat-tile-count { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.blog-cat-tile-title { font-size: 1.25rem; font-weight: 700; line-height: 1.25; color: #fff; }
+.blog-cat-tile-desc { font-size: 0.9rem; line-height: 1.5; color: #CBD5E1; }
+.blog-cat-tile-arrow { position: absolute; top: 1rem; right: 1rem; z-index: 1; color: #fff; transition: transform 160ms; }
+a.blog-cat-tile:hover .blog-cat-tile-arrow { transform: translate(2px, -2px); }
+
+@media (min-width: 700px) { .blog-card--photo { grid-template-columns: 260px 1fr; gap: 2rem; } }
+.blog-card--photo .blog-card-aside { border: 0; padding: 0; }
+.blog-card-img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 654; object-fit: cover; border-radius: var(--radius-md); }
+@media (min-width: 700px) { .blog-card--photo .blog-card-img { height: 100%; min-height: 170px; aspect-ratio: auto; } }

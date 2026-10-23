@@ -381,3 +381,17 @@
 .block-card:hover .block-card-photo img { transform: scale(1.04); }
 .block-card-photo + .block-card-ic { margin-top: -30px; position: relative; z-index: 1; box-shadow: 0 6px 16px rgba(0,0,0,.35); background: #16213A; border: 1px solid rgba(148,163,184,.18); }
 .block-card:hover .block-card-photo + .block-card-ic { background: var(--brand-primary); }
+
+/* Zdjęcie usługi na górze karty (usługi dla firm, grafiki Higgsfield 10.2026) */
+.svc-card--photo { overflow: hidden; }
+.svc-card-photo {
+  display: block; position: relative;
+  width: calc(100% + 2.5rem); height: 112px;
+  margin: -1.75rem -1.25rem 0;
+}
+.svc-card-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 75% center; transition: transform 300ms ease; }
+.svc-card-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(11,18,32,.05) 30%, var(--surface) 100%); }
+.svc-card--photo:hover .svc-card-photo img { transform: scale(1.04); }
+.svc-card--photo .svc-card-arrow { z-index: 1; color: #fff; }
+.svc-card--photo .svc-card-ic { margin-top: -28px; position: relative; z-index: 1; box-shadow: 0 6px 16px rgba(0,0,0,.35); background: #16213A; border: 1px solid rgba(148,163,184,.18); }
+.svc-card--photo:hover .svc-card-ic { background: var(--brand-primary); }

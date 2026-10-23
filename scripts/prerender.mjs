@@ -54,6 +54,9 @@ const data = await probe.evaluate(() => ({
     updated: ((window.BLOCK_CONTENT || {})[b.id] || {}).updated || null,
     services: b.services.map((s) => ({ slug: s.slug, title: s.title, desc: s.desc || '', updated: ((window.SERVICE_CONTENT || {})[s.slug] || {}).updated || null })) })),
   blog: (window.BLOG || []).map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt || '', iso: p.iso, modified: window.postModifiedIso(p) })),
+  blogCats: window.BLOG_CATEGORIES.filter((c) => window.postsInCategory(c).length).map((c) => ({ id: c.id, title: c.title, desc: c.desc,
+    modified: window.postsInCategory(c).map((p) => window.postModifiedIso(p)).sort().pop() })),
+  uncategorized: (window.BLOG || []).filter((p) => !window.blogCategoryOfPost(p)).map((p) => p.slug + ' (' + p.category + ')'),
 }));
 await probe.close();
 
@@ -69,6 +72,7 @@ const routes = [
     ...b.services.map((s) => ({ path: `/uslugi/${b.id}/${s.slug}`, priority: '0.7', lastmod: s.updated || undefined })),
   ]),
   { path: '/blog', priority: '0.7' },
+  ...data.blogCats.map((c) => ({ path: `/blog/kategoria/${c.id}`, lastmod: c.modified, priority: '0.6' })),
   ...data.blog.map((p) => ({ path: `/blog/${p.slug}`, lastmod: p.modified, priority: '0.6' })),
   { path: '/o-mnie', priority: '0.7' },
   { path: '/kontakt', priority: '0.6' },
@@ -88,6 +92,8 @@ function outFile(p) {
 
 /* 2. render each route */
 const failures = [];
+/* every post must land in a Skarbnica category (pages.jsx BLOG_CATEGORIES) — otherwise /blog has no link to it */
+if (data.uncategorized.length) failures.push(`posts without a /blog category (add the category to BLOG_CATEGORIES in pages.jsx): ${data.uncategorized.join(', ')}`);
 async function render(page, r) {
   page._errors.length = 0;
   await page.goto(BASE + r.path, { waitUntil: 'domcontentloaded', timeout: 60000 });

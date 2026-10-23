@@ -281,19 +281,15 @@ function MegaMenu({ onNavigate, active }) {
             Wszystkie usługi <Icon name="arrow-right" size={14} />
           </window.NavLink>
         </div>
-        <ul className="mega-menu-grid">
+        <ul className="mega-menu-list">
           {window.SERVICE_BLOCKS.map((b) =>
           <li key={b.id}>
               <window.NavLink
               route="blok"
               slug={b.id}
-              className={`mega-tile ${active === b.id ? 'active' : ''}`}
+              className={`mega-link ${active === b.id ? 'active' : ''}`}
               onNavigate={onNavigate}>
-
-                <span className="mega-tile-head">
-                  <span className="mega-tile-icon"><Icon name={b.icon} size={18} /></span>
-                </span>
-                <span className="mega-tile-label">{b.title}</span>
+                {b.title}
               </window.NavLink>
             </li>
           )}

@@ -322,10 +322,35 @@ function LeadFormBand() {
 /* ============================================================
    Blog index + post
    ============================================================ */
+/* Skarbnica wiedzy: kategorie = rodzaje spraw (zdjęcia obszarów usług, assets/foto-<photo>-800|1600.webp).
+   Wpis trafia do kategorii po polu `category`; wpis bez kategorii zatrzymuje prerender (scripts/prerender.mjs). */
+const BLOG_CATEGORIES = [
+  { id: 'warunki-zabudowy', title: 'Warunki zabudowy i plan ogólny', desc: 'WZ, plan ogólny, obszar uzupełnienia zabudowy, terminy i koszty.', photo: 'warunki-zabudowy-planowanie', cats: ['Planowanie przestrzenne', 'Warunki zabudowy'] },
+  { id: 'slupy-i-przesyl', title: 'Słupy, linie i rury na działce', desc: 'Służebność przesyłu, wynagrodzenie, bezumowne korzystanie, przesunięcie słupa.', photo: 'sluzebnosci-odszkodowania', cats: ['Służebność przesyłu'] },
+  { id: 'droga-konieczna', title: 'Droga konieczna i służebności', desc: 'Szerokość drogi, wynagrodzenie, koszty utrzymania, zasiedzenie.', photo: 'droga-konieczna', cats: ['Służebności'] },
+  { id: 'najem', title: 'Najem i eksmisja', desc: 'Bezpieczny wynajem, eksmisja lokatora, czego wynajmującemu nie wolno.', photo: 'najem', cats: ['Najem'] },
+  { id: 'budowa', title: 'Budowa i sąsiedzi', desc: 'Pozwolenie, zjazd z drogi, sprzeciw sąsiada.', photo: 'proces-budowlany', cats: ['Proces budowlany'] },
+  { id: 'zakup-i-ksiegi', title: 'Zakup, księgi wieczyste i podatki', desc: 'Księgi wieczyste, ceny transakcyjne, błędy w ewidencji i podatku.', photo: 'ksiegi-wieczyste-stan-prawny', cats: ['Księgi wieczyste', 'Rynek nieruchomości', 'Podatek od nieruchomości'] },
+  { id: 'deweloper', title: 'Spory z deweloperem', desc: 'Opóźnienie, kary umowne, wady mieszkania i odszkodowanie.', photo: 'roszczenia-deweloper', cats: ['Spory z deweloperem'] },
+  { id: 'grunty-rolne-oze', title: 'Grunty rolne i OZE', desc: 'Fotowoltaika na działce rolnej, dzierżawa, VAT, odpowiedzialność właściciela.', photo: 'grunty-rolne-oze', cats: ['Grunty rolne i OZE', 'Odpowiedzialność właściciela'] },
+  { id: 'wspolwlasnosc', title: 'Współwłasność i podział majątku', desc: 'Podział nieruchomości po rozwodzie i między współwłaścicielami.', photo: 'wspolwlasnosc-podzialy', cats: ['Podział majątku'] },
+];
+function getBlogCategory(id) { return BLOG_CATEGORIES.find((c) => c.id === id) || null; }
+function blogCategoryOfPost(post) { return BLOG_CATEGORIES.find((c) => c.cats.indexOf(post.category) !== -1) || null; }
+function postsInCategory(cat) { return window.BLOG.filter((p) => cat.cats.indexOf(p.category) !== -1); }
+/* najnowsze najpierw; ten sam dzień — kolejność z danych */
+function blogNewest(n) {
+  return window.BLOG.map((p, i) => [p, i]).sort((a, b) => (b[0].iso || '').localeCompare(a[0].iso || '') || a[1] - b[1]).slice(0, n).map((x) => x[0]);
+}
+function wpisy(n) {
+  const d = n % 10, dd = n % 100;
+  return n + (n === 1 ? ' wpis' : (d >= 2 && d <= 4 && (dd < 12 || dd > 14)) ? ' wpisy' : ' wpisów');
+}
+
 function BlogPage({ setRoute }) {
   return (
     <main id="main-content" data-screen-label="04 Blog">
-      <section className="bg-light" style={{ paddingBlock: '3rem 5rem' }}>
+      <section className="bg-light" style={{ paddingBlock: '3rem 4rem' }}>
         <div className="wrap">
           <window.NavLink className="btn-link" route="landing">
             <Icon name="arrow-left" size={16} /> Strona główna
@@ -343,15 +368,84 @@ function BlogPage({ setRoute }) {
         </div>
       </section>
 
+      <section className="section-py" style={{ paddingBottom: '2rem' }}>
+        <div className="wrap">
+          <span className="eyebrow">Najnowsze</span>
+          <h2 className="h2 mt-4">Ostatnio dodane poradniki.</h2>
+          <div className="blog-newest mt-8">
+            {blogNewest(3).map((post) => (
+              <window.NavLink key={post.slug} className="blog-newest-card" route="blogpost" slug={post.slug}>
+                <span className="blog-newest-photo"><img src={post.cover} alt="" width="1200" height="654" loading="eager" decoding="async" /></span>
+                <span className="blog-newest-body">
+                  <span className="tag tag-info">{post.category}</span>
+                  <span className="blog-newest-title">{post.title}</span>
+                  <span className="blog-card-meta"><span>{post.date}</span><span>·</span><span>{post.readTime} czytania</span></span>
+                </span>
+              </window.NavLink>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-py">
+        <div className="wrap">
+          <span className="eyebrow">Kategorie</span>
+          <h2 className="h2 mt-4">Wybierz rodzaj sprawy.</h2>
+          <div className="blog-cat-grid mt-8">
+            {BLOG_CATEGORIES.map((c) => {
+              const n = postsInCategory(c).length;
+              if (!n) return null;
+              return (
+                <window.NavLink key={c.id} className="blog-cat-tile" route="blogcat" slug={c.id}>
+                  <img src={`/assets/foto-${c.photo}-800.webp`} alt="" width="800" height="450" loading="lazy" decoding="async" />
+                  <span className="blog-cat-tile-body">
+                    <span className="blog-cat-tile-count">{wpisy(n)}</span>
+                    <span className="blog-cat-tile-title">{c.title}</span>
+                    <span className="blog-cat-tile-desc">{c.desc}</span>
+                  </span>
+                  <span className="blog-cat-tile-arrow"><Icon name="arrow-up-right" size={16} /></span>
+                </window.NavLink>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <LeadFormBand />
+    </main>
+  );
+}
+
+function BlogCategoryPage({ catId, setRoute }) {
+  const cat = getBlogCategory(catId) || BLOG_CATEGORIES[0];
+  const posts = postsInCategory(cat);
+  const others = BLOG_CATEGORIES.filter((c) => c.id !== cat.id && postsInCategory(c).length);
+  return (
+    <main id="main-content" data-screen-label={`Blog — ${cat.title}`}>
+      <section className="bg-light relative overflow-hidden" style={{ paddingBlock: '3rem 4rem' }}>
+        {window.PhotoBg && <window.PhotoBg name={cat.photo} eager />}
+        <div className="wrap relative" style={{ zIndex: 2 }}>
+          {window.Breadcrumb && <window.Breadcrumb trail={[
+            { label: 'Start', route: 'landing' },
+            { label: 'Skarbnica wiedzy', route: 'blog' },
+            { label: cat.title },
+          ]} />}
+          <div className="mt-8" style={{ maxWidth: '44rem' }}>
+            <span className="eyebrow">Skarbnica wiedzy · {wpisy(posts.length)}</span>
+            <h1 className="display mt-4">{cat.title}</h1>
+            <p className="lead mt-6">{cat.desc}</p>
+          </div>
+        </div>
+      </section>
+
       <section className="section-py">
         <div className="wrap">
           <ul className="blog-list">
-            {window.BLOG.map((post, i) => (
+            {posts.map((post) => (
               <li key={post.slug} className="blog-card-wrap">
-                <window.NavLink className="blog-card" route="blogpost" slug={post.slug}>
+                <window.NavLink className="blog-card blog-card--photo" route="blogpost" slug={post.slug}>
                   <div className="blog-card-aside">
-                    <span className="kicker-num kicker-num--ghost">{String(i + 1)}</span>
-                    <span className="tag tag-info mt-4">{post.category}</span>
+                    <img className="blog-card-img" src={post.cover} alt="" width="1200" height="654" loading="lazy" decoding="async" />
                   </div>
                   <div className="blog-card-body">
                     <div className="blog-card-meta">
@@ -359,7 +453,7 @@ function BlogPage({ setRoute }) {
                       <span>·</span>
                       <span>{post.readTime} czytania</span>
                     </div>
-                    <h3 className="blog-card-title mt-3">{post.title}</h3>
+                    <h2 className="blog-card-title mt-3">{post.title}</h2>
                     <p className="body mt-4">{post.excerpt}</p>
                     <div className="blog-card-foot mt-6">
                       <span className="btn-link">
@@ -376,6 +470,15 @@ function BlogPage({ setRoute }) {
               </li>
             ))}
           </ul>
+
+          <div className="blog-cat-others mt-12">
+            <span className="eyebrow">Inne kategorie</span>
+            <div className="flex mt-4" style={{ flexWrap: 'wrap', gap: '0.5rem' }}>
+              {others.map((c) => (
+                <window.NavLink key={c.id} className="chip" route="blogcat" slug={c.id}>{c.title}</window.NavLink>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -715,7 +818,8 @@ function KontaktPage({ setRoute }) {
 
 Object.assign(window, {
   HomePage, UslugiPage, ServiceDetailPage,
-  BlogPage, BlogPostPage,
+  BlogPage, BlogPostPage, BlogCategoryPage,
+  BLOG_CATEGORIES, getBlogCategory, blogCategoryOfPost, postsInCategory,
   FAQPage, FAQAccordion,
   KontaktPage, LeadFormBand, BlogTeaserCard,
 });

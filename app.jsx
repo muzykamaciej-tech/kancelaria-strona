@@ -59,6 +59,7 @@ function buildPath(route, ids) {
     }
     case 'blog': return '/blog';
     case 'blogpost': return '/blog/' + (ids.blogSlug || '');
+    case 'blogcat': return '/blog/kategoria/' + (ids.blogCat || '');
     case 'faq': return '/faq';
     case 'kontakt': return '/kontakt';
     case 'o-mnie': return '/o-mnie';
@@ -76,6 +77,7 @@ function idsFor(route, slug) {
   if (route === 'usluga') return { serviceSlug: slug };
   if (route === 'blok') return { blockId: slug };
   if (route === 'blogpost') return { blogSlug: slug };
+  if (route === 'blogcat') return { blogCat: slug };
   return {};
 }
 /* href for any internal route — used by <NavLink> and plain <a> links */
@@ -98,6 +100,7 @@ function parsePath(pathname) {
   }
   if (a === 'blog') {
     if (!b) return { route: 'blog' };
+    if (b === 'kategoria') return c && window.getBlogCategory && window.getBlogCategory(c) && parts.length === 3 ? { route: 'blogcat', blogCat: c } : { route: 'notfound' };
     return (window.BLOG || []).some((p) => p.slug === b) && !c ? { route: 'blogpost', blogSlug: b } : { route: 'notfound' };
   }
   if (parts.length > 1) return { route: 'notfound' };
@@ -266,6 +269,9 @@ function setMetaForView(route, ids) {
     setMeta(SEO_TITLE_SERVICE[ids.serviceSlug] || localTitle([title, s && s.title]), (c && c.metaDesc) || truncMeta(desc, 155));
   } else if (route === 'blog') {
     setMeta('Skarbnica wiedzy: poradniki o prawie nieruchomości', 'Praktyczne wpisy o prawie nieruchomości — jak bezpiecznie kupować, sprawdzać umowy i chronić swój kapitał.');
+  } else if (route === 'blogcat') {
+    const c = window.getBlogCategory(ids.blogCat);
+    if (c) setMeta(fitTitle([c.title + ' – poradniki | Skarbnica wiedzy', c.title + ' – poradniki', c.title]), truncMeta('Poradniki adwokata od nieruchomości: ' + c.title.toLowerCase() + '. ' + c.desc, 155));
   } else if (route === 'blogpost') {
     const p = (window.BLOG || []).find((x) => x.slug === ids.blogSlug) || (window.BLOG || [])[0];
     if (p) setMeta(fitTitle([p.metaTitle && p.metaTitle + ' | ' + SITE_NAME, p.title + ' | ' + SITE_NAME, p.metaTitle, p.title]), p.metaDesc || truncMeta(p.excerpt, 155), {
@@ -389,6 +395,14 @@ function buildJsonLd(route, ids) {
       Object.assign(trail, { '@id': url + '#okruszki' }),
     ].filter(Boolean) };
   }
+  if (route === 'blogcat') {
+    const c = window.getBlogCategory(ids.blogCat); if (!c) return null;
+    const path = '/blog/kategoria/' + c.id, url = SITE_BASE + path;
+    return { '@context': 'https://schema.org', '@graph': [
+      { '@type': 'CollectionPage', '@id': url, url, name: c.title, description: c.desc, inLanguage: 'pl',
+        mainEntity: { '@type': 'ItemList', itemListElement: window.postsInCategory(c).map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE_BASE + '/blog/' + p.slug, name: p.title })) } },
+      crumbs([{ name: 'Start', path: '/' }, { name: 'Skarbnica wiedzy', path: '/blog' }, { name: c.title, path }]) ] };
+  }
   if (route === 'blogpost') {
     const p = (window.BLOG || []).find((x) => x.slug === ids.blogSlug); if (!p) return null;
     return { '@context': 'https://schema.org', '@graph': [
@@ -445,6 +459,7 @@ function App() {
   const [serviceSlug, setServiceSlug] = useState(() => parsePath().serviceSlug || null);
   const [blockId, setBlockId] = useState(() => parsePath().blockId || null);
   const [blogSlug, setBlogSlug] = useState(() => parsePath().blogSlug || null);
+  const [blogCat, setBlogCat] = useState(() => parsePath().blogCat || null);
   const [contactSubject, setContactSubject] = useState('');
   const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
   /* every client-side navigation bumps navTick; the layout effect below then scrolls and moves focus */
@@ -477,15 +492,17 @@ function App() {
     setServiceSlug(p.serviceSlug || null);
     setBlockId(p.blockId || null);
     setBlogSlug(p.blogSlug || null);
+    setBlogCat(p.blogCat || null);
     afterNav(y);
   }
 
   function setRoute(r, slug, subject) {
     setRouteState(r);
-    const ids = { blockId, serviceSlug, blogSlug };
+    const ids = { blockId, serviceSlug, blogSlug, blogCat };
     if (r === 'usluga' && slug) { setServiceSlug(slug); ids.serviceSlug = slug; }
     if (r === 'blok' && slug) { setBlockId(slug); ids.blockId = slug; }
     if (r === 'blogpost' && slug) { setBlogSlug(slug); ids.blogSlug = slug; }
+    if (r === 'blogcat' && slug) { setBlogCat(slug); ids.blogCat = slug; }
     if (subject) setContactSubject(subject);
     pushPath(buildPath(r, ids), r, ids);
     afterNav(0);
@@ -535,8 +552,8 @@ function App() {
 
   /* keep document.title + meta description in sync with the current view */
   useEffect(() => {
-    setMetaForView(route, { blockId, serviceSlug, blogSlug });
-  }, [route, blockId, serviceSlug, blogSlug]);
+    setMetaForView(route, { blockId, serviceSlug, blogSlug, blogCat });
+  }, [route, blockId, serviceSlug, blogSlug, blogCat]);
 
   /* which service block to highlight in the mega-menu */
   let activeBlock = null;
@@ -579,6 +596,7 @@ function App() {
   else if (route === 'blok') body = <PillarPage setRoute={setRoute} blockId={blockId || window.SERVICE_BLOCKS[0].id} />;
   else if (route === 'usluga') body = <ServicePage setRoute={setRoute} slug={serviceSlug || window.SERVICE_BLOCKS[0].services[0].slug} />;
   else if (route === 'blog') body = <BlogPage setRoute={setRoute} />;
+  else if (route === 'blogcat') body = <window.BlogCategoryPage setRoute={setRoute} catId={blogCat} />;
   else if (route === 'blogpost') body = <BlogPostPage setRoute={setRoute} slug={blogSlug || window.BLOG[0].slug} />;
   else if (route === 'faq') body = <FaqPageV3 setRoute={setRoute} />;
   else if (route === 'kontakt') body = <KontaktPage setRoute={setRoute} />;
@@ -600,7 +618,7 @@ function App() {
       <CookieBanner />
       {window.QuickContact && <window.QuickContact />}
       {route !== 'landing' && <BackToTop />}
-      {route !== 'landing' && <MobileCTABar key={route + (serviceSlug || '') + (blockId || '') + (blogSlug || '')} />}
+      {route !== 'landing' && <MobileCTABar key={route + (serviceSlug || '') + (blockId || '') + (blogSlug || '') + (blogCat || '')} />}
 
       <TweaksPanel title="Tweaks" defaultPosition={{ right: 24, bottom: 24 }}>
         <TweakSection label="Układ">
