@@ -105,7 +105,7 @@
 /* ----------------------------------------------------------------
    Intro (brand statement above the form)
    ---------------------------------------------------------------- */
-.landing-intro { padding-top: clamp(2.5rem, 4vw + 1rem, 4.5rem); padding-bottom: 0; }
+.landing-intro { padding-block: clamp(2.5rem, 4vw + 1rem, 4.5rem); }
 .landing-intro .landing-intro-lead {
   color: #fff;
   font-size: clamp(1.0625rem, 0.95rem + 0.4vw, 1.2rem);
@@ -119,39 +119,17 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 2.5rem;
-  align-items: end;
+  align-items: center;
 }
-.landing-intro-text { padding-bottom: clamp(0rem, 3vw, 4.5rem); align-self: center; }
 @media (min-width: 980px) {
   .landing-intro-grid { grid-template-columns: 1.1fr 0.9fr; gap: clamp(2rem, 4vw, 4rem); }
 }
 
-/* Portret w nagłówku: oryginalne zdjęcie (assets/maciej-muzyka-hero-*.webp) z brzegami wygaszonymi maską
-   w kolor tła sekcji — lewa krawędź i dół mocniej, góra i prawa delikatnie; podpis nachodzi na zdjęcie. */
+/* Portret w nagłówku: oryginalne zdjęcie, prostokąt; gradient w granat tylko od strony tekstu, podpis pod zdjęciem. */
 .landing-intro-portrait { display: flex; justify-content: center; }
 .hero-portrait { position: relative; width: 100%; max-width: 34rem; }
-.hero-portrait img {
-  display: block; width: 100%; height: auto;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 22%, #000 90%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 12%, #000 72%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent 0%, #000 22%, #000 90%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 12%, #000 72%, transparent 100%);
-  mask-composite: intersect;
-}
-.hero-portrait-badge {
-  position: absolute; z-index: 2; left: 0; bottom: 18%;
-  display: flex; flex-direction: column; gap: 0.2rem;
-  padding: 0.85rem 1.15rem 0.9rem;
-  background: rgba(11,18,32,.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(127,176,234,.22); border-left: 3px solid var(--brand-primary-light, #7FB0EA);
-  border-radius: var(--radius-md, 10px);
-  box-shadow: 0 12px 30px rgba(0,0,0,.35);
-}
-.hero-portrait-name { font-weight: 700; font-size: 1.125rem; color: #fff; line-height: 1.2; }
-.hero-portrait-role { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; color: var(--brand-primary-light, #7FB0EA); }
-@media (max-width: 979px) {
-  .hero-portrait { max-width: 24rem; }
-  .hero-portrait-badge { left: -0.25rem; bottom: 14%; }
-}
+@media (max-width: 979px) { .hero-portrait { max-width: 24rem; } }
+
 /* łagodne przejście sekcji powitalnej w następną (postać stoi na krawędzi) */
 .landing-intro::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; z-index: 3;
@@ -936,20 +914,36 @@ select.input { appearance: auto; cursor: pointer; }
 @media (max-width: 979px) {
   .landing-intro-grid { gap: 0; }
   .landing-intro-portrait { order: -1; }
-  .landing-intro-portrait .hero-portrait { max-width: 19rem; margin-bottom: -0.5rem; }
-  .landing-intro-text { padding-bottom: 3rem; }
-  .hero-portrait-badge { bottom: 10%; padding: 0.6rem 0.9rem 0.65rem; }
-  .hero-portrait-name { font-size: 1rem; }
-  .hero-portrait-role { font-size: 0.72rem; }
+  .landing-intro-portrait .hero-portrait { max-width: 19rem; margin-bottom: 1.75rem; }
 }
 
 /* Zdjęcia Macieja w sekcjach strony głównej: oryginał z brzegami wygaszonymi maską w kolor tła sekcji.
    --fade-right: mocniej przy prawej krawędzi (zdjęcie po lewej, tekst po prawej). */
 .side-photo { display: block; width: 100%; height: auto; }
+/* Gradient i przyciemnienie tylko od strony tekstu (styl liberda.pl); pozostałe krawędzie zostają ostre. */
 .side-photo--fade-right {
-  filter: brightness(0.88) saturate(0.95);
-  -webkit-mask-image: radial-gradient(closest-side ellipse at 50% 48%, #000 58%, rgba(0,0,0,.5) 80%, transparent 100%);
-  mask-image: radial-gradient(closest-side ellipse at 50% 48%, #000 58%, rgba(0,0,0,.5) 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 34%, rgba(0,0,0,.72) 54%, rgba(0,0,0,.32) 76%, rgba(0,0,0,.08) 90%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 0%, #000 34%, rgba(0,0,0,.72) 54%, rgba(0,0,0,.32) 76%, rgba(0,0,0,.08) 90%, transparent 100%);
+}
+.side-photo--fade-left {
+  -webkit-mask-image: linear-gradient(to left, #000 0%, #000 34%, rgba(0,0,0,.72) 54%, rgba(0,0,0,.32) 76%, rgba(0,0,0,.08) 90%, transparent 100%);
+  mask-image: linear-gradient(to left, #000 0%, #000 34%, rgba(0,0,0,.72) 54%, rgba(0,0,0,.32) 76%, rgba(0,0,0,.08) 90%, transparent 100%);
+}
+/* na telefonie zdjęcie jest nad tekstem — wygaszony tylko dół */
+@media (max-width: 979px) {
+  .side-photo--fade-right, .side-photo--fade-left {
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, rgba(0,0,0,.55) 82%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 62%, rgba(0,0,0,.55) 82%, transparent 100%);
+  }
+}
+
+/* Podpis pod zdjęciem: kreska, nazwisko kursywą, funkcja */
+.photo-caption { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3rem; margin-top: 1rem; text-align: right; }
+.photo-caption::before { content: ""; width: 2rem; height: 1px; background: var(--brand-primary-light, #7FB0EA); margin-bottom: 0.45rem; }
+.photo-caption-name { font-family: var(--font-heading); font-style: italic; font-size: 1.3rem; color: #fff; line-height: 1.2; }
+.photo-caption-role { font-size: 0.82rem; letter-spacing: 0.04em; color: var(--text-on-dark-3, #94A3B8); }
+@media (max-width: 979px) {
+  .photo-caption { align-items: center; text-align: center; margin-top: 0.25rem; }
 }
 
 /* Sekcja z formularzem: zdjęcie po lewej (przyklejone przy przewijaniu), tekst i formularz po prawej */

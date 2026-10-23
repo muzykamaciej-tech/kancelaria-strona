@@ -757,14 +757,15 @@ function LandingIntro({ setRoute }) {
           <div className="landing-intro-portrait">
             <div className="hero-portrait">
               <img
+                className="side-photo side-photo--fade-left"
                 src="/assets/maciej-muzyka-hero-1000.webp"
                 srcSet="/assets/maciej-muzyka-hero-600.webp 600w, /assets/maciej-muzyka-hero-1000.webp 1000w"
                 sizes="(min-width: 980px) 34rem, 90vw"
                 alt="adw. dr Maciej Muzyka"
                 width="1000" height="1275" loading="eager" fetchpriority="high" decoding="async" />
-              <div className="hero-portrait-badge">
-                <span className="hero-portrait-name">adw. dr Maciej Muzyka</span>
-                <span className="hero-portrait-role">Adwokat · Doktor nauk prawnych</span>
+              <div className="photo-caption">
+                <span className="photo-caption-name">adw. dr Maciej Muzyka</span>
+                <span className="photo-caption-role">Adwokat · Doktor nauk prawnych</span>
               </div>
             </div>
           </div>
@@ -790,7 +791,7 @@ function LandingHero() {
               srcSet="/assets/maciej-muzyka-telefon-600.webp 600w, /assets/maciej-muzyka-telefon-1000.webp 1000w"
               sizes="(min-width: 980px) 40vw, 90vw"
               alt="adw. dr Maciej Muzyka podczas rozmowy telefonicznej z klientem"
-              width="1000" height="1096" loading="lazy" decoding="async" />
+              width="1000" height="998" loading="lazy" decoding="async" />
           </div>
           <div className="landing-hero-main">
           <div className="landing-hero-text">
