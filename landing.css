@@ -105,40 +105,63 @@
 /* ----------------------------------------------------------------
    Intro (brand statement above the form)
    ---------------------------------------------------------------- */
-.landing-intro { padding-block: clamp(2.75rem, 4vw + 1.5rem, 5rem); }
-.landing-intro-head {
-  text-align: center;
-  max-width: 60rem;
-  margin-inline: auto;
-}
-.landing-intro-head .eyebrow { justify-content: center; }
-.landing-intro-head .eyebrow::after {
-  content: "";
-  width: 1.5rem;
-  height: 1px;
-  background: currentColor;
-}
-.landing-intro-head .landing-intro-title { text-wrap: balance; }
+.landing-intro { padding-top: clamp(2.5rem, 4vw + 1rem, 4.5rem); padding-bottom: 0; }
 .landing-intro .landing-intro-lead {
   color: #fff;
   font-size: clamp(1.0625rem, 0.95rem + 0.4vw, 1.2rem);
   line-height: 1.7;
   max-width: 40rem;
+  margin-top: 1.5rem;
 }
 .landing-intro .landing-intro-lead span { color: inherit; }
+.landing-intro-title { font-size: clamp(2rem, 1.2rem + 2.4vw, 3.4rem); text-wrap: balance; margin: 1.25rem 0 0; }
 .landing-intro-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
-  align-items: center;
-  margin-top: clamp(1.75rem, 3vw, 2.75rem);
+  gap: 2.5rem;
+  align-items: end;
 }
+.landing-intro-text { padding-bottom: clamp(0rem, 3vw, 4.5rem); align-self: center; }
 @media (min-width: 980px) {
-  .landing-intro-grid { grid-template-columns: 1fr 0.8fr; gap: clamp(2.5rem, 5vw, 5rem); }
+  .landing-intro-grid { grid-template-columns: 1.1fr 0.9fr; gap: clamp(2rem, 4vw, 4rem); }
 }
-.landing-intro-title { font-size: clamp(2rem, 1.2rem + 2.4vw, 3.25rem); }
+
+/* Portret w nagłówku: wycięta postać (assets/maciej-muzyka-hero-*.webp, przezroczyste tło, wygaszony dół)
+   stoi na dolnej krawędzi sekcji; za nią poświata i okrąg w kolorach marki, podpis nachodzi na zdjęcie. */
 .landing-intro-portrait { display: flex; justify-content: center; }
-@media (min-width: 980px) { .landing-intro-portrait .portrait-card { max-width: 24rem; } }
+.hero-portrait { position: relative; width: 100%; max-width: 34rem; isolation: isolate; }
+.hero-portrait img { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
+.hero-portrait-glow {
+  position: absolute; z-index: 0; left: 50%; top: 4%; width: 92%; aspect-ratio: 1; transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 45%, rgba(46,120,214,.55) 0%, rgba(14,83,165,.32) 38%, rgba(14,83,165,0) 70%);
+  filter: blur(6px);
+}
+.hero-portrait-ring {
+  position: absolute; z-index: 0; left: 50%; top: 1%; width: 78%; aspect-ratio: 1; transform: translateX(-50%);
+  border-radius: 50%; border: 1px solid rgba(127,176,234,.28);
+  box-shadow: 0 0 0 18px rgba(127,176,234,.04);
+}
+.hero-portrait-badge {
+  position: absolute; z-index: 2; left: 0; bottom: 18%;
+  display: flex; flex-direction: column; gap: 0.2rem;
+  padding: 0.85rem 1.15rem 0.9rem;
+  background: rgba(11,18,32,.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(127,176,234,.22); border-left: 3px solid var(--brand-primary-light, #7FB0EA);
+  border-radius: var(--radius-md, 10px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+}
+.hero-portrait-name { font-weight: 700; font-size: 1.125rem; color: #fff; line-height: 1.2; }
+.hero-portrait-role { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; color: var(--brand-primary-light, #7FB0EA); }
+@media (max-width: 979px) {
+  .hero-portrait { max-width: 24rem; }
+  .hero-portrait-badge { left: -0.25rem; bottom: 14%; }
+}
+/* łagodne przejście sekcji powitalnej w następną (postać stoi na krawędzi) */
+.landing-intro::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; z-index: 3;
+  background: linear-gradient(90deg, transparent, rgba(127,176,234,.35), transparent);
+}
 
 /* ----------------------------------------------------------------
    Google badge
@@ -913,3 +936,14 @@ select.input { appearance: auto; cursor: pointer; }
 
 .report-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 .report-actions .btn { max-width: 100%; white-space: normal; text-align: center; }
+.landing-intro-text .eyebrow { line-height: 1.6; }
+.landing-intro-text .eyebrow::after { display: none; }
+@media (max-width: 979px) {
+  .landing-intro-grid { gap: 0; }
+  .landing-intro-portrait { order: -1; }
+  .landing-intro-portrait .hero-portrait { max-width: 19rem; margin-bottom: -0.5rem; }
+  .landing-intro-text { padding-bottom: 3rem; }
+  .hero-portrait-badge { bottom: 10%; padding: 0.6rem 0.9rem 0.65rem; }
+  .hero-portrait-name { font-size: 1rem; }
+  .hero-portrait-role { font-size: 0.72rem; }
+}

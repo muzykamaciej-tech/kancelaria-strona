@@ -722,17 +722,14 @@ function LandingIntro({ setRoute }) {
     <section className="bg-dark landing-intro relative overflow-hidden" data-screen-label="00a Wstęp">
       <div className="orb" style={{ width: 640, height: 640, top: -240, right: -200, opacity: 'calc(0.16 * var(--ambient-on))' }} />
       <div className="wrap relative" style={{ zIndex: 2 }}>
-        <div className="landing-intro-head">
-          <h1 className="eyebrow on-dark" style={{ margin: 0 }}>Prawnik od nieruchomości w Lublinie · adwokat · doktor nauk prawnych</h1>
-          <p className="display landing-intro-title mt-6" style={{ color: '#fff', marginBottom: '0.67em' }}>
-            Nie musisz znać się na prawie,<br />
-            żeby bezpiecznie<br />
-            <span className="italic" style={{ color: 'var(--brand-primary-light)' }}>kupować i inwestować.</span>
-          </p>
-        </div>
-
         <div className="landing-intro-grid">
           <div className="landing-intro-text">
+            <h1 className="eyebrow on-dark" style={{ margin: 0 }}>Prawnik od nieruchomości w Lublinie · adwokat · doktor nauk prawnych</h1>
+            <p className="display landing-intro-title mt-6" style={{ color: '#fff' }}>
+              Nie musisz znać się na prawie,<br />
+              żeby bezpiecznie<br />
+              <span className="italic" style={{ color: 'var(--brand-primary-light)' }}>kupować i inwestować.</span>
+            </p>
             <p className="lead landing-intro-lead">
               Od tego masz mnie.<br />
               Sprawdzam umowy, wychwytuję ukryte ryzyka i reguluję stany prawne, zanim staną się Twoim problemem.<br />
@@ -758,14 +755,18 @@ function LandingIntro({ setRoute }) {
           </div>
 
           <div className="landing-intro-portrait">
-            <div className="portrait-card">
-              <img src={window.__resources?.portrait1 || "/assets/maciej-muzyka.webp"} alt="adw. dr Maciej Muzyka" width="1100" height="1100" decoding="async" />
-              <div className="portrait-scrim" />
-              <div className="portrait-caption">
-                <p className="font-bold" style={{ fontSize: '1.5rem' }}>Maciej Muzyka</p>
-                <p className="font-semibold" style={{ color: 'var(--brand-primary-light)', letterSpacing: '0.04em', fontSize: '0.875rem' }}>
-                  Adwokat · Doktor nauk prawnych
-                </p>
+            <div className="hero-portrait">
+              <span className="hero-portrait-ring" aria-hidden="true" />
+              <span className="hero-portrait-glow" aria-hidden="true" />
+              <img
+                src="/assets/maciej-muzyka-hero-1000.webp"
+                srcSet="/assets/maciej-muzyka-hero-600.webp 600w, /assets/maciej-muzyka-hero-1000.webp 1000w"
+                sizes="(min-width: 980px) 34rem, 90vw"
+                alt="adw. dr Maciej Muzyka"
+                width="1000" height="1275" loading="eager" fetchpriority="high" decoding="async" />
+              <div className="hero-portrait-badge">
+                <span className="hero-portrait-name">adw. dr Maciej Muzyka</span>
+                <span className="hero-portrait-role">Adwokat · Doktor nauk prawnych</span>
               </div>
             </div>
           </div>
