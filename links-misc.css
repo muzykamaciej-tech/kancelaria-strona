@@ -23,6 +23,6 @@ a.btn { text-align: center; }
 .bg-dark .btn-secondary:focus-visible,
 .bg-dark .about-cred-link:focus-visible { outline-color: #9DC2EC; }
 /* floating phone/WhatsApp buttons: the ring (outline-offset 3px) sits on the page background, where #E0EDFA was 1.19:1 */
-.qc-btn:focus-visible { outline-color: var(--brand-primary); }
+.qc-btn:focus-visible { outline-color: var(--focus-ring); }
 /* after a client-side navigation the new page's <h1> takes focus (tabindex=-1) for screen readers; no ring on a heading */
 main h1[tabindex="-1"]:focus { outline: none; }

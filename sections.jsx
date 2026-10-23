@@ -203,7 +203,7 @@ function Navbar({ route, setRoute, serviceSlug }) {
           onNavigate={closeMenus}
           aria-label="Kancelaria Nieruchomości — Adwokat Maciej Muzyka">
 
-          <img src={window.__resources?.logoLight || "/assets/logo.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" width="686" height="208" style={{ objectFit: "cover" }} />
+          <img src={window.__resources?.logoDark || "/assets/logo-on-dark.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" width="686" height="208" style={{ objectFit: "cover" }} />
         </window.NavLink>
 
         {/* Desktop links */}
@@ -556,7 +556,7 @@ function AboutBlock({ compact = false }) {
             <h2 className="display mt-4" style={{ color: compact ? 'var(--text-main)' : '#fff' }}>
               Maciej Muzyka
             </h2>
-            <p className="font-semibold mt-2" style={{ color: compact ? 'var(--brand-primary)' : 'var(--brand-primary-light)', letterSpacing: '0.04em', fontSize: '1.0625rem' }}>adwokat · doktor nauk prawnych
+            <p className="font-semibold mt-2" style={{ color: compact ? 'var(--accent)' : 'var(--brand-primary-light)', letterSpacing: '0.04em', fontSize: '1.0625rem' }}>adwokat · doktor nauk prawnych
 
             </p>
             <div style={{ width: 80, height: 3, background: 'var(--brand-primary)', margin: '1.5rem auto 2rem' }} />
@@ -615,7 +615,7 @@ function Testimonials() {
                 „{t.text}”
               </p>
               <div className="flex gap-4 items-center mt-8" style={{ paddingTop: '1.5rem', borderTop: '1px solid var(--slate-100)' }}>
-                <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'var(--brand-primary-light)', color: 'var(--brand-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>
+                <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'var(--tint)', color: 'var(--tint-fg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>
                   {t.name.charAt(0)}
                 </div>
                 <div>
@@ -894,7 +894,7 @@ function CredibilityStrip() {
         <ul className="cred-strip">
           {items.map((it, i) =>
           <li key={i}>
-              <Icon name={it.i} size={18} style={{ color: 'var(--brand-primary)' }} />
+              <Icon name={it.i} size={18} style={{ color: 'var(--accent)' }} />
               <span>{it.l}</span>
             </li>
           )}

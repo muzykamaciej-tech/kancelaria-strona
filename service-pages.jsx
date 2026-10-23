@@ -42,7 +42,7 @@ function ServiceTrustStrip() {
         <ul className="cred-strip">
           {items.map((it, i) => (
             <li key={i}>
-              <SIcon name={it.i} size={18} style={{ color: 'var(--brand-primary)' }} />
+              <SIcon name={it.i} size={18} style={{ color: 'var(--accent)' }} />
               <span>{it.l}</span>
             </li>
           ))}
@@ -307,9 +307,9 @@ function NumberedBlock({ n, eyebrow, title, children }) {
 /* Shared list item — supports plain string or { b, t } (bold label + text) */
 function svcItem(it, i, iconName) {
   if (it && typeof it === 'object') {
-    return <li key={i}><SIcon name={iconName} size={18} style={{ color: 'var(--brand-primary)' }} /><span><strong style={{ color: 'var(--text-main)' }}>{it.b}</strong> — {it.t}</span></li>;
+    return <li key={i}><SIcon name={iconName} size={18} style={{ color: 'var(--accent)' }} /><span><strong style={{ color: 'var(--text-main)' }}>{it.b}</strong> — {it.t}</span></li>;
   }
-  return <li key={i}><SIcon name={iconName} size={18} style={{ color: 'var(--brand-primary)' }} /><span>{it}</span></li>;
+  return <li key={i}><SIcon name={iconName} size={18} style={{ color: 'var(--accent)' }} /><span>{it}</span></li>;
 }
 
 /* ============================================================
@@ -440,14 +440,14 @@ function buildServiceSections(c) {
                 <p className="level-sub">{lv.sub}</p>
                 <ul className="check-list mt-5">
                   {lv.points.map((p, k) => (
-                    <li key={k}><SIcon name="check" size={18} style={{ color: 'var(--brand-primary)' }} /><span>{p}</span></li>
+                    <li key={k}><SIcon name="check" size={18} style={{ color: 'var(--accent)' }} /><span>{p}</span></li>
                   ))}
                 </ul>
               </div>
             ))}
           </div>
           <div className="cost-note mt-8">
-            <SIcon name="info" size={20} style={{ color: 'var(--brand-primary)', flexShrink: 0 }} />
+            <SIcon name="info" size={20} style={{ color: 'var(--accent)', flexShrink: 0 }} />
             <div>
               <p className="font-bold" style={{ color: 'var(--text-main)' }}>Koszt</p>
               <p className="body mt-1">{c.levels.cost}</p>
@@ -500,9 +500,9 @@ function buildServiceSections(c) {
     title: 'Na start wystarczy tyle.',
     node: (
       <React.Fragment>
-        <ul className="check-list mt-8">{c.need.map((w, i) => <li key={i}><SIcon name="file-text" size={18} style={{ color: 'var(--brand-primary)' }} /><span>{w}</span></li>)}</ul>
+        <ul className="check-list mt-8">{c.need.map((w, i) => <li key={i}><SIcon name="file-text" size={18} style={{ color: 'var(--accent)' }} /><span>{w}</span></li>)}</ul>
         <div className="cost-note mt-10">
-          <SIcon name="info" size={20} style={{ color: 'var(--brand-primary)', flexShrink: 0 }} />
+          <SIcon name="info" size={20} style={{ color: 'var(--accent)', flexShrink: 0 }} />
           <div>
             <p className="font-bold" style={{ color: 'var(--text-main)' }}>Koszt</p>
             <p className="body mt-1">{window.COST_TEXT}</p>
@@ -526,7 +526,7 @@ function buildServiceSections(c) {
         <ul className="check-list prose-legal mt-8" data-law-list="">
           {c.law.items.map((it, i) => (
             <li key={i}>
-              <SIcon name="scale" size={18} style={{ color: 'var(--brand-primary)' }} />
+              <SIcon name="scale" size={18} style={{ color: 'var(--accent)' }} />
               <span>
                 <a href={'https://eli.gov.pl/eli/' + it.eli + '/ogl'} target="_blank" rel="noopener">{it.ref}</a>
                 {' — ' + it.act}{it.tj ? ` (t.j. ${it.tj})` : ''}{it.note ? `: ${it.note}` : ''}
@@ -582,7 +582,7 @@ function DocsToSend({ blockId, n, docs, title }) {
     <section className="section-py docs-to-send">
       <div className="wrap">
         <NumberedBlock n={n} eyebrow="Co przesłać do wstępnej analizy" title={title || 'Wystarczy to, co masz.'}>
-          <ul className="check-list mt-8">{list.map((d, i) => <li key={i}><SIcon name="file-text" size={18} style={{ color: 'var(--brand-primary)' }} /><span>{d}</span></li>)}</ul>
+          <ul className="check-list mt-8">{list.map((d, i) => <li key={i}><SIcon name="file-text" size={18} style={{ color: 'var(--accent)' }} /><span>{d}</span></li>)}</ul>
           <p className="body mt-6">Nie masz wszystkich dokumentów? Napisz, co masz. Do wstępnej analizy i oferty zwykle wystarczy kilka zdań i jeden dokument. Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów; szczegółowa analiza to zakres oferty.</p>
           <button className="btn btn-primary mt-6" onClick={() => spScrollToForm()}>
             Opisz sprawę i dołącz dokumenty <SIcon name="arrow-right" size={16} />
@@ -686,7 +686,7 @@ function ServicePage({ slug, setRoute }) {
                   To jedna z usług w obszarze „{block.title.toLowerCase()}”. Każdą sprawę prowadzę indywidualnie — od analizy dokumentów, przez przygotowanie pism i reprezentację, po finalne rozliczenie. Najszybciej pomogę, gdy opiszesz swoją sytuację w formularzu poniżej.
                 </p>
                 <div className="cost-note mt-10">
-                  <SIcon name="info" size={20} style={{ color: 'var(--brand-primary)', flexShrink: 0 }} />
+                  <SIcon name="info" size={20} style={{ color: 'var(--accent)', flexShrink: 0 }} />
                   <div>
                     <p className="font-bold" style={{ color: 'var(--text-main)' }}>Koszt</p>
                     <p className="body mt-1">{window.COST_TEXT}</p>

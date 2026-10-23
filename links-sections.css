@@ -46,7 +46,7 @@
   cursor: pointer;
   text-align: left;
 }
-.mobile-menu-sub li a:hover { color: var(--brand-primary); }
+.mobile-menu-sub li a:hover { color: var(--accent); }
 
 /* Footer "Kancelaria" links — ".footer-links a" in layout.css already sets colour, font and hover;
    only the inline-block box of the old <button> is missing. Internal links only (tel/mailto/WhatsApp stay inline). */

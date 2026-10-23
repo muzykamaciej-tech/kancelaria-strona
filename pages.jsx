@@ -178,7 +178,7 @@ function ServiceDetailPage({ serviceId, setRoute }) {
                 <ul className="aside-audience mt-3">
                   {service.audience.map((a, i) => (
                     <li key={i}>
-                      <Icon name="check" size={16} style={{ color: 'var(--brand-primary)' }} />
+                      <Icon name="check" size={16} style={{ color: 'var(--accent)' }} />
                       <span>{a}</span>
                     </li>
                   ))}

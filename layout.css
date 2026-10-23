@@ -79,10 +79,10 @@
   max-width: calc(100vw - 3rem);
 }
 .mega-menu-inner {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--slate-100);
   border-radius: var(--radius-lg);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.45), 0 4px 12px rgba(0,0,0,0.3);
   padding: 1.25rem;
 }
 .mega-menu-top {
@@ -112,7 +112,7 @@
   width: 100%;
   padding: 0.875rem 1rem;
   border: 1px solid var(--slate-100);
-  background: #fff;
+  background: var(--surface);
   cursor: pointer;
   font-family: inherit;
   text-align: center;
@@ -121,7 +121,7 @@
 }
 .mega-tile:hover, .mega-tile.active {
   border-color: var(--brand-primary);
-  background: var(--brand-primary-light);
+  background: var(--tint);
   box-shadow: var(--shadow-card-quiet);
 }
 .mega-tile-head {
@@ -134,7 +134,7 @@
   height: 32px;
   border-radius: var(--radius-sm);
   background: var(--slate-100);
-  color: var(--brand-primary);
+  color: var(--accent);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -153,7 +153,7 @@
   letter-spacing: 0.04em;
 }
 .mega-tile:hover .mega-tile-num,
-.mega-tile.active .mega-tile-num { color: var(--brand-primary); }
+.mega-tile.active .mega-tile-num { color: var(--accent); }
 .mega-tile-label {
   font-size: 0.9375rem;
   font-weight: 700;
@@ -163,15 +163,15 @@
   color: var(--text-main);
 }
 .mega-tile:hover .mega-tile-label,
-.mega-tile.active .mega-tile-label { color: var(--brand-primary); }
+.mega-tile.active .mega-tile-label { color: var(--accent); }
 
 /* Accessibility — skip link + visible keyboard focus */
 .skip-link{position:absolute;left:8px;top:-48px;z-index:200;background:var(--brand-primary);color:#fff;padding:10px 16px;border-radius:8px;font-family:var(--font-sans);font-weight:600;transition:top 160ms}
 .skip-link:focus{top:8px}
-a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible{ outline:2px solid var(--brand-primary); outline-offset:2px; border-radius:2px; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible{ outline: 2px solid var(--focus-ring); outline-offset:2px; border-radius:2px; }
 
 .nav-mobile-toggle {
-  background: #fff;
+  background: var(--surface);
   border: 2px solid var(--slate-200);
   border-radius: var(--radius-md);
   padding: 0.625rem;
@@ -182,10 +182,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   color: var(--text-main);
   transition: border-color 150ms;
 }
-.nav-mobile-toggle:hover { border-color: var(--brand-primary); color: var(--brand-primary); }
+.nav-mobile-toggle:hover { border-color: var(--brand-primary); color: var(--accent); }
 
 .mobile-menu {
-  background: #fff;
+  background: var(--surface);
   border-top: 1px solid var(--slate-100);
   padding: 1rem 0 1.5rem;
 }
@@ -205,7 +205,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   cursor: pointer;
   text-align: left;
 }
-.mobile-menu-link.active { color: var(--brand-primary); }
+.mobile-menu-link.active { color: var(--accent); }
 .mobile-menu-sub {
   list-style: none;
   padding: 0.5rem 0 0.5rem 1rem;
@@ -229,11 +229,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   cursor: pointer;
   text-align: left;
 }
-.mobile-menu-sub li button:hover { color: var(--brand-primary); }
+.mobile-menu-sub li button:hover { color: var(--accent); }
 .mobile-menu-num {
   font-weight: 800;
   font-size: 0.75rem;
-  color: var(--brand-primary);
+  color: var(--accent);
   margin-right: 0.25rem;
   font-variant-numeric: tabular-nums;
 }
@@ -260,7 +260,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   font-weight: 600;
   transition: color 150ms;
 }
-.breadcrumb button:hover { color: var(--brand-primary); }
+.breadcrumb button:hover { color: var(--accent); }
 .bg-dark .breadcrumb span { color: #fff; }
 .bg-dark .breadcrumb button { color: var(--text-on-dark-2); }
 .bg-dark .breadcrumb button:hover { color: #fff; }
@@ -289,7 +289,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .hero-stat-num {
   font-weight: 800;
   font-size: 2rem;
-  color: var(--brand-primary);
+  color: var(--accent);
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
@@ -338,7 +338,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   position: absolute;
   top: -2rem;
   right: -1rem;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--slate-100);
   border-radius: var(--radius-md);
   padding: 1rem 1.25rem;
@@ -408,7 +408,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 .service-tile {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--slate-100);
   border-radius: var(--radius-lg);
   padding: var(--d-card-p);
@@ -438,7 +438,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   font-size: clamp(2.5rem, 2rem + 2vw, 4rem);
   line-height: 1;
   color: transparent;
-  -webkit-text-stroke: 1.5px var(--brand-primary);
+  -webkit-text-stroke: 1.5px var(--accent);
   letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
 }
@@ -446,8 +446,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   width: 48px;
   height: 48px;
   border-radius: var(--radius-md);
-  background: var(--brand-primary-light);
-  color: var(--brand-primary);
+  background: var(--tint);
+  color: var(--tint-fg);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -496,7 +496,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   height: 36px;
   border-radius: 50%;
   background: var(--slate-100);
-  color: var(--brand-primary);
+  color: var(--accent);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -538,7 +538,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .service-row-num {
   font-weight: 800;
   font-size: 1.5rem;
-  color: var(--brand-primary);
+  color: var(--accent);
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
 }
@@ -546,8 +546,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   width: 40px;
   height: 40px;
   border-radius: var(--radius-sm);
-  background: var(--brand-primary-light);
-  color: var(--brand-primary);
+  background: var(--tint);
+  color: var(--tint-fg);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -579,7 +579,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   transition: transform 150ms, color 150ms;
 }
 .service-row:hover .service-row-arrow {
-  color: var(--brand-primary);
+  color: var(--accent);
   transform: translateX(4px);
 }
 
@@ -621,7 +621,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .service-detail-head { grid-template-columns: 2fr 1fr; gap: clamp(2rem, 4vw, 4rem); }
 }
 .service-detail-aside {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--slate-100);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
@@ -690,7 +690,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   gap: 1rem;
   align-items: start;
   padding: 1rem 1.25rem;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--slate-100);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card-quiet);
@@ -704,7 +704,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .deliverable-num {
   font-weight: 800;
   font-size: 1.25rem;
-  color: var(--brand-primary);
+  color: var(--accent);
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -728,7 +728,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   font-weight: 800;
   font-size: 1.75rem;
   color: transparent;
-  -webkit-text-stroke: 1.5px var(--brand-primary);
+  -webkit-text-stroke: 1.5px var(--accent);
   letter-spacing: -0.03em;
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -739,7 +739,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
    FAQ accordion
    ------------------------------------------------------------------------- */
 .faq-acc-item {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--slate-100);
   border-radius: var(--radius-md);
   transition: border-color 200ms;
@@ -769,7 +769,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   height: 32px;
   border-radius: 50%;
   background: var(--slate-100);
-  color: var(--brand-primary);
+  color: var(--accent);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -826,7 +826,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   grid-template-columns: 1fr;
   gap: 1.5rem;
   text-align: left;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--slate-100);
   border-radius: var(--radius-lg);
   padding: clamp(1.5rem, 2.5vw, 2.5rem);
@@ -903,7 +903,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   transition: all 150ms;
 }
 .blog-teaser-card:hover .blog-teaser-arrow {
-  color: var(--brand-primary);
+  color: var(--accent);
   transform: translate(2px, -2px);
 }
 
@@ -911,8 +911,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--brand-primary-light);
-  color: var(--brand-primary);
+  background: var(--tint);
+  color: var(--tint-fg);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -990,13 +990,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .prose-legal strong { font-weight: 700; color: var(--text-main); }
 .prose-legal em { font-style: italic; }
 .prose-legal a {
-  color: var(--brand-primary);
+  color: var(--accent);
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-thickness: 1px;
 }
-.prose-legal a:hover { color: var(--brand-primary-hover); }
+.prose-legal a:hover { color: var(--accent-hover); }
 
 .prose-legal .prose-table-wrap {
   margin: 0 0 1.5rem;
@@ -1034,8 +1034,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .prose-legal tbody tr:nth-child(even) th { background: var(--slate-50); }
 
 .post-callout {
-  background: var(--brand-primary-light);
-  border: 1px solid rgba(14,83,165,0.12);
+  background: var(--tint);
+  border: 1px solid rgba(127,176,234,0.22);
   border-radius: var(--radius-md);
   padding: 1.25rem 1.5rem;
   margin: 2rem 0;
@@ -1045,7 +1045,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   display: flex;
   align-items: center;
   gap: 1rem;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--slate-100);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
@@ -1134,7 +1134,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   grid-template-columns: 1fr;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--slate-100);
   box-shadow: var(--shadow-card-quiet);
 }
@@ -1249,11 +1249,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   align-items: center;
   gap: 1.75rem;
   padding: 1.25rem 1.5rem;
-  background: var(--slate-900);
+  background: var(--surface-overlay);
   color: var(--text-on-dark);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.22);
   border-radius: var(--radius-lg);
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.4);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
 }
 .cookie-banner-text {
   flex: 1;
@@ -1313,7 +1313,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
    ------------------------------------------------------------------------- */
 .tweak-mini-btn {
   padding: 0.5rem 0.75rem;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--slate-200);
   border-radius: var(--radius-sm);
   font-family: inherit;
@@ -1323,7 +1323,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   cursor: pointer;
   transition: all 150ms;
 }
-.tweak-mini-btn:hover { border-color: var(--brand-primary); color: var(--brand-primary); }
+.tweak-mini-btn:hover { border-color: var(--brand-primary); color: var(--accent); }
 .tweak-mini-btn[data-active="true"] {
   background: var(--brand-primary);
   border-color: var(--brand-primary);

@@ -10,7 +10,7 @@
   cursor: pointer;
   transition: color 150ms;
 }
-.breadcrumb a:hover { color: var(--brand-primary); }
+.breadcrumb a:hover { color: var(--accent); }
 .bg-dark .breadcrumb a { color: var(--text-on-dark-2); }
 .bg-dark .breadcrumb a:hover { color: #fff; }
 

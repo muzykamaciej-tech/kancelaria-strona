@@ -461,7 +461,7 @@ function QualificationForm({ compact = false }) {
       }
 
       <p className="small qual-foot">
-        <SvgIcon name="lock" size={13} style={{ color: 'var(--brand-primary)' }} />
+        <SvgIcon name="lock" size={13} style={{ color: 'var(--accent)' }} />
         Analiza i oferta w 24 h robocze. Do akceptacji oferty nic nie płacisz.
       </p>
       <p className="small qual-alt">Wolisz mailem? Wyślij opis i dokumenty na <a href={MAILTO_CASE}>{CONTACT_EMAIL}</a>.</p>
@@ -1129,7 +1129,7 @@ function ReviewsBand() {
             </figure>
           )}
         </div>
-        <p className="small mt-8" style={{ textAlign: 'center', color: 'var(--text-muted)' }}>Wszystkie {reviewsCount} {opinieLabel(reviewsCount)} znajdziesz w <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-primary)', textDecoration: 'underline' }}>wizytówce Google</a>.</p>
+        <p className="small mt-8" style={{ textAlign: 'center', color: 'var(--text-muted)' }}>Wszystkie {reviewsCount} {opinieLabel(reviewsCount)} znajdziesz w <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>wizytówce Google</a>.</p>
       </div>
     </section>);
 
@@ -1193,7 +1193,7 @@ function TrustPillars() {
         <div key={i} className="card">
               <p className="body" style={{ fontStyle: 'italic', color: 'var(--slate-700)', fontSize: '1.0625rem' }}>„{t.text}”</p>
               <div className="flex gap-4 items-center mt-8" style={{ paddingTop: '1.5rem', borderTop: '1px solid var(--slate-100)' }}>
-                <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'var(--brand-primary-light)', color: 'var(--brand-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>
+                <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'var(--tint)', color: 'var(--tint-fg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>
                   {t.name.charAt(0)}
                 </div>
                 <div>
@@ -1296,10 +1296,10 @@ function MapSection() {
         <span className="eyebrow">Kancelaria</span>
         <h3 className="h2 mt-4">Lublin i Warszawa —<br />sprawy z całej Polski</h3>
         <ul className="map-info-list mt-8">
-          <li><LIcon name="map-pin" size={20} style={{ color: 'var(--brand-primary)' }} /><span><span className="loc-label">Siedziba kancelarii</span>ul. Cicha 4/5<br />20-078 Lublin<br /><a href="https://maps.google.com/?cid=8576864712077445002" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-primary)', fontWeight: 600 }}>Wizytówka w Mapach Google</a></span></li>
-          <li><LIcon name="map-pin" size={20} style={{ color: 'var(--brand-primary)' }} /><span><span className="loc-label">Spotkania osobiste — Warszawa</span>ul. Bracka 20/lok. 7A<br />00-028 Warszawa</span></li>
-          <li><LIcon name="mail" size={20} style={{ color: 'var(--brand-primary)' }} /><span style={{ wordBreak: 'break-all' }}>maciej.muzyka@mecenasodnieruchomosci.pl</span></li>
-          <li><LIcon name="phone" size={20} style={{ color: 'var(--brand-primary)' }} /><span>+48 884 784 984<br /><span className="small">Preferowany kontakt mailowy</span></span></li>
+          <li><LIcon name="map-pin" size={20} style={{ color: 'var(--accent)' }} /><span><span className="loc-label">Siedziba kancelarii</span>ul. Cicha 4/5<br />20-078 Lublin<br /><a href="https://maps.google.com/?cid=8576864712077445002" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', fontWeight: 600 }}>Wizytówka w Mapach Google</a></span></li>
+          <li><LIcon name="map-pin" size={20} style={{ color: 'var(--accent)' }} /><span><span className="loc-label">Spotkania osobiste — Warszawa</span>ul. Bracka 20/lok. 7A<br />00-028 Warszawa</span></li>
+          <li><LIcon name="mail" size={20} style={{ color: 'var(--accent)' }} /><span style={{ wordBreak: 'break-all' }}>maciej.muzyka@mecenasodnieruchomosci.pl</span></li>
+          <li><LIcon name="phone" size={20} style={{ color: 'var(--accent)' }} /><span>+48 884 784 984<br /><span className="small">Preferowany kontakt mailowy</span></span></li>
         </ul>
         <p className="small mt-6" style={{ color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: '30rem' }}>
           Sprawy prowadzę zdalnie, w całej Polsce — kontakt przede wszystkim mailowo. Gdy sprawa wymaga osobistego spotkania, mam do dyspozycji lokal w Warszawie.

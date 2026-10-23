@@ -75,7 +75,7 @@ body {
   letter-spacing: -0.04em;
 }
 .display .accent {
-  color: var(--brand-primary);
+  color: var(--accent);
 }
 .display .italic {
   font-style: normal;
@@ -100,7 +100,7 @@ body {
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--brand-primary);
+  color: var(--accent);
 }
 .eyebrow::before,
 .eyebrow::after {
@@ -118,13 +118,13 @@ body {
   font-size: clamp(4rem, 3rem + 6vw, 9rem);
   line-height: 0.85;
   letter-spacing: -0.05em;
-  color: var(--brand-primary);
+  color: var(--accent);
   font-feature-settings: "tnum", "lnum";
   font-variant-numeric: tabular-nums lining-nums;
 }
 .kicker-num--ghost {
   color: transparent;
-  -webkit-text-stroke: 1.5px var(--brand-primary);
+  -webkit-text-stroke: 1.5px var(--accent);
 }
 
 .lead { font-size: 1.125rem; line-height: 1.6; color: var(--text-body); }
@@ -176,26 +176,27 @@ body {
   transform: none;
 }
 .btn-secondary {
-  background: #fff;
+  background: transparent;
   color: var(--text-main);
   border: 2px solid var(--slate-200);
 }
 .btn-secondary:hover {
   border-color: var(--brand-primary);
-  color: var(--brand-primary);
+  color: var(--accent);
 }
 .btn-ghost {
   background: transparent;
   color: var(--text-main);
   padding: 0.5rem 0;
 }
-.btn-ghost:hover { color: var(--brand-primary); }
+.btn-ghost:hover { color: var(--accent); }
 
 .btn-on-dark {
-  background: #fff;
-  color: var(--text-main);
+  background: var(--brand-primary);
+  color: #fff;
+  box-shadow: var(--shadow-cta);
 }
-.btn-on-dark:hover { background: var(--slate-100); transform: translateY(-2px); }
+.btn-on-dark:hover { background: var(--brand-primary-hover); transform: translateY(-2px); }
 
 .btn-link {
   display: inline-flex;
@@ -203,13 +204,13 @@ body {
   gap: 0.5rem;
   font-weight: var(--weight-bold);
   font-size: 0.9375rem;
-  color: var(--brand-primary);
+  color: var(--tint-fg);
   text-decoration: none;
   letter-spacing: 0.01em;
   padding: 0.6rem 1.15rem;
-  border: 1.5px solid color-mix(in oklch, var(--brand-primary) 22%, transparent);
+  border: 1.5px solid color-mix(in oklch, var(--accent) 30%, transparent);
   border-radius: var(--radius-full);
-  background: var(--brand-primary-light);
+  background: var(--tint);
   cursor: pointer;
   font-family: inherit;
   transition: background-color 160ms, border-color 160ms, color 160ms, transform 160ms, box-shadow 160ms;
@@ -229,8 +230,8 @@ body {
   border-color: rgba(255, 255, 255, 0.28);
 }
 .btn-link.on-dark:hover {
-  background: var(--brand-primary-light);
-  color: var(--brand-primary);
+  background: var(--tint);
+  color: var(--tint-fg);
   border-color: var(--brand-primary-light);
 }
 
@@ -238,7 +239,7 @@ body {
    Cards
    ------------------------------------------------------------------------- */
 .card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--slate-100);
   border-radius: var(--radius-lg);
   padding: var(--d-card-p);
@@ -280,8 +281,8 @@ body {
 }
 .icon-tile--lg { width: 4.5rem; height: 4.5rem; }
 .icon-tile--warn { background: var(--signal-warn-bg); color: var(--signal-warn-fg); }
-.icon-tile--info { background: var(--brand-primary-light); color: var(--brand-primary); }
-.icon-tile--ghost { background: transparent; border: 1.5px solid var(--brand-primary); color: var(--brand-primary); }
+.icon-tile--info { background: var(--tint); color: var(--tint-fg); }
+.icon-tile--ghost { background: transparent; border: 1.5px solid var(--brand-primary); color: var(--accent); }
 .icon-tile--dark { background: rgba(224, 237, 250, 0.1); color: var(--brand-primary-light); }
 
 /* -------------------------------------------------------------------------
@@ -295,13 +296,14 @@ body {
   font: inherit;
   font-size: 1rem;
   color: var(--text-main);
-  background: #fff;
+  background: var(--input-bg);
   transition: border-color 150ms, box-shadow 150ms;
 }
+.input::placeholder, .textarea::placeholder { color: var(--text-muted); opacity: 1; }
 .input:focus, .textarea:focus {
   outline: none;
-  border-color: var(--brand-primary);
-  box-shadow: 0 0 0 3px var(--brand-primary-shadow-soft);
+  border-color: var(--focus-ring);
+  box-shadow: 0 0 0 1px var(--focus-ring), 0 0 0 4px var(--brand-primary-shadow-soft); /* 2.5 px visible ring */
 }
 .textarea { resize: vertical; min-height: 6rem; }
 .input.input-error, .textarea.input-error {
@@ -378,16 +380,16 @@ section { position: relative; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--nav-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--slate-100);
   transition: box-shadow 280ms ease, background-color 280ms ease, border-color 280ms ease;
 }
 .nav--scrolled {
-  background: rgba(255, 255, 255, 0.97);
-  border-bottom-color: transparent;
-  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.08);
+  background: var(--nav-bg-scrolled);
+  border-bottom-color: var(--slate-100);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
 }
 .nav-inner {
   display: flex;
@@ -411,7 +413,7 @@ section { position: relative; }
   padding: 0.5rem 0;
   font-family: inherit;
 }
-.nav-link:hover, .nav-link.active { color: var(--brand-primary); }
+.nav-link:hover, .nav-link.active { color: var(--accent); }
 .nav-link.active {
   position: relative;
 }
@@ -453,7 +455,7 @@ section { position: relative; }
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   border-radius: var(--radius-full);
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--slate-200);
   font-size: 0.8125rem;
   font-weight: var(--weight-medium);
@@ -461,7 +463,7 @@ section { position: relative; }
   white-space: nowrap;
 }
 .chip strong {
-  color: var(--brand-primary);
+  color: var(--accent);
   font-weight: var(--weight-bold);
 }
 .chip--dark {
@@ -481,7 +483,7 @@ section { position: relative; }
   padding: 0.625rem 1rem;
   border: 1.5px solid var(--slate-200);
   border-radius: var(--radius-full);
-  background: #fff;
+  background: var(--surface);
   cursor: pointer;
   font-family: inherit;
   font-weight: var(--weight-semibold);
@@ -491,7 +493,7 @@ section { position: relative; }
 }
 .pillar-pill:hover {
   border-color: var(--brand-primary);
-  color: var(--brand-primary);
+  color: var(--accent);
 }
 .pillar-pill.active {
   background: var(--brand-primary);
@@ -589,7 +591,7 @@ section { position: relative; }
    Quick Check report styling
    ------------------------------------------------------------------------- */
 .report {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--slate-100);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -622,9 +624,9 @@ section { position: relative; }
   justify-content: center;
 }
 .finding-badge--ok { background: var(--signal-ok-bg); color: var(--signal-ok-fg); }
-.finding-badge--warn { background: #FFF7ED; color: #F97316; }
+.finding-badge--warn { background: var(--signal-alert-bg); color: var(--signal-alert-fg); }
 .finding-badge--risk { background: var(--signal-warn-bg); color: var(--signal-warn-fg); }
-.finding-badge--info { background: var(--brand-primary-light); color: var(--brand-primary); }
+.finding-badge--info { background: var(--tint); color: var(--tint-fg); }
 
 .tag {
   display: inline-flex;
@@ -637,17 +639,17 @@ section { position: relative; }
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.tag-ok { background: var(--signal-ok-bg); color: #16A34A; }
-.tag-warn { background: #FFF7ED; color: #C2410C; }
-.tag-risk { background: var(--signal-warn-bg); color: #B91C1C; }
-.tag-info { background: var(--brand-primary-light); color: var(--brand-primary); }
+.tag-ok { background: var(--signal-ok-bg); color: var(--signal-ok-text); }
+.tag-warn { background: var(--signal-alert-bg); color: var(--signal-alert-text); }
+.tag-risk { background: var(--signal-warn-bg); color: var(--signal-warn-text); }
+.tag-info { background: var(--tint); color: var(--tint-fg); }
 .tag-neutral { background: var(--slate-100); color: var(--slate-700); }
 
 /* -------------------------------------------------------------------------
    Tooltips / focus rings
    ------------------------------------------------------------------------- */
 :focus-visible {
-  outline: 2px solid var(--brand-primary);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -693,12 +695,12 @@ section { position: relative; }
 .mb-6 { margin-bottom: 1.5rem; }
 .mb-8 { margin-bottom: 2rem; }
 .mb-12 { margin-bottom: 3rem; }
-.text-brand { color: var(--brand-primary); }
+.text-brand { color: var(--accent); }
 .text-brand-light { color: var(--brand-primary-light); }
 .text-muted { color: var(--text-muted); }
 .text-body { color: var(--text-body); }
 .text-on-dark { color: var(--text-on-dark); }
-.bg-white { background: #fff; }
+.bg-white { background: var(--surface); }
 
 /* Hide scrollbars on chip rails */
 .scroll-x {
