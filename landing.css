@@ -238,14 +238,6 @@ select.input { appearance: auto; cursor: pointer; }
 .review-text { margin: 1rem 0 0; font-style: italic; color: var(--slate-700); font-size: 1.0625rem; flex: 1; text-wrap: pretty; }
 .review-meta { display: flex; gap: 0.875rem; align-items: center; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--slate-100); }
 .review-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--tint); color: var(--tint-fg); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
-/* Case studies */
-.cases-grid { display: grid; gap: var(--d-gap); grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); }
-.case-card { display: flex; flex-direction: column; }
-.case-steps { margin: 0 0 1.5rem; }
-.case-steps dt { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-top: 0.875rem; }
-.case-steps dd { margin: 0.25rem 0 0; color: var(--text-body); line-height: 1.6; font-size: 0.9375rem; text-wrap: pretty; }
-.case-metric { margin-top: auto; padding-top: 1.25rem; border-top: 1px solid var(--slate-100); display: flex; flex-direction: column; gap: 0.125rem; }
-.case-metric-num { font-weight: 800; font-size: 1.75rem; color: var(--text-main); letter-spacing: -0.02em; }
 .qual-field { display: block; margin-top: 1rem; }
 
 /* File drop / chip */

@@ -1156,43 +1156,6 @@ function ReviewsBand() {
 
 }
 
-/* ============================================================
-   Case studies — z praktyki (dane klientów zmienione)
-   ============================================================ */
-const CASE_STUDIES = [
-  { tag: 'Roszczenia wobec dewelopera', title: 'Wadliwa izolacja, grzyb w salonie, deweloper „pudruje” naprawy', situation: 'Klient kupił apartament z ogródkiem. Po pierwszym większym deszczu w salonie pojawiła się wilgoć i grzyb, a parkiet spuchł. Deweloper dwa razy przysłał ekipę, która zamalowała skutki, nie usuwając przyczyny.', action: 'Zleciłem prywatną opinię rzeczoznawcy budowlanego, który wycenił prawidłowe wykonanie izolacji (z rozkuciem tarasu) i wymianę podłogi na 45 000 zł. Doliczyłem szkodę za trzy miesiące bez możliwości korzystania z salonu i wezwałem dewelopera do zapłaty.', result: 'Ugoda zamiast kolejnej „kosmetycznej” naprawy: deweloper wypłacił 52 000 zł. Klient wynajął własną ekipę i zrobił to raz, a dobrze.', metric: '52 000 zł', metricLabel: 'wypłacone w ugodzie' },
-  { tag: 'Najem', title: 'Najemcy przestali płacić po trzech miesiącach', situation: 'Właścicielka dwupokojowego mieszkania w Warszawie wynajęła je młodemu małżeństwu. Po trzech miesiącach czynsz przestał wpływać. Przy zwykłej umowie czekałaby ją wielomiesięczna sprawa o eksmisję.', action: 'Przy zawieraniu umowy przekonałem ją do najmu okazjonalnego z notarialnym oświadczeniem najemców. Po powstaniu zaległości wypowiedziałem umowę, uzyskałem klauzulę wykonalności i skierowałem sprawę wprost do komornika — bez procesu o eksmisję.', result: 'Lokal odzyskany w niecałe trzy miesiące zamiast — realistycznie — roku. Koszt zabezpieczenia przy podpisywaniu umowy: kilkaset złotych u notariusza.', metric: '< 3 mies.', metricLabel: 'do odzyskania mieszkania' },
-  { tag: 'Planowanie przestrzenne', title: 'Działka rolna na skraju miasta a nowy plan ogólny', situation: 'Klienci mieli dużą działkę rolną na obrzeżach miasta i plany budowy w kolejnych latach. Gmina przystąpiła do planu ogólnego — bez ujęcia działki w obszarze uzupełnienia zabudowy, po 1 września 2026 r. uzyskanie warunków zabudowy stałoby się niemożliwe.', action: 'Przeanalizowałem projekt planu i sytuację działki, złożyłem w imieniu klientów formalne wnioski do planu ogólnego z argumentacją prawną i urbanistyczną, a na etapie wyłożenia projektu pilnowałem, czy zostały uwzględnione.', result: 'Teren został ujęty w obszarze uzupełnienia zabudowy. Klienci zachowali możliwość zabudowy działki na nowych zasadach.', metric: 'OUZ', metricLabel: 'działka w obszarze zabudowy' },
-];
-
-function CaseStudies() {
-  return (
-    <section className="section-py" id="z-praktyki">
-      <div className="wrap">
-        <div className="section-head section-head--center">
-          <span className="eyebrow">Z praktyki</span>
-          <h2 className="h2 mt-4">Trzy sprawy, trzy wyniki.</h2>
-          <p className="lead mt-6" style={{ maxWidth: '40rem' }}>Przykłady z mojej praktyki. Dane klientów zmienione, przebieg i wyniki — prawdziwe.</p>
-        </div>
-        <div className="cases-grid mt-12">
-          {CASE_STUDIES.map((c, i) =>
-          <article key={i} className="card case-card">
-              <span className="eyebrow">{c.tag}</span>
-              <h3 className="font-bold mt-3" style={{ fontSize: '1.25rem', color: 'var(--text-main)', lineHeight: 1.3, textWrap: 'pretty' }}>{c.title}</h3>
-              <dl className="case-steps mt-4">
-                <dt>Sytuacja</dt><dd>{c.situation}</dd>
-                <dt>Co zrobiłem</dt><dd>{c.action}</dd>
-                <dt>Wynik</dt><dd>{c.result}</dd>
-              </dl>
-              <div className="case-metric"><span className="case-metric-num">{c.metric}</span><span className="small">{c.metricLabel}</span></div>
-            </article>
-          )}
-        </div>
-      </div>
-    </section>);
-
-}
-
 /* Trust pillars grid (same card/grid look as before; no stars, no names) */
 function TrustPillars() {
   return (
@@ -1366,7 +1329,6 @@ function LandingPage({ setRoute }) {
       <StatsBand />
       <HowItWorks />
       <PracticeAreas setRoute={setRoute} />
-      <CaseStudies />
       <LAboutBlock />
       <Standards />
       <ReviewsBand />
