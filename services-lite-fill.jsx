@@ -754,7 +754,7 @@ Object.assign(window.SERVICE_CONTENT, {
         t: 'Zapis z wzorca uważa się w szczególności za nieuzgodniony indywidualnie, a uzgodnienie musi wykazać biuro (art. 385¹ § 3 i 4 k.c.). Nie wiąże konsumenta, gdy jest sprzeczny z dobrymi obyczajami i przy tym rażąco narusza jego interesy, chyba że jednoznacznie określa wynagrodzenie (art. 385¹ § 1 k.c.).',
       },
       {
-        b: 'Prowadzisz biuro sam i nie masz procedury AML albo masz wzór z internetu.',
+        b: 'Prowadzisz biuro sam i nie masz procedury AML albo masz ogólny wzór, którego nie dopasowałeś do biura.',
         t: 'W jednoosobowej działalności za AML odpowiadasz Ty (art. 9 ustawy AML), a procedura ma pasować do Twojej działalności (art. 50 ust. 2).',
       },
     ],
@@ -797,7 +797,7 @@ Object.assign(window.SERVICE_CONTENT, {
         a: 'Tak, gdy miesięczny czynsz wynosi co najmniej równowartość 10 000 euro. Pośrednictwo przy najmie lub dzierżawie z niższym czynszem ustawa AML wyłącza (art. 2 ust. 1 pkt 18). Euro przeliczasz według średniego kursu NBP (art. 5 ustawy AML). Przy lokalach użytkowych i halach sprawdź to przed podpisaniem umowy pośrednictwa.',
       },
       {
-        q: 'Czy wzór procedury AML z internetu wystarczy?',
+        q: 'Czy wystarczy gotowy wzór procedury AML?',
         a: 'Nie, jeżeli nie dopasujesz go do biura. Procedura ma uwzględniać charakter, rodzaj i rozmiar Twojej działalności (art. 50 ust. 2 ustawy AML) i opisywać, jak ograniczasz ryzyko z Twojej oceny ryzyka (art. 50 ust. 2 pkt 1–3, art. 27 ust. 1). Ocenę aktualizujesz co najmniej co 2 lata (art. 27 ust. 3). Klientów, transakcje i kanały pozyskania opisujesz własne.',
       },
     ],

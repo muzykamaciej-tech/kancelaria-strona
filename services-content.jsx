@@ -4043,7 +4043,7 @@ const SERVICE_CONTENT = {
     when: [
       { b: 'Najemca już się wprowadził, a umowy nikt jeszcze nie zgłosił.', t: 'Masz 14 dni od dnia rozpoczęcia najmu, nie od podpisu umowy (art. 19b ust. 1 u.o.p.l.). Ten termin już biegnie.' },
       {
-        b: 'Masz umowę „z internetu” z nagłówkiem „najem okazjonalny”.',
+        b: 'Masz podpisaną umowę z nagłówkiem „najem okazjonalny” i nie wiesz, czy ma wszystkie załączniki.',
         t: 'Sam nagłówek nie chroni. Bez aktu notarialnego najemcy i bez zgłoszenia w terminie nie ma opróżnienia lokalu bez procesu (art. 19a ust. 2 pkt 1, art. 19b ust. 3 u.o.p.l.).',
       },
       {
@@ -6959,8 +6959,8 @@ const SERVICE_CONTENT = {
     ],
     lists: [
       {
-        eyebrow: 'Zamiast wzoru z internetu',
-        title: 'Cztery zapisy, których wzór z internetu nie ustali za Ciebie',
+        eyebrow: 'Przed podpisem',
+        title: 'Cztery zapisy, których żaden wzór nie ustali za Ciebie',
         kind: 'check',
         items: [
           { b: 'Rok dzierżawny', t: 'od niego liczy się koniec wypowiedzenia (art. 704 k.c.) i czynsz za niepełny rok (art. 707 k.c.).' },

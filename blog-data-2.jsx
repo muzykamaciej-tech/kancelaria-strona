@@ -107,7 +107,7 @@ window.BLOG.push(
       ['h3', 'TL;DR – Wynajem w 3 krokach:'],
       ['ul', [
         '**Weryfikuj najemcę:** Zawsze sprawdzaj tożsamość, źródło dochodu i historię poprzednich najmów. To Twoja pierwsza linia obrony.',
-        '**Stwórz żelazną umowę:** Nie polegaj na darmowych wzorach z internetu. Zainwestuj w umowę najmu okazjonalnego, która realnie chroni Twoje interesy.',
+        '**Zadbaj o umowę:** Korzystaj tylko ze wzoru, który ma autora, datę stanu prawnego i instrukcję. Najem okazjonalny chroni Cię dopiero z aktem notarialnym najemcy i zgłoszeniem umowy do urzędu skarbowego.',
         '**Dokumentuj wszystko:** Protokół zdawczo-odbiorczy ze szczegółową dokumentacją fotograficzną to absolutna podstawa, by uniknąć sporów o kaucję.',
       ]],
       ['h2', 'Krok 1: Weryfikacja najemcy – fundament Twojego spokoju'],
@@ -123,7 +123,7 @@ window.BLOG.push(
       ]],
       ['p', 'Pamiętaj, że wszystkie te działania muszą odbywać się z poszanowaniem RODO. Możesz pytać tylko o dane niezbędne do oceny wiarygodności płatniczej i zawarcia umowy.'],
       ['h2', 'Krok 2: Umowa najmu – Twoja tarcza prawna'],
-      ['p', 'Darmowy wzór umowy z internetu to prosta droga do kłopotów. Dlaczego? Ponieważ większość z nich zawiera klauzule niedozwolone (abuzywne) lub po prostu nie chroni właściciela w wystarczającym stopniu.'],
+      ['p', 'Wzór bez autora i daty stanu prawnego to ryzyko: nie wiesz, czy uwzględnia zmiany przepisów, czy pasuje do rodzaju najmu i czy ma wszystkie załączniki. Zanim go użyjesz, sprawdź, kto go przygotował i na jaki dzień.'],
       ['h3', 'Umowa na czas określony czy nieokreślony?'],
       ['ul', [
         '**Czas określony:** Daje Ci większą pewność co do długości najmu i przychodów. Jest trudniejsza do wypowiedzenia przez najemcę, ale również przez Ciebie (chyba że umowa przewiduje konkretne przypadki).',

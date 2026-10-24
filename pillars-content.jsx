@@ -824,7 +824,7 @@ Object.assign(window.BLOCK_CONTENT, {
       ],
     },
     introHeading: 'Mieszkanie czy lokal pod firmę: od tego zależą Twoje prawa',
-    intro: 'Umowa najmu to oddanie rzeczy do używania w zamian za umówiony czynsz (art. 659 § 1 k.c.). Przy mieszkaniu do Kodeksu cywilnego dochodzi ustawa o ochronie praw lokatorów, która zna kilka rodzajów najmu. Od rodzaju umowy zależą wypowiedzenie, górna granica kaucji i to, czy odzyskanie lokalu wymaga procesu. Najwięcej problemów bierze się z umów pisanych „ze wzoru z internetu”.',
+    intro: 'Umowa najmu to oddanie rzeczy do używania w zamian za umówiony czynsz (art. 659 § 1 k.c.). Przy mieszkaniu do Kodeksu cywilnego dochodzi ustawa o ochronie praw lokatorów, która zna kilka rodzajów najmu. Od rodzaju umowy zależą wypowiedzenie, górna granica kaucji i to, czy odzyskanie lokalu wymaga procesu. Najwięcej problemów sprawiają umowy z przypadkowego wzoru: bez daty stanu prawnego, z nagłówkiem, który nie pasuje do rodzaju najmu, albo bez wymaganych załączników.',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Lokator nie płaci, przyszło wypowiedzenie albo ktoś wymienił zamki',
     when: [

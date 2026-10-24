@@ -208,7 +208,7 @@ const SERVICES = [
     ],
     process: [
       { t: 'Diagnoza Twojej sytuacji', d: 'Jaki typ najmu, jaki profil najemcy, jakie ryzyka.' },
-      { t: 'Wzór umowy', d: 'Indywidualnie skrojona umowa — nie szablon z internetu.' },
+      { t: 'Wzór umowy', d: 'Umowa pod Twój tryb najmu i lokal, ze stanem prawnym na dzień podpisu.' },
       { t: 'Bieżąca obsługa', d: 'Wezwania do zapłaty, kary umowne, kontakty z najemcą.' },
       { t: 'Eskalacja', d: 'Eksmisja, windykacja, postępowanie egzekucyjne — gdy potrzeba.' },
     ],

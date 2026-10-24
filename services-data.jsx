@@ -90,9 +90,9 @@ const SERVICE_BLOCKS = [
     metaDesc: 'Prowadzę sprawy najmu nieruchomości: umowy, kaucje, zaległy czynsz i eksmisje. Najemcę mieszkania chroni ustawa o ochronie praw lokatorów, a biura umowa.',
     title: 'Najem nieruchomości',
     tagline: 'Bezpieczny najem — dla wynajmującego i dla najemcy.',
-    intro: 'Zabezpieczam najem po obu stronach — skrojona pod Ciebie umowa zamiast szablonu z internetu, najem okazjonalny, eksmisja i windykacja czynszu.',
+    intro: 'Zabezpieczam najem po obu stronach — umowa pod Twój tryb najmu i Twój lokal, najem okazjonalny, eksmisja i windykacja czynszu.',
     services: [
-      { slug: 'bezpieczny-najem', icon: 'key-round', title: 'Bezpieczny najem dla wynajmującego', desc: 'Najem okazjonalny i instytucjonalny, umowa skrojona pod Ciebie, nie szablon z internetu.' },
+      { slug: 'bezpieczny-najem', icon: 'key-round', title: 'Bezpieczny najem dla wynajmującego', desc: 'Najem okazjonalny i instytucjonalny: umowa pod Twój tryb najmu, z załącznikami, których ten tryb wymaga.' },
       { slug: 'analiza-umowy-najmu', icon: 'file-search', title: 'Analiza umowy najmu (dla najemcy)', desc: 'Sprawdzam umowę, zanim ją podpiszesz jako najemca.' },
       { slug: 'eksmisja', icon: 'door-open', title: 'Eksmisja', desc: 'Odzyskanie lokalu — od pozwu po egzekucję, także z najmu okazjonalnego.' },
       { slug: 'windykacja-czynszu', icon: 'banknote', title: 'Windykacja czynszu', desc: 'Odzyskiwanie zaległego czynszu i opłat.' },
