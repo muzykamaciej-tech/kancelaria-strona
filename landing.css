@@ -373,7 +373,7 @@ select.input { appearance: auto; cursor: pointer; }
   white-space: nowrap;
   font-variant-numeric: tabular-nums lining-nums;
 }
-.stat-label { font-size: 0.9375rem; line-height: 1.4; color: var(--text-on-dark-2); margin-top: 0.75rem; max-width: 16rem; }
+.stat-label { font-size: 0.8125rem; line-height: 1.5; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-on-dark-2); margin-top: 0.85rem; max-width: 24rem; text-wrap: balance; }
 .stats-note { margin-top: 2.5rem; color: var(--slate-500); }
 
 /* ----------------------------------------------------------------

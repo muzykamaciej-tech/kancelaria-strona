@@ -89,7 +89,7 @@ const LANDING_STATS = [
 { value: 10, suffix: '', grouped: false, l: 'lat w prawie nieruchomości' },
 { value: 24, suffix: ' h', grouped: false, l: 'czas wstępnej analizy sprawy' },
 { value: 1479, suffix: '', grouped: true, l: 'godzin na sali sądowej' },
-{ value: 7412, suffix: '', grouped: true, l: 'wypitych kaw (i liczę dalej)' }];
+{ value: 7412, suffix: '', grouped: true, l: 'wypitych kaw' }];
 
 
 /* Standardy współpracy */
