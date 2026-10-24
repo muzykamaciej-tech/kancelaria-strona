@@ -399,3 +399,14 @@
 /* 12. kafelek na stronie głównej: sprawa spoza 11 obszarów → formularz (wyróżniona ramka) */
 .block-card--cta { border-color: rgba(127,176,234,.45); box-shadow: 0 0 0 1px rgba(127,176,234,.12), var(--shadow-card-quiet); }
 .block-card--cta .block-card-photo + .block-card-ic { background: var(--brand-primary); color: #fff; }
+
+/* Hover kafelków ze zdjęciem (24.10.2026): bez powiększania zdjęcia (wystawało poza pole i rysowało poziomą linię),
+   zamiast tego zdjęcie przycięte do swojego pola i lekko rozjaśnione, kafelek się unosi, ikona świeci */
+.block-card-photo, .svc-card-photo { overflow: hidden; }
+.block-card-photo img, .svc-card-photo img { transform: none !important; transition: filter 400ms ease; }
+.block-card:hover .block-card-photo img, .svc-card--photo:hover .svc-card-photo img { filter: brightness(1.18) saturate(1.08); }
+.block-card, .svc-card--photo { transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease; }
+.block-card:hover, .svc-card--photo:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -18px rgba(0,0,0,.7), 0 0 0 1px rgba(127,176,234,.35); }
+.block-card-photo + .block-card-ic, .svc-card--photo .svc-card-ic { transition: background-color 260ms ease, color 260ms ease, box-shadow 260ms ease; transform: none !important; }
+.block-card:hover .block-card-photo + .block-card-ic, .svc-card--photo:hover .svc-card-ic { box-shadow: 0 6px 16px rgba(0,0,0,.35), 0 0 0 4px rgba(14,83,165,.25), 0 0 24px rgba(46,120,214,.45); }
+@media (prefers-reduced-motion: reduce) { .block-card:hover, .svc-card--photo:hover { transform: none; } }
