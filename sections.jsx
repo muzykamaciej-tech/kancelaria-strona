@@ -301,6 +301,12 @@ function MegaMenu({ onNavigate, active }) {
 
 function MobileMenu({ go, route, onNavigate }) {
   const [servicesOpen, setServicesOpen] = useState(false);
+  useEffect(() => { /* wysokość paska nad menu → max-height menu w layout.css */
+    const bar = document.querySelector('.nav .nav-inner');
+    if (bar) document.documentElement.style.setProperty('--nav-h', bar.getBoundingClientRect().bottom + 'px');
+    document.body.classList.add('mobile-menu-open');
+    return () => document.body.classList.remove('mobile-menu-open');
+  }, []);
   useEffect(() => {
     if (servicesOpen && window.lucide) {
       const t = setTimeout(() => window.lucide.createIcons(), 20);
