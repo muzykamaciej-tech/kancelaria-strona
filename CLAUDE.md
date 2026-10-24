@@ -47,6 +47,10 @@ Potem commit razem z `dist/`. Najpierw push na gałąź roboczą (podgląd), a n
 - Marketing bez danych klientów (nazwiska, adresy, numery działek i KW).
 - Każda sygnatura i każdy przepis przed publikacją do weryfikacji w LEX/Legalis/CBOSA. Stare wpisy z WIX miały błędy prawne (archiwum i ocena: Dysk, `Marketing/Strona www/Archiwum WIX 2026-09-25/`).
 
+## Narzędzia poza stroną
+
+`narzedzia/lex-mcp/`: serwer MCP `lex` (wyszukiwanie i odczyt LEX w ukrytym Chrome, hasło w pęku kluczy macOS). Nie wchodzi do `dist/` ani do builda strony. Instrukcja: `narzedzia/lex-mcp/README.md`. Zmiany w nim nie wymagają przebudowy `dist/`.
+
 ## Skrypty
 
 | Skrypt | Co robi |

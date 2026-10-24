@@ -1,0 +1,23 @@
+{
+  "name": "lex-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Serwer MCP do LEX (sip.lex.pl): logowanie w tle (ukryty Chrome), wyszukiwanie orzeczeń, komentarzy i publikacji, odczyt pełnych tekstów. Dane logowania w pęku kluczy macOS.",
+  "type": "module",
+  "bin": {
+    "lex": "bin/lex.mjs"
+  },
+  "scripts": {
+    "setup": "node bin/lex.mjs setup",
+    "start": "node src/server.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "puppeteer-core": "^24.0.0",
+    "zod": "^3.25.0"
+  }
+}
