@@ -1461,3 +1461,11 @@ a.blog-cat-tile:hover .blog-cat-tile-arrow { transform: translate(2px, -2px); }
 @media (max-width: 639px) {
   .post-hero-cover { width: calc(100% + 2 * var(--gutter-x-sm)); max-width: none; margin-inline: calc(-1 * var(--gutter-x-sm)); border-radius: 0; }
 }
+
+/* „O mnie” ze zdjęciem jako panel sekcji (24.10.2026): tekst w prawej połowie; wysokość górnej części = wysokość zdjęcia,
+   żeby lista kwalifikacji zaczynała się pod zdjęciem */
+@media (min-width: 980px) {
+  .about-grid--panel { grid-template-columns: 1fr 1fr; gap: 3rem; min-height: calc(50vw * 1597 / 1400 - var(--d-section-py) - 6rem); }
+  .about-grid--panel > .about-body { grid-column: 2; }
+}
+.about-band .section-photo { margin-top: calc(-1 * var(--d-section-py)); }

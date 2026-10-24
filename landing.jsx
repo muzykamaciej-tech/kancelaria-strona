@@ -728,7 +728,7 @@ function SectionPhoto({ name, side, alt, fit, eager, children }) {
         src={`/assets/maciej-muzyka-${name}-1400.webp`}
         srcSet={`/assets/maciej-muzyka-${name}-800.webp 800w, /assets/maciej-muzyka-${name}-1400.webp 1400w`}
         sizes="(min-width: 980px) 50vw, 100vw"
-        alt={alt} width="1400" height={{ hero: 1974, telefon: 1555, smartfon: 1575 }[name]}
+        alt={alt} width="1400" height={{ hero: 1974, telefon: 1555, smartfon: 1575, omnie: 1597 }[name]}
         loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" />
       {children}
     </div>
@@ -1316,4 +1316,4 @@ function LandingPage({ setRoute }) {
 
 }
 
-Object.assign(window, { LandingPage, QualificationForm, GoogleBadge, ReportShowcase, MapSection, MobileCTABar, lScrollToId, ReviewsBand, FinalCTA });
+Object.assign(window, { SectionPhoto, LandingPage, QualificationForm, GoogleBadge, ReportShowcase, MapSection, MobileCTABar, lScrollToId, ReviewsBand, FinalCTA });

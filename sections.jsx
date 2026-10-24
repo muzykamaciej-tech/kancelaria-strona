@@ -540,13 +540,15 @@ function ServiceTile({ service, onOpen, route, slug, large = false }) {
    ============================================================ */
 function AboutBlock({ compact = false }) {
   return (
-    <section className={`section-py ${compact ? '' : 'bg-dark'} relative overflow-hidden`}>
+    <section className={`section-py ${compact ? '' : 'bg-dark about-band'} relative overflow-hidden`}>
       {!compact && <div className="orb" style={{ width: 500, height: 500, bottom: '-20%', right: '-10%', opacity: 'calc(0.2 * var(--ambient-on))' }} />}
+      {/* zdjęcie jako panel sekcji (jak na stronie głównej): lewa połowa od górnej krawędzi, gradient w stronę tekstu */}
+      {!compact && window.SectionPhoto && <window.SectionPhoto name="omnie" side="left" fit="top" alt="adw. dr Maciej Muzyka" />}
       <div className="wrap relative" style={{ zIndex: 2 }}>
-        <div className="about-grid">
-          <div className="about-portrait">
+        <div className={'about-grid' + (compact ? '' : ' about-grid--panel')}>
+          {compact && <div className="about-portrait">
             <img src={window.__resources?.portrait2 || "/assets/maciej-muzyka-2.webp"} alt="adw. dr Maciej Muzyka" width="1100" height="1467" loading="lazy" decoding="async" />
-          </div>
+          </div>}
           <div className="about-body text-center">
             <span className={`eyebrow ${compact ? '' : 'on-dark'}`}>O mnie</span>
             <h2 className="display mt-4" style={{ color: compact ? 'var(--text-main)' : '#fff' }}>
