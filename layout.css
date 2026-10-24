@@ -1469,3 +1469,16 @@ a.blog-cat-tile:hover .blog-cat-tile-arrow { transform: translate(2px, -2px); }
   .about-grid--panel > .about-body { grid-column: 2; }
 }
 .about-band .section-photo { margin-top: calc(-1 * var(--d-section-py)); }
+
+/* Menu mobilne jest częścią przyklejonego paska (.nav sticky), więc samo musi się przewijać,
+   gdy rozwinięte „Usługi prawne” są dłuższe niż ekran. */
+.mobile-menu {
+  max-height: calc(100vh - var(--nav-h, 72px));
+  max-height: calc(100dvh - var(--nav-h, 72px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+}
+/* przyciski pływające nie zasłaniają otwartego menu */
+body.mobile-menu-open .back-to-top, body.mobile-menu-open .mobile-cta-bar, body.mobile-menu-open .quick-contact { opacity: 0 !important; pointer-events: none !important; }
