@@ -737,7 +737,8 @@ function BlogTeaser({ setRoute }) {
 /* One blog card: home teaser and the „Poradniki” module on service and pillar pages (service-pages.jsx) */
 function BlogTeaserCard({ post }) {
   return (
-    <window.NavLink className="card card-hover blog-teaser-card" route="blogpost" slug={post.slug} style={{ textAlign: 'left' }}>
+    <window.NavLink className={'card card-hover blog-teaser-card' + (post.cover ? ' blog-teaser-card--photo' : '')} route="blogpost" slug={post.slug} style={{ textAlign: 'left' }}>
+      {post.cover && <span className="blog-teaser-photo" aria-hidden="true"><img src={post.cover} alt="" width="1200" height="654" loading="lazy" decoding="async" /></span>}
       <span className="tag tag-info">{post.category}</span>
       <h3 className="font-bold mt-4" style={{ color: 'var(--text-main)', fontSize: '1.125rem', lineHeight: 1.3 }}>{post.title}</h3>
       <div className="small mt-4 flex items-center gap-2">
