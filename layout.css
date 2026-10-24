@@ -1428,7 +1428,8 @@ a.blog-cat-tile:hover .blog-cat-tile-arrow { transform: translate(2px, -2px); }
 @media (min-width: 700px) { .blog-card--photo { grid-template-columns: 260px 1fr; gap: 2rem; } }
 .blog-card--photo .blog-card-aside { border: 0; padding: 0; }
 .blog-card-img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 654; object-fit: cover; border-radius: var(--radius-md); }
-@media (min-width: 700px) { .blog-card--photo .blog-card-img { height: 100%; min-height: 170px; aspect-ratio: auto; } }
+/* cała okładka (ma wpisany tytuł) — bez przycinania */
+.blog-card--photo .blog-card-aside { align-self: start; }
 
 /* Okładka wpisu na karcie poradnika (strony usług i obszarów, 10.2026) */
 .blog-teaser-card--photo { overflow: hidden; }
@@ -1440,3 +1441,23 @@ a.blog-cat-tile:hover .blog-cat-tile-arrow { transform: translate(2px, -2px); }
 .blog-teaser-card--photo:hover .blog-teaser-photo img { transform: scale(1.04); }
 .blog-teaser-card--photo .blog-teaser-arrow { z-index: 1; color: #fff; }
 .blog-teaser-card--photo .tag { align-self: flex-start; }
+
+/* Nagłówek wpisu: rozmyta okładka jako tło na całą szerokość ekranu, okładka na pełną szerokość treści (10.2026) */
+.post-hero { position: relative; overflow: hidden; isolation: isolate; }
+.post-hero-bg {
+  position: absolute; inset: -60px; z-index: 0;
+  background-size: cover; background-position: center;
+  filter: blur(42px) brightness(0.42) saturate(1.15);
+  transform: scale(1.1);
+}
+.post-hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(11,18,32,.35) 0%, rgba(11,18,32,0) 30%, rgba(11,18,32,0) 70%, var(--bg-default, #0B1220) 100%);
+}
+.post-hero-cover {
+  display: block; width: 100%; height: auto; margin-top: clamp(2rem, 4vw, 3rem);
+  border-radius: var(--radius-lg); box-shadow: 0 30px 60px -20px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.06);
+}
+@media (max-width: 639px) {
+  .post-hero-cover { width: calc(100% + 2 * var(--gutter-x-sm)); max-width: none; margin-inline: calc(-1 * var(--gutter-x-sm)); border-radius: 0; }
+}

@@ -495,8 +495,10 @@ function BlogPostPage({ slug, setRoute }) {
 
   return (
     <main id="main-content" data-screen-label={`05 Blog post — ${post.title}`}>
-      <section className="bg-light" style={{ paddingBlock: '3rem 4rem' }}>
-        <div className="wrap">
+      <section className={'bg-light' + (post.cover ? ' post-hero' : '')} style={{ paddingBlock: '3rem 4rem' }}>
+        {/* tło: rozmyta, przyciemniona okładka na całą szerokość ekranu */}
+        {post.cover && <div className="post-hero-bg" aria-hidden="true" style={{ backgroundImage: `url(${post.cover})` }} />}
+        <div className="wrap relative" style={{ zIndex: 1 }}>
           <nav className="breadcrumb">
             <window.NavLink route="landing">Start</window.NavLink>
             <Icon name="chevron-right" size={14} />
@@ -519,12 +521,13 @@ function BlogPostPage({ slug, setRoute }) {
               </div>
             </div>
           </div>
+          {/* okładka na pełną szerokość treści (bez przycinania — ma wpisany tytuł) */}
+          {post.cover && <img className="post-hero-cover" src={post.cover} alt="" width="1200" height="654" fetchpriority="high" decoding="async" />}
         </div>
       </section>
 
       <article className="section-py">
         <div className="wrap" style={{ maxWidth: '46rem' }}>
-          {post.cover && <img className="prose-cover" src={post.cover} alt="" width="1200" height="654" decoding="async" />}
           <BlogBody blocks={post.body} service={relatedServicesFor(post)[0]} />
         </div>
       </article>

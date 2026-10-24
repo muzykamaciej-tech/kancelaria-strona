@@ -7,7 +7,7 @@ window.BLOG.push(
     excerpt: 'Dostałeś pismo od zakładu energetycznego lub gazowniczego z propozycją zapłaty za ustanowienie służebności przesyłu? Kluczowe pytanie brzmi: „ILE?”. Wyjaśniam, jak rzeczoznawcy majątkowi wyliczają te kwoty i dlaczego pierwsza propozycja od przedsiębiorcy to zazwyczaj tylko ułamek tego, co Ci się należy.',
     date: '12 stycznia 2026', iso: '2026-01-12', readTime: '3 min',
     category: 'Służebność przesyłu', tags: ['Operat szacunkowy', 'Współczynnik K', 'Rzeczoznawca'],
-    cover: '/assets/blog-wycena-przesyl.jpg',
+    cover: '/assets/blog-wycena-przesyl-granat.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/wycena-służebności-przesyłu-jak-robi-to-rzeczoznawca-majątkowy',
     related: ['odszkodowanie-sluzebnosc-przesylu', 'bezumowne-korzystanie'],
     body: [
@@ -71,7 +71,7 @@ window.BLOG.push(
     excerpt: 'Przeglądasz księgę wieczystą i w dziale III widzisz wpis: służebność przesyłu na rzecz zakładu energetycznego. Problem w tym, że na działce nic nie ma — stare słupy zniknęły dekadę temu, a rury dawno wykopano. Czy taki „wirtualny” wpis jest groźny? Czy można się go pozbyć?',
     date: '13 stycznia 2026', iso: '2026-01-13', readTime: '3 min',
     category: 'Księgi wieczyste', tags: ['Wykreślenie służebności', 'Art. 293 KC', 'Dział III KW'],
-    cover: '/assets/blog-zniesienie-sluzebnosci.jpg',
+    cover: '/assets/blog-zniesienie-sluzebnosci-granat.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/zniesienie-sluzebnosci-nieistniejaca-linia',
     related: ['uregulowanie-stanu-prawnego', 'audyt-stanu-prawnego-nieruchomosci'],
     body: [
@@ -121,7 +121,7 @@ window.BLOG.push(
     excerpt: 'Brak dostępu do drogi publicznej to dla właściciela działki prawdziwy dramat. Rozwiązaniem jest ustanowienie służebności drogi koniecznej. Ale tu pojawia się pytanie, które słyszę niemal codziennie: „Ile to będzie kosztować?” lub „Ile mogę zażądać od sąsiada?”.',
     date: '14 stycznia 2026', iso: '2026-01-14', readTime: '3 min',
     category: 'Służebności', tags: ['Droga konieczna', 'Wynagrodzenie', 'Art. 145 KC'],
-    cover: '/assets/blog-wynagrodzenie-droga-konieczna.jpg',
+    cover: '/assets/blog-wynagrodzenie-droga-konieczna-granat.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/wynagrodzenie-za-sluzebnosc-drogi-koniecznej',
     related: ['droga-konieczna'],
     body: [
@@ -181,7 +181,7 @@ window.BLOG.push(
     excerpt: 'Dostęp do drogi publicznej to podstawa – bez niego działka jest w świetle prawa budowlanego praktycznie bezużyteczna. Ale co, gdy dostęp niby jest, ale tak wąski, że ledwo mieści się samochód? Albo gdy sąsiad zgadza się na służebność, ale chce wydzielić tylko 2,5 metra?',
     date: '15 stycznia 2026', iso: '2026-01-15', updated: '23 października 2026', updatedIso: '2026-10-23', readTime: '4 min',
     category: 'Służebności', tags: ['Droga konieczna', 'Droga pożarowa', 'Pozwolenie na budowę'],
-    cover: '/assets/blog-szerokosc-drogi.jpg',
+    cover: '/assets/blog-szerokosc-drogi-granat.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/szerokosc-drogi-koniecznej',
     related: ['droga-konieczna', 'pozwolenie-na-budowe'],
     metaDesc: 'Szerokości drogi koniecznej nie podaje żaden przepis. Sąd ustala ją według potrzeb działki (art. 145 k.c.). Dla domu zwykle 3–4 m, z miejscem na media.',
@@ -228,7 +228,7 @@ window.BLOG.push(
     excerpt: 'Dziura w nawierzchni, błoto po jesiennych deszczach albo pół metra śniegu o poranku. To moment, w którym dobre relacje sąsiedzkie wystawiane są na najcięższą próbę. Kto powinien chwycić za łopatę lub portfel? Właściciel gruntu, przez który biegnie droga, czy sąsiad, który z niej korzysta?',
     date: '16 stycznia 2026', iso: '2026-01-16', updated: '29 stycznia 2026', readTime: '3 min',
     category: 'Służebności', tags: ['Droga konieczna', 'Art. 289 KC', 'Sąsiedzi'],
-    cover: '/assets/blog-koszty-utrzymania-drogi.jpg',
+    cover: '/assets/blog-koszty-utrzymania-drogi-granat.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/koszty-drogi-koniecznej',
     related: ['droga-konieczna'],
     body: [
@@ -283,7 +283,7 @@ window.BLOG.push(
     excerpt: '„W 2007 roku kupiłem działkę budowlaną, na której końcu stoi słup linii średniego napięcia. Firma energetyczna twierdzi, że skablowanie linii i usunięcie słupa jest możliwe tylko na mój koszt. Czy to legalne? Czy naprawdę muszę płacić za ich infrastrukturę na mojej ziemi?”',
     date: '19 stycznia 2026', iso: '2026-01-19', updated: '23 października 2026', updatedIso: '2026-10-23', readTime: '2 min',
     category: 'Służebność przesyłu', tags: ['Słupy na działce', 'Przesunięcie urządzeń', 'Pytanie klienta'],
-    cover: '/assets/blog-slup-przesuniecie.jpg',
+    cover: '/assets/blog-slup-przesuniecie-granat.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/słup-energetyczny-na-działce-czy-musisz-płacić-za-jego-przesunięcie',
     related: ['odszkodowanie-sluzebnosc-przesylu', 'bezumowne-korzystanie'],
     body: [
