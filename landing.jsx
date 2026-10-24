@@ -1079,6 +1079,16 @@ function PracticeAreas({ setRoute }) {
           {window.SERVICE_BLOCKS.map((b) =>
           <BlockCard key={b.id} block={b} route="blok" slug={b.id} setRoute={setRoute} />
           )}
+          {/* 12. kafelek domyka siatkę 4 × 3: sprawa spoza 11 obszarów → formularz */}
+          <button className="block-card block-card--cta" onClick={() => lScrollToId('formularz')}>
+            <span className="block-card-photo" aria-hidden="true"><img src="/assets/foto-biurko-dokumenty-800.webp" alt="" width="800" height="450" loading="lazy" decoding="async" /></span>
+            <span className="block-card-ic"><LIcon name="message-square-text" size={26} /></span>
+            <h3 className="block-card-title">Inna sprawa z nieruchomością?</h3>
+            <p className="block-card-tag">Nie wiesz, gdzie pasuje Twoja sprawa? Opisz ją — w 24 h odpiszę, co trzeba zrobić, i prześlę ofertę.</p>
+            <span className="block-card-cta">
+              Opisz swoją sprawę <SvgIcon name="arrow-right" size={14} />
+            </span>
+          </button>
         </div>
       </div>
     </section>);
