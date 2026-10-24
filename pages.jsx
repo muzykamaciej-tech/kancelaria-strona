@@ -329,11 +329,12 @@ const BLOG_CATEGORIES = [
   { id: 'slupy-i-przesyl', title: 'Słupy, linie i rury na działce', desc: 'Służebność przesyłu, wynagrodzenie, bezumowne korzystanie, przesunięcie słupa.', photo: 'sluzebnosci-odszkodowania', cats: ['Służebność przesyłu'] },
   { id: 'droga-konieczna', title: 'Droga konieczna i służebności', desc: 'Szerokość drogi, wynagrodzenie, koszty utrzymania, zasiedzenie.', photo: 'droga-konieczna', cats: ['Służebności'] },
   { id: 'najem', title: 'Najem i eksmisja', desc: 'Bezpieczny wynajem, eksmisja lokatora, czego wynajmującemu nie wolno.', photo: 'najem', cats: ['Najem'] },
-  { id: 'budowa', title: 'Budowa i sąsiedzi', desc: 'Pozwolenie, zjazd z drogi, sprzeciw sąsiada.', photo: 'proces-budowlany', cats: ['Proces budowlany'] },
-  { id: 'zakup-i-ksiegi', title: 'Zakup, księgi wieczyste i podatki', desc: 'Księgi wieczyste, ceny transakcyjne, błędy w ewidencji i podatku.', photo: 'ksiegi-wieczyste-stan-prawny', cats: ['Księgi wieczyste', 'Rynek nieruchomości', 'Podatek od nieruchomości'] },
+  { id: 'budowa', title: 'Budowa, samowole i nadzór', desc: 'Pozwolenie czy zgłoszenie, samowola budowlana, kontrola PINB, sprzeciw sąsiada.', photo: 'proces-budowlany', cats: ['Proces budowlany'] },
+  { id: 'zakup-i-umowy', title: 'Zakup nieruchomości i umowy', desc: 'Co sprawdzić przed zakupem, zadatek, umowa przedwstępna, licytacja komornicza.', photo: 'transakcje-umowy', cats: ['Zakup nieruchomości'] },
+  { id: 'zakup-i-ksiegi', title: 'Księgi wieczyste, stan prawny i podatki', desc: 'Księgi wieczyste, zasiedzenie, użytkowanie wieczyste, ceny transakcyjne, podatki przy sprzedaży.', photo: 'ksiegi-wieczyste-stan-prawny', cats: ['Księgi wieczyste', 'Zasiedzenie', 'Użytkowanie wieczyste', 'Podatki', 'Rynek nieruchomości', 'Podatek od nieruchomości'] },
   { id: 'deweloper', title: 'Spory z deweloperem', desc: 'Opóźnienie, kary umowne, wady mieszkania i odszkodowanie.', photo: 'roszczenia-deweloper', cats: ['Spory z deweloperem'] },
-  { id: 'grunty-rolne-oze', title: 'Grunty rolne i OZE', desc: 'Fotowoltaika na działce rolnej, dzierżawa, VAT, odpowiedzialność właściciela.', photo: 'grunty-rolne-oze', cats: ['Grunty rolne i OZE', 'Odpowiedzialność właściciela'] },
-  { id: 'wspolwlasnosc', title: 'Współwłasność i podział majątku', desc: 'Podział nieruchomości po rozwodzie i między współwłaścicielami.', photo: 'wspolwlasnosc-podzialy', cats: ['Podział majątku'] },
+  { id: 'grunty-rolne-oze', title: 'Grunty rolne i OZE', desc: 'Dom na działce rolnej, odrolnienie, fotowoltaika, dzierżawa i odpowiedzialność właściciela.', photo: 'grunty-rolne-oze', cats: ['Grunty rolne i OZE', 'Odpowiedzialność właściciela'] },
+  { id: 'wspolwlasnosc', title: 'Współwłasność, spadki i podział majątku', desc: 'Zniesienie współwłasności, mieszkanie po rodzicach, podział po rozwodzie.', photo: 'wspolwlasnosc-podzialy', cats: ['Podział majątku', 'Współwłasność i spadki'] },
 ];
 function getBlogCategory(id) { return BLOG_CATEGORIES.find((c) => c.id === id) || null; }
 function blogCategoryOfPost(post) { return BLOG_CATEGORIES.find((c) => c.cats.indexOf(post.category) !== -1) || null; }
@@ -528,7 +529,7 @@ function BlogPostPage({ slug, setRoute }) {
 
       <article className="section-py">
         <div className="wrap" style={{ maxWidth: '46rem' }}>
-          <BlogBody blocks={post.body} service={relatedServicesFor(post)[0]} />
+          <BlogBody blocks={post.body} service={relatedServicesFor(post)[0]} selfSlug={post.slug} />
         </div>
       </article>
 
@@ -567,14 +568,37 @@ function BlogPostPage({ slug, setRoute }) {
 }
 
 /* Inline **bold** → <strong> */
+/* Tytuły innych wpisów wpisane w treści (jak w pakietach md) stają się linkami do tych wpisów.
+   Wyrażenie budowane raz; najdłuższe tytuły pierwsze, żeby krótszy nie „zjadł” dłuższego. */
+let BLOG_TITLE_RE = null, BLOG_BY_TITLE = null, BLOG_SELF = null;
+function blogTitleRe() {
+  if (BLOG_TITLE_RE !== null) return BLOG_TITLE_RE;
+  BLOG_BY_TITLE = {};
+  const titles = (window.BLOG || []).filter((p) => p.title && p.title.length >= 20).map((p) => { BLOG_BY_TITLE[p.title] = p.slug; return p.title; });
+  titles.sort((a, b) => b.length - a.length);
+  BLOG_TITLE_RE = titles.length ? new RegExp('(' + titles.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')') : false;
+  return BLOG_TITLE_RE;
+}
+function blogLinkify(text, key) {
+  const re = blogTitleRe();
+  if (!re) return text;
+  const parts = String(text).split(re);
+  if (parts.length === 1) return text;
+  return parts.map((s, i) => {
+    const slug = i % 2 === 1 ? BLOG_BY_TITLE[s] : null;
+    if (!slug || slug === BLOG_SELF) return s;
+    return <window.NavLink key={key + '-' + i} route="blogpost" slug={slug}>{s}</window.NavLink>;
+  });
+}
 function blogInline(text) {
   const parts = String(text).split('**');
-  if (parts.length === 1) return text;
-  return parts.map((s, i) => (i % 2 === 1 ? <strong key={i}>{s}</strong> : s));
+  if (parts.length === 1) return blogLinkify(text, 't');
+  return parts.map((s, i) => (i % 2 === 1 ? <strong key={i}>{blogLinkify(s, 's' + i)}</strong> : <React.Fragment key={i}>{blogLinkify(s, 'p' + i)}</React.Fragment>));
 }
 
 /* Article body from block list — see blog-data.jsx for the format */
-function BlogBody({ blocks, service }) {
+function BlogBody({ blocks, service, selfSlug }) {
+  BLOG_SELF = selfSlug || null;
   const svc = service && window.getService ? window.getService(service) : null;
   /* odnośnik do głównej usługi zaraz po pierwszym akapicie: czytelnik poradnika trafia do usługi, zanim opuści stronę */
   const callout = svc ? (
@@ -600,6 +624,13 @@ function renderBlogBlock(b, i) {
   if (t === 'ol') return <ol key={i}>{v.map((li, k) => <li key={k}>{blogInline(li)}</li>)}</ol>;
   if (t === 'quote') return <blockquote key={i}>{blogInline(v)}</blockquote>;
   if (t === 'note') return <p key={i} className="prose-note">{blogInline(v)}</p>;
+  if (t === 'table') return (
+    <div key={i} className="prose-table-wrap">
+      <table className="prose-table">
+        <thead><tr>{v[0].map((c, k) => <th key={k} scope="col">{blogInline(c)}</th>)}</tr></thead>
+        <tbody>{v.slice(1).map((row, r) => <tr key={r}>{row.map((c, k) => k === 0 ? <th key={k} scope="row">{blogInline(c)}</th> : <td key={k}>{blogInline(c)}</td>)}</tr>)}</tbody>
+      </table>
+    </div>);
   return <p key={i}>{blogInline(v)}</p>;
 }
 
