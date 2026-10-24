@@ -410,3 +410,24 @@
 .block-card-photo + .block-card-ic, .svc-card--photo .svc-card-ic { transition: background-color 260ms ease, color 260ms ease, box-shadow 260ms ease; transform: none !important; }
 .block-card:hover .block-card-photo + .block-card-ic, .svc-card--photo:hover .svc-card-ic { box-shadow: 0 6px 16px rgba(0,0,0,.35), 0 0 0 4px rgba(14,83,165,.25), 0 0 24px rgba(46,120,214,.45); }
 @media (prefers-reduced-motion: reduce) { .block-card:hover, .svc-card--photo:hover { transform: none; } }
+
+/* Ta sama animacja dla wszystkich kafelków na stronie (decyzja Macieja 24.10.2026):
+   unoszenie o 4 px + podświetlona ramka; zdjęcia bez powiększania, tylko rozjaśnienie w swoim polu; ikony świecą */
+.card-hover, .blog-card, .blog-teaser-card, a.blog-newest-card, a.blog-cat-tile, .related-post, .service-tile, .service-row, .svc-card, .trust-pillar, .standard-card {
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+.card-hover:hover, .blog-card:hover, .blog-teaser-card:hover, a.blog-newest-card:hover, a.blog-cat-tile:hover, .related-post:hover, .service-tile:hover, .service-row:hover, .svc-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(127,176,234,.45);
+  box-shadow: 0 18px 40px -18px rgba(0,0,0,.7), 0 0 0 1px rgba(127,176,234,.35);
+}
+.blog-newest-photo img, .blog-teaser-photo img, a.blog-cat-tile > img, .blog-card-img { transform: none !important; transition: filter 400ms ease; }
+a.blog-newest-card:hover .blog-newest-photo img, .blog-teaser-card--photo:hover .blog-teaser-photo img, a.blog-cat-tile:hover > img, .blog-card--photo:hover .blog-card-img { filter: brightness(1.18) saturate(1.08); }
+.svc-card-ic, .service-tile-icon, .service-row-icon { transform: none !important; transition: background-color 260ms ease, color 260ms ease, box-shadow 260ms ease; }
+.svc-card:hover .svc-card-ic, .service-tile:hover .service-tile-icon, .service-row:hover .service-row-icon {
+  background: var(--brand-primary); color: #fff;
+  box-shadow: 0 6px 16px rgba(0,0,0,.35), 0 0 0 4px rgba(14,83,165,.25), 0 0 24px rgba(46,120,214,.45);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-hover:hover, .blog-card:hover, .blog-teaser-card:hover, a.blog-newest-card:hover, a.blog-cat-tile:hover, .related-post:hover, .service-tile:hover, .service-row:hover, .svc-card:hover { transform: none; }
+}
