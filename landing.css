@@ -972,3 +972,27 @@ select.input { appearance: auto; cursor: pointer; }
   .final-cta-text .flex { justify-content: flex-start; }
   .final-cta-text .lead { text-align: left; margin-inline: 0; }
 }
+
+/* Opinie: przewijający się pasek zamiast siatki kafelków (decyzja Macieja 24.10.2026) */
+.reviews-band { padding-block: clamp(3rem, 3vw + 2rem, 4.5rem); overflow: hidden; }
+.reviews-band-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+.reviews-band-head .eyebrow::after { display: none; }
+.reviews-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.reviews-track { display: flex; gap: 1.25rem; width: max-content; padding-block: 0.5rem; animation: reviews-scroll 70s linear infinite; }
+.reviews-marquee:hover .reviews-track, .reviews-marquee:focus-within .reviews-track { animation-play-state: paused; }
+@keyframes reviews-scroll { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 0.625rem)); } }
+.review-card--strip { width: min(24rem, 82vw); flex: 0 0 auto; padding: 1.5rem 1.6rem; }
+.review-card--strip .review-text {
+  font-size: 1rem; line-height: 1.6; text-align: left; hyphens: manual;
+  display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden;
+}
+.review-card--strip .review-meta { margin-top: 1rem; padding-top: 1rem; }
+@media (prefers-reduced-motion: reduce) {
+  .reviews-track { animation: none; }
+  .reviews-marquee { overflow-x: auto; }
+  .reviews-track > [aria-hidden="true"] { display: none; }
+}

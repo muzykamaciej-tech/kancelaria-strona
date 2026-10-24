@@ -2,7 +2,6 @@
    Reuses brand components from sections.jsx / pages.jsx. Loaded after pages.jsx. */
 
 const { Icon: LIcon, ServiceTile: LServiceTile, AboutBlock: LAboutBlock, Testimonials: LTestimonials, Footer: LFooter } = window;
-const { FAQAccordion: LFAQAccordion } = window;
 const { useState: lUseState, useRef: lUseRef, useEffect: lUseEffect } = React;
 
 /* Inline-SVG icons for the form. Lucide rewrites <i data-lucide> placeholders
@@ -1129,28 +1128,35 @@ function Standards() {
 function ReviewsBand() {
   const reviews = window.TESTIMONIALS || [];
   const { count: reviewsCount } = useGoogleRating();
+  /* pasek przewijający się w poziomie: lista podwójnie, druga kopia ukryta dla czytników ekranu; pauza po najechaniu */
+  const card = (t, i, hidden) =>
+    <figure key={(hidden ? 'b' : 'a') + i} className="card review-card review-card--strip" aria-hidden={hidden ? 'true' : undefined}>
+      <div className="review-stars" aria-label={hidden ? undefined : '5 na 5 gwiazdek'}>★★★★★</div>
+      <blockquote className="body review-text">„{t.text}”</blockquote>
+      <figcaption className="review-meta">
+        <span className="review-avatar">{t.name.charAt(0)}</span>
+        <span><span className="font-bold" style={{ color: 'var(--text-main)', display: 'block' }}>{t.name}</span><span className="small">{t.role}</span></span>
+      </figcaption>
+    </figure>;
   return (
-    <section className="section-py bg-light" id="opinie">
+    <section className="bg-light reviews-band" id="opinie">
       <div className="wrap">
-        <div className="section-head section-head--center">
-          <span className="eyebrow">Opinie klientów</span>
-          <h2 className="h2 mt-4">Co mówią klienci.</h2>
-          <p className="lead mt-6" style={{ maxWidth: '38rem' }}></p>
-          <div className="mt-6"><GoogleBadge /></div>
+        <div className="reviews-band-head">
+          <div>
+            <span className="eyebrow">Opinie klientów</span>
+            <h2 className="h2 mt-3">Co mówią klienci.</h2>
+          </div>
+          <GoogleBadge />
         </div>
-        <div className="reviews-grid mt-12">
-          {reviews.map((t, i) =>
-          <figure key={i} className="card review-card">
-              <div className="review-stars" aria-label="5 na 5 gwiazdek">★★★★★</div>
-              <blockquote className="body review-text">„{t.text}”</blockquote>
-              <figcaption className="review-meta">
-                <span className="review-avatar">{t.name.charAt(0)}</span>
-                <span><span className="font-bold" style={{ color: 'var(--text-main)', display: 'block' }}>{t.name}</span><span className="small">{t.role}</span></span>
-              </figcaption>
-            </figure>
-          )}
+      </div>
+      <div className="reviews-marquee mt-8">
+        <div className="reviews-track">
+          {reviews.map((t, i) => card(t, i, false))}
+          {reviews.map((t, i) => card(t, i, true))}
         </div>
-        <p className="small mt-8" style={{ textAlign: 'center', color: 'var(--text-muted)' }}>Wszystkie {reviewsCount} {opinieLabel(reviewsCount)} znajdziesz w <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>wizytówce Google</a>.</p>
+      </div>
+      <div className="wrap">
+        <p className="small mt-6" style={{ textAlign: 'center', color: 'var(--text-muted)' }}>Wszystkie {reviewsCount} {opinieLabel(reviewsCount)} znajdziesz w <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>wizytówce Google</a>.</p>
       </div>
     </section>);
 
@@ -1189,36 +1195,6 @@ function TrustPillars() {
         )}
         </div>}
     </div>);
-
-}
-
-/* ============================================================
-   FAQ section (landing-specific)
-   ============================================================ */
-function LandingFAQ({ setRoute }) {
-  return (
-    <section className="section-py">
-      <div className="wrap">
-        <div className="section-head section-head--center">
-          <span className="eyebrow">FAQ</span>
-          <h2 className="display mt-4">
-            Zanim<br />
-            <span className="italic" style={{ color: 'var(--text-body)' }}>napiszesz.</span>
-          </h2>
-          <p className="lead mt-6">
-            Najczęstsze pytania o bezpłatną wstępną analizę i ofertę. Jeśli czegoś tu brakuje — zapytaj w formularzu.
-          </p>
-        </div>
-        <div className="faq-teaser-body mt-12">
-          <LFAQAccordion items={window.FAQ_HOME} startOpen={0} />
-          <div className="text-center mt-8">
-            <window.NavLink route="faq" className="btn-link">
-              Wszystkie pytania (FAQ) <LIcon name="arrow-right" size={14} />
-            </window.NavLink>
-          </div>
-        </div>
-      </div>
-    </section>);
 
 }
 
@@ -1332,7 +1308,6 @@ function LandingPage({ setRoute }) {
       <LAboutBlock />
       <Standards />
       <ReviewsBand />
-      <LandingFAQ setRoute={setRoute} />
       <FinalCTA />
       <MobileCTABar />
     </main>);

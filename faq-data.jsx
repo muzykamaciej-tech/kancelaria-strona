@@ -70,8 +70,4 @@ const FAQ_SECTIONS = [
   },
 ];
 
-/* Homepage excerpt = sections A + B flattened */
-const FAQ_HOME = FAQ_SECTIONS.filter((s) => s.letter === 'A' || s.letter === 'B')
-  .flatMap((s) => s.items);
-
-Object.assign(window, { FAQ_SECTIONS, FAQ_HOME });
+Object.assign(window, { FAQ_SECTIONS });
