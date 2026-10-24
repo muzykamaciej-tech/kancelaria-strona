@@ -1469,3 +1469,18 @@ a.blog-cat-tile:hover .blog-cat-tile-arrow { transform: translate(2px, -2px); }
   .about-grid--panel > .about-body { grid-column: 2; }
 }
 .about-band .section-photo { margin-top: calc(-1 * var(--d-section-py)); }
+
+/* Tabela we wpisie bloga (poradniki, 10.2026) */
+.prose-table-wrap { margin: 1.5rem 0 1.75rem; overflow-x: auto; border: 1px solid var(--slate-100); border-radius: var(--radius-md); }
+.prose-table { width: 100%; border-collapse: collapse; font-size: 0.975rem; line-height: 1.5; }
+.prose-table th, .prose-table td { padding: 0.75rem 1rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--slate-100); }
+.prose-table thead th { background: rgba(127,176,234,.08); color: var(--text-main); font-weight: 700; }
+.prose-table tbody th { color: var(--text-main); font-weight: 600; }
+.prose-table td { color: var(--text-body); }
+.prose-table tr:last-child th, .prose-table tr:last-child td { border-bottom: none; }
+@media (max-width: 639px) { .prose-table { font-size: 0.9rem; } .prose-table th, .prose-table td { padding: 0.6rem 0.7rem; } }
+/* osamotniony ostatni kafelek kategorii rozciąga się na cały rząd (3 kolumny: 3n+1, 2 kolumny: 2n+1) */
+@media (min-width: 960px) { .blog-cat-grid > a:last-child:nth-child(3n+1) { grid-column: 1 / -1; min-height: 220px; } }
+@media (min-width: 600px) and (max-width: 959px) { .blog-cat-grid > a:last-child:nth-child(2n+1) { grid-column: 1 / -1; } }
+.prose-table-wrap { -webkit-overflow-scrolling: touch; }
+@media (max-width: 639px) { .prose-table { min-width: 520px; } }
