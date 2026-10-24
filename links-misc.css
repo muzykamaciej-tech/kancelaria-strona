@@ -26,3 +26,34 @@ a.btn { text-align: center; }
 .qc-btn:focus-visible { outline-color: var(--focus-ring); }
 /* after a client-side navigation the new page's <h1> takes focus (tabindex=-1) for screen readers; no ring on a heading */
 main h1[tabindex="-1"]:focus { outline: none; }
+
+/* =========================================================================
+   Wyrównanie tekstu na całej stronie (decyzja Macieja 24.10.2026):
+   nadtytuły, tytuły i podtytuły wyśrodkowane, kreska po obu stronach nadtytułu;
+   dłuższe teksty (lead, akapity) wyjustowane, ostatni wiersz leadu wyśrodkowany.
+   Karty, formularze, tabele i menu mają własne wyrównanie.
+   ========================================================================= */
+html main h1, html main h2:not(.blog-card-title) { text-align: center; text-wrap: balance; }
+html main .eyebrow { display: flex; justify-content: center; text-align: center; width: fit-content; max-width: 100%; margin-inline: auto; text-wrap: balance; }
+html main .eyebrow::before, html main .eyebrow::after { display: block; }
+html main .lead { text-align: justify; text-align-last: center; -webkit-hyphens: auto; hyphens: auto; margin-inline: auto; }
+html main .section-head { text-align: center; margin-inline: auto; }
+/* elementy pod wyśrodkowanym tytułem: przyciski, plakietki, autor wpisu */
+html main .landing-intro-text, html main .landing-hero-text, html main .final-cta-text { text-align: center; }
+html main .landing-intro-text > .flex, html main .final-cta-text > .flex { justify-content: center; }
+html main .landing-hero-meta { align-items: center; }
+html main .landing-hero-text .trust-points { justify-content: center; }
+html main .reviews-band-head { flex-direction: column; align-items: center; text-align: center; }
+html main .blog-post-meta, html main .blog-post-meta > .flex { display: flex; justify-content: center; }
+/* akapit z osobnymi wierszami (<br>) — wyśrodkowany, bo wyjustowanie dawało nierówne wiersze */
+html main .landing-intro .landing-intro-lead { text-align: center; margin-inline: auto; }
+/* boczna etykieta sekcji na stronach usług (numer + nadtytuł w lewej kolumnie) zostaje przy numerze */
+html main .service-section-side .eyebrow { margin-inline: 0; }
+html main .landing-intro-eyebrow { line-height: 1.7; }
+@media (max-width: 639px) { html main .landing-intro-eyebrow::before, html main .landing-intro-eyebrow::after { display: none; } }
+/* rzędy przycisków i plakietek pod wyśrodkowanym nagłówkiem */
+html main .lead ~ .flex, html main .lead ~ div > .btn:only-child, html main h1 ~ .flex { justify-content: center; }
+html main .lead ~ .btn, html main h1 ~ .btn { display: flex; width: fit-content; margin-inline: auto; }
+/* nadtytuł w jednym rzędzie z ikoną: bez automatycznego marginesu, rząd wyśrodkowany */
+html main .flex > .eyebrow { margin-inline: 0; }
+html main .flex:has(> .icon-tile + .eyebrow), html main .flex:has(> .eyebrow + .icon-tile) { justify-content: center; }

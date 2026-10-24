@@ -10,7 +10,7 @@ function OMniePage({ setRoute }) {
           <window.NavLink route="landing" className="btn-link">
             <Icon name="arrow-left" size={16} /> Strona główna
           </window.NavLink>
-          <div className="mt-8" style={{ maxWidth: '48rem' }}>
+          <div className="mt-8" style={{ maxWidth: '48rem', marginInline: 'auto' }}>
             <span className="eyebrow">Mecenas od Nieruchomości</span>
             <h1 className="display mt-4">adw. dr Maciej Muzyka<br /><span className="italic" style={{ color: 'var(--text-body)' }}>wyłącznie prawo nieruchomości.</span></h1>
             <p className="lead mt-6">Adwokat (Lubelska Izba Adwokacka, wpis nr LUB/ADW/1702) i doktor nauk prawnych. Kancelaria w Lublinie, sprawy klientów z całej Polski prowadzone zdalnie.</p>

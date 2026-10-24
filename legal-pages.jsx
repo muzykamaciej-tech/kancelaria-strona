@@ -15,7 +15,7 @@ function LegalLayout({ eyebrow, title, label, setRoute, children }) {
               { label },
             ]}
           />
-          <div className="mt-8" style={{ maxWidth: '48rem' }}>
+          <div className="mt-8" style={{ maxWidth: '48rem', marginInline: 'auto' }}>
             <span className="eyebrow">{eyebrow}</span>
             <h1 className="display mt-4" style={{ lineHeight: 1.02 }}>{title}</h1>
           </div>

@@ -753,7 +753,7 @@ function FaqPageV3({ setRoute }) {
       <section className="bg-light" style={{ paddingBlock: '3rem 4rem' }}>
         <div className="wrap">
           <Breadcrumb trail={[{ label: 'Start', route: 'landing' }, { label: 'FAQ' }]} />
-          <div className="mt-8" style={{ maxWidth: '46rem' }}>
+          <div className="mt-8" style={{ maxWidth: '46rem', marginInline: 'auto' }}>
             <span className="eyebrow">FAQ · {total} pytań</span>
             <h1 className="display mt-4">Wszystko, co warto{' '}<br /><span className="italic" style={{ color: 'var(--text-body)' }}>wiedzieć przed startem.</span></h1>
             <p className="lead mt-6">

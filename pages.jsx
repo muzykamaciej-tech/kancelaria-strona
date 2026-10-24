@@ -87,7 +87,7 @@ function UslugiPage({ setRoute }) {
           <window.NavLink className="btn-link" route="landing">
             <Icon name="arrow-left" size={16} /> Strona główna
           </window.NavLink>
-          <div className="mt-8" style={{ maxWidth: '46rem' }}>
+          <div className="mt-8" style={{ maxWidth: '46rem', marginInline: 'auto' }}>
             <span className="eyebrow">Usługi prawne · pełna lista</span>
             <h1 className="display mt-4">
               Jedenaście<br />
@@ -355,7 +355,7 @@ function BlogPage({ setRoute }) {
           <window.NavLink className="btn-link" route="landing">
             <Icon name="arrow-left" size={16} /> Strona główna
           </window.NavLink>
-          <div className="mt-8" style={{ maxWidth: '46rem' }}>
+          <div className="mt-8" style={{ maxWidth: '46rem', marginInline: 'auto' }}>
             <span className="eyebrow">Skarbnica wiedzy · prawo nieruchomości</span>
             <h1 className="display mt-4">
               Skarbnica<br />
@@ -430,7 +430,7 @@ function BlogCategoryPage({ catId, setRoute }) {
             { label: 'Skarbnica wiedzy', route: 'blog' },
             { label: cat.title },
           ]} />}
-          <div className="mt-8" style={{ maxWidth: '44rem' }}>
+          <div className="mt-8" style={{ maxWidth: '44rem', marginInline: 'auto' }}>
             <span className="eyebrow">Skarbnica wiedzy · {wpisy(posts.length)}</span>
             <h1 className="display mt-4">{cat.title}</h1>
             <p className="lead mt-6">{cat.desc}</p>
@@ -506,7 +506,7 @@ function BlogPostPage({ slug, setRoute }) {
             <Icon name="chevron-right" size={14} />
             <span>{post.category}</span>
           </nav>
-          <div className="mt-8" style={{ maxWidth: '48rem' }}>
+          <div className="mt-8" style={{ maxWidth: '48rem', marginInline: 'auto' }}>
             <span className="eyebrow">{post.category}</span>
             <h1 className="display mt-4" style={{ lineHeight: 1.02 }}>
               {post.title}
@@ -643,7 +643,7 @@ function FAQPage({ setRoute }) {
           <window.NavLink className="btn-link" route="landing">
             <Icon name="arrow-left" size={16} /> Strona główna
           </window.NavLink>
-          <div className="mt-8" style={{ maxWidth: '46rem' }}>
+          <div className="mt-8" style={{ maxWidth: '46rem', marginInline: 'auto' }}>
             <span className="eyebrow">FAQ · pytania, które usłyszysz tu pierwszy raz</span>
             <h1 className="display mt-4">
               Najczęściej<br />
@@ -799,7 +799,7 @@ function KontaktPage({ setRoute }) {
           <window.NavLink className="btn-link" route="landing">
             <Icon name="arrow-left" size={16} /> Strona główna
           </window.NavLink>
-          <div className="mt-8" style={{ maxWidth: '48rem' }}>
+          <div className="mt-8" style={{ maxWidth: '48rem', marginInline: 'auto' }}>
             <span className="eyebrow">Kontakt</span>
             <h1 className="display mt-4">Napisz — odpiszę<br /><span className="italic" style={{ color: 'var(--text-body)' }}>w ciągu 24 h roboczych.</span></h1>
             <p className="lead mt-6">Kontakt prowadzę przede wszystkim mailowo, w pełni zdalnie. Najprościej opisać sprawę w formularzu „Wstępna analiza sprawy”: w ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem.</p>

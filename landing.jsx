@@ -85,10 +85,10 @@ function opinieLabel(n) {
 /* Pasek statystyk — animowany licznik (count-up) */
 const LANDING_STATS = [
 { value: 14689342, suffix: ' zł', grouped: true, l: 'odzyskanych środków dla klientów' },
-{ value: 380, suffix: '+', grouped: false, l: 'poprowadzonych spraw' },
-{ value: 10, suffix: '+', grouped: false, l: 'lat w prawie nieruchomości' },
+{ value: 378, suffix: '', grouped: false, l: 'poprowadzonych spraw' },
+{ value: 10, suffix: '', grouped: false, l: 'lat w prawie nieruchomości' },
 { value: 24, suffix: ' h', grouped: false, l: 'czas wstępnej analizy sprawy' },
-{ value: 1500, suffix: '+', grouped: true, l: 'godzin na sali sądowej' },
+{ value: 1479, suffix: '', grouped: true, l: 'godzin na sali sądowej' },
 { value: 7412, suffix: '', grouped: true, l: 'wypitych kaw (i liczę dalej)' }];
 
 
@@ -748,7 +748,7 @@ function LandingIntro({ setRoute }) {
       <div className="wrap relative" style={{ zIndex: 2 }}>
         <div className="landing-intro-grid">
           <div className="landing-intro-text">
-            <h1 className="eyebrow on-dark" style={{ margin: 0 }}>Prawnik od nieruchomości w Lublinie · adwokat · doktor nauk prawnych</h1>
+            <h1 className="eyebrow on-dark landing-intro-eyebrow" style={{ marginBlock: 0 }}><span>Prawnik od nieruchomości w Lublinie<br />adwokat · doktor nauk prawnych</span></h1>
             <p className="display landing-intro-title mt-6" style={{ color: '#fff' }}>
               Nie musisz znać się na prawie,<br />
               żeby bezpiecznie<br />

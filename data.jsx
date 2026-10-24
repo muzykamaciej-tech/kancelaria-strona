@@ -379,7 +379,7 @@ const FEATURED_IDS = ['audyt-stanu-prawnego', 'sprawdzenie-umowy-deweloperskiej'
 
 /* Quick stats for hero */
 const STATS = [
-  { n: '10+', l: 'lat w prawie nieruchomości' },
+  { n: '10', l: 'lat w prawie nieruchomości' },
   { n: 'dr', l: 'doktor nauk prawnych' },
   { n: '100%', l: 'spraw z nieruchomości' },
 ];
@@ -391,7 +391,7 @@ const TRUST_PILLARS = [
   {
     icon: 'award',
     title: 'Doświadczenie i tytuł',
-    text: 'Ponad 10 lat w prawie nieruchomości i tytuł doktora nauk prawnych. Doświadczenie zdobyte m.in. w kancelarii SPCG, jednej z czołowych w Polsce — dziś w całości do Twojej dyspozycji.',
+    text: '10 lat w prawie nieruchomości i tytuł doktora nauk prawnych. Doświadczenie zdobyte m.in. w kancelarii SPCG, jednej z czołowych w Polsce — dziś w całości do Twojej dyspozycji.',
   },
   {
     icon: 'target',
