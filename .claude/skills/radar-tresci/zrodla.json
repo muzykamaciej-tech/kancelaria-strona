@@ -1,0 +1,484 @@
+{
+  "_opis": "Konfiguracja radaru treści. frazy: tematy kancelarii (bloki usług na stronie). youtube: kanały, których Shorts i filmy porównujemy z medianą autora (id = UC… albo @uchwyt). youtube_pomin: kanały spoza tematu, których wyszukiwanie ma nie dołączać. instagram: konta do dodania w Metricool → Konkurencja (stamtąd agent czyta ich rolki). linkedin: profile do przeglądu ręcznego. raport_url: artefakt aktualizowany co przebieg.",
+  "konto": {
+    "instagram": "mecenas.od.nieruchomosci",
+    "tiktok": "mecenas.od.nieruchomosci",
+    "youtube": "UCJ89QBg497COA9yhgI94SxQ",
+    "metricool_brand_id": "7468439",
+    "strona": "https://mecenasodnieruchomosci.pl"
+  },
+  "raport_url": "https://claude.ai/artifact/Q1W8h77eh58VvRq8VfKhWe",
+  "frazy": [
+    "słup na działce",
+    "służebność przesyłu",
+    "bezumowne korzystanie z gruntu",
+    "droga konieczna",
+    "wywłaszczenie odszkodowanie",
+    "warunki zabudowy",
+    "plan ogólny gminy",
+    "plan miejscowy działka",
+    "odrolnienie działki",
+    "zakup działki",
+    "księga wieczysta",
+    "sprawdzenie mieszkania przed zakupem",
+    "umowa przedwstępna",
+    "zadatek",
+    "umowa deweloperska",
+    "odbiór mieszkania od dewelopera",
+    "wady mieszkania od dewelopera",
+    "kary umowne deweloper",
+    "samowola budowlana",
+    "spór z wykonawcą",
+    "zasiedzenie",
+    "zniesienie współwłasności",
+    "dział spadku",
+    "zachowek",
+    "spadek po rodzicach mieszkanie",
+    "darowizna mieszkania",
+    "umowa dożywocia",
+    "podział majątku po rozwodzie mieszkanie",
+    "najem okazjonalny",
+    "eksmisja lokatora",
+    "kaucja za mieszkanie",
+    "wspólnota mieszkaniowa",
+    "spółdzielnia mieszkaniowa",
+    "spór z sąsiadem",
+    "granica działki",
+    "dzierżawa pod fotowoltaikę",
+    "ziemia rolna zakup",
+    "użytkowanie wieczyste",
+    "najem krótkoterminowy",
+    "dziki lokator",
+    "eksmisja zimą",
+    "zasiedzenie służebności przesyłu",
+    "mieszkanie z licytacji komorniczej",
+    "dom po babci spadek"
+  ],
+  "slowa_trendow": [
+    "nieruchomo",
+    "mieszka",
+    "działk",
+    "dom ",
+    "kredyt",
+    "czynsz",
+    "najem",
+    "najm",
+    "deweloper",
+    "podat",
+    "ziemi",
+    "grunt",
+    "budow",
+    "sąsiad",
+    "spadek",
+    "spadk",
+    "notariusz",
+    "księg",
+    "gmin",
+    "wywłaszcz",
+    "autostrad",
+    "cpk",
+    "kolej",
+    "powódź",
+    "katastr",
+    "stopy procentowe",
+    "eksmisj",
+    "lokator"
+  ],
+  "fora": [
+    {
+      "nazwa": "forumprawne.org: nieruchomości, lokale, budowlane",
+      "url": "https://forumprawne.org/forum/prawo-nieruchomosci-lokalowe-i-budowlane.31"
+    },
+    {
+      "nazwa": "forumprawne.org: spadki",
+      "url": "https://forumprawne.org/forum/prawo-spadkowe.52"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "UCJ89QBg497COA9yhgI94SxQ",
+      "nazwa": "Mecenas od Nieruchomości",
+      "grupa": "własny"
+    },
+    {
+      "id": "UC--OtxuvLBrQHOcQ02-9mXw",
+      "nazwa": "Jakub Al-Shaick, adwokat (nieruchomości)",
+      "grupa": "prawnicy",
+      "uwagi": "najbliższa konkurencja: działki, plan ogólny, WZ"
+    },
+    {
+      "id": "UCLSp3qyMMkUsG2MPC7tg3YQ",
+      "nazwa": "Anna Klisz, radca prawny (spadki)",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "UCiwAZCI7TZYSOK1sb6apsVw",
+      "nazwa": "Joanna Dominowska, adwokat",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "@radcaprawnyjoannarynas",
+      "nazwa": "Joanna Rynas, radca prawny (działki)",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "UCXymSMTa17fq-sjD15He3Qg",
+      "nazwa": "Elżbieta Liberda, radca prawny",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "@prawniknabudowie",
+      "nazwa": "Łukasz Mróz, Prawnik na Budowie",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "@AdwokatIwoKlisz",
+      "nazwa": "Iwo Klisz, adwokat",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "@AdwokatArkadiuszSłupek",
+      "nazwa": "Arkadiusz Słupek, adwokat",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "@AdwokatKatarzynaStankiewicz",
+      "nazwa": "Katarzyna Stankiewicz, adwokat",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "@PrawoZysku",
+      "nazwa": "Prawo Zysku (najem)",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "@szoajskilegalgroup3237",
+      "nazwa": "Szołajski Legal Group",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "@TerleckiPartners",
+      "nazwa": "Terlecki & Wspólnicy (deweloperzy)",
+      "grupa": "prawnicy",
+      "uwagi": "możliwa płatna promocja części Shorts"
+    },
+    {
+      "id": "@KarolHojda",
+      "nazwa": "Karol Hojda, radca prawny",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "UCPY4idtYTSEgWjTMNkxA2iA",
+      "nazwa": "GPLF, Prawnik od Nieruchomości",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "UCbgIXU3lZ0W6YPxSRlBbLaQ",
+      "nazwa": "Kancelaria EuroLege",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "UCMJ9j8CnKwibIb5cdQ_lmgQ",
+      "nazwa": "Kancelaria Aventum",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "UCCiPwJZOg2ZJmW1Abbdjqaw",
+      "nazwa": "Moja Sprawa",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "UCYzLbNChyF9w0bnXb6ZVWuQ",
+      "nazwa": "VOTUM Odszkodowania",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "UCuX_znVc9wKDb7WCeRvDp4w",
+      "nazwa": "NABICI",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "UCrTXu-z7d_WUjeU8MrE0Luw",
+      "nazwa": "Porozmawiaj z notariuszem",
+      "grupa": "prawnicy",
+      "uwagi": "seria „Jak nie popaść w kłopoty” wygląda na kampanię płatną"
+    },
+    {
+      "id": "UC-ntCWjI8EpARZNeZnGOdVg",
+      "nazwa": "Michał Birek",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "UCKOKk-tWpe0cPLcEYzvm5jA",
+      "nazwa": "Fundacja Togatus Pro Bono",
+      "grupa": "prawnicy"
+    },
+    {
+      "id": "UCwnepnwDRF7xd1zEURpFYdA",
+      "nazwa": "Prawo Marcina",
+      "grupa": "prawnicy-zasieg"
+    },
+    {
+      "id": "@MarcinZarzycki",
+      "nazwa": "Marcin Zarzycki, adwokat",
+      "grupa": "prawnicy-zasieg"
+    },
+    {
+      "id": "@mj_jaworski",
+      "nazwa": "Marcin Jaworski (flipy)",
+      "grupa": "nieruchomosci"
+    },
+    {
+      "id": "@kamil_sadzinski",
+      "nazwa": "Kamil Sadziński (flipy)",
+      "grupa": "nieruchomosci"
+    },
+    {
+      "id": "@damianposrednik",
+      "nazwa": "Damian pośrednik",
+      "grupa": "nieruchomosci"
+    },
+    {
+      "id": "UCp7jS5zVB9rbvK_76LD9esw",
+      "nazwa": "eXmiter (eksmisje, lokatorzy)",
+      "grupa": "nieruchomosci"
+    },
+    {
+      "id": "@PawelPaczul",
+      "nazwa": "Paweł Paczul (patodeweloperka)",
+      "grupa": "nieruchomosci"
+    },
+    {
+      "id": "@DanielSiwiecPL",
+      "nazwa": "Daniel Siwiec (flipy, Lublin)",
+      "grupa": "nieruchomosci"
+    },
+    {
+      "id": "UCCIHfoQkgPDjHITJ4EzUj3g",
+      "nazwa": "Filip Kowarski",
+      "grupa": "nieruchomosci"
+    },
+    {
+      "id": "@OdbiórMieszkania",
+      "nazwa": "Odbiór Mieszkania",
+      "grupa": "nieruchomosci"
+    },
+    {
+      "id": "UCRZ67mLrPplZOadsG2yPwpA",
+      "nazwa": "Inspekcja Domu",
+      "grupa": "nieruchomosci"
+    },
+    {
+      "id": "@zbudujsamdom",
+      "nazwa": "Zbuduj sam dom",
+      "grupa": "nieruchomosci"
+    },
+    {
+      "id": "@MarcinIwućFBO",
+      "nazwa": "Marcin Iwuć (kredyty)",
+      "grupa": "nieruchomosci"
+    },
+    {
+      "id": "UCX8DANZLvurZHoZ5-qawiNQ",
+      "nazwa": "Jak się wybudować, Sławomir Zając",
+      "grupa": "nieruchomosci"
+    },
+    {
+      "id": "UCmPJ6dn9IAMwSTb8x4H44zw",
+      "nazwa": "disinn.architekci",
+      "grupa": "nieruchomosci"
+    },
+    {
+      "id": "UChPOvtxlU2hmrWqNy2BjfMA",
+      "nazwa": "Gratka",
+      "grupa": "nieruchomosci",
+      "uwagi": "marka; część wyników to kampanie"
+    },
+    {
+      "id": "UCkTzHv82WjM3Tae-8IzECMQ",
+      "nazwa": "Rendin Polska",
+      "grupa": "nieruchomosci",
+      "uwagi": "marka"
+    },
+    {
+      "id": "@OnGeo-pl",
+      "nazwa": "OnGeo (plan ogólny)",
+      "grupa": "nieruchomosci",
+      "uwagi": "marka; 7,2 mln na jednym Shorcie"
+    },
+    {
+      "id": "UCKmmERguliWTynG9OIoDhDw",
+      "nazwa": "Law By Mike",
+      "grupa": "wzorce-zagranica"
+    },
+    {
+      "id": "@UgoLord",
+      "nazwa": "Ugo Lord",
+      "grupa": "wzorce-zagranica"
+    },
+    {
+      "id": "@Erika2",
+      "nazwa": "Erika Kullberg",
+      "grupa": "wzorce-zagranica"
+    },
+    {
+      "id": "@MikeRafiLawyer",
+      "nazwa": "Mike Rafi",
+      "grupa": "wzorce-zagranica"
+    },
+    {
+      "id": "UCE2pv_U4_WKaps3tfBByf8g",
+      "nazwa": "The Real Estate Lawyer (Tiffany Webber)",
+      "grupa": "wzorce-zagranica"
+    }
+  ],
+  "youtube_pomin": {
+    "UCRp8W7MwtrQPMlAHt5FbQrw": "Otodom: spoty reklamowe",
+    "UCiKPw9d7fKFtSuKIKPBU_Gg": "Siniat: producent płyt, poza tematem",
+    "UCA609oB5ogUNAxU-6WijOGg": "Koswood: producent zadaszeń, reklamy",
+    "UCXaphFpu4G8crdMNWVhsbug": "Damian Kurcz: motoryzacja",
+    "UCdLudvI-MRUv0hHcPG_8vEA": "Rolnik Samwdolinie: rozrywka",
+    "UCzzvJDZThwv06dR4xmzrZBw": "Bargain Seekers: oszustwa OLX",
+    "UC7jDnr-ZAjQ94lf46eTcTAQ": "namzalezy.pl: polityka",
+    "UCc282c_TN8xIba_Z6GaDnQw": "Telewizja Republika: news",
+    "UCb7O4-iI4pEO5UZPlOBr0Ug": "polsatnews: news",
+    "UCMiUw1QLNmwCrj7KVnLRgzQ": "Dziennik Wschodni: news",
+    "UC0HRA1UdUfviBVfgYn3gC8Q": "TVT Zgorzelec: news",
+    "UCC0ezu6e8HdM0kMjxKQKCDQ": "Twój Elektryk: poza tematem",
+    "UCVDc-Cgtsn98nnVueQyvmow": "ogród: poza tematem",
+    "UClhEl4bMD8_escGCCTmRAYg": "Kanał Zero: news",
+    "UCooNw9Ts78jSY8RKjXBPvXw": "top agrar: rolnictwo ogólnie"
+  },
+  "instagram": [
+    {
+      "konto": "prawnik.odnieruchomosci",
+      "nazwa": "Jakub Al-Shaick"
+    },
+    {
+      "konto": "anna_klisz_radca_prawny_",
+      "nazwa": "Anna Klisz"
+    },
+    {
+      "konto": "radcaprawnyjoannarynas",
+      "nazwa": "Joanna Rynas"
+    },
+    {
+      "konto": "elzbieta_liberda",
+      "nazwa": "Elżbieta Liberda"
+    },
+    {
+      "konto": "prawniknabudowie",
+      "nazwa": "Łukasz Mróz"
+    },
+    {
+      "konto": "adwokatwroclaw",
+      "nazwa": "Iwo Klisz"
+    },
+    {
+      "konto": "prawomarcina",
+      "nazwa": "Prawo Marcina"
+    },
+    {
+      "konto": "prawnik.przedsiebiorcow",
+      "nazwa": "Mateusz Ostrowski"
+    },
+    {
+      "konto": "prawnicza.para",
+      "nazwa": "Prawnicza Para (scenki)"
+    },
+    {
+      "konto": "marcinzarzycki.pl",
+      "nazwa": "Marcin Zarzycki"
+    },
+    {
+      "konto": "prawnaposesja",
+      "nazwa": "Agnieszka Kolbuch-Wągiel"
+    },
+    {
+      "konto": "adwokat_od_nieruchomosci",
+      "nazwa": "Sylwia Mendak-Niekurzak"
+    },
+    {
+      "konto": "prawnik_o_nieruchomosciach",
+      "nazwa": "(do potwierdzenia)"
+    },
+    {
+      "konto": "mecenas_na_kredyt",
+      "nazwa": "Katarzyna Wilk"
+    },
+    {
+      "konto": "mj_jaworski",
+      "nazwa": "Marcin Jaworski"
+    },
+    {
+      "konto": "sadzinski_kamil",
+      "nazwa": "Kamil Sadziński"
+    },
+    {
+      "konto": "exmitercom",
+      "nazwa": "eXmiter"
+    },
+    {
+      "konto": "daniel.siwiec",
+      "nazwa": "Daniel Siwiec"
+    },
+    {
+      "konto": "filipkowarski",
+      "nazwa": "Filip Kowarski"
+    },
+    {
+      "konto": "odbiormieszkania",
+      "nazwa": "Odbiór Mieszkania"
+    },
+    {
+      "konto": "marcin_iwuc_fbo",
+      "nazwa": "Marcin Iwuć"
+    },
+    {
+      "konto": "lawbymike",
+      "nazwa": "Law By Mike (wzorzec)"
+    },
+    {
+      "konto": "ugolord",
+      "nazwa": "Ugo Lord (wzorzec)"
+    }
+  ],
+  "linkedin": [
+    {
+      "url": "https://www.linkedin.com/in/prawniknabudowie",
+      "nazwa": "Łukasz Mróz"
+    },
+    {
+      "url": "https://www.linkedin.com/in/lewandowska-malgorzata/",
+      "nazwa": "Małgorzata Lewandowska (LinkedIn Live)"
+    },
+    {
+      "url": "https://www.linkedin.com/in/mariusz-stankiewicz8946b559/",
+      "nazwa": "Mariusz Stankiewicz (#legalnyvlog)"
+    },
+    {
+      "url": "https://www.linkedin.com/in/bartosz-grube-422011215",
+      "nazwa": "Bartosz Grube"
+    },
+    {
+      "url": "https://www.linkedin.com/in/maciejoniszczuk",
+      "nazwa": "Maciej Oniszczuk"
+    },
+    {
+      "url": "https://www.linkedin.com/in/dr-szymonromanow-903650182",
+      "nazwa": "Szymon Romanow"
+    },
+    {
+      "url": "https://www.linkedin.com/in/elżbietaliberda/",
+      "nazwa": "Elżbieta Liberda"
+    },
+    {
+      "url": "https://www.linkedin.com/in/marcin-zarzycki",
+      "nazwa": "Marcin Zarzycki"
+    },
+    {
+      "url": "https://www.linkedin.com/in/joannarynas",
+      "nazwa": "Joanna Rynas"
+    }
+  ]
+}

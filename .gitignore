@@ -2,3 +2,5 @@
 .check/
 node_modules/
 .dist-build/
+.radar/
+__pycache__/

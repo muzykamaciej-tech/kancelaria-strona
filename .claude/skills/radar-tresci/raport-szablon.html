@@ -1,0 +1,257 @@
+<title>Radar treści kancelarii</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+/* Układ: jedna kolumna czytana z telefonu. Najpierw „co nagrać”, potem dowody: co się wybiło, Twoje rolki, popyt, źródła.
+   Barwy i krój z systemu strony kancelarii (assets/tokens.css): błękit marki, łupkowe szarości, Lora. */
+:root {
+  --bg: #F8FAFC;
+  --surface: #FFFFFF;
+  --ink: #1E293B;
+  --body: #475569;
+  --muted: #64748B;
+  --line: #E2E8F0;
+  --brand: #0E53A5;
+  --brand-tint: #E0EDFA;
+  --hot: #B45309;
+  --hot-tint: #FEF3C7;
+  --ok: #15803D;
+  --warn: #B91C1C;
+  --warn-tint: #FEF2F2;
+  --font-text: 'Lora', Georgia, Cambria, 'Times New Roman', serif;
+  --font-ui: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-num: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F172A; --surface: #1E293B; --ink: #F1F5F9; --body: #CBD5E1; --muted: #94A3B8; --line: #334155;
+    --brand: #7FB2F0; --brand-tint: #17345A; --hot: #FBBF24; --hot-tint: #3B2A0A; --ok: #4ADE80; --warn: #FCA5A5; --warn-tint: #3A1717;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F172A; --surface: #1E293B; --ink: #F1F5F9; --body: #CBD5E1; --muted: #94A3B8; --line: #334155;
+  --brand: #7FB2F0; --brand-tint: #17345A; --hot: #FBBF24; --hot-tint: #3B2A0A; --ok: #4ADE80; --warn: #FCA5A5; --warn-tint: #3A1717;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--body); font-family: var(--font-text); font-size: 16px; line-height: 1.6; }
+.wrap { max-width: 860px; margin: 0 auto; padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { color: var(--ink); font-weight: 700; line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(1.9rem, 1.2rem + 2.4vw, 2.6rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.35rem, 1.1rem + 1vw, 1.7rem); }
+h3 { font-size: 1.15rem; }
+a { color: var(--brand); text-underline-offset: 2px; overflow-wrap: anywhere; }
+a:focus-visible, summary:focus-visible, button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 3px; }
+.eyebrow { font-family: var(--font-ui); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+header.top { display: grid; gap: 10px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+header.top .meta { font-family: var(--font-ui); font-size: 0.85rem; color: var(--muted); }
+nav.toc { display: flex; flex-wrap: wrap; gap: 6px 14px; font-family: var(--font-ui); font-size: 0.85rem; padding-top: 4px; }
+section { display: grid; gap: 16px; padding-top: 40px; }
+section > * { min-width: 0; }
+section > .head { display: grid; gap: 4px; }
+section > .head p { margin: 0; font-size: 0.95rem; color: var(--muted); max-width: 65ch; }
+.takeaways { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; counter-reset: t; }
+.takeaways li { display: grid; grid-template-columns: 28px 1fr; gap: 8px; color: var(--ink); max-width: 70ch; }
+.takeaways li::before { counter-increment: t; content: counter(t); font-family: var(--font-num); color: var(--brand); font-weight: 600; padding-top: 1px; }
+
+/* pomysły: kolejność = ocena, więc numer niesie informację */
+.ideas { display: grid; gap: 14px; }
+.idea { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.idea > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; padding: 16px 18px; }
+.idea > summary::-webkit-details-marker { display: none; }
+.idea .rank { font-family: var(--font-num); font-size: 1.5rem; font-weight: 600; color: var(--brand); line-height: 1.1; min-width: 1.6ch; }
+.idea .sumtext { display: grid; gap: 6px; min-width: 0; overflow-wrap: anywhere; }
+.idea .hook { color: var(--ink); font-style: italic; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; font-family: var(--font-ui); font-size: 0.75rem; }
+.chip { border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; color: var(--muted); white-space: nowrap; }
+.chip.x { background: var(--hot-tint); color: var(--hot); border-color: transparent; font-weight: 600; }
+.chip.check { background: var(--warn-tint); color: var(--warn); border-color: transparent; }
+.chip.brand { background: var(--brand-tint); color: var(--brand); border-color: transparent; }
+.idea .more { font-family: var(--font-ui); font-size: 0.8rem; color: var(--brand); }
+.idea[open] .more { display: none; }
+.idea .body { display: grid; gap: 14px; padding: 0 18px 18px; border-top: 1px solid var(--line); padding-top: 14px; margin: 0 0 0; }
+.field { display: grid; gap: 4px; min-width: 0; align-content: start; }
+.field > .eyebrow { font-size: 0.7rem; }
+.field p, .field ul, .field ol { margin: 0; }
+.field ul, .field ol { padding-left: 1.2em; display: grid; gap: 4px; }
+.hooks li { color: var(--ink); }
+.script li { font-size: 0.95rem; }
+.onscreen { font-family: var(--font-ui); font-weight: 700; color: var(--ink); letter-spacing: 0.01em; }
+.two { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+
+/* tabele */
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-family: var(--font-ui); font-size: 0.85rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.n, th.n { text-align: right; white-space: nowrap; font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+td .why { color: var(--body); font-family: var(--font-text); font-size: 0.9rem; margin-top: 4px; }
+td .take { color: var(--ink); font-family: var(--font-text); font-size: 0.9rem; margin-top: 2px; }
+.outliers td:nth-child(3) { min-width: 260px; }
+.mult { font-weight: 700; color: var(--hot); }
+
+/* własne rolki: odsetek obejrzeń > 3 s narysowany w skali 0–100 % */
+.bar { position: relative; height: 8px; width: 90px; background: var(--line); border-radius: 4px; display: inline-block; vertical-align: middle; margin-left: 6px; }
+.bar > i { position: absolute; inset: 0 auto 0 0; background: var(--brand); border-radius: 4px; }
+.lessons { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; max-width: 70ch; }
+
+/* popyt */
+.cols { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.box { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 8px; min-width: 0; align-content: start; }
+.box ul { margin: 0; padding-left: 1.1em; display: grid; gap: 5px; font-size: 0.93rem; }
+.src { font-family: var(--font-ui); font-size: 0.72rem; color: var(--muted); margin-left: 4px; }
+.ai li { font-style: italic; color: var(--ink); }
+
+.status { display: grid; gap: 8px; }
+.status .row { display: grid; grid-template-columns: 14px 1fr; gap: 10px; align-items: start; font-size: 0.95rem; }
+.dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 7px; background: var(--muted); }
+.dot.ok { background: var(--ok); } .dot.czesciowo { background: var(--hot); } .dot.brak { background: var(--warn); }
+.todo { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+footer { padding-top: 40px; font-family: var(--font-ui); font-size: 0.8rem; color: var(--muted); }
+@media (max-width: 520px) {
+  .idea > summary { padding: 14px; gap: 6px 10px; }
+  .idea .body { padding: 14px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="wrap" id="app">
+  <header class="top">
+    <div class="eyebrow">Kancelaria Nieruchomości · radar treści</div>
+    <h1>Co nagrać w tym tygodniu</h1>
+    <div class="meta" id="meta"></div>
+    <nav class="toc" aria-label="Sekcje">
+      <a href="#pomysly">Pomysły</a><a href="#wybicia">Co się wybiło</a><a href="#twoje">Twoje rolki</a>
+      <a href="#popyt">O co pytają</a><a href="#zrodla">Źródła</a><a href="#archiwum">Archiwum</a>
+    </nav>
+  </header>
+
+  <section id="wnioski" aria-labelledby="h-wnioski">
+    <div class="head"><h2 id="h-wnioski">Najważniejsze w tym tygodniu</h2></div>
+    <ol class="takeaways" id="takeaways"></ol>
+  </section>
+
+  <section id="pomysly" aria-labelledby="h-pomysly">
+    <div class="head"><h2 id="h-pomysly">Pomysły na rolki</h2>
+      <p>Od najwyżej ocenionego: popyt × sprawdzony wzór × dopasowanie do usług kancelarii. Dotknij, by rozwinąć scenariusz.</p></div>
+    <div class="ideas" id="ideas"></div>
+  </section>
+
+  <section id="wybicia" aria-labelledby="h-wybicia">
+    <div class="head"><h2 id="h-wybicia">Co się wybiło ponad normę autora</h2>
+      <p>Krotność to wyświetlenia (na Instagramie konkurencji: polubienia) podzielone przez medianę tego samego autora. Porównujemy autora z nim samym, więc wielkość konta się nie liczy.</p></div>
+    <div class="scroll"><table class="outliers"><thead><tr><th class="n">Krotność</th><th>Autor</th><th>Rolka · co zadziałało · co bierzemy</th><th class="n">Wynik</th><th class="n">Mediana</th></tr></thead><tbody id="outliers"></tbody></table></div>
+  </section>
+
+  <section id="twoje" aria-labelledby="h-twoje">
+    <div class="head"><h2 id="h-twoje">Twoje rolki</h2><p id="own-sum"></p></div>
+    <div class="scroll"><table><thead><tr><th>Data</th><th>Rolka</th><th class="n">Wyświetl.</th><th class="n">× mediany</th><th class="n">Zostaje po 3 s</th><th class="n">Udostępn.</th><th class="n">Zapis.</th><th class="n">Śr. czas</th></tr></thead><tbody id="own"></tbody></table></div>
+    <ul class="lessons" id="lessons"></ul>
+  </section>
+
+  <section id="popyt" aria-labelledby="h-popyt">
+    <div class="head"><h2 id="h-popyt">O co ludzie pytają</h2>
+      <p>Podpowiedzi Google, YouTube i Bing dla tematów kancelarii, świeże wątki z forum, trendy i zmiany przepisów. Zapytań do ChatGPT nikt nie publikuje; najbliżej nich są pełne pytania z podpowiedzi i forów, przepisane tak, jak ktoś zadałby je czatowi.</p></div>
+    <div class="cols">
+      <div class="box"><div class="eyebrow">Pytania z wyszukiwarek</div><ul id="q"></ul></div>
+      <div class="box"><div class="eyebrow">Tak pytają czatu (przybliżenie)</div><ul class="ai" id="ai"></ul></div>
+      <div class="box"><div class="eyebrow">Świeże wątki na forum</div><ul id="forum"></ul></div>
+      <div class="box"><div class="eyebrow">Przepisy, terminy, newsy</div><ul id="news"></ul></div>
+    </div>
+  </section>
+
+  <section id="zrodla" aria-labelledby="h-zrodla">
+    <div class="head"><h2 id="h-zrodla">Źródła danych w tym przebiegu</h2></div>
+    <div class="status" id="sources"></div>
+    <div class="box"><div class="eyebrow">Do zrobienia, żeby radar widział więcej</div><ol class="todo" id="todo"></ol></div>
+  </section>
+
+  <section id="archiwum" aria-labelledby="h-archiwum">
+    <div class="head"><h2 id="h-archiwum">Archiwum pomysłów</h2><p>Wszystko, co radar już proponował. Agent nie powtarza tych tematów bez nowego powodu.</p></div>
+    <div class="scroll"><table><thead><tr><th>Tydzień</th><th>Pomysł</th><th>Status</th></tr></thead><tbody id="archive"></tbody></table></div>
+  </section>
+
+  <footer id="foot"></footer>
+</div>
+
+<script type="application/json" id="dane">__DANE__</script>
+<script>
+(function () {
+  var D = JSON.parse(document.getElementById('dane').textContent);
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var link = function (t, u) { return u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(t) + '</a>' : esc(t); };
+  var nf = new Intl.NumberFormat('pl-PL');
+  var num = function (n) { return n == null || n === '' ? '–' : (typeof n === 'number' ? nf.format(n) : esc(n)); };
+  var mult = function (k) { return k == null ? '–' : String(k).replace('.', ',') + '×'; };
+  var $ = function (id) { return document.getElementById(id); };
+  var list = function (arr, f) { return (arr || []).map(f).join(''); };
+  var site = 'https://mecenasodnieruchomosci.pl';
+
+  $('meta').innerHTML = 'Przebieg z ' + esc(D.tydzien) + (D.okres ? ' · dane: ' + esc(D.okres) : '');
+  $('takeaways').innerHTML = list(D.wnioski, function (w) { return '<li>' + esc(w) + '</li>'; });
+
+  $('ideas').innerHTML = list(D.pomysly, function (p, i) {
+    var chips = '<span class="chip brand">' + esc(p.format) + '</span>' +
+      list(p.platformy, function (x) { return '<span class="chip">' + esc(x) + '</span>'; }) +
+      (p.wzor && p.wzor.krotnosc ? '<span class="chip x">wzór ' + mult(p.wzor.krotnosc) + '</span>' : '') +
+      ((p.przepisy || []).length ? '<span class="chip check">przepisy do weryfikacji</span>' : '');
+    var dowody = list(p.dowody, function (d) { return '<li>' + link(d.tekst, d.url) + (d.typ ? '<span class="src">' + esc(d.typ) + '</span>' : '') + '</li>'; });
+    var linkStr = p.link_strony ? link(site + p.link_strony, site + p.link_strony) : '';
+    return '<details class="idea" id="pomysl-' + (i + 1) + '"><summary>' +
+      '<span class="rank">' + (i + 1) + '</span><span class="sumtext"><h3>' + esc(p.tytul) + '</h3>' +
+      '<span class="hook">„' + esc((p.hooki || [])[0]) + '”</span><span class="chips">' + chips + '</span>' +
+      '<span class="more">Scenariusz, dowody, CTA ▾</span></span></summary>' +
+      '<div class="body">' +
+      '<div class="field"><span class="eyebrow">Dlaczego teraz</span><p>' + esc(p.dlaczego_teraz) + '</p></div>' +
+      (dowody ? '<div class="field"><span class="eyebrow">Dowody popytu</span><ul>' + dowody + '</ul></div>' : '') +
+      (p.wzor ? '<div class="field"><span class="eyebrow">Wzór</span><p>' + link(p.wzor.tytul, p.wzor.url) + ' · ' + esc(p.wzor.autor) +
+        (p.wzor.krotnosc ? ' · <span class="num mult">' + mult(p.wzor.krotnosc) + '</span> mediany autora' : '') +
+        (p.wzor.co ? '<br>' + esc(p.wzor.co) : '') + '</p></div>' : '') +
+      '<div class="field"><span class="eyebrow">Hook: 3 warianty na pierwsze 2 sekundy</span><ol class="hooks">' + list(p.hooki, function (h) { return '<li>' + esc(h) + '</li>'; }) + '</ol></div>' +
+      '<div class="field"><span class="eyebrow">Szkic</span><ol class="script">' + list(p.szkic, function (s) { return '<li>' + esc(s) + '</li>'; }) + '</ol></div>' +
+      '<div class="two">' +
+        (p.tekst_na_ekranie ? '<div class="field"><span class="eyebrow">Tekst na ekranie (0–2 s)</span><p class="onscreen">' + esc(p.tekst_na_ekranie) + '</p></div>' : '') +
+        '<div class="field"><span class="eyebrow">CTA</span><p>' + esc(p.cta) + (linkStr ? '<br>' + linkStr : '') + '</p></div>' +
+      '</div>' +
+      ((p.przepisy || []).length ? '<div class="field"><span class="eyebrow">Przepisy i orzeczenia do sprawdzenia przed nagraniem</span><ul>' + list(p.przepisy, function (x) { return '<li>' + esc(x) + '</li>'; }) + '</ul></div>' : '') +
+      (p.uwagi ? '<div class="field"><span class="eyebrow">Uwagi</span><p>' + esc(p.uwagi) + '</p></div>' : '') +
+      '</div></details>';
+  });
+
+  $('outliers').innerHTML = list(D.odstajace, function (o) {
+    return '<tr><td class="n"><span class="mult">' + mult(o.krotnosc) + '</span></td><td>' + esc(o.autor) + '<div class="src">' + esc(o.platforma) + '</div></td>' +
+      '<td>' + link(o.tytul, o.url) + (o.co_zadzialalo ? '<div class="why">' + esc(o.co_zadzialalo) + '</div>' : '') +
+      (o.przenosimy ? '<div class="take">→ ' + esc(o.przenosimy) + '</div>' : '') + '</td>' +
+      '<td class="n">' + num(o.wynik) + '</td><td class="n">' + num(o.mediana) + '</td></tr>';
+  });
+
+  var W = D.wlasne || {};
+  $('own-sum').textContent = W.podsumowanie || '';
+  $('own').innerHTML = list(W.rolki, function (r) {
+    var h = r.hook == null ? '–' : String(r.hook).replace('.', ',') + ' %<span class="bar" aria-hidden="true"><i style="width:' + Math.max(0, Math.min(100, r.hook)) + '%"></i></span>';
+    return '<tr><td class="num">' + esc(r.data) + '</td><td>' + link(r.opis, r.url) + '</td><td class="n">' + num(r.wyswietlenia) + '</td><td class="n">' + mult(r.krotnosc) +
+      '</td><td class="n">' + h + '</td><td class="n">' + num(r.udostepnienia) + '</td><td class="n">' + num(r.zapisania) + '</td><td class="n">' + (r.sr_czas == null ? '–' : String(r.sr_czas).replace('.', ',') + ' s') + '</td></tr>';
+  });
+  $('lessons').innerHTML = list(W.lekcje, function (l) { return '<li>' + esc(l) + '</li>'; });
+
+  var P = D.popyt || {};
+  $('q').innerHTML = list(P.pytania, function (q) { return '<li>' + esc(q.tekst) + (q.zrodla ? '<span class="src">' + esc(q.zrodla) + '</span>' : '') + '</li>'; });
+  $('ai').innerHTML = list(P.jak_do_ai, function (q) { return '<li>' + esc(q) + '</li>'; });
+  $('forum').innerHTML = list(P.forum, function (f) { return '<li>' + link(f.tytul, f.url) + '<span class="src">' + esc(f.data) + '</span></li>'; });
+  $('news').innerHTML = list(P.aktualnosci, function (n) { return '<li>' + link(n.tekst, n.url) + '</li>'; });
+
+  $('sources').innerHTML = list(D.zrodla, function (s) { return '<div class="row"><span class="dot ' + esc(s.stan) + '"></span><div><strong>' + esc(s.nazwa) + '.</strong> ' + esc(s.opis) + '</div></div>'; });
+  $('todo').innerHTML = list(D.do_zrobienia, function (t) { return '<li>' + esc(t) + '</li>'; });
+  $('archive').innerHTML = list(D.archiwum, function (a) { return '<tr><td class="num">' + esc(a.data) + '</td><td>' + esc(a.tytul) + '</td><td>' + esc(a.status) + '</td></tr>'; });
+  $('foot').textContent = 'Przygotował agent radar-tresci (repozytorium kancelaria-strona, .claude/skills/radar-tresci). Każdy przepis i sygnaturę sprawdź w LEX, Legalis albo CBOSA przed publikacją.';
+
+  var h = location.hash.slice(1);
+  if (/^pomysl-\d+$/.test(h) && $(h)) { $(h).open = true; $(h).scrollIntoView(); }
+})();
+</script>
