@@ -342,7 +342,7 @@ Nie znalazłem polskiego SaaS „white-label”, który pozwalałby adwokatowi s
 ## 7. Generatory wspierane przez AI (LLM) na stronie kancelarii
 
 ### Takeaway
-Technicznie i kosztowo to tanie: sesja asystenta to ok. 0,07 USD na Claude Sonnet 5.5 i poniżej 0,01 USD na Haiku 5.5. Główne ryzyka są prawne i etyczne:
+Technicznie i kosztowo to tanie: sesja asystenta to ok. 0,07 USD na Claude (model średniej klasy) i poniżej 0,01 USD na model najtańszy. Główne ryzyka są prawne i etyczne:
 - zasady NRA (AI tylko pomocniczo, tajemnica, osobista weryfikacja);
 - AI Act art. 50 od 2.08.2026 (informacja, że użytkownik rozmawia z AI);
 - RODO;
@@ -352,9 +352,9 @@ Bezpieczniejszy wariant to AI jako pomoc w wypełnianiu kwestionariusza, a dokum
 
 ### Cited Findings
 - Ceny Claude API (USD/1 mln tokenów):
-  - Opus 5.5: 4 wejście, 20 wyjście, cache hit 0,20;
-  - Sonnet 5.5: 2 / 10, cache 0,10;
-  - Haiku 5.5: 0,10 / 0,50 (dla promptów do 100 tys. tokenów).
+  - model najwyższej klasy: 4 wejście, 20 wyjście, cache hit 0,20;
+  - model średniej klasy: 2 / 10, cache 0,10;
+  - model najtańszy: 0,10 / 0,50 (dla promptów do 100 tys. tokenów).
   Batch API daje 50% zniżki. Domyślnie routing jest globalny. `inference_geo: "us"` (tylko USA) kosztuje 1,1x. Regionalne endpointy u partnerów (Bedrock/Vertex) mają 10% premii. — [Anthropic – pricing](https://platform.claude.com/docs/en/about-claude/pricing)
 - NRA zmieniła Zbiór Zasad Etyki Adwokackiej. Adwokat może korzystać z narzędzi technologicznych, w tym AI, „tylko pomocniczo”, bez naruszania tajemnicy, bez delegowania osądu i bez rezygnacji z osobistej weryfikacji wyników. Na prośbę klienta należy ujawnić, jakie narzędzia są używane. KRRP wydała 22 rekomendacje dla radców. — [Rzeczpospolita – NRA zmieniła kodeks etyki](https://www.rp.pl/zawody-prawnicze/art44636171-nra-zmienila-kodeks-etyki-adwokat-moze-korzystac-z-ai-ale-tylko-pomocniczo); [Prawo.pl – adwokat a AI, zmiany w zasadach etyki](https://www.prawo.pl/prawnicy-sady/adwokat-ai-zmiany-w-zasadach-etyki,1546668.html)
 - AI Act art. 50: od 2.08.2026 systemy do bezpośredniej interakcji z ludźmi muszą informować, że użytkownik rozmawia z AI (chyba że to oczywiste). Generatory treści syntetycznych muszą je oznaczać w formacie maszynowym. Kary do 15 mln EUR lub 3% obrotu (dla MŚP niższa kwota). Wytyczne KE z 20.07.2026 potwierdziły termin. Wymogi dla systemów wysokiego ryzyka z załącznika III przesunięto na 2.12.2027. — [Prawo.pl – AI Act od sierpnia 2026](https://www.prawo.pl/biznes/ai-act-jakie-obowiazki-maja-firmy-od-sierpnia-2026,1550271.html); [Forsal – obowiązki AI Act nieprzesunięte](https://forsal.pl/biznes/technologie/artykuly/11274547,firmy-maja-czas-do-2-sierpnia-te-obowiazki-ai-act-nie-zostaly-przesuniete.html); [iFirma – AI Act od 2.08.2026](https://www.ifirma.pl/blog/ai-act-od-2-sierpnia-2026-r-co-zmieniaja-nowe-obowiazki-dotyczace-sztucznej-inteligencji/)
@@ -362,9 +362,9 @@ Bezpieczniejszy wariant to AI jako pomoc w wypełnianiu kwestionariusza, a dokum
 
 ### Inferences
 - **Koszt (moje obliczenia):** sesja z 20 tys. tokenów wejścia (instrukcja, szablon, rozmowa) i 3 tys. wyjścia kosztuje:
-  - Sonnet 5.5: ok. 0,07 USD;
-  - Opus 5.5: ok. 0,14 USD;
-  - Haiku 5.5: ok. 0,004 USD.
+  - model średniej klasy: ok. 0,07 USD;
+  - model najwyższej klasy: ok. 0,14 USD;
+  - model najtańszy: ok. 0,004 USD.
   1000 sesji miesięcznie na Sonnecie to ok. 70 USD, a z cache'owaniem stałej instrukcji mniej. Do tego koszt funkcji Vercel (minimalny).
 - **Dane:** API pierwszej strony Anthropic oferuje routing globalny lub „us”, bez wariantu tylko-UE na API bezpośrednim (wniosek z cennika). Dane klientów (opis sprawy, nieruchomości, KW) to dane osobowe i potencjalnie tajemnica adwokacka. Potrzebne są: umowa powierzenia (DPA), minimalizacja (bez numerów KW i nazwisk w promptach), informacja w polityce prywatności, retencja logów i ocena transferu poza EOG.
 - **Model produktu:** AI zbiera i porządkuje fakty, tłumaczy pojęcia i wybiera wariant klauzuli z biblioteki zatwierdzonej przez adwokata. Dokument powstaje z szablonu. Zgodnie z zasadami kancelarii każdy przepis i sygnatura w szablonie musi być zweryfikowany w LEX/Legalis/CBOSA. Swobodne pisanie umowy przez LLM zwiększa ryzyko halucynacji, odpowiedzialności zawodowej i zarzutu świadczenia porady bez nadzoru.
@@ -414,7 +414,7 @@ MailerLite przemianował plany (Free do 250 subskrybentów, Comfort od 12 USD, P
 ## 9. Rekomendowany stack: (a) szybki start z niskim utrzymaniem, (b) skalowalny z generatorami i subskrypcjami
 
 ### Takeaway
-**(a)** Hostowana polska platforma bez prowizji (Publigo GO Plus albo heyhey Pro) z P24 lub Tpay, Fakturownią z automatycznym KSeF i przyciskami „Kup” na stronie prowadzącymi do sklepu na subdomenie. Koszt to ok. 177–475 zł netto/mies. + Fakturownia i ok. 1,3–2% + 0,30–0,41 zł za sprzedaż. **(b)** Headless na Vercel: Stripe Checkout/Billing (BLIK, także cykliczny, P24, karty) albo P24/Tpay, webhook w `api/`, prywatny Blob, Fakturownia lub inFakt API z KSeF, Resend, MailerLite, generator z docxtemplater, opcjonalnie AI na Sonnet 5.5. Koszt stały ok. 20–60 USD/mies. + program fakturowy, a za sprzedaż ok. 1,5–1,9% + 1 zł (Stripe) lub 1,29% + 0,30 zł (P24), plus 0,7% przy subskrypcjach Stripe.
+**(a)** Hostowana polska platforma bez prowizji (Publigo GO Plus albo heyhey Pro) z P24 lub Tpay, Fakturownią z automatycznym KSeF i przyciskami „Kup” na stronie prowadzącymi do sklepu na subdomenie. Koszt to ok. 177–475 zł netto/mies. + Fakturownia i ok. 1,3–2% + 0,30–0,41 zł za sprzedaż. **(b)** Headless na Vercel: Stripe Checkout/Billing (BLIK, także cykliczny, P24, karty) albo P24/Tpay, webhook w `api/`, prywatny Blob, Fakturownia lub inFakt API z KSeF, Resend, MailerLite, generator z docxtemplater, opcjonalnie AI na model średniej klasy. Koszt stały ok. 20–60 USD/mies. + program fakturowy, a za sprzedaż ok. 1,5–1,9% + 1 zł (Stripe) lub 1,29% + 0,30 zł (P24), plus 0,7% przy subskrypcjach Stripe.
 
 ### Cited Findings (podstawy kosztów)
 - Publigo GO Plus: 177 zł netto/mies. (157 zł rocznie), znak wodny PDF i pakiety, bez prowizji producenta. Pro (subskrypcje, upsell, afiliacja): 297 zł (247 zł). — [Publigo – cennik](https://publigo.pl/cennik/)
@@ -426,7 +426,7 @@ MailerLite przemianował plany (Free do 250 subskrybentów, Comfort od 12 USD, P
 - Fakturownia: KSeF i API na każdym planie (Micro 0 zł do 3 faktur/mies.). inFakt: KSeF bezpłatny, API z webhookami. — [Fakturownia – cennik](https://fakturownia.pl/cennik); [inFakt – KSeF](https://infakt.pl/ksef)
 - docxtemplater: rdzeń darmowy (MIT/GPLv3), moduł 500 EUR/rok. Carbone Cloud Free 100 dokumentów/mies., Essential 29 EUR. — [docxtemplater – pricing](https://docxtemplater.com/pricing/); [Carbone – pricing](https://carbone.io/pricing.html)
 - MailerLite Comfort od 12 USD/mies. — [MailerLite – pricing](https://www.mailerlite.com/pricing)
-- Claude Sonnet 5.5: 2 / 10 USD za 1 mln tokenów; Haiku 5.5: 0,10 / 0,50. — [Anthropic – pricing](https://platform.claude.com/docs/en/about-claude/pricing)
+- Claude (model średniej klasy): 2 / 10 USD za 1 mln tokenów; model najtańszy: 0,10 / 0,50. — [Anthropic – pricing](https://platform.claude.com/docs/en/about-claude/pricing)
 
 ### Inferences (rekomendacja i szacunki, obliczenia własne)
 
@@ -463,7 +463,7 @@ Etap 2, generator umów: kwestionariusz w React (istniejący stos JSX), szablony
 
 Etap 3, subskrypcje: Stripe Billing (+0,7%), karta i BLIK cykliczny, np. „Pakiet wzorów nieruchomościowych + aktualizacje”.
 
-Etap 4, opcjonalnie AI: asystent kwestionariusza na Claude Sonnet 5.5 lub Haiku 5.5 z informacją z art. 50 AI Act, bez danych z KW i nazwisk w promptach, z treścią dokumentu wyłącznie z zatwierdzonych klauzul.
+Etap 4, opcjonalnie AI: asystent kwestionariusza na Claude (model średniej klasy) lub model najtańszy z informacją z art. 50 AI Act, bez danych z KW i nazwisk w promptach, z treścią dokumentu wyłącznie z zatwierdzonych klauzul.
 
 Kursy i nagrania webinarów: albo zostają na platformie z wariantu (a) (hosting wideo), albo trafiają do zewnętrznego hostingu wideo z prywatnym odtwarzaczem. Hostingu wideo w wariancie (b) nie badałem.
 
