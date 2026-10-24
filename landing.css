@@ -115,20 +115,10 @@
 }
 .landing-intro .landing-intro-lead span { color: inherit; }
 .landing-intro-title { font-size: clamp(2rem, 1.2rem + 2.4vw, 3.4rem); text-wrap: balance; margin: 1.25rem 0 0; }
-.landing-intro-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
-  align-items: center;
-}
+.landing-intro-grid { display: grid; grid-template-columns: 1fr; }
 @media (min-width: 980px) {
-  .landing-intro-grid { grid-template-columns: 1.1fr 0.9fr; gap: clamp(2rem, 4vw, 4rem); }
+  .landing-intro-grid { grid-template-columns: 1fr 1fr; gap: 3rem; min-height: 40rem; align-items: center; }
 }
-
-/* Portret w nagłówku: oryginalne zdjęcie, prostokąt; gradient w granat tylko od strony tekstu, podpis pod zdjęciem. */
-.landing-intro-portrait { display: flex; justify-content: center; }
-.hero-portrait { position: relative; width: 100%; max-width: 34rem; }
-@media (max-width: 979px) { .hero-portrait { max-width: 24rem; } }
 
 /* łagodne przejście sekcji powitalnej w następną (postać stoi na krawędzi) */
 .landing-intro::after {
@@ -911,49 +901,63 @@ select.input { appearance: auto; cursor: pointer; }
 .report-actions .btn { max-width: 100%; white-space: normal; text-align: center; }
 .landing-intro-text .eyebrow { line-height: 1.6; }
 .landing-intro-text .eyebrow::after { display: none; }
-@media (max-width: 979px) {
-  .landing-intro-grid { gap: 0; }
-  .landing-intro-portrait { order: -1; }
-  .landing-intro-portrait .hero-portrait { max-width: 19rem; margin-bottom: 1.75rem; }
-}
 
-/* Zdjęcia Macieja w sekcjach strony głównej: oryginał z brzegami wygaszonymi maską w kolor tła sekcji.
-   --fade-right: mocniej przy prawej krawędzi (zdjęcie po lewej, tekst po prawej). */
-.side-photo { display: block; width: 100%; height: auto; }
-/* Gradient i przyciemnienie tylko od strony tekstu (styl liberda.pl); pozostałe krawędzie zostają ostre. */
-.side-photo--fade-right {
-  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 34%, rgba(0,0,0,.72) 54%, rgba(0,0,0,.32) 76%, rgba(0,0,0,.08) 90%, transparent 100%);
-  mask-image: linear-gradient(to right, #000 0%, #000 34%, rgba(0,0,0,.72) 54%, rgba(0,0,0,.32) 76%, rgba(0,0,0,.08) 90%, transparent 100%);
+/* ----------------------------------------------------------------
+   Zdjęcia Macieja jako panele sekcji (styl liberda.pl, decyzja Macieja 24.10.2026)
+   Komputer: panel na połowie sekcji, od jej górnej krawędzi do brzegu ekranu; gradient w granat tylko od strony tekstu.
+   --top: naturalna wysokość, przypięte do góry sekcji, dół wygaszony (sekcja z formularzem jest wyższa niż zdjęcie).
+   Telefon: zdjęcie na pełną szerokość nad tekstem, wygaszony dół.
+   ---------------------------------------------------------------- */
+.section-photo { position: relative; z-index: 0; margin-bottom: 1.5rem; }
+.section-photo img {
+  display: block; width: 100%; height: auto; max-height: 78vh; object-fit: cover; object-position: center 22%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, rgba(0,0,0,.55) 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 62%, rgba(0,0,0,.55) 82%, transparent 100%);
 }
-.side-photo--fade-left {
-  -webkit-mask-image: linear-gradient(to left, #000 0%, #000 34%, rgba(0,0,0,.72) 54%, rgba(0,0,0,.32) 76%, rgba(0,0,0,.08) 90%, transparent 100%);
-  mask-image: linear-gradient(to left, #000 0%, #000 34%, rgba(0,0,0,.72) 54%, rgba(0,0,0,.32) 76%, rgba(0,0,0,.08) 90%, transparent 100%);
-}
-/* na telefonie zdjęcie jest nad tekstem — wygaszony tylko dół */
-@media (max-width: 979px) {
-  .side-photo--fade-right, .side-photo--fade-left {
-    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, rgba(0,0,0,.55) 82%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 0%, #000 62%, rgba(0,0,0,.55) 82%, transparent 100%);
+/* na telefonie zdjęcie zaczyna się przy górnej krawędzi sekcji */
+.landing-intro .section-photo { margin-top: calc(-1 * clamp(2.5rem, 4vw + 1rem, 4.5rem)); }
+.landing-hero .section-photo { margin-top: calc(-1 * clamp(2.5rem, 4vw + 1.5rem, 5.5rem)); }
+.final-cta .section-photo { margin-top: calc(-1 * var(--d-section-py)); }
+
+@media (min-width: 980px) {
+  .section-photo { position: absolute; top: 0; bottom: 0; width: 50%; margin: 0 !important; }
+  .section-photo--right { right: 0; }
+  .section-photo--left { left: 0; }
+  .section-photo img { width: 100%; height: 100%; max-height: none; object-fit: cover; object-position: center 30%; }
+  .section-photo--right img {
+    -webkit-mask-image: linear-gradient(to left, #000 0%, #000 42%, rgba(0,0,0,.72) 60%, rgba(0,0,0,.32) 80%, rgba(0,0,0,.08) 93%, transparent 100%);
+    mask-image: linear-gradient(to left, #000 0%, #000 42%, rgba(0,0,0,.72) 60%, rgba(0,0,0,.32) 80%, rgba(0,0,0,.08) 93%, transparent 100%);
+  }
+  .section-photo--left img {
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 42%, rgba(0,0,0,.72) 60%, rgba(0,0,0,.32) 80%, rgba(0,0,0,.08) 93%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 0%, #000 42%, rgba(0,0,0,.72) 60%, rgba(0,0,0,.32) 80%, rgba(0,0,0,.08) 93%, transparent 100%);
+  }
+  .section-photo--top { bottom: auto; }
+  .section-photo--top img {
+    height: auto; object-fit: initial;
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 42%, rgba(0,0,0,.72) 60%, rgba(0,0,0,.32) 80%, rgba(0,0,0,.08) 93%, transparent 100%), linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, #000 0%, #000 42%, rgba(0,0,0,.72) 60%, rgba(0,0,0,.32) 80%, rgba(0,0,0,.08) 93%, transparent 100%), linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
+    mask-composite: intersect;
   }
 }
 
-/* Podpis pod zdjęciem: kreska, nazwisko kursywą, funkcja */
-.photo-caption { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3rem; margin-top: 1rem; text-align: right; }
+/* Podpis na zdjęciu w nagłówku: kreska, nazwisko kursywą, funkcja (na telefonie pod zdjęciem) */
+.photo-caption { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; text-align: center; margin-top: -0.5rem; }
 .photo-caption::before { content: ""; width: 2rem; height: 1px; background: var(--brand-primary-light, #7FB0EA); margin-bottom: 0.45rem; }
 .photo-caption-name { font-family: var(--font-heading); font-style: italic; font-size: 1.3rem; color: #fff; line-height: 1.2; }
-.photo-caption-role { font-size: 0.82rem; letter-spacing: 0.04em; color: var(--text-on-dark-3, #94A3B8); }
-@media (max-width: 979px) {
-  .photo-caption { align-items: center; text-align: center; margin-top: 0.25rem; }
+.photo-caption-role { font-size: 0.82rem; letter-spacing: 0.04em; color: #CBD5E1; }
+@media (min-width: 980px) {
+  .photo-caption { position: absolute; z-index: 1; right: clamp(1.5rem, 4vw, 4rem); bottom: 2.25rem; align-items: flex-end; text-align: right; margin: 0; }
+  .section-photo--right::after { content: ""; position: absolute; inset: auto 0 0 0; height: 35%; background: linear-gradient(to top, rgba(7,12,23,.85), transparent); pointer-events: none; }
 }
 
-/* Sekcja z formularzem: zdjęcie po lewej (przyklejone przy przewijaniu), tekst i formularz po prawej */
-.landing-hero.overflow-hidden { overflow: clip; }
+/* Sekcja z formularzem: tekst i formularz w prawej połowie */
 .landing-hero-grid--photo { max-width: none; }
-.landing-hero-photo { max-width: 22rem; margin-inline: auto; width: 100%; }
 .landing-hero-main { display: flex; flex-direction: column; gap: 2.5rem; min-width: 0; }
 @media (min-width: 980px) {
-  .landing-hero-grid--photo { grid-template-columns: 0.85fr 1fr; gap: clamp(2rem, 4vw, 4.5rem); }
-  .landing-hero-photo { max-width: none; position: sticky; top: 7rem; }
+  .landing-hero-grid--photo { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .landing-hero-main { grid-column: 2; }
   .landing-hero-grid--photo .landing-hero-text { text-align: left; }
   .landing-hero-grid--photo .landing-hero-text .eyebrow { justify-content: flex-start; }
   .landing-hero-grid--photo .landing-hero-text .eyebrow::after { display: none; }
@@ -962,19 +966,17 @@ select.input { appearance: auto; cursor: pointer; }
   .landing-hero-grid--photo .landing-hero-text .trust-points { justify-content: flex-start; }
 }
 
-/* Sekcja końcowa: zdjęcie po lewej, tekst po prawej */
-.final-cta-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: center; }
-.final-cta-photo { max-width: 20rem; margin-inline: auto; width: 100%; }
+/* Sekcja końcowa: tekst w prawej połowie */
+.final-cta-grid { display: grid; grid-template-columns: 1fr; }
 .final-cta-text { text-align: center; }
 .final-cta-text .eyebrow { justify-content: center; }
 .final-cta-text .flex { justify-content: center; }
+.final-cta-text .lead { text-align: center; margin-inline: auto; }
 @media (min-width: 980px) {
-  .final-cta-grid { grid-template-columns: 0.8fr 1fr; gap: clamp(2rem, 4vw, 4.5rem); }
-  .final-cta-photo { max-width: none; }
-  .final-cta-text { text-align: left; }
+  .final-cta-grid { grid-template-columns: 1fr 1fr; gap: 3rem; min-height: 34rem; align-items: center; }
+  .final-cta-text { grid-column: 2; text-align: left; }
   .final-cta-text .eyebrow { justify-content: flex-start; }
   .final-cta-text .eyebrow::after { display: none; }
   .final-cta-text .flex { justify-content: flex-start; }
+  .final-cta-text .lead { text-align: left; margin-inline: 0; }
 }
-.final-cta-text .lead { text-align: center; margin-inline: auto; }
-@media (min-width: 980px) { .final-cta-text .lead { text-align: left; margin-inline: 0; } }

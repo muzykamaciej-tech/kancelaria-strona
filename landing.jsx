@@ -717,10 +717,33 @@ function ReportShowcase() {
 /* ============================================================
    Landing intro — editorial brand statement (sits above the form)
    ============================================================ */
+/* Zdjęcie Macieja jako panel sekcji (styl liberda.pl): na komputerze wypełnia połowę sekcji od jej górnej krawędzi
+   do brzegu ekranu i przechodzi w granat tylko od strony tekstu; na telefonie stoi nad tekstem.
+   fit="top" — naturalna wysokość, przypięte do góry sekcji (sekcja z formularzem jest wyższa niż zdjęcie). */
+function SectionPhoto({ name, side, alt, fit, eager, children }) {
+  return (
+    <div className={`section-photo section-photo--${side}${fit === 'top' ? ' section-photo--top' : ''}`}>
+      <img
+        src={`/assets/maciej-muzyka-${name}-1400.webp`}
+        srcSet={`/assets/maciej-muzyka-${name}-800.webp 800w, /assets/maciej-muzyka-${name}-1400.webp 1400w`}
+        sizes="(min-width: 980px) 50vw, 100vw"
+        alt={alt} width="1400" height={{ hero: 1974, telefon: 1555, smartfon: 1575 }[name]}
+        loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" />
+      {children}
+    </div>
+  );
+}
+
 function LandingIntro({ setRoute }) {
   return (
     <section className="bg-dark landing-intro relative overflow-hidden" data-screen-label="00a Wstęp">
       <div className="orb" style={{ width: 640, height: 640, top: -240, right: -200, opacity: 'calc(0.16 * var(--ambient-on))' }} />
+      <SectionPhoto name="hero" side="right" alt="adw. dr Maciej Muzyka" eager>
+        <div className="photo-caption">
+          <span className="photo-caption-name">adw. dr Maciej Muzyka</span>
+          <span className="photo-caption-role">Adwokat · Doktor nauk prawnych</span>
+        </div>
+      </SectionPhoto>
       <div className="wrap relative" style={{ zIndex: 2 }}>
         <div className="landing-intro-grid">
           <div className="landing-intro-text">
@@ -754,21 +777,6 @@ function LandingIntro({ setRoute }) {
             </p>
           </div>
 
-          <div className="landing-intro-portrait">
-            <div className="hero-portrait">
-              <img
-                className="side-photo side-photo--fade-left"
-                src="/assets/maciej-muzyka-hero-1000.webp"
-                srcSet="/assets/maciej-muzyka-hero-600.webp 600w, /assets/maciej-muzyka-hero-1000.webp 1000w"
-                sizes="(min-width: 980px) 34rem, 90vw"
-                alt="adw. dr Maciej Muzyka"
-                width="1000" height="1275" loading="eager" fetchpriority="high" decoding="async" />
-              <div className="photo-caption">
-                <span className="photo-caption-name">adw. dr Maciej Muzyka</span>
-                <span className="photo-caption-role">Adwokat · Doktor nauk prawnych</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>);
@@ -782,17 +790,9 @@ function LandingHero() {
   return (
     <section id="formularz" className="landing-hero relative overflow-hidden">
       <div className="orb" style={{ width: 620, height: 620, top: -260, left: -180, opacity: 'calc(0.10 * var(--ambient-on))' }} />
+      <SectionPhoto name="telefon" side="left" fit="top" alt="adw. dr Maciej Muzyka podczas rozmowy telefonicznej z klientem" />
       <div className="wrap relative" style={{ zIndex: 2 }}>
         <div className="landing-hero-grid landing-hero-grid--photo">
-          <div className="landing-hero-photo">
-            <img
-              className="side-photo side-photo--fade-right"
-              src="/assets/maciej-muzyka-telefon-1000.webp"
-              srcSet="/assets/maciej-muzyka-telefon-600.webp 600w, /assets/maciej-muzyka-telefon-1000.webp 1000w"
-              sizes="(min-width: 980px) 40vw, 90vw"
-              alt="adw. dr Maciej Muzyka podczas rozmowy telefonicznej z klientem"
-              width="1000" height="998" loading="lazy" decoding="async" />
-          </div>
           <div className="landing-hero-main">
           <div className="landing-hero-text">
             <span className="eyebrow">Bezpłatna wstępna analiza</span>
@@ -1256,17 +1256,9 @@ function FinalCTA() {
   return (
     <section className="section-py bg-dark relative overflow-hidden final-cta">
       <div className="orb" style={{ width: 520, height: 520, top: '10%', right: '-12%', opacity: 'calc(0.2 * var(--ambient-on))' }} />
+      <SectionPhoto name="smartfon" side="left" alt="adw. dr Maciej Muzyka ze smartfonem" />
       <div className="wrap relative" style={{ zIndex: 2 }}>
         <div className="final-cta-grid">
-          <div className="final-cta-photo">
-            <img
-              className="side-photo side-photo--fade-right"
-              src="/assets/maciej-muzyka-smartfon-1000.webp"
-              srcSet="/assets/maciej-muzyka-smartfon-600.webp 600w, /assets/maciej-muzyka-smartfon-1000.webp 1000w"
-              sizes="(min-width: 980px) 36vw, 90vw"
-              alt="adw. dr Maciej Muzyka ze smartfonem"
-              width="1000" height="930" loading="lazy" decoding="async" />
-          </div>
           <div className="final-cta-text">
             <span className="eyebrow on-dark">Bezpłatnie · w 24 h</span>
             <h2 className="display mt-4" style={{ color: '#fff' }}>
