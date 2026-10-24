@@ -45,8 +45,8 @@ html main .landing-hero-meta { align-items: center; }
 html main .landing-hero-text .trust-points { justify-content: center; }
 html main .reviews-band-head { flex-direction: column; align-items: center; text-align: center; }
 html main .blog-post-meta, html main .blog-post-meta > .flex { display: flex; justify-content: center; }
-/* akapit z osobnymi wierszami (<br>) — wyśrodkowany, bo wyjustowanie dawało nierówne wiersze */
-html main .landing-intro .landing-intro-lead { text-align: center; margin-inline: auto; }
+/* akapit pod głównym tytułem: wyjustowany, ostatni wiersz do lewej (decyzja Macieja 24.10.2026) */
+html main .landing-intro .landing-intro-lead { text-align: justify; text-align-last: left; margin-inline: auto; }
 /* boczna etykieta sekcji na stronach usług (numer + nadtytuł w lewej kolumnie) zostaje przy numerze */
 html main .service-section-side .eyebrow { margin-inline: 0; }
 html main .landing-intro-eyebrow { line-height: 1.7; }

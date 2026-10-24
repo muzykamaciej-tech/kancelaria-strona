@@ -755,10 +755,10 @@ function LandingIntro({ setRoute }) {
               <span className="italic" style={{ color: 'var(--brand-primary-light)' }}>kupować i inwestować.</span>
             </p>
             <p className="lead landing-intro-lead">
-              Od tego masz mnie.<br />
-              Sprawdzam umowy, wychwytuję ukryte ryzyka i reguluję stany prawne, zanim staną się Twoim problemem.<br />
-              Prowadzę sprawę od pierwszej oceny aż po ostateczny podpis.<br />
-              Zdalnie, prostym językiem, z ceną i terminem ustalonymi z góry.<br />
+              Od tego masz mnie.
+              Sprawdzam umowy, wychwytuję ukryte ryzyka i reguluję stany prawne, zanim staną się Twoim problemem.
+              Prowadzę sprawę od pierwszej oceny aż po ostateczny podpis.
+              Zdalnie, prostym językiem, z ceną i terminem ustalonymi z góry.
               A zanim cokolwiek zlecisz, bezpłatnie powiem, co trzeba zrobić w Twojej sprawie, i od razu prześlę ofertę.
             </p>
             <div className="flex gap-3 mt-8" style={{ flexWrap: 'wrap', alignItems: 'center' }}>
