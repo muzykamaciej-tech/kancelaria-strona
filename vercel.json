@@ -541,7 +541,11 @@
   "rewrites": [
     {
       "source": "/favicon.ico",
-      "destination": "/assets/favicon.ico"
+      "destination": "/assets/favicon-kn.ico"
+    },
+    {
+      "source": "/apple-touch-icon.png",
+      "destination": "/assets/apple-touch-icon-kn.png"
     },
     {
       "source": "/9e62a1f5c7a86998050d9dd6474a028d.txt",

@@ -158,7 +158,6 @@ html = html.replace(/<meta name="ext-resource-dependency"[^>]*>\s*/g, '');
 html = html.replace(/<script src="https:\/\/unpkg\.com\/[^"]+"[^>]*><\/script>\s*/g, '');
 html = html.replace(new RegExp(LOCAL_CSS_LINK.source + '\\s*', 'g'), '');
 html = html.replace(/<script type="text\/babel" src="[^"]+"><\/script>\s*/g, '');
-html = html.replace('<link rel="icon" href="assets/favicon.ico" />', '<link rel="icon" href="/assets/favicon.ico" />');
 html = html.replace(/https:\/\/mecenasodnieruchomosci\.pl/g, 'https://www.mecenasodnieruchomosci.pl');
 html = html.replace('</head>', `<link rel="stylesheet" href="/${cssName}" />
 <script defer src="${vendorNames['react.production.min.js']}"></script>
