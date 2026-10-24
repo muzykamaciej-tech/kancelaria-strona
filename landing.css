@@ -996,3 +996,5 @@ select.input { appearance: auto; cursor: pointer; }
   .reviews-marquee { overflow-x: auto; }
   .reviews-track > [aria-hidden="true"] { display: none; }
 }
+/* 6 statystyk: 3 + 3 na komputerze */
+@media (min-width: 1024px) { .stats-band-grid { grid-template-columns: repeat(3, 1fr); } }
