@@ -68,7 +68,7 @@ const SERVICE_BLOCKS = [
     services: [
       { slug: 'zasiedzenie-nieruchomosci', icon: 'hourglass', title: 'Zasiedzenie nieruchomości', desc: 'Nabycie własności przez wieloletnie posiadanie — i obrona przed zasiedzeniem.' },
       { slug: 'uregulowanie-stanu-prawnego', icon: 'folder-tree', title: 'Uregulowanie stanu prawnego nieruchomości', desc: 'Błędne wpisy, brak księgi, nieuregulowany spadek, granice — porządkuję papiery.' },
-      { slug: 'uzytkowanie-wieczyste', icon: 'replace', title: 'Użytkowanie wieczyste: przekształcenie i opłaty', desc: 'Wykup gruntu, bonifikaty i sprzeciw od zawyżonej opłaty rocznej.' },
+      { slug: 'uzytkowanie-wieczyste', icon: 'replace', title: 'Użytkowanie wieczyste: przekształcenie i opłaty', desc: 'Wykup gruntu, bonifikaty i wniosek do SKO przy zawyżonej opłacie rocznej.' },
     ],
   },
   {

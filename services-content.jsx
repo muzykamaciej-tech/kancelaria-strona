@@ -101,7 +101,7 @@ const SERVICE_CONTENT = {
             b: 'Dostęp do drogi publicznej',
             t: 'służebność przejazdu przez grunt sąsiada może być wpisana w dziale I księgi Twojej działki (art. 25 ust. 1 pkt 1 u.k.w.h.). Dostęp do drogi publicznej jest warunkiem WZ (art. 61 ust. 1 pkt 2 u.p.z.p.), a bez niego zostaje żądanie drogi koniecznej od sąsiadów (art. 145 § 1 k.c.).',
           },
-          { b: 'Słupy, kable i rury', t: 'rękojmia nie działa przeciwko służebności przesyłu (art. 7 pkt 5 u.k.w.h.), więc tytuł firmy przesyłowej ustalasz przed zakupem.' },
+          { b: 'Słupy, kable i rury', t: 'rękojmia nie działa przeciwko służebności przesyłu (art. 7 pkt 5 u.k.w.h.), a według utrwalonego orzecznictwa SN także przeciwko służebności zasiedzianej (art. 7 pkt 1 u.k.w.h.; postanowienie SN z 28.03.2017, II CSK 462/16), więc tytuł firmy przesyłowej ustalasz przed zakupem.' },
           {
             b: 'Najem i dzierżawa',
             t: 'nabywca wstępuje w najem na miejsce sprzedającego (art. 678 § 1 k.c.), przy dzierżawie odpowiednio (art. 694). Umowy zawartej na piśmie, na czas oznaczony i z datą pewną, gdy lokal albo grunt wydano najemcy, nie wypowiesz na tej podstawie (art. 678 § 2).',
@@ -144,7 +144,7 @@ const SERVICE_CONTENT = {
       },
     ],
     law: {
-      asOf: '2026-10-10',
+      asOf: '2026-10-26',
       items: [
         {
           ref: 'art. 2, 5–8, 16, 25, 36⁴, 123',
@@ -193,7 +193,7 @@ const SERVICE_CONTENT = {
     ],
     seeAlso: ['droga-konieczna', 'plan-ogolny', 'legalizacja-samowoli'],
     cta: { heading: 'Audyt kosztuje ułamek tego, co możesz stracić.', lead: 'Napisz, co kupujesz i do kiedy masz podpisać umowę. W 24 h roboczych odpiszę ze wstępną analizą i ofertą; płacisz dopiero, gdy ją przyjmiesz.' },
-    updated: '2026-10-10',
+    updated: '2026-10-26',
   },
 
   /* ===== Sprawdzenie umowy deweloperskiej ===== */
@@ -766,7 +766,7 @@ const SERVICE_CONTENT = {
           },
           {
             b: 'Nikt nie odpowiada albo odpowiadają obie strony',
-            t: 'Zadatek wraca, a obowiązek zapłaty dwukrotności odpada (art. 394 § 3 k.c.). Zaliczka: kodeks nie przewiduje dla niej skutków zadatku, dlatego zasady jej zwrotu zapisz w umowie.',
+            t: 'Zadatek wraca, a obowiązek zapłaty dwukrotności odpada (art. 394 § 3 k.c.). Zaliczka wraca bez względu na przyczynę, dla której nie zawarto umowy sprzedaży (art. 410 § 2 k.c.; uchwała SN z 8.03.2007, III CZP 3/07).',
           },
           { b: 'Sprzedaż doszła do skutku', t: 'Zadatek zalicza się na cenę (art. 394 § 2 k.c.); zaliczka też, jeżeli umowa opisuje ją jako część ceny.' },
         ],
@@ -813,7 +813,7 @@ const SERVICE_CONTENT = {
       },
     ],
     law: {
-      asOf: '2026-10-10',
+      asOf: '2026-10-26',
       items: [
         {
           ref: 'art. 6, 89, 118, 155, 157, 158, 389, 390, 394, 535',
@@ -855,7 +855,7 @@ const SERVICE_CONTENT = {
       heading: 'Zadatek wpłacasz raz. Sprawdź umowę, zanim to zrobisz.',
       lead: 'Prześlij projekt umowy przedwstępnej albo opisz ustalenia i kwotę zadatku. W 24 h roboczych odpiszę, czy wystarczy sprawdzić umowę, czy lepiej napisać ją od nowa, i prześlę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-10-26',
   },
 
   /* ===== Sprawdzenie umowy rezerwacyjnej (Blok 1) ===== */
@@ -2310,7 +2310,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Czy samowola budowlana jest przestępstwem albo wykroczeniem?',
-        a: 'Za budowę bez pozwolenia albo zgłoszenia Prawo budowlane przewiduje karę grzywny, nie karę pozbawienia wolności (art. 93 pkt 2a Pb). Orzeka się ją według Kodeksu postępowania w sprawach o wykroczenia (art. 94 Pb).',
+        a: 'Za budowę bez pozwolenia albo zgłoszenia Prawo budowlane przewiduje karę grzywny, nie karę pozbawienia wolności (art. 93 pkt 2a i 13 Pb). Orzeka się ją według Kodeksu postępowania w sprawach o wykroczenia (art. 94 Pb).',
       },
       {
         q: 'Kupiłem dom z samowolą. Czy problem przeszedł na mnie?',
@@ -2318,7 +2318,7 @@ const SERVICE_CONTENT = {
       },
     ],
     law: {
-      asOf: '2026-10-10',
+      asOf: '2026-10-26',
       items: [
         {
           ref: 'art. 3 pkt 6, art. 29 ust. 1 pkt 14, art. 48–53a, art. 83 Pb',
@@ -2349,7 +2349,7 @@ const SERVICE_CONTENT = {
       heading: 'Samowola nie zniknie sama. Ale można ją uporządkować.',
       lead: 'Napisz, co i kiedy zbudowano oraz czy przyszło pismo z PINB. W 24 h roboczych bezpłatnie wskażę, co zrobić najpierw, i prześlę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-10-26',
   },
 
   'spory-z-wykonawca': {
@@ -2826,7 +2826,7 @@ const SERVICE_CONTENT = {
         t: 'jesteś zainteresowanym w sprawie (art. 510 § 1 k.p.c.) i możesz wykazać, że posiadanie było zależne, np. z dzierżawy, przerwane albo za krótkie.',
       },
       { b: 'Rodzina od dziesięcioleci uprawia działkę, a w księdze jest obcy właściciel albo księgi nie ma', t: 'jeżeli władacie nią jak właściciel, lata rodziców i dziadków doliczasz do swoich (art. 176 k.c.).' },
-      { b: 'Kupiłeś albo dostałeś działkę „na kartkę”, bez notariusza', t: 'umowa bez aktu notarialnego nie przenosi własności (art. 158 i art. 73 § 2 k.c.); drogą do uregulowania bywa zasiedzenie.' },
+      { b: 'Kupiłeś albo dostałeś działkę „na kartkę”, bez notariusza', t: 'umowa bez aktu notarialnego nie przenosi własności (art. 158 i art. 73 § 2 k.c.); drogą do uregulowania bywa zasiedzenie. Kto objął działkę na podstawie takiej umowy, jest w złej wierze, więc potrzebuje 30 lat (uchwała 7 sędziów SN z 6.12.1991, III CZP 108/91).' },
       { b: 'Płot od lat stoi w innym miejscu niż granica na mapie', t: 'liczy się, od kiedy płot tam stoi i kto użytkuje pas między płotem a granicą jak właściciel (art. 172 k.c.).' },
       {
         b: 'Od ponad 20 lat jeździsz przez działkę sąsiada',
@@ -2893,7 +2893,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Ile kosztuje sprawa o zasiedzenie w sądzie?',
-        a: 'Opłata sądowa od wniosku wynosi 2000 zł, przy służebności gruntowej 200 zł (art. 40 i art. 39 ust. 1 pkt 3 u.k.s.c.). Od wniosku o wpis własności w księdze opłata wynosi 200 zł (art. 42 ust. 1 u.k.s.c.). Osoba fizyczna płaci też podatek od spadków i darowizn (art. 1 ust. 1 pkt 3 u.p.s.d.), którego wysokość oceni doradca podatkowy. Cenę prowadzenia sprawy o zasiedzenie podaję w ofercie.',
+        a: 'Opłata sądowa od wniosku wynosi 2000 zł, przy służebności gruntowej 200 zł (art. 40 i art. 39 ust. 1 pkt 3 u.k.s.c.). Od wniosku o wpis własności w księdze opłata wynosi 200 zł (art. 42 ust. 1 u.k.s.c.). Osoba fizyczna płaci też podatek od spadków i darowizn: 7% wartości nieruchomości, bez kwoty wolnej (art. 1 ust. 1 pkt 3 i art. 15 ust. 2 u.p.s.d.). Z podstawy wyłącza się wartość nakładów poczynionych w czasie biegu zasiedzenia i budynku, który sam wzniosłeś (art. 7 ust. 4–5 u.p.s.d.). Cenę prowadzenia sprawy o zasiedzenie podaję w ofercie.',
       },
       {
         q: 'Co przerywa bieg zasiedzenia mojej działki?',
@@ -2901,13 +2901,13 @@ const SERVICE_CONTENT = {
       },
     ],
     law: {
-      asOf: '2026-10-10',
+      asOf: '2026-10-26',
       items: [
         { ref: 'art. 7, art. 123–124, art. 172–176, art. 292, art. 336 i art. 339–340 k.c.', act: 'Kodeks cywilny', tj: 'Dz.U. 2026 poz. 795', eli: 'DU/1964/93', note: 'terminy, przerwanie biegu, domniemania' },
         { ref: 'art. 507, art. 510, art. 521 i art. 606–610 k.p.c.', act: 'Kodeks postępowania cywilnego', tj: 'Dz.U. 2026 poz. 468', eli: 'DU/1964/296', note: 'sąd, ogłoszenie, postanowienie' },
         { ref: 'art. 25 i art. 31 ust. 2 u.k.w.h.', act: 'Ustawa o księgach wieczystych i hipotece', tj: 'Dz.U. 2026 poz. 1066', eli: 'DU/1982/147', note: 'wpis własności po postanowieniu' },
         { ref: 'art. 39, art. 40 i art. 42 u.k.s.c.', act: 'Ustawa o kosztach sądowych w sprawach cywilnych', tj: 'Dz.U. 2025 poz. 1228', eli: 'DU/2005/1398', note: 'opłaty od wniosków' },
-        { ref: 'art. 1, art. 6 i art. 17a u.p.s.d.', act: 'Ustawa o podatku od spadków i darowizn', tj: 'Dz.U. 2026 poz. 478', eli: 'DU/1983/207', note: 'podatek i termin zeznania' },
+        { ref: 'art. 1, art. 6, art. 7, art. 15 ust. 2 i art. 17a u.p.s.d.', act: 'Ustawa o podatku od spadków i darowizn', tj: 'Dz.U. 2026 poz. 478', eli: 'DU/1983/207', note: 'stawka 7%, nakłady i budynek, termin zeznania' },
         { ref: 'art. 10 ustawy z 28.07.1990', act: 'Ustawa z dnia 28 lipca 1990 r. o zmianie ustawy – Kodeks cywilny', tj: 'Dz.U. 1990 nr 55 poz. 321', eli: 'DU/1990/321', note: 'bieg zasiedzenia sprzed 1.10.1990' },
       ],
     },
@@ -2925,7 +2925,7 @@ const SERVICE_CONTENT = {
       heading: 'Wieloletnie posiadanie może stać się własnością. Sprawdźmy, czy w Twoim przypadku.',
       lead: 'Napisz, od kiedy i jak korzystasz z nieruchomości albo kto zajmuje Twoją. W 24 h roboczych odpiszę, co trzeba zrobić w tej sprawie, i wyślę ofertę z ceną i terminem; do akceptacji oferty nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-10-26',
   },
 
   'uregulowanie-stanu-prawnego': {
@@ -7059,7 +7059,7 @@ const SERVICE_CONTENT = {
         ],
         [
           'Należność (opłata publiczna, nie honorarium)',
-          '87 435–437 175 zł za 1 ha minus wartość rynkowa gruntu; płatna w 60 dni od dnia, w którym decyzja stała się ostateczna (art. 12 ust. 6, 7 i 13 u.o.g.r.l.)',
+          '87 435–437 175 zł za 1 ha minus wartość rynkowa gruntu; obowiązek powstaje od faktycznego wyłączenia gruntu, a termin zapłaty to 60 dni od dnia, w którym decyzja stała się ostateczna (art. 12 ust. 1, 6, 7 i 13 u.o.g.r.l.); termin sprawdź w swojej decyzji',
         ],
         [
           'Opłata roczna (opłata publiczna, nie honorarium)',
@@ -7100,7 +7100,7 @@ const SERVICE_CONTENT = {
       'Przesyłasz wypis z rejestru gruntów i opis inwestycji. W 24 h roboczych odpisuję, co trzeba zrobić, np. wniosek o WZ albo do starosty, i wysyłam ofertę z ceną i terminem. Do jej akceptacji nic nie płacisz.',
       'Podstawa zabudowy: plan miejscowy albo WZ od wójta, burmistrza lub prezydenta miasta. Przy wniosku złożonym od 1.09.2026 wydanie WZ jest możliwe, jeżeli w gminie wszedł w życie plan ogólny (art. 59 ust. 3 ustawy z 7.07.2023). Przy wniosku od 1.01.2027 WZ dostaje tylko wnioskodawca mający prawo do dysponowania nieruchomością na cele budowlane (art. 63 ust. 1a u.p.z.p.).',
       'Wniosek do starosty o wyłączenie (art. 11 ust. 1 u.o.g.r.l.). Przy klasach I–III starosta określa w decyzji obowiązki związane z wyłączeniem (ust. 1a), a przy glebach organicznych klas IV–VI jest związany Twoim wnioskiem (ust. 1b).',
-      'Po doręczeniu decyzji: odwołanie w 14 dni (art. 129 § 2 k.p.a.) albo zapłata należności, gdy decyzja stanie się ostateczna (art. 12 ust. 13 u.o.g.r.l.).',
+      'Po doręczeniu decyzji: odwołanie w 14 dni (art. 129 § 2 k.p.a.). Należność płacisz w 60 dni od dnia, w którym decyzja stała się ostateczna (art. 12 ust. 13 u.o.g.r.l.), ale obowiązek powstaje dopiero z faktycznym wyłączeniem gruntu (art. 12 ust. 1; wyrok NSA z 4.11.2016, II OSK 224/15). Starostwa stosują to różnie, więc termin sprawdź w decyzji.',
       'Krok nieodwracalny: pierwszy dzień nierolniczego użytkowania gruntu, bo od niego płacisz należność i opłaty roczne (art. 12 ust. 1 u.o.g.r.l.). Wcześniej dołączasz decyzję do wniosku o pozwolenie albo do zgłoszenia budowy (art. 11 ust. 4a).',
     ],
     faq: [
@@ -7130,7 +7130,7 @@ const SERVICE_CONTENT = {
       },
     ],
     law: {
-      asOf: '2026-10-10',
+      asOf: '2026-10-26',
       items: [
         {
           ref: 'art. 4 pkt 6, 11 i 13, art. 5, 7, 10a, 11, 12, 12a, 28 ust. 1–2',
@@ -7176,7 +7176,7 @@ const SERVICE_CONTENT = {
       heading: 'Odrolnienie nie musi kosztować fortuny — a często nie kosztuje nic.',
       lead: 'Napisz, jaką klasę ma działka i co chcesz na niej zbudować; przy klasach IV–VI z gleb mineralnych i pod dom do 0,05 ha należności nie płacisz (art. 11 ust. 1, art. 12 ust. 1, art. 12a u.o.g.r.l.). W 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-10-26',
   },
 };
 
