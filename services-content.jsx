@@ -766,7 +766,7 @@ const SERVICE_CONTENT = {
           },
           {
             b: 'Nikt nie odpowiada albo odpowiadają obie strony',
-            t: 'Zadatek wraca, a obowiązek zapłaty dwukrotności odpada (art. 394 § 3 k.c.). Zaliczka wraca bez względu na przyczynę, dla której nie zawarto umowy sprzedaży (art. 410 § 2 k.c.; uchwała SN z 8.03.2007, III CZP 3/07).',
+            t: 'Zadatek wraca, a obowiązek zapłaty dwukrotności odpada (art. 394 § 3 k.c.). Zaliczka co do zasady wraca bez względu na przyczynę, dla której nie zawarto umowy sprzedaży (art. 410 § 2 k.c.; uchwała SN z 8.03.2007, III CZP 3/07), chyba że umowa wyraźnie pozwala ją zatrzymać, np. jako karę umowną (wyrok SN z 25.03.2004, II CK 116/03).',
           },
           { b: 'Sprzedaż doszła do skutku', t: 'Zadatek zalicza się na cenę (art. 394 § 2 k.c.); zaliczka też, jeżeli umowa opisuje ją jako część ceny.' },
         ],

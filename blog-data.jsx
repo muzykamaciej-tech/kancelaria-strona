@@ -116,7 +116,7 @@ const BLOG = [
         'podstawowym warunkiem jest to, aby dokument posiadał cechy umożliwiające jego weryfikację z centralną bazą danych;',
         'jeśli pobrałeś takie dokumenty jeszcze przed wejściem w życie nowych przepisów, zachowają one swoją moc urzędową, o ile da się je technicznie zweryfikować z bazą danych.',
       ]],
-      ['p', 'To ogromna oszczędność czasu przed wizytą u notariusza czy podczas załatwiania kredytu hipotecznego. Cechy takich dokumentów i sposób ich weryfikacji określa Minister Sprawiedliwości w rozporządzeniu (art. 36⁴ u.k.w.h.).'],
+      ['p', 'To ogromna oszczędność czasu przed wizytą u notariusza czy podczas załatwiania kredytu hipotecznego. Za dokument do samodzielnego wydruku płacisz 30 zł za odpis zwykły i 75 zł za odpis zupełny (rozporządzenie MS z 24.03.2026, Dz.U. 2026 poz. 410). Cechy takich dokumentów i sposób ich weryfikacji określa Minister Sprawiedliwości w rozporządzeniu (art. 36⁴ u.k.w.h.).'],
       ['h2', 'Alerty z KRS prosto na Twój telefon (mObywatel)'],
       ['p', 'Drugim kluczowym elementem nowelizacji jest integracja Krajowego Rejestru Sądowego z popularną aplikacją mObywatel. To świetne narzędzie do monitorowania bezpieczeństwa własnego biznesu oraz weryfikacji kontrahentów.'],
       ['p', 'Jak to działa w praktyce?'],
