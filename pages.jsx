@@ -325,16 +325,16 @@ function LeadFormBand() {
 /* Skarbnica wiedzy: kategorie = rodzaje spraw (zdjęcia obszarów usług, assets/foto-<photo>-800|1600.webp).
    Wpis trafia do kategorii po polu `category`; wpis bez kategorii zatrzymuje prerender (scripts/prerender.mjs). */
 const BLOG_CATEGORIES = [
-  { id: 'warunki-zabudowy', title: 'Warunki zabudowy i plan ogólny', desc: 'WZ, plan ogólny, obszar uzupełnienia zabudowy, terminy i koszty.', photo: 'warunki-zabudowy-planowanie', cats: ['Planowanie przestrzenne', 'Warunki zabudowy'] },
+  { id: 'warunki-zabudowy', title: 'Warunki zabudowy i plan ogólny', desc: 'WZ, plan ogólny, obszar uzupełnienia zabudowy, opłata adiacencka, operat szacunkowy.', photo: 'warunki-zabudowy-planowanie', cats: ['Planowanie przestrzenne', 'Warunki zabudowy'] },
   { id: 'slupy-i-przesyl', title: 'Słupy, linie i rury na działce', desc: 'Służebność przesyłu, wynagrodzenie, bezumowne korzystanie, przesunięcie słupa.', photo: 'sluzebnosci-odszkodowania', cats: ['Służebność przesyłu'] },
   { id: 'droga-konieczna', title: 'Droga konieczna i służebności', desc: 'Szerokość drogi, wynagrodzenie, koszty utrzymania, zasiedzenie.', photo: 'droga-konieczna', cats: ['Służebności'] },
-  { id: 'najem', title: 'Najem i eksmisja', desc: 'Bezpieczny wynajem, eksmisja lokatora, czego wynajmującemu nie wolno.', photo: 'najem', cats: ['Najem'] },
-  { id: 'budowa', title: 'Budowa, samowole i nadzór', desc: 'Pozwolenie czy zgłoszenie, samowola budowlana, kontrola PINB, sprzeciw sąsiada.', photo: 'proces-budowlany', cats: ['Proces budowlany'] },
-  { id: 'zakup-i-umowy', title: 'Zakup nieruchomości i umowy', desc: 'Co sprawdzić przed zakupem, zadatek, umowa przedwstępna, licytacja komornicza.', photo: 'transakcje-umowy', cats: ['Zakup nieruchomości'] },
+  { id: 'najem', title: 'Najem, eksmisja i wspólnoty', desc: 'Rodzaje umów najmu, kaucja, wypowiedzenie, eksmisja, uchwały wspólnoty.', photo: 'najem', cats: ['Najem', 'Wspólnoty mieszkaniowe'] },
+  { id: 'budowa', title: 'Budowa, samowole i nadzór', desc: 'Pozwolenie czy zgłoszenie, umowa o roboty budowlane, samowola, kontrola PINB.', photo: 'proces-budowlany', cats: ['Proces budowlany'] },
+  { id: 'zakup-i-umowy', title: 'Zakup nieruchomości i umowy', desc: 'Co sprawdzić przed zakupem, umowa rezerwacyjna i deweloperska, zadatek, licytacja.', photo: 'transakcje-umowy', cats: ['Zakup nieruchomości'] },
   { id: 'zakup-i-ksiegi', title: 'Księgi wieczyste, stan prawny i podatki', desc: 'Księgi wieczyste, zasiedzenie, użytkowanie wieczyste, ceny transakcyjne, podatki przy sprzedaży.', photo: 'ksiegi-wieczyste-stan-prawny', cats: ['Księgi wieczyste', 'Zasiedzenie', 'Użytkowanie wieczyste', 'Podatki', 'Rynek nieruchomości', 'Podatek od nieruchomości'] },
-  { id: 'deweloper', title: 'Spory z deweloperem', desc: 'Opóźnienie, kary umowne, wady mieszkania i odszkodowanie.', photo: 'roszczenia-deweloper', cats: ['Spory z deweloperem'] },
-  { id: 'grunty-rolne-oze', title: 'Grunty rolne i OZE', desc: 'Dom na działce rolnej, odrolnienie, fotowoltaika, dzierżawa i odpowiedzialność właściciela.', photo: 'grunty-rolne-oze', cats: ['Grunty rolne i OZE', 'Odpowiedzialność właściciela'] },
-  { id: 'wspolwlasnosc', title: 'Współwłasność, spadki i podział majątku', desc: 'Zniesienie współwłasności, mieszkanie po rodzicach, podział po rozwodzie.', photo: 'wspolwlasnosc-podzialy', cats: ['Podział majątku', 'Współwłasność i spadki'] },
+  { id: 'deweloper', title: 'Spory z deweloperem', desc: 'Odbiór mieszkania, opóźnienie, kary umowne, wady i odszkodowanie.', photo: 'roszczenia-deweloper', cats: ['Spory z deweloperem'] },
+  { id: 'grunty-rolne-oze', title: 'Grunty rolne i OZE', desc: 'Dom na działce rolnej, zgoda KOWR, status rolnika, odrolnienie, fotowoltaika.', photo: 'grunty-rolne-oze', cats: ['Grunty rolne i OZE', 'Odpowiedzialność właściciela'] },
+  { id: 'wspolwlasnosc', title: 'Współwłasność, spadki i podział majątku', desc: 'Stwierdzenie nabycia spadku, zachowek, dożywocie, zniesienie współwłasności, podział po rozwodzie.', photo: 'wspolwlasnosc-podzialy', cats: ['Podział majątku', 'Współwłasność i spadki'] },
 ];
 function getBlogCategory(id) { return BLOG_CATEGORIES.find((c) => c.id === id) || null; }
 function blogCategoryOfPost(post) { return BLOG_CATEGORIES.find((c) => c.cats.indexOf(post.category) !== -1) || null; }

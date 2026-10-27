@@ -379,7 +379,7 @@ const SERVICE_CONTENT = {
       'Umowa o miejsce postojowe lub komórkę lokatorską, jeśli kupujesz je osobno.',
       'Numer księgi wieczystej działki, na której powstaje budynek, jeśli go znasz.',
     ],
-    guides: ['kara-umowna-za-opoznienie-dewelopera-uchwala-sn'],
+    guides: ['kara-umowna-za-opoznienie-dewelopera-uchwala-sn', 'umowa-deweloperska', 'umowa-rezerwacyjna-mieszkania'],
     seeAlso: ['klauzule-abuzywne-deweloper', 'kary-za-opoznienie-dewelopera', 'rekojmia-wady-lokalu'],
     cta: {
       heading: 'Nie podpisuj umowy deweloperskiej w ciemno.',
@@ -971,7 +971,7 @@ const SERVICE_CONTENT = {
       'Termin decyzji kredytowej z banku albo sama decyzja, jeśli bierzesz kredyt',
       'Potwierdzenie przelewu opłaty i korespondencja z deweloperem, jeśli umowa jest podpisana',
     ],
-    guides: [],
+    guides: ['umowa-rezerwacyjna-mieszkania'],
     seeAlso: ['klauzule-abuzywne-deweloper', 'negocjacje-nieruchomosci', 'spory-o-metraz'],
     cta: {
       heading: 'Zanim zarezerwujesz mieszkanie, sprawdź, czy odzyskasz opłatę.',
@@ -1404,7 +1404,7 @@ const SERVICE_CONTENT = {
       'Akt notarialny umowy o dożywocie, jeśli umowa jest już zawarta',
       'Wypis z rejestru gruntów, jeśli przekazujesz ziemię rolną',
     ],
-    guides: [],
+    guides: ['umowa-dozywocia'],
     seeAlso: ['zachowek', 'stwierdzenie-nabycia-spadku'],
     cta: {
       heading: 'Przekaż mieszkanie mądrze — z opieką i bez sporów o zachowek.',
@@ -2054,7 +2054,7 @@ const SERVICE_CONTENT = {
       'Akt sprzedaży albo projekt umowy, jeśli chodzi o rentę planistyczną',
       'Wypis z planu miejscowego i opis, jak korzystałeś z działki przed planem, jeśli żądasz odszkodowania',
     ],
-    guides: ['odszkodowanie-za-plan-ogolny'],
+    guides: ['odszkodowanie-za-plan-ogolny', 'oplata-adiacencka-renta-planistyczna', 'operat-szacunkowy-jak-podwazyc'],
     seeAlso: ['obsluga-sprzedazy', 'odszkodowanie-wywlaszczenie', 'wykup-dzialki-resztkowej'],
     cta: {
       heading: 'Nie płać gminie więcej, niż musisz — i odzyskaj to, co plan Ci zabrał.',
@@ -2495,7 +2495,7 @@ const SERVICE_CONTENT = {
       'Protokoły odbioru częściowego lub końcowego i zgłoszenia wad, jeśli są.',
       'Wezwanie do zapłaty albo faktury od wykonawcy, jeśli je dostałeś.',
     ],
-    guides: [],
+    guides: ['umowa-o-roboty-budowlane'],
     seeAlso: ['usuniecie-wad-protokol', 'obsluga-prawna-firm-budowlanych'],
     cta: {
       heading: 'Niedokończona budowa albo fuszerka to nie musi być Twój koszt.',
@@ -2621,7 +2621,7 @@ const SERVICE_CONTENT = {
       'Projekt budowlany albo opis robót, jeśli masz.',
       'Kwotę zaliczki i harmonogram płatności, jeśli masz.',
     ],
-    guides: [],
+    guides: ['umowa-o-roboty-budowlane'],
     seeAlso: ['obsluga-prawna-firm-budowlanych', 'obsluga-prawna-architektow'],
     cta: {
       heading: 'Dobra umowa to Twoja polisa na czas budowy.',
@@ -3691,7 +3691,7 @@ const SERVICE_CONTENT = {
       'Wezwanie do zapłaty zachowku albo pozew, jeśli przyszły do Ciebie',
       'Lista najbliższej rodziny zmarłego: kto żyje, kto zmarł wcześniej, kto jest małoletni',
     ],
-    guides: [],
+    guides: ['zachowek-z-darowizny'],
     seeAlso: ['darowizna-nieruchomosci', 'dozywocie-renta'],
     cta: {
       heading: 'Pominięto Cię przy podziale majątku? Zachowek to Twoje prawo.',
@@ -3848,7 +3848,7 @@ const SERVICE_CONTENT = {
       'Oświadczenia o przyjęciu lub odrzuceniu spadku złożone przez rodzinę, jeśli były',
       'Numer księgi wieczystej nieruchomości zmarłego, jeśli znasz',
     ],
-    guides: [],
+    guides: ['stwierdzenie-nabycia-spadku'],
     seeAlso: ['uregulowanie-stanu-prawnego', 'obsluga-sprzedazy'],
     cta: {
       heading: 'Potwierdź, że dziedziczysz — i odzyskaj kontrolę nad majątkiem.',
@@ -4137,11 +4137,7 @@ const SERVICE_CONTENT = {
       'Adres lokalu wskazanego przez najemcę, jeśli już go znasz',
       'Jeśli umowa już trwa: kopia oświadczenia najemcy złożonego u notariusza i dowód złożenia zgłoszenia w urzędzie skarbowym',
     ],
-    guides: [
-      'jak-bezpiecznie-wynajac-mieszkanie-poradnik',
-      'ile-trwa-eksmisja-lokatora',
-      '5-nielegalnych-sposobow-na-wyrzucenie-lokatora',
-    ],
+    guides: ['jak-bezpiecznie-wynajac-mieszkanie-poradnik', 'ile-trwa-eksmisja-lokatora', '5-nielegalnych-sposobow-na-wyrzucenie-lokatora', 'umowa-najmu-mieszkania-rodzaje'],
     seeAlso: ['obsluga-zakupu', 'obsluga-prawna-operatorow-najmu'],
     cta: {
       heading: 'Wynajmuj spokojnie — z umową, która naprawdę Cię chroni.',
@@ -4305,7 +4301,7 @@ const SERVICE_CONTENT = {
       'Dotychczasowa umowa z aneksami, jeżeli przedłużasz najem albo dostałeś nową wersję',
       'Dane wynajmującego z umowy: osoba prywatna czy firma',
     ],
-    guides: [],
+    guides: ['umowa-najmu-mieszkania-rodzaje'],
     seeAlso: ['negocjacje-nieruchomosci', 'obsluga-prawna-najemcow-komercyjnych'],
     cta: {
       heading: 'Zanim podpiszesz najem, sprawdźmy, na co się zgadzasz.',
@@ -4730,7 +4726,7 @@ const SERVICE_CONTENT = {
       'Rozliczenie kaucji od wynajmującego albo lista potrąceń z rachunkami za naprawy, jeśli masz',
       'Korespondencja o kaucji: SMS-y, maile, wezwania, jeśli masz',
     ],
-    guides: ['jak-bezpiecznie-wynajac-mieszkanie-poradnik'],
+    guides: ['jak-bezpiecznie-wynajac-mieszkanie-poradnik', 'kaucja-za-mieszkanie'],
     seeAlso: ['obsluga-prawna-najemcow-komercyjnych', 'obsluga-prawna-operatorow-najmu'],
     cta: {
       heading: 'Kaucja to Twoje pieniądze — po którejkolwiek stronie umowy stoisz.',
@@ -5130,7 +5126,7 @@ const SERVICE_CONTENT = {
       'Twoje zgłoszenia wady i odpowiedzi dewelopera: maile, pisma, potwierdzenia nadania.',
       'Prospekt informacyjny, karta gwarancyjna i opinie techniczne, jeśli masz.',
     ],
-    guides: ['odszkodowanie-od-dewelopera-za-wady'],
+    guides: ['odszkodowanie-od-dewelopera-za-wady', 'odbior-mieszkania-od-dewelopera'],
     seeAlso: ['sprawdzenie-umowy-deweloperskiej', 'spory-z-wykonawca'],
     cta: {
       heading: 'Kupiłeś mieszkanie bez wad — i takie Ci się należy.',
@@ -5435,7 +5431,7 @@ const SERVICE_CONTENT = {
       'Korespondencję o terminach napraw i wejściu ekipy (maile, SMS-y), jeśli ją masz.',
       'Kosztorys albo faktury za naprawę, jeśli już ją zleciłeś.',
     ],
-    guides: ['odszkodowanie-od-dewelopera-za-wady'],
+    guides: ['odszkodowanie-od-dewelopera-za-wady', 'odbior-mieszkania-od-dewelopera'],
     seeAlso: ['sprawdzenie-umowy-deweloperskiej', 'spory-z-wykonawca'],
     cta: {
       heading: 'Wpisane do protokołu wady to Twoje prawo — dopilnuję, żeby deweloper je usunął.',
@@ -6353,7 +6349,7 @@ const SERVICE_CONTENT = {
       'Pozwolenia na budowę, faktury lub umowy dotyczące budynków i nasadzeń, jeśli masz.',
       'Numer księgi wieczystej działki.',
     ],
-    guides: [],
+    guides: ['operat-szacunkowy-jak-podwazyc'],
     seeAlso: ['oplaty-odszkodowania-planistyczne', 'skarga-na-plan-miejscowy'],
     cta: {
       heading: 'Wywłaszczenie musi być słusznie wynagrodzone. Dopilnuję, żeby tak było.',
@@ -6763,7 +6759,7 @@ const SERVICE_CONTENT = {
       'Dyplom, świadectwo albo dokument o stażu pracy w rolnictwie, jeśli wniosek ma złożyć kupujący',
       'Decyzja KOWR z datą doręczenia, jeśli już ją dostałeś',
     ],
-    guides: [],
+    guides: ['zgoda-kowr-nabycie-ziemi-rolnej', 'status-rolnika-indywidualnego'],
     seeAlso: ['obsluga-zakupu', 'obsluga-prawna-przedsiebiorstw-rolnych'],
     cta: {
       heading: 'Nie jesteś rolnikiem, a chcesz kupić ziemię? Przeprowadzę Cię przez zgodę KOWR.',
@@ -6884,7 +6880,7 @@ const SERVICE_CONTENT = {
       'Lista Twoich gruntów rolnych (własność, dzierżawa, współwłasność) z gminą i powierzchnią',
       'Dane kupowanej ziemi i termin aktu, jeśli jest ustalony',
     ],
-    guides: [],
+    guides: ['status-rolnika-indywidualnego', 'zgoda-kowr-nabycie-ziemi-rolnej'],
     seeAlso: ['obsluga-zakupu', 'obsluga-prawna-przedsiebiorstw-rolnych'],
     cta: {
       heading: 'Status rolnika trzeba udowodnić — pomogę Ci to zrobić bez potknięć.',

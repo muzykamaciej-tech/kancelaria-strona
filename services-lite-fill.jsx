@@ -934,7 +934,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Przy zaległościach: uchwała o wysokości zaliczek, zestawienie wpłat dłużnika i wysłane wezwania',
       'Projekt umowy, którą zarząd ma podpisać, z uchwałą, jeśli ją podjęto',
     ],
-    guides: [],
+    guides: ['wspolnota-mieszkaniowa-uchwaly'],
     seeAlso: ['roszczenia-wspolnota-deweloper', 'nadzor-budowlany-pinb', 'gwarancja-jakosci-lokal'],
     cta: {
       heading: 'Uchwały, które się bronią. Pieniądze, które wracają. Deweloper, który odpowiada.',

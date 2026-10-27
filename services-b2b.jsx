@@ -1523,7 +1523,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Pisma od wynajmującego albo nowego właściciela budynku (podwyżka, wezwanie, wypowiedzenie) z datą doręczenia',
       'Przy sieci: Twoja lista warunków minimalnych albo umowa z innej lokalizacji, którą uważasz za wzorcową',
     ],
-    guides: [],
+    guides: ['wypowiedzenie-najmu-lokalu-uzytkowego'],
     seeAlso: ['analiza-umowy-najmu', 'negocjacje-nieruchomosci', 'kaucja-najem'],
     cta: {
       heading: 'Najem po stronie najemcy — policzalny, elastyczny, uczciwy.',
