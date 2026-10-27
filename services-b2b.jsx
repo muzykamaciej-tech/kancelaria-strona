@@ -1415,7 +1415,7 @@ Object.assign(window.SERVICE_CONTENT, {
       ],
     },
     introHeading: 'Umowę pisze wynajmujący. Co z tego wynika dla najemcy lokalu użytkowego',
-    intro: 'Najem to umowa, w której wynajmujący oddaje lokal do używania, a najemca płaci umówiony czynsz (art. 659 § 1 k.c.). Wiele przepisów o najmie działa tylko wtedy, gdy umowa nie mówi inaczej, np. rozliczenie ulepszeń (art. 676 k.c.) albo terminy wypowiedzenia najmu na czas nieoznaczony (art. 673 § 1 k.c.). Projekt umowy przygotowuje zwykle wynajmujący, więc te miejsca wypełnia na swoją korzyść. W sieci handlowej zapis przyjęty w jednej umowie może wrócić w kolejnych lokalizacjach.',
+    intro: 'Najem to umowa, w której wynajmujący oddaje lokal do używania, a najemca płaci umówiony czynsz (art. 659 § 1 k.c.). Wiele przepisów o najmie działa tylko wtedy, gdy umowa nie mówi inaczej, np. rozliczenie ulepszeń (art. 676 k.c.) albo terminy wypowiedzenia najmu na czas nieoznaczony (art. 673 § 1 k.c.), przy czym przy lokalu z czynszem płatnym miesięcznie umowa może je tylko wydłużyć ponad 3 miesiące (art. 688 k.c.). Projekt umowy przygotowuje zwykle wynajmujący, więc te miejsca wypełnia na swoją korzyść. W sieci handlowej zapis przyjęty w jednej umowie może wrócić w kolejnych lokalizacjach.',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Nowy właściciel budynku, podwyżka czynszu albo lokalizacja, która nie zarabia',
     when: [

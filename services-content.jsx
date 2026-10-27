@@ -2000,7 +2000,7 @@ const SERVICE_CONTENT = {
         a: 'Tak, na Twój wniosek gmina może rozłożyć opłatę na raty roczne płatne do 10 lat (art. 147 ust. 1 u.g.n.). Raty są oprocentowane stopą redyskonta weksli NBP (art. 147 ust. 2 u.g.n.). Ulgi w spłacie i umorzenie ocenia się według ustawy o finansach publicznych (art. 98a ust. 5, art. 148 ust. 5 u.g.n.).',
       },
       {
-        q: 'Kiedy przedawnia się opłata adiacencka?',
+        q: 'W jakim terminie gmina może ustalić opłatę adiacencką?',
         a: 'Ustawa daje gminie 3 lata na wszczęcie postępowania o opłatę (art. 98a ust. 1, art. 145 ust. 2 u.g.n.). Liczy się je od dnia, w którym decyzja o podziale stała się ostateczna, albo od stworzenia warunków do podłączenia działki lub korzystania z drogi. Bez obowiązującej wtedy uchwały rady gminy o stawce opłaty się nie ustala (art. 98a ust. 1a, art. 145 ust. 2 u.g.n.).',
       },
       {
@@ -4759,7 +4759,7 @@ const SERVICE_CONTENT = {
         ],
         [
           'Wypowiedzenie z powodu zaległości',
-          'Ta sama podstawa przy najmie zwykłym, okazjonalnym i instytucjonalnym: ustawa pozwala wypowiedzieć przy zwłoce za co najmniej 3 pełne okresy płatności, po pisemnym uprzedzeniu z dodatkowym, miesięcznym terminem do zapłaty (art. 11 ust. 2 pkt 2, art. 19e, art. 19j u.o.p.l.)',
+          'Ta sama podstawa przy najmie zwykłym, okazjonalnym i instytucjonalnym: ustawa pozwala wypowiedzieć przy zwłoce za co najmniej 3 pełne okresy płatności, po pisemnym uprzedzeniu z dodatkowym, miesięcznym terminem do zapłaty (art. 11 ust. 2 pkt 2, art. 19e, art. 19j u.o.p.l.); przy zwykłym najmie na czas oznaczony bezpieczniej, gdy umowa wymienia tę przyczynę (art. 673 § 3 k.c.)',
         ],
       ],
     },

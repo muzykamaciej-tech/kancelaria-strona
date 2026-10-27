@@ -97,7 +97,7 @@ window.BLOG.push(
     title: 'Jak bezpiecznie wynająć mieszkanie? Kompletny poradnik prawnika od nieruchomości',
     metaTitle: 'Jak bezpiecznie wynająć mieszkanie? Poradnik prawnika',
     excerpt: 'Jako adwokat specjalizujący się w prawie nieruchomości, widziałem już wszystko: od drobnych nieporozumień po kosztowne batalie sądowe. Ten artykuł to esencja moich doświadczeń, która pomoże Ci wynająć mieszkanie bezpiecznie i z zyskiem.',
-    date: '11 października 2025', iso: '2025-10-11', readTime: '5 min',
+    date: '11 października 2025', iso: '2025-10-11', updated: '27 października 2026', updatedIso: '2026-10-27', readTime: '5 min',
     category: 'Najem', tags: ['Najem okazjonalny', 'Kaucja', 'Wynajmujący'],
     cover: '/assets/blog-bezpieczny-najem-granat.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/jak-bezpiecznie-wynająć-mieszkanie-kompletny-poradnik-prawnika-od-nieruchomości',
@@ -163,7 +163,7 @@ window.BLOG.push(
       ['h2', 'Kiedy sprawy idą źle – wypowiedzenie umowy'],
       ['p', 'Nawet najlepsze przygotowanie nie daje 100% gwarancji. Jeśli najemca przestaje płacić, musisz działać szybko i zgodnie z prawem.'],
       ['ol', [
-        '**Wezwanie do zapłaty:** Wyślij oficjalne pismo (listem poleconym za potwierdzeniem odbioru), wzywające do uregulowania zaległości i wyznaczające dodatkowy, miesięczny termin na zapłatę.',
+        '**Wezwanie do zapłaty:** Gdy zaległość obejmuje co najmniej 3 pełne okresy płatności, wyślij pismo (listem poleconym za potwierdzeniem odbioru), w którym uprzedzasz o zamiarze wypowiedzenia i wyznaczasz dodatkowy, miesięczny termin na zapłatę zaległych i bieżących należności (art. 11 ust. 2 pkt 2 ustawy o ochronie praw lokatorów).',
         '**Oświadczenie o wypowiedzeniu:** Dopiero po bezskutecznym upływie tego terminu możesz złożyć oświadczenie o wypowiedzeniu umowy.',
         '**Postępowanie sądowe:** Jeśli najemca nie opuści lokalu dobrowolnie, kolejnym krokiem jest pozew o eksmisję.',
       ]],
