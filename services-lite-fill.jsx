@@ -903,7 +903,7 @@ Object.assign(window.SERVICE_CONTENT, {
     faq: [
       {
         q: 'Ile czasu ma właściciel na zaskarżenie uchwały wspólnoty?',
-        a: '6 tygodni. Przy uchwale podjętej na zebraniu liczy się je od dnia jej podjęcia (art. 25 ust. 1a u.w.l.). Przy głosach zbieranych indywidualnie termin biegnie od dnia powiadomienia właściciela o treści uchwały. O takiej uchwale każdy właściciel ma być powiadomiony na piśmie (art. 23 ust. 3 u.w.l.); zachowaj dowód doręczenia.',
+        a: '6 tygodni. Przy uchwale podjętej na zebraniu liczy się je od dnia jej podjęcia (art. 25 ust. 1a u.w.l.). Przy głosach zbieranych indywidualnie, także gdy część głosów oddano na zebraniu, termin biegnie od dnia powiadomienia właściciela o treści uchwały (wyrok SN z 1.10.2021, II CSKP 153/21). Pozew rozpoznaje sąd okręgowy (art. 17 pkt 4² k.p.c.). O takiej uchwale każdy właściciel ma być powiadomiony na piśmie (art. 23 ust. 3 u.w.l.); zachowaj dowód doręczenia.',
       },
       {
         q: 'Jak odzyskać zaległe zaliczki od właściciela lokalu?',

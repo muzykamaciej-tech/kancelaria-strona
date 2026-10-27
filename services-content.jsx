@@ -1295,11 +1295,11 @@ const SERVICE_CONTENT = {
         ],
         [
           'Podatek (nie honorarium)',
-          'PCC 2% wartości rynkowej nieruchomości; płaci nabywca, pobiera notariusz (art. 4 pkt 4, art. 6 ust. 1 pkt 4, art. 7 ust. 1 pkt 2 lit. a i art. 10 ust. 2 u.p.c.c.). Stan na 10.10.2026',
+          'PCC 2% wartości rynkowej nieruchomości, bez zwolnienia dla najbliższej rodziny; płaci nabywca, pobiera notariusz (art. 4 pkt 4, art. 6 ust. 1 pkt 4, art. 7 ust. 1 pkt 2 lit. a, art. 9 i art. 10 ust. 2 u.p.c.c.). Stan na 27.10.2026',
         ],
         [
           'Opłata sądowa (nie honorarium)',
-          'Wpis nabywcy jako właściciela do księgi wieczystej: 200 zł, a przy ziemi rolnej do 5 ha 150 zł (art. 42 ust. 1 i art. 43 pkt 2 u.k.s.c.); osobno opłata od wpisu prawa dożywocia (art. 45 ust. 2 u.k.s.c.). Stan na 10.10.2026',
+          'Wpis nabywcy jako właściciela do księgi wieczystej: 200 zł, a przy ziemi rolnej do 5 ha 150 zł (art. 42 ust. 1 i art. 43 pkt 2 u.k.s.c.); osobno 150 zł od wpisu prawa dożywocia jako prawa osobistego (art. 43 pkt 3 i art. 45 ust. 2 u.k.s.c.). Stan na 27.10.2026',
         ],
       ],
     },
@@ -3572,7 +3572,7 @@ const SERVICE_CONTENT = {
         ],
         [
           'Termin',
-          '5 lat od ogłoszenia testamentu, wobec obdarowanego od śmierci spadkodawcy (art. 1007 k.c.); koniec w ostatnim dniu roku (art. 118 k.c.)',
+          '5 lat: przy testamencie od jego ogłoszenia, bez testamentu i wobec obdarowanego od śmierci spadkodawcy (art. 1007 k.c.); bezpieczniej liczyć 5 lat dzień w dzień',
         ],
         [
           'Gdzie',
@@ -3652,7 +3652,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Kiedy zachowek się przedawnia?',
-        a: 'Po 5 latach od ogłoszenia testamentu (art. 1007 § 1 k.c.). Roszczenie wobec obdarowanego przedawnia się po 5 latach od śmierci spadkodawcy (art. 1007 § 2 i art. 924 k.c.). Koniec terminu przypada na ostatni dzień roku kalendarzowego (art. 118 k.c.). Potem zobowiązany może odmówić zapłaty (art. 117 § 2 k.c.).',
+        a: 'Po 5 latach od ogłoszenia testamentu (art. 1007 § 1 k.c.). Gdy testamentu nie ma, termin biegnie od śmierci spadkodawcy (postanowienie SN z 10.03.2011, V CSK 283/10). Roszczenie wobec obdarowanego przedawnia się po 5 latach od śmierci spadkodawcy (art. 1007 § 2 i art. 924 k.c.). Sądy zwykle przyjmują, że koniec terminu przypada na ostatni dzień roku kalendarzowego (art. 118 k.c.), ale Sąd Najwyższy tego wprost nie przesądził, więc bezpieczniej liczyć 5 lat dzień w dzień. Potem zobowiązany może odmówić zapłaty (art. 117 § 2 k.c.).',
       },
       {
         q: 'Ile kosztuje sprawa o zachowek?',
@@ -4691,7 +4691,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Czy właściciel może potrącić z kaucji za normalne zużycie ścian i podłóg?',
-        a: 'Przy zwykłym najmie musisz po wyprowadzce odnowić lokal, np. pomalować ściany (art. 6e ust. 1, art. 6b ust. 2 pkt 9 u.o.p.l.). Za samo zużycie przy prawidłowym używaniu nie odpowiadasz (art. 675 § 1 k.c.). Umowa najmu lokalu spoza zasobu publicznego może to zmienić (art. 6f). Najem instytucjonalny i okazjonalny zgłoszony do urzędu skarbowego tego obowiązku nie mają (art. 19j, 19e).',
+        a: 'Przy zwykłym najmie co do zasady musisz po wyprowadzce odnowić lokal, np. pomalować ściany (art. 6e ust. 1, art. 6b ust. 2 pkt 9 u.o.p.l.). Sporne jest, czy płacisz też równowartość urządzeń zużytych normalnie, np. kuchenki, bo sądy łączą ten przepis z art. 675 § 1 k.c. Za samo zużycie przy prawidłowym używaniu nie odpowiadasz (art. 675 § 1 k.c.). Umowa najmu lokalu spoza zasobu publicznego może to zmienić (art. 6f). Najem instytucjonalny i okazjonalny zgłoszony do urzędu skarbowego tego obowiązku nie mają (art. 19j, 19e).',
       },
       {
         q: 'Czy kaucja powinna być zwaloryzowana?',
@@ -5303,7 +5303,7 @@ const SERVICE_CONTENT = {
       ],
     },
     introHeading: 'Co daje wpisanie usterki przy odbiorze mieszkania',
-    intro: 'Odbiór mieszkania albo domu odbywa się w Twojej obecności, a z odbioru sporządza się protokół, do którego możesz zgłosić wady (art. 41 ust. 2–3 u.d.). Każda wpisana wada uruchamia terminy dla dewelopera, liczone od dnia podpisania protokołu. Te zasady pochodzą z ustawy deweloperskiej z 20.05.2021 r.; do części umów z przedsięwzięć, w których sprzedaż ruszyła przed jej wejściem w życie, stosuje się przepisy dotychczasowe (art. 76 u.d.). Gdy deweloper przeniesie na Ciebie prawa z umowy, w zakresie, którego art. 41 nie reguluje, do wad stosuje się odpowiednio przepisy kodeksu cywilnego o rękojmi przy sprzedaży (art. 41a u.d.).',
+    intro: 'Odbiór mieszkania albo domu odbywa się w Twojej obecności, a z odbioru sporządza się protokół, do którego możesz zgłosić wady (art. 41 ust. 2–3 u.d.). Każda wpisana wada uruchamia terminy dla dewelopera, liczone od dnia podpisania protokołu. Te zasady pochodzą z ustawy deweloperskiej z 20.05.2021 r.; do części umów z przedsięwzięć, w których sprzedaż ruszyła przed jej wejściem w życie, stosuje się przepisy dotychczasowe (art. 76 u.d.). Gdy deweloper przeniesie na Ciebie prawa z umowy, w zakresie, którego art. 41 nie reguluje, do wad stosuje się odpowiednio przepisy kodeksu cywilnego o rękojmi przy sprzedaży (art. 41a u.d.). Gdy kupujesz od dewelopera gotowy lokal zwykłą umową sprzedaży, stosuje się tylko art. 41 ust. 1–3 u.d. (odbiór i protokół), a terminy dewelopera na usunięcie wad już nie (art. 3 u.d.).',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Usterki z protokołu wiszą, a deweloper zwleka',
     when: [

@@ -1175,7 +1175,7 @@ Object.assign(window.BLOCK_CONTENT, {
         ],
         [
           'Zarząd wspólnoty',
-          'Właściciel lokalu może zaskarżyć uchwałę w 6 tygodni, co do zasady od jej podjęcia na zebraniu; pozew idzie przeciwko wspólnocie (art. 25 ust. 1 i 1a u.w.l.). Usługa: wspólnoty mieszkaniowe',
+          'Właściciel lokalu może zaskarżyć uchwałę w 6 tygodni, co do zasady od jej podjęcia na zebraniu albo od powiadomienia o uchwale podjętej w trybie indywidualnego zbierania głosów; pozew idzie przeciwko wspólnocie (art. 25 ust. 1 i 1a u.w.l.). Usługa: wspólnoty mieszkaniowe',
         ],
       ],
     },
