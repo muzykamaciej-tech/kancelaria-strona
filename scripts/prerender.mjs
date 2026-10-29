@@ -56,6 +56,7 @@ const data = await probe.evaluate(() => ({
   blog: (window.BLOG || []).map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt || '', iso: p.iso, modified: window.postModifiedIso(p) })),
   blogCats: window.BLOG_CATEGORIES.filter((c) => window.postsInCategory(c).length).map((c) => ({ id: c.id, title: c.title, desc: c.desc,
     modified: window.postsInCategory(c).map((p) => window.postModifiedIso(p)).sort().pop() })),
+  offers: Object.entries(window.OFFERS || {}).map(([slug, o]) => ({ slug, title: o.metaTitle, desc: o.metaDesc, updated: o.updated || null })),
   uncategorized: (window.BLOG || []).filter((p) => !window.blogCategoryOfPost(p)).map((p) => p.slug + ' (' + p.category + ')'),
 }));
 await probe.close();
@@ -71,6 +72,7 @@ const routes = [
     { path: `/uslugi/${b.id}`, priority: '0.8', lastmod: b.updated || undefined },
     ...b.services.map((s) => ({ path: `/uslugi/${b.id}/${s.slug}`, priority: '0.7', lastmod: s.updated || undefined })),
   ]),
+  ...data.offers.map((o) => ({ path: `/oferta/${o.slug}`, priority: '0.7', lastmod: o.updated || undefined })),
   { path: '/blog', priority: '0.7' },
   ...data.blogCats.map((c) => ({ path: `/blog/kategoria/${c.id}`, lastmod: c.modified, priority: '0.6' })),
   ...data.blog.map((p) => ({ path: `/blog/${p.slug}`, lastmod: p.modified, priority: '0.6' })),
@@ -163,7 +165,7 @@ const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
 const llms = [
   '# Kancelaria Nieruchomości – adw. dr Maciej Muzyka (Mecenas od Nieruchomości)',
   '',
-  '> Mecenas od Nieruchomości: kancelaria adwokacka z Lublina zajmująca się wyłącznie prawem nieruchomości. Prowadzi adw. dr Maciej Muzyka (Lubelska Izba Adwokacka, wpis LUB/ADW/1702). Sprawy z całej Polski, kontakt zdalny, przede wszystkim mailowo; spotkania w Lublinie i w Warszawie. Sprawę opisuje się w formularzu na stronie. W ciągu 24 h roboczych klient dostaje bezpłatną wstępną analizę (co trzeba zrobić: np. szczegółowy audyt, pismo albo sprawa sądowa) i jednocześnie ofertę z ceną i terminem. Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów. Bez płatnych konsultacji i bez cennika: cenę ustala się osobno dla każdej sprawy.',
+  '> Mecenas od Nieruchomości: kancelaria adwokacka z Lublina zajmująca się wyłącznie prawem nieruchomości. Prowadzi adw. dr Maciej Muzyka (Lubelska Izba Adwokacka, wpis LUB/ADW/1702). Sprawy z całej Polski, kontakt zdalny, przede wszystkim mailowo; spotkania w Lublinie i w Warszawie. Sprawę opisuje się w formularzu na stronie. W ciągu 24 h roboczych klient dostaje bezpłatną wstępną analizę (co trzeba zrobić: np. szczegółowy audyt, pismo albo sprawa sądowa) i jednocześnie ofertę z ceną i terminem. Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów. Bez płatnych konsultacji. Cenę ustala się osobno dla każdej sprawy; wyjątek to stałe pakiety z cenami podanymi na stronach ofert (sekcja „Oferty z cenami”).',
   '',
   `- Strona: ${ORIGIN}/`,
   `- O kancelarii i kwalifikacjach: ${ORIGIN}/o-mnie`,
@@ -179,6 +181,7 @@ const llms = [
     ...b.services.map((s) => `- [${s.title}](${ORIGIN}/uslugi/${b.id}/${s.slug})${s.desc ? ': ' + clean(s.desc) : ''}`),
     '',
   ]),
+  ...(data.offers.length ? ['## Oferty z cenami', '', ...data.offers.map((o) => `- [${clean(o.title)}](${ORIGIN}/oferta/${o.slug}): ${clean(o.desc)}`), ''] : []),
   '## Poradniki',
   '',
   ...data.blog.map((p) => `- [${clean(p.title)}](${ORIGIN}/blog/${p.slug})${p.excerpt ? ': ' + clean(p.excerpt) : ''}`),

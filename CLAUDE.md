@@ -44,6 +44,7 @@ Potem commit razem z `dist/`. Najpierw push na gałąź roboczą (podgląd), a n
 ## Treść i zasady kancelarii
 
 - Model pierwszego kontaktu (27.09.2026): formularz → w ciągu 24 h roboczych bezpłatna wstępna analiza (co trzeba zrobić: np. szczegółowy audyt, pismo albo sprawa sądowa) i jednocześnie oferta z ceną i terminem. Do akceptacji oferty klient nic nie płaci. Wstępna analiza to nie opinia prawna ani pełne sprawdzenie dokumentów; szczegółowa analiza, pismo czy prowadzenie sprawy to zakres oferty. Bez płatnych konsultacji, bez cennika na stronie. „Wycena” tylko w znaczeniu „oferta z ceną”, nie jako nazwa usługi.
+- Wyjątek od „bez cennika” (29.10.2026): strony ofert z cenami pakietów `/oferta/<slug>` (`offers.jsx`, dane w `OFFERS`; ceny netto, brutto liczone z VAT 23%). Przycisk „Wybieram ten pakiet” wpisuje pakiet do formularza i tematu zgłoszenia; link `?pakiet=<id>` zaznacza pakiet od razu.
 - Marketing bez danych klientów (nazwiska, adresy, numery działek i KW).
 - Każda sygnatura i każdy przepis przed publikacją do weryfikacji w LEX/Legalis/CBOSA. Stare wpisy z WIX miały błędy prawne (archiwum i ocena: Dysk, `Marketing/Strona www/Archiwum WIX 2026-09-25/`).
 

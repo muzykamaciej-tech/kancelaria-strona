@@ -121,8 +121,11 @@ const MAX_FILE_MB = 10;
 const CONTACT_EMAIL = 'maciej.muzyka@mecenasodnieruchomosci.pl';
 const MAILTO_CASE = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Sprawa do bezpłatnej analizy')}`;
 
-function QualificationForm({ compact = false }) {
-  const [state, setState] = lUseState({ name: '', email: '', phone: '', kw: '', situation: '', message: '' });
+/* preset (strona oferty, offers.jsx): { service, packages, pakiet, onPakiet, situation, placeholder } —
+   usługa i wybrany pakiet trafiają do pól zgłoszenia i do tematu maila */
+function QualificationForm({ compact = false, preset }) {
+  const [state, setState] = lUseState({ name: '', email: '', phone: '', kw: '', situation: (preset && preset.situation) || '', message: '' });
+  const pakiet = preset ? preset.pakiet || '' : '';
   const [files, setFiles] = lUseState([]);
   const [urgent, setUrgent] = lUseState(false);
   const [contact, setContact] = lUseState('email'); // email | phone
@@ -172,12 +175,18 @@ function QualificationForm({ compact = false }) {
       fd.append('Telefon', state.phone);
       fd.append('Preferowany kontakt', contact === 'phone' ? 'TELEFON — klient prosi o oddzwonienie' : 'e-mail');
       fd.append('Sytuacja', state.situation || '—');
+      if (preset) {
+        fd.append('Usługa', preset.service);
+        fd.append('Pakiet', pakiet || 'nie wybrano — klient prosi o radę');
+      }
       fd.append('Numer KW', state.kw || '—');
       fd.append('Pilne', urgent ? 'TAK — klient zaznaczył pilne terminy' : 'nie');
       fd.append('Opis sprawy', state.message);
       fd.append('Strona', src + ' · ' + location.href);
       files.forEach((f, i) => fd.append('Załącznik ' + (i + 1), f));
-      fd.append('_subject', (urgent ? 'PILNE · ' : '') + 'Nowa sprawa: ' + (state.situation || 'analiza') + ' — ' + state.name + ' (' + src + ')');
+      fd.append('_subject', (urgent ? 'PILNE · ' : '') + (preset
+        ? 'Pakiet: ' + (pakiet || 'do wyboru') + ' · ' + preset.service + ' — ' + state.name
+        : 'Nowa sprawa: ' + (state.situation || 'analiza') + ' — ' + state.name + ' (' + src + ')'));
 
       if (APPS_SCRIPT_URL) {
         const fields = {};
@@ -186,7 +195,7 @@ function QualificationForm({ compact = false }) {
         const r = await fetch(APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'text/plain;charset=utf-8' } });
         const j = await r.json().catch(() => ({}));
         if (r.ok && j.ok) {
-          if (window.gtag) window.gtag('event', 'generate_lead', { method: 'formularz-wstepna-analiza', situation: state.situation || 'brak', files: files.length, source: src });
+          if (window.gtag) window.gtag('event', 'generate_lead', { method: preset ? 'formularz-pakiet' : 'formularz-wstepna-analiza', situation: state.situation || 'brak', pakiet: pakiet || undefined, files: files.length, source: src });
           setStatus('sent');
         } else {
           setErrDetail(j.error || ('HTTP ' + r.status));
@@ -213,7 +222,7 @@ function QualificationForm({ compact = false }) {
         setErrDetail((j.errors && j.errors.map((e) => e.message).join('; ')) || j.error || ('HTTP ' + res.status));
       }
       if (res.ok) {
-        if (window.gtag) window.gtag('event', 'generate_lead', { method: 'formularz-wstepna-analiza', situation: state.situation || 'brak', files: files.length, source: src });
+        if (window.gtag) window.gtag('event', 'generate_lead', { method: preset ? 'formularz-pakiet' : 'formularz-wstepna-analiza', situation: state.situation || 'brak', pakiet: pakiet || undefined, files: files.length, source: src });
         setStatus('sent');
       } else
       setStatus('error');
@@ -224,7 +233,7 @@ function QualificationForm({ compact = false }) {
   }
 
   function reset() {
-    setState({ name: '', email: '', phone: '', kw: '', situation: '', message: '' });
+    setState({ name: '', email: '', phone: '', kw: '', situation: (preset && preset.situation) || '', message: '' });
     setFiles([]);
     setUrgent(false);
     setContact('email');
@@ -264,10 +273,27 @@ function QualificationForm({ compact = false }) {
           Sprawa przyjęta.
         </h3>
         <p className="lead mt-3" style={{ textAlign: 'center' }}>
-          {contact === 'phone'
+          {preset
+            ? 'Dziękuję. W ciągu 24 h roboczych ' + (contact === 'phone' ? 'zadzwonię i ' : 'odpiszę i ') + (pakiet ? 'potwierdzę zakres i termin pakietu „' + pakiet + '”.' : 'doradzę, który pakiet wybrać, i potwierdzę termin.')
+            : contact === 'phone'
             ? 'Dziękuję. W ciągu 24 h roboczych zadzwonię i powiem, co trzeba zrobić w Twojej sprawie. Ofertę z ceną i terminem prześlę mailem.'
             : 'Dziękuję. W ciągu 24 h roboczych odpiszę, co trzeba zrobić w Twojej sprawie, i prześlę ofertę z ceną i terminem.'}
         </p>
+        {preset ?
+        <ol className="success-steps mt-8">
+          <li>
+            <span className="success-step-num">1</span>
+            <div className="success-step-txt"><strong>Czytam Twój opis</strong><span>i dołączone dokumenty</span></div>
+          </li>
+          <li>
+            <span className="success-step-num">2</span>
+            <div className="success-step-txt"><strong>{contact === 'phone' ? 'Dzwonię w ciągu 24 h roboczych' : 'Odpisuję w ciągu 24 h roboczych'}</strong><span>potwierdzam zakres i termin</span></div>
+          </li>
+          <li>
+            <span className="success-step-num">3</span>
+            <div className="success-step-txt"><strong>Termin liczy się od kompletu dokumentów</strong><span>i wpłaty wynagrodzenia</span></div>
+          </li>
+        </ol> :
         <ol className="success-steps mt-8">
           <li>
             <span className="success-step-num">1</span>
@@ -281,7 +307,7 @@ function QualificationForm({ compact = false }) {
             <span className="success-step-num">3</span>
             <div className="success-step-txt"><strong>Razem z analizą dostajesz ofertę</strong><span>z ceną i terminem; do jej akceptacji nic nie płacisz</span></div>
           </li>
-        </ol>
+        </ol>}
         <p className="small mt-6" style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
           {filesDropped ? <strong style={{ display: 'block', marginBottom: '0.25rem', color: 'var(--text-main)' }}>Opis dotarł, ale załączniki nie przeszły — wyślij je proszę mailem.</strong> : 'Masz jeszcze dokumenty? '}Dopisz je mailem na <a href={MAILTO_CASE}>{CONTACT_EMAIL}</a>.
         </p>
@@ -300,9 +326,15 @@ function QualificationForm({ compact = false }) {
   return (
     <form className="qual-card" onSubmit={submit} noValidate>
       <div className="qual-card-head">
-        <span className="qual-badge"><SvgIcon name="gift" size={14} /> Bezpłatnie · w 24 h</span>
-        <h3 className="qual-title">Wstępna analiza sprawy</h3>
-        <p className="body" style={{ marginTop: '0.5rem' }}>Opisz, z czym się mierzysz. Odpiszę, co trzeba zrobić — audyt, pismo czy sprawa sądowa — i prześlę ofertę z ceną i terminem.</p>
+        {preset ? <React.Fragment>
+          <span className="qual-badge"><SvgIcon name="mail-check" size={14} /> Odpowiedź w 24 h</span>
+          <h3 className="qual-title">{preset.service}</h3>
+          <p className="body" style={{ marginTop: '0.5rem' }}>Wybierz pakiet i dołącz dokumenty. W ciągu 24 h roboczych potwierdzę zakres i termin.</p>
+        </React.Fragment> : <React.Fragment>
+          <span className="qual-badge"><SvgIcon name="gift" size={14} /> Bezpłatnie · w 24 h</span>
+          <h3 className="qual-title">Wstępna analiza sprawy</h3>
+          <p className="body" style={{ marginTop: '0.5rem' }}>Opisz, z czym się mierzysz. Odpiszę, co trzeba zrobić — audyt, pismo czy sprawa sądowa — i prześlę ofertę z ceną i terminem.</p>
+        </React.Fragment>}
       </div>
 
       <input
@@ -315,6 +347,15 @@ function QualificationForm({ compact = false }) {
         value={hp}
         onChange={(e) => setHp(e.target.value)}
         placeholder="Nie wypełniaj tego pola" />
+
+      {preset &&
+      <label className="qual-field qual-pakiet">
+        <span className="input-label">Pakiet</span>
+        <select className="input" value={pakiet} onChange={(e) => preset.onPakiet && preset.onPakiet(e.target.value)}>
+          <option value="">Nie wiem jeszcze, doradź mi</option>
+          {preset.packages.map((o) => <option key={o} value={o}>{o}</option>)}
+        </select>
+      </label>}
 
       <div className="qual-grid">
         <label>
@@ -380,7 +421,7 @@ function QualificationForm({ compact = false }) {
           value={state.message}
           onChange={(e) => setState({ ...state, message: e.target.value })}
           maxLength={5000}
-          placeholder="Np. Kupuję mieszkanie od dewelopera i nie wiem, czy umowa jest dla mnie bezpieczna…" />
+          placeholder={(preset && preset.placeholder) || 'Np. Kupuję mieszkanie od dewelopera i nie wiem, czy umowa jest dla mnie bezpieczna…'} />
         <div className="field-foot">
           {errors.message ? <div className="input-err">{errors.message}</div> : <span />}
           <span className={`char-count ${state.message.length > 4800 ? 'is-near' : ''}`}>{state.message.length} / 5000</span>
@@ -450,7 +491,7 @@ function QualificationForm({ compact = false }) {
         {status === 'sending' ?
         <><SvgIcon name="loader-circle" size={16} style={{ animation: 'spin 0.8s linear infinite' }} /> Wysyłam…</> :
 
-        <>Wyślij sprawę do analizy <SvgIcon name="arrow-right" size={16} /></>
+        <>{preset ? 'Wyślij zgłoszenie' : 'Wyślij sprawę do analizy'} <SvgIcon name="arrow-right" size={16} /></>
         }
       </button>
 
@@ -463,7 +504,7 @@ function QualificationForm({ compact = false }) {
 
       <p className="small qual-foot">
         <SvgIcon name="lock" size={13} style={{ color: 'var(--accent)' }} />
-        Analiza i oferta w 24 h robocze. Do akceptacji oferty nic nie płacisz.
+        {preset ? 'Odpowiedź w 24 h robocze. Dokumenty obejmuje tajemnica adwokacka.' : 'Analiza i oferta w 24 h robocze. Do akceptacji oferty nic nie płacisz.'}
       </p>
       <p className="small qual-alt">Wolisz mailem? Wyślij opis i dokumenty na <a href={MAILTO_CASE}>{CONTACT_EMAIL}</a>.</p>
     </form>);

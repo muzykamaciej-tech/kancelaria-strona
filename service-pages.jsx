@@ -56,19 +56,21 @@ function ServiceTrustStrip() {
    Reusable case-form band — the single conversion point.
    Sits at the bottom of every service & pillar page (id="formularz").
    ============================================================ */
-function CaseFormBand({ eyebrow, heading, lead }) {
+/* title: trzy wiersze nagłówka (ostatni w kolorze akcentu); preset: formularz z wybraną usługą i pakietem (offers.jsx) */
+function CaseFormBand({ eyebrow, title, heading, lead, preset }) {
   const GBadge = window.GoogleBadge;
+  const t = title || ['Bezpłatnie', 'powiem, co', 'trzeba zrobić.'];
   return (
     <section id="formularz" className="section-py case-form-band relative overflow-hidden">
       <div className="orb" style={{ width: 520, height: 520, top: '-20%', right: '-10%', opacity: 'calc(0.12 * var(--ambient-on))' }} />
       <div className="wrap relative" style={{ zIndex: 2 }}>
         <div className="case-form-grid">
           <div className="case-form-text">
-            <span className="eyebrow">Bezpłatna wstępna analiza</span>
+            <span className="eyebrow">{(title && eyebrow) || 'Bezpłatna wstępna analiza'}</span>
             <h2 className="display display--xl mt-6">
-              Bezpłatnie{' '}<br />
-              powiem, co{' '}<br />
-              <span className="accent">trzeba zrobić.</span>
+              {t[0]}{' '}<br />
+              {t[1]}{' '}<br />
+              <span className="accent">{t[2]}</span>
             </h2>
             <p className="lead mt-6" style={{ maxWidth: '32rem' }}>
               {lead || 'Kupujesz, sprzedajesz, inwestujesz albo masz spór o nieruchomość? Opisz sprawę. W ciągu 24 h roboczych odpiszę, co trzeba w niej zrobić — audyt, pismo czy sprawa sądowa — i od razu prześlę ofertę z ceną i terminem.'}
@@ -83,7 +85,7 @@ function CaseFormBand({ eyebrow, heading, lead }) {
             </div>
           </div>
           <div className="case-form-card">
-            <SQualForm />
+            <SQualForm preset={preset} />
           </div>
         </div>
       </div>
@@ -639,6 +641,7 @@ function ServicePage({ slug, setRoute }) {
   const c = window.SERVICE_CONTENT[slug];
   const isFull = !!c;
   const hide = hiddenModules(c);
+  const offerSlug = window.offerForService ? window.offerForService(slug) : null;
 
   return (
     <main id="main-content" data-screen-label={`Usługa — ${service.title}`} data-std={stdDate(c)}>
@@ -668,6 +671,11 @@ function ServicePage({ slug, setRoute }) {
               <button className="btn btn-primary" onClick={() => spScrollToForm()}>
                 Opisz swoją sprawę <SIcon name="arrow-right" size={16} />
               </button>
+              {offerSlug && (
+                <window.NavLink className="btn btn-secondary" route="oferta" slug={offerSlug}>
+                  Pakiety i ceny
+                </window.NavLink>
+              )}
               <window.NavLink className="btn btn-secondary" route="blok" slug={block.id}>
                 Wszystkie usługi w tym obszarze
               </window.NavLink>

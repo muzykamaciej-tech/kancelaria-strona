@@ -1,6 +1,6 @@
 # Kancelaria Nieruchomości – adw. dr Maciej Muzyka (Mecenas od Nieruchomości)
 
-> Mecenas od Nieruchomości: kancelaria adwokacka z Lublina zajmująca się wyłącznie prawem nieruchomości. Prowadzi adw. dr Maciej Muzyka (Lubelska Izba Adwokacka, wpis LUB/ADW/1702). Sprawy z całej Polski, kontakt zdalny, przede wszystkim mailowo; spotkania w Lublinie i w Warszawie. Sprawę opisuje się w formularzu na stronie. W ciągu 24 h roboczych klient dostaje bezpłatną wstępną analizę (co trzeba zrobić: np. szczegółowy audyt, pismo albo sprawa sądowa) i jednocześnie ofertę z ceną i terminem. Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów. Bez płatnych konsultacji i bez cennika: cenę ustala się osobno dla każdej sprawy.
+> Mecenas od Nieruchomości: kancelaria adwokacka z Lublina zajmująca się wyłącznie prawem nieruchomości. Prowadzi adw. dr Maciej Muzyka (Lubelska Izba Adwokacka, wpis LUB/ADW/1702). Sprawy z całej Polski, kontakt zdalny, przede wszystkim mailowo; spotkania w Lublinie i w Warszawie. Sprawę opisuje się w formularzu na stronie. W ciągu 24 h roboczych klient dostaje bezpłatną wstępną analizę (co trzeba zrobić: np. szczegółowy audyt, pismo albo sprawa sądowa) i jednocześnie ofertę z ceną i terminem. Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów. Bez płatnych konsultacji. Cenę ustala się osobno dla każdej sprawy; wyjątek to stałe pakiety z cenami podanymi na stronach ofert (sekcja „Oferty z cenami”).
 
 - Strona: https://www.mecenasodnieruchomosci.pl/
 - O kancelarii i kwalifikacjach: https://www.mecenasodnieruchomosci.pl/o-mnie
@@ -102,6 +102,10 @@
 - [Klauzule abuzywne w umowie deweloperskiej](https://www.mecenasodnieruchomosci.pl/uslugi/roszczenia-deweloper/klauzule-abuzywne-deweloper): Niedozwolone postanowienia — analiza, UOKiK, droga sądowa.
 - [Roszczenia z gwarancji jakości na lokal](https://www.mecenasodnieruchomosci.pl/uslugi/roszczenia-deweloper/gwarancja-jakosci-lokal): Egzekwowanie zobowiązań gwarancyjnych dewelopera.
 - [Przejęcie roszczeń nabywców przez wspólnotę](https://www.mecenasodnieruchomosci.pl/uslugi/roszczenia-deweloper/roszczenia-wspolnota-deweloper): Wspólnota dochodzi wad części wspólnych — uchwały i reprezentacja.
+
+## Oferty z cenami
+
+- [Sprawdzenie umowy deweloperskiej: pakiety i ceny](https://www.mecenasodnieruchomosci.pl/oferta/sprawdzenie-umowy-deweloperskiej): Umowę deweloperską sprawdzę, zanim ją podpiszesz: od 480 zł netto (590,40 zł brutto) z wynikiem w 2 dni robocze, aż po negocjacje z deweloperem.
 
 ## Poradniki
 
