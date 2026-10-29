@@ -411,8 +411,10 @@ function hiddenModules(c) {
 
 /* Builds the ordered content sections for a full service / umbrella page.
    Data-driven so service pages and pillar umbrellas share one visual language. */
-function buildServiceSections(c) {
+/* ctx.onPick(nazwa pakietu): przycisk „Wybieram ten pakiet” w sekcji pakietów (c.offer) zaznacza pakiet w formularzu strony */
+function buildServiceSections(c, ctx) {
   const blocks = [];
+  const offer = c.offer && window.getOffer ? window.getOffer(c.offer.slug) : null;
   /* „W skrócie”: pytanie klienta (H2), odpowiedź i tabela faktów (nagłówek wiersza = <th scope="row">) */
   if (c.short && c.short.a) blocks.push({
     eyebrow: 'W skrócie',
@@ -468,6 +470,41 @@ function buildServiceSections(c) {
               <p className="body mt-1">{c.levels.cost}</p>
             </div>
           </div>
+        </div>
+      ),
+    });
+  } else if (offer) {
+    blocks.push({
+      eyebrow: c.offer.eyebrow,
+      title: c.offer.heading,
+      node: (
+        <div>
+          <p className="lead mt-6">{c.offer.intro}</p>
+          <div className="level-list mt-8">
+            {offer.packages.map((p) => (
+              <div key={p.id} className={'level-card level-card--price' + (p.label ? ' level-card--featured' : '')}>
+                <div className="level-card-head">
+                  <h3 className="level-card-name">{p.name}</h3>
+                  {p.label && <span className="level-plus">{p.label}</span>}
+                </div>
+                <p className="level-price"><strong>{window.formatPln(p.net)} netto</strong> <span>({window.formatPln(window.grossPrice(p.net))} brutto)</span> · <span>{p.term}</span></p>
+                <p className="level-sub">{p.forWhom}</p>
+                <ul className="check-list mt-5">
+                  {p.includes && <li className="level-includes"><SIcon name="layers" size={18} style={{ color: 'var(--accent)' }} /><span>{p.includes}</span></li>}
+                  {p.scope.map((t, k) => (
+                    <li key={k}><SIcon name="check" size={18} style={{ color: 'var(--accent)' }} /><span>{t}</span></li>
+                  ))}
+                </ul>
+                <a href="#formularz" className={'btn ' + (p.label ? 'btn-primary' : 'btn-secondary') + ' mt-6'}
+                  onClick={(e) => { e.preventDefault(); if (ctx && ctx.onPick) ctx.onPick(p.name); spScrollToForm(); }}>
+                  Wybieram ten pakiet <SIcon name="arrow-right" size={16} />
+                </a>
+              </div>
+            ))}
+          </div>
+          <p className="body mt-6">
+            Ten sam cennik z pytaniami o zamówienie: <window.NavLink route="oferta" slug={c.offer.slug}>pakiety i ceny sprawdzenia umowy deweloperskiej</window.NavLink>.
+          </p>
         </div>
       ),
     });
@@ -635,6 +672,7 @@ function RelatedServices({ block, slug, setRoute, extra }) {
 }
 
 function ServicePage({ slug, setRoute }) {
+  const [picked, setPicked] = React.useState('');
   const service = window.getService(slug);
   const block = window.getBlockOfService(slug);
   if (!service) { return <UslugiOverview setRoute={setRoute} />; }
@@ -686,7 +724,7 @@ function ServicePage({ slug, setRoute }) {
 
       {isFull ? (
         (() => {
-          const blocks = buildServiceSections(c);
+          const blocks = buildServiceSections(c, { onPick: setPicked });
           return blocks.map((b, i) => (
             <section key={i} className={`section-py ${i % 2 === 1 ? 'bg-light' : ''}`}>
               <div className="wrap">
@@ -734,6 +772,7 @@ function ServicePage({ slug, setRoute }) {
       <CaseFormBand
         heading={c && c.cta ? c.cta.heading : 'Opisz swoją sprawę.'}
         lead={c && c.cta ? c.cta.lead : 'Napisz w kilku zdaniach, z czym się mierzysz — w ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną. Do jej akceptacji nic nie płacisz.'}
+        preset={offerSlug && window.getOffer(offerSlug) ? window.offerFormPreset(window.getOffer(offerSlug), picked, setPicked) : undefined}
       />
       <ServiceTrustStrip />
     </main>

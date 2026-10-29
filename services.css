@@ -500,3 +500,8 @@ a.blog-newest-card:hover .blog-newest-photo img, .blog-teaser-card--photo:hover 
 .price-card-scope li.price-card-includes svg { color: var(--tint-fg); }
 .price-card-cta { margin: 0 1.75rem 1.75rem; justify-content: center; }
 .qual-pakiet .input { border-color: var(--brand-primary); font-weight: var(--weight-semibold); }
+/* pakiety z cenami na stronie usługi (c.offer): układ kart „Trzy poziomy” + cena, termin i przycisk */
+.level-card--featured { border-color: var(--brand-primary); border-width: 2px 2px 2px 4px; }
+.level-price { margin-top: 0.75rem; color: var(--text-body); font-size: 1rem; }
+.level-price strong { font-size: 1.5rem; color: var(--text-main); font-weight: var(--weight-bold); }
+.level-card .check-list li.level-includes span { font-weight: var(--weight-bold); color: var(--text-main); }
