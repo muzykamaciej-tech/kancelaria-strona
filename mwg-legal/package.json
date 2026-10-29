@@ -1,0 +1,15 @@
+{
+  "name": "mwg-legal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Strona MWG Legal – Muzyka Goździewski Wspólnicy",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node tools/serve.mjs dist 4173",
+    "illustrations": "node tools/illustrations/render.mjs",
+    "brand": "node tools/brand-assets.mjs",
+    "check": "node tools/check.mjs"
+  },
+  "engines": { "node": ">=18" }
+}
