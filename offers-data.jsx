@@ -49,7 +49,7 @@ const OFFERS = {
         name: 'Pełna analiza dokumentów',
         label: 'Najczęściej wybierany',
         net: DEV_NET.pelna,
-        term: 'wynik w 5 dni roboczych',
+        term: 'wynik w 3 dni robocze',
         forWhom: 'Dla osób, które chcą mieć pewność, że sprawdzone jest wszystko – umowa, deweloper i nieruchomość.',
         includes: 'Wszystko z pakietu „Szybkie sprawdzenie umowy”, a dodatkowo:',
         scope: [
