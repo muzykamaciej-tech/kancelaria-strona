@@ -116,7 +116,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Wezwanie, reklamacja albo pozew od właściciela, wspólnoty lub wykonawcy, jeśli są',
       'Ewidencja zaliczek albo zestawienie zaległości, jeśli chodzi o windykację',
     ],
-    guides: [],
+    guides: ['zarzadca-nieruchomosci-umowa'],
     seeAlso: ['windykacja-czynszu', 'nadzor-budowlany-pinb', 'wady-czesci-wspolnych'],
     cta: {
       heading: 'Zarządzaj spokojnie — prawną stronę wezmę na siebie.',
@@ -245,7 +245,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Przy przeniesieniu własności: żądanie członka z datą wpływu i dokumenty prawa do gruntu (jeśli masz)',
       'Przy zaległościach: zestawienie opłat i wpłat lokalu',
     ],
-    guides: [],
+    guides: ['spoldzielcze-wlasnosciowe-prawo-do-lokalu'],
     seeAlso: ['uregulowanie-stanu-prawnego', 'uzytkowanie-wieczyste'],
     cta: {
       heading: 'Uchwały, które się obronią. Procedury bez potknięć.',
@@ -511,7 +511,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Korespondencja z inwestorem o zmianach, nadzorze albo płatnościach, z datami, oraz niezapłacone faktury.',
       'Przy sporze: zdjęcia albo ogłoszenie drugiej budowy według Twojego projektu, jeśli masz.',
     ],
-    guides: ['warunki-zabudowy-dla-czesci-dzialki', 'przebudowa-czy-nowy-zjazd-nsa'],
+    guides: ['warunki-zabudowy-dla-czesci-dzialki', 'przebudowa-czy-nowy-zjazd-nsa', 'prawa-autorskie-do-projektu-budowlanego'],
     seeAlso: ['pozwolenie-na-budowe', 'warunki-zabudowy'],
     cta: {
       heading: 'Twój projekt, Twoje prawa, Twoje honorarium — dobrze zabezpieczone.',
@@ -627,7 +627,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Reklamacja, wezwanie, pozew albo zawiadomienie rzecznika, jeśli przyszły',
       'Polisa OC, jeśli masz',
     ],
-    guides: ['zawyzony-podatek-od-nieruchomosci-blad-w-ewidencji'],
+    guides: ['zawyzony-podatek-od-nieruchomosci-blad-w-ewidencji', 'podzial-dzialki-krok-po-kroku', 'wznowienie-granic-dzialki'],
     seeAlso: ['uregulowanie-stanu-prawnego', 'zniesienie-wspolwlasnosci', 'droga-konieczna'],
     cta: {
       heading: 'Tam, gdzie kończy się pomiar, a zaczyna spór — jestem po Twojej stronie.',
@@ -848,11 +848,11 @@ Object.assign(window.SERVICE_CONTENT, {
       },
       {
         q: 'Czy partycypacja w SIM wraca i jest waloryzowana?',
-        a: 'Tak, w lokalach zbudowanych z kredytu BGK (wnioski do 30.09.2009) albo z finansowania zwrotnego. SIM zwraca ją najpóźniej 12 miesięcy po opróżnieniu lokalu (art. 29a ust. 3 u.s.f.r.m.). Kwotę waloryzuje się wskaźnikiem GUS ceny 1 m² budynku mieszkalnego i pomniejsza o 0,75% za każdy rok najmu liczony w pełnych kwartałach.',
+        a: 'Tak, w lokalach zbudowanych z kredytu BGK (wnioski do 30.09.2009) albo z finansowania zwrotnego. SIM zwraca ją najpóźniej 12 miesięcy po opróżnieniu lokalu (art. 29a ust. 3 u.s.f.r.m.). Kwotę waloryzuje się wskaźnikiem GUS ceny 1 m² budynku mieszkalnego i pomniejsza o 0,75% za każdy rok najmu liczony w pełnych kwartałach. Przy umowach zawartych przed 25.10.2015 zwrot to taki odsetek aktualnej wartości odtworzeniowej lokalu, jaki stanowiła partycypacja (art. 7 ust. 1 ustawy z 10.09.2015, Dz.U. 2015 poz. 1582).',
       },
       {
         q: 'Jak działa najem z dojściem do własności w SIM?',
-        a: 'Płacisz czynsz i miesięczne raty ceny, a po zapłacie ceny SIM przenosi na Ciebie własność lokalu (art. 19k ust. 1, art. 19l ust. 4 u.o.p.l.). Przy partycypacji od 10% kosztów budowy umowa jest na czas nieoznaczony albo z dojściem do własności (art. 29a ust. 2b u.s.f.r.m.). Zmiana starej umowy na taki najem z rozliczeniem partycypacji nie przysługuje w mieście będącym siedzibą wojewody lub sejmiku (art. 33dk ust. 1 u.s.f.r.m.). To samo dotyczy miast na prawach powiatu powyżej 100 tys. mieszkańców.',
+        a: 'Płacisz czynsz i miesięczne raty ceny, a po zapłacie ceny SIM przenosi na Ciebie własność lokalu (art. 19k ust. 1, art. 19l ust. 4 u.o.p.l.). Przy partycypacji od 10% kosztów budowy umowa jest na czas nieoznaczony albo z dojściem do własności (art. 29a ust. 2b u.s.f.r.m.). Zmiana starej umowy na taki najem z rozliczeniem partycypacji nie przysługuje w mieście będącym siedzibą wojewody lub sejmiku (art. 33dk ust. 1 u.s.f.r.m.). To samo dotyczy miast na prawach powiatu powyżej 100 tys. mieszkańców. Wyłączenie dotyczy finansowania zwrotnego z wniosków od 22.08.2025; przy wcześniejszych stosuje się dawny art. 33dk (art. 14 ustawy z 25.07.2025, Dz.U. 2025 poz. 1077).',
       },
       {
         q: 'Czy gmina może sprzedać kooperatywie grunt?',
@@ -899,7 +899,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Dla SIM i TBS: umowa spółki albo statut i uchwała o stawkach czynszu',
       'Dla SIM: wniosek najemcy o rozliczenie partycypacji i jego umowa partycypacji',
     ],
-    guides: [],
+    guides: ['mieszkanie-w-tbs'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'umowa-o-roboty-budowlane'],
     cta: {
       heading: 'Społeczne budownictwo ma swoje reguły — poprowadzę Cię przez nie bezpiecznie.',
@@ -1373,7 +1373,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Rozliczenia z właścicielami (przychody, koszty, wypłaty), jeśli spór dotyczy pieniędzy',
       'Pisma od właścicieli: wezwania, uprzedzenia, wypowiedzenia, z datą doręczenia, jeśli je dostałeś',
     ],
-    guides: [],
+    guides: ['najem-krotkoterminowy'],
     seeAlso: ['obsluga-wynajmujacych', 'eksmisja'],
     cta: {
       heading: 'Model operatorski, który się broni — finansowo i prawnie.',

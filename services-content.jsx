@@ -1541,7 +1541,7 @@ const SERVICE_CONTENT = {
       'Przy odwołaniu: akt darowizny, jeśli masz, i opis zachowań obdarowanego z datami, w tym data, kiedy się o nich dowiedziałeś',
       'Wiadomości, pisma albo zgłoszenia, które dokumentują te zachowania, jeśli są',
     ],
-    guides: [],
+    guides: ['przepisanie-mieszkania-na-dziecko'],
     seeAlso: ['zachowek', 'dzial-spadku'],
     cta: {
       heading: 'Przekaż nieruchomość w rodzinie — bezpiecznie i z głową.',
@@ -1708,11 +1708,7 @@ const SERVICE_CONTENT = {
       'Uwaga albo wniosek, które już złożyłeś, i raport z konsultacji, jeśli są',
       'Wypis z planu miejscowego albo decyzja WZ, jeżeli działka je ma: od nich zaczynam analizę',
     ],
-    guides: [
-      'odszkodowanie-za-plan-ogolny',
-      'jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym',
-      'plan-ogolny-a-wniosek-o-wz-w-toku',
-    ],
+    guides: ['odszkodowanie-za-plan-ogolny', 'jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym', 'plan-ogolny-a-wniosek-o-wz-w-toku', 'uwagi-do-planu-ogolnego'],
     seeAlso: ['analiza-umowy-przedwstepnej', 'obsluga-prawna-deweloperow'],
     cta: {
       heading: 'Nie daj się zaskoczyć planem ogólnym.',
@@ -3084,10 +3080,7 @@ const SERVICE_CONTENT = {
       'Pismo wierzyciela o spłacie kredytu zabezpieczonego hipoteką, jeśli masz',
       'Zawiadomienie z sądu o wpisie ostrzeżenia, jeśli je dostałeś',
     ],
-    guides: [
-      'zniesienie-sluzebnosci-przesylu-nieistniejaca-linia',
-      'zawyzony-podatek-od-nieruchomosci-blad-w-ewidencji',
-    ],
+    guides: ['zniesienie-sluzebnosci-przesylu-nieistniejaca-linia', 'zawyzony-podatek-od-nieruchomosci-blad-w-ewidencji', 'wznowienie-granic-dzialki', 'spoldzielcze-wlasnosciowe-prawo-do-lokalu'],
     seeAlso: ['stwierdzenie-nabycia-spadku', 'obsluga-sprzedazy', 'obsluga-prawna-geodetow'],
     cta: {
       heading: 'Uporządkuj papiery, zanim zablokują Ci sprzedaż albo spadek.',
@@ -3383,7 +3376,7 @@ const SERVICE_CONTENT = {
       'Mapa albo projekt podziału działki od geodety, jeśli są',
       'Pisma i propozycje spłaty od współwłaścicieli, jeśli są',
     ],
-    guides: [],
+    guides: ['sprzedaz-udzialu-w-nieruchomosci'],
     seeAlso: ['obsluga-sprzedazy', 'droga-konieczna'],
     cta: {
       heading: 'Wyjdź ze współwłasności, zanim ona zablokuje Twoje plany.',
@@ -3848,7 +3841,7 @@ const SERVICE_CONTENT = {
       'Oświadczenia o przyjęciu lub odrzuceniu spadku złożone przez rodzinę, jeśli były',
       'Numer księgi wieczystej nieruchomości zmarłego, jeśli znasz',
     ],
-    guides: ['stwierdzenie-nabycia-spadku'],
+    guides: ['stwierdzenie-nabycia-spadku', 'odrzucenie-spadku'],
     seeAlso: ['uregulowanie-stanu-prawnego', 'obsluga-sprzedazy'],
     cta: {
       heading: 'Potwierdź, że dziedziczysz — i odzyskaj kontrolę nad majątkiem.',
@@ -4840,7 +4833,7 @@ const SERVICE_CONTENT = {
       'Akty notarialne najemców i daty zgłoszeń najmu okazjonalnego, jeśli je masz',
       'Zestawienie zaległości z datami rat i pisma już wysłane do lokatorów, jeśli są',
     ],
-    guides: ['jak-bezpiecznie-wynajac-mieszkanie-poradnik'],
+    guides: ['jak-bezpiecznie-wynajac-mieszkanie-poradnik', 'podatek-od-najmu-ryczalt', 'najem-krotkoterminowy'],
     seeAlso: ['obsluga-prawna-operatorow-najmu', 'obsluga-prawna-zarzadcow'],
     cta: {
       heading: 'Traktujesz najem jak biznes? Miej do niego prawnika na stałe.',
@@ -6609,7 +6602,7 @@ const SERVICE_CONTENT = {
       'Zdjęcia gruntu przed robotami i po nich, np. wykopów i zniszczonych upraw.',
       'Decyzja o odszkodowaniu i opinia rzeczoznawcy majątkowego, jeśli to postępowanie już trwa.',
     ],
-    guides: [],
+    guides: ['ograniczenie-korzystania-z-nieruchomosci-odszkodowanie'],
     seeAlso: ['skarga-na-plan-miejscowy', 'obsluga-prawna-przedsiebiorstw-rolnych'],
     cta: {
       heading: '„Małe wywłaszczenie” to wciąż wywłaszczenie — i wciąż masz prawa.',
@@ -7022,7 +7015,7 @@ const SERVICE_CONTENT = {
       'Wezwania i wypowiedzenie z datą doręczenia, jeśli były',
       'Zawiadomienie notariusza o sprzedaży albo projekt umowy sprzedaży ziemi, jeśli są',
     ],
-    guides: ['dzierzawa-pod-fotowoltaike-a-vat'],
+    guides: ['dzierzawa-pod-fotowoltaike-a-vat', 'umowa-dzierzawy-gruntu-rolnego'],
     seeAlso: ['bezumowne-korzystanie', 'obsluga-prawna-przedsiebiorstw-rolnych'],
     cta: {
       heading: 'Dobra umowa dzierżawy chroni Cię, zanim pojawi się problem.',
