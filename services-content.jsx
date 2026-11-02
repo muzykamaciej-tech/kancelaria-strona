@@ -174,7 +174,7 @@ const SERVICE_CONTENT = {
           eli: 'DU/2023/1688',
           note: 'WZ na wnioski od 1.09.2026 tylko w gminie z planem ogólnym; WZ bez 5-letniego terminu.',
         },
-        { ref: 'art. 20, 21', act: 'Ustawa z dnia 17 maja 1989 r. Prawo geodezyjne i kartograficzne', tj: 'Dz.U. 2024 poz. 1151', eli: 'DU/1989/163', note: 'Ewidencja gruntów i budynków.' },
+        { ref: 'art. 20, 21', act: 'Ustawa z dnia 17 maja 1989 r. Prawo geodezyjne i kartograficzne', tj: 'Dz.U. 2026 poz. 1389', eli: 'DU/1989/163', note: 'Ewidencja gruntów i budynków.' },
         { ref: 'art. 924 § 1', act: 'Ustawa z dnia 17 listopada 1964 r. Kodeks postępowania cywilnego', tj: 'Dz.U. 2026 poz. 468', eli: 'DU/1964/296', note: 'Wpis o wszczęciu egzekucji z nieruchomości do księgi wieczystej.' },
       ],
     },
@@ -1485,7 +1485,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Czy można cofnąć darowiznę po 10 latach?',
-        a: 'Tak, jeżeli o rażącej niewdzięczności dowiedziałeś się mniej niż rok temu (art. 899 § 3 k.c.). Ustawa nie liczy tego terminu od dnia darowizny. Granica 10 lat pochodzi z przepisów o zachowku i liczy się wstecz od śmierci darczyńcy (art. 994 § 1 i art. 924 k.c.).',
+        a: 'Tak, jeżeli o rażącej niewdzięczności dowiedziałeś się mniej niż rok temu (art. 899 § 3 k.c.). Ustawa nie liczy tego terminu od dnia darowizny. Granica 10 lat pochodzi z przepisów o zachowku i liczy się wstecz od śmierci darczyńcy (art. 994 § 1 i art. 924 k.c.), ale dotyczy tylko darowizn dla osób spoza kręgu spadkobierców i uprawnionych do zachowku. Darowiznę dla dziecka dolicza się bez względu na upływ czasu.',
       },
       {
         q: 'Czy do odwołania darowizny potrzebny jest notariusz albo zgoda obdarowanego?',
@@ -3063,7 +3063,7 @@ const SERVICE_CONTENT = {
         {
           ref: 'art. 29, 31, 33, 34, 39',
           act: 'Ustawa z dnia 17 maja 1989 r. Prawo geodezyjne i kartograficzne',
-          tj: 'Dz.U. 2024 poz. 1151',
+          tj: 'Dz.U. 2026 poz. 1389',
           eli: 'DU/1989/163',
           note: 'Rozgraniczenie przed wójtem i w sądzie, wznowienie znaków granicznych.',
         },
@@ -3261,7 +3261,7 @@ const SERVICE_CONTENT = {
       ],
     },
     introHeading: 'Dlaczego wspólny dom trudno sprzedać i jak zakończyć współwłasność',
-    intro: 'Współwłasność to stan, w którym własność tej samej rzeczy przysługuje niepodzielnie kilku osobom (art. 195 k.c.). Do sprzedaży całego domu potrzebna jest co do zasady zgoda wszystkich (art. 199 k.c.). Swój udział kupiony albo otrzymany w darowiźnie sprzedasz bez zgody pozostałych (art. 198 k.c.). Przy domu ze spadku, przed działem, sprzedaż udziału bez zgody pozostałych spadkobierców jest bezskuteczna o tyle, o ile naruszałaby ich prawa wynikające z przepisów o dziale spadku (art. 1036 k.c.). Zniesienie współwłasności kończy ten stan: dostajesz część nieruchomości, całość ze spłatą innych albo pieniądze. Gdy dom należy do niepodzielonego spadku, właściwa jest sprawa o dział spadku (art. 1035 i 1037 § 1 k.c.), a przy majątku wspólnym byłych małżonków sprawa o podział majątku (art. 46 k.r.o.).',
+    intro: 'Współwłasność to stan, w którym własność tej samej rzeczy przysługuje niepodzielnie kilku osobom (art. 195 k.c.). Do sprzedaży całego domu potrzebna jest co do zasady zgoda wszystkich (art. 199 k.c.). Swój udział kupiony albo otrzymany w darowiźnie co do zasady sprzedasz bez zgody pozostałych (art. 198 k.c.); wyjątki to m.in. udział w majątku wspólnym małżonków i pierwokup przy nieruchomości rolnej. Przy domu ze spadku, przed działem, sprzedaż udziału bez zgody pozostałych spadkobierców jest bezskuteczna o tyle, o ile naruszałaby ich prawa wynikające z przepisów o dziale spadku (art. 1036 k.c.). Zniesienie współwłasności kończy ten stan: dostajesz część nieruchomości, całość ze spłatą innych albo pieniądze. Gdy dom należy do niepodzielonego spadku, właściwa jest sprawa o dział spadku (art. 1035 i 1037 § 1 k.c.), a przy majątku wspólnym byłych małżonków sprawa o podział majątku (art. 46 k.r.o.).',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Brat nie chce sprzedać, a Ty chcesz odzyskać swoje pieniądze',
     when: [
@@ -7153,7 +7153,7 @@ const SERVICE_CONTENT = {
         {
           ref: 'art. 20 ust. 1 pkt 1',
           act: 'Ustawa z dnia 17 maja 1989 r. Prawo geodezyjne i kartograficzne',
-          tj: 'Dz.U. 2024 poz. 1151 ze zm.',
+          tj: 'Dz.U. 2026 poz. 1389',
           eli: 'DU/1989/163',
           note: 'Ewidencja gruntów obejmuje rodzaj użytku i klasę bonitacyjną.',
         },

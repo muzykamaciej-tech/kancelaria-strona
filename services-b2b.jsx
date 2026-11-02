@@ -12,7 +12,7 @@ Object.assign(window.SERVICE_CONTENT, {
     subtitle: 'Zarządzasz wspólnotami albo budynkami komercyjnymi i chcesz wiedzieć, za co odpowiadasz, gdy coś pójdzie źle? Obsługa prawna zarządcy nieruchomości obejmuje umowę o zarządzanie, granice odpowiedzialności, obowiązkowe OC (art. 186 ust. 3 u.g.n.) i windykację zaliczek. Piszę i opiniuję umowy, protokoły przejęcia i pisma oraz prowadzę spory.',
     short: {
       q: 'Za co odpowiada zarządca nieruchomości, skoro nie ma już licencji?',
-      a: 'Odpowiadasz za szkodę z niewykonania lub nienależytego wykonania umowy o zarządzanie (art. 471 k.c.). Staranność ocenia się z uwzględnieniem zawodowego charakteru Twojej działalności (art. 355 § 2 k.c.). Za pracowników i podwykonawców odpowiadasz jak za siebie (art. 474 k.c.). Licencji ustawa nie wymaga: zarządcą jest przedsiębiorca prowadzący działalność z zakresu zarządzania nieruchomościami (art. 184a u.g.n.).',
+      a: 'Odpowiadasz za szkodę z niewykonania lub nienależytego wykonania umowy o zarządzanie (art. 471 k.c.). Staranność ocenia się z uwzględnieniem zawodowego charakteru Twojej działalności (art. 355 § 2 k.c.). Za pracowników i podwykonawców co do zasady odpowiadasz jak za siebie (art. 474 k.c.); przy zastępcy dopuszczonym umową odpowiadasz tylko za winę w wyborze (art. 738 § 1 k.c.). Licencji ustawa nie wymaga: zarządcą jest przedsiębiorca prowadzący działalność z zakresu zarządzania nieruchomościami (art. 184a u.g.n.).',
       facts: [
         [
           'Forma umowy o zarządzanie',
@@ -606,7 +606,7 @@ Object.assign(window.SERVICE_CONTENT, {
         {
           ref: 'art. 6a ust. 1, 7b ust. 2, 12b, 33, 34, 42, 46–46p',
           act: 'Ustawa – Prawo geodezyjne i kartograficzne',
-          tj: 'Dz.U. 2024 poz. 1151',
+          tj: 'Dz.U. 2026 poz. 1389',
           eli: 'DU/1989/163',
           note: 'Weryfikacja wyników, rozgraniczenie, uprawnienia, odpowiedzialność dyscyplinarna.',
         },

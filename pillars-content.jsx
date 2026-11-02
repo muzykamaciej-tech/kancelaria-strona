@@ -637,7 +637,7 @@ Object.assign(window.BLOCK_CONTENT, {
         {
           ref: 'art. 7d, 20, 24, 29, 30, 33, 34 i 37 p.g.k.',
           act: 'Ustawa z dnia 17 maja 1989 r. Prawo geodezyjne i kartograficzne',
-          tj: 'Dz.U. 2024 poz. 1151',
+          tj: 'Dz.U. 2026 poz. 1389',
           eli: 'DU/1989/163',
           note: 'Ewidencja gruntów i budynków, rozgraniczenie (art. 24 ust. 5 w brzmieniu ustawy Dz.U. 2023 poz. 1615).',
         },

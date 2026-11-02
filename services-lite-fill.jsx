@@ -174,7 +174,7 @@ Object.assign(window.SERVICE_CONTENT, {
       ],
     },
     introHeading: 'Co podpisujesz, gdy oddajesz ziemię pod farmę',
-    intro: 'Umowa dzierżawy pod panele albo turbiny wiatrowe zobowiązuje Cię oddać grunt inwestorowi do używania i pobierania pożytków, a jego do płacenia umówionego czynszu (art. 693 § 1 k.c.). Na użytkach rolnych klas I–III nowa farma co do zasady może powstać tylko na podstawie planu miejscowego (art. 14 ust. 6a pkt 2 u.p.z.p.). Inwestor zwykle podpisuje umowę, zanim ma decyzje potrzebne do budowy, więc grunt bywa związany umową przez cały okres przygotowawczy.',
+    intro: 'Umowa dzierżawy pod panele albo turbiny wiatrowe zobowiązuje Cię oddać grunt inwestorowi do używania i pobierania pożytków, a jego do płacenia umówionego czynszu (art. 693 § 1 k.c.). Farma na użytkach rolnych klas I–III, na klasie IV (ponad 150 kW albo przy działalności gospodarczej w zakresie wytwarzania energii) oraz na innych gruntach przy mocy ponad 1000 kW może powstać tylko na podstawie planu miejscowego (art. 14 ust. 6a pkt 2 u.p.z.p.). Inwestor zwykle podpisuje umowę, zanim ma decyzje potrzebne do budowy, więc grunt bywa związany umową przez cały okres przygotowawczy.',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Firma OZE chce dzierżawić Twoją ziemię',
     when: [
@@ -378,7 +378,7 @@ Object.assign(window.SERVICE_CONTENT, {
         {
           ref: 'art. 4 ust. 1a pkt 7, art. 7d pkt 1 lit. b, art. 23 ust. 2 i 7, art. 40a ust. 2 pkt 1 lit. k',
           act: 'Prawo geodezyjne i kartograficzne',
-          tj: 'Dz.U. 2024 poz. 1151',
+          tj: 'Dz.U. 2026 poz. 1389',
           eli: 'DU/1989/163',
           note: 'Rejestr cen nieruchomości; udostępnianie danych bez opłaty od 13.02.2026 (zmiana Dz.U. 2025 poz. 1542).',
         },

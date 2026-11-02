@@ -215,7 +215,7 @@ const SERVICES = [
     faq: [
       { q: 'Czy mogę wynajmować bez najmu okazjonalnego?', a: 'Tak, ale ryzyko jest duże. W razie problemu eksmisja trwa od 2 do 5 lat. Najem okazjonalny pozwala wyeksmitować w 3–6 miesięcy.' },
       { q: 'Co jeśli najemca przestał płacić, a uciekł?', a: 'Pomagam wszcząć egzekucję komorniczą — i wcześniej znaleźć majątek dłużnika. Wiele zależy od tego, jak zabezpieczona była umowa.' },
-      { q: 'Czy obsługujesz najem krótkoterminowy (Airbnb)?', a: 'Tak — ale w tym wypadku stawiam mocny akcent na zgodność z uchwałami wspólnoty i miejscowym prawem.' },
+      { q: 'Czy obsługujesz najem krótkoterminowy (Airbnb)?', a: 'Tak — w tym wypadku stawiam mocny akcent na zgodność z regulaminem porządku domowego wspólnoty, ewidencją obiektów w gminie i opłatą miejscową.' },
     ],
     related: ['flipy', 'audyt-stanu-prawnego', 'porady-prawne'],
   },

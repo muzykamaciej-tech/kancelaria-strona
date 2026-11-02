@@ -724,7 +724,7 @@ window.BLOG.push(
         'Ustawa z 16.11.2006 o opłacie skarbowej (t.j. Dz.U. 2025 poz. 1154 ze zm.): art. 2 ust. 1 pkt 2, 6 ust. 1 pkt 1 i ust. 2, 7 pkt 5, 8 ust. 1, 9 ust. 1–2a (ust. 2–2a w brzmieniu z Dz.U. 2026 poz. 846), 12 ust. 1 i ust. 2 pkt 1; załącznik cz. I pkt 8 i 9, cz. IV.',
         'Ustawa z 27.03.2003 o planowaniu i zagospodarowaniu przestrzennym (t.j. Dz.U. 2026 poz. 538 ze zm.): art. 5, 52 ust. 2 pkt 1–2 i ust. 3, 54 ust. 2 pkt 1 lit. a, 60 ust. 4, 61 ust. 1 pkt 1a, 63 ust. 1a–1b (od 1.01.2027) i ust. 5, 64 ust. 1.',
         'Ustawy o zmianie ustawy o planowaniu i zagospodarowaniu przestrzennym oraz niektórych innych ustaw: z 7.07.2023 (Dz.U. 2023 poz. 1688 ze zm.), art. 59 ust. 3; z 5.11.2025 (Dz.U. 2025 poz. 1668), art. 6; z 30.04.2026 (Dz.U. 2026 poz. 781), art. 12.',
-        'Prawo geodezyjne i kartograficzne (t.j. Dz.U. 2024 poz. 1151 ze zm.): art. 7d pkt 1, 40d ust. 1–3, 40e, 40j, załącznik.',
+        'Prawo geodezyjne i kartograficzne (t.j. Dz.U. 2026 poz. 1389): art. 7d pkt 1, 40d ust. 1–3, 40e, 40j, załącznik.',
         'Prawo budowlane (t.j. Dz.U. 2026 poz. 524 ze zm.): art. 34 ust. 3 pkt 1.',
         'Kodeks postępowania administracyjnego (t.j. Dz.U. 2025 poz. 1691): art. 61 § 3–3a, 129 § 1–2, 141 § 2, 261 § 1–3, 262 § 1 pkt 2 i § 2, 264 § 2.',
         'Rozporządzenie Rady Ministrów z 16.12.2003 w sprawie wysokości oraz szczegółowych zasad pobierania wpisu w postępowaniu przed sądami administracyjnymi (t.j. Dz.U. 2021 poz. 535): § 2 ust. 3 pkt 2.',

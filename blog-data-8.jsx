@@ -1823,7 +1823,7 @@ window.BLOG.push(
       ['p', '**Brak księgi wieczystej dla działki.** Taką działkę można kupić. Notariusz w dniu aktu złoży wniosek o założenie księgi i wpis kupującego (art. 92 § 4 Prawa o notariacie). Nie masz jednak rękojmi, bo chroni ona nabycie od osoby uprawnionej „według treści księgi” (art. 5 u.k.w.h.). Musisz sam sprawdzić łańcuch dokumentów nabycia, od ostatniego aktu wstecz.'],
       ['p', '**Brak księgi wieczystej dla mieszkania.** Sprawdź, jakie to prawo:'],
       ['ul', [
-        '**Spółdzielcze własnościowe prawo do lokalu** to ograniczone prawo rzeczowe (art. 17² § 1 ustawy o spółdzielniach mieszkaniowych). Księga może dla niego być prowadzona, ale nie musi (art. 1 ust. 3 u.k.w.h.). Bez księgi stan prawny potwierdza zaświadczenie spółdzielni.',
+        '**Spółdzielcze własnościowe prawo do lokalu** to ograniczone prawo rzeczowe (art. 17² ust. 1 ustawy o spółdzielniach mieszkaniowych). Księga może dla niego być prowadzona, ale nie musi (art. 1 ust. 3 u.k.w.h.). Bez księgi stan prawny potwierdza zaświadczenie spółdzielni.',
         '**Lokal niewyodrębniony** nie ma własnej księgi, bo odrębna własność powstaje dopiero z wpisem (art. 7 ust. 2 ustawy o własności lokali). Sprawdź księgę budynku i działki.',
         '**Spółdzielcze lokatorskie prawo do lokalu** – ustawa przewiduje księgę tylko dla prawa własnościowego (art. 1 ust. 3 u.k.w.h.), a prawa lokatorskiego nie można zbyć (art. 9 ust. 3 ustawy o spółdzielniach mieszkaniowych).',
       ]],
@@ -2090,7 +2090,7 @@ window.BLOG.push(
       ['h2', 'Jak przerwać zasiedzenie, gdy ktoś zajmuje Twoją działkę?'],
       ['p', 'Jesteś właścicielem, a sąsiad od lat korzysta z pasa Twojego gruntu? Bieg zasiedzenia przerywa:'],
       ['ol', [
-        '**Czynność przed sądem** podjęta bezpośrednio w celu dochodzenia Twojego prawa, np. pozew o wydanie nieruchomości (art. 222 § 1 w zw. z art. 123 § 1 pkt 1 i art. 175 k.c.). Wniosek o rozgraniczenie złożony przez właściciela też może przerwać zasiedzenie przygranicznego pasa, ale nie wtedy, gdy składa go sam posiadacz przeciwko właścicielowi (postanowienie SN z 11.12.2013, IV CSK 180/13).',
+        '**Czynność przed sądem** podjęta bezpośrednio w celu dochodzenia Twojego prawa, np. pozew o wydanie nieruchomości (art. 222 § 1 w zw. z art. 123 § 1 pkt 1 i art. 175 k.c.). Czy przerywa je wniosek właściciela o rozgraniczenie, SN oceniał różnie: nie (uchwała SN z 4.02.1987, III CZP 104/86) albo tak, chyba że wniosek składa sam posiadacz przeciwko właścicielowi (postanowienie SN z 11.12.2013, IV CSK 180/13).',
         '**Uznanie Twojego prawa przez posiadacza**, np. podpisana przez niego umowa dzierżawy pasa albo pismo, w którym prosi o zgodę na korzystanie (art. 123 § 1 pkt 2 w zw. z art. 175 k.c.). Musi z niego wynikać, że posiadacz włada za Twoją zgodą, a nie jak właściciel. Sama jego propozycja odkupu pasa co do zasady nie wystarczy (postanowienie SN z 28.04.1999, I CKN 430/98).',
       ]],
       ['p', 'Po przerwaniu termin biegnie od nowa, a przy sprawie sądowej – dopiero po jej zakończeniu (art. 124 k.c.). Wezwanie listem poleconym zasiedzenia nie przerywa. Wniosek o zawezwanie do próby ugodowej też go nie przerywa, tylko zawiesza na czas postępowania pojednawczego (art. 121 pkt 6 w zw. z art. 175 k.c.). Jeżeli termin już upłynął, przerwać nie ma czego.'],
@@ -2173,6 +2173,7 @@ window.BLOG.push(
         'Uchwała składu 7 sędziów SN z 6.12.1991, III CZP 108/91 (OSNC 1992, nr 4, poz. 48).',
         'Uchwała SN z 8.09.1995, III CZP 104/95.',
         'Uchwała pełnego składu Izby Cywilnej SN z 26.10.2007, III CZP 30/07 (OSNC 2008, nr 5, poz. 43).',
+        'Uchwała SN z 4.02.1987, III CZP 104/86 (OSNC 1988, nr 2–3, poz. 31).',
         'Postanowienia SN: z 28.04.1999, I CKN 430/98 (OSNC 1999, nr 11, poz. 198); z 5.10.2012, IV CSK 94/12; z 21.03.2013, II CSK 495/12 (OSNC-ZD 2014, nr 1, poz. 11); z 29.08.2013, I CSK 716/12 (OSNC-ZD 2014, nr 4, poz. 66); z 11.12.2013, IV CSK 180/13; z 14.04.2016, IV CSK 412/15.',
       ]],
     ],
