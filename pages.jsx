@@ -325,16 +325,16 @@ function LeadFormBand() {
 /* Skarbnica wiedzy: kategorie = rodzaje spraw (zdjęcia obszarów usług, assets/foto-<photo>-800|1600.webp).
    Wpis trafia do kategorii po polu `category`; wpis bez kategorii zatrzymuje prerender (scripts/prerender.mjs). */
 const BLOG_CATEGORIES = [
-  { id: 'warunki-zabudowy', title: 'Warunki zabudowy i plan ogólny', desc: 'WZ, plan ogólny i uwagi do niego, podział działki, opłata adiacencka, operat szacunkowy.', photo: 'warunki-zabudowy-planowanie', cats: ['Planowanie przestrzenne', 'Warunki zabudowy'] },
+  { id: 'warunki-zabudowy', title: 'Warunki zabudowy i plan ogólny', desc: 'WZ, plan ogólny, uwagi i skarga na plan, plan miejscowy, podział działki, opłata adiacencka, operat.', photo: 'warunki-zabudowy-planowanie', cats: ['Planowanie przestrzenne', 'Warunki zabudowy'] },
   { id: 'slupy-i-przesyl', title: 'Słupy, linie i rury na działce', desc: 'Służebność przesyłu, wynagrodzenie, bezumowne korzystanie, decyzja z art. 124 u.g.n.', photo: 'sluzebnosci-odszkodowania', cats: ['Służebność przesyłu'] },
-  { id: 'droga-konieczna', title: 'Droga konieczna i służebności', desc: 'Szerokość drogi, wynagrodzenie, zasiedzenie, granice działki i rozgraniczenie.', photo: 'droga-konieczna', cats: ['Służebności'] },
-  { id: 'najem', title: 'Najem, eksmisja i wspólnoty', desc: 'Umowy najmu, kaucja, podatek, najem krótkoterminowy, TBS, wspólnota i zarządca.', photo: 'najem', cats: ['Najem', 'Wspólnoty mieszkaniowe'] },
-  { id: 'budowa', title: 'Budowa, samowole i nadzór', desc: 'Pozwolenie czy zgłoszenie, umowa o roboty budowlane, prawa do projektu, samowola, PINB.', photo: 'proces-budowlany', cats: ['Proces budowlany'] },
-  { id: 'zakup-i-umowy', title: 'Zakup nieruchomości i umowy', desc: 'Co sprawdzić przed zakupem, umowa rezerwacyjna i deweloperska, zadatek, licytacja.', photo: 'transakcje-umowy', cats: ['Zakup nieruchomości'] },
+  { id: 'droga-konieczna', title: 'Droga konieczna i służebności', desc: 'Szerokość drogi, wynagrodzenie, zasiedzenie, bezumowne korzystanie, granice działki i rozgraniczenie.', photo: 'droga-konieczna', cats: ['Służebności'] },
+  { id: 'najem', title: 'Najem, eksmisja i wspólnoty', desc: 'Umowy najmu, wypowiedzenie, zaległy czynsz, kaucja, lokal użytkowy, podatek, wspólnota i zarządca.', photo: 'najem', cats: ['Najem', 'Wspólnoty mieszkaniowe'] },
+  { id: 'budowa', title: 'Budowa, samowole i nadzór', desc: 'Pozwolenie czy zgłoszenie, umowa o roboty budowlane, prawa do projektu, samowola, nakaz rozbiórki, PINB.', photo: 'proces-budowlany', cats: ['Proces budowlany'] },
+  { id: 'zakup-i-umowy', title: 'Zakup nieruchomości i umowy', desc: 'Co sprawdzić przed zakupem, koszty zakupu, umowa deweloperska, zadatek, pośrednik, sprzedaż z kredytem.', photo: 'transakcje-umowy', cats: ['Zakup nieruchomości'] },
   { id: 'zakup-i-ksiegi', title: 'Księgi wieczyste, stan prawny i podatki', desc: 'Księgi wieczyste, spółdzielcze prawo do lokalu, zasiedzenie, użytkowanie wieczyste, podatki.', photo: 'ksiegi-wieczyste-stan-prawny', cats: ['Księgi wieczyste', 'Zasiedzenie', 'Użytkowanie wieczyste', 'Podatki', 'Rynek nieruchomości', 'Podatek od nieruchomości'] },
-  { id: 'deweloper', title: 'Spory z deweloperem', desc: 'Odbiór mieszkania, opóźnienie, kary umowne, wady i odszkodowanie.', photo: 'roszczenia-deweloper', cats: ['Spory z deweloperem'] },
-  { id: 'grunty-rolne-oze', title: 'Grunty rolne i OZE', desc: 'Dom na działce rolnej, zgoda KOWR, status rolnika, dzierżawa, dzierżawa pod fotowoltaikę.', photo: 'grunty-rolne-oze', cats: ['Grunty rolne i OZE', 'Odpowiedzialność właściciela'] },
-  { id: 'wspolwlasnosc', title: 'Współwłasność, spadki i podział majątku', desc: 'Spadek i jego odrzucenie, zachowek, darowizna dziecku, dożywocie, sprzedaż udziału, zniesienie współwłasności.', photo: 'wspolwlasnosc-podzialy', cats: ['Podział majątku', 'Współwłasność i spadki'] },
+  { id: 'deweloper', title: 'Spory z deweloperem', desc: 'Odbiór mieszkania, opóźnienie, kary umowne, wady, gwarancja i odszkodowanie.', photo: 'roszczenia-deweloper', cats: ['Spory z deweloperem'] },
+  { id: 'grunty-rolne-oze', title: 'Grunty rolne i OZE', desc: 'Dom na działce rolnej, zgoda KOWR, status rolnika, sprzedaż gospodarstwa, dzierżawa pod fotowoltaikę.', photo: 'grunty-rolne-oze', cats: ['Grunty rolne i OZE', 'Odpowiedzialność właściciela'] },
+  { id: 'wspolwlasnosc', title: 'Współwłasność, spadki i podział majątku', desc: 'Spadek, zachowek, darowizna i jej odwołanie, dożywocie i renta, kredyt po rozwodzie, zniesienie współwłasności.', photo: 'wspolwlasnosc-podzialy', cats: ['Podział majątku', 'Współwłasność i spadki'] },
 ];
 function getBlogCategory(id) { return BLOG_CATEGORIES.find((c) => c.id === id) || null; }
 function blogCategoryOfPost(post) { return BLOG_CATEGORIES.find((c) => c.cats.indexOf(post.category) !== -1) || null; }

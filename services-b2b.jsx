@@ -1523,7 +1523,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Pisma od wynajmującego albo nowego właściciela budynku (podwyżka, wezwanie, wypowiedzenie) z datą doręczenia',
       'Przy sieci: Twoja lista warunków minimalnych albo umowa z innej lokalizacji, którą uważasz za wzorcową',
     ],
-    guides: ['wypowiedzenie-najmu-lokalu-uzytkowego'],
+    guides: ['wypowiedzenie-najmu-lokalu-uzytkowego', 'umowa-najmu-lokalu-uzytkowego'],
     seeAlso: ['analiza-umowy-najmu', 'negocjacje-nieruchomosci', 'kaucja-najem'],
     cta: {
       heading: 'Najem po stronie najemcy — policzalny, elastyczny, uczciwy.',
@@ -1571,7 +1571,7 @@ Object.assign(window.SERVICE_CONTENT, {
       },
       {
         b: 'Syn pracuje z Tobą w gospodarstwie, a Ty myślisz o emeryturze rolniczej.',
-        t: 'Umową z następcą zobowiązujesz się przekazać gospodarstwo, a własność przenosi druga umowa, zawarta w celu jej wykonania. Obie wymagają aktu notarialnego (art. 84–85 u.s.r.).',
+        t: 'Umową z następcą zobowiązujesz się przekazać gospodarstwo, a własność przenosi druga umowa, zawarta w celu jej wykonania. Obie wymagają aktu notarialnego (art. 84–85 u.s.r.). Przekazanie nie jest warunkiem wypłaty emerytury: prowadzenie gospodarstwa zawiesza dziś tylko część renty rolniczej, nie emerytury (art. 28 ust. 1 u.s.r.).',
       },
       {
         b: 'Z dzierżawami gospodarujesz blisko 300 ha i chcesz dokupić ziemię.',
@@ -1652,7 +1652,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Lista kredytów i innych długów gospodarstwa, jeśli ją masz',
       'Przy przekazaniu: wiek następcy, czy pracuje w gospodarstwie i czy jest w związku małżeńskim',
     ],
-    guides: ['farma-fotowoltaiczna-na-dzialce-rolnej', 'dzierzawa-pod-fotowoltaike-a-vat'],
+    guides: ['farma-fotowoltaiczna-na-dzialce-rolnej', 'dzierzawa-pod-fotowoltaike-a-vat', 'sprzedaz-gospodarstwa-rolnego'],
     seeAlso: [
       'status-rolnika',
       'odszkodowanie-sluzebnosc-przesylu',

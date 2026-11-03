@@ -518,7 +518,7 @@ Object.assign(window.SERVICE_CONTENT, {
         },
         { ref: 'art. 129 i 138 k.p.a.', act: 'Kodeks postępowania administracyjnego', tj: 'Dz.U. 2025 poz. 1691', eli: 'DU/1960/168', note: 'odwołanie od decyzji o sprzeciwie i rozstrzygnięcie wojewody' },
         { ref: 'art. 53 § 1 p.p.s.a.', act: 'Prawo o postępowaniu przed sądami administracyjnymi', tj: 'Dz.U. 2026 poz. 143', eli: 'DU/2002/1270', note: 'termin skargi do WSA' },
-        { ref: 'art. 2 ust. 1 pkt 2, załącznik, część I ust. 9a u.o.s.', act: 'Ustawa o opłacie skarbowej', tj: 'Dz.U. 2025 poz. 1154', eli: 'DU/2006/1635', note: 'opłata skarbowa za przyjęcie zgłoszenia domu' },
+        { ref: 'art. 2 ust. 1 pkt 2, załącznik, część I ust. 9a u.o.s.', act: 'Ustawa o opłacie skarbowej', tj: 'Dz.U. 2026 poz. 1395', eli: 'DU/2006/1635', note: 'opłata skarbowa za przyjęcie zgłoszenia domu' },
       ],
     },
     docs: [
@@ -823,7 +823,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Przy sporze: podpisana umowa z klientem, protokoły prezentacji i korespondencja z klientem oraz kupującym',
       'Wezwanie albo wypowiedzenie od klienta, jeśli je dostałeś',
     ],
-    guides: ['jawne-ceny-nieruchomosci-rejestr-cen'],
+    guides: ['jawne-ceny-nieruchomosci-rejestr-cen', 'umowa-posrednictwa-prowizja'],
     seeAlso: ['obsluga-sprzedazy', 'audyt-stanu-prawnego-nieruchomosci'],
     cta: {
       heading: 'Pewna umowa i chroniona prowizja — żebyś dostał zapłatę za swoją pracę.',

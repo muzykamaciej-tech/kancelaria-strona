@@ -182,7 +182,7 @@ window.BLOG.push(
       ['h2', '1. Odcinanie mediów (prądu, wody, gazu)'],
       ['p', 'To najczęstsza metoda stosowana przez osoby mieniące się „skutecznymi negocjatorami”. Argumentacja jest prosta: skoro lokator nie płaci, właściciel nie ma obowiązku finansować mu mediów.'],
       ['ul', [
-        '**rzeczywistość prawna:** zgodnie z art. 191 § 1a kodeksu karnego, kto w celu zmuszenia innej osoby do określonego działania (np. opuszczenia lokalu) stosuje przemoc innego rodzaju, która istotnie utrudnia korzystanie z zajmowanego lokalu mieszkalnego, podlega karze pozbawienia wolności do lat 3;',
+        '**rzeczywistość prawna:** zgodnie z art. 191 § 1a kodeksu karnego, kto w celu zmuszenia innej osoby do określonego działania (np. opuszczenia lokalu) stosuje przemoc innego rodzaju uporczywie lub w sposób istotnie utrudniający korzystanie z zajmowanego lokalu mieszkalnego, podlega karze pozbawienia wolności do lat 3; ściganie następuje na wniosek pokrzywdzonego (art. 191 § 3 k.k.);',
         '**ryzyko:** lokator może złożyć zawiadomienie na policję, a Ty jako właściciel ryzykujesz nie tylko sprawę karną, ale też pozew o przywrócenie posiadania.',
       ]],
       ['h2', '2. Wymiana zamków pod nieobecność lokatora'],

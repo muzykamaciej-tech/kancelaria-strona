@@ -641,7 +641,7 @@ const SERVICE_CONTENT = {
           note: 'skarga do WSA; wpis 500 zł: § 2 ust. 3 pkt 2 rozporządzenia RM z 16.12.2003 (Dz.U. 2021 poz. 535)',
         },
         { ref: 'art. 3 pkt 11, 29 i 32 p.b.', act: 'Prawo budowlane', tj: 'Dz.U. 2026 poz. 524', eli: 'DU/1994/414', note: 'prawo do dysponowania działką, pozwolenie w okresie ważności WZ' },
-        { ref: 'załącznik, część I ust. 8–9', act: 'Ustawa o opłacie skarbowej', tj: 'Dz.U. 2025 poz. 1154', eli: 'DU/2006/1635', note: 'opłata skarbowa za WZ i jej przeniesienie' },
+        { ref: 'załącznik, część I ust. 8–9', act: 'Ustawa o opłacie skarbowej', tj: 'Dz.U. 2026 poz. 1395', eli: 'DU/2006/1635', note: 'opłata skarbowa za WZ i jej przeniesienie' },
       ],
     },
     docs: [
@@ -1042,7 +1042,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Ile kosztuje zakup mieszkania u notariusza?',
-        a: 'Opłaty publiczne to co do zasady PCC 2% wartości rynkowej i 200 zł za wpis własności (art. 7 ust. 1 pkt 1 lit. a u.p.c.c., art. 42 ust. 1 u.k.s.c.). Przy kredycie dochodzi 200 zł za wpis hipoteki banku (art. 45 ust. 2 u.k.s.c.). Czy przysługuje Ci zwolnienie z PCC, oceni doradca podatkowy. Wynagrodzenie notariusza nie może przekroczyć taksy maksymalnej (art. 5 § 1 Prawa o notariacie), a cenę mojej obsługi podaję w ofercie.',
+        a: 'Opłaty publiczne to co do zasady PCC 2% wartości rynkowej i 200 zł za wpis własności (art. 7 ust. 1 pkt 1 lit. a u.p.c.c., art. 42 ust. 1 u.k.s.c.). Przy kredycie dochodzi 200 zł za wpis hipoteki banku (art. 42 ust. 1 i art. 45 ust. 2 u.k.s.c.). Czy przysługuje Ci zwolnienie z PCC, oceni doradca podatkowy. Wynagrodzenie notariusza nie może przekroczyć taksy maksymalnej (art. 5 § 1 Prawa o notariacie). Przy sprzedaży lokalu mieszkalnego to połowa stawki z § 3 (§ 6 rozporządzenia w sprawie maksymalnych stawek taksy notarialnej), a od 5.11.2026 notariusz może pobrać osobno do 300 zł za wniosek o wpis do księgi (§ 15c); do obu kwot dolicza 23% VAT. Cenę mojej obsługi podaję w ofercie.',
       },
       {
         q: 'Kiedy przelew za mieszkanie i kiedy przekazanie kluczy?',
@@ -1094,7 +1094,7 @@ const SERVICE_CONTENT = {
       'Dokument, na podstawie którego sprzedający jest właścicielem (np. akt notarialny, postanowienie o nabyciu spadku), jeśli go przekazał.',
       'Decyzja kredytowa albo informacja z banku o terminie wypłaty, jeśli kupujesz na kredyt.',
     ],
-    guides: ['jawne-ceny-nieruchomosci-rejestr-cen'],
+    guides: ['jawne-ceny-nieruchomosci-rejestr-cen', 'koszty-zakupu-mieszkania'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'nieruchomosci-rolne', 'warunki-zabudowy'],
     cta: {
       heading: 'Kupuj z kimś, kto pilnuje Twojej strony.',
@@ -1229,7 +1229,7 @@ const SERVICE_CONTENT = {
       'Umowa przedwstępna albo projekt aktu, jeśli już są.',
       'Umowa najmu, jeśli w mieszkaniu ktoś mieszka.',
     ],
-    guides: ['jawne-ceny-nieruchomosci-rejestr-cen'],
+    guides: ['jawne-ceny-nieruchomosci-rejestr-cen', 'umowa-posrednictwa-prowizja', 'sprzedaz-domu-z-kredytem-hipotecznym'],
     seeAlso: ['stwierdzenie-nabycia-spadku', 'uregulowanie-stanu-prawnego', 'zniesienie-wspolwlasnosci'],
     cta: {
       heading: 'Sprzedaj bezpiecznie — z pieniędzmi zabezpieczonymi od początku.',
@@ -1361,6 +1361,7 @@ const SERVICE_CONTENT = {
         { ref: 'art. 42, 43 i 45 u.k.s.c.', act: 'Ustawa o kosztach sądowych w sprawach cywilnych', tj: 'Dz.U. 2025 poz. 1228', eli: 'DU/2005/1398', note: 'opłaty za wpisy do księgi wieczystej' },
         { ref: 'art. 7 pkt 2 i art. 16 ust. 2 pkt 1 u.k.w.h.', act: 'Ustawa o księgach wieczystych i hipotece', tj: 'Dz.U. 2026 poz. 1066', eli: 'DU/1982/147', note: 'dożywocie w księdze wieczystej' },
         { ref: 'art. 1000 § 3 k.p.c.', act: 'Kodeks postępowania cywilnego', tj: 'Dz.U. 2026 poz. 468', eli: 'DU/1964/296', note: 'dożywocie przy licytacji komorniczej' },
+        { ref: 'art. 4, 5 ust. 1 i art. 7 ust. 1 u.o.k.h.', act: 'Ustawa o odwróconym kredycie hipotecznym', tj: 'Dz.U. 2025 poz. 573', eli: 'DU/2014/1585', note: 'odwrócony kredyt hipoteczny' },
         { ref: 'art. 2a ust. 3 i art. 4 ust. 4 u.k.u.r.', act: 'Ustawa o kształtowaniu ustroju rolnego', tj: 'Dz.U. 2026 poz. 941', eli: 'DU/2003/592', note: 'ziemia rolna przekazana osobie bliskiej' },
       ],
     },
@@ -1372,7 +1373,7 @@ const SERVICE_CONTENT = {
       'Akt notarialny umowy o dożywocie, jeśli umowa jest już zawarta',
       'Wypis z rejestru gruntów, jeśli przekazujesz ziemię rolną',
     ],
-    guides: ['umowa-dozywocia'],
+    guides: ['umowa-dozywocia', 'renta-dozywotnia-odwrocona-hipoteka'],
     seeAlso: ['zachowek', 'stwierdzenie-nabycia-spadku'],
     cta: {
       heading: 'Przekaż mieszkanie mądrze — z opieką i bez sporów o zachowek.',
@@ -1509,7 +1510,7 @@ const SERVICE_CONTENT = {
       'Przy odwołaniu: akt darowizny, jeśli masz, i opis zachowań obdarowanego z datami, w tym data, kiedy się o nich dowiedziałeś',
       'Wiadomości, pisma albo zgłoszenia, które dokumentują te zachowania, jeśli są',
     ],
-    guides: ['przepisanie-mieszkania-na-dziecko'],
+    guides: ['przepisanie-mieszkania-na-dziecko', 'odwolanie-darowizny', 'renta-dozywotnia-odwrocona-hipoteka'],
     seeAlso: ['zachowek', 'dzial-spadku'],
     cta: {
       heading: 'Przekaż nieruchomość w rodzinie — bezpiecznie i z głową.',
@@ -1539,11 +1540,15 @@ const SERVICE_CONTENT = {
         ],
         [
           'Gdzie',
-          'Wojewódzki sąd administracyjny; skargę wnosisz przez radę gminy, która uchwaliła plan (art. 13 § 1, art. 54 § 1 p.p.s.a.)',
+          'Wojewódzki sąd administracyjny, w którego okręgu leży gmina; skargę wnosisz przez radę gminy, która uchwaliła plan (art. 13 § 2, art. 54 § 1 p.p.s.a.)',
         ],
         [
           'Opłata sądowa (nie honorarium)',
-          '300 zł wpisu stałego od skargi na akt prawa miejscowego, stan na 10.10.2026 (§ 2 ust. 1 pkt 3 rozporządzenia RM w sprawie wpisu przed sądami administracyjnymi)',
+          '300 zł wpisu stałego od skargi na akt prawa miejscowego i 150 zł od skargi kasacyjnej do NSA, stan na 3.11.2026 (§ 2 ust. 1 pkt 3 i § 3 rozporządzenia RM w sprawie wpisu przed sądami administracyjnymi)',
+        ],
+        [
+          'Pismo do wojewody',
+          'Wojewoda bada uchwałę przez 30 dni od jej doręczenia i może sam stwierdzić jej nieważność (art. 91 ust. 1 u.s.g.). Twoje pismo nie wszczyna postępowania, ale może wskazać konkretny błąd w dokumentacji planu (NSA, I OSK 1755/10)',
         ],
         [
           'Uwagi do projektu',
@@ -1676,7 +1681,7 @@ const SERVICE_CONTENT = {
       'Uwaga albo wniosek, które już złożyłeś, i raport z konsultacji, jeśli są',
       'Wypis z planu miejscowego albo decyzja WZ, jeżeli działka je ma: od nich zaczynam analizę',
     ],
-    guides: ['odszkodowanie-za-plan-ogolny', 'jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym', 'plan-ogolny-a-wniosek-o-wz-w-toku', 'uwagi-do-planu-ogolnego'],
+    guides: ['odszkodowanie-za-plan-ogolny', 'jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym', 'plan-ogolny-a-wniosek-o-wz-w-toku', 'uwagi-do-planu-ogolnego', 'skarga-na-plan-ogolny', 'miejscowy-plan-zagospodarowania'],
     seeAlso: ['analiza-umowy-przedwstepnej', 'obsluga-prawna-deweloperow'],
     cta: {
       heading: 'Nie daj się zaskoczyć planem ogólnym.',
@@ -1856,10 +1861,7 @@ const SERVICE_CONTENT = {
       'Decyzja o warunkach zabudowy, pozwolenie na budowę albo zgłoszenie budowy, jeśli masz',
       'Ogłoszenie o konsultacjach społecznych i projekt planu, jeśli plan jest w przygotowaniu',
     ],
-    guides: [
-      'jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym',
-      'odszkodowanie-za-plan-ogolny',
-    ],
+    guides: ['jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym', 'odszkodowanie-za-plan-ogolny', 'miejscowy-plan-zagospodarowania', 'skarga-na-plan-ogolny'],
     seeAlso: ['odszkodowanie-wywlaszczenie', 'odrolnienie'],
     cta: {
       heading: 'Plan miejscowy związał Ci ręce? Sprawdźmy, czy słusznie.',
@@ -2144,7 +2146,7 @@ const SERVICE_CONTENT = {
         },
         { ref: 'art. 37, 129–130 i 145–148 k.p.a.', act: 'Kodeks postępowania administracyjnego', tj: 'Dz.U. 2025 poz. 1691', eli: 'DU/1960/168', note: 'ponaglenie, odwołanie, wykonanie decyzji, wznowienie' },
         { ref: 'art. 53, 61 i 173 p.p.s.a.', act: 'Prawo o postępowaniu przed sądami administracyjnymi', tj: 'Dz.U. 2026 poz. 143', eli: 'DU/2002/1270', note: 'skarga do WSA i NSA' },
-        { ref: 'art. 2 ust. 1 pkt 2, załącznik część I ust. 11 i część III ust. 9 u.o.s.', act: 'Ustawa o opłacie skarbowej', tj: 'Dz.U. 2025 poz. 1154', eli: 'DU/2006/1635', note: 'opłata za pozwolenie i jego przeniesienie' },
+        { ref: 'art. 2 ust. 1 pkt 2, załącznik część I ust. 11 i część III ust. 9 u.o.s.', act: 'Ustawa o opłacie skarbowej', tj: 'Dz.U. 2026 poz. 1395', eli: 'DU/2006/1635', note: 'opłata za pozwolenie i jego przeniesienie' },
         {
           ref: '§ 2 ust. 1 pkt 6 i ust. 3 pkt 1',
           act: 'Rozporządzenie Rady Ministrów w sprawie wysokości oraz szczegółowych zasad pobierania wpisu w postępowaniu przed sądami administracyjnymi',
@@ -2307,7 +2309,7 @@ const SERVICE_CONTENT = {
       'Projekt, pozwolenie albo zgłoszenie, jeśli były',
       'Przy sprzedaży albo zakupie: projekt umowy i termin aktu notarialnego, jeśli już jest',
     ],
-    guides: [],
+    guides: ['legalizacja-samowoli-budowlanej', 'nakaz-rozbiorki-samowoli'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'obsluga-sprzedazy'],
     cta: {
       heading: 'Samowola nie zniknie sama. Ale można ją uporządkować.',
@@ -2449,7 +2451,7 @@ const SERVICE_CONTENT = {
           eli: 'DU/2005/1398',
           note: 'Opłata od pozwu o zapłatę.',
         },
-        { ref: 'art. 286 § 1', act: 'Ustawa z dnia 6 czerwca 1997 r. – Kodeks karny', tj: 'Dz.U. 2025 poz. 383 ze zm.', eli: 'DU/1997/553', note: 'Oszustwo.' },
+        { ref: 'art. 286 § 1', act: 'Ustawa z dnia 6 czerwca 1997 r. – Kodeks karny', tj: 'Dz.U. 2026 poz. 1342 ze zm.', eli: 'DU/1997/553', note: 'Oszustwo.' },
       ],
     },
     docs: [
@@ -2743,7 +2745,7 @@ const SERVICE_CONTENT = {
       'Zdjęcia stanu robót albo budynku z datą wykonania',
       'Książka obiektu budowlanego i protokoły kontroli okresowych, jeśli sprawa dotyczy istniejącego budynku',
     ],
-    guides: [],
+    guides: ['nakaz-rozbiorki-samowoli'],
     seeAlso: ['obsluga-prawna-zarzadcow', 'obsluga-prawna-wspolnot', 'wady-czesci-wspolnych'],
     cta: {
       heading: 'Pismo z nadzoru budowlanego? Nie czekaj na decyzję — działaj teraz.',
@@ -3652,7 +3654,7 @@ const SERVICE_CONTENT = {
       'Wezwanie do zapłaty zachowku albo pozew, jeśli przyszły do Ciebie',
       'Lista najbliższej rodziny zmarłego: kto żyje, kto zmarł wcześniej, kto jest małoletni',
     ],
-    guides: ['zachowek-z-darowizny'],
+    guides: ['zachowek-z-darowizny', 'odwolanie-darowizny'],
     seeAlso: ['darowizna-nieruchomosci', 'dozywocie-renta'],
     cta: {
       heading: 'Pominięto Cię przy podziale majątku? Zachowek to Twoje prawo.',
@@ -3858,7 +3860,7 @@ const SERVICE_CONTENT = {
     when: [
       {
         b: 'Były małżonek złożył wniosek o podział, a Ty od rozwodu sam płacisz raty kredytu',
-        t: 'zbierz potwierdzenia wpłat od dnia rozwodu, a ja zgłoszę te raty w sprawie o podział. Sąd rozstrzyga w niej także o tym, jakie wydatki i nakłady podlegają zwrotowi (art. 567 § 1 k.p.c.).',
+        t: 'zbierz potwierdzenia wpłat od dnia rozwodu, a ja zgłoszę te raty w sprawie o podział. Raty spłacone do podziału trzeba zgłosić właśnie tam, później przepadają (art. 567 § 3, art. 686 i art. 618 § 3 k.p.c.). Zwrotu rat spłaconych już po podziale żądasz w osobnej sprawie (SN, uchwała 7 sędziów z 27.02.2019, III CZP 30/18).',
       },
       {
         b: 'Chcesz zostać w mieszkaniu i spłacić byłą żonę albo byłego męża',
@@ -3877,7 +3879,7 @@ const SERVICE_CONTENT = {
     doFor: [
       'Ustalam, co jest w majątku wspólnym, a co w osobistym: daty zakupów, źródło pieniędzy, darowizny, umowę majątkową (art. 31, 33 i 47 k.r.o.).',
       'Przy porozumieniu piszę projekt umowy o podział dla notariusza: kto zatrzymuje mieszkanie, ile i kiedy płaci, jak rozliczacie raty po rozwodzie i co, jeśli bank nie zwolni drugiej osoby z kredytu.',
-      'We wniosku do sądu zgłaszam Twoje nakłady z dowodami, raty spłacone po rozwodzie i, gdy są podstawy, żądanie nierównych udziałów (art. 567 § 1 k.p.c.).',
+      'We wniosku do sądu zgłaszam Twoje nakłady z dowodami, raty spłacone po rozwodzie i, gdy są podstawy, żądanie nierównych udziałów (art. 567 § 1 i 3, art. 686 k.p.c.).',
       'Sprawdzam operat biegłego o wartości mieszkania: datę, stan lokalu i przyjęte transakcje; uwagi składam na piśmie.',
       'Piszę do banku wniosek o zwolnienie z kredytu osoby, która oddaje mieszkanie (art. 373 i 508 k.c.), a gdy kredyt ma tylko jedno z Was, o zgodę na przejęcie długu (art. 519 § 2 pkt 2 k.c.).',
     ],
@@ -3951,7 +3953,7 @@ const SERVICE_CONTENT = {
       'Potwierdzenia rat zapłaconych przez Ciebie po rozwodzie i rachunki za remonty',
       'Umowa majątkowa małżeńska (intercyza), jeśli ją zawieraliście',
     ],
-    guides: [],
+    guides: ['kredyt-hipoteczny-po-rozwodzie'],
     seeAlso: ['obsluga-sprzedazy', 'eksmisja'],
     cta: {
       heading: 'Wspólny dom i kredyt po rozwodzie? Zadbam, żeby podział wyszedł po Twojej stronie.',
@@ -4262,7 +4264,7 @@ const SERVICE_CONTENT = {
       'Dotychczasowa umowa z aneksami, jeżeli przedłużasz najem albo dostałeś nową wersję',
       'Dane wynajmującego z umowy: osoba prywatna czy firma',
     ],
-    guides: ['umowa-najmu-mieszkania-rodzaje'],
+    guides: ['umowa-najmu-mieszkania-rodzaje', 'wypowiedzenie-umowy-najmu-mieszkania'],
     seeAlso: ['negocjacje-nieruchomosci', 'obsluga-prawna-najemcow-komercyjnych'],
     cta: {
       heading: 'Zanim podpiszesz najem, sprawdźmy, na co się zgadzasz.',
@@ -4402,7 +4404,7 @@ const SERVICE_CONTENT = {
         { ref: 'art. 13, art. 27 pkt 11, art. 71 pkt 1', act: 'Ustawa o kosztach sądowych w sprawach cywilnych', tj: 'Dz.U. 2025 poz. 1228', eli: 'DU/2005/1398', note: 'Opłaty od pozwu i od wniosku o klauzulę.' },
         { ref: 'art. 10 ust. 1 pkt 4', act: 'Ustawa o komornikach sądowych', tj: 'Dz.U. 2026 poz. 881', eli: 'DU/2018/771', note: 'Bez wyboru komornika przy opróżnieniu lokalu.' },
         { ref: 'art. 6, 117 § 1, 344 § 1, 417 § 1', act: 'Kodeks cywilny', tj: 'Dz.U. 2026 poz. 795', eli: 'DU/1964/93', note: 'Ciężar dowodu, przedawnienie, ochrona posiadania, odpowiedzialność gminy.' },
-        { ref: 'art. 191 § 1a', act: 'Kodeks karny', tj: 'Dz.U. 2025 poz. 383', eli: 'DU/1997/553', note: 'Zmuszanie do wyprowadzki.' },
+        { ref: 'art. 191 § 1a', act: 'Kodeks karny', tj: 'Dz.U. 2026 poz. 1342', eli: 'DU/1997/553', note: 'Zmuszanie do wyprowadzki.' },
       ],
     },
     docs: [
@@ -4413,7 +4415,7 @@ const SERVICE_CONTENT = {
       'Numer księgi wieczystej lokalu albo akt notarialny nabycia',
       'Wyrok i pisma od komornika lub gminy, jeśli sprawa jest na tym etapie',
     ],
-    guides: ['ile-trwa-eksmisja-lokatora', '5-nielegalnych-sposobow-na-wyrzucenie-lokatora'],
+    guides: ['ile-trwa-eksmisja-lokatora', '5-nielegalnych-sposobow-na-wyrzucenie-lokatora', 'lokator-nie-placi-czynszu', 'wypowiedzenie-umowy-najmu-mieszkania'],
     seeAlso: ['flip-mieszkania', 'podzial-majatku-po-rozwodzie'],
     cta: {
       heading: 'Lokator, który nie płaci i nie wychodzi, to nie musi być Twój problem na lata.',
@@ -4552,7 +4554,7 @@ const SERVICE_CONTENT = {
           note: 'Opłata od pozwu o zapłatę i jej obniżenie w postępowaniu nakazowym i elektronicznym upominawczym.',
         },
         { ref: 'art. 10 ust. 1', act: 'Ustawa o komornikach sądowych', tj: 'Dz.U. 2026 poz. 881', eli: 'DU/2018/771', note: 'Wybór komornika przez wierzyciela.' },
-        { ref: 'art. 191 § 1a', act: 'Kodeks karny', tj: 'Dz.U. 2025 poz. 383', eli: 'DU/1997/553', note: 'Granica samopomocy wobec najemcy, który mieszka w lokalu.' },
+        { ref: 'art. 191 § 1a', act: 'Kodeks karny', tj: 'Dz.U. 2026 poz. 1342', eli: 'DU/1997/553', note: 'Granica samopomocy wobec najemcy, który mieszka w lokalu.' },
       ],
     },
     docs: [
@@ -4563,7 +4565,7 @@ const SERVICE_CONTENT = {
       'Faktury albo noty za czynsz, jeśli je wystawiałeś',
       'Ostatni znany adres najemcy i informacja, kto z nim mieszkał',
     ],
-    guides: ['ile-trwa-eksmisja-lokatora'],
+    guides: ['ile-trwa-eksmisja-lokatora', 'lokator-nie-placi-czynszu'],
     seeAlso: ['obsluga-prawna-wspolnot', 'obsluga-prawna-zarzadcow'],
     cta: {
       heading: 'Zaległy czynsz nie musi przepaść. Odzyskam go za Ciebie.',
@@ -4801,7 +4803,7 @@ const SERVICE_CONTENT = {
       'Akty notarialne najemców i daty zgłoszeń najmu okazjonalnego, jeśli je masz',
       'Zestawienie zaległości z datami rat i pisma już wysłane do lokatorów, jeśli są',
     ],
-    guides: ['jak-bezpiecznie-wynajac-mieszkanie-poradnik', 'podatek-od-najmu-ryczalt', 'najem-krotkoterminowy'],
+    guides: ['jak-bezpiecznie-wynajac-mieszkanie-poradnik', 'podatek-od-najmu-ryczalt', 'najem-krotkoterminowy', 'wypowiedzenie-umowy-najmu-mieszkania', 'lokator-nie-placi-czynszu'],
     seeAlso: ['obsluga-prawna-operatorow-najmu', 'obsluga-prawna-zarzadcow'],
     cta: {
       heading: 'Traktujesz najem jak biznes? Miej do niego prawnika na stałe.',
@@ -5087,7 +5089,7 @@ const SERVICE_CONTENT = {
       'Twoje zgłoszenia wady i odpowiedzi dewelopera: maile, pisma, potwierdzenia nadania.',
       'Prospekt informacyjny, karta gwarancyjna i opinie techniczne, jeśli masz.',
     ],
-    guides: ['odszkodowanie-od-dewelopera-za-wady', 'odbior-mieszkania-od-dewelopera'],
+    guides: ['odszkodowanie-od-dewelopera-za-wady', 'odbior-mieszkania-od-dewelopera', 'gwarancja-dewelopera-na-mieszkanie'],
     seeAlso: ['sprawdzenie-umowy-deweloperskiej', 'spory-z-wykonawca'],
     cta: {
       heading: 'Kupiłeś mieszkanie bez wad — i takie Ci się należy.',
@@ -5691,7 +5693,7 @@ const SERVICE_CONTENT = {
     doForTitle: 'Co robię, gdy gwarant albo deweloper nie naprawia usterki',
     doFor: [
       'Czytam kartę gwarancyjną i umowę: gwarant, zakres, termin i procedura zgłoszenia (art. 577¹ § 2 k.c.).',
-      'Dla każdej usterki wybieram rękojmię, gwarancję albo obie drogi i liczę terminy: od wydania lokalu i od stwierdzenia wady (art. 568 § 1–2 k.c.).',
+      'Dla każdej usterki wybieram rękojmię albo gwarancję (po odmowie gwaranta – rękojmię) i liczę terminy: od wydania lokalu i od stwierdzenia wady (art. 568 § 1–2 i art. 579 § 3 k.c.).',
       'Zawiadamiam dewelopera o wadzie zgłoszonej gwarantowi, żeby bieg terminu na uprawnienia z rękojmi został zawieszony (art. 579 § 3 k.c.).',
       'Gdy ani deweloper, ani gwarant nie usuwają wady, piszę pozew o jej usunięcie (art. 561 § 1 k.c.) i prowadzę sprawę przed sądem.',
     ],
@@ -5755,7 +5757,7 @@ const SERVICE_CONTENT = {
       'Zgłoszenia do gwaranta i dewelopera oraz ich odpowiedzi.',
       'Zdjęcia usterki z datami; reklama inwestycji, jeśli obiecywała gwarancję.',
     ],
-    guides: [],
+    guides: ['gwarancja-dewelopera-na-mieszkanie'],
     seeAlso: ['sprawdzenie-umowy-deweloperskiej', 'obsluga-prawna-wspolnot'],
     cta: {
       heading: 'Gwarancja to obietnica, którą można wyegzekwować — pomogę Ci to zrobić.',
@@ -6016,7 +6018,7 @@ const SERVICE_CONTENT = {
       'Umowa dzierżawy, najmu albo pisemna zgoda, jeśli kiedyś była, i jej wypowiedzenie',
       'Korespondencja z zajmującym: wezwania, odpowiedzi, propozycje ugody',
     ],
-    guides: [],
+    guides: ['bezumowne-korzystanie-z-nieruchomosci'],
     seeAlso: ['zasiedzenie-nieruchomosci', 'dzierzawa-rolna'],
     cta: {
       heading: 'Ktoś korzysta z Twojej ziemi za darmo? Należy Ci się zapłata.',
@@ -6720,7 +6722,7 @@ const SERVICE_CONTENT = {
       'Dyplom, świadectwo albo dokument o stażu pracy w rolnictwie, jeśli wniosek ma złożyć kupujący',
       'Decyzja KOWR z datą doręczenia, jeśli już ją dostałeś',
     ],
-    guides: ['zgoda-kowr-nabycie-ziemi-rolnej', 'status-rolnika-indywidualnego'],
+    guides: ['zgoda-kowr-nabycie-ziemi-rolnej', 'status-rolnika-indywidualnego', 'sprzedaz-gospodarstwa-rolnego'],
     seeAlso: ['obsluga-zakupu', 'obsluga-prawna-przedsiebiorstw-rolnych'],
     cta: {
       heading: 'Nie jesteś rolnikiem, a chcesz kupić ziemię? Przeprowadzę Cię przez zgodę KOWR.',

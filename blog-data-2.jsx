@@ -41,7 +41,7 @@ window.BLOG.push(
       ['p', 'Jeśli tylko Ty wykażesz realną zdolność do spłaty, Twoja pozycja w sporze staje się dominująca.'],
       ['h3', '2. Dobro małoletnich dzieci – argument koronny'],
       ['p', 'Gdy oboje macie zdolność finansową, decydujący głos zyskują dzieci. Sąd, kierując się nadrzędną zasadą ochrony ich dobra, zrobi wszystko, by zminimalizować chaos w ich życiu.'],
-      ['p', 'W praktyce oznacza to, że **nieruchomość niemal zawsze zostanie przyznana temu rodzicowi, przy którym ustalono miejsce pobytu dzieci i który sprawuje nad nimi codzienną pieczę.** Chodzi o to, by dzieci nie musiały zmieniać szkoły, przedszkola, otoczenia i znajomych w i tak trudnym dla nich okresie. Argument ten ma ogromną siłę przebicia i często przesądza o wyniku sprawy.'],
+      ['p', 'W praktyce oznacza to, że **nieruchomość często zostaje przyznana temu rodzicowi, przy którym ustalono miejsce pobytu dzieci i który sprawuje nad nimi codzienną pieczę, jeśli udźwignie spłatę.** Chodzi o to, by dzieci nie musiały zmieniać szkoły, przedszkola, otoczenia i znajomych w i tak trudnym dla nich okresie. Argument ten ma ogromną siłę przebicia i często przesądza o wyniku sprawy.'],
       ['h3', '3. Pozostałe, wspierające argumenty'],
       ['p', 'Gdy zdolność spłaty jest po obu stronach, a małżonkowie nie mają dzieci, sąd analizuje dodatkowe okoliczności:'],
       ['ul', [

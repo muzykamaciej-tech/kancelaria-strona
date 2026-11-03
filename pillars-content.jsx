@@ -901,7 +901,7 @@ Object.assign(window.BLOCK_CONTENT, {
           eli: 'DU/1964/93',
           note: 'Najem i najem lokalu, wypowiedzenie przy zaległości, śmierć najemcy, ochrona posiadania, forma pełnomocnictwa.',
         },
-        { ref: 'art. 191 § 1a i § 3', act: 'Kodeks karny', tj: 'Dz.U. 2025 poz. 383', eli: 'DU/1997/553', note: 'Zmuszanie do opuszczenia mieszkania przez utrudnianie korzystania z niego; ściganie na wniosek.' },
+        { ref: 'art. 191 § 1a i § 3', act: 'Kodeks karny', tj: 'Dz.U. 2026 poz. 1342', eli: 'DU/1997/553', note: 'Zmuszanie do opuszczenia mieszkania przez utrudnianie korzystania z niego; ściganie na wniosek.' },
       ],
     },
     guides: ['5-nielegalnych-sposobow-na-wyrzucenie-lokatora', 'ile-trwa-eksmisja-lokatora'],

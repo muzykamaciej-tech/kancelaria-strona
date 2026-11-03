@@ -1200,7 +1200,7 @@ window.BLOG.push(
         '**Rozszerzenie wspólności.** W sprawie przed SN syn po darowiźnie od rodziców wniósł nieruchomość umową do majątku wspólnego. Gdy matka odwołała darowiznę, do zwrotu zobowiązani byli oboje małżonkowie (wyrok z 24.02.2011, III CSK 137/10).',
       ]],
       ['h2', 'Czy darowiznę mieszkania można cofnąć?'],
-      ['p', 'Tak, ale tylko z powodu rażącej niewdzięczności obdarowanego, także po wykonaniu darowizny (art. 898 § 1 k.c.). Zmiana zdania nie wystarczy.'],
+      ['p', 'Tak, ale po wykonaniu darowizny co do zasady tylko z powodu rażącej niewdzięczności obdarowanego (art. 898 § 1 k.c.). Zmiana zdania nie wystarczy.'],
       ['ul', [
         '**Forma:** oświadczenie złożone obdarowanemu na piśmie, bez notariusza (art. 900 k.c.).',
         '**Termin:** rok od dnia, w którym dowiedziałeś się o niewdzięczności (art. 899 § 3 k.c.).',
