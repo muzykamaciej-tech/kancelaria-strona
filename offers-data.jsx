@@ -81,7 +81,7 @@ const OFFERS = {
       },
     ],
     faq: [
-      { q: 'Jakie dokumenty trzeba przesłać?', a: 'Projekt umowy z załącznikami i prospekt informacyjny. Deweloper ma obowiązek wydać je na Twoje żądanie przed podpisaniem umowy. Resztę (księgi wieczyste, rejestry, dane dewelopera) sprawdzam sam.' },
+      { q: 'Jakie dokumenty trzeba przesłać?', a: 'Projekt umowy z załącznikami i prospekt informacyjny. Prospekt z załącznikami deweloper musi doręczyć Ci nieodpłatnie przed podpisaniem umowy, także bez Twojej prośby (art. 21 ust. 1–2 ustawy deweloperskiej). Resztę (księgi wieczyste, rejestry, dane dewelopera) sprawdzam sam.' },
       { q: 'Czy mogę zmienić pakiet w trakcie?', a: 'Tak. Jeśli po szybkim sprawdzeniu zdecydujesz się na pełną analizę albo pakiet premium, dopłacasz tylko różnicę w cenie.' },
       { q: 'Czy działacie zdalnie?', a: 'Tak. Dokumenty przesyłasz mailem, a wyniki omawiamy telefonicznie lub online. Obsługuję klientów z całej Polski.' },
       { q: 'Od kiedy liczy się termin?', a: 'Od otrzymania kompletu dokumentów i wpłaty wynagrodzenia. Jeśli termin podpisania umowy jest bliski, napisz o tym w zgłoszeniu.' },

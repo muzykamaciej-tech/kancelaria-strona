@@ -528,7 +528,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Złożone zgłoszenie z datą doręczenia urzędowi (jeśli już je złożyłeś)',
       'Postanowienie o uzupełnieniu albo decyzja o sprzeciwie z datą doręczenia (jeśli je dostałeś)',
     ],
-    guides: ['warunki-zabudowy-ile-wazne'],
+    guides: ['warunki-zabudowy-ile-wazne', 'dom-do-70-m2-bez-pozwolenia'],
     seeAlso: ['warunki-zabudowy', 'odrolnienie'],
     cta: {
       heading: 'Zgłoszenie zamiast pozwolenia — szybciej, o ile zrobione bez błędu.',

@@ -347,7 +347,7 @@ const SERVICE_CONTENT = {
       'Umowa o miejsce postojowe lub komórkę lokatorską, jeśli kupujesz je osobno.',
       'Numer księgi wieczystej działki, na której powstaje budynek, jeśli go znasz.',
     ],
-    guides: ['kara-umowna-za-opoznienie-dewelopera-uchwala-sn', 'umowa-deweloperska', 'umowa-rezerwacyjna-mieszkania'],
+    guides: ['kara-umowna-za-opoznienie-dewelopera-uchwala-sn', 'umowa-deweloperska', 'umowa-rezerwacyjna-mieszkania', 'prospekt-informacyjny-dewelopera'],
     seeAlso: ['klauzule-abuzywne-deweloper', 'kary-za-opoznienie-dewelopera', 'rekojmia-wady-lokalu'],
     cta: {
       heading: 'Nie podpisuj umowy deweloperskiej w ciemno.',
@@ -402,7 +402,7 @@ const SERVICE_CONTENT = {
       { b: 'Słupy stoją od 30 lat, a firma twierdzi, że zasiedziała służebność.', t: 'To zarzut, który firma musi udowodnić (art. 6 k.c.), a nie fakt, który przyjmujesz na słowo. Przesłanki opisuję w pytaniu o zasiedzenie.' },
       {
         b: 'Weszli na działkę i wymienili słup bez pytania.',
-        t: 'Bez tytułu prawnego i bez decyzji starosty o udostępnieniu nieruchomości (art. 124b u.g.n.) to naruszenie własności. Możesz żądać przywrócenia stanu zgodnego z prawem i zaniechania naruszeń (art. 222 § 2 k.c.).',
+        t: 'Bez tytułu prawnego i bez decyzji starosty o udostępnieniu nieruchomości (art. 124b u.g.n.) to naruszenie własności. Wyjątkiem jest nagła potrzeba zapobieżenia znacznej szkodzie z awarii: wtedy musisz udostępnić działkę, a firma ma 3 dni na wniosek do starosty (art. 126 ust. 5 i 10 u.g.n.). W pozostałych przypadkach możesz żądać przywrócenia stanu zgodnego z prawem i zaniechania naruszeń (art. 222 § 2 k.c.).',
       },
       { b: 'Chcesz się budować, a słup albo linia stoi w złym miejscu.', t: 'O tym, czy możesz żądać usunięcia albo przesunięcia urządzeń, decyduje tytuł firmy i treść ewentualnej służebności (art. 222 § 2, art. 305¹ k.c.).' },
       {
@@ -484,10 +484,7 @@ const SERVICE_CONTENT = {
       'Decyzje administracyjne (np. starosty) albo umowy poprzednich właścicieli dotyczące linii lub gazociągu, jeśli masz.',
       'Informacja, czy na działce prowadzisz działalność gospodarczą albo produkcję rolną na sprzedaż.',
     ],
-    guides: [
-      'sluzebnosc-przesylu-jak-obliczyc-wynagrodzenie',
-      'wycena-sluzebnosci-przesylu-rzeczoznawca',
-    ],
+    guides: ['sluzebnosc-przesylu-jak-obliczyc-wynagrodzenie', 'wycena-sluzebnosci-przesylu-rzeczoznawca', 'linia-energetyczna-na-dzialce-budowa-domu'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'uregulowanie-stanu-prawnego'],
     cta: {
       heading: 'Nie zostawiaj swoich pieniędzy firmie przesyłowej.',
@@ -1887,7 +1884,7 @@ const SERVICE_CONTENT = {
         ],
         [
           'Spadek wartości przy sprzedaży',
-          'Odszkodowanie równe obniżeniu wartości, zgłoszone w 5 lat od dnia, w którym plan stał się obowiązujący (art. 36 ust. 3, art. 37 ust. 3 u.p.z.p.)',
+          'Odszkodowanie równe obniżeniu wartości, zgłoszone w 5 lat od dnia, w którym plan stał się obowiązujący (art. 36 ust. 3, art. 37 ust. 3 u.p.z.p.). SN jest podzielony, czy w tym terminie wystarczy żądanie do gminy (V CSK 222/16), czy musi wpłynąć pozew (IV CSK 653/18), więc bezpieczniej zmieścić w 5 latach także pozew',
         ],
         [
           'Renta planistyczna',
@@ -1903,7 +1900,7 @@ const SERVICE_CONTENT = {
         ],
         [
           'Opłata sądowa (nie honorarium)',
-          'Skarga do wojewódzkiego sądu administracyjnego (WSA): wpis od kwoty opłaty – 4% do 10 000 zł (min. 100 zł), 3% do 50 000 zł (min. 400 zł), 2% do 100 000 zł (min. 1500 zł), 1% powyżej (min. 2000 zł, maks. 100 000 zł); art. 231 p.p.s.a., § 1 rozporządzenia RM z 16.12.2003, stan na 10.10.2026',
+          'Skarga do wojewódzkiego sądu administracyjnego (WSA): wpis od kwoty opłaty – 4% do 10 000 zł (min. 100 zł), 3% do 50 000 zł (min. 400 zł), 2% do 100 000 zł (min. 1500 zł), 1% powyżej (min. 2000 zł, maks. 100 000 zł); art. 231 p.p.s.a., § 1 rozporządzenia RM z 16.12.2003, stan na 10.10.2026. Pozew o roszczenia z art. 36 u.p.z.p. przy wartości ponad 20 000 zł: opłata stała 1000 zł (art. 13b u.k.s.c.)',
         ],
       ],
     },
@@ -2020,7 +2017,7 @@ const SERVICE_CONTENT = {
       'Akt sprzedaży albo projekt umowy, jeśli chodzi o rentę planistyczną',
       'Wypis z planu miejscowego i opis, jak korzystałeś z działki przed planem, jeśli żądasz odszkodowania',
     ],
-    guides: ['odszkodowanie-za-plan-ogolny', 'oplata-adiacencka-renta-planistyczna', 'operat-szacunkowy-jak-podwazyc'],
+    guides: ['odszkodowanie-za-plan-ogolny', 'oplata-adiacencka-renta-planistyczna', 'operat-szacunkowy-jak-podwazyc', 'odszkodowanie-za-plan-miejscowy'],
     seeAlso: ['obsluga-sprzedazy', 'odszkodowanie-wywlaszczenie', 'wykup-dzialki-resztkowej'],
     cta: {
       heading: 'Nie płać gminie więcej, niż musisz — i odzyskaj to, co plan Ci zabrał.',
@@ -2365,7 +2362,7 @@ const SERVICE_CONTENT = {
         b: 'Termin z umowy minął, a ekipy dalej nie ma na budowie.',
         t: 'Przy zwłoce (spóźnieniu, za które wykonawca odpowiada) wyznaczasz mu odpowiedni termin dodatkowy z zagrożeniem odstąpienia od umowy (art. 476, art. 491 § 1 k.c.).',
       },
-      { b: 'Wziął zaliczkę na materiały i od tygodni nic nie robi.', t: 'Po odstąpieniu od umowy wykonawca zwraca to, co od Ciebie otrzymał (art. 494 § 1 k.c.).' },
+      { b: 'Wziął zaliczkę na materiały i od tygodni nic nie robi.', t: 'Po odstąpieniu od umowy wykonawca zwraca nadpłatę ponad wartość wykonanych robót (art. 491 § 2, art. 494 § 1 k.c.).' },
       { b: 'Ekipa pracuje, ale niezgodnie z projektem albo byle jak.', t: 'Najpierw wezwanie do zmiany sposobu wykonania z terminem (art. 636 § 1 k.c.).' },
       { b: 'Wykonawca chce reszty pieniędzy za niedokończoną albo wadliwą robotę.', t: 'Przy wadzie obniżasz mu wynagrodzenie, chyba że niezwłocznie ją usunie (art. 560 § 1 w zw. z art. 638 § 1 k.c.).' },
     ],
@@ -2390,7 +2387,7 @@ const SERVICE_CONTENT = {
     faq: [
       {
         q: 'Jak odzyskać pieniądze od nieuczciwego wykonawcy?',
-        a: 'Przez wezwanie do wykonania prac z terminem, odstąpienie od umowy, a gdy wykonawca dalej nie płaci, pozew o zwrot zaliczki. Po odstąpieniu wykonawca musi zwrócić wszystko, co od Ciebie otrzymał (art. 494 § 1 k.c.). Zanim odstąpisz, zrób zdjęcia budowy z datą i zbierz potwierdzenia przelewów.',
+        a: 'Przez wezwanie do wykonania prac z terminem, odstąpienie od umowy, a gdy wykonawca dalej nie płaci, pozew o zwrot zaliczki. Po odstąpieniu rozliczasz wpłaty z wykonanymi robotami, a nadpłatę wykonawca zwraca (art. 491 § 2, art. 494 § 1 k.c.). Zanim odstąpisz, zrób zdjęcia budowy z datą i zbierz potwierdzenia przelewów.',
       },
       {
         q: 'Nieuczciwy wykonawca bez umowy – co mogę zrobić?',
@@ -2461,7 +2458,7 @@ const SERVICE_CONTENT = {
       'Protokoły odbioru częściowego lub końcowego i zgłoszenia wad, jeśli są.',
       'Wezwanie do zapłaty albo faktury od wykonawcy, jeśli je dostałeś.',
     ],
-    guides: ['umowa-o-roboty-budowlane'],
+    guides: ['umowa-o-roboty-budowlane', 'odstapienie-od-umowy-z-wykonawca', 'gwarancja-zaplaty-za-roboty-budowlane'],
     seeAlso: ['usuniecie-wad-protokol', 'obsluga-prawna-firm-budowlanych'],
     cta: {
       heading: 'Niedokończona budowa albo fuszerka to nie musi być Twój koszt.',
@@ -3050,7 +3047,7 @@ const SERVICE_CONTENT = {
       'Pismo wierzyciela o spłacie kredytu zabezpieczonego hipoteką, jeśli masz',
       'Zawiadomienie z sądu o wpisie ostrzeżenia, jeśli je dostałeś',
     ],
-    guides: ['zniesienie-sluzebnosci-przesylu-nieistniejaca-linia', 'zawyzony-podatek-od-nieruchomosci-blad-w-ewidencji', 'wznowienie-granic-dzialki', 'spoldzielcze-wlasnosciowe-prawo-do-lokalu'],
+    guides: ['zniesienie-sluzebnosci-przesylu-nieistniejaca-linia', 'zawyzony-podatek-od-nieruchomosci-blad-w-ewidencji', 'wznowienie-granic-dzialki', 'spoldzielcze-wlasnosciowe-prawo-do-lokalu', 'uzgodnienie-tresci-ksiegi-wieczystej'],
     seeAlso: ['stwierdzenie-nabycia-spadku', 'obsluga-sprzedazy', 'obsluga-prawna-geodetow'],
     cta: {
       heading: 'Uporządkuj papiery, zanim zablokują Ci sprzedaż albo spadek.',
@@ -3346,7 +3343,7 @@ const SERVICE_CONTENT = {
       'Mapa albo projekt podziału działki od geodety, jeśli są',
       'Pisma i propozycje spłaty od współwłaścicieli, jeśli są',
     ],
-    guides: ['sprzedaz-udzialu-w-nieruchomosci'],
+    guides: ['sprzedaz-udzialu-w-nieruchomosci', 'dzial-spadku'],
     seeAlso: ['obsluga-sprzedazy', 'droga-konieczna'],
     cta: {
       heading: 'Wyjdź ze współwłasności, zanim ona zablokuje Twoje plany.',
@@ -3462,7 +3459,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Dział spadku ze spłatą: czy płaci się podatek?',
-        a: 'Tak, od spłat i dopłat płaci się podatek od czynności cywilnoprawnych (art. 1 u.p.c.c.). Przy nieruchomości stawka wynosi 2% (art. 7 u.p.c.c.). Płaci ten, kto dostaje więcej niż jego udział, od wartości nadwyżki (art. 4 i 6 u.p.c.c.). Tak samo jest przy postanowieniu sądu. Jeżeli dostajesz więcej niż Twój udział bez spłaty, skutki podatkowe oceni doradca podatkowy. Oceni też podatek dochodowy przy późniejszej sprzedaży.',
+        a: 'Tak, od spłat i dopłat płaci się podatek od czynności cywilnoprawnych (art. 1 u.p.c.c.). Przy nieruchomości stawka wynosi 2% (art. 7 u.p.c.c.). Płaci ten, kto dostaje więcej niż jego udział, od wartości nadwyżki (art. 4 i 6 u.p.c.c.). Przy postanowieniu sądu podstawa jest sporna: NSA przyjął kwotę zasądzonych spłat (II FSK 1054/08), a Dyrektor KIS wartość nadwyżki. Jeżeli dostajesz więcej niż Twój udział bez spłaty, skutki podatkowe oceni doradca podatkowy. Oceni też podatek dochodowy przy późniejszej sprzedaży.',
       },
       {
         q: 'Rodzeństwo blokuje podział: co mogę zrobić?',
@@ -3506,7 +3503,7 @@ const SERVICE_CONTENT = {
       'Rachunki i przelewy za remonty, podatki i długi zapłacone po śmierci spadkodawcy',
       'Pisma od rodzeństwa albo Twoja propozycja podziału, jeśli masz',
     ],
-    guides: [],
+    guides: ['dzial-spadku'],
     seeAlso: ['uregulowanie-stanu-prawnego', 'nieruchomosci-rolne'],
     cta: {
       heading: 'Zamień odziedziczone „ułamki” w konkretny, sprawiedliwy podział.',
@@ -4851,7 +4848,7 @@ const SERVICE_CONTENT = {
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Minął termin z umowy, a deweloper przesuwa akt i przysyła aneksy',
     when: [
-      { b: 'Minęła data z umowy, a notariusz wciąż nie ma terminu aktu.', t: 'Od tego dnia liczysz karę według stawki z umowy. Ten sam dzień otwiera drogę do odstąpienia od umowy (art. 43 ust. 1 pkt 6 u.d.).' },
+      { b: 'Minęła data z umowy, a notariusz wciąż nie ma terminu aktu.', t: 'Sprawdź, od kiedy umowa liczy karę: od dnia po terminie czy po okresie karencji, i czy należy się ona bez odstąpienia. Ten sam dzień otwiera drogę do odstąpienia od umowy (art. 43 ust. 1 pkt 6 u.d.).' },
       {
         b: 'Deweloper naciska, żebyś szybko podpisał aneks z nowym terminem.',
         t: 'Aneks podpisuje się w formie aktu notarialnego, jak samą umowę (art. 77 § 1 k.c., art. 40 ust. 1 u.d.). Masz więc czas, żeby przed wizytą u notariusza przeczytać jego projekt.',
@@ -4889,7 +4886,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Czy odzyskam koszty najmu i dodatkowe odsetki od kredytu?',
-        a: 'Tak, jeżeli umowa pozwala żądać odszkodowania ponad karę (art. 484 § 1 zd. 2 k.c.). Gdy umowa ogranicza Cię do kary, sprawdzam też, czy ten zapis Cię wiąże (art. 385¹ § 1 k.c.). Odszkodowanie obejmuje normalne następstwa opóźnienia (art. 361 § 1 k.c.). Potrzebujesz więc umowy najmu, potwierdzeń czynszu i zaświadczenia banku o odsetkach.',
+        a: 'Tak, jeżeli umowa pozwala żądać odszkodowania ponad karę (art. 484 § 1 zd. 2 k.c.). Gdy umowa ogranicza Cię do kary, sprawdzam też, czy ten zapis Cię wiąże (art. 385¹ § 1 k.c.). Odszkodowanie obejmuje normalne następstwa opóźnienia (art. 361 § 1 k.c.). Dostajesz różnicę ponad karę, a nie sumę obu kwot. Potrzebujesz więc umowy najmu, potwierdzeń czynszu i zaświadczenia banku o odsetkach.',
       },
       {
         q: 'Deweloper przysłał aneks z nowym terminem – podpisać?',
@@ -4897,7 +4894,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Kara w umowie jest śmiesznie niska – da się coś zrobić?',
-        a: 'Samej kary nie podwyższysz: kodeks przewiduje tylko jej zmniejszenie na żądanie dłużnika (art. 484 § 2 k.c.). Ustawa deweloperska nie narzuca minimalnej kary. Zakazuje natomiast, by odsetki zastrzeżone dla dewelopera przewyższały Twoje kary (art. 39 ust. 1 u.d.), i to sprawdzam w każdej umowie.',
+        a: 'Samej kary nie podwyższysz: kodeks przewiduje tylko jej zmniejszenie na żądanie dłużnika (art. 484 § 2 k.c.). Ustawa deweloperska nie narzuca minimalnej kary. Zakazuje natomiast, by odsetki zastrzeżone dla dewelopera przewyższały Twoje kary (art. 39 ust. 1 u.d.), i to sprawdzam w każdej umowie. Możesz natomiast podważyć zapis, który nie daje prawa do odszkodowania ponad karę: Sąd Najwyższy uznał, że taki zapis w razie wątpliwości jest niedozwolony, w szczególności przy karze rażąco niskiej (uchwała z 31.10.2025, III CZP 22/25). Szkodę musisz udowodnić.',
       },
       {
         q: 'Ile mam czasu na dochodzenie kar od dewelopera?',
@@ -4949,7 +4946,7 @@ const SERVICE_CONTENT = {
       'Korespondencja z deweloperem o terminie: zawiadomienia o przesunięciu, maile, projekt aneksu.',
       'Dowody kosztów z okresu opóźnienia, jeśli je masz: umowa najmu, potwierdzenia czynszu, harmonogram spłat kredytu.',
     ],
-    guides: ['kara-umowna-za-opoznienie-dewelopera-uchwala-sn'],
+    guides: ['kara-umowna-za-opoznienie-dewelopera-uchwala-sn', 'opoznienie-dewelopera-odszkodowanie'],
     seeAlso: ['sprawdzenie-umowy-deweloperskiej', 'negocjacje-nieruchomosci'],
     cta: {
       heading: 'Opóźnienie dewelopera ma swoją cenę — i to on powinien ją zapłacić.',
@@ -5089,7 +5086,7 @@ const SERVICE_CONTENT = {
       'Twoje zgłoszenia wady i odpowiedzi dewelopera: maile, pisma, potwierdzenia nadania.',
       'Prospekt informacyjny, karta gwarancyjna i opinie techniczne, jeśli masz.',
     ],
-    guides: ['odszkodowanie-od-dewelopera-za-wady', 'odbior-mieszkania-od-dewelopera', 'gwarancja-dewelopera-na-mieszkanie'],
+    guides: ['odszkodowanie-od-dewelopera-za-wady', 'odbior-mieszkania-od-dewelopera', 'gwarancja-dewelopera-na-mieszkanie', 'deweloper-nie-usuwa-usterek'],
     seeAlso: ['sprawdzenie-umowy-deweloperskiej', 'spory-z-wykonawca'],
     cta: {
       heading: 'Kupiłeś mieszkanie bez wad — i takie Ci się należy.',
@@ -5394,7 +5391,7 @@ const SERVICE_CONTENT = {
       'Korespondencję o terminach napraw i wejściu ekipy (maile, SMS-y), jeśli ją masz.',
       'Kosztorys albo faktury za naprawę, jeśli już ją zleciłeś.',
     ],
-    guides: ['odszkodowanie-od-dewelopera-za-wady', 'odbior-mieszkania-od-dewelopera'],
+    guides: ['odszkodowanie-od-dewelopera-za-wady', 'odbior-mieszkania-od-dewelopera', 'deweloper-nie-usuwa-usterek'],
     seeAlso: ['sprawdzenie-umowy-deweloperskiej', 'spory-z-wykonawca'],
     cta: {
       heading: 'Wpisane do protokołu wady to Twoje prawo — dopilnuję, żeby deweloper je usunął.',
@@ -5644,7 +5641,7 @@ const SERVICE_CONTENT = {
       'Pismo dewelopera, w którym powołuje się na zapis (wezwanie do dopłaty, naliczenie kary, nowy termin), i aneksy, jeśli je masz.',
       'Potwierdzenia wpłat, jeżeli spór dotyczy pieniędzy.',
     ],
-    guides: ['kara-umowna-za-opoznienie-dewelopera-uchwala-sn'],
+    guides: ['kara-umowna-za-opoznienie-dewelopera-uchwala-sn', 'klauzule-niedozwolone-umowa-deweloperska'],
     seeAlso: ['sprawdzenie-umowy-deweloperskiej', 'sprawdzenie-umowy-rezerwacyjnej'],
     cta: {
       heading: 'Nie każdy zapis w umowie deweloperskiej naprawdę Cię wiąże.',
@@ -6091,6 +6088,7 @@ const SERVICE_CONTENT = {
           { b: 'Biegły', t: 'jego wynagrodzenie to wydatek sądowy (art. 5 ust. 1 pkt 3 u.k.s.c.); zaliczkę w kwocie i terminie oznaczonych przez sąd płaci ten, kto wnosi o opinię (art. 130⁴ § 1 w zw. z art. 13 § 2 k.p.c.).' },
           { b: 'Podział kosztów sprawy', t: 'co do zasady każdy uczestnik ponosi koszty swojego udziału; przy sprzecznych interesach sąd może rozdzielić je inaczej (art. 520 § 1 i 2 k.p.c.).' },
           { b: 'Umowa u notariusza', t: 'taksę notarialną podaje notariusz. Podatek od czynności cywilnoprawnych przy odpłatnej służebności płaci nabywający służebność (art. 4 pkt 6 u.p.c.c.).' },
+          { b: 'Postanowienie sądu', t: 'ten sam podatek, 1%, płacisz także od postanowienia ustanawiającego odpłatną służebność; deklarację składasz sam w 14 dni od uprawomocnienia (art. 1 ust. 1 pkt 3 i ust. 2 pkt 2 u.p.c.c.).' },
         ],
       },
       {
@@ -6152,11 +6150,7 @@ const SERVICE_CONTENT = {
       'Wniosek sąsiada albo pismo z sądu, jeżeli to sąsiad żąda drogi przez Twój grunt',
       'Zdjęcia przejazdu, bramy albo blokady i dotychczasowe ustalenia z sąsiadem (jeśli masz)',
     ],
-    guides: [
-      'ile-kosztuje-sluzebnosc-drogi-koniecznej',
-      'wynagrodzenie-za-sluzebnosc-drogi-koniecznej',
-      'koszty-utrzymania-drogi-koniecznej',
-    ],
+    guides: ['ile-kosztuje-sluzebnosc-drogi-koniecznej', 'wynagrodzenie-za-sluzebnosc-drogi-koniecznej', 'koszty-utrzymania-drogi-koniecznej', 'droga-konieczna-jak-ustanowic'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'pozwolenie-na-budowe'],
     cta: {
       heading: 'Działka bez dojazdu to nie ślepy zaułek — jest droga wyjścia.',
@@ -6173,7 +6167,7 @@ const SERVICE_CONTENT = {
     subtitle: 'Twoja działka albo dom trafiły pod drogę, a kwota z urzędu wydaje się zaniżona? Co do zasady dostajesz wartość rynkową nieruchomości według stanu z dnia ZRID i wartości z dnia ustalania odszkodowania (art. 18 ust. 1 specustawy drogowej, art. 134 ust. 1 u.g.n.). Sprawdzam operat, piszę uwagi i odwołanie oraz liczę terminy na zaliczkę i dodatek 5%.',
     short: {
       q: 'Ile wynosi odszkodowanie za działkę zabraną pod drogę?',
-      a: 'Co do zasady tyle, ile wynosi wartość rynkowa nieruchomości (art. 134 ust. 1 u.g.n.). Do tego 5% za wydanie w terminie i 10 000 zł, jeżeli mieszkasz w budynku objętym ZRID (art. 18 ust. 1e i 1f specustawy drogowej). Jeżeli przeznaczenie pod drogę podnosi wartość, wartość 1 m² gruntu powiększa się najwyżej o 50% (§ 49 ust. 3 rozporządzenia w sprawie wyceny nieruchomości).',
+      a: 'Co do zasady tyle, ile wynosi wartość rynkowa nieruchomości (art. 134 ust. 1 u.g.n.). Do tego 5% za wydanie w terminie i 10 000 zł, jeżeli mieszkasz w budynku stojącym na przejmowanej części (art. 18 ust. 1e i 1f specustawy drogowej). Jeżeli przeznaczenie pod drogę podnosi wartość, wartość 1 m² gruntu powiększa się najwyżej o 50% (§ 49 ust. 3 rozporządzenia w sprawie wyceny nieruchomości).',
       facts: [
         [
           'Kto ustala kwotę',
@@ -6185,7 +6179,7 @@ const SERVICE_CONTENT = {
         ],
         [
           'Dodatki',
-          '5% wartości, jeżeli wydasz nieruchomość w 30 dni od doręczenia zawiadomienia o ZRID z rygorem, od doręczenia postanowienia o rygorze albo od dnia, w którym ZRID stała się ostateczna (art. 18 ust. 1e); 10 000 zł, jeżeli mieszkasz w budynku mieszkalnym objętym ZRID (art. 18 ust. 1f specustawy drogowej)',
+          '5% wartości, jeżeli wydasz nieruchomość w 30 dni od doręczenia zawiadomienia o ZRID z rygorem, od doręczenia postanowienia o rygorze albo od dnia, w którym ZRID stała się ostateczna (art. 18 ust. 1e); 10 000 zł, jeżeli mieszkasz w budynku mieszkalnym objętym ZRID, czyli stojącym na przejmowanej części (art. 18 ust. 1f specustawy drogowej)',
         ],
         [
           'Zaliczka',
@@ -6258,7 +6252,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Czy należy mi się dodatek za szybkie wydanie nieruchomości?',
-        a: 'Tak, 5% wartości nieruchomości, jeżeli wydasz ją niezwłocznie, najpóźniej w 30 dni (art. 18 ust. 1e specustawy drogowej). Termin liczy się od doręczenia zawiadomienia o ZRID z rygorem, od doręczenia postanowienia o nadaniu rygoru albo od dnia, w którym ZRID stała się ostateczna. Jeżeli mieszkasz w budynku mieszkalnym objętym ZRID, odszkodowanie rośnie dodatkowo o 10 000 zł (art. 18 ust. 1f).',
+        a: 'Tak, 5% wartości przejętej nieruchomości, jeżeli wydasz ją niezwłocznie, najpóźniej w 30 dni (art. 18 ust. 1e specustawy drogowej). Sama gotowość do wydania nie wystarcza (NSA, wyrok z 21.02.2023, I OSK 34/22). Termin liczy się od doręczenia zawiadomienia o ZRID z rygorem, od doręczenia postanowienia o nadaniu rygoru albo od dnia, w którym ZRID stała się ostateczna. Jeżeli mieszkasz w budynku mieszkalnym stojącym na przejmowanej części, odszkodowanie rośnie dodatkowo o 10 000 zł (art. 18 ust. 1f).',
       },
       {
         q: 'Czy wycena obejmie drzewa, ogrodzenie i budynki?',
@@ -6312,7 +6306,7 @@ const SERVICE_CONTENT = {
       'Pozwolenia na budowę, faktury lub umowy dotyczące budynków i nasadzeń, jeśli masz.',
       'Numer księgi wieczystej działki.',
     ],
-    guides: ['operat-szacunkowy-jak-podwazyc'],
+    guides: ['operat-szacunkowy-jak-podwazyc', 'wywlaszczenie-pod-droge-odszkodowanie'],
     seeAlso: ['oplaty-odszkodowania-planistyczne', 'skarga-na-plan-miejscowy'],
     cta: {
       heading: 'Wywłaszczenie musi być słusznie wynagrodzone. Dopilnuję, żeby tak było.',
@@ -6329,7 +6323,7 @@ const SERVICE_CONTENT = {
     subtitle: 'Droga zabrała pas Twojej działki, a została wąska, odcięta albo za mała resztówka. Jeżeli pas przejęła decyzja o zezwoleniu na realizację inwestycji drogowej (ZRID), a resztówka nie nadaje się do prawidłowego wykorzystania na dotychczasowe cele, zarządca drogi musi ją wykupić na Twój wniosek (art. 13 ust. 3 specustawy drogowej). Piszę wniosek, sprawdzam cenę, a przy odmowie prowadzę sprawę dalej.',
     short: {
       q: 'Została mi wąska resztka działki po budowie drogi. Czy mogą ją ode mnie wykupić?',
-      a: 'Tak, na Twój wniosek, jeżeli reszta działki nie nadaje się do prawidłowego wykorzystania na dotychczasowe cele (art. 13 ust. 3 specustawy drogowej). Przy drodze z decyzji ZRID nabywa ją zarządca drogi w imieniu Skarbu Państwa albo samorządu. Przy wywłaszczeniu na inny cel publiczny resztę nabywa się w drodze umowy na rzecz Skarbu Państwa albo samorządu (art. 113 ust. 3 u.g.n.).',
+      a: 'Tak, na Twój wniosek, jeżeli reszta działki nie nadaje się do prawidłowego wykorzystania na dotychczasowe cele (art. 13 ust. 3 specustawy drogowej). Liczy się skutek odłączenia części działki, a nie samo sąsiedztwo drogi, i to Ty musisz to wykazać (SN, uchwała z 11.09.2013, III CZP 35/13). Przy drodze z decyzji ZRID nabywa ją zarządca drogi w imieniu Skarbu Państwa albo samorządu. Przy wywłaszczeniu na inny cel publiczny resztę nabywa się w drodze umowy na rzecz Skarbu Państwa albo samorządu (art. 113 ust. 3 u.g.n.).',
       facts: [
         [
           'Kto może żądać',
@@ -6492,7 +6486,7 @@ const SERVICE_CONTENT = {
       { b: 'Po budowie zostały koleiny, wykopy albo zniszczone uprawy.', t: 'Ten, kto wystąpił o zezwolenie, ma przywrócić grunt do stanu poprzedniego niezwłocznie po założeniu sieci (art. 124 ust. 4 u.g.n.).' },
       {
         b: 'Gazownia chce wejść na działkę, żeby wyremontować istniejącą rurę lub linię albo usunąć jej awarię.',
-        t: 'Jeżeli się nie zgadzasz, starosta zobowiązuje Cię decyzją do udostępnienia gruntu na najwyżej 6 miesięcy, za odszkodowaniem (art. 124b ust. 1, 3 i 4 u.g.n.). Przy sieci założonej na podstawie decyzji z art. 124 obowiązek udostępnienia wynika wprost z ustawy (art. 124 ust. 6 u.g.n.).',
+        t: 'Jeżeli się nie zgadzasz, starosta zobowiązuje Cię decyzją do udostępnienia gruntu na najwyżej 6 miesięcy, za odszkodowaniem (art. 124b ust. 1, 3 i 4 u.g.n.). Przy sieci założonej na podstawie decyzji z art. 124 obowiązek udostępnienia wynika wprost z ustawy (art. 124 ust. 6 u.g.n.). Wyjątkiem jest nagła potrzeba zapobieżenia znacznej szkodzie z awarii: wtedy musisz udostępnić działkę, a firma ma 3 dni na wniosek do starosty (art. 126 ust. 5 i 10 u.g.n.).',
       },
     ],
     doForTitle: 'Co robię po stronie właściciela działki',
@@ -6572,7 +6566,7 @@ const SERVICE_CONTENT = {
       'Zdjęcia gruntu przed robotami i po nich, np. wykopów i zniszczonych upraw.',
       'Decyzja o odszkodowaniu i opinia rzeczoznawcy majątkowego, jeśli to postępowanie już trwa.',
     ],
-    guides: ['ograniczenie-korzystania-z-nieruchomosci-odszkodowanie'],
+    guides: ['ograniczenie-korzystania-z-nieruchomosci-odszkodowanie', 'wejscie-na-dzialke-bez-zgody-wlasciciela'],
     seeAlso: ['skarga-na-plan-miejscowy', 'obsluga-prawna-przedsiebiorstw-rolnych'],
     cta: {
       heading: '„Małe wywłaszczenie” to wciąż wywłaszczenie — i wciąż masz prawa.',

@@ -262,7 +262,7 @@ Object.assign(window.SERVICE_CONTENT, {
     subtitle: 'Inwestor zalega z płatnościami, nalicza kary za opóźnienie albo nie chce zapłacić za roboty dodatkowe. Obsługę prawną firmy budowlanej zaczynam od zabezpieczenia zapłaty: gwarancji możesz co do zasady żądać w każdym czasie (art. 649³ § 1 k.c.). Przygotowuję umowy i pisma do inwestora oraz prowadzę spory o wynagrodzenie, stale albo przy jednym kontrakcie.',
     short: {
       q: 'Inwestor nie chce dać gwarancji zapłaty – czy mogę odstąpić od umowy?',
-      a: 'Tak. Wyznacz inwestorowi termin na gwarancję zapłaty, nie krótszy niż 45 dni. Jeżeli jej nie dostaniesz, możesz odstąpić od umowy z winy inwestora (art. 649⁴ § 1 k.c.). Odstąpienie inwestora spowodowane Twoim żądaniem gwarancji jest bezskuteczne (art. 649² § 2 k.c.).',
+      a: 'Tak. Wyznacz inwestorowi termin na gwarancję zapłaty, nie krótszy niż 45 dni. Jeżeli jej nie dostaniesz, możesz odstąpić od umowy z winy inwestora (art. 649⁴ § 1 k.c.). Odstąpienie inwestora spowodowane Twoim żądaniem gwarancji jest bezskuteczne (art. 649² § 2 k.c.). Po wykonaniu wszystkich robót możesz nadal żądać gwarancji, jeżeli nie dostałeś całego wynagrodzenia, ale odstąpienie od umowy wykonanej w całości sąd uzna za nieskuteczne. Żądanie, które jest tylko pretekstem do wyjścia z umowy, może zostać ocenione jako nadużycie prawa (art. 5 k.c.).',
       facts: [
         [
           'Kiedy żądać gwarancji zapłaty',
@@ -382,7 +382,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Notę z karą umowną albo wezwanie do zapłaty, jeśli je dostałeś.',
       'Zgłoszenie podwykonawcy do inwestora i odpowiedź inwestora, jeśli są.',
     ],
-    guides: [],
+    guides: ['gwarancja-zaplaty-za-roboty-budowlane'],
     seeAlso: ['umowa-o-roboty-budowlane', 'spory-z-wykonawca'],
     cta: {
       heading: 'Zabezpieczona umowa i pewna zapłata — zanim wejdziesz na budowę.',

@@ -135,7 +135,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Postanowienie o stwierdzeniu nabycia spadku albo zarejestrowany akt poświadczenia dziedziczenia, jeśli sprzedają spadkobiercy.',
       'Twój akt zakupu i opis remontu, jeśli sprzedajesz.',
     ],
-    guides: ['ile-trwa-eksmisja-lokatora', 'jawne-ceny-nieruchomosci-rejestr-cen'],
+    guides: ['ile-trwa-eksmisja-lokatora', 'jawne-ceny-nieruchomosci-rejestr-cen', 'flip-mieszkania'],
     seeAlso: [
       'obsluga-prawna-inwestorow-flipping',
       'audyt-stanu-prawnego-nieruchomosci',
