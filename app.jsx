@@ -57,6 +57,7 @@ function buildPath(route, ids) {
       const b = window.getBlockOfService(ids.serviceSlug);
       return '/uslugi/' + (b ? b.id + '/' : '') + (ids.serviceSlug || '');
     }
+    case 'oferta': return '/oferta/' + (ids.offerSlug || '');
     case 'blog': return '/blog';
     case 'blogpost': return '/blog/' + (ids.blogSlug || '');
     case 'blogcat': return '/blog/kategoria/' + (ids.blogCat || '');
@@ -78,6 +79,7 @@ function idsFor(route, slug) {
   if (route === 'blok') return { blockId: slug };
   if (route === 'blogpost') return { blogSlug: slug };
   if (route === 'blogcat') return { blogCat: slug };
+  if (route === 'oferta') return { offerSlug: slug };
   return {};
 }
 /* href for any internal route — used by <NavLink> and plain <a> links */
@@ -98,6 +100,7 @@ function parsePath(pathname) {
     if (window.getService(b)) return { route: 'usluga', serviceSlug: b };
     return { route: 'notfound' };
   }
+  if (a === 'oferta') return b && !c && window.getOffer && window.getOffer(b) ? { route: 'oferta', offerSlug: b } : { route: 'notfound' };
   if (a === 'blog') {
     if (!b) return { route: 'blog' };
     if (b === 'kategoria') return c && window.getBlogCategory && window.getBlogCategory(c) && parts.length === 3 ? { route: 'blogcat', blogCat: c } : { route: 'notfound' };
@@ -267,6 +270,9 @@ function setMetaForView(route, ids) {
     const title = (c && c.h1) || (s && s.title) || 'Usługa';
     const desc = (c && (c.subtitle || c.intro)) || (s && s.desc) || LANDING_META;
     setMeta(SEO_TITLE_SERVICE[ids.serviceSlug] || localTitle([title, s && s.title]), (c && c.metaDesc) || truncMeta(desc, 155));
+  } else if (route === 'oferta') {
+    const o = window.getOffer(ids.offerSlug);
+    if (o) setMeta(o.metaTitle, o.metaDesc);
   } else if (route === 'blog') {
     setMeta('Skarbnica wiedzy: poradniki o prawie nieruchomości', 'Praktyczne wpisy o prawie nieruchomości — jak bezpiecznie kupować, sprawdzać umowy i chronić swój kapitał.');
   } else if (route === 'blogcat') {
@@ -382,6 +388,29 @@ function buildJsonLd(route, ids) {
       Object.assign(trail, { '@id': url + '#okruszki' }),
     ].filter(Boolean) };
   }
+  if (route === 'oferta') {
+    const o = window.getOffer(ids.offerSlug); if (!o) return null;
+    const s = window.getService(o.service), b = window.getBlockOfService(o.service);
+    const path = buildPath('oferta', ids), url = SITE_BASE + path, name = o.h1.join(' ');
+    /* ceny netto i brutto z tych samych danych co karty (offers.jsx); price oferty = brutto (cena dla konsumenta) */
+    const pln = (v) => v.toFixed(2);
+    const offers = o.packages.map((p) => ({
+      '@type': 'Offer', '@id': url + '#pakiet-' + p.id, url: url + '#pakiet-' + p.id, name: p.name, description: p.forWhom,
+      price: pln(window.grossPrice(p.net)), priceCurrency: 'PLN', availability: 'https://schema.org/InStock', seller: { '@id': ORG_ID },
+      priceSpecification: [
+        { '@type': 'UnitPriceSpecification', price: pln(p.net), priceCurrency: 'PLN', valueAddedTaxIncluded: false },
+        { '@type': 'UnitPriceSpecification', price: pln(window.grossPrice(p.net)), priceCurrency: 'PLN', valueAddedTaxIncluded: true },
+      ],
+      itemOffered: { '@id': url + '#usluga' },
+    }));
+    return { '@context': 'https://schema.org', '@graph': [
+      { '@type': 'WebPage', '@id': url, url, name: o.metaTitle, description: o.metaDesc, inLanguage: 'pl', breadcrumb: { '@id': url + '#okruszki' }, about: { '@id': url + '#usluga' } },
+      { '@type': 'Service', '@id': url + '#usluga', name: s.title, description: o.intro, serviceType: b.title, provider: { '@id': ORG_ID }, areaServed: AREA_SERVED, url,
+        offers, hasOfferCatalog: { '@type': 'OfferCatalog', name: o.crumb, itemListElement: offers.map((x) => ({ '@id': x['@id'] })) } },
+      { '@type': 'FAQPage', '@id': url + '#faq', mainEntity: o.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+      Object.assign(crumbs([{ name: 'Start', path: '/' }, { name: 'Usługi', path: '/uslugi' }, { name: b.title, path: '/uslugi/' + b.id }, { name: s.title, path: buildPath('usluga', { serviceSlug: s.slug }) }, { name: o.crumb, path }]), { '@id': url + '#okruszki' }),
+    ] };
+  }
   if (route === 'blok') {
     const b = window.getBlock(ids.blockId); if (!b) return null;
     const bc = (window.BLOCK_CONTENT || {})[b.id] || {};
@@ -433,7 +462,9 @@ function captureFields(root) {
   if (!root) return [];
   return [...root.querySelectorAll('input, textarea, select')].map((el, i) => {
     const toggle = el.type === 'checkbox' || el.type === 'radio';
-    const changed = toggle ? el.checked !== el.defaultChecked : el.tagName === 'SELECT' ? [...el.options].some((o) => o.selected !== o.defaultSelected) : el.type !== 'file' && el.value !== el.defaultValue;
+    /* select bez atrybutu selected (React ustawia tylko właściwość) domyślnie pokazuje pierwszą opcję: to nie jest zmiana,
+       inaczej przywrócenie nadpisałoby wartość ustawioną przez aplikację (np. pakiet wybrany na stronie oferty) */
+    const changed = toggle ? el.checked !== el.defaultChecked : el.tagName === 'SELECT' ? el.selectedIndex !== Math.max(0, [...el.options].findIndex((o) => o.defaultSelected)) : el.type !== 'file' && el.value !== el.defaultValue;
     const focus = el === document.activeElement;
     return changed || focus ? { i, key: fieldKey(el), toggle, changed, value: el.value, checked: el.checked, focus, sel: toggle ? null : [el.selectionStart, el.selectionEnd] } : null;
   }).filter(Boolean);
@@ -460,6 +491,7 @@ function App() {
   const [blockId, setBlockId] = useState(() => parsePath().blockId || null);
   const [blogSlug, setBlogSlug] = useState(() => parsePath().blogSlug || null);
   const [blogCat, setBlogCat] = useState(() => parsePath().blogCat || null);
+  const [offerSlug, setOfferSlug] = useState(() => parsePath().offerSlug || null);
   const [contactSubject, setContactSubject] = useState('');
   const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
   /* every client-side navigation bumps navTick; the layout effect below then scrolls and moves focus */
@@ -493,12 +525,14 @@ function App() {
     setBlockId(p.blockId || null);
     setBlogSlug(p.blogSlug || null);
     setBlogCat(p.blogCat || null);
+    setOfferSlug(p.offerSlug || null);
     afterNav(y);
   }
 
   function setRoute(r, slug, subject) {
     setRouteState(r);
-    const ids = { blockId, serviceSlug, blogSlug, blogCat };
+    const ids = { blockId, serviceSlug, blogSlug, blogCat, offerSlug };
+    if (r === 'oferta' && slug) { setOfferSlug(slug); ids.offerSlug = slug; }
     if (r === 'usluga' && slug) { setServiceSlug(slug); ids.serviceSlug = slug; }
     if (r === 'blok' && slug) { setBlockId(slug); ids.blockId = slug; }
     if (r === 'blogpost' && slug) { setBlogSlug(slug); ids.blogSlug = slug; }
@@ -552,14 +586,17 @@ function App() {
 
   /* keep document.title + meta description in sync with the current view */
   useEffect(() => {
-    setMetaForView(route, { blockId, serviceSlug, blogSlug, blogCat });
-  }, [route, blockId, serviceSlug, blogSlug, blogCat]);
+    setMetaForView(route, { blockId, serviceSlug, blogSlug, blogCat, offerSlug });
+  }, [route, blockId, serviceSlug, blogSlug, blogCat, offerSlug]);
 
   /* which service block to highlight in the mega-menu */
   let activeBlock = null;
   if (route === 'blok') activeBlock = blockId;
   else if (route === 'usluga' && serviceSlug) {
     const b = window.getBlockOfService(serviceSlug);
+    activeBlock = b ? b.id : null;
+  } else if (route === 'oferta' && offerSlug && window.getOffer(offerSlug)) {
+    const b = window.getBlockOfService(window.getOffer(offerSlug).service);
     activeBlock = b ? b.id : null;
   }
 
@@ -595,6 +632,7 @@ function App() {
   else if (route === 'uslugi') body = <UslugiOverview setRoute={setRoute} />;
   else if (route === 'blok') body = <PillarPage setRoute={setRoute} blockId={blockId || window.SERVICE_BLOCKS[0].id} />;
   else if (route === 'usluga') body = <ServicePage setRoute={setRoute} slug={serviceSlug || window.SERVICE_BLOCKS[0].services[0].slug} />;
+  else if (route === 'oferta') body = <window.OfferPage key={offerSlug} slug={offerSlug} />;
   else if (route === 'blog') body = <BlogPage setRoute={setRoute} />;
   else if (route === 'blogcat') body = <window.BlogCategoryPage setRoute={setRoute} catId={blogCat} />;
   else if (route === 'blogpost') body = <BlogPostPage setRoute={setRoute} slug={blogSlug || window.BLOG[0].slug} />;
@@ -618,7 +656,7 @@ function App() {
       <CookieBanner />
       {window.QuickContact && <window.QuickContact />}
       {route !== 'landing' && <BackToTop />}
-      {route !== 'landing' && <MobileCTABar key={route + (serviceSlug || '') + (blockId || '') + (blogSlug || '') + (blogCat || '')} />}
+      {route !== 'landing' && <MobileCTABar key={route + (serviceSlug || '') + (blockId || '') + (blogSlug || '') + (blogCat || '') + (offerSlug || '')} />}
 
       <TweaksPanel title="Tweaks" defaultPosition={{ right: 24, bottom: 24 }}>
         <TweakSection label="Układ">

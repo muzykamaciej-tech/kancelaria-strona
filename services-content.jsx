@@ -232,7 +232,7 @@ const SERVICE_CONTENT = {
     when: [
       {
         b: 'Termin u notariusza jest za tydzień, a projekt umowy dopiero przyszedł.',
-        t: 'Podaj datę aktu w formularzu: termin raportu w ofercie ustalam względem tej daty. Zmiany prospektu wprowadzone po jego doręczeniu muszą być w umowie wyraźnie podkreślone i wiążą Cię tylko za Twoją zgodą (art. 35 ust. 2–3 u.d.).',
+        t: 'Podaj datę aktu w formularzu. Szybkie sprawdzenie umowy daje wynik w 2 dni robocze, a pakiet premium pierwsze wyniki w 3 dni robocze. Zmiany prospektu wprowadzone po jego doręczeniu muszą być w umowie wyraźnie podkreślone i wiążą Cię tylko za Twoją zgodą (art. 35 ust. 2–3 u.d.).',
       },
       {
         b: 'Deweloper mówi, że wszyscy podpisują bez zmian.',
@@ -251,44 +251,12 @@ const SERVICE_CONTENT = {
         t: 'Przeniesienie wierzytelności z umowy (potocznie: cesja) jest dopuszczalne przy jednym lokalu, jeżeli w ciągu 3 lat wcześniej nie było innej Twojej cesji (art. 37a ust. 1 u.d.). Limit nie dotyczy cesji na rzecz osoby z I albo II grupy podatkowej (art. 37a ust. 2 u.d.). Cesja wymaga aktu notarialnego i oświadczenia pod rygorem odpowiedzialności karnej (art. 37a ust. 4, art. 40 ust. 1 u.d.).',
       },
     ],
-    levels: {
-      eyebrow: 'Trzy poziomy sprawdzenia',
-      heading: 'Co dostajesz: trzy zakresy sprawdzenia umowy z deweloperem',
-      intro: 'Bezpieczeństwo zakupu zależy od umowy, od stanu prawnego gruntu i od spółki, która buduje. Zakres wyższy obejmuje wszystko z niższego.',
-      cost: 'Który zakres wystarczy, piszę we wstępnej analizie w 24 h roboczych. Cenę i termin podaję w ofercie; płacisz dopiero po jej przyjęciu.',
-      items: [
-        {
-          name: 'Analiza podstawowa',
-          sub: 'Gdy chcesz bezpiecznie podpisać konkretną umowę z deweloperem.',
-          points: [
-            'Czytam umowę deweloperską z prospektem i załącznikami, a także umowę rezerwacyjną, jeśli ją masz. Wskazuję zapisy nieważne, niedozwolone i brakujące.',
-            'Sprawdzam harmonogram, umowę o miejsce postojowe lub komórkę i zgodę banku na przeniesienie lokalu bez hipoteki.',
-            'Sprawdzam księgę wieczystą gruntu: właściciela, hipoteki i służebności.',
-            'Dostajesz raport z ryzykami w trzech kolorach i gotowymi zmianami: co wykreślić, co dopisać, jak sformułować. Odpowiadam na pytania do dnia podpisania umowy.',
-          ],
-        },
-        {
-          name: 'Analiza pełna',
-          plus: 'wszystko z podstawowej, plus:',
-          sub: 'Gdy masz wątpliwości co do dewelopera lub okolicy albo kupujesz więcej niż jeden lokal.',
-          points: [
-            'Sprawdzam, jakie inwestycje deweloper zrealizował i jak skończyły się jego wcześniejsze spółki.',
-            'Czytam jego sprawozdania finansowe za ostatnie 2 lata, z którymi na Twoje żądanie musi umożliwić Ci zapoznanie się w swoim biurze (art. 26 ust. 1 pkt 4 u.d.). Sprawdzam rejestry długów.',
-            'Pozyskuję z urzędów dokumenty, których deweloper nie udostępnił.',
-            'Sprawdzam przeznaczenie terenu w planie i inwestycje uciążliwe w okolicy (wysypiska, spalarnie, oczyszczalnie).',
-          ],
-        },
-        {
-          name: 'Analiza pełna + negocjacje',
-          plus: 'wszystko z pełnej, plus:',
-          sub: 'Gdy chcesz, żebym negocjował zmiany z deweloperem w Twoim imieniu.',
-          points: [
-            'Negocjuję cenę i warunki umowy bezpośrednio z deweloperem lub jego prawnikiem.',
-            'Pilnuję, żeby ustalone zmiany trafiły do aktu notarialnego.',
-            'Jestem z Tobą aż do podpisania aktu.',
-          ],
-        },
-      ],
+    /* pakiety z cenami z offers-data.jsx (te same co na /oferta/sprawdzenie-umowy-deweloperskiej) */
+    offer: {
+      slug: 'sprawdzenie-umowy-deweloperskiej',
+      eyebrow: 'Pakiety i ceny',
+      heading: 'Co dostajesz: trzy pakiety sprawdzenia umowy z deweloperem',
+      intro: 'Bezpieczeństwo zakupu zależy od umowy, od stanu prawnego gruntu i od spółki, która buduje. Wyższy pakiet obejmuje wszystko z niższego.',
     },
     lists: [
       {
@@ -318,9 +286,9 @@ const SERVICE_CONTENT = {
     stepsHeading: 'Od projektu umowy do aktu notarialnego: jak pracujemy',
     steps: [
       'Przesyłasz projekt umowy deweloperskiej, prospekt informacyjny z załącznikami i datę aktu, jeśli notariusz już ją wyznaczył.',
-      'Bezpłatna wstępna analiza w 24 h roboczych: piszę, czy wystarczy porównać umowę z prospektem, czy trzeba też sprawdzić dewelopera i księgę wieczystą gruntu. Razem z nią dostajesz ofertę z ceną i terminem raportu.',
-      'Po akceptacji oferty sprawdzam dokumenty i wysyłam raport z gotowymi zmianami do umowy.',
-      'Zmiany przekazujesz deweloperowi samodzielnie albo negocjuję je w Twoim imieniu (zakres z negocjacjami).',
+      'Wybierasz pakiet w formularzu. W 24 h roboczych potwierdzam zakres i termin, a jeśli nie wiesz, który pakiet wybrać, piszę, czy wystarczy sprawdzić samą umowę, czy trzeba też sprawdzić dewelopera i księgę wieczystą gruntu.',
+      'Po otrzymaniu kompletu dokumentów i wpłaty wynagrodzenia sprawdzam dokumenty i w terminie pakietu wysyłam wynik ze zmianami do umowy.',
+      'Zmiany przekazujesz deweloperowi samodzielnie albo negocjuję je w Twoim imieniu (pakiet premium).',
       'Krok nieodwracalny: podpis aktu notarialnego. Każda późniejsza zmiana to aneks w formie aktu notarialnego (art. 77 § 1 k.c. i art. 40 ust. 1 u.d.), dlatego zmiany ustalamy przed podpisem.',
     ],
     faq: [
@@ -346,7 +314,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Ile kosztuje sprawdzenie umowy deweloperskiej przez prawnika?',
-        a: 'Cenę podaję w ofercie, którą wysyłam w 24 h roboczych razem z bezpłatną wstępną analizą. Analiza mówi, co trzeba sprawdzić w Twojej sprawie; nie jest opinią o umowie. Cena zależy od zakresu: sama umowa, do tego deweloper i grunt albo także negocjacje. Płacisz dopiero po przyjęciu oferty.',
+        a: `Szybkie sprawdzenie umowy kosztuje ${plainPln(DEV_NET.szybkie)} netto (${plainPln(grossPrice(DEV_NET.szybkie))} brutto), pełna analiza dokumentów z deweloperem i księgą wieczystą ${plainPln(DEV_NET.pelna)} netto (${plainPln(grossPrice(DEV_NET.pelna))} brutto), a pakiet premium z negocjacjami do podpisania aktu ${plainPln(DEV_NET.premium)} netto (${plainPln(grossPrice(DEV_NET.premium))} brutto). Jeśli po szybkim sprawdzeniu wybierzesz wyższy pakiet, dopłacasz tylko różnicę w cenie.`,
       },
     ],
     law: {
@@ -383,9 +351,9 @@ const SERVICE_CONTENT = {
     seeAlso: ['klauzule-abuzywne-deweloper', 'kary-za-opoznienie-dewelopera', 'rekojmia-wady-lokalu'],
     cta: {
       heading: 'Nie podpisuj umowy deweloperskiej w ciemno.',
-      lead: 'Prześlij projekt umowy, prospekt i datę aktu. W 24 h roboczych odpiszę, czy wystarczy sprawdzić samą umowę, czy także dewelopera i grunt, i prześlę ofertę z ceną oraz terminem raportu. Wstępna analiza i oferta są bezpłatne.',
+      lead: 'Wybierz pakiet i prześlij projekt umowy, prospekt oraz datę aktu. W 24 h roboczych potwierdzę zakres i termin. Nie wiesz, który pakiet wybrać? Zostaw „doradź mi”, a odpiszę, czy wystarczy sprawdzić samą umowę, czy także dewelopera i grunt.',
     },
-    updated: '2026-10-10',
+    updated: '2026-10-29',
     faqHeading: 'Pytania przed wizytą u notariusza',
   },
 
