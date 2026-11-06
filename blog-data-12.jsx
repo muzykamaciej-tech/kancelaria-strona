@@ -419,7 +419,7 @@ window.BLOG.push(
     metaTitle: 'Dom do 70 m² bez pozwolenia: warunki i zgłoszenie 2026',
     metaDesc: 'Dom do 70 m² bez pozwolenia: 5 warunków, zgłoszenie z projektem, start po doręczeniu, bez kierownika budowy. WZ, sprzedaż domu i pułapki.',
     excerpt: 'Dom do 70 m² bez pozwolenia: 5 warunków, zgłoszenie z projektem, start po doręczeniu, bez kierownika budowy. WZ, sprzedaż domu i pułapki.',
-    date: '4 listopada 2026', iso: '2026-11-04', readTime: '14 min',
+    date: '4 listopada 2026', iso: '2026-11-04', updated: '6 listopada 2026', updatedIso: '2026-11-06', readTime: '14 min',
     category: 'Proces budowlany', tags: ['Dom do 70 m²', 'Zgłoszenie budowy', 'Dom bez pozwolenia'],
     cover: '/assets/blog-dom-do-70-m2-bez-pozwolenia.jpg',
     related: ['zgloszenie-budowy', 'pozwolenie-na-budowe', 'legalizacja-samowoli'],
@@ -460,7 +460,7 @@ window.BLOG.push(
       ]],
       ['p', '- projekt zagospodarowania działki i projekt architektoniczno-budowlany w 3 egzemplarzach albo elektronicznie, z wymaganymi opiniami i uzgodnieniami, - oświadczenie o prawie do dysponowania nieruchomością na cele budowlane, - WZ, jeżeli jest wymagana, - oświadczenie o budowie na własne potrzeby mieszkaniowe, - oświadczenie, że przyjmujesz odpowiedzialność za kierowanie budową, jeżeli nie ustanowisz kierownika, i że dokumentacja jest kompletna (art. 30 ust. 2a pkt 7 Pb), - oświadczenie o stosowaniu dotychczasowych warunków technicznych, jeżeli projekt powstał według nich (art. 102a ust. 1 Pb).'],
       ['ol', [
-        '**Złóż zgłoszenie** u starosty, a w mieście na prawach powiatu u prezydenta miasta, papierowo albo przez portal e-Budownictwo (art. 30 ust. 1b i 4d Pb). Podaj termin rozpoczęcia robót (art. 30 ust. 2 Pb) i zachowaj potwierdzenie doręczenia.',
+        '**Złóż zgłoszenie** na formularzu PB-2a (Dz.U. 2026 poz. 282) u starosty, a w mieście na prawach powiatu u prezydenta miasta, papierowo albo przez portal e-Budownictwo (art. 30 ust. 1b i 4d Pb). Podaj termin rozpoczęcia robót (art. 30 ust. 2 Pb) i zachowaj potwierdzenie doręczenia.',
         '**Zacznij po doręczeniu.** Zwykłe 21 dni na sprzeciw tego domu nie dotyczy. Urząd nie sprawdza projektu, nie wzywa do uzupełnień, nie wydaje zaświadczenia i nie wnosi sprzeciwu (art. 30 ust. 5j–5k Pb). Jeżeli czegoś brakuje, nikt Ci tego nie powie. Na start masz 3 lata od terminu podanego w zgłoszeniu; później potrzebne jest ponowne zgłoszenie (art. 30 ust. 5b Pb).',
         '**Przed pierwszymi robotami** zapewnij projekt techniczny (art. 42 ust. 1 pkt 1 lit. b Pb). Zawiadom nadzór budowlany i projektanta o terminie rozpoczęcia, z oświadczeniem projektanta o projekcie technicznym (art. 41 ust. 4–4a Pb). Zabezpiecz teren budowy i umieść tablicę informacyjną; przy tym domu to Twój obowiązek (art. 45a ust. 2 i 3a pkt 1 Pb).',
       ]],

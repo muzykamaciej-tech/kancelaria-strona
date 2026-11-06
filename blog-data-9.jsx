@@ -623,7 +623,7 @@ window.BLOG.push(
     metaTitle: 'Zachowek z darowizny – ile wynosi i kiedy się przedawnia',
     metaDesc: 'Zachowek z darowizny należy się dzieciom, małżonkowi i rodzicom. Ile wynosi, jak wycenić mieszkanie, od kogo żądać i kiedy mija 5 lat.',
     excerpt: 'Zachowek z darowizny należy się dzieciom, małżonkowi i rodzicom. Ile wynosi, jak wycenić mieszkanie, od kogo żądać i kiedy mija 5 lat.',
-    date: '27 października 2026', iso: '2026-10-27', readTime: '15 min',
+    date: '27 października 2026', iso: '2026-10-27', updated: '6 listopada 2026', updatedIso: '2026-11-06', readTime: '15 min',
     category: 'Współwłasność i spadki', tags: ['Zachowek', 'Darowizna', 'Spadek'],
     cover: '/assets/blog-zachowek-z-darowizny.jpg',
     related: ['zachowek', 'darowizna-nieruchomosci', 'stwierdzenie-nabycia-spadku'],
@@ -638,7 +638,7 @@ window.BLOG.push(
     ],
     body: [
       ['lead', 'Mama za życia przepisała mieszkanie na brata, a po jej śmierci w spadku nie zostało nic? Zachowek z darowizny należy Ci się, jeżeli jesteś dzieckiem, małżonkiem albo rodzicem zmarłego i dziedziczyłbyś po nim z ustawy: darowiznę dolicza się do spadku, a od tej sumy liczy się zachowek (art. 991 § 1 i art. 993 § 1 Kodeksu cywilnego, dalej: k.c.). Zachowek to połowa wartości udziału, który dostałbyś bez testamentu, a 2/3 – gdy jesteś trwale niezdolny do pracy albo jako zstępny jesteś małoletni. Darowizny dla rodzeństwa i innych spadkobierców liczy się bez względu na to, kiedy je zrobiono, a dla osób obcych – tylko z 10 lat przed śmiercią (art. 994 § 1 k.c.). Na pozew masz co do zasady 5 lat (art. 1007 k.c.).'],
-      ['note', 'Stan prawny na 27.10.2026. Opisuję zachowek po osobie, która za życia darowała mieszkanie, dom, działkę albo pieniądze. Nie opisuję zachowku z zapisu windykacyjnego i fundacji rodzinnej ani szczególnych zasad dla gospodarstw rolnych. Początek przedawnienia przy dziedziczeniu bez testamentu wynika z orzecznictwa Sądu Najwyższego, a nie wprost z ustawy. Przy mieszkaniu sprzedanym przez obdarowanego opieram się na jednym wyroku SN z 2025 r. i piszę to w tekście. Rozłożenie zachowku na raty i jego obniżenie jest możliwe od 22.05.2023 r.'],
+      ['note', 'Stan prawny na 27.10.2026. Opisuję zachowek po osobie, która za życia darowała mieszkanie, dom, działkę albo pieniądze. Nie opisuję zachowku z zapisu windykacyjnego i fundacji rodzinnej ani szczególnych zasad dla gospodarstw rolnych. Początek przedawnienia przy dziedziczeniu bez testamentu wynika z orzecznictwa Sądu Najwyższego, a nie wprost z ustawy. Przy mieszkaniu sprzedanym przez obdarowanego orzeczenia SN nie są jednolite i piszę to w tekście. Rozłożenie zachowku na raty i jego obniżenie jest możliwe od 22.05.2023 r.'],
       ['h2', 'Czy z darowizny należy się zachowek?'],
       ['p', 'Tak. Przy obliczaniu zachowku dolicza się do spadku darowizny zrobione przez spadkodawcę (art. 993 § 1 k.c.). Nie chodzi o zwrot mieszkania. To operacja rachunkowa: wartość darowizny powiększa podstawę, od której liczysz zachowek.'],
       ['p', 'Zachowek z darowizny należy się w 3 typowych sytuacjach:'],
@@ -680,7 +680,7 @@ window.BLOG.push(
       ['ul', [
         '**Remont obdarowanego się nie liczy.** Nowa łazienka, ocieplenie czy dobudowane piętro, za które zapłacił brat, nie zwiększają zachowku, bo zmieniły stan mieszkania po darowiźnie.',
         '**Służebność mieszkania zastrzeżona w umowie darowizny obniża wartość.** Jeżeli mama darowała mieszkanie i zastrzegła sobie dożywotnie prawo mieszkania, wycenia się mieszkanie obciążone tym prawem. SN przyjął, że ograniczone prawa rzeczowe ustanowione razem z darowizną należą do stanu z chwili darowizny (V CSK 385/12).',
-        '**Mieszkanie sprzedane przez obdarowanego.** W wyroku z 5.03.2025, II CSKP 2142/22 SN przyjął, że gdy obdarowany spadkobierca sprzedał nieruchomość albo ją wywłaszczono, liczy się cena lub odszkodowanie, które dostał, a nie wycena po dzisiejszych cenach. Zmiana cen między sprzedażą a wyrokiem nie ma obciążać żadnej ze stron. To jeden wyrok, a brzmienie art. 995 § 1 k.c. mówi o cenach z chwili ustalania zachowku. Przy sprzedanym mieszkaniu licz się z tym, że druga strona powoła się na ten wyrok, a Ty możesz bronić wyceny z przepisu.',
+        '**Mieszkanie sprzedane przez obdarowanego.** W wyroku z 5.03.2025, II CSKP 2142/22 SN przyjął, że gdy obdarowany spadkobierca sprzedał nieruchomość albo ją wywłaszczono, liczy się cena lub odszkodowanie, które dostał, a nie wycena po dzisiejszych cenach. Zmiana cen między sprzedażą a wyrokiem nie ma obciążać żadnej ze stron. Przy nieruchomości ze spadku SN orzekł inaczej: w wyroku z 4.07.2012, I CSK 599/11 liczył zachowek według cen z dnia orzekania, choć spadkobiercy sprzedali udział za niższą cenę. Brzmienie art. 995 § 1 k.c. też mówi o cenach z chwili ustalania zachowku. Przy sprzedanym mieszkaniu licz się z tym, że druga strona powoła się na ten wyrok, a Ty możesz bronić wyceny z przepisu.',
       ]],
       ['h2', 'Od kogo żądać zachowku z darowizny?'],
       ['p', 'Najpierw od spadkobiercy (art. 991 § 2 k.c.). Gdy od spadkobiercy nie da się uzyskać zachowku, od obdarowanego (art. 1000 § 1 k.c.). Taką kolejność opisał SN w wyroku I CSK 381/17.'],

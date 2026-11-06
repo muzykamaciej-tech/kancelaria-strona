@@ -39,12 +39,12 @@
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/najem</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/najem/bezpieczny-najem</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/najem/analiza-umowy-najmu</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/najem/eksmisja</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/najem/eksmisja</loc><lastmod>2026-11-06</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/najem/windykacja-czynszu</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/najem/kaucja-najem</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/najem/obsluga-wynajmujacych</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/sluzebnosci-odszkodowania</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/sluzebnosci-odszkodowania/odszkodowanie-sluzebnosc-przesylu</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/sluzebnosci-odszkodowania/odszkodowanie-sluzebnosc-przesylu</loc><lastmod>2026-11-06</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/sluzebnosci-odszkodowania/bezumowne-korzystanie</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/sluzebnosci-odszkodowania/droga-konieczna</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/sluzebnosci-odszkodowania/odszkodowanie-wywlaszczenie</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
@@ -76,7 +76,7 @@
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/obsluga-podmiotow-profesjonalnych/obsluga-prawna-tbs-sim-kooperatyw</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/roszczenia-deweloper</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/roszczenia-deweloper/kary-za-opoznienie-dewelopera</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/roszczenia-deweloper/rekojmia-wady-lokalu</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/roszczenia-deweloper/rekojmia-wady-lokalu</loc><lastmod>2026-11-06</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/roszczenia-deweloper/wady-czesci-wspolnych</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/roszczenia-deweloper/usuniecie-wad-protokol</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/roszczenia-deweloper/spory-o-metraz</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
@@ -85,20 +85,35 @@
   <url><loc>https://www.mecenasodnieruchomosci.pl/uslugi/roszczenia-deweloper/roszczenia-wspolnota-deweloper</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/oferta/sprawdzenie-umowy-deweloperskiej</loc><lastmod>2026-10-29</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog</loc><priority>0.7</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/warunki-zabudowy</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/slupy-i-przesyl</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/droga-konieczna</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/najem</loc><lastmod>2026-11-03</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/budowa</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/zakup-i-umowy</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/zakup-i-ksiegi</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/deweloper</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/grunty-rolne-oze</loc><lastmod>2026-11-03</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/wspolwlasnosc</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/warunki-zabudowy</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/slupy-i-przesyl</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/droga-konieczna</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/najem</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/budowa</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/zakup-i-umowy</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/zakup-i-ksiegi</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/deweloper</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/grunty-rolne-oze</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kategoria/wspolwlasnosc</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/pozwolenie-na-budowe-krok-po-kroku</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/plan-ogolny-gminy-co-to-jest</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/sluzebnosc-przesylu-co-to-jest</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/eksmisja-lokatora-krok-po-kroku</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/wylaczenie-gruntow-z-produkcji-rolnej</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kupno-dzialki-rolnej-nie-rolnik</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/prawo-pierwokupu-kowr</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/ile-wynosi-zachowek</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/zgloszenie-robot-budowlanych</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/zasiedzenie-sluzebnosci-przesylu</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/zasiedzenie-dzialki-sasiada</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/skarga-na-plan-miejscowy</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/rozgraniczenie-dzialek</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/rekojmia-za-wady-mieszkania</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/akt-notarialny-kupna-nieruchomosci</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/droga-konieczna-jak-ustanowic</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/dzial-spadku</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/uzgodnienie-tresci-ksiegi-wieczystej</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/dom-do-70-m2-bez-pozwolenia</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/dom-do-70-m2-bez-pozwolenia</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/linia-energetyczna-na-dzialce-budowa-domu</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/odszkodowanie-za-plan-miejscowy</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/wywlaszczenie-pod-droge-odszkodowanie</loc><lastmod>2026-11-04</lastmod><priority>0.6</priority></url>
@@ -121,7 +136,7 @@
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/miejscowy-plan-zagospodarowania</loc><lastmod>2026-11-03</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/sprzedaz-gospodarstwa-rolnego</loc><lastmod>2026-11-03</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/renta-dozywotnia-odwrocona-hipoteka</loc><lastmod>2026-11-03</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/sprzedaz-domu-z-kredytem-hipotecznym</loc><lastmod>2026-11-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/sprzedaz-domu-z-kredytem-hipotecznym</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/koszty-zakupu-mieszkania</loc><lastmod>2026-11-03</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kredyt-hipoteczny-po-rozwodzie</loc><lastmod>2026-11-03</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/umowa-najmu-lokalu-uzytkowego</loc><lastmod>2026-11-03</lastmod><priority>0.6</priority></url>
@@ -131,7 +146,7 @@
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/podzial-dzialki-krok-po-kroku</loc><lastmod>2026-11-02</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/dzierzawa-ziemi-pod-fotowoltaike</loc><lastmod>2026-11-02</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/podatek-od-najmu-ryczalt</loc><lastmod>2026-11-02</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/wznowienie-granic-dzialki</loc><lastmod>2026-11-02</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/wznowienie-granic-dzialki</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/odrzucenie-spadku</loc><lastmod>2026-11-02</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/przepisanie-mieszkania-na-dziecko</loc><lastmod>2026-11-02</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/ograniczenie-korzystania-z-nieruchomosci-odszkodowanie</loc><lastmod>2026-11-02</lastmod><priority>0.6</priority></url>
@@ -144,7 +159,7 @@
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/umowa-deweloperska</loc><lastmod>2026-10-27</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/odbior-mieszkania-od-dewelopera</loc><lastmod>2026-10-27</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/stwierdzenie-nabycia-spadku</loc><lastmod>2026-10-27</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/zachowek-z-darowizny</loc><lastmod>2026-10-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/zachowek-z-darowizny</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/umowa-dozywocia</loc><lastmod>2026-10-27</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/wspolnota-mieszkaniowa-uchwaly</loc><lastmod>2026-10-27</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/umowa-najmu-mieszkania-rodzaje</loc><lastmod>2026-10-27</lastmod><priority>0.6</priority></url>
@@ -169,12 +184,12 @@
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/mieszkanie-z-licytacji-komorniczej</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/ksiega-wieczysta-jak-sprawdzic-wpis</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/sprzedaz-mieszkania-ze-spadku-podatek</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/zasiedzenie-nieruchomosci-po-ilu-latach</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/zasiedzenie-nieruchomosci-po-ilu-latach</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/kupno-dzialki-rolnej-z-warunkami-zabudowy</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/jak-sprawdzic-czy-dostane-warunki-zabudowy</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/droga-konieczna-a-warunki-zabudowy</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/warunki-zabudowy-jakie-dokumenty</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/obszar-uzupelnienia-zabudowy-mapa</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/obszar-uzupelnienia-zabudowy-mapa</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/warunki-zabudowy-po-uchwaleniu-planu-ogolnego</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/warunki-zabudowy-koszt</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/warunki-zabudowy-ile-sie-czeka</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -183,7 +198,7 @@
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/warunki-zabudowy-bez-planu-ogolnego</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/czy-warunki-zabudowy-przechodza-na-nowego-wlasciciela</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/warunki-zabudowy-ile-wazne</loc><lastmod>2026-10-06</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/ile-trwa-eksmisja-lokatora</loc><lastmod>2026-09-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/ile-trwa-eksmisja-lokatora</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/warunki-zabudowy-2026-lublin</loc><lastmod>2026-10-07</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/warunki-zabudowy-dla-czesci-dzialki</loc><lastmod>2026-04-09</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/wydruki-ksiag-wieczystych-i-alerty-krs-2026</loc><lastmod>2026-10-26</lastmod><priority>0.6</priority></url>
@@ -200,7 +215,7 @@
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/szerokosc-drogi-koniecznej</loc><lastmod>2026-10-26</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/wynagrodzenie-za-sluzebnosc-drogi-koniecznej</loc><lastmod>2026-01-14</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/zniesienie-sluzebnosci-przesylu-nieistniejaca-linia</loc><lastmod>2026-01-13</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/wycena-sluzebnosci-przesylu-rzeczoznawca</loc><lastmod>2026-10-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/wycena-sluzebnosci-przesylu-rzeczoznawca</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/sluzebnosc-przesylu-jak-obliczyc-wynagrodzenie</loc><lastmod>2026-01-05</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/plan-ogolny-a-wniosek-o-wz-w-toku</loc><lastmod>2026-10-07</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/dzierzawa-pod-fotowoltaike-a-vat</loc><lastmod>2025-12-30</lastmod><priority>0.6</priority></url>
@@ -209,7 +224,7 @@
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/farma-fotowoltaiczna-na-dzialce-rolnej</loc><lastmod>2026-10-07</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/odszkodowanie-od-dewelopera-za-wady</loc><lastmod>2025-12-17</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/zasiedzenie-sluzebnosci-drogi-po-30-latach</loc><lastmod>2026-10-26</lastmod><priority>0.6</priority></url>
-  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/wyrok-tk-zasiedzenie-sluzebnosci-przesylu</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.mecenasodnieruchomosci.pl/blog/wyrok-tk-zasiedzenie-sluzebnosci-przesylu</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym</loc><lastmod>2026-10-06</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/jak-bezpiecznie-wynajac-mieszkanie-poradnik</loc><lastmod>2026-10-27</lastmod><priority>0.6</priority></url>
   <url><loc>https://www.mecenasodnieruchomosci.pl/blog/nielegalne-wydobycie-piachu-z-dzialki-konsekwencje</loc><lastmod>2025-10-11</lastmod><priority>0.6</priority></url>

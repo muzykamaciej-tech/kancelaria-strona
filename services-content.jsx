@@ -434,7 +434,11 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Słupy stoją od 30 lat. Czy zakład energetyczny zasiedział służebność?',
-        a: 'Mógł, ale udowodnić to musi firma, która się na zasiedzenie powołuje (art. 6 k.c.). Zasiedzenie wymaga korzystania z trwałego i widocznego urządzenia przez 20 lat w dobrej wierze albo 30 lat w złej wierze (art. 292 w zw. z art. 172 i 305⁴ k.c.). Firma wykazuje więc, od kiedy korzysta z urządzenia na Twojej działce; dobrą wiarę i ciągłość posiadania prawo domniemywa (art. 7 i 340 k.c.).',
+        a: 'Mógł, ale udowodnić to musi firma, która się na zasiedzenie powołuje (art. 6 k.c.). Zasiedzenie wymaga korzystania z trwałego i widocznego urządzenia przez 20 lat w dobrej wierze albo 30 lat w złej wierze (art. 292 w zw. z art. 172 i 305⁴ k.c.). Firma wykazuje więc, od kiedy korzysta z urządzenia na Twojej działce; dobrą wiarę i ciągłość posiadania prawo domniemywa (art. 7 i 340 k.c.). Sądy są podzielone co do lat sprzed 3.08.2008 r., a wyrok TK P 10/16 nie został ogłoszony w Dzienniku Ustaw; spór opisuję w poradniku o zasiedzeniu służebności przesyłu.',
+      },
+      {
+        q: 'Czy od wynagrodzenia za służebność płacę podatek?',
+        a: 'Wynagrodzenie za ustanowienie służebności przesyłu jest zwolnione z PIT (art. 21 ust. 1 pkt 120a ustawy o PIT). Wynagrodzenie za bezumowne korzystanie według organów podatkowych i NSA zwolnione nie jest. Dlatego w ugodzie warto rozdzielić obie kwoty zgodnie z tym, za co rzeczywiście są płacone.',
       },
       {
         q: 'Za ile lat wstecz mogę żądać zapłaty za słupy?',
@@ -484,13 +488,13 @@ const SERVICE_CONTENT = {
       'Decyzje administracyjne (np. starosty) albo umowy poprzednich właścicieli dotyczące linii lub gazociągu, jeśli masz.',
       'Informacja, czy na działce prowadzisz działalność gospodarczą albo produkcję rolną na sprzedaż.',
     ],
-    guides: ['sluzebnosc-przesylu-jak-obliczyc-wynagrodzenie', 'wycena-sluzebnosci-przesylu-rzeczoznawca', 'linia-energetyczna-na-dzialce-budowa-domu'],
+    guides: ['sluzebnosc-przesylu-jak-obliczyc-wynagrodzenie', 'wycena-sluzebnosci-przesylu-rzeczoznawca', 'linia-energetyczna-na-dzialce-budowa-domu', 'sluzebnosc-przesylu-co-to-jest', 'zasiedzenie-sluzebnosci-przesylu'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'uregulowanie-stanu-prawnego'],
     cta: {
       heading: 'Nie zostawiaj swoich pieniędzy firmie przesyłowej.',
       lead: 'Napisz, co stoi na działce, od kiedy i czy firma przesłała Ci propozycję kwoty. W 24 h roboczych odpiszę, czy zacząć od sprawdzenia tytułu firmy, czy od wezwania, i prześlę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-06',
   },
 
   /* ===== Warunki zabudowy (WZ) ===== */
@@ -1091,7 +1095,7 @@ const SERVICE_CONTENT = {
       'Dokument, na podstawie którego sprzedający jest właścicielem (np. akt notarialny, postanowienie o nabyciu spadku), jeśli go przekazał.',
       'Decyzja kredytowa albo informacja z banku o terminie wypłaty, jeśli kupujesz na kredyt.',
     ],
-    guides: ['jawne-ceny-nieruchomosci-rejestr-cen', 'koszty-zakupu-mieszkania'],
+    guides: ['jawne-ceny-nieruchomosci-rejestr-cen', 'koszty-zakupu-mieszkania', 'akt-notarialny-kupna-nieruchomosci'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'nieruchomosci-rolne', 'warunki-zabudowy'],
     cta: {
       heading: 'Kupuj z kimś, kto pilnuje Twojej strony.',
@@ -1592,7 +1596,7 @@ const SERVICE_CONTENT = {
       {
         eyebrow: 'Strefy planistyczne',
         title: 'Symbole stref na mapie: co obejmuje profil każdej strefy',
-        intro: 'Profile określa załącznik nr 1 do rozporządzenia w sprawie projektu planu ogólnego (Dz.U. 2026 poz. 826). Profil Twojej strefy podaje gminny katalog stref w planie (art. 13e ust. 2 pkt 1 u.p.z.p.); obejmuje on też tereny klas niższego poziomu (przypis 1 do załącznika), więc szczegóły sprawdzam w wypisie.',
+        intro: 'Profile określa załącznik nr 1 do rozporządzenia w sprawie projektu planu ogólnego (Dz.U. 2023 poz. 2758 w brzmieniu z Dz.U. 2026 poz. 826). Profil Twojej strefy podaje gminny katalog stref w planie (art. 13e ust. 2 pkt 1 u.p.z.p.); obejmuje on też tereny klas niższego poziomu (przypis 1 do załącznika), więc szczegóły sprawdzam w wypisie.',
         kind: 'check',
         items: [
           { b: 'SJ – strefa wielofunkcyjna z zabudową mieszkaniową jednorodzinną', t: 'podstawowo m.in. zabudowa mieszkaniowa jednorodzinna, usługi i zieleń urządzona.' },
@@ -1678,7 +1682,7 @@ const SERVICE_CONTENT = {
       'Uwaga albo wniosek, które już złożyłeś, i raport z konsultacji, jeśli są',
       'Wypis z planu miejscowego albo decyzja WZ, jeżeli działka je ma: od nich zaczynam analizę',
     ],
-    guides: ['odszkodowanie-za-plan-ogolny', 'jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym', 'plan-ogolny-a-wniosek-o-wz-w-toku', 'uwagi-do-planu-ogolnego', 'skarga-na-plan-ogolny', 'miejscowy-plan-zagospodarowania'],
+    guides: ['odszkodowanie-za-plan-ogolny', 'jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym', 'plan-ogolny-a-wniosek-o-wz-w-toku', 'uwagi-do-planu-ogolnego', 'skarga-na-plan-ogolny', 'miejscowy-plan-zagospodarowania', 'plan-ogolny-gminy-co-to-jest'],
     seeAlso: ['analiza-umowy-przedwstepnej', 'obsluga-prawna-deweloperow'],
     cta: {
       heading: 'Nie daj się zaskoczyć planem ogólnym.',
@@ -1858,7 +1862,7 @@ const SERVICE_CONTENT = {
       'Decyzja o warunkach zabudowy, pozwolenie na budowę albo zgłoszenie budowy, jeśli masz',
       'Ogłoszenie o konsultacjach społecznych i projekt planu, jeśli plan jest w przygotowaniu',
     ],
-    guides: ['jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym', 'odszkodowanie-za-plan-ogolny', 'miejscowy-plan-zagospodarowania', 'skarga-na-plan-ogolny'],
+    guides: ['jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym', 'odszkodowanie-za-plan-ogolny', 'miejscowy-plan-zagospodarowania', 'skarga-na-plan-ogolny', 'skarga-na-plan-miejscowy'],
     seeAlso: ['odszkodowanie-wywlaszczenie', 'odrolnienie'],
     cta: {
       heading: 'Plan miejscowy związał Ci ręce? Sprawdźmy, czy słusznie.',
@@ -2161,7 +2165,7 @@ const SERVICE_CONTENT = {
       'Decyzja o warunkach zabudowy albo wypis z planu miejscowego (jeśli masz)',
       'Odwołanie sąsiada albo zawiadomienie urzędu o jego wniesieniu (jeśli dotyczy)',
     ],
-    guides: ['warunki-zabudowy-ile-wazne', 'przebudowa-czy-nowy-zjazd-nsa'],
+    guides: ['warunki-zabudowy-ile-wazne', 'przebudowa-czy-nowy-zjazd-nsa', 'pozwolenie-na-budowe-krok-po-kroku'],
     seeAlso: ['warunki-zabudowy', 'droga-konieczna', 'obsluga-prawna-architektow'],
     cta: {
       heading: 'Odmowa, odwołanie sąsiada albo cisza w urzędzie? Zawalczę o Twoją budowę.',
@@ -2882,7 +2886,7 @@ const SERVICE_CONTENT = {
       'Zdjęcia, rachunki za nakłady i lista świadków, jeśli masz',
       'Odpis wniosku o zasiedzenie, jeśli bronisz swojej działki',
     ],
-    guides: ['zasiedzenie-sluzebnosci-drogi-po-30-latach'],
+    guides: ['zasiedzenie-sluzebnosci-drogi-po-30-latach', 'zasiedzenie-dzialki-sasiada'],
     seeAlso: ['droga-konieczna', 'stwierdzenie-nabycia-spadku'],
     cta: {
       heading: 'Wieloletnie posiadanie może stać się własnością. Sprawdźmy, czy w Twoim przypadku.',
@@ -3651,7 +3655,7 @@ const SERVICE_CONTENT = {
       'Wezwanie do zapłaty zachowku albo pozew, jeśli przyszły do Ciebie',
       'Lista najbliższej rodziny zmarłego: kto żyje, kto zmarł wcześniej, kto jest małoletni',
     ],
-    guides: ['zachowek-z-darowizny', 'odwolanie-darowizny'],
+    guides: ['zachowek-z-darowizny', 'odwolanie-darowizny', 'ile-wynosi-zachowek'],
     seeAlso: ['darowizna-nieruchomosci', 'dozywocie-renta'],
     cta: {
       heading: 'Pominięto Cię przy podziale majątku? Zachowek to Twoje prawo.',
@@ -4290,7 +4294,7 @@ const SERVICE_CONTENT = {
         ],
         [
           'Lokal socjalny',
-          'Sąd orzeka o nim z urzędu w wyroku (art. 14 ust. 1 i 3 u.o.p.l.), poza m.in. przemocą w rodzinie i zajęciem lokalu bez tytułu (art. 17 ust. 1); przy lokalu spoza publicznego zasobu może go odmówić także rodzinie z dzieckiem (art. 14 ust. 7)',
+          'Sąd orzeka o nim z urzędu w wyroku (art. 14 ust. 1 i 3 u.o.p.l.), poza m.in. przemocą w rodzinie i zajęciem lokalu bez tytułu (art. 17 ust. 1); przy lokalu spoza publicznego zasobu może go odmówić także rodzinie z dzieckiem (art. 14 ust. 7), chyba że stosunek prawny nawiązano ze spółdzielnią mieszkaniową albo społeczną inicjatywą mieszkaniową albo umowę o używanie lokalu zawarto przed 1.01.2005 (art. 4 ustawy z 17.12.2004)',
         ],
         [
           'Zima',
@@ -4318,7 +4322,7 @@ const SERVICE_CONTENT = {
       { b: 'Lokator nie płaci od kilku miesięcy i nie odbiera telefonu.', t: 'Najpierw potrzebne jest pisemne uprzedzenie z miesiącem na zapłatę zaległości (art. 11 ust. 2 pkt 2 u.o.p.l.).' },
       { b: 'Umowa się skończyła, a lokator nie chce się wynieść.', t: 'Zajmuje lokal bez tytułu prawnego. Potrzebny jest wyrok, a za każdy miesiąc należy Ci się odszkodowanie (art. 18 ust. 1 u.o.p.l.).' },
       { b: 'Masz najem okazjonalny z aktem notarialnym najemcy.', t: 'Bez procesu tylko wtedy, gdy umowę zgłoszono naczelnikowi urzędu skarbowego w 14 dni od rozpoczęcia najmu (art. 19b ust. 1 i 3 u.o.p.l.).' },
-      { b: 'Lokator ma w wyroku lokal socjalny, a gmina od miesięcy go nie daje.', t: 'Eksmisja czeka na ofertę gminy, a ustawa nie daje gminie terminu (art. 14 ust. 6 u.o.p.l.).' },
+      { b: 'Lokator ma w wyroku lokal socjalny, a gmina od miesięcy go nie daje.', t: 'Eksmisja czeka na ofertę gminy, a ustawa nie daje gminie terminu (art. 14 ust. 6 u.o.p.l.). Bez dowodu oferty sąd co do zasady nie nada klauzuli wykonalności (art. 786 § 1 k.p.c.), więc wezwij gminę na piśmie.' },
     ],
     doForTitle: 'Pisma, które przygotowuję: od uprzedzenia do pozwu przeciw gminie',
     doFor: [
@@ -4358,7 +4362,7 @@ const SERVICE_CONTENT = {
       'Opisujesz w formularzu rodzaj umowy, datę zgłoszenia najmu okazjonalnego i od kiedy lokator nie płaci. W 24 h roboczych wskazuję, od którego pisma trzeba zacząć (uprzedzenie, pozew albo wniosek o klauzulę), i przesyłam ofertę z ceną i terminem; do akceptacji oferty nic nie płacisz.',
       'Uprzedzenie i wypowiedzenie. Wypowiedzenie bez formy pisemnej albo bez przyczyny jest nieważne (art. 11 ust. 1 u.o.p.l.), a wtedy kalendarz zaczyna się od nowego uprzedzenia.',
       'Pozew i wyrok. Wyrok zaoczny sąd wyda dopiero po przeprowadzeniu dowodów (art. 15 ust. 4 u.o.p.l.), więc umowę i pisma trzeba mieć od początku.',
-      'Komornik. Eksmisję prowadzi komornik przy sądzie, w którego okręgu leży lokal; tu go nie wybierasz (art. 1046 § 1 k.p.c., art. 10 ust. 1 pkt 4 u.k.s.). Najpierw wzywa lokatora do dobrowolnego opróżnienia lokalu.',
+      'Komornik. Eksmisję prowadzi komornik przy sądzie, w którego okręgu leży lokal; tu go nie wybierasz (art. 1046 § 1 k.p.c., art. 10 ust. 1 pkt 4 u.k.s.). Jeżeli sąd przyznał lokal socjalny, klauzulę wykonalności uzyskasz co do zasady dopiero po wykazaniu dokumentem, że gmina złożyła ofertę (art. 14 ust. 6 u.o.p.l., art. 786 § 1 k.p.c.). Najpierw wzywa lokatora do dobrowolnego opróżnienia lokalu.',
       'Czekanie na gminę. Jeżeli sąd nie przyznał lokalu socjalnego, czekanie na tymczasowe pomieszczenie skracasz, wskazując sam pomieszczenie spełniające wymogi z art. 2 ust. 1 pkt 5a u.o.p.l. (art. 1046 § 4 i 5 k.p.c.).',
     ],
     faq: [
@@ -4376,7 +4380,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Czy rodzinę z dziećmi da się eksmitować i co z lokalem socjalnym?',
-        a: 'Tak. Sąd co do zasady z urzędu bada, czy przyznać lokal socjalny (art. 14 ust. 1 i 3 u.o.p.l.). Przy lokalu spoza publicznego zasobu może go odmówić nawet małoletnim, bo art. 14 ust. 4 wtedy nie działa (art. 14 ust. 7). Jeżeli lokal przyzna, eksmisja czeka na ofertę gminy (art. 14 ust. 6).',
+        a: 'Tak. Sąd co do zasady z urzędu bada, czy przyznać lokal socjalny (art. 14 ust. 1 i 3 u.o.p.l.). Przy lokalu spoza publicznego zasobu może go odmówić nawet małoletnim, bo art. 14 ust. 4 wtedy nie działa (art. 14 ust. 7). Są wyjątki: stosunek prawny nawiązany ze spółdzielnią mieszkaniową albo społeczną inicjatywą mieszkaniową (art. 14 ust. 7) oraz umowa o używanie lokalu zawarta przed 1.01.2005 (art. 4 ustawy z 17.12.2004). Wtedy sąd co do zasady nie może odmówić lokalu socjalnego małoletnim i ich opiekunom (art. 14 ust. 4). Jeżeli lokal przyzna, eksmisja czeka na ofertę gminy (art. 14 ust. 6).',
       },
       {
         q: 'Kto mi zapłaci, kiedy gmina latami nie daje lokalu socjalnego?',
@@ -4388,7 +4392,7 @@ const SERVICE_CONTENT = {
       },
     ],
     law: {
-      asOf: '2026-10-10',
+      asOf: '2026-11-06',
       items: [
         {
           ref: 'art. 2, 11, 14–18, 19a–19j, 25d',
@@ -4396,6 +4400,13 @@ const SERVICE_CONTENT = {
           tj: 'Dz.U. 2023 poz. 725',
           eli: 'DU/2001/733',
           note: 'Wypowiedzenie przy długu, lokal socjalny, ochrona zimowa, odszkodowanie, eksmisja bez procesu.',
+        },
+        {
+          ref: 'art. 4',
+          act: 'Ustawa z 17.12.2004 o zmianie ustawy o ochronie praw lokatorów, mieszkaniowym zasobie gminy i o zmianie Kodeksu cywilnego',
+          tj: 'Dz.U. 2004 nr 281 poz. 2783',
+          eli: 'DU/2004/2783',
+          note: 'Umowy sprzed 1.01.2005.',
         },
         { ref: 'art. 87¹, 98 § 1, 1046', act: 'Kodeks postępowania cywilnego', tj: 'Dz.U. 2026 poz. 468', eli: 'DU/1964/296', note: 'Pełnomocnik, koszty procesu, eksmisja przez komornika.' },
         { ref: 'art. 13, art. 27 pkt 11, art. 71 pkt 1', act: 'Ustawa o kosztach sądowych w sprawach cywilnych', tj: 'Dz.U. 2025 poz. 1228', eli: 'DU/2005/1398', note: 'Opłaty od pozwu i od wniosku o klauzulę.' },
@@ -4412,13 +4423,13 @@ const SERVICE_CONTENT = {
       'Numer księgi wieczystej lokalu albo akt notarialny nabycia',
       'Wyrok i pisma od komornika lub gminy, jeśli sprawa jest na tym etapie',
     ],
-    guides: ['ile-trwa-eksmisja-lokatora', '5-nielegalnych-sposobow-na-wyrzucenie-lokatora', 'lokator-nie-placi-czynszu', 'wypowiedzenie-umowy-najmu-mieszkania'],
+    guides: ['ile-trwa-eksmisja-lokatora', '5-nielegalnych-sposobow-na-wyrzucenie-lokatora', 'lokator-nie-placi-czynszu', 'wypowiedzenie-umowy-najmu-mieszkania', 'eksmisja-lokatora-krok-po-kroku'],
     seeAlso: ['flip-mieszkania', 'podzial-majatku-po-rozwodzie'],
     cta: {
       heading: 'Lokator, który nie płaci i nie wychodzi, to nie musi być Twój problem na lata.',
       lead: 'Opisz umowę i od kiedy lokator nie płaci albo kiedy skończył się najem. W 24 h roboczych odpiszę, którą drogą odzyskać lokal, i dostaniesz ofertę z ceną i terminem; do akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-06',
   },
 
   'windykacja-czynszu': {
@@ -4989,6 +5000,7 @@ const SERVICE_CONTENT = {
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Usterki w mieszkaniu od dewelopera: kiedy działać z rękojmi',
     when: [
+      { b: 'Kupiłeś mieszkanie od osoby prywatnej, nie od dewelopera.', t: 'Rękojmia działa także wtedy: masz 5 lat od wydania lokalu na stwierdzenie wady (art. 568 § 1 k.c.) i rok od jej stwierdzenia na żądanie albo oświadczenie (art. 568 § 2–3 k.c.). Nie masz jednak ochrony konsumenckiej, bo konsumentem jesteś tylko wobec przedsiębiorcy (art. 22¹ k.c.), więc nie działa domniemanie z art. 556² k.c. ani uznanie żądania po 14 dniach (art. 561⁵ k.c.). Sprzedawca mógł też wyłączyć rękojmię w akcie (art. 558 § 1 k.c.), ale wyłączenie jest bezskuteczne co do wady, którą podstępnie zataił (art. 558 § 2 k.c.).' },
       {
         b: 'Zgłosiłeś usterkę, a deweloper od 2 tygodni milczy.',
         t: 'Liczy się, czego zażądałeś: naprawy albo obniżenia ceny o wskazaną kwotę. Jeżeli jesteś konsumentem, po 14 dniach milczenia uważa się, że deweloper uznał to za uzasadnione (art. 561⁵ k.c.).',
@@ -5018,7 +5030,7 @@ const SERVICE_CONTENT = {
       'Wysyłam zgłoszenie tak, żebyś miał dowód, kiedy doszło do dewelopera (art. 61 § 1 k.c.).',
       'Zbieram dowody wady: zdjęcia z datami, korespondencję, a gdy trzeba, opinię rzeczoznawcy budowlanego.',
       'Wyliczam obniżenie ceny według proporcji z art. 560 § 3 k.c.: wartość lokalu z wadą do wartości lokalu bez wady.',
-      'Przy wadzie istotnej przygotowuję oświadczenie o odstąpieniu od umowy deweloperskiej i wyliczam, co deweloper musi Ci zwrócić (art. 494 § 1 k.c.).',
+      'Przy wadzie istotnej przygotowuję oświadczenie o odstąpieniu od umowy i wyliczam, co deweloper musi Ci zwrócić (art. 494 § 1 k.c.).',
       'Gdy deweloper nie usuwa wady ani nie płaci, wnoszę pozew z wnioskiem o opinię biegłego o wadzie lokalu.',
     ],
     stepsHeading: 'Jak przebiega sprawa o wady mieszkania',
@@ -5086,13 +5098,13 @@ const SERVICE_CONTENT = {
       'Twoje zgłoszenia wady i odpowiedzi dewelopera: maile, pisma, potwierdzenia nadania.',
       'Prospekt informacyjny, karta gwarancyjna i opinie techniczne, jeśli masz.',
     ],
-    guides: ['odszkodowanie-od-dewelopera-za-wady', 'odbior-mieszkania-od-dewelopera', 'gwarancja-dewelopera-na-mieszkanie', 'deweloper-nie-usuwa-usterek'],
+    guides: ['odszkodowanie-od-dewelopera-za-wady', 'odbior-mieszkania-od-dewelopera', 'gwarancja-dewelopera-na-mieszkanie', 'deweloper-nie-usuwa-usterek', 'rekojmia-za-wady-mieszkania'],
     seeAlso: ['sprawdzenie-umowy-deweloperskiej', 'spory-z-wykonawca'],
     cta: {
       heading: 'Kupiłeś mieszkanie bez wad — i takie Ci się należy.',
       lead: 'Opisz usterkę i podaj, kiedy deweloper wydał Ci lokal. W 24 h roboczych odpiszę, od czego zacząć, i wyślę ofertę z ceną i terminem. Płacisz dopiero, gdy ją zaakceptujesz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-06',
     faqHeading: 'Usterki po odbiorze mieszkania: pytania nabywców',
   },
 
@@ -6716,7 +6728,7 @@ const SERVICE_CONTENT = {
       'Dyplom, świadectwo albo dokument o stażu pracy w rolnictwie, jeśli wniosek ma złożyć kupujący',
       'Decyzja KOWR z datą doręczenia, jeśli już ją dostałeś',
     ],
-    guides: ['zgoda-kowr-nabycie-ziemi-rolnej', 'status-rolnika-indywidualnego', 'sprzedaz-gospodarstwa-rolnego'],
+    guides: ['zgoda-kowr-nabycie-ziemi-rolnej', 'status-rolnika-indywidualnego', 'sprzedaz-gospodarstwa-rolnego', 'prawo-pierwokupu-kowr'],
     seeAlso: ['obsluga-zakupu', 'obsluga-prawna-przedsiebiorstw-rolnych'],
     cta: {
       heading: 'Nie jesteś rolnikiem, a chcesz kupić ziemię? Przeprowadzę Cię przez zgodę KOWR.',
@@ -7123,7 +7135,7 @@ const SERVICE_CONTENT = {
       'Decyzja starosty o wyłączeniu z datą doręczenia, jeśli już ją masz',
       'Umowa zakupu działki albo operat szacunkowy, jeśli spór dotyczy wartości gruntu',
     ],
-    guides: ['farma-fotowoltaiczna-na-dzialce-rolnej'],
+    guides: ['farma-fotowoltaiczna-na-dzialce-rolnej', 'wylaczenie-gruntow-z-produkcji-rolnej'],
     seeAlso: ['warunki-zabudowy', 'zgloszenie-budowy'],
     cta: {
       heading: 'Odrolnienie nie musi kosztować fortuny — a często nie kosztuje nic.',

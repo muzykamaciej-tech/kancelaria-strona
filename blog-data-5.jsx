@@ -5,7 +5,7 @@ window.BLOG.push(
     title: 'Wycena służebności przesyłu – jak robi to rzeczoznawca majątkowy?',
     metaTitle: 'Wycena służebności przesyłu – jak liczy rzeczoznawca?',
     excerpt: 'Dostałeś pismo od zakładu energetycznego lub gazowniczego z propozycją zapłaty za ustanowienie służebności przesyłu? Kluczowe pytanie brzmi: „ILE?”. Wyjaśniam, jak rzeczoznawcy majątkowi wyliczają te kwoty i dlaczego pierwsza propozycja od przedsiębiorcy to zazwyczaj tylko ułamek tego, co Ci się należy.',
-    date: '12 stycznia 2026', iso: '2026-01-12', updated: '27 października 2026', updatedIso: '2026-10-27', readTime: '3 min',
+    date: '12 stycznia 2026', iso: '2026-01-12', updated: '6 listopada 2026', updatedIso: '2026-11-06', readTime: '3 min',
     category: 'Służebność przesyłu', tags: ['Operat szacunkowy', 'Współczynnik K', 'Rzeczoznawca'],
     cover: '/assets/blog-wycena-przesyl-granat.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/wycena-służebności-przesyłu-jak-robi-to-rzeczoznawca-majątkowy',
@@ -48,7 +48,7 @@ window.BLOG.push(
       ['ol', [
         'Wartość gruntu w tej okolicy wzrosła.',
         'Współczynnik współkorzystania był znacznie wyższy, bo gazociąg uniemożliwiał zrobienie wjazdu na posesję w planowanym miejscu.',
-        'Doliczyliśmy odszkodowanie za obniżenie wartości reszty działki.',
+        'W wynagrodzeniu uwzględniliśmy obniżenie wartości reszty działki.',
       ]],
       ['p', '**Efekt?** Realna wartość służebności i odszkodowania wyniosła **28 000 zł**. To ponad 10 razy więcej niż pierwsza propozycja!'],
       ['h2', 'Dlaczego nie warto wierzyć na słowo wycenie od przedsiębiorstwa?'],

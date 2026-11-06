@@ -132,7 +132,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Umowa dzierżawy z datą zawarcia, jeśli ktoś dzierżawi tę ziemię',
       'Projekt umowy od notariusza, jeśli już go masz',
     ],
-    guides: [],
+    guides: ['kupno-dzialki-rolnej-nie-rolnik'],
     seeAlso: ['analiza-umowy-przedwstepnej', 'dzial-spadku'],
     cta: {
       heading: 'Ziemia rolna to osobne przepisy — sprawdźmy je, zanim podpiszesz.',
@@ -480,7 +480,7 @@ Object.assign(window.SERVICE_CONTENT, {
     steps: [
       'Wysyłasz przez formularz opis obiektu i działki, a jeśli masz, projekt albo pismo urzędu.',
       'Bezpłatnie, w 24 h roboczych, odpisuję, jaki jest następny krok, np. sprawdzenie projektu pod kątem art. 29 Pb, odpowiedź na wezwanie starosty albo odwołanie od sprzeciwu. Ofertę z ceną i terminem wysyłam razem z tą odpowiedzią; przed jej przyjęciem nic nie płacisz.',
-      'Składasz zgłoszenie u starosty papierowo albo przez portal e-Budownictwo, przed zamierzonym terminem rozpoczęcia robót (art. 30 ust. 1b, 4d i 5 Pb); dokumenty i oświadczenia przygotowuję wcześniej.',
+      'Składasz zgłoszenie u starosty na formularzu PB-2a (dom jednorodzinny) albo PB-2 (inne obiekty i roboty), papierowo albo przez portal e-Budownictwo, przed zamierzonym terminem rozpoczęcia robót (art. 30 ust. 1b, 4d i 5 Pb; Dz.U. 2026 poz. 282); dokumenty i oświadczenia przygotowuję wcześniej.',
       'Krok nieodwracalny: start robót. Dom do 70 m² zaczynasz po doręczeniu zgłoszenia, inne obiekty po 21 dniach bez sprzeciwu (art. 30 ust. 5 i 5k Pb); wcześniejszy start to podstawa sprzeciwu (art. 30 ust. 6 pkt 4 Pb). Przy domu najpierw zawiadamiasz nadzór budowlany i projektanta o zamierzonym terminie startu (art. 41 ust. 4 Pb).',
     ],
     faqHeading: 'Kierownik budowy, 21 dni, sprzeciw i opłata: najczęstsze pytania',
@@ -528,7 +528,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Złożone zgłoszenie z datą doręczenia urzędowi (jeśli już je złożyłeś)',
       'Postanowienie o uzupełnieniu albo decyzja o sprzeciwie z datą doręczenia (jeśli je dostałeś)',
     ],
-    guides: ['warunki-zabudowy-ile-wazne', 'dom-do-70-m2-bez-pozwolenia'],
+    guides: ['warunki-zabudowy-ile-wazne', 'dom-do-70-m2-bez-pozwolenia', 'zgloszenie-robot-budowlanych'],
     seeAlso: ['warunki-zabudowy', 'odrolnienie'],
     cta: {
       heading: 'Zgłoszenie zamiast pozwolenia — szybciej, o ile zrobione bez błędu.',

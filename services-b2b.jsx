@@ -627,7 +627,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Reklamacja, wezwanie, pozew albo zawiadomienie rzecznika, jeśli przyszły',
       'Polisa OC, jeśli masz',
     ],
-    guides: ['zawyzony-podatek-od-nieruchomosci-blad-w-ewidencji', 'podzial-dzialki-krok-po-kroku', 'wznowienie-granic-dzialki'],
+    guides: ['zawyzony-podatek-od-nieruchomosci-blad-w-ewidencji', 'podzial-dzialki-krok-po-kroku', 'wznowienie-granic-dzialki', 'rozgraniczenie-dzialek'],
     seeAlso: ['uregulowanie-stanu-prawnego', 'zniesienie-wspolwlasnosci', 'droga-konieczna'],
     cta: {
       heading: 'Tam, gdzie kończy się pomiar, a zaczyna spór — jestem po Twojej stronie.',
