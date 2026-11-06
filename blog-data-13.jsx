@@ -2173,7 +2173,7 @@ window.BLOG.push(
       ['p', 'Po podpisaniu zmiana wymaga zgody sprzedającego i kolejnego aktu (art. 77 § 1 i art. 158 k.c.). Notariusz sam prostuje protokołem tylko oczywiste omyłki (art. 80 § 4 p.n.).'],
       ['p', '**Czy notariusz pilnuje mojego interesu?** Czuwa nad prawami i słusznymi interesami obu stron i udziela niezbędnych wyjaśnień (art. 80 § 2–3 p.n.). Odmówi czynności sprzecznej z prawem (art. 81), ale niekorzystna umowa nie musi nią być. Sąd Najwyższy wskazał, że ta ocena musi uwzględniać autonomię woli stron (wyrok z 11.03.2009, I CSK 363/08, sprawa gospodarcza, sprzedaż za 1 zł). Notariusz odpowiada za szkodę przy szczególnej staranności (art. 49 p.n.), ale nie negocjuje za Ciebie.'],
       ['h2', 'Jak wygląda podpisanie aktu i ile to trwa?'],
-      ['p', 'Przepisy nie podają czasu. Prosta sprzedaż to zwykle jedna wizyta, przy kredycie albo pełnomocnikach trwa to dłużej.'],
+      ['p', 'Przepisy nie podają czasu i bywa różnie. Czasem dostajesz projekt z wyprzedzeniem, a czasem wszystko dzieje się podczas jednej wizyty. Przy kredycie albo pełnomocnikach trwa to dłużej.'],
       ['ol', [
         '**Tożsamość.** Notariusz ją stwierdza (art. 85 p.n.). Przy wątpliwości co do zdolności do czynności prawnych nie sporządzi aktu (art. 86).',
         '**Płatności.** PCC i opłatę sądową uiszczasz przed sporządzeniem aktu (art. 10 ust. 3 u.p.c.c., art. 7 § 2 p.n.).',
@@ -2200,7 +2200,7 @@ window.BLOG.push(
       ['p', 'W środę 25 listopada cofa zastrzeżenie PESEL, a rano w dniu aktu przegląda księgę. Do 10 grudnia składa informację o nieruchomości, a podatek płaci od 1 grudnia.'],
       ['h2', 'Co możesz zrobić przed wizytą u notariusza'],
       ['ol', [
-        '**Poproś o projekt aktu** z kilkudniowym wyprzedzeniem, z listą dokumentów i wyliczeniem kosztów.',
+        '**Poproś o projekt aktu** przed terminem, z listą dokumentów i wyliczeniem kosztów. Nie zawsze dostaniesz go z wyprzedzeniem, więc zapytaj o to przy umawianiu wizyty.',
         '**Porównaj projekt** z księgą, wypisem z ewidencji i umową przedwstępną.',
         '**Zaznacz 3 daty:** zapłaty, wydania i terminu w zapisie o egzekucji. Przy kredycie uzgodnij je z bankiem.',
         '**Zgłoś poprawki na piśmie** notariuszowi i sprzedającemu.',
