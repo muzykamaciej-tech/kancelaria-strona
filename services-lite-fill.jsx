@@ -132,13 +132,13 @@ Object.assign(window.SERVICE_CONTENT, {
       'Umowa dzierżawy z datą zawarcia, jeśli ktoś dzierżawi tę ziemię',
       'Projekt umowy od notariusza, jeśli już go masz',
     ],
-    guides: ['kupno-dzialki-rolnej-nie-rolnik'],
+    guides: ['kupno-dzialki-rolnej-nie-rolnik', 'przekazanie-gospodarstwa-rolnego'],
     seeAlso: ['analiza-umowy-przedwstepnej', 'dzial-spadku'],
     cta: {
       heading: 'Ziemia rolna to osobne przepisy — sprawdźmy je, zanim podpiszesz.',
       lead: 'Napisz, jaką działkę rolną kupujesz albo sprzedajesz i czy po drugiej stronie jest rodzina, rolnik albo dzierżawca. W 24 h roboczych odpiszę, co trzeba zrobić przed aktem, np. zawrzeć umowę warunkową, i prześlę ofertę z ceną i terminem.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'dzierzawa-oze': {
@@ -438,7 +438,7 @@ Object.assign(window.SERVICE_CONTENT, {
       ],
     },
     introHeading: 'Kiedy urząd może zablokować budowę w 21 dni',
-    intro: 'Zgłoszenie to pismo do starosty z opisem rodzaju, zakresu, miejsca i sposobu robót oraz terminu ich rozpoczęcia (art. 30 ust. 1b–2, art. 82 ust. 2 Pb). Jeżeli w 21 dni od doręczenia zgłoszenia urząd nie wniesie sprzeciwu w drodze decyzji, możesz zacząć roboty (art. 30 ust. 5 Pb), potocznie: milcząca zgoda. Sprzeciw musi wnieść m.in. wtedy, gdy obiekt wymaga pozwolenia albo narusza plan miejscowy lub decyzję o warunkach zabudowy (art. 30 ust. 6 Pb). Przy domu granicę wyznacza obszar oddziaływania obiektu, czyli teren wokół budynku, na którym przepisy odrębne ograniczają przez niego zabudowę (art. 3 pkt 20 Pb). Jeżeli wychodzi poza działkę, na której dom zaprojektowano, potrzebujesz pozwolenia na budowę (art. 28 ust. 1, art. 29 ust. 1 pkt 1 Pb).',
+    intro: 'Zgłoszenie to pismo do starosty z opisem rodzaju, zakresu, miejsca i sposobu robót oraz terminu ich rozpoczęcia (art. 30 ust. 1b–2, art. 82 ust. 2 Pb). Wyjątek: zjazd z drogi krajowej lub wojewódzkiej zgłaszasz wojewodzie, a odwołanie rozpatruje Główny Inspektor Nadzoru Budowlanego (art. 82 ust. 3 pkt 3 Pb). Jeżeli w 21 dni od doręczenia zgłoszenia urząd nie wniesie sprzeciwu w drodze decyzji, możesz zacząć roboty (art. 30 ust. 5 Pb), potocznie: milcząca zgoda. Sprzeciw musi wnieść m.in. wtedy, gdy obiekt wymaga pozwolenia albo narusza plan miejscowy lub decyzję o warunkach zabudowy (art. 30 ust. 6 Pb). Przy domu granicę wyznacza obszar oddziaływania obiektu, czyli teren wokół budynku, na którym przepisy odrębne ograniczają przez niego zabudowę (art. 3 pkt 20 Pb). Jeżeli wychodzi poza działkę, na której dom zaprojektowano, potrzebujesz pozwolenia na budowę (art. 28 ust. 1, art. 29 ust. 1 pkt 1 Pb).',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Planujesz mały dom, starosta przysłał pismo albo budowa wciąż nie ruszyła',
     when: [
@@ -529,7 +529,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Złożone zgłoszenie z datą doręczenia urzędowi (jeśli już je złożyłeś)',
       'Postanowienie o uzupełnieniu albo decyzja o sprzeciwie z datą doręczenia (jeśli je dostałeś)',
     ],
-    guides: ['warunki-zabudowy-ile-wazne', 'dom-do-70-m2-bez-pozwolenia', 'zgloszenie-robot-budowlanych', 'ogrodzenie-na-granicy-dzialki'],
+    guides: ['warunki-zabudowy-ile-wazne', 'dom-do-70-m2-bez-pozwolenia', 'zgloszenie-robot-budowlanych', 'ogrodzenie-na-granicy-dzialki', 'zjazd-z-drogi-publicznej'],
     seeAlso: ['warunki-zabudowy', 'odrolnienie'],
     cta: {
       heading: 'Zgłoszenie zamiast pozwolenia — szybciej, o ile zrobione bez błędu.',
@@ -935,7 +935,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Przy zaległościach: uchwała o wysokości zaliczek, zestawienie wpłat dłużnika i wysłane wezwania',
       'Projekt umowy, którą zarząd ma podpisać, z uchwałą, jeśli ją podjęto',
     ],
-    guides: ['wspolnota-mieszkaniowa-uchwaly', 'zarzadca-nieruchomosci-umowa', 'uchwala-wspolnoty-o-remoncie'],
+    guides: ['wspolnota-mieszkaniowa-uchwaly', 'zarzadca-nieruchomosci-umowa', 'uchwala-wspolnoty-o-remoncie', 'zarzad-wspolnoty-mieszkaniowej'],
     seeAlso: ['roszczenia-wspolnota-deweloper', 'nadzor-budowlany-pinb', 'gwarancja-jakosci-lokal'],
     cta: {
       heading: 'Uchwały, które się bronią. Pieniądze, które wracają. Deweloper, który odpowiada.',

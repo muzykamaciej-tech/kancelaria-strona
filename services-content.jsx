@@ -1095,7 +1095,7 @@ const SERVICE_CONTENT = {
       'Dokument, na podstawie którego sprzedający jest właścicielem (np. akt notarialny, postanowienie o nabyciu spadku), jeśli go przekazał.',
       'Decyzja kredytowa albo informacja z banku o terminie wypłaty, jeśli kupujesz na kredyt.',
     ],
-    guides: ['jawne-ceny-nieruchomosci-rejestr-cen', 'koszty-zakupu-mieszkania', 'akt-notarialny-kupna-nieruchomosci', 'kupno-dzialki-budowlanej-krok-po-kroku', 'prawo-pierwokupu-gminy', 'wykup-mieszkania-komunalnego-bonifikata', 'negocjacje-ceny-nieruchomosci'],
+    guides: ['jawne-ceny-nieruchomosci-rejestr-cen', 'koszty-zakupu-mieszkania', 'akt-notarialny-kupna-nieruchomosci', 'kupno-dzialki-budowlanej-krok-po-kroku', 'prawo-pierwokupu-gminy', 'wykup-mieszkania-komunalnego-bonifikata', 'negocjacje-ceny-nieruchomosci', 'dzialka-rod-kupno-sprzedaz', 'miejsce-postojowe-garaz-wlasnosc', 'wady-ukryte-mieszkania-rynek-wtorny'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'nieruchomosci-rolne', 'warunki-zabudowy'],
     cta: {
       heading: 'Kupuj z kimś, kto pilnuje Twojej strony.',
@@ -1230,7 +1230,7 @@ const SERVICE_CONTENT = {
       'Umowa przedwstępna albo projekt aktu, jeśli już są.',
       'Umowa najmu, jeśli w mieszkaniu ktoś mieszka.',
     ],
-    guides: ['jawne-ceny-nieruchomosci-rejestr-cen', 'umowa-posrednictwa-prowizja', 'sprzedaz-domu-z-kredytem-hipotecznym', 'prawo-pierwokupu-gminy', 'wykup-mieszkania-komunalnego-bonifikata'],
+    guides: ['jawne-ceny-nieruchomosci-rejestr-cen', 'umowa-posrednictwa-prowizja', 'sprzedaz-domu-z-kredytem-hipotecznym', 'prawo-pierwokupu-gminy', 'wykup-mieszkania-komunalnego-bonifikata', 'sprzedaz-mieszkania-krok-po-kroku'],
     seeAlso: ['stwierdzenie-nabycia-spadku', 'uregulowanie-stanu-prawnego', 'zniesienie-wspolwlasnosci'],
     cta: {
       heading: 'Sprzedaj bezpiecznie — z pieniędzmi zabezpieczonymi od początku.',
@@ -2165,7 +2165,7 @@ const SERVICE_CONTENT = {
       'Decyzja o warunkach zabudowy albo wypis z planu miejscowego (jeśli masz)',
       'Odwołanie sąsiada albo zawiadomienie urzędu o jego wniesieniu (jeśli dotyczy)',
     ],
-    guides: ['warunki-zabudowy-ile-wazne', 'przebudowa-czy-nowy-zjazd-nsa', 'pozwolenie-na-budowe-krok-po-kroku', 'odwolanie-od-pozwolenia-na-budowe'],
+    guides: ['warunki-zabudowy-ile-wazne', 'przebudowa-czy-nowy-zjazd-nsa', 'pozwolenie-na-budowe-krok-po-kroku', 'odwolanie-od-pozwolenia-na-budowe', 'odleglosc-domu-od-granicy-dzialki'],
     seeAlso: ['warunki-zabudowy', 'droga-konieczna', 'obsluga-prawna-architektow'],
     cta: {
       heading: 'Odmowa, odwołanie sąsiada albo cisza w urzędzie? Zawalczę o Twoją budowę.',
@@ -2462,13 +2462,13 @@ const SERVICE_CONTENT = {
       'Protokoły odbioru częściowego lub końcowego i zgłoszenia wad, jeśli są.',
       'Wezwanie do zapłaty albo faktury od wykonawcy, jeśli je dostałeś.',
     ],
-    guides: ['umowa-o-roboty-budowlane', 'odstapienie-od-umowy-z-wykonawca', 'gwarancja-zaplaty-za-roboty-budowlane'],
+    guides: ['umowa-o-roboty-budowlane', 'odstapienie-od-umowy-z-wykonawca', 'gwarancja-zaplaty-za-roboty-budowlane', 'podwykonawca-nie-dostal-zaplaty'],
     seeAlso: ['usuniecie-wad-protokol', 'obsluga-prawna-firm-budowlanych'],
     cta: {
       heading: 'Niedokończona budowa albo fuszerka to nie musi być Twój koszt.',
       lead: 'Napisz, na jakim etapie stanęła budowa, ile zapłaciłeś i czy wykonawca dostał już wezwanie. W 24 h roboczych bezpłatnie odpiszę, czy zaczynamy od wezwania, odstąpienia czy pozwu, a w ofercie podam cenę i termin; płacisz dopiero, gdy ją przyjmiesz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'umowa-o-roboty-budowlane': {
@@ -3390,7 +3390,7 @@ const SERVICE_CONTENT = {
       ],
     },
     introHeading: 'Co się zmienia, gdy dom po rodzicach należy do kilku osób',
-    intro: 'Jeżeli spadek przypada kilku osobom, każda ma ułamek całego majątku, a do tej wspólności stosuje się odpowiednio przepisy o współwłasności w częściach ułamkowych (art. 1035 k.c.). Postanowienie o stwierdzeniu nabycia spadku wskazuje tylko spadkobierców i wysokość ich udziałów (art. 677 k.p.c.). Dział spadku rozstrzyga, kto dostaje dom, a kto spłatę. Jeżeli nie ma ani postanowienia spadkowego, ani zarejestrowanego aktu poświadczenia dziedziczenia, sąd stwierdzi nabycie spadku w sprawie o dział (art. 681 k.p.c.).',
+    intro: 'Jeżeli spadek przypada kilku osobom, każda ma ułamek całego majątku, a do tej wspólności stosuje się odpowiednio przepisy o współwłasności w częściach ułamkowych (art. 1035 k.c.). Postanowienie o stwierdzeniu nabycia spadku wskazuje tylko spadkobierców i wysokość ich udziałów (art. 677 k.p.c.). Dział spadku rozstrzyga, kto dostaje dom, a kto spłatę. Jeżeli nie ma ani postanowienia spadkowego, ani zarejestrowanego aktu poświadczenia dziedziczenia, sąd stwierdzi nabycie spadku w sprawie o dział (art. 681 k.p.c.). Spadkobiercą jest dziecko? Dział wymaga zezwolenia sądu, a gdy dziedziczy też rodzic, za dziecko podpisuje reprezentant ustanowiony przez sąd (art. 98 § 2 pkt 2, art. 99 § 1 i art. 101 § 3 k.r.o.).',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Dom po rodzicach należy do rodzeństwa i trzeba go podzielić',
     when: [
@@ -3507,13 +3507,13 @@ const SERVICE_CONTENT = {
       'Rachunki i przelewy za remonty, podatki i długi zapłacone po śmierci spadkodawcy',
       'Pisma od rodzeństwa albo Twoja propozycja podziału, jeśli masz',
     ],
-    guides: ['dzial-spadku'],
+    guides: ['dzial-spadku', 'nieruchomosc-maloletniego-zgoda-sadu'],
     seeAlso: ['uregulowanie-stanu-prawnego', 'nieruchomosci-rolne'],
     cta: {
       heading: 'Zamień odziedziczone „ułamki” w konkretny, sprawiedliwy podział.',
       lead: 'Napisz, czy rodzeństwo zgadza się na podział, a do 24 h roboczych bezpłatnie wskażę, od czego zacząć. W tej odpowiedzi znajdziesz też ofertę z ceną i terminem pracy przy dziale; płacisz dopiero po jej przyjęciu.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'zachowek': {
@@ -4423,13 +4423,13 @@ const SERVICE_CONTENT = {
       'Numer księgi wieczystej lokalu albo akt notarialny nabycia',
       'Wyrok i pisma od komornika lub gminy, jeśli sprawa jest na tym etapie',
     ],
-    guides: ['ile-trwa-eksmisja-lokatora', '5-nielegalnych-sposobow-na-wyrzucenie-lokatora', 'lokator-nie-placi-czynszu', 'wypowiedzenie-umowy-najmu-mieszkania', 'eksmisja-lokatora-krok-po-kroku'],
+    guides: ['ile-trwa-eksmisja-lokatora', '5-nielegalnych-sposobow-na-wyrzucenie-lokatora', 'lokator-nie-placi-czynszu', 'wypowiedzenie-umowy-najmu-mieszkania', 'eksmisja-lokatora-krok-po-kroku', 'wymeldowanie-z-mieszkania'],
     seeAlso: ['flip-mieszkania', 'podzial-majatku-po-rozwodzie'],
     cta: {
       heading: 'Lokator, który nie płaci i nie wychodzi, to nie musi być Twój problem na lata.',
       lead: 'Opisz umowę i od kiedy lokator nie płaci albo kiedy skończył się najem. W 24 h roboczych odpiszę, którą drogą odzyskać lokal, i dostaniesz ofertę z ceną i terminem; do akceptacji nic nie płacisz.',
     },
-    updated: '2026-11-06',
+    updated: '2026-11-07',
   },
 
   'windykacja-czynszu': {
@@ -4811,13 +4811,13 @@ const SERVICE_CONTENT = {
       'Akty notarialne najemców i daty zgłoszeń najmu okazjonalnego, jeśli je masz',
       'Zestawienie zaległości z datami rat i pisma już wysłane do lokatorów, jeśli są',
     ],
-    guides: ['jak-bezpiecznie-wynajac-mieszkanie-poradnik', 'podatek-od-najmu-ryczalt', 'najem-krotkoterminowy', 'wypowiedzenie-umowy-najmu-mieszkania', 'lokator-nie-placi-czynszu'],
+    guides: ['jak-bezpiecznie-wynajac-mieszkanie-poradnik', 'podatek-od-najmu-ryczalt', 'najem-krotkoterminowy', 'wypowiedzenie-umowy-najmu-mieszkania', 'lokator-nie-placi-czynszu', 'najem-instytucjonalny'],
     seeAlso: ['obsluga-prawna-operatorow-najmu', 'obsluga-prawna-zarzadcow'],
     cta: {
       heading: 'Traktujesz najem jak biznes? Miej do niego prawnika na stałe.',
       lead: 'Napisz, co dziś wymaga ruchu: nowa umowa, zaległość czy koniec najmu. W ciągu 24 h roboczych bezpłatnie wskażę, co zrobić najpierw, i prześlę ofertę z zakresem, ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   /* ===== BLOK 12 — Roszczenia wobec dewelopera ===== */
@@ -4957,13 +4957,13 @@ const SERVICE_CONTENT = {
       'Korespondencja z deweloperem o terminie: zawiadomienia o przesunięciu, maile, projekt aneksu.',
       'Dowody kosztów z okresu opóźnienia, jeśli je masz: umowa najmu, potwierdzenia czynszu, harmonogram spłat kredytu.',
     ],
-    guides: ['kara-umowna-za-opoznienie-dewelopera-uchwala-sn', 'opoznienie-dewelopera-odszkodowanie'],
+    guides: ['kara-umowna-za-opoznienie-dewelopera-uchwala-sn', 'opoznienie-dewelopera-odszkodowanie', 'odstapienie-od-umowy-deweloperskiej'],
     seeAlso: ['sprawdzenie-umowy-deweloperskiej', 'negocjacje-nieruchomosci'],
     cta: {
       heading: 'Opóźnienie dewelopera ma swoją cenę — i to on powinien ją zapłacić.',
       lead: 'Prześlij umowę z aneksami i datę, której deweloper nie dotrzymał. W 24 h roboczych odpiszę, jaki pierwszy krok wobec dewelopera proponuję, i wyślę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'rekojmia-wady-lokalu': {

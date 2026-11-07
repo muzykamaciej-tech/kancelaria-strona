@@ -134,7 +134,7 @@ window.BLOG.push(
     metaTitle: 'Dział spadku – notariusz czy sąd, spłaty, koszty, czas',
     metaDesc: 'Dział spadku: akt u notariusza albo wniosek do sądu za 500 zł (zgodny 300 zł). Spłaty rodzeństwa, darowizny, PCC 2%, koszty i czas trwania.',
     excerpt: 'Dział spadku: akt u notariusza albo wniosek do sądu za 500 zł (zgodny 300 zł). Spłaty rodzeństwa, darowizny, PCC 2%, koszty i czas trwania.',
-    date: '4 listopada 2026', iso: '2026-11-04', readTime: '13 min',
+    date: '4 listopada 2026', iso: '2026-11-04', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '13 min',
     category: 'Współwłasność i spadki', tags: ['Dział spadku', 'Spłata rodzeństwa', 'Koszty i podatki'],
     cover: '/assets/blog-dzial-spadku.jpg',
     related: ['dzial-spadku', 'zniesienie-wspolwlasnosci', 'stwierdzenie-nabycia-spadku'],
@@ -166,7 +166,7 @@ window.BLOG.push(
         ['PCC', 'pobiera notariusz', 'sam, w 14 dni', 'sam, w 14 dni'],
       ]],
       ['p', 'Zgodny wniosek jest tańszy, ale sąd sprawdzi, czy projekt nie sprzeciwia się prawu ani zasadom współżycia społecznego i nie narusza rażąco interesu uprawnionych (art. 622 § 2 w zw. z art. 688 k.p.c.). Po akcie wniosek do księgi wieczystej składa notariusz (art. 92 § 4 Prawa o notariacie), a po postanowieniu nowy właściciel.'],
-      ['p', 'Sprawę rozpoznaje sąd spadku, czyli sąd rejonowy ostatniego miejsca zwykłego pobytu zmarłego (art. 507 i 628 k.p.c.). Gdy spadkobiercą jest małoletnie dziecko, rodzice nie podpiszą działu bez zezwolenia sądu (art. 101 § 3 Kodeksu rodzinnego i opiekuńczego).'],
+      ['p', 'Sprawę rozpoznaje sąd spadku, czyli sąd rejonowy ostatniego miejsca zwykłego pobytu zmarłego (art. 507 i 628 k.p.c.). Gdy spadkobiercą jest małoletnie dziecko, dział wymaga zezwolenia sądu (art. 101 § 3 Kodeksu rodzinnego i opiekuńczego). Jeżeli obok dziecka dziedziczy też rodzic, za dziecko podpisuje reprezentant ustanowiony przez sąd, a nie rodzice (art. 98 § 2 pkt 2 i art. 99 § 1 tego kodeksu).'],
       ['h2', 'Jak sąd dzieli spadek: podział, spłata albo sprzedaż?'],
       ['ol', [
         '**Podział fizyczny.** Każdy może go żądać, chyba że byłby sprzeczny z ustawą albo społeczno-gospodarczym przeznaczeniem rzeczy, albo pociągałby istotną zmianę rzeczy lub znaczne zmniejszenie jej wartości (art. 211 k.c.). Różnice wyrównuje się dopłatami (art. 212 § 1 k.c.). Sąd Najwyższy uchylił w części postanowienie, bo nie zbadano, czy wydzielona działka, mniejsza od minimum z planu miejscowego, nie uniemożliwi budowy (postanowienie z 21.01.2015, IV CSK 177/14).',

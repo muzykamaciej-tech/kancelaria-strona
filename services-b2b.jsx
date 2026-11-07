@@ -149,7 +149,7 @@ Object.assign(window.SERVICE_CONTENT, {
         ],
         [
           'Opłata sądowa (nie honorarium)',
-          '200 zł od pozwu o uchylenie uchwały organu spółdzielni (art. 27 pkt 8 u.k.s.c.)',
+          '200 zł od pozwu o uchylenie uchwały organu spółdzielni, stwierdzenie jej nieważności albo ustalenie jej istnienia lub nieistnienia (art. 27 pkt 8, 8a i 8b u.k.s.c.)',
         ],
       ],
     },
@@ -235,7 +235,7 @@ Object.assign(window.SERVICE_CONTENT, {
           note: 'pełnomocnik na walnym, większość głosów, zaskarżenie uchwał walnego, reprezentacja przez zarząd',
         },
         { ref: 'art. 16 u.w.l.', act: 'Ustawa o własności lokali', tj: 'Dz.U. 2026 poz. 232', eli: 'DU/1994/388', note: 'sprzedaż lokalu w drodze licytacji, stosowana odpowiednio przez art. 17¹⁰ u.s.m.' },
-        { ref: 'art. 27 pkt 8 u.k.s.c.', act: 'Ustawa o kosztach sądowych w sprawach cywilnych', tj: 'Dz.U. 2025 poz. 1228', eli: 'DU/2005/1398', note: 'opłata od pozwu o uchylenie uchwały organu spółdzielni' },
+        { ref: 'art. 27 pkt 8, 8a i 8b u.k.s.c.', act: 'Ustawa o kosztach sądowych w sprawach cywilnych', tj: 'Dz.U. 2025 poz. 1228', eli: 'DU/2005/1398', note: 'opłata od pozwu o uchylenie uchwały organu spółdzielni, stwierdzenie jej nieważności albo ustalenie jej istnienia lub nieistnienia' },
       ],
     },
     docs: [
@@ -245,13 +245,13 @@ Object.assign(window.SERVICE_CONTENT, {
       'Przy przeniesieniu własności: żądanie członka z datą wpływu i dokumenty prawa do gruntu (jeśli masz)',
       'Przy zaległościach: zestawienie opłat i wpłat lokalu',
     ],
-    guides: ['spoldzielcze-wlasnosciowe-prawo-do-lokalu'],
+    guides: ['spoldzielcze-wlasnosciowe-prawo-do-lokalu', 'walne-zgromadzenie-spoldzielni-mieszkaniowej'],
     seeAlso: ['uregulowanie-stanu-prawnego', 'uzytkowanie-wieczyste'],
     cta: {
       heading: 'Uchwały, które się obronią. Procedury bez potknięć.',
       lead: 'Napisz, kiedy jest walne albo czego dotyczy pozew lub żądanie członka. Najpóźniej w 24 h roboczych wskażę, co jest potrzebne, i prześlę ofertę z ceną i terminem; płacisz dopiero po jej akceptacji.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'obsluga-prawna-firm-budowlanych': {
@@ -382,13 +382,13 @@ Object.assign(window.SERVICE_CONTENT, {
       'Notę z karą umowną albo wezwanie do zapłaty, jeśli je dostałeś.',
       'Zgłoszenie podwykonawcy do inwestora i odpowiedź inwestora, jeśli są.',
     ],
-    guides: ['gwarancja-zaplaty-za-roboty-budowlane'],
+    guides: ['gwarancja-zaplaty-za-roboty-budowlane', 'podwykonawca-nie-dostal-zaplaty'],
     seeAlso: ['umowa-o-roboty-budowlane', 'spory-z-wykonawca'],
     cta: {
       heading: 'Zabezpieczona umowa i pewna zapłata — zanim wejdziesz na budowę.',
       lead: 'Opisz kontrakt albo spór z inwestorem lub generalnym wykonawcą. W 24 h roboczych wskażę, które pismo wysłać najpierw, a w tej samej wiadomości przyjdzie oferta z ceną i terminem. Do akceptacji oferty nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'obsluga-prawna-architektow': {
@@ -899,13 +899,13 @@ Object.assign(window.SERVICE_CONTENT, {
       'Dla SIM i TBS: umowa spółki albo statut i uchwała o stawkach czynszu',
       'Dla SIM: wniosek najemcy o rozliczenie partycypacji i jego umowa partycypacji',
     ],
-    guides: ['mieszkanie-w-tbs', 'kooperatywa-mieszkaniowa'],
+    guides: ['mieszkanie-w-tbs', 'kooperatywa-mieszkaniowa', 'sim-spoleczna-inicjatywa-mieszkaniowa'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'umowa-o-roboty-budowlane'],
     cta: {
       heading: 'Społeczne budownictwo ma swoje reguły — poprowadzę Cię przez nie bezpiecznie.',
       lead: 'Opisz etap kooperatywy albo sprawę w SIM, a w 24 h roboczych odpiszę, czy zacząć od umowy, oferty do przetargu czy rozliczenia partycypacji. Razem z tym wyślę ofertę z ceną i terminem, a płacisz dopiero po jej przyjęciu.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
 });
@@ -1373,13 +1373,13 @@ Object.assign(window.SERVICE_CONTENT, {
       'Rozliczenia z właścicielami (przychody, koszty, wypłaty), jeśli spór dotyczy pieniędzy',
       'Pisma od właścicieli: wezwania, uprzedzenia, wypowiedzenia, z datą doręczenia, jeśli je dostałeś',
     ],
-    guides: ['najem-krotkoterminowy', 'condohotel-co-to-jest'],
+    guides: ['najem-krotkoterminowy', 'condohotel-co-to-jest', 'najem-instytucjonalny'],
     seeAlso: ['obsluga-wynajmujacych', 'eksmisja'],
     cta: {
       heading: 'Model operatorski, który się broni — finansowo i prawnie.',
       lead: 'Opisz model: ilu masz właścicieli, czy to najem, czy zarządzanie, i czy nabywcy dostają gwarancję czynszu. W 24 h roboczych dostaniesz odpowiedź, co zrobić najpierw, razem z ofertą z ceną i terminem; płacisz po jej przyjęciu.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'obsluga-prawna-najemcow-komercyjnych': {

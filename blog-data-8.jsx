@@ -172,7 +172,7 @@ window.BLOG.push(
     metaTitle: 'Co sprawdzić przed zakupem nieruchomości? Lista prawnika',
     metaDesc: 'Co sprawdzić przed zakupem działki, domu i mieszkania: 4 działy księgi wieczystej, plan, dojazd, słupy, lokatorzy, zaległości, samowole, KOWR.',
     excerpt: 'Co sprawdzić przed zakupem działki, domu i mieszkania: 4 działy księgi wieczystej, plan, dojazd, słupy, lokatorzy, zaległości, samowole, KOWR.',
-    date: '24 października 2026', iso: '2026-10-24', readTime: '16 min',
+    date: '24 października 2026', iso: '2026-10-24', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '16 min',
     category: 'Zakup nieruchomości', tags: ['Zakup nieruchomości', 'Księga wieczysta', 'Stan prawny'],
     cover: '/assets/blog-co-sprawdzic-przed-zakupem-nieruchomosci.jpg',
     related: ['audyt-stanu-prawnego-nieruchomosci', 'analiza-umowy-przedwstepnej', 'sprawdzenie-umowy-deweloperskiej'],
@@ -241,7 +241,7 @@ window.BLOG.push(
       ['ul', [
         '**Pozwolenie albo zgłoszenie i zakończenie budowy.** Do użytkowania domu przystępuje się co do zasady po zawiadomieniu nadzoru budowlanego o zakończeniu budowy, jeżeli nadzór w 14 dni nie wniesie sprzeciwu (art. 54 ust. 1 Prawa budowlanego). Inwestor przekazuje dokumentację właścicielowi (art. 60 ust. 1), a sprzedający musi Ci wydać posiadane dokumenty (art. 546 § 2 k.c.).',
         '**Samowola budowlana.** Przy budynku postawionym bez wymaganego pozwolenia albo zgłoszenia nadzór wstrzymuje budowę i informuje o legalizacji (art. 48 ust. 1 i 3 Prawa budowlanego). Uproszczona legalizacja wchodzi w grę po co najmniej 20 latach od zakończenia budowy (art. 49f ust. 1). Po zakończeniu robót nakazy trafiają do właściciela, czyli do Ciebie (art. 52 ust. 1). Szczegóły w tekście „Samowola budowlana: legalizacja zwykła i uproszczona po 20 latach, koszty i kary”.',
-        '**Najemcy i dożywotnicy.** Kupując dom z najemcą, wstępujesz w najem. Umowy na czas oznaczony, zawartej na piśmie z datą pewną, nie wypowiesz, jeżeli najemca już mieszka (art. 678 § 1–2 k.c.). Dożywocie obciąży Cię nawet bez wpisu (art. 7 pkt 2 u.k.w.h.).',
+        '**Najemcy i dożywotnicy.** Kupując dom z najemcą, wstępujesz w najem. Umowy na czas oznaczony, zawartej na piśmie z datą pewną, nie wypowiesz, jeżeli najemca już mieszka (art. 678 § 1–2 k.c.). Najemcy lokalu mieszkalnego, który objął lokal, nie wypowiesz z powodu zakupu (art. 692 k.c.). Dożywocie obciąży Cię nawet bez wpisu (art. 7 pkt 2 u.k.w.h.).',
         '**Wady.** Wadą prawną jest m.in. obciążenie prawem osoby trzeciej (art. 556³ k.c.). Jeżeli wiedziałeś o wadzie w dniu umowy, sprzedający nie odpowiada z rękojmi (art. 557 § 1 k.c.). Znane wady wpisz więc do umowy i uwzględnij w cenie.',
       ]],
       ['h2', 'Jak sprawdzić mieszkanie przed zakupem z rynku wtórnego?'],
@@ -249,7 +249,7 @@ window.BLOG.push(
         '**Księga lokalu.** Sprawdź udział w nieruchomości wspólnej i pomieszczenia przynależne (art. 3 ust. 1–3 ustawy o własności lokali, dalej: u.w.l.) oraz to, czy miejsce postojowe nie ma osobnej księgi. Przy spółdzielczym własnościowym prawie do lokalu bez księgi poproś spółdzielnię o zaświadczenie.',
         '**Zaległości i uchwały.** Właściciel uczestniczy w kosztach zarządu i płaci zaliczki do 10 dnia miesiąca (art. 13 ust. 1 i art. 15 ust. 1 u.w.l.). Poproś zarządcę o zaświadczenie o braku zaległości i o uchwały o remoncie lub kredycie, bo od nich zależą zaliczki po zakupie.',
         '**Zameldowani.** Zameldowanie służy wyłącznie celom ewidencyjnym (art. 28 ust. 4 ustawy o ewidencji ludności) i nie daje prawa do mieszkania.',
-        '**Lokatorzy.** Najem przechodzi na Ciebie tak jak przy domu (art. 678 k.c.). Wpisz do aktu termin wydania lokalu i poddanie się przez sprzedającego egzekucji co do wydania (art. 777 § 1 pkt 4 k.p.c.). Jeżeli mieszka z nim np. małżonek, niech też złoży takie oświadczenie, bo skutek aktu wobec domowników w nim niewymienionych jest sporny. Bez tego zostaje proces – zob. „Ile trwa eksmisja lokatora bez tytułu prawnego? Kalendarz 2026”.',
+        '**Lokatorzy.** Najem przechodzi na Ciebie tak jak przy domu (art. 678 k.c.). Najemcy lokalu mieszkalnego, który objął lokal, nie wypowiesz z powodu zakupu (art. 692 k.c.). Wpisz do aktu termin wydania lokalu i poddanie się przez sprzedającego egzekucji co do wydania (art. 777 § 1 pkt 4 k.p.c.). Jeżeli mieszka z nim np. małżonek, niech też złoży takie oświadczenie, bo skutek aktu wobec domowników w nim niewymienionych jest sporny. Bez tego zostaje proces – zob. „Ile trwa eksmisja lokatora bez tytułu prawnego? Kalendarz 2026”.',
       ]],
       ['h2', 'Co sprawdzić przed zakupem mieszkania lub domu od dewelopera?'],
       ['ul', [

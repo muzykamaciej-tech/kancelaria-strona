@@ -919,7 +919,7 @@ window.BLOG.push(
     metaTitle: 'Wspólnota mieszkaniowa – co to jest i jak zaskarżyć uchwałę',
     metaDesc: 'Wspólnota mieszkaniowa powstaje z mocy prawa. Kto decyduje, jak się głosuje i jak zaskarżyć uchwałę: pozew w 6 tygodni, opłata 200 zł.',
     excerpt: 'Wspólnota mieszkaniowa powstaje z mocy prawa. Kto decyduje, jak się głosuje i jak zaskarżyć uchwałę: pozew w 6 tygodni, opłata 200 zł.',
-    date: '27 października 2026', iso: '2026-10-27', readTime: '15 min',
+    date: '27 października 2026', iso: '2026-10-27', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '15 min',
     category: 'Wspólnoty mieszkaniowe', tags: ['Wspólnota mieszkaniowa', 'Uchwała wspólnoty', 'Zaskarżenie uchwały'],
     cover: '/assets/blog-wspolnota-mieszkaniowa-uchwaly.jpg',
     related: ['obsluga-prawna-wspolnot', 'roszczenia-wspolnota-deweloper', 'obsluga-prawna-spoldzielni'],
@@ -944,7 +944,7 @@ window.BLOG.push(
       ['p', 'Zniesienia współwłasności nieruchomości wspólnej nie zażądasz, dopóki trwa odrębna własność lokali (art. 3 ust. 1 u.w.l.). Kiedy zniesienie współwłasności wchodzi w grę, opisuję w tekście Zniesienie współwłasności: u notariusza czy w sądzie, koszty i co gdy brak zgody.'],
       ['p', 'Za długi dotyczące nieruchomości wspólnej odpowiada wspólnota bez ograniczeń, a każdy właściciel – w części odpowiadającej swojemu udziałowi (art. 17 u.w.l.).'],
       ['h2', 'Mała i duża wspólnota: ile lokali i kto zarządza?'],
-      ['p', 'Granica to 3 lokale, licząc także niewyodrębnione lokale dotychczasowego właściciela, np. dewelopera (art. 19 i 20 ust. 1 u.w.l.). Do 15.08.2019 granica wynosiła 7 lokali; tę nieaktualną liczbę wciąż podaje część poradników.'],
+      ['p', 'Granica to 3 lokale, licząc także niewyodrębnione lokale dotychczasowego właściciela, np. dewelopera (art. 19 i 20 ust. 1 u.w.l.). Do 31.12.2019 granica wynosiła 7 lokali; tę nieaktualną liczbę wciąż podaje część poradników.'],
       ['ul', [
         '**Mała wspólnota (do 3 lokali)** działa według przepisów Kodeksu cywilnego o współwłasności (art. 19 u.w.l.). Zwykły zarząd wymaga większości liczonej według udziałów, czynności dalej idące – zgody wszystkich, a gdy jej brak, rozstrzyga sąd (art. 199, 201, 202 i 204 k.c.). Pozwu o uchylenie uchwały z art. 25 u.w.l. co do zasady tu nie ma, chyba że sposób zarządu określono w umowie notarialnej (postanowienie SA w Krakowie z 25.05.2016, I ACa 105/16). Tak działa np. dom jednorodzinny z 2 lokalami; więcej co do zasady w nim nie wyodrębnisz (art. 2 ust. 1c u.w.l.).',
         '**Duża wspólnota (od 4 lokali)** musi wybrać uchwałą zarząd. Jego członkiem może być tylko osoba fizyczna, także spoza grona właścicieli (art. 20 ust. 1 u.w.l.). Zarząd można w każdej chwili odwołać (art. 20 ust. 2 u.w.l.).',
@@ -1084,7 +1084,7 @@ window.BLOG.push(
       ['h2', 'Źródła'],
       ['ul', [
         'Ustawa z 24.06.1994 o własności lokali (t.j. Dz.U. 2026 poz. 232): art. 2 ust. 1c i 4, 3 ust. 1–3, 4 ust. 1, 6, 12 ust. 2 i 3, 13 ust. 1, 15 ust. 1, 16 ust. 1, 17, 18 ust. 1 i 2a, 19, 20, 21 ust. 1–2, 22, 23, 24, 25, 26 ust. 1, 29 ust. 3, 30 ust. 1 pkt 3 i ust. 1a, 31, 32, 33.',
-        'Ustawa z 13.06.2019 o zmianie ustawy o Krajowym Zasobie Nieruchomości oraz niektórych innych ustaw (Dz.U. 2019 poz. 1309): zmiana art. 19 i 20 ust. 1 u.w.l. (granica 3 lokali), w życiu od 15.08.2019.',
+        'Ustawa z 13.06.2019 o zmianie ustawy o Krajowym Zasobie Nieruchomości oraz niektórych innych ustaw (Dz.U. 2019 poz. 1309): zmiana art. 19 i 20 ust. 1 u.w.l. (granica 3 lokali), w życiu od 1.01.2020 (art. 7 pkt 2–4, art. 30 pkt 3).',
         'Kodeks cywilny (t.j. Dz.U. 2026 poz. 795): art. 5, 112, 115, 199, 201, 202, 204, 481 § 1 i 2.',
         'Kodeks postępowania cywilnego (t.j. Dz.U. 2026 poz. 468): art. 17 pkt 4² (brzmienie z ustawy Dz.U. 2019 poz. 1469, od 7.11.2019), 98 § 1 i 3, 187 § 1, 189, 730 i n.',
         'Ustawa z 28.07.2005 o kosztach sądowych w sprawach cywilnych (t.j. Dz.U. 2025 poz. 1228): art. 27 pkt 9.',
