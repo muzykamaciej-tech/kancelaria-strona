@@ -476,7 +476,7 @@ Object.assign(window.SERVICE_CONTENT, {
       },
       {
         q: 'Ile lat odpowiadam za błędy w projekcie?',
-        a: 'Nie ma jednego terminu dla wszystkich roszczeń. Osobne przepisy dotyczą roszczeń z umowy o dzieło, rękojmi za wady i szkody osoby spoza umowy (art. 646, art. 568, art. 442¹ k.c.). Właściwy termin ustalam na Twojej umowie i na tym, kto czego żąda. Klauzula zwalniająca Cię z odpowiedzialności za umyślnie wyrządzoną szkodę jest nieważna (art. 473 § 2 k.c.).',
+        a: 'Nie ma jednego terminu dla wszystkich roszczeń. Osobne przepisy dotyczą roszczeń z umowy o dzieło, rękojmi za wady i szkody osoby spoza umowy (art. 646, art. 568, art. 442¹ k.c.). Właściwy termin ustalam na Twojej umowie i na tym, kto czego żąda. Jeżeli umowę zawierasz jako twórca, żądanie poprawek, obniżka i odstąpienie z art. 55 ust. 1 pr. aut. gasną z chwilą przyjęcia projektu, a brak odpowiedzi inwestora przez 6 miesięcy od dostarczenia oznacza przyjęcie, chyba że ustalicie inny termin (art. 55 ust. 3 i 4 pr. aut.). Otrzymaną część wynagrodzenia, do 25%, zachowujesz w każdym razie (art. 55 ust. 1 pr. aut.). Czy po przyjęciu zostaje rękojmia, jest sporne, a odszkodowania przyjęcie co do zasady nie gasi. Klauzula zwalniająca Cię z odpowiedzialności za umyślnie wyrządzoną szkodę jest nieważna (art. 473 § 2 k.c.).',
       },
       {
         q: 'Jak rozliczać zmiany projektu w ramach nadzoru autorskiego?',
@@ -511,13 +511,13 @@ Object.assign(window.SERVICE_CONTENT, {
       'Korespondencja z inwestorem o zmianach, nadzorze albo płatnościach, z datami, oraz niezapłacone faktury.',
       'Przy sporze: zdjęcia albo ogłoszenie drugiej budowy według Twojego projektu, jeśli masz.',
     ],
-    guides: ['warunki-zabudowy-dla-czesci-dzialki', 'przebudowa-czy-nowy-zjazd-nsa', 'prawa-autorskie-do-projektu-budowlanego'],
+    guides: ['warunki-zabudowy-dla-czesci-dzialki', 'przebudowa-czy-nowy-zjazd-nsa', 'prawa-autorskie-do-projektu-budowlanego', 'umowa-z-architektem'],
     seeAlso: ['pozwolenie-na-budowe', 'warunki-zabudowy'],
     cta: {
       heading: 'Twój projekt, Twoje prawa, Twoje honorarium — dobrze zabezpieczone.',
       lead: 'Opisz, dla kogo projektujesz i na jakiej umowie. W 24 h roboczych odpiszę, co trzeba zrobić z prawami do projektu, nadzorem albo zaległym wynagrodzeniem, i prześlę ofertę z ceną i terminem; do akceptacji oferty nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'obsluga-prawna-geodetow': {
@@ -899,7 +899,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Dla SIM i TBS: umowa spółki albo statut i uchwała o stawkach czynszu',
       'Dla SIM: wniosek najemcy o rozliczenie partycypacji i jego umowa partycypacji',
     ],
-    guides: ['mieszkanie-w-tbs'],
+    guides: ['mieszkanie-w-tbs', 'kooperatywa-mieszkaniowa'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'umowa-o-roboty-budowlane'],
     cta: {
       heading: 'Społeczne budownictwo ma swoje reguły — poprowadzę Cię przez nie bezpiecznie.',
@@ -1373,7 +1373,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Rozliczenia z właścicielami (przychody, koszty, wypłaty), jeśli spór dotyczy pieniędzy',
       'Pisma od właścicieli: wezwania, uprzedzenia, wypowiedzenia, z datą doręczenia, jeśli je dostałeś',
     ],
-    guides: ['najem-krotkoterminowy'],
+    guides: ['najem-krotkoterminowy', 'condohotel-co-to-jest'],
     seeAlso: ['obsluga-wynajmujacych', 'eksmisja'],
     cta: {
       heading: 'Model operatorski, który się broni — finansowo i prawnie.',
@@ -1652,7 +1652,7 @@ Object.assign(window.SERVICE_CONTENT, {
       'Lista kredytów i innych długów gospodarstwa, jeśli ją masz',
       'Przy przekazaniu: wiek następcy, czy pracuje w gospodarstwie i czy jest w związku małżeńskim',
     ],
-    guides: ['farma-fotowoltaiczna-na-dzialce-rolnej', 'dzierzawa-pod-fotowoltaike-a-vat', 'sprzedaz-gospodarstwa-rolnego'],
+    guides: ['farma-fotowoltaiczna-na-dzialce-rolnej', 'dzierzawa-pod-fotowoltaike-a-vat', 'sprzedaz-gospodarstwa-rolnego', 'scalenie-gruntow'],
     seeAlso: [
       'status-rolnika',
       'odszkodowanie-sluzebnosc-przesylu',

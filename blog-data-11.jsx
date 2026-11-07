@@ -145,7 +145,7 @@ window.BLOG.push(
     metaTitle: 'Nakaz rozbiórki – kiedy PINB go wydaje i jak się bronić',
     metaDesc: 'Nakaz rozbiórki: kiedy PINB go wydaje, 14 dni na odwołanie do WINB, skarga do WSA, grzywna w celu przymuszenia i wykonanie zastępcze. Kto płaci.',
     excerpt: 'Nakaz rozbiórki: kiedy PINB go wydaje, 14 dni na odwołanie do WINB, skarga do WSA, grzywna w celu przymuszenia i wykonanie zastępcze. Kto płaci.',
-    date: '3 listopada 2026', iso: '2026-11-03', readTime: '14 min',
+    date: '3 listopada 2026', iso: '2026-11-03', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '14 min',
     category: 'Proces budowlany', tags: ['Nakaz rozbiórki', 'Samowola budowlana', 'Nadzór budowlany'],
     cover: '/assets/blog-nakaz-rozbiorki-samowoli.jpg',
     related: ['legalizacja-samowoli', 'nadzor-budowlany-pinb'],
@@ -190,7 +190,7 @@ window.BLOG.push(
       ['p', 'Ogrodzenie do 2,20 m stawiasz bez pozwolenia i bez zgłoszenia (art. 29 ust. 2 pkt 20 Pb), więc samowolą nie jest. Wyższe wymaga zgłoszenia (art. 29 ust. 1 pkt 21 Pb). Postawione bez niego idzie zwykłą drogą: wstrzymanie, 30 dni na wniosek o legalizację, opłata legalizacyjna 2500 zł (art. 49d ust. 1 pkt 2 lit. b Pb), a bez legalizacji nakaz rozbiórki.'],
       ['p', 'Płot wbity w Twoją działkę to spór o granicę, nie sprawa dla PINB – zob. tekst Wznowienie granic działki czy rozgraniczenie: co wybrać, gdy sąsiad przesunął płot.'],
       ['h2', 'Dostałem nakaz rozbiórki – co dalej?'],
-      ['p', 'Zapisz datę doręczenia. Od niej liczysz 14 dni na odwołanie do WINB, które składasz za pośrednictwem PINB (art. 129 § 1 i 2 k.p.a.). Szczegółowe uzasadnienie nie jest wymagane (art. 128 k.p.a.). Do upływu terminu i po złożeniu odwołania decyzja nie podlega wykonaniu, chyba że ma rygor natychmiastowej wykonalności (art. 108 i art. 130 k.p.a.). Spóźniłeś się bez swojej winy? W 7 dni od ustania przeszkody złóż prośbę o przywrócenie terminu razem z odwołaniem (art. 58 k.p.a.).'],
+      ['p', 'Zapisz datę doręczenia. Od niej liczysz 14 dni na odwołanie do WINB, które składasz za pośrednictwem PINB (art. 129 § 1 i 2 k.p.a.). Odwołanie musi zawierać zarzuty do decyzji, zakres żądania i wskazanie dowodów (art. 10b ust. 1 Pb). Gdy czegoś brakuje, urząd wzywa do uzupełnienia w terminie nie krótszym niż 7 dni, a nieusunięte braki oznaczają pozostawienie odwołania bez rozpoznania (art. 10b ust. 2 Pb, art. 64 § 2 k.p.a.). Do upływu terminu i po złożeniu odwołania decyzja nie podlega wykonaniu, chyba że ma rygor natychmiastowej wykonalności (art. 108 i art. 130 k.p.a.). Spóźniłeś się bez swojej winy? W 7 dni od ustania przeszkody złóż prośbę o przywrócenie terminu razem z odwołaniem (art. 58 k.p.a.).'],
       ['p', 'Co sprawdzić w odwołaniu:'],
       ['ul', [
         '**Datę zakończenia budowy.** Jeżeli 20 lat minęło przed postanowieniem o wstrzymaniu budowy, właściwy jest tryb uproszczony bez opłaty (art. 49f ust. 1 i 5 Pb). Dowody: ortofotomapy, faktury, zdjęcia z datą, świadkowie.',
@@ -261,7 +261,7 @@ window.BLOG.push(
       ['p', 'Co do zasady tak. Obowiązek przechodzi na nabywcę, a PINB może prowadzić egzekucję wobec niego po wystawieniu nowego tytułu wykonawczego (art. 52 ust. 1 Pb, art. 28a u.p.e.a.).'],
       ['h2', 'Źródła'],
       ['ul', [
-        'Ustawa z 7.07.1994 – Prawo budowlane (t.j. Dz.U. 2026 poz. 524 ze zm.): art. 29 ust. 1 pkt 21 i ust. 2 pkt 20, 30b, 48, 48a, 49d ust. 1 pkt 2 lit. b, 49e, 49f, 49g ust. 2, 49i, 50, 50a, 51, 52, 53a, 66 ust. 1, 67, 82 ust. 3, 83, 93.',
+        'Ustawa z 7.07.1994 – Prawo budowlane (t.j. Dz.U. 2026 poz. 524 ze zm.): art. 10b, 29 ust. 1 pkt 21 i ust. 2 pkt 20, 30b, 48, 48a, 49d ust. 1 pkt 2 lit. b, 49e, 49f, 49g ust. 2, 49i, 50, 50a, 51, 52, 53a, 66 ust. 1, 67, 82 ust. 3, 83, 93.',
         'Ustawa z 17.06.1966 o postępowaniu egzekucyjnym w administracji (t.j. Dz.U. 2026 poz. 1311 ze zm.): art. 5 § 1 pkt 1, 15 § 1, 17 § 1, 20 § 1 pkt 4, 28a, 33, 35 § 1, 121, 122, 125–128.',
         'Ustawa z 14.06.1960 – Kodeks postępowania administracyjnego (t.j. Dz.U. 2025 poz. 1691): art. 28, 30 § 4, 37, 58, 73, 108, 128, 129, 130.',
         'Ustawa z 30.08.2002 – Prawo o postępowaniu przed sądami administracyjnymi (t.j. Dz.U. 2026 poz. 143 ze zm.): art. 53 § 1, 54 § 1, 61, 83 § 2, 173 § 1, 177 § 1.',

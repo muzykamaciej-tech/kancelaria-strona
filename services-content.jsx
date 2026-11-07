@@ -2165,13 +2165,13 @@ const SERVICE_CONTENT = {
       'Decyzja o warunkach zabudowy albo wypis z planu miejscowego (jeśli masz)',
       'Odwołanie sąsiada albo zawiadomienie urzędu o jego wniesieniu (jeśli dotyczy)',
     ],
-    guides: ['warunki-zabudowy-ile-wazne', 'przebudowa-czy-nowy-zjazd-nsa', 'pozwolenie-na-budowe-krok-po-kroku'],
+    guides: ['warunki-zabudowy-ile-wazne', 'przebudowa-czy-nowy-zjazd-nsa', 'pozwolenie-na-budowe-krok-po-kroku', 'odwolanie-od-pozwolenia-na-budowe'],
     seeAlso: ['warunki-zabudowy', 'droga-konieczna', 'obsluga-prawna-architektow'],
     cta: {
       heading: 'Odmowa, odwołanie sąsiada albo cisza w urzędzie? Zawalczę o Twoją budowę.',
       lead: 'Prześlij decyzję, postanowienie urzędu albo odwołanie sąsiada z datą doręczenia. Bezpłatnie, w 24 h roboczych, wskażę pismo i termin, które Cię dotyczą, oraz prześlę ofertę z ceną i terminem wykonania; płacisz dopiero po jej akceptacji.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'legalizacja-samowoli': {
@@ -2472,11 +2472,11 @@ const SERVICE_CONTENT = {
   },
 
   'umowa-o-roboty-budowlane': {
-    metaDesc: 'Umowa o roboty budowlane powinna być na piśmie, a karę za opóźnienie dostaniesz tylko, gdy ją wpiszesz. Sprawdzam albo piszę umowę przed podpisem.',
+    metaDesc: 'Umowa o roboty budowlane powinna być na piśmie, a karę za zwłokę dostaniesz tylko, gdy ją wpiszesz. Sprawdzam albo piszę umowę przed podpisem.',
     h1: 'Umowa o roboty budowlane',
     h1Full: 'Umowa o roboty budowlane: kary, terminy, odbiory i zabezpieczenie zapłaty',
     topic: 'Umowa o roboty budowlane',
-    subtitle: 'Firma budowlana dała Ci swoją umowę do podpisu i nie wiesz, czy chroni Cię przed opóźnieniem i fuszerką? Kara za opóźnienie wykonawcy należy się tylko wtedy, gdy zastrzega ją umowa (art. 483 § 1 k.c.). Jako adwokat sprawdzam projekt umowy o roboty budowlane albo piszę ją od zera, zanim ją podpiszesz.',
+    subtitle: 'Firma budowlana dała Ci swoją umowę do podpisu i nie wiesz, czy chroni Cię przed opóźnieniem i fuszerką? Kara za zwłokę wykonawcy należy się tylko wtedy, gdy zastrzega ją umowa (art. 483 § 1 k.c.). Jako adwokat sprawdzam projekt umowy o roboty budowlane albo piszę ją od zera, zanim ją podpiszesz.',
     short: {
       q: 'Co powinna zawierać umowa z firmą budowlaną na budowę domu?',
       a: 'Zakres robót z projektem, daty etapów i oddania, płatności po odbiorach, kary umowne, zasady usuwania wad i zgłaszania podwykonawców. Jeżeli umowa nie stanowi inaczej, na żądanie wykonawcy odbierasz roboty częściowo i płacisz za nie odpowiednią część wynagrodzenia (art. 654 k.c.).',
@@ -2517,7 +2517,7 @@ const SERVICE_CONTENT = {
     ],
     doForTitle: 'Co sprawdzam i co dopisuję w umowie z wykonawcą',
     doFor: [
-      'Wpisuję kary za opóźnienie w oddaniu etapów i obiektu oraz w usunięciu wad, z kwotą za dzień i limitem. Dopisuję prawo do odszkodowania ponad karę.',
+      'Wpisuję kary za zwłokę w oddaniu etapów i obiektu oraz w usunięciu wad, z kwotą za dzień i limitem, a osobno wyliczam okoliczności, które wykonawcy nie usprawiedliwiają. Dopisuję prawo do odszkodowania ponad karę.',
       'Wiążę płatności z odbiorami częściowymi, zostawiam część wynagrodzenia na usterki (kaucja, kwota zatrzymana albo gwarancja bankowa) i opisuję warunki zwrotu zaliczki.',
       'Ustalam protokół odbioru, zgłaszanie wad oraz pisemne zgłaszanie podwykonawców z dowodem zapłaty im przed kolejną płatnością dla wykonawcy.',
       'Ustalam ryczałt albo kosztorys i pisemne zlecanie robót dodatkowych z ceną. Wykonawcy przygotowuję harmonogram płatności i żądanie gwarancji zapłaty.',
@@ -2547,7 +2547,7 @@ const SERVICE_CONTENT = {
     faq: [
       {
         q: 'Jakie kary umowne wpisać w umowie z firmą budowlaną?',
-        a: 'Za opóźnienie w oddaniu obiektu i etapów oraz w usunięciu wad, jako kwotę za dzień z górnym limitem. Kara należy się bez względu na wysokość szkody (art. 484 § 1 k.c.). Odszkodowania ponad karę możesz żądać tylko wtedy, gdy umowa na to pozwala. Rażąco wygórowanej kary wykonawca może żądać zmniejszenia (art. 484 § 2 k.c.).',
+        a: 'Za zwłokę w oddaniu obiektu i etapów oraz w usunięciu wad, jako kwotę za dzień z górnym limitem. Kara należy się bez względu na wysokość szkody (art. 484 § 1 k.c.). Odszkodowania ponad karę możesz żądać tylko wtedy, gdy umowa na to pozwala. Rażąco wygórowanej kary wykonawca może żądać zmniejszenia (art. 484 § 2 k.c.).',
       },
       {
         q: 'Kiedy przedawniają się roszczenia z umowy o roboty budowlane?',
@@ -2588,13 +2588,13 @@ const SERVICE_CONTENT = {
       'Projekt budowlany albo opis robót, jeśli masz.',
       'Kwotę zaliczki i harmonogram płatności, jeśli masz.',
     ],
-    guides: ['umowa-o-roboty-budowlane'],
+    guides: ['umowa-o-roboty-budowlane', 'kara-umowna-w-umowie-z-wykonawca'],
     seeAlso: ['obsluga-prawna-firm-budowlanych', 'obsluga-prawna-architektow'],
     cta: {
       heading: 'Dobra umowa to Twoja polisa na czas budowy.',
       lead: 'Prześlij projekt umowy z firmą budowlaną albo jej ofertę. W 24 h roboczych odpiszę, którą drogę proponuję, i dołączę ofertę z ceną i terminem. Do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'nadzor-budowlany-pinb': {
@@ -2704,7 +2704,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Jak napisać odwołanie od decyzji PINB i do kogo je złożyć?',
-        a: 'Adresujesz je do WINB, ale składasz w PINB, który wydał decyzję, w 14 dni od doręczenia (art. 83 ust. 2 Pb, art. 129 § 1 i 2 k.p.a.). Szczegółowe uzasadnienie nie jest wymagane; wystarczy, że z pisma wynika niezadowolenie z decyzji (art. 128 k.p.a.).',
+        a: 'Adresujesz je do WINB, ale składasz w PINB, który wydał decyzję, w 14 dni od doręczenia (art. 83 ust. 2 Pb, art. 129 § 1 i 2 k.p.a.). Pismo musi zawierać zarzuty do decyzji, zakres żądania i wskazanie dowodów (art. 10b ust. 1 Pb). Gdy czegoś brakuje, urząd wzywa do uzupełnienia w terminie nie krótszym niż 7 dni, a nieusunięte braki oznaczają pozostawienie odwołania bez rozpoznania (art. 10b ust. 2 Pb, art. 64 § 2 k.p.a.).',
       },
       {
         q: 'Czy nadzór budowlany przyjeżdża na odbiór domu?',
@@ -2715,7 +2715,7 @@ const SERVICE_CONTENT = {
       asOf: '2026-10-10',
       items: [
         {
-          ref: 'art. 36a, 48, 48a, 49e, 49f, 50, 50a, 51, 52, 53a, 54, 55, 59, 59a, 59f, 59i, 66, 80, 81, 81a, 81c, 83, 91',
+          ref: 'art. 10b, 36a, 48, 48a, 49e, 49f, 50, 50a, 51, 52, 53a, 54, 55, 59, 59a, 59f, 59i, 66, 80, 81, 81a, 81c, 83, 91',
           act: 'Ustawa z dnia 7 lipca 1994 r. – Prawo budowlane',
           tj: 'Dz.U. 2026 poz. 524',
           eli: 'DU/1994/414',
@@ -2752,7 +2752,7 @@ const SERVICE_CONTENT = {
       heading: 'Pismo z nadzoru budowlanego? Nie czekaj na decyzję — działaj teraz.',
       lead: 'Prześlij pismo z PINB albo opisz zapowiedzianą kontrolę, a w 24 h roboczych bezpłatnie wskażę, czego wymaga Twoja sprawa przed nadzorem. Ofertę z ceną i terminem dostaniesz w tej samej wiadomości; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   /* ===== BLOK 6 — Księgi wieczyste, stan prawny i użytkowanie wieczyste ===== */
@@ -2992,7 +2992,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Ile kosztuje założenie księgi wieczystej i ile to trwa?',
-        a: 'Opłata sądowa to 300 zł, po spadku 250 zł. To 100 zł od wniosku o założenie księgi i 200 zł od wpisu własności (art. 44 ust. 1 pkt 1, art. 45 ust. 1, art. 42 ust. 1 u.k.s.c.). Wpis po spadku albo własności nieruchomości rolnej do 5 ha kosztuje 150 zł (art. 42 ust. 3, art. 43 pkt 2). W mojej praktyce prosty wpis to tygodnie, a sprawa o uzgodnienie albo spadek – miesiące. Cenę wniosku podaję w ofercie.',
+        a: 'Opłata sądowa to 300 zł, po spadku 250 zł. To 100 zł od wniosku o założenie księgi i 200 zł od wpisu własności (art. 44 ust. 1 pkt 1, art. 45 ust. 1, art. 42 ust. 1 u.k.s.c.). Wpis po spadku albo własności nieruchomości rolnej do 5 ha kosztuje 150 zł (art. 42 ust. 3, art. 43 pkt 2). Czas zależy od wydziału: średnia dla spraw wieczystoksięgowych w 2025 r. to 3,0 miesiąca (dane Ministerstwa Sprawiedliwości), a sprawa o uzgodnienie albo spadek trwa zwykle dłużej. Cenę wniosku podaję w ofercie.',
       },
       {
         q: 'Jak poprawić błąd w księdze wieczystej, np. w nazwisku albo powierzchni działki?',
@@ -3051,13 +3051,13 @@ const SERVICE_CONTENT = {
       'Pismo wierzyciela o spłacie kredytu zabezpieczonego hipoteką, jeśli masz',
       'Zawiadomienie z sądu o wpisie ostrzeżenia, jeśli je dostałeś',
     ],
-    guides: ['zniesienie-sluzebnosci-przesylu-nieistniejaca-linia', 'zawyzony-podatek-od-nieruchomosci-blad-w-ewidencji', 'wznowienie-granic-dzialki', 'spoldzielcze-wlasnosciowe-prawo-do-lokalu', 'uzgodnienie-tresci-ksiegi-wieczystej'],
+    guides: ['zniesienie-sluzebnosci-przesylu-nieistniejaca-linia', 'zawyzony-podatek-od-nieruchomosci-blad-w-ewidencji', 'wznowienie-granic-dzialki', 'spoldzielcze-wlasnosciowe-prawo-do-lokalu', 'uzgodnienie-tresci-ksiegi-wieczystej', 'zalozenie-ksiegi-wieczystej'],
     seeAlso: ['stwierdzenie-nabycia-spadku', 'obsluga-sprzedazy', 'obsluga-prawna-geodetow'],
     cta: {
       heading: 'Uporządkuj papiery, zanim zablokują Ci sprzedaż albo spadek.',
       lead: 'Opisz, co blokuje nieruchomość, a w 24 h roboczych odpiszę, co trzeba zrobić, np. wpis spadkobierców albo pozew o uzgodnienie. Razem z tym prześlę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'uzytkowanie-wieczyste': {
@@ -3182,7 +3182,7 @@ const SERVICE_CONTENT = {
       'Numer księgi wieczystej gruntu albo lokalu',
       'Operat szacunkowy albo notatki z jego przejrzenia, jeśli go widziałeś',
     ],
-    guides: [],
+    guides: ['uzytkowanie-wieczyste-oplata-przeksztalcenie'],
     seeAlso: ['obsluga-sprzedazy', 'obsluga-prawna-wspolnot'],
     cta: {
       heading: 'Zawyżona opłata albo wykup gruntu? Sprawdźmy, co Ci się należy.',
@@ -3347,7 +3347,7 @@ const SERVICE_CONTENT = {
       'Mapa albo projekt podziału działki od geodety, jeśli są',
       'Pisma i propozycje spłaty od współwłaścicieli, jeśli są',
     ],
-    guides: ['sprzedaz-udzialu-w-nieruchomosci', 'dzial-spadku'],
+    guides: ['sprzedaz-udzialu-w-nieruchomosci', 'dzial-spadku', 'wspolwlasnosc-nieruchomosci'],
     seeAlso: ['obsluga-sprzedazy', 'droga-konieczna'],
     cta: {
       heading: 'Wyjdź ze współwłasności, zanim ona zablokuje Twoje plany.',
@@ -3812,7 +3812,7 @@ const SERVICE_CONTENT = {
       'Oświadczenia o przyjęciu lub odrzuceniu spadku złożone przez rodzinę, jeśli były',
       'Numer księgi wieczystej nieruchomości zmarłego, jeśli znasz',
     ],
-    guides: ['stwierdzenie-nabycia-spadku', 'odrzucenie-spadku'],
+    guides: ['stwierdzenie-nabycia-spadku', 'odrzucenie-spadku', 'dobrodziejstwo-inwentarza'],
     seeAlso: ['uregulowanie-stanu-prawnego', 'obsluga-sprzedazy'],
     cta: {
       heading: 'Potwierdź, że dziedziczysz — i odzyskaj kontrolę nad majątkiem.',
@@ -3954,7 +3954,7 @@ const SERVICE_CONTENT = {
       'Potwierdzenia rat zapłaconych przez Ciebie po rozwodzie i rachunki za remonty',
       'Umowa majątkowa małżeńska (intercyza), jeśli ją zawieraliście',
     ],
-    guides: ['kredyt-hipoteczny-po-rozwodzie'],
+    guides: ['kredyt-hipoteczny-po-rozwodzie', 'podzial-majatku-po-rozwodzie'],
     seeAlso: ['obsluga-sprzedazy', 'eksmisja'],
     cta: {
       heading: 'Wspólny dom i kredyt po rozwodzie? Zadbam, żeby podział wyszedł po Twojej stronie.',
@@ -4265,7 +4265,7 @@ const SERVICE_CONTENT = {
       'Dotychczasowa umowa z aneksami, jeżeli przedłużasz najem albo dostałeś nową wersję',
       'Dane wynajmującego z umowy: osoba prywatna czy firma',
     ],
-    guides: ['umowa-najmu-mieszkania-rodzaje', 'wypowiedzenie-umowy-najmu-mieszkania'],
+    guides: ['umowa-najmu-mieszkania-rodzaje', 'wypowiedzenie-umowy-najmu-mieszkania', 'prawa-najemcy-mieszkania'],
     seeAlso: ['negocjacje-nieruchomosci', 'obsluga-prawna-najemcow-komercyjnych'],
     cta: {
       heading: 'Zanim podpiszesz najem, sprawdźmy, na co się zgadzasz.',
@@ -4697,7 +4697,7 @@ const SERVICE_CONTENT = {
       'Rozliczenie kaucji od wynajmującego albo lista potrąceń z rachunkami za naprawy, jeśli masz',
       'Korespondencja o kaucji: SMS-y, maile, wezwania, jeśli masz',
     ],
-    guides: ['jak-bezpiecznie-wynajac-mieszkanie-poradnik', 'kaucja-za-mieszkanie'],
+    guides: ['jak-bezpiecznie-wynajac-mieszkanie-poradnik', 'kaucja-za-mieszkanie', 'protokol-zdawczo-odbiorczy-najem'],
     seeAlso: ['obsluga-prawna-najemcow-komercyjnych', 'obsluga-prawna-operatorow-najmu'],
     cta: {
       heading: 'Kaucja to Twoje pieniądze — po którejkolwiek stronie umowy stoisz.',
@@ -5141,7 +5141,7 @@ const SERVICE_CONTENT = {
       ],
     },
     introHeading: 'Udział w częściach wspólnych: skąd Twoje prawa wobec dewelopera',
-    intro: 'Kupując mieszkanie, nabyłeś też udział w nieruchomości wspólnej jako prawo związane z własnością lokalu (art. 3 ust. 1 u.w.l.), więc przeciekający dach to wada tego, co kupiłeś. Art. 41a u.d. każe stosować do wad dewelopera odpowiednio kodeksowe przepisy o rękojmi przy sprzedaży, a rękojmia działa względem kupującego (art. 556 k.c.). Wspólnota mieszkaniowa, czyli ogół właścicieli lokali w danej nieruchomości (art. 6 u.w.l.), nie była stroną Twojej umowy. Jak wspólnota może przejąć roszczenia nabywców, opisuję na stronie o przejęciu roszczeń przez wspólnotę.',
+    intro: 'Kupując mieszkanie, nabyłeś też udział w nieruchomości wspólnej jako prawo związane z własnością lokalu (art. 3 ust. 1 u.w.l.), więc przeciekający dach to wada tego, co kupiłeś. Art. 41a u.d. każe stosować do wad dewelopera odpowiednio kodeksowe przepisy o rękojmi przy sprzedaży, a rękojmia działa względem kupującego (art. 556 k.c.). Wspólnota mieszkaniowa, czyli ogół właścicieli lokali w danej nieruchomości (art. 6 u.w.l.), nie była stroną Twojej umowy. Jak wspólnota może przejąć roszczenia nabywców, opisuję na stronie o przejęciu roszczeń przez wspólnotę. Art. 41a u.d. działa od 9.09.2025 r. Przy wcześniejszym akcie po umowie deweloperskiej rękojmia bywa kwestionowana i pewniejszy jest art. 471 k.c., ale nie przy zwykłej sprzedaży gotowego lokalu.',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Przecieka dach, woda w garażu, deweloper odsyła do wspólnoty',
     when: [
@@ -5228,13 +5228,13 @@ const SERVICE_CONTENT = {
       'Protokoły z kontroli budynku lub wpisy z książki obiektu budowlanego, jeśli zarządca je udostępni.',
       'Dla wspólnoty: uchwały w sprawie wad, wykaz lokali z datami wydania i opinia rzeczoznawcy, jeśli są.',
     ],
-    guides: ['odszkodowanie-od-dewelopera-za-wady'],
+    guides: ['odszkodowanie-od-dewelopera-za-wady', 'wady-czesci-wspolnych-budynku'],
     seeAlso: ['obsluga-prawna-wspolnot', 'nadzor-budowlany-pinb'],
     cta: {
       heading: 'Wady wspólne to wspólny problem — pomogę go rozwiązać u źródła.',
       lead: 'Napisz, co przecieka albo pęka w budynku i kiedy odebrałeś klucze. Odpowiedź, od czego zacząć, przyjdzie w ciągu 24 h roboczych razem z ofertą z ceną i terminem; zanim ją przyjmiesz, nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'usuniecie-wad-protokol': {
@@ -5484,7 +5484,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Według jakiej normy mierzy się mieszkanie od dewelopera?',
-        a: 'W umowach zawartych od 13.02.2026 według Polskiej Normy o wskaźnikach powierzchniowych i kubaturowych. Liczy się norma z dnia wniosku o pozwolenie na budowę albo zgłoszenia budowy (art. 5a u.d.). Każda umowa deweloperska wskazuje też sposób pomiaru (art. 35 ust. 1 pkt 15 u.d.). Ścianki działowe i inne szczegóły rozstrzygają norma i ten zapis umowy.',
+        a: 'W umowach zawartych od 13.02.2026 według Polskiej Normy o wskaźnikach powierzchniowych i kubaturowych. Liczy się norma z dnia wniosku o pozwolenie na budowę albo zgłoszenia budowy (art. 5a u.d.). Każda umowa deweloperska wskazuje też sposób pomiaru (art. 35 ust. 1 pkt 15 u.d.). Zapis wliczający stałe ściany działowe do powierzchni użytkowej można podważać: w umowie od 13.02.2026 r. jest moim zdaniem nieważny jako sprzeczny z art. 5a u.d. (art. 42 u.d.), a przy starszych umowach sądy okręgowe orzekały różnie (IV Ca 1735/23 na korzyść nabywców, XXVII Ca 2347/24 na korzyść dewelopera, gdy umowa, prospekt i rzut wskazywały ścianki wprost).',
       },
       {
         q: 'Mój geodeta zmierzył inaczej niż deweloper. Kto ma rację?',
@@ -5533,13 +5533,13 @@ const SERVICE_CONTENT = {
       'Protokół odbioru i akt notarialny przeniesienia własności, jeśli już były.',
       'Protokół Twojego geodety z nazwą normy i korespondencja z deweloperem o metrażu, jeśli masz.',
     ],
-    guides: [],
+    guides: ['metraz-mieszkania-inny-niz-w-umowie'],
     seeAlso: ['sprawdzenie-umowy-deweloperskiej', 'negocjacje-nieruchomosci'],
     cta: {
       heading: 'Płaciłeś za metry, których nie ma? Odzyskam różnicę.',
       lead: 'Prześlij umowę i pomiar, który masz. W 24 h roboczych dostaniesz odpowiedź, co trzeba zrobić w Twojej sprawie o metraż, oraz ofertę z ceną i terminem. Nic nie płacisz, dopóki jej nie zaakceptujesz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'klauzule-abuzywne-deweloper': {
@@ -5783,7 +5783,7 @@ const SERVICE_CONTENT = {
     subtitle: 'Przecieka dach albo pęka elewacja, a deweloper odpisuje zarządowi, że wspólnota nie jest stroną umów? Roszczenia nabywców z rękojmi wobec dewelopera, np. o usunięcie wady, wspólnota może przejąć umową przelewu, czyli cesji (art. 509 § 1 k.c.). Przygotowuję uchwałę, umowy przelewu i pozew, licząc 5 lat od wydania każdego lokalu.',
     short: {
       q: 'Jak wspólnota mieszkaniowa przejmuje od nabywców roszczenia wobec dewelopera?',
-      a: 'Umową przelewu, czyli cesji, zawieraną z każdym nabywcą osobno (art. 509 § 1 k.c.). Uprawnienia z rękojmi ma ten, kto kupił lokal od dewelopera (art. 556 k.c., art. 41a u.d.). Po przelewie wspólnota jest wierzycielem i może pozwać dewelopera we własnym imieniu (art. 6 u.w.l.).',
+      a: 'Umową przelewu, czyli cesji, zawieraną z każdym nabywcą osobno (art. 509 § 1 k.c.). Uprawnienia z rękojmi ma ten, kto kupił lokal od dewelopera (art. 556 k.c., art. 41a u.d.). Art. 41a u.d. działa od 9.09.2025 r. Przy wcześniejszym akcie po umowie deweloperskiej rękojmia bywa kwestionowana i pewniejszy jest art. 471 k.c., ale nie przy zwykłej sprzedaży gotowego lokalu. Dlatego w umowie przelewu wymieniamy też roszczenia z art. 471 k.c. Po przelewie wspólnota jest wierzycielem i może pozwać dewelopera we własnym imieniu (art. 6 u.w.l.).',
       facts: [
         [
           'Kto ma uprawnienia z rękojmi',
@@ -5848,7 +5848,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Jakie uchwały musi podjąć wspólnota przed pozwem?',
-        a: 'Uchwałę o zgodzie na przyjęcie przelewów i dochodzenie roszczeń, z pełnomocnictwem dla zarządu (art. 22 ust. 2 u.w.l.). Art. 22 ust. 3 u.w.l. wylicza czynności przekraczające zwykły zarząd tylko przykładowo i przelewu nie wymienia. Uchwała usuwa więc wątpliwość, czy zarząd może działać sam. Projekt piszę tak, żeby obejmował też wniesienie pozwu.',
+        a: 'Uchwałę o zgodzie na przyjęcie przelewów i dochodzenie roszczeń, z pełnomocnictwem dla zarządu (art. 22 ust. 2 u.w.l.). Art. 22 ust. 3 u.w.l. wylicza czynności przekraczające zwykły zarząd tylko przykładowo i przelewu nie wymienia. Uchwała usuwa więc wątpliwość, czy zarząd może działać sam. Projekt piszę tak, żeby obejmował też wniesienie pozwu. Koszty sprawy pokrywaj z zaliczek tylko od tych właścicieli, którzy podpisali przelew albo sami dochodzą roszczeń. Uchwałę obciążającą wszystkich sąd uchylił (wyrok SA w Krakowie z 26.09.2024, I ACa 835/22), a fundusz ograniczony do tych osób utrzymał (wyrok SA w Szczecinie z 22.07.2020, I ACa 250/19).',
       },
       {
         q: 'Co z właścicielami, którzy kupili mieszkanie na rynku wtórnym?',
@@ -5883,13 +5883,13 @@ const SERVICE_CONTENT = {
       'Uchwały i protokoły zebrań wspólnoty dotyczące wad, jeśli były',
       'Opinia rzeczoznawcy budowlanego albo protokół przeglądu budynku, jeśli jest',
     ],
-    guides: [],
+    guides: ['wady-czesci-wspolnych-budynku'],
     seeAlso: ['obsluga-prawna-wspolnot', 'obsluga-prawna-zarzadcow', 'nadzor-budowlany-pinb'],
     cta: {
       heading: 'Rozproszone roszczenia to słabość. Zbiorę je we wspólną, mocną sprawę.',
       lead: 'Opisz wady części wspólnych i liczbę lokali, a w 24 h roboczych odpiszę, jak zebrać przelewy. Do odpowiedzi dołączę ofertę dla zarządu z ceną i terminem; wspólnota nic nie płaci, zanim jej nie przyjmie.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   /* ===== BLOK 9 — Przesył i wywłaszczenia (uzupełnienie) ===== */
@@ -6386,7 +6386,7 @@ const SERVICE_CONTENT = {
       'Zbieram dowody dawnego korzystania z działki: mapę sprzed podziału, zdjęcia, umowy dzierżawy, wnioski o dopłaty rolne.',
       'Piszę wniosek o nabycie resztówki: przy ZRID do zarządcy drogi, przy wywłaszczeniu z u.g.n. do starosty albo organu wykonawczego samorządu, na którego rzecz je przeprowadzono (art. 113 ust. 3 i art. 11 ust. 1 u.g.n.).',
       'Sprawdzam operat i proponowaną cenę, zanim podpiszesz akt notarialny (art. 158 k.c.).',
-      'Gdy zarządca odmawia albo proponuje cenę niższą niż w operacie, odpowiadam pismem z dowodami i wskazuję, jak dalej dochodzić obowiązku nabycia.',
+      'Gdy zarządca odmawia albo proponuje cenę niższą niż w operacie, odpowiadam pismem z dowodami, a gdy to nie wystarcza, pozywam o zobowiązanie do złożenia oświadczenia woli (art. 64 k.c., art. 1047 § 1 k.p.c.).',
       'Gdy równolegle toczy się sprawa odszkodowania za zajęty pas, prowadzę obie na tych samych dowodach.',
     ],
     stepsHeading: 'Jak przebiega sprawa: od wniosku do zarządcy drogi po akt notarialny',
@@ -6404,11 +6404,11 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Co jeśli GDDKiA odmówi wykupu resztówki?',
-        a: 'Odmowa nie znosi obowiązku: zarządca drogi jest obowiązany nabyć resztę, jeżeli nie nadaje się ona do prawidłowego wykorzystania na dotychczasowe cele (art. 13 ust. 3 specustawy drogowej). Przy drogach zarządzanych przez Generalnego Dyrektora Dróg Krajowych i Autostrad obowiązek ciąży na nim (art. 1 ust. 2). Przepis nie wskazuje trybu dochodzenia, dlatego dalszy krok dobieram po lekturze odmowy. Zachowaj ją i dowody, jak korzystałeś z działki przed budową.',
+        a: 'Odmowa nie znosi obowiązku: zarządca drogi jest obowiązany nabyć resztę, jeżeli nie nadaje się ona do prawidłowego wykorzystania na dotychczasowe cele (art. 13 ust. 3 specustawy drogowej). Przy drogach zarządzanych przez Generalnego Dyrektora Dróg Krajowych i Autostrad obowiązek ciąży na nim (art. 1 ust. 2). To roszczenie cywilne: odmowa nie jest decyzją administracyjną, a spór rozstrzyga sąd powszechny (NSA, wyrok z 8.11.2011, I OSK 1932/10). Po odmowie zostaje pozew o zobowiązanie do złożenia oświadczenia woli. Prawomocny wyrok zastępuje oświadczenie zarządcy (art. 64 k.c., art. 1047 § 1 k.p.c.). Zachowaj ją i dowody, jak korzystałeś z działki przed budową.',
       },
       {
         q: 'Czy cena będzie taka jak za wywłaszczoną część?',
-        a: 'Przepisy tego nie przesądzają, bo to dwa odrębne rozliczenia. Odszkodowanie za pas ustala w decyzji organ, który wydał decyzję ZRID (art. 12 ust. 4a specustawy drogowej). Art. 13 ust. 3 nie podaje wzoru ceny resztówki, a w sprawach nieuregulowanych w tym rozdziale stosuje się u.g.n. (art. 23).',
+        a: 'Przepisy tego nie przesądzają, bo to dwa odrębne rozliczenia. Odszkodowanie za pas ustala w decyzji organ, który wydał decyzję ZRID (art. 12 ust. 4a specustawy drogowej). Art. 13 ust. 3 nie podaje wzoru ceny resztówki, a w sprawach nieuregulowanych w tym rozdziale stosuje się u.g.n. (art. 23). Cenę uzgadniasz z zarządcą, a w sporze ustala ją sąd z opinii biegłego. Plan miejscowy może ją podnieść: sąd przyjął wartość według funkcji z planu, choć działkę uprawiano (SA w Gdańsku, wyrok z 26.04.2017, V ACa 948/15). Może ją też obniżyć: przy działce rolnej z zakazem zabudowy sąd przyjął 27 690 zł wobec żądanych 270 000 zł i nie zastosował art. 134 ust. 4 u.g.n. (SA w Krakowie, wyrok z 16.03.2016, I ACa 1732/15).',
       },
       {
         q: 'Do kiedy trzeba złożyć wniosek o wykup?',
@@ -6420,7 +6420,7 @@ const SERVICE_CONTENT = {
       },
     ],
     law: {
-      asOf: '2026-10-10',
+      asOf: '2026-11-07',
       items: [
         {
           ref: 'art. 1 ust. 2, art. 11a ust. 1, art. 12 ust. 1, 4 i 4a, art. 13 ust. 3 i art. 23',
@@ -6436,7 +6436,8 @@ const SERVICE_CONTENT = {
           eli: 'DU/1997/741',
           note: 'nabycie reszty przy wywłaszczeniu; kto reprezentuje Skarb Państwa i samorząd; podział pod drogę na wniosek właściciela',
         },
-        { ref: 'art. 155 § 1 i art. 158 k.c.', act: 'Kodeks cywilny', tj: 'Dz.U. 2026 poz. 795', eli: 'DU/1964/93', note: 'forma aktu notarialnego i przejście własności przy nabyciu resztówki' },
+        { ref: 'art. 64, art. 155 § 1 i art. 158 k.c.', act: 'Kodeks cywilny', tj: 'Dz.U. 2026 poz. 795', eli: 'DU/1964/93', note: 'wyrok zastępuje oświadczenie woli; forma aktu notarialnego i przejście własności przy nabyciu resztówki' },
+        { ref: 'art. 1047 § 1', act: 'Kodeks postępowania cywilnego', tj: 'Dz.U. 2026 poz. 468', eli: 'DU/1964/296', note: 'Wykonanie wyroku zobowiązującego do złożenia oświadczenia woli.' },
       ],
     },
     docs: [
@@ -6446,13 +6447,13 @@ const SERVICE_CONTENT = {
       'Zdjęcia, umowy dzierżawy albo wnioski o dopłaty sprzed budowy (jeśli masz)',
       'Pisma od zarządcy drogi, np. odmowa wykupu albo propozycja ceny (jeśli są)',
     ],
-    guides: [],
+    guides: ['wykup-dzialki-resztkowej'],
     seeAlso: ['oplaty-odszkodowania-planistyczne', 'nieruchomosci-rolne'],
     cta: {
       heading: 'Nie musisz zostać z bezużytecznym kawałkiem ziemi.',
       lead: 'Napisz, jaki pas działki zajęto pod drogę i do czego służyła reszta. W 24 h roboczych dostaniesz bezpłatną wstępną analizę (co trzeba zrobić, np. wniosek do zarządcy drogi albo pismo po odmowie) i ofertę z ceną i terminem; do akceptacji oferty nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'ograniczenie-korzystania-nieruchomosci': {
