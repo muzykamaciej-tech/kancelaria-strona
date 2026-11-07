@@ -1028,7 +1028,7 @@ window.BLOG.push(
     metaTitle: 'Mieszkanie po rodzicach – kto dziedziczy, spłata, sprzedaż',
     metaDesc: 'Mieszkanie po rodzicach bez testamentu dziedziczą dzieci i małżonek po równo. Jak przejąć je ze spłatą rodzeństwa, kiedy sprzedać i jaki podatek.',
     excerpt: 'Mieszkanie po rodzicach bez testamentu dziedziczą dzieci i małżonek po równo. Jak przejąć je ze spłatą rodzeństwa, kiedy sprzedać i jaki podatek.',
-    date: '24 października 2026', iso: '2026-10-24', readTime: '15 min',
+    date: '24 października 2026', iso: '2026-10-24', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '15 min',
     category: 'Współwłasność i spadki', tags: ['Spadek', 'Dział spadku', 'Spłata rodzeństwa'],
     cover: '/assets/blog-mieszkanie-po-rodzicach-spadek.jpg',
     related: ['dzial-spadku', 'stwierdzenie-nabycia-spadku', 'zniesienie-wspolwlasnosci'],
@@ -1053,7 +1053,7 @@ window.BLOG.push(
       ]],
       ['p', 'Nowy mąż albo żona zmarłego rodzica dziedziczy jako małżonek, na równi z dziećmi (art. 931 § 1 k.c.). Te same zasady dotyczą domu po rodzicach, chyba że wchodzi w skład gospodarstwa rolnego.'],
       ['h2', 'Mieszkanie po rodzicach z testamentem: co z rodzeństwem?'],
-      ['p', 'Testament ma pierwszeństwo przed ustawą (art. 926 § 2 k.c.). Jeżeli rodzic zapisał mieszkanie jednemu dziecku, pozostałe nie stają się współwłaścicielami. Przysługuje im zachowek, czyli roszczenie o pieniądze: połowa wartości udziału, który dostałyby bez testamentu, a 2/3 – gdy uprawniony jest małoletni albo trwale niezdolny do pracy (art. 991 § 1 k.c.). Roszczenie przedawnia się z upływem 5 lat od ogłoszenia testamentu (art. 1007 § 1 k.c.).'],
+      ['p', 'Testament ma pierwszeństwo przed ustawą (art. 926 § 2 k.c.). Jeżeli rodzic przeznaczył jednemu dziecku mieszkanie, które było prawie całym majątkiem, to dziecko to w razie wątpliwości dziedziczy cały spadek (art. 961 k.c.). Rodzeństwo nie staje się wtedy współwłaścicielem, podobnie jak przy zapisie windykacyjnym w testamencie notarialnym (art. 981¹ k.c.). Przysługuje mu zachowek, czyli roszczenie o pieniądze: połowa wartości udziału, który dostałoby bez testamentu, a 2/3 – gdy uprawniony jest małoletni albo trwale niezdolny do pracy (art. 991 § 1 k.c.). Roszczenie przedawnia się z upływem 5 lat od ogłoszenia testamentu, a wobec zapisobiercy windykacyjnego od śmierci rodzica (art. 1007 k.c.). Inaczej jest przy zapisie zwykłym, gdy mieszkanie to tylko część majątku: spadek dziedziczą inne osoby, często także rodzeństwo, a dziecko z testamentu ma wobec nich roszczenie o przeniesienie własności (art. 968 § 1 k.c.).'],
       ['h2', 'Jak odziedziczyć mieszkanie po rodzicach krok po kroku?'],
       ['p', 'Spadek przechodzi na spadkobierców z chwilą śmierci (art. 922 § 1 k.c.). Żeby mieszkaniem rozporządzać, musisz jednak zrobić 4 rzeczy.'],
       ['ol', [

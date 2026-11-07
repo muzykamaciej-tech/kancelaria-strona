@@ -761,13 +761,13 @@ Object.assign(window.SERVICE_CONTENT, {
       'Pisma z zarzutami do operatu, opinia biegłego albo decyzja ministra, jeśli są.',
       'Przy roszczeniu zamawiającego: jego wezwanie i polisa OC aktualna na dzień operatu.',
     ],
-    guides: ['wycena-sluzebnosci-przesylu-rzeczoznawca'],
+    guides: ['wycena-sluzebnosci-przesylu-rzeczoznawca', 'rzeczoznawca-majatkowy'],
     seeAlso: ['odszkodowanie-wywlaszczenie', 'oplaty-odszkodowania-planistyczne'],
     cta: {
       heading: 'Bronię Twoich wycen — i Ciebie.',
       lead: 'Prześlij zawiadomienie z Komisji albo pismo z zarzutami do operatu, a w 24 h roboczych odpiszę, co trzeba zrobić. Dołączę ofertę z ceną i terminem; przed jej przyjęciem nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'obsluga-prawna-tbs-sim-kooperatyw': {

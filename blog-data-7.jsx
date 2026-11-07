@@ -7,7 +7,7 @@ window.BLOG.push(
     metaTitle: 'Kupno działki rolnej z warunkami zabudowy – co sprawdzić',
     metaDesc: 'Kupujesz działkę rolną z WZ? Sprawdź w decyzji datę prawomocności, adresata, mapę i funkcję, a poza nią plan miejscowy, księgę wieczystą i KOWR.',
     excerpt: 'Kupujesz działkę rolną z WZ? Sprawdź w decyzji datę prawomocności, adresata, mapę i funkcję, a poza nią plan miejscowy, księgę wieczystą i KOWR.',
-    date: '23 października 2026', iso: '2026-10-23', readTime: '13 min',
+    date: '23 października 2026', iso: '2026-10-23', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '13 min',
     category: 'Planowanie przestrzenne', tags: ['WZ', 'Zakup działki', 'Działka rolna'],
     cover: '/assets/blog-kupno-dzialki-rolnej-z-warunkami-zabudowy.jpg',
     related: ['audyt-stanu-prawnego-nieruchomosci', 'analiza-umowy-przedwstepnej', 'warunki-zabudowy'],
@@ -27,7 +27,7 @@ window.BLOG.push(
       ['p', 'Warto więc kupić, jeżeli przejdziesz listę poniżej bez czerwonej flagi. Nie warto płacić ceny działki budowlanej, gdy adresat WZ nie podpisze zgody, decyzja nie obejmuje Twojej działki albo wygaśnie, zanim złożysz projekt.'],
       ['h2', 'Co daje WZ kupującemu, a czego nie daje?'],
       ['ul', [
-        '**Nie daje prawa do działki.** WZ nie rodzi praw do terenu i nie narusza prawa własności (art. 63 ust. 2 u.p.z.p.). Mógł ją więc dostać ktoś, kto nie był właścicielem, a dla jednej działki mogą istnieć decyzje kilku osób (art. 63 ust. 1).',
+        '**Nie daje prawa do działki.** WZ nie rodzi praw do terenu i nie narusza prawa własności (art. 63 ust. 2 u.p.z.p.). Mógł ją więc dostać ktoś, kto nie był właścicielem, a dla jednej działki mogą istnieć decyzje kilku osób (art. 63 ust. 1 u.p.z.p., a od 1 stycznia 2027 r. art. 63 ust. 1d).',
         '**Nie przechodzi z aktem.** Urząd przeniesie WZ na Ciebie za zgodą osoby, na którą ją wydano, jeżeli przyjmiesz wszystkie warunki z decyzji (art. 63 ust. 5). Zgodę, opłatę i kroki opisuję w tekście Czy warunki zabudowy przechodzą na nowego właściciela działki?',
         '**Obejmuje tylko teren z mapy.** Decyzja wyznacza na mapie linie rozgraniczające teren inwestycji (art. 54 ust. 1 pkt 3 w zw. z art. 64 ust. 1 u.p.z.p.), czyli granice obszaru, którego dotyczy. Działka wydzielona poza tymi liniami nie jest objęta WZ, nawet gdy ogłoszenie mówi „z WZ”.',
         '**Może wygasnąć.** Nowsze WZ wygasają po 5 latach od prawomocności (art. 64c), a każda – po pozwoleniu na budowę innego wnioskodawcy albo po uchwaleniu planu miejscowego z innymi ustaleniami (art. 65 ust. 1).',

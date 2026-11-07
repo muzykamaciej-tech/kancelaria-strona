@@ -174,7 +174,7 @@ Object.assign(window.SERVICE_CONTENT, {
       ],
     },
     introHeading: 'Co podpisujesz, gdy oddajesz ziemię pod farmę',
-    intro: 'Umowa dzierżawy pod panele albo turbiny wiatrowe zobowiązuje Cię oddać grunt inwestorowi do używania i pobierania pożytków, a jego do płacenia umówionego czynszu (art. 693 § 1 k.c.). Farma na użytkach rolnych klas I–III, na klasie IV (ponad 150 kW albo przy działalności gospodarczej w zakresie wytwarzania energii) oraz na innych gruntach przy mocy ponad 1000 kW może powstać tylko na podstawie planu miejscowego (art. 14 ust. 6a pkt 2 u.p.z.p.). Inwestor zwykle podpisuje umowę, zanim ma decyzje potrzebne do budowy, więc grunt bywa związany umową przez cały okres przygotowawczy.',
+    intro: 'Umowa pod panele albo turbiny wiatrowe zobowiązuje Cię oddać grunt inwestorowi, a jego do płacenia umówionego czynszu (art. 693 k.c.). Przy turbinach Sąd Najwyższy uznał ją za umowę nienazwaną, do której przepisy o dzierżawie stosuje się odpowiednio (wyrok z 5.10.2012, IV CSK 244/12). Farma fotowoltaiczna na użytkach rolnych klas I–III, na klasie IV (ponad 150 kW albo przy działalności gospodarczej w zakresie wytwarzania energii) oraz na innych gruntach przy mocy ponad 1000 kW może powstać tylko na podstawie planu miejscowego (art. 14 ust. 6a pkt 2 u.p.z.p.). Turbina wiatrowa wymaga planu miejscowego zawsze (art. 3 ustawy o inwestycjach w zakresie elektrowni wiatrowych). Inwestor zwykle podpisuje umowę, zanim ma decyzje potrzebne do budowy, więc grunt bywa związany umową przez cały okres przygotowawczy.',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Firma OZE chce dzierżawić Twoją ziemię',
     when: [
@@ -254,6 +254,7 @@ Object.assign(window.SERVICE_CONTENT, {
         { ref: 'art. 14 ust. 6a', act: 'Ustawa z dnia 27 marca 2003 r. o planowaniu i zagospodarowaniu przestrzennym', tj: 'Dz.U. 2026 poz. 538', eli: 'DU/2003/717', note: 'Kiedy farma wymaga planu miejscowego.' },
         { ref: 'art. 16 ust. 2 pkt 1, art. 17', act: 'Ustawa z dnia 6 lipca 1982 r. o księgach wieczystych i hipotece', tj: 'Dz.U. 2026 poz. 1066', eli: 'DU/1982/147', note: 'Wpis dzierżawy do księgi wieczystej.' },
         { ref: 'art. 2b ust. 2–4', act: 'Ustawa z dnia 11 kwietnia 2003 r. o kształtowaniu ustroju rolnego', tj: 'Dz.U. 2026 poz. 941', eli: 'DU/2003/592', note: 'Zgoda KOWR przed upływem 5 lat od zakupu.' },
+        { ref: 'art. 3', act: 'Ustawa z dnia 20 maja 2016 r. o inwestycjach w zakresie elektrowni wiatrowych', tj: 'Dz.U. 2024 poz. 317', eli: 'DU/2016/961', note: 'Turbina tylko na podstawie planu miejscowego.' },
       ],
     },
     docs: [
@@ -264,13 +265,13 @@ Object.assign(window.SERVICE_CONTENT, {
       'Akt notarialny zakupu ziemi, jeśli kupiłeś ją w ostatnich 5 latach',
       'Mapa z zaznaczonym terenem farmy, jeśli inwestor ją przysłał',
     ],
-    guides: ['farma-fotowoltaiczna-na-dzialce-rolnej', 'dzierzawa-pod-fotowoltaike-a-vat', 'dzierzawa-ziemi-pod-fotowoltaike'],
+    guides: ['farma-fotowoltaiczna-na-dzialce-rolnej', 'dzierzawa-pod-fotowoltaike-a-vat', 'dzierzawa-ziemi-pod-fotowoltaike', 'dzierzawa-pod-wiatraki'],
     seeAlso: ['negocjacje-nieruchomosci', 'plan-ogolny', 'obsluga-prawna-deweloperow-oze'],
     cta: {
       heading: 'Twój grunt na 30 lat — podpisz dopiero, gdy umowa naprawdę Cię chroni.',
       lead: 'Prześlij projekt umowy od firmy OZE. W 24 h roboczych dostaniesz informację, jakiego zakresu pracy wymaga Twoja umowa, i ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'negocjacje-nieruchomosci': {
@@ -302,7 +303,7 @@ Object.assign(window.SERVICE_CONTENT, {
       ],
     },
     introHeading: 'Jak zbić cenę mieszkania i nie podpisać przy tym złej umowy',
-    intro: 'W transakcji negocjuje się nie tylko cenę, ale też termin, zadatek, warunki odstąpienia, stan wydania i podział kosztów. Najmocniejszy argument to liczba, którą druga strona może sprawdzić, np. cena z rejestru cen nieruchomości: trafiają do niego dane z aktów notarialnych (art. 23 ust. 2 pkt 1 i ust. 7 p.g.k.). Kupując od dewelopera jako konsument, pamiętaj: zapis, który zmienisz w negocjacjach, jest uzgodniony indywidualnie (miałeś wpływ na jego treść), więc potem nie podważysz go jako niedozwolonego (art. 385¹ § 1 i 3 k.c.). Przy zakupie od osoby prywatnej tej ochrony w ogóle nie ma (art. 22¹ k.c.). W jednej transakcji reprezentuję tylko jedną stronę.',
+    intro: 'W transakcji negocjuje się nie tylko cenę, ale też termin, zadatek, warunki odstąpienia, stan wydania i podział kosztów. Najmocniejszy argument to liczba, którą druga strona może sprawdzić, np. cena z rejestru cen nieruchomości: trafiają do niego dane z aktów notarialnych (art. 23 ust. 2 pkt 1 i ust. 7 p.g.k.). Jeżeli dostajesz obniżkę za wadę, opisz w umowie wadę i kwotę: za wadę, o której wiedziałeś przy zawarciu umowy, sprzedawca nie odpowiada z rękojmi (art. 557 § 1 k.c.), ale za inne wady odpowiada dalej, chyba że skutecznie wyłączono rękojmię (art. 558 k.c.). Kupując od dewelopera jako konsument, pamiętaj: zapis, który zmienisz w negocjacjach, jest uzgodniony indywidualnie (miałeś wpływ na jego treść), więc potem nie podważysz go jako niedozwolonego (art. 385¹ § 1 i 3 k.c.). Przy zakupie od osoby prywatnej tej ochrony w ogóle nie ma (art. 22¹ k.c.). W jednej transakcji reprezentuję tylko jedną stronę.',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Chcesz zbić cenę albo zmienić umowę, zanim cokolwiek podpiszesz',
     when: [
@@ -362,7 +363,7 @@ Object.assign(window.SERVICE_CONTENT, {
       asOf: '2026-10-10',
       items: [
         {
-          ref: 'art. 22¹, art. 72, art. 158, art. 385¹',
+          ref: 'art. 22¹, art. 72, art. 158, art. 385¹, art. 557, art. 558',
           act: 'Kodeks cywilny',
           tj: 'Dz.U. 2026 poz. 795',
           eli: 'DU/1964/93',
@@ -399,13 +400,13 @@ Object.assign(window.SERVICE_CONTENT, {
       'Numer księgi wieczystej, jeśli podano go w ogłoszeniu albo w ofercie.',
       'Dotychczasowa korespondencja z drugą stroną albo pośrednikiem i propozycje ceny.',
     ],
-    guides: ['jawne-ceny-nieruchomosci-rejestr-cen'],
+    guides: ['jawne-ceny-nieruchomosci-rejestr-cen', 'negocjacje-ceny-nieruchomosci'],
     seeAlso: ['analiza-umowy-przedwstepnej', 'dzierzawa-oze', 'obsluga-prawna-najemcow-komercyjnych'],
     cta: {
       heading: 'Nie negocjuj sam pod presją emocji. Zrobię to za Ciebie.',
       lead: 'Opisz transakcję i cel. W 24 h roboczych odpiszę, co trzeba zrobić przed rozmową z drugą stroną, i prześlę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'zgloszenie-budowy': {
@@ -528,13 +529,13 @@ Object.assign(window.SERVICE_CONTENT, {
       'Złożone zgłoszenie z datą doręczenia urzędowi (jeśli już je złożyłeś)',
       'Postanowienie o uzupełnieniu albo decyzja o sprzeciwie z datą doręczenia (jeśli je dostałeś)',
     ],
-    guides: ['warunki-zabudowy-ile-wazne', 'dom-do-70-m2-bez-pozwolenia', 'zgloszenie-robot-budowlanych'],
+    guides: ['warunki-zabudowy-ile-wazne', 'dom-do-70-m2-bez-pozwolenia', 'zgloszenie-robot-budowlanych', 'ogrodzenie-na-granicy-dzialki'],
     seeAlso: ['warunki-zabudowy', 'odrolnienie'],
     cta: {
       heading: 'Zgłoszenie zamiast pozwolenia — szybciej, o ile zrobione bez błędu.',
       lead: 'Opisz obiekt i działkę albo dołącz sprzeciw: w 24 h roboczych napiszę bezpłatnie, czy pierwszym krokiem jest projekt, uzupełnienie czy odwołanie. W tej wiadomości podam też cenę i termin; płacisz tylko wtedy, gdy przyjmiesz ofertę.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'obsluga-prawna-deweloperow': {
@@ -934,13 +935,13 @@ Object.assign(window.SERVICE_CONTENT, {
       'Przy zaległościach: uchwała o wysokości zaliczek, zestawienie wpłat dłużnika i wysłane wezwania',
       'Projekt umowy, którą zarząd ma podpisać, z uchwałą, jeśli ją podjęto',
     ],
-    guides: ['wspolnota-mieszkaniowa-uchwaly', 'zarzadca-nieruchomosci-umowa'],
+    guides: ['wspolnota-mieszkaniowa-uchwaly', 'zarzadca-nieruchomosci-umowa', 'uchwala-wspolnoty-o-remoncie'],
     seeAlso: ['roszczenia-wspolnota-deweloper', 'nadzor-budowlany-pinb', 'gwarancja-jakosci-lokal'],
     cta: {
       heading: 'Uchwały, które się bronią. Pieniądze, które wracają. Deweloper, który odpowiada.',
       lead: 'Napisz, czego dotyczy sprawa wspólnoty: uchwały, zaległości czy umowy. W 24 h roboczych odpiszę, od czego zarząd powinien zacząć, i dołączę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
 });

@@ -1095,13 +1095,13 @@ const SERVICE_CONTENT = {
       'Dokument, na podstawie którego sprzedający jest właścicielem (np. akt notarialny, postanowienie o nabyciu spadku), jeśli go przekazał.',
       'Decyzja kredytowa albo informacja z banku o terminie wypłaty, jeśli kupujesz na kredyt.',
     ],
-    guides: ['jawne-ceny-nieruchomosci-rejestr-cen', 'koszty-zakupu-mieszkania', 'akt-notarialny-kupna-nieruchomosci'],
+    guides: ['jawne-ceny-nieruchomosci-rejestr-cen', 'koszty-zakupu-mieszkania', 'akt-notarialny-kupna-nieruchomosci', 'kupno-dzialki-budowlanej-krok-po-kroku', 'prawo-pierwokupu-gminy', 'wykup-mieszkania-komunalnego-bonifikata', 'negocjacje-ceny-nieruchomosci'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'nieruchomosci-rolne', 'warunki-zabudowy'],
     cta: {
       heading: 'Kupuj z kimś, kto pilnuje Twojej strony.',
       lead: 'Napisz, co kupujesz i na kiedy jest umowa przedwstępna albo akt; jeśli masz, dodaj numer księgi wieczystej. W 24 h roboczych odpiszę, co trzeba zrobić na tym etapie zakupu, i prześlę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   /* ===== Obsługa prawna sprzedaży nieruchomości (Blok 2) ===== */
@@ -1230,13 +1230,13 @@ const SERVICE_CONTENT = {
       'Umowa przedwstępna albo projekt aktu, jeśli już są.',
       'Umowa najmu, jeśli w mieszkaniu ktoś mieszka.',
     ],
-    guides: ['jawne-ceny-nieruchomosci-rejestr-cen', 'umowa-posrednictwa-prowizja', 'sprzedaz-domu-z-kredytem-hipotecznym'],
+    guides: ['jawne-ceny-nieruchomosci-rejestr-cen', 'umowa-posrednictwa-prowizja', 'sprzedaz-domu-z-kredytem-hipotecznym', 'prawo-pierwokupu-gminy', 'wykup-mieszkania-komunalnego-bonifikata'],
     seeAlso: ['stwierdzenie-nabycia-spadku', 'uregulowanie-stanu-prawnego', 'zniesienie-wspolwlasnosci'],
     cta: {
       heading: 'Sprzedaj bezpiecznie — z pieniędzmi zabezpieczonymi od początku.',
       lead: 'Napisz, co sprzedajesz, skąd to masz i czy jest na tym hipoteka. W 24 h roboczych odpiszę, co trzeba przygotować przed aktem, i prześlę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   /* ===== Umowa dożywocia i renta (Blok 2) ===== */
@@ -1374,13 +1374,13 @@ const SERVICE_CONTENT = {
       'Akt notarialny umowy o dożywocie, jeśli umowa jest już zawarta',
       'Wypis z rejestru gruntów, jeśli przekazujesz ziemię rolną',
     ],
-    guides: ['umowa-dozywocia', 'renta-dozywotnia-odwrocona-hipoteka'],
+    guides: ['umowa-dozywocia', 'renta-dozywotnia-odwrocona-hipoteka', 'sluzebnosc-mieszkania'],
     seeAlso: ['zachowek', 'stwierdzenie-nabycia-spadku'],
     cta: {
       heading: 'Przekaż mieszkanie mądrze — z opieką i bez sporów o zachowek.',
       lead: 'Napisz, co chcesz przekazać, komu, jakiej opieki oczekujesz i kogo masz w najbliższej rodzinie. W 24 h roboczych dostaniesz odpowiedź, co trzeba przygotować przed aktem, i ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   /* ===== Darowizna nieruchomości (Blok 2) ===== */
@@ -1389,10 +1389,10 @@ const SERVICE_CONTENT = {
     h1Full: 'Darowizna nieruchomości: przepisanie mieszkania w rodzinie i odwołanie darowizny',
     topic: 'Darowizna nieruchomości',
     metaDesc: 'Darowizna nieruchomości wymaga aktu notarialnego. Najbliższa rodzina nie płaci podatku. Odwołujesz ją na piśmie w rok od dowiedzenia się o niewdzięczności.',
-    subtitle: 'Chcesz przepisać mieszkanie lub działkę na dziecko albo cofnąć darowiznę, której dziś żałujesz? Darowizna nieruchomości wymaga aktu notarialnego, a najbliższa rodzina nie płaci od niej podatku (art. 890 § 1 k.c., art. 4a u.p.s.d.). Przygotowuję darowiznę z zabezpieczeniem darczyńcy, a po rażącej niewdzięczności obdarowanego odwołuję ją na piśmie i prowadzę sprawę o zwrot.',
+    subtitle: 'Chcesz przepisać mieszkanie lub działkę na dziecko albo cofnąć darowiznę, której dziś żałujesz? Darowizna nieruchomości wymaga aktu notarialnego, a najbliższa rodzina nie płaci od niej podatku (art. 158 i art. 890 § 2 k.c., art. 4a u.p.s.d.). Przygotowuję darowiznę z zabezpieczeniem darczyńcy, a po rażącej niewdzięczności obdarowanego odwołuję ją na piśmie i prowadzę sprawę o zwrot.',
     short: {
       q: 'Jak przepisać mieszkanie na dziecko i kiedy można cofnąć darowiznę?',
-      a: 'Przepisanie mieszkania to umowa darowizny w formie aktu notarialnego (art. 890 § 1 i art. 158 k.c.). Najbliższa rodzina jest zwolniona z podatku i przy akcie nie składa zgłoszenia do urzędu skarbowego (art. 4a u.p.s.d.). Cofnąć darowiznę możesz z powodu rażącej niewdzięczności, pisemnie, w ciągu roku od dowiedzenia się o niej (art. 898–900 k.c.).',
+      a: 'Przepisanie mieszkania to umowa darowizny w formie aktu notarialnego (art. 158 i art. 890 § 2 k.c.). Najbliższa rodzina jest zwolniona z podatku i przy akcie nie składa zgłoszenia do urzędu skarbowego (art. 4a u.p.s.d.). Cofnąć darowiznę możesz z powodu rażącej niewdzięczności, pisemnie, w ciągu roku od dowiedzenia się o niej (art. 898–900 k.c.).',
       facts: [
         [
           'Forma',
@@ -1422,7 +1422,7 @@ const SERVICE_CONTENT = {
     whenHeading: 'Przepisujesz mieszkanie na dziecko albo żałujesz darowizny',
     when: [
       { b: 'Syn albo córka, którym przepisałeś mieszkanie, zachowali się wobec Ciebie rażąco niewdzięcznie', t: 'termin na odwołanie biegnie od dnia, w którym się o tym dowiedziałeś (art. 899 § 3 k.c.).' },
-      { b: 'Chcesz przepisać mieszkanie lub działkę na syna albo córkę', t: 'potrzebny jest akt notarialny (art. 890 § 1 k.c.); przed podpisem ustalamy, gdzie zamieszkasz.' },
+      { b: 'Chcesz przepisać mieszkanie lub działkę na syna albo córkę', t: 'potrzebny jest akt notarialny (art. 158 i art. 890 § 2 k.c.); przed podpisem ustalamy, gdzie zamieszkasz.' },
       { b: 'Boisz się, że po podpisie zostaniesz bez dachu nad głową', t: 'obdarowany może w akcie ustanowić dla Ciebie służebność mieszkania (art. 245 § 2 i art. 296 k.c.).' },
       { b: 'Chcesz darować mieszkanie synowej, zięciowi albo komuś spoza rodziny', t: 'zwolnienie ich nie obejmuje; podatek zależy od grupy podatkowej (art. 14 u.p.s.d.), a pobiera go notariusz przy akcie (art. 18 u.p.s.d.).' },
       { b: 'Po przepisaniu mieszkania brakuje Ci na utrzymanie', t: 'obdarowany dostarcza Ci środków w granicach wzbogacenia albo zwalnia się, zwracając jego wartość (art. 897 k.c.).' },
@@ -1474,7 +1474,7 @@ const SERVICE_CONTENT = {
       asOf: '2026-10-10',
       items: [
         {
-          ref: 'art. 155 § 1, 158, 244 § 1, 245 § 2, 296, 299, 301 i 890 § 1 k.c.',
+          ref: 'art. 155 § 1, 158, 244 § 1, 245 § 2, 296, 299, 301 i 890 § 2 k.c.',
           act: 'Kodeks cywilny',
           tj: 'Dz.U. 2026 poz. 795',
           eli: 'DU/1964/93',
@@ -1511,13 +1511,13 @@ const SERVICE_CONTENT = {
       'Przy odwołaniu: akt darowizny, jeśli masz, i opis zachowań obdarowanego z datami, w tym data, kiedy się o nich dowiedziałeś',
       'Wiadomości, pisma albo zgłoszenia, które dokumentują te zachowania, jeśli są',
     ],
-    guides: ['przepisanie-mieszkania-na-dziecko', 'odwolanie-darowizny', 'renta-dozywotnia-odwrocona-hipoteka'],
+    guides: ['przepisanie-mieszkania-na-dziecko', 'odwolanie-darowizny', 'renta-dozywotnia-odwrocona-hipoteka', 'darowizna-dzialki-i-mieszkania', 'sluzebnosc-mieszkania'],
     seeAlso: ['zachowek', 'dzial-spadku'],
     cta: {
       heading: 'Przekaż nieruchomość w rodzinie — bezpiecznie i z głową.',
       lead: 'Napisz, komu chcesz darować mieszkanie albo co zrobił obdarowany, a w ciągu 24 h roboczych bezpłatnie wskażę pierwszy krok. Razem z odpowiedzią dostajesz ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   /* ===== Plan ogólny gminy (Blok 4) ===== */
@@ -3000,7 +3000,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Jak wykreślić z księgi hipotekę spłaconą wiele lat temu?',
-        a: 'Wnioskiem o wykreślenie, do którego dołączasz dokument od wierzyciela albo jego następcy. Spłata co do zasady wygasza hipotekę (art. 94 u.k.w.h.), a wierzyciel ma wtedy obowiązek umożliwić jej wykreślenie (art. 100). Sam upływ lat nie wystarczy, bo przedawnienie wierzytelności nie odbiera prawa do zaspokojenia z nieruchomości (art. 77). Gdy wierzyciel nie istnieje albo odmawia, możesz żądać usunięcia niezgodności w procesie (art. 10 ust. 1).',
+        a: 'Wnioskiem o wykreślenie, do którego dołączasz dokument od wierzyciela albo jego następcy. Spłata co do zasady wygasza hipotekę (art. 94 u.k.w.h.), a wierzyciel ma wtedy obowiązek umożliwić jej wykreślenie (art. 100). Sam upływ lat nie wystarczy, bo przedawnienie wierzytelności nie odbiera prawa do zaspokojenia z nieruchomości (art. 77). Gdy wierzyciel odmawia, możesz żądać usunięcia niezgodności w procesie (art. 10 ust. 1). Gdy zwleka albo nie wiadomo, kto nim dziś jest, wpłacasz zabezpieczoną kwotę do depozytu sądowego ze zrzeczeniem się odbioru i hipoteka wygasa, a wykreślenie następuje na podstawie prawomocnego zezwolenia sądu i dowodu wpłaty (art. 99 u.k.w.h.).',
       },
     ],
     law: {
@@ -3051,7 +3051,7 @@ const SERVICE_CONTENT = {
       'Pismo wierzyciela o spłacie kredytu zabezpieczonego hipoteką, jeśli masz',
       'Zawiadomienie z sądu o wpisie ostrzeżenia, jeśli je dostałeś',
     ],
-    guides: ['zniesienie-sluzebnosci-przesylu-nieistniejaca-linia', 'zawyzony-podatek-od-nieruchomosci-blad-w-ewidencji', 'wznowienie-granic-dzialki', 'spoldzielcze-wlasnosciowe-prawo-do-lokalu', 'uzgodnienie-tresci-ksiegi-wieczystej', 'zalozenie-ksiegi-wieczystej'],
+    guides: ['zniesienie-sluzebnosci-przesylu-nieistniejaca-linia', 'zawyzony-podatek-od-nieruchomosci-blad-w-ewidencji', 'wznowienie-granic-dzialki', 'spoldzielcze-wlasnosciowe-prawo-do-lokalu', 'uzgodnienie-tresci-ksiegi-wieczystej', 'zalozenie-ksiegi-wieczystej', 'wykreslenie-hipoteki'],
     seeAlso: ['stwierdzenie-nabycia-spadku', 'obsluga-sprzedazy', 'obsluga-prawna-geodetow'],
     cta: {
       heading: 'Uporządkuj papiery, zanim zablokują Ci sprzedaż albo spadek.',
@@ -3536,7 +3536,7 @@ const SERVICE_CONTENT = {
         ],
         [
           'Termin',
-          '5 lat: przy testamencie od jego ogłoszenia, bez testamentu i wobec obdarowanego od śmierci spadkodawcy (art. 1007 k.c.); bezpieczniej liczyć 5 lat dzień w dzień',
+          '5 lat: przy testamencie od jego ogłoszenia, bez testamentu oraz wobec obdarowanego i zapisobiercy windykacyjnego od śmierci spadkodawcy (art. 1007 k.c.); bezpieczniej liczyć 5 lat dzień w dzień',
         ],
         [
           'Gdzie',
@@ -3569,7 +3569,7 @@ const SERVICE_CONTENT = {
       'Zbieram darowizny zmarłego z aktów notarialnych i ksiąg wieczystych i sprawdzam, które się dolicza (art. 993–994 k.c.).',
       'Wyliczam kwotę i wysyłam wezwanie do zapłaty z wyliczeniem.',
       'Składam pozew przed upływem 5 lat (art. 1007 k.c.) i wnoszę o biegłego, gdy wartość mieszkania jest sporna (art. 278 § 1 k.p.c.).',
-      'Gdy spadkobierca nie ma z czego zapłacić, kieruję roszczenie do obdarowanego, najpierw do obdarowanego najpóźniej (art. 1000–1001 k.c.).',
+      'Gdy spadkobierca nie ma z czego zapłacić, kieruję roszczenie do zapisobiercy windykacyjnego, a potem do obdarowanego, najpierw do obdarowanego najpóźniej (art. 999¹, 1000 i 1001 k.c.).',
     ],
     lists: [
       {
@@ -3616,7 +3616,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Kiedy zachowek się przedawnia?',
-        a: 'Po 5 latach od ogłoszenia testamentu (art. 1007 § 1 k.c.). Gdy testamentu nie ma, termin biegnie od śmierci spadkodawcy (postanowienie SN z 10.03.2011, V CSK 283/10). Roszczenie wobec obdarowanego przedawnia się po 5 latach od śmierci spadkodawcy (art. 1007 § 2 i art. 924 k.c.). Sądy zwykle przyjmują, że koniec terminu przypada na ostatni dzień roku kalendarzowego (art. 118 k.c.), ale Sąd Najwyższy tego wprost nie przesądził, więc bezpieczniej liczyć 5 lat dzień w dzień. Potem zobowiązany może odmówić zapłaty (art. 117 § 2 k.c.).',
+        a: 'Po 5 latach od ogłoszenia testamentu (art. 1007 § 1 k.c.). Gdy testamentu nie ma, termin biegnie od śmierci spadkodawcy (wyrok SN z 10.03.2011, V CSK 283/10). Roszczenie wobec obdarowanego albo zapisobiercy windykacyjnego przedawnia się po 5 latach od śmierci spadkodawcy (art. 1007 § 2 i art. 924 k.c.). Sądy zwykle przyjmują, że koniec terminu przypada na ostatni dzień roku kalendarzowego (art. 118 k.c.), ale Sąd Najwyższy tego wprost nie przesądził, więc bezpieczniej liczyć 5 lat dzień w dzień. Potem zobowiązany może odmówić zapłaty (art. 117 § 2 k.c.).',
       },
       {
         q: 'Ile kosztuje sprawa o zachowek?',
@@ -3655,13 +3655,13 @@ const SERVICE_CONTENT = {
       'Wezwanie do zapłaty zachowku albo pozew, jeśli przyszły do Ciebie',
       'Lista najbliższej rodziny zmarłego: kto żyje, kto zmarł wcześniej, kto jest małoletni',
     ],
-    guides: ['zachowek-z-darowizny', 'odwolanie-darowizny', 'ile-wynosi-zachowek'],
+    guides: ['zachowek-z-darowizny', 'odwolanie-darowizny', 'ile-wynosi-zachowek', 'testament-a-mieszkanie-zachowek'],
     seeAlso: ['darowizna-nieruchomosci', 'dozywocie-renta'],
     cta: {
       heading: 'Pominięto Cię przy podziale majątku? Zachowek to Twoje prawo.',
       lead: 'Opisz rodzinę zmarłego i darowizny, o których wiesz: w 24 h roboczych odpiszę, od czego zacząć. Ofertę z ceną i terminem dostajesz od razu, a do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'stwierdzenie-nabycia-spadku': {
@@ -3680,7 +3680,7 @@ const SERVICE_CONTENT = {
         ],
         [
           'U notariusza',
-          'Protokół dziedziczenia z udziałem wszystkich możliwych spadkobierców, potem akt poświadczenia dziedziczenia wpisany do Rejestru Spadkowego (art. 95b, 95e i 95h pr. not.)',
+          'Protokół dziedziczenia z udziałem wszystkich osób zainteresowanych, czyli możliwych spadkobierców i zapisobierców windykacyjnych, potem akt poświadczenia dziedziczenia wpisany do Rejestru Spadkowego (art. 95aa § 1, 95b, 95e i 95h pr. not.)',
         ],
         [
           'W sądzie',
@@ -3812,13 +3812,13 @@ const SERVICE_CONTENT = {
       'Oświadczenia o przyjęciu lub odrzuceniu spadku złożone przez rodzinę, jeśli były',
       'Numer księgi wieczystej nieruchomości zmarłego, jeśli znasz',
     ],
-    guides: ['stwierdzenie-nabycia-spadku', 'odrzucenie-spadku', 'dobrodziejstwo-inwentarza'],
+    guides: ['stwierdzenie-nabycia-spadku', 'odrzucenie-spadku', 'dobrodziejstwo-inwentarza', 'testament-a-mieszkanie-zachowek'],
     seeAlso: ['uregulowanie-stanu-prawnego', 'obsluga-sprzedazy'],
     cta: {
       heading: 'Potwierdź, że dziedziczysz — i odzyskaj kontrolę nad majątkiem.',
       lead: 'Opisz sprawę w formularzu, a w 24 h roboczych bezpłatnie odpowiem, czy wystarczy notariusz. Razem z odpowiedzią przyjdzie oferta z ceną i terminem, a płacisz dopiero wtedy, gdy ją zaakceptujesz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
     faqHeading: 'Koszt, czas i dokumenty: pytania rodziny po śmierci bliskiej osoby',
   },
 
@@ -6232,6 +6232,10 @@ const SERVICE_CONTENT = {
         b: 'Po podziale została Ci wąska resztka, z której nie skorzystasz tak jak dotąd.',
         t: 'Możesz żądać, żeby zarządca drogi nabył tę pozostałą część (art. 13 ust. 3 specustawy drogowej). To osobna sprawa: wykup działki resztkowej.',
       },
+      {
+        b: 'Droga leży na Twoim gruncie od lat, a w księdze wieczystej wciąż figuruje rodzina.',
+        t: 'Jeżeli 31.12.1998 była to droga publiczna we władaniu państwa albo samorządu, grunt przeszedł na nich z mocy prawa 1.01.1999, a wniosek o odszkodowanie trzeba było złożyć do 31.12.2005 (art. 73 ust. 1 i 4 ustawy z 13.10.1998). Jeżeli nie była, grunt może nadal być Twój. Piszę o tym w tekście Działka pod drogą: odszkodowanie za grunt zajęty przed 1999 r. i co zrobić, gdy termin minął.',
+      },
     ],
     doForTitle: 'Co sprawdzam w operacie i jakie pisma składam do wojewody albo starosty',
     doFor: [
@@ -6273,6 +6277,10 @@ const SERVICE_CONTENT = {
       {
         q: 'Jak długo czeka się na pieniądze za działkę pod drogę?',
         a: 'Decyzja o odszkodowaniu zapada według ustawy w 30 dni od dnia, w którym ZRID stała się ostateczna, a wypłata następuje w 14 dni od dnia, w którym ta decyzja stała się ostateczna (art. 12 ust. 4b specustawy drogowej, art. 132 ust. 1a u.g.n.). Przy ZRID z rygorem organ ma 60 dni od nadania rygoru (art. 12 ust. 4g). Jeżeli organ nie dotrzymuje terminu, możesz wnieść ponaglenie (art. 37 § 1 pkt 1 k.p.a.).',
+      },
+      {
+        q: 'Droga nie powstała. Czy mogę odzyskać działkę?',
+        a: 'Tak, jeżeli przez 7 lat od dnia, w którym ZRID stała się ostateczna, nie rozpoczęto prac na działce albo przez 10 lat nie zrealizowano celu (art. 136–137 u.g.n., art. 23 specustawy drogowej). Oddajesz wtedy zwaloryzowane odszkodowanie. Uprawnienie wygasa po 20 latach od dnia, w którym decyzja stała się ostateczna (art. 136 ust. 7 u.g.n.). Więcej w tekście Zwrot wywłaszczonej nieruchomości: kiedy możesz odzyskać działkę i co zapłacisz.',
       },
     ],
     law: {
@@ -6318,13 +6326,13 @@ const SERVICE_CONTENT = {
       'Pozwolenia na budowę, faktury lub umowy dotyczące budynków i nasadzeń, jeśli masz.',
       'Numer księgi wieczystej działki.',
     ],
-    guides: ['operat-szacunkowy-jak-podwazyc', 'wywlaszczenie-pod-droge-odszkodowanie'],
+    guides: ['operat-szacunkowy-jak-podwazyc', 'wywlaszczenie-pod-droge-odszkodowanie', 'zwrot-wywlaszczonej-nieruchomosci', 'droga-na-dzialce-przed-1999-odszkodowanie'],
     seeAlso: ['oplaty-odszkodowania-planistyczne', 'skarga-na-plan-miejscowy'],
     cta: {
       heading: 'Wywłaszczenie musi być słusznie wynagrodzone. Dopilnuję, żeby tak było.',
       lead: 'Prześlij ZRID, decyzję o odszkodowaniu i operat, jeśli je masz. W 24 h roboczych odpiszę, co trzeba zrobić przed upływem terminów na wydanie nieruchomości i odwołanie, i prześlę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'wykup-dzialki-resztkowej': {
@@ -6579,13 +6587,13 @@ const SERVICE_CONTENT = {
       'Zdjęcia gruntu przed robotami i po nich, np. wykopów i zniszczonych upraw.',
       'Decyzja o odszkodowaniu i opinia rzeczoznawcy majątkowego, jeśli to postępowanie już trwa.',
     ],
-    guides: ['ograniczenie-korzystania-z-nieruchomosci-odszkodowanie', 'wejscie-na-dzialke-bez-zgody-wlasciciela'],
+    guides: ['ograniczenie-korzystania-z-nieruchomosci-odszkodowanie', 'wejscie-na-dzialke-bez-zgody-wlasciciela', 'immisje-drzewo-sasiada'],
     seeAlso: ['skarga-na-plan-miejscowy', 'obsluga-prawna-przedsiebiorstw-rolnych'],
     cta: {
       heading: '„Małe wywłaszczenie” to wciąż wywłaszczenie — i wciąż masz prawa.',
       lead: 'Napisz, czy gazownia dopiero proponuje umowę, czy masz już decyzję starosty. W 24 h roboczych wskażę, czy potrzebne jest odwołanie, pismo do starosty albo wniosek o odszkodowanie, i przyślę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-07',
   },
 
   'zgoda-kowr': {
