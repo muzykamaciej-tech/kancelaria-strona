@@ -1,17 +1,25 @@
 # Katalog wzorów i pakietów
 
-Stan na 24.10.2026. Lista ok. 110 wzorów, pism, checklist i poradników ułożonych według 11 bloków usług ze strony oraz sześć sposobów łączenia ich w pakiety, w tym rozbudowany pakiet dla flipperów. Ceny to propozycje do testu, oparte na cenach konkurencji z raportu „Produkty cyfrowe kancelarii nieruchomości”. Ceny dla osób prywatnych są brutto, licencje B2B netto. Każdy przepis i każdą formę czynności trzeba przed publikacją produktu sprawdzić w LEX lub Legalis, zgodnie z zasadami kancelarii.
+Stan na 7.11.2026. Lista ok. 110 wzorów, pism, checklist i poradników ułożonych według 11 bloków usług ze strony oraz pięć sposobów łączenia ich w pakiety, w tym rozbudowany pakiet dla flipperów. Ceny to propozycje do testu, oparte na cenach konkurencji z raportu „Produkty cyfrowe kancelarii nieruchomości”. Ceny dla osób prywatnych są brutto, licencje B2B netto. Produkty sprzedajemy bez aktualizacji po zakupie. Każdy przepis i każdą formę czynności trzeba przed publikacją produktu sprawdzić w LEX lub Legalis, zgodnie z zasadami kancelarii.
 
 ## Standard każdego produktu
 
 Każdy plik ma ten sam układ, który odróżnia go od anonimowego wzoru:
 
-1. autor (adw. dr Maciej Muzyka), stan prawny na dzień, numer wersji i rejestr zmian;
+1. autor (adw. dr Maciej Muzyka) i stan prawny na dzień, na który wzór jest aktualny;
 2. instrukcja wypełnienia krok po kroku, z przykładami na danych fikcyjnych;
 3. warianty zapisów (np. dla wynajmującego i dla najemcy, dla czasu oznaczonego i nieoznaczonego);
 4. przy każdym ważnym zapisie przepis z linkiem do eli.gov.pl;
 5. kalendarz terminów, jeżeli sprawa ma terminy;
 6. na końcu „kiedy wzór nie wystarczy”: konkretne czerwone flagi i odesłanie do formularza (bezpłatna wstępna analiza i oferta w 24 h robocze).
+
+### Bez aktualizacji: co to oznacza w praktyce
+
+Kupujący dostaje plik w wersji z dnia zakupu. Po zakupie nie wysyłamy nowych wersji ani powiadomień o zmianach przepisów. Żeby to było skuteczne wobec konsumenta, potrzebne są trzy rzeczy:
+
+1. **Informacja na stronie produktu**: „Wzór odpowiada stanowi prawnemu na dzień [data]. Po zakupie nie jest aktualizowany.”
+2. **Osobny checkbox w koszyku**, niezaznaczony domyślnie: „Wiem, że wzór odpowiada stanowi prawnemu na dzień [data] i nie będzie aktualizowany po zakupie.” Ustawa o prawach konsumenta wymaga od sprzedawcy treści cyfrowej aktualizacji przez okres, którego konsument może zasadnie oczekiwać (art. 43k ust. 3). Sprzedawca nie odpowiada za brak takiej cechy, jeżeli konsument został o tym wyraźnie poinformowany i wyraźnie, odrębnie to zaakceptował (art. 43k ust. 5). Do sprawdzenia w LEX przed uruchomieniem sklepu.
+3. **Przegląd katalogu po zmianie prawa**: wzór musi być zgodny z prawem w dniu sprzedaży, a za brak zgodności istniejący w tym dniu sprzedawca odpowiada przez dwa lata (art. 43l ust. 1). Po nowelizacji trzeba więc poprawić plik dla nowych kupujących albo zdjąć produkt ze sprzedaży. Dotyczy to tylko katalogu, a nie osób, które już kupiły.
 
 W tabelach są trzy typy produktów:
 
@@ -209,8 +217,8 @@ Opieram się na tym, co strona już obiecuje flipperom w usługach „Flip miesz
 | **Flip Start** (jeden flip, osoba prywatna) | checklista przed zadatkiem (księga, sprzedający, spadek, lokator, wspólnota); umowa przedwstępna z zadatkiem i wejściem ekipy przed aktem; umowa o remont za ryczałt w etapach; protokół wydania lokalu przy zakupie; protokół stanu lokalu z ujawnieniem wad przy sprzedaży i wariantami zapisu o rękojmi; lista ustaleń do aktu sprzedaży; kalendarz flipa, w tym 5-letni termin w PIT do omówienia z doradcą podatkowym | 249–349 zł |
 | **Flip Okazje** (licytacje, spadki, cesje) | checklista obwieszczenia komorniczego (cena wywołania, rękojmia, oglądanie); kalendarz licytacji (zapłata ceny, przysądzenie własności); poradnik „lokator po licytacji”; checklista mieszkania po zmarłym (kto podpisuje umowę); checklista cesji umowy deweloperskiej (limit 3 lat, zastrzeżenia w umowie) i lista ustaleń do umowy przeniesienia dla notariusza | 149–249 zł |
 | **Flip z inwestorem** | umowa inwestycyjna (wkłady, podział zysku z każdego flipa, termin wypłaty, decyzja o cenie sprzedaży, wyjście inwestora, strata); alternatywnie umowa pożyczki inwestycyjnej z zabezpieczeniem; umowa o poufności dla źródła okazji; wzór rozliczenia flipa dla inwestora | 399–599 zł |
-| **Komplet flipera** | trzy moduły razem i 12 miesięcy aktualizacji | 599–899 zł |
-| **Licencja dla firmy flippingowej** (B2B) | komplet do użytku w nieograniczonej liczbie transakcji firmy, aktualizacje przez rok, bez prawa dalszej dystrybucji | 990–1490 zł netto rocznie |
+| **Komplet flipera** | trzy moduły razem | 549–799 zł |
+| **Licencja dla firmy flippingowej** (B2B) | komplet do użytku w nieograniczonej liczbie transakcji firmy, bezterminowo, bez prawa dalszej dystrybucji | 990–1490 zł netto jednorazowo |
 | **Inwestor: flip i najem** | Flip Start i Najem okazjonalny: start | 449–599 zł |
 
 „Kiedy wzór nie wystarczy” w pakiecie flipera: kilka flipów w roku, zakup przez spółkę z o.o., pieniądze kilku inwestorów, lokator po licytacji, który nie chce wyjść, cesja przy zastrzeżeniu w umowie z deweloperem. Każdy z tych punktów prowadzi do formularza, a przy kilku flipach rocznie do stałej obsługi z bloku 10. Umowa inwestycyjna jest najbardziej ryzykownym wzorem w katalogu, bo bez zapisu w umowie wspólnicy dzielą zysk po równo. Dlatego instrukcja powinna przeprowadzić przez każdą decyzję, a nie tylko podawać zapisy.
@@ -223,7 +231,7 @@ Ten sam temat w trzech cenach pozwala kupić tyle, ile ktoś potrzebuje, i podno
 |---|---|---|---|
 | Podstawowy | checklista i poradnik | checklista odbioru i kalendarz terminów | 49–79 zł |
 | Standard | wzory z instrukcjami | protokół, zgłoszenie wad, wezwania | 149–249 zł |
-| Pro | Standard, pozwy, kalendarz eksmisji i 12 miesięcy aktualizacji | Standard, kary, metraż, gwarancja i 12 miesięcy aktualizacji | 299–449 zł |
+| Pro | Standard, pozwy i kalendarz eksmisji | Standard, kary, metraż i gwarancja | 249–399 zł |
 
 ### D. Licencje profesjonalne B2B
 
@@ -235,19 +243,9 @@ Ten sam temat w trzech cenach pozwala kupić tyle, ile ktoś potrzebuje, i podno
 | Pracownia architektoniczna | umowa projektowa z prawami autorskimi, protokoły odbioru etapów | 500–900 zł netto |
 | Geodeta i rzeczoznawca | umowy z klientem, ograniczenie odpowiedzialności, protokoły | 500–900 zł netto |
 
-Licencja określa liczbę użytkowników i transakcji oraz zakazuje dalszej dystrybucji. Rynek akceptuje takie ceny: pakiety umów pośrednictwa kosztują u konkurencji 1500–3870 zł.
+Licencja jest jednorazowa i bezterminowa, określa liczbę użytkowników i transakcji oraz zakazuje dalszej dystrybucji. Rynek akceptuje takie ceny: pakiety umów pośrednictwa kosztują u konkurencji 1500–3870 zł.
 
-### E. Biblioteki z aktualizacjami (przychód cykliczny)
-
-| Biblioteka | Zawartość | Cena |
-|---|---|---|
-| Biblioteka wynajmującego | wszystkie wzory z bloku 7, nowe wersje po zmianach przepisów, e-mail o każdej zmianie | 149–199 zł rocznie |
-| Biblioteka inwestora | najem, flip i zakup | 299–399 zł rocznie |
-| Licencja B2B z aktualizacjami | jak w punkcie D | odnowienie 50–60% ceny pierwszego roku |
-
-W bibliotece nie ma konsultacji. Pytanie o konkretną sprawę to pomoc prawna, więc trafia do formularza.
-
-### F. Darmowe wejścia
+### E. Darmowe wejścia
 
 Darmowe produkty budują listę mailową i prowadzą do pakietów:
 
@@ -272,6 +270,7 @@ Druga fala: Najem okazjonalny: start (przed lipcem), Odbiór i wady (przed sierp
 
 ## 4. Do sprawdzenia przed publikacją
 
+- Czy wybrana platforma sklepu pozwala dodać osobny, niezaznaczony checkbox o braku aktualizacji (punkt „Bez aktualizacji” wyżej).
 - Formy czynności i przepisy z kolumn „Uwagi” w LEX lub Legalis, szczególnie skutki zawezwania do próby ugodowej dla przedawnienia, podstawa rękojmi wobec dewelopera według daty umowy i limit cesji umowy deweloperskiej.
 - Które wnioski mają urzędowe formularze (WZ, pozwolenie na budowę, zgłoszenie, wnioski wieczystoksięgowe), żeby nie sprzedawać „wzoru” urzędowego formularza.
 - Spójność stron: kancelaria ma usługi po obu stronach tych samych relacji (nabywcy i deweloperzy, właściciele gruntów i firmy OZE). Anonimowy zakup wzoru nie tworzy konfliktu interesów, ale pakiet „przeciw deweloperowi” obok licencji dla deweloperów osłabia przekaz. Warto ustalić, po której stronie sklep stoi w każdym temacie.
