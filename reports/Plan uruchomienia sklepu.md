@@ -1,6 +1,6 @@
 # Plan uruchomienia sklepu
 
-Stan na 15.11.2026. Cel: do **11.01.2027** w sprzedaży są trzy płatne pakiety i jeden darmowy wzór, na czas styczniowo-lutowego szczytu wypowiedzeń najmu. Plan opiera się na raporcie „Produkty cyfrowe kancelarii nieruchomości” i „Katalogu wzorów i pakietów”, z decyzją z 7.11.2026, że produkty nie mają aktualizacji po zakupie.
+Stan na 15.11.2026 (z decyzjami z tego dnia: polisa OC poza planem, Vercel na razie na planie darmowym, KSeF podłączony do Fakturowni). Cel: do **11.01.2027** w sprzedaży są trzy płatne pakiety i jeden darmowy wzór, na czas styczniowo-lutowego szczytu wypowiedzeń najmu. Plan opiera się na raporcie „Produkty cyfrowe kancelarii nieruchomości” i „Katalogu wzorów i pakietów”, z decyzją z 7.11.2026, że produkty nie mają aktualizacji po zakupie.
 
 ## Co się zmieniło od raportu
 
@@ -23,24 +23,22 @@ Do zrobienia technicznie: gałąź robocza z poprawkami „wzorów z internetu�
 | 5 | Pierwsza fala | **Flip Start z modułem Okazje**, **Najemca nie płaci**, **Działka przed zadatkiem**; darmowy **protokół zdawczo-odbiorczy** | jak w katalogu: materiał do flipa już jest, najem ma szczyt w styczniu, przy działce nie ma konkurencji |
 | 6 | Ceny pilotażu | Flip Start z Okazjami 349 zł, Najemca nie płaci 199 zł, Działka przed zadatkiem 199 zł (brutto) | środek przedziałów z katalogu |
 | 7 | Sposób podawania cen | dla osób prywatnych **cena brutto jako główna**; licencje B2B netto z brutto w nawiasie | konsumentowi trzeba podać cenę, którą zapłaci, z podatkiem. Zasada z `CLAUDE.md` „netto z brutto w nawiasie” dotyczy usług. Dla produktów warto dopisać wyjątek |
-| 8 | Nazwa i adres sekcji | „Wzory kancelarii”, adresy `/wzory` i `/wzory/<slug>` | odróżnia produkty od pakietów usług w `/oferta` |
+| 8 | Nazwa i adres sekcji | „Wzory i poradniki”, adresy `/wzory` i `/wzory/<slug>` | odróżnia produkty od pakietów usług w `/oferta`. Sklepu nie nazywać „kancelarią adwokacką”: regulamin NRA zastrzega tę nazwę dla pomocy prawnej (do sprawdzenia) |
 
 ## 2. Sprawy formalne: Ty i księgowa
 
-Te sprawy biegną równolegle z produktami. Dwie z nich blokują start.
+Te sprawy biegną równolegle z produktami. Podatki, kasę i PKD ustaliłem 15.11.2026 (notatki w `research_notes/Podatki PKD i kasa sklepu/`); księgowa ma je tylko potwierdzić.
 
 | Sprawa | Kto | Do kiedy | Blokuje start? |
 |---|---|---|---|
-| **Ubezpieczyciel OC**: pisemne pytanie, czy polisa obejmuje sprzedaż wzorów; jeśli nie, osobna polisa OC | Ty | odpowiedź do 15.12 | **tak** |
-| **Księgowa**: VAT (23% dla wzorów, 5% tylko dla e-booka odpowiadającego książce), stawka ryczałtu, kasa fiskalna albo zwolnienie, osobna ewidencja | Ty i księgowa | 30.11 | **tak** |
-| **PKD 2025 w CEIDG**: aktualizacja wpisu i dopisanie sprzedaży produktów | Ty lub księgowa | **31.12.2026** (termin ustawowy) | nie, ale ma twardy termin |
-| **KSeF**: od 1.01.2027 każda faktura dla firmy idzie przez KSeF; podłączenie Fakturowni do KSeF | Ty | 20.12 | tak dla licencji B2B |
+| **Księgowa**: potwierdzenie ustaleń: VAT 5% dla poradnika PDF do czytania i 23% dla wzorów, ryczałt 5,5%, zwolnienie z kasy (poz. 42), osobna ewidencja przychodów według stawek ryczałtu | Ty i księgowa | 30.11 | **tak** |
+| **PKD 2025 w CEIDG**: przeniesienie wpisu na PKD 2025 i dopisanie 58.11.Z i 58.19.Z (85.59.B przy kursach); kod przeważający 69.10.Z | Ty | **31.12.2026** (termin ustawowy); nowe kody w 7 dni od startu sprzedaży | nie, ale ma twardy termin |
 | **Komisja Etyki ORA w Lublinie**: zapytanie o sprzedaż wzorów pod nazwiskiem adwokata | Ty | wysłać do 22.11 | nie: przepisy tego nie zakazują, to zabezpieczenie |
-| **Interpretacja podatkowa** dla wzorów (ryczałt 5,5% czy 15%) | księgowa | wniosek w grudniu; urząd ma do 3 miesięcy | nie: do czasu odpowiedzi przyjąć ostrożną stawkę |
+| **Interpretacja podatkowa** (ryczałt 5,5% dla wzorów adwokata; zwolnienie z kasy) i ewentualnie **WIS** dla pakietu poradnik + wzory | księgowa | wniosek w grudniu; organ ma do 3 miesięcy | nie |
 | **Osobny rachunek bankowy** na sprzedaż produktów | Ty | 30.11 | tak, jeśli wybierzesz oddzielenie z punktu 1.4 |
-| **Vercel Pro** (20 USD miesięcznie): plan Hobby wyklucza użycie komercyjne | Ty | przed startem | **tak**, jeśli konto jest dziś na Hobby |
+| **Vercel**: na razie plan darmowy (decyzja z 15.11). Regulamin planu Hobby wyklucza użycie komercyjne, a dotyczy to już dziś strony kancelarii, nie tylko sklepu | Ty | do decyzji | nie |
 
-Pisma do ubezpieczyciela, ORA i księgowej mogę przygotować jako szkice w Gmailu.
+Pisma do ORA i księgowej mogę przygotować jako szkice w Gmailu.
 
 ## 3. Platforma, płatności, faktury
 
@@ -49,7 +47,8 @@ Konta zakładasz Ty, bo każde wymaga Twoich danych i weryfikacji tożsamości. 
 1. **Okres próbny Publigo**: przed płatnym planem sprawdzić trzy rzeczy, których platforma nie potwierdza w dokumentacji:
    - osobny, niezaznaczony checkbox o braku aktualizacji;
    - checkbox zgody na dostarczenie pliku przed upływem 14 dni i utratę prawa odstąpienia;
-   - przekazanie NIP kupującego do faktury w Fakturowni i dalej do KSeF.
+   - przekazanie NIP kupującego do faktury w Fakturowni i dalej do KSeF;
+   - pakiet jako dwie pozycje z różnymi stawkami VAT (poradnik 5%, wzory 23%) albo dwa produkty w koszyku z kodem rabatowym.
 
    Jeśli któregoś brak, zapasem jest Easytools albo heyhey.
 2. **Przelewy24**: wniosek o konto. Bramki zwykle sprawdzają przed aktywacją stronę sklepu: regulamin, dane sprzedawcy, ceny. Dlatego regulamin musi być gotowy wcześniej (punkt 5).
@@ -60,7 +59,8 @@ Konta zakładasz Ty, bo każde wymaga Twoich danych i weryfikacji tożsamości. 
    - przycisk „Zamawiam i płacę” (ustawa wymaga sformułowania typu „zamówienie z obowiązkiem zapłaty”);
    - e-mail po zakupie z potwierdzeniem zgód w PDF, żeby konsument miał je na trwałym nośniku;
    - najniższa cena z 30 dni przy promocjach.
-6. **Zakupy testowe**: BLIK i karta, faktura dla konsumenta i dla firmy z NIP (sprawdzić numer KSeF), zwrot, e-mail z plikiem.
+6. **Zwolnienie z kasy (poz. 42)**: w Publigo tylko Przelewy24 i przelew (bez gotówki i bonów), pole „kupuję jako firma” z NIP przed zapłatą, numer zamówienia w opisie transakcji P24, raport paczkowy P24 po każdej wypłacie, comiesięczne uzgodnienie zamówień, raportów P24 i wyciągu dla księgowej.
+7. **Zakupy testowe**: BLIK i karta, faktura dla konsumenta i dla firmy z NIP (sprawdzić numer KSeF), zwrot, e-mail z plikiem.
 
 ## 4. Produkty pierwszej fali
 
@@ -72,6 +72,8 @@ Dla każdego produktu ten sam cykl: ja piszę szkic z treści strony i Skarbnicy
 | Najemca nie płaci | usługi z bloku najmu i poradniki Skarbnicy o wypowiedzeniu, kaucji i eksmisji | wezwanie, uprzedzenie, wypowiedzenie, żądanie opróżnienia lokalu, rozliczenie kaucji, kalendarz eksmisji | ok. 3 h |
 | Działka przed zadatkiem | blok 1, seria o WZ, przykładowy raport audytu | checklista w trzech kolorach, umowa przedwstępna kupna działki, wniosek o wypis i wyrys, instrukcja wniosku o WZ | ok. 3 h |
 | Protokół zdawczo-odbiorczy (darmowy) | blok najmu | protokół z instrukcją dokumentacji zdjęciowej | ok. 1 h |
+
+Budowa produktu wpływa na VAT. Poradnik do czytania (spis treści, komentarz, przykłady) ma 5%, a wzór do wypełnienia i checklista do odhaczania 23%. Pakiet sprzedajemy jako poradnik i wzory z rozbitą ceną (5% i 23%), chyba że WIS potwierdzi 5% dla całości.
 
 Każdy plik ma standard z katalogu: autor i stan prawny na dzień, instrukcja z przykładem na fikcyjnych danych, przepisy z linkiem ELI, kalendarz terminów i „kiedy wzór nie wystarczy” z odesłaniem do formularza. Przy flipie i najmie część czerwonych flag może prowadzić do stron `/oferta`, jeśli powstaną dla tych usług.
 
@@ -102,7 +104,7 @@ Szacuję 4–6 sesji pracy, plus Twoje poprawki do treści.
 
 | Termin | Ty | Ja |
 |---|---|---|
-| 16–22.11 | decyzje z punktu 1; pytania do ubezpieczyciela, ORA i księgowej; okres próbny Publigo; wniosek do Przelewy24 | scalenie z `main`; szkic regulaminu sklepu i polityki prywatności; szkic Flip Start |
+| 16–22.11 | decyzje z punktu 1; pytania do ORA i księgowej; wniosek o zmianę wpisu w CEIDG (PKD 2025); okres próbny Publigo; wniosek do Przelewy24 | scalenie z `main`; szkic regulaminu sklepu i polityki prywatności; szkic Flip Start |
 | 23.11–6.12 | recenzja regulaminu i Flip Start w LEX; Fakturownia i KSeF; MailerLite | szkice Najemca nie płaci, Działka przed zadatkiem, protokół; strony `/wzory` na podglądzie |
 | 7–13.12 | recenzja dwóch pakietów; konfiguracja koszyka | pliki DOCX i PDF; linki ze stron usług i Skarbnicy; formularz zapisu; GA4 |
 | 14–20.12 | zakupy testowe; akceptacja podglądu | poprawki; sekwencja e-maili; publikacja na `main` po akceptacji |
@@ -118,11 +120,9 @@ Grudzień jest najsłabszym miesiącem wyszukiwań, więc to dobry czas na testy
 | Pozycja | Koszt |
 |---|---|
 | Publigo GO Plus | 157–177 zł netto miesięcznie |
-| Vercel Pro | 20 USD miesięcznie (jeśli konto jest dziś na Hobby) |
 | Fakturownia | według planu; KSeF działa w każdym |
 | MailerLite | 0 zł do 250 osób, potem od 12 USD miesięcznie |
 | Przelewy24 | ok. 1,3% + 0,30 zł od sprzedaży (oferta dla nowych klientów) |
-| Osobna polisa OC | do ustalenia z ubezpieczycielem |
 
 ## 9. Kiedy projekt jest skończony
 
@@ -130,7 +130,7 @@ Grudzień jest najsłabszym miesiącem wyszukiwań, więc to dobry czas na testy
 - Zakup przez BLIK i kartę działa. Konsument dostaje plik ze znakiem wodnym i e-mail z potwierdzeniem zgód. Firma dostaje fakturę z numerem KSeF.
 - W koszyku są trzy checkboxy: regulamin, zgoda na natychmiastowe dostarczenie z utratą prawa odstąpienia i brak aktualizacji.
 - Regulamin sklepu i nowa polityka prywatności są opublikowane.
-- Sprawy formalne są zamknięte: OC, księgowa, PKD, KSeF, Vercel Pro. Zapytanie do ORA jest wysłane.
+- Sprawy formalne są zamknięte: potwierdzenie księgowej, PKD 2025 w CEIDG, procedura dokumentów do zwolnienia z kasy. Zapytanie do ORA jest wysłane.
 - GA4 mierzy wejścia, kliknięcia „Kup” i zapisy.
 - Jest ustalone, kto po każdej nowelizacji przegląda katalog i poprawia albo zdejmuje produkt.
 
@@ -139,5 +139,5 @@ Grudzień jest najsłabszym miesiącem wyszukiwań, więc to dobry czas na testy
 - Scalić `main` z gałęzią roboczą i przygotować poprawki „wzorów z internetu” do akceptacji.
 - Napisać szkice regulaminu sklepu i polityki prywatności.
 - Napisać szkic Flip Start z modułem Okazje.
-- Przygotować w Gmailu szkice pism do ubezpieczyciela, ORA i księgowej.
+- Przygotować w Gmailu szkice pism do ORA i księgowej.
 - Wpisać zadania z tego planu do Todoist.
