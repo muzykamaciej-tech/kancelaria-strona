@@ -31,10 +31,10 @@ Te sprawy biegną równolegle z produktami. Podatki, kasę i PKD ustaliłem 15.1
 
 | Sprawa | Kto | Do kiedy | Blokuje start? |
 |---|---|---|---|
-| **Księgowa**: potwierdzenie ustaleń: VAT 5% dla poradnika PDF do czytania i 23% dla wzorów, ryczałt 5,5%, zwolnienie z kasy (poz. 42), osobna ewidencja przychodów według stawek ryczałtu | Ty i księgowa | 30.11 | **tak** |
+| **Księgowa**: potwierdzenie ustaleń: VAT 5% dla poradnika PDF do czytania i 23% dla wzorów, zwolnienie z kasy (poz. 42). Podatek liniowy 19%, więc stawki ryczałtu nie mają znaczenia | Ty i księgowa | 30.11 | **tak** |
 | **PKD 2025 w CEIDG**: przeniesienie wpisu na PKD 2025 i dopisanie 58.11.Z i 58.19.Z (85.59.B przy kursach); kod przeważający 69.10.Z | Ty | **31.12.2026** (termin ustawowy); nowe kody w 7 dni od startu sprzedaży | nie, ale ma twardy termin |
 | **Komisja Etyki ORA w Lublinie**: zapytanie o sprzedaż wzorów pod nazwiskiem adwokata | Ty | wysłać do 22.11 | nie: przepisy tego nie zakazują, to zabezpieczenie |
-| **Interpretacja podatkowa** (ryczałt 5,5% dla wzorów adwokata; zwolnienie z kasy) i ewentualnie **WIS** dla pakietu poradnik + wzory | księgowa | wniosek w grudniu; organ ma do 3 miesięcy | nie |
+| **Interpretacja podatkowa**: zwolnienie z kasy (projekt wniosku z 15.11.2026 w Claude Docs: „Wniosek o interpretację: zwolnienie z kasy”, opłata 40 zł); ewentualnie **WIS** dla pakietu poradnik + wzory | Ty | wniosek do 30.11; organ ma do 3 miesięcy | nie |
 | **Osobny rachunek bankowy** na sprzedaż produktów | Ty | 30.11 | tak, jeśli wybierzesz oddzielenie z punktu 1.4 |
 | **Vercel**: na razie plan darmowy (decyzja z 15.11). Regulamin planu Hobby wyklucza użycie komercyjne, a dotyczy to już dziś strony kancelarii, nie tylko sklepu | Ty | do decyzji | nie |
 
