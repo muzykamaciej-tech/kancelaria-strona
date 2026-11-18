@@ -286,6 +286,150 @@ function PlanAlertBand() {
 }
 
 /* ============================================================
+   Kalkulator „ostatni dzień ważności WZ” — narzędzie we wpisie /blog/warunki-zabudowy-ile-wazne
+   (blok ['tool', 'wz-waznosc'] w body wpisu → pages.jsx renderBlogBlock → window.BLOG_TOOLS).
+   Zasady jak we wpisie (zweryfikowane w LEX 18.11.2026), bez nowych tez:
+   - bez terminu (art. 62 ustawy z 7.07.2023, Dz.U. 2023 poz. 1688, w brzmieniu Dz.U. 2025 poz. 1668):
+     wniosek wpłynął do urzędu przed 16.10.2025 ALBO decyzja stała się prawomocna przed 1.01.2026;
+   - pozostałe WZ wygasają po 5 latach od dnia prawomocności (art. 64c u.p.z.p.): ostatni dzień to dzień z tą samą
+     datą 5 lat później, a gdy takiego dnia nie ma (29 lutego) — ostatni dzień miesiąca (art. 112 k.c.);
+     bezpieczniej dzień wcześniej (przykład we wpisie); termin nie przesuwa się z soboty ani święta;
+   - wcześniejsze wygaśnięcie (art. 65 u.p.z.p.) kalkulator tylko sygnalizuje.
+   Do GA idzie wyłącznie rodzaj wyniku, nigdy daty.
+   ============================================================ */
+const WZ_CUT_WNIOSEK = '2025-10-16';
+const WZ_CUT_PRAWOMOCNA = '2026-01-01';
+const WZ_DAYS = ['niedziela', 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota'];
+/* daty jako UTC północ: bez przesunięć strefy i zmiany czasu */
+function wzParse(s) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || '');
+  if (!m) return null;
+  const y = +m[1], mo = +m[2] - 1, d = +m[3];
+  const dt = new Date(Date.UTC(y, mo, d));
+  return dt.getUTCFullYear() === y && dt.getUTCMonth() === mo && dt.getUTCDate() === d && y >= 1995 && y <= 2100 ? dt : null;
+}
+const wzIso = (dt) => dt.toISOString().slice(0, 10);
+const wzFmt = (dt) => wzIso(dt).split('-').reverse().join('.') + ' r.';
+const wzDay = (dt) => WZ_DAYS[dt.getUTCDay()];
+function wzPlusYears(dt, n) {
+  const y = dt.getUTCFullYear() + n, mo = dt.getUTCMonth();
+  const lastDay = new Date(Date.UTC(y, mo + 1, 0)).getUTCDate(); /* art. 112 k.c.: brak takiego dnia → ostatni dzień miesiąca */
+  return new Date(Date.UTC(y, mo, Math.min(dt.getUTCDate(), lastDay)));
+}
+const wzAddDays = (dt, n) => new Date(dt.getTime() + n * 86400000);
+/* daty 'RRRR-MM-DD' (wartość <input type="date">) → { err: { wniosek?, prawomocna? } } albo { r: wynik } */
+function wzCompute(fWniosek, fPrawomocna) {
+  const err = {};
+  const w = fWniosek ? wzParse(fWniosek) : null;
+  const p = fPrawomocna ? wzParse(fPrawomocna) : null;
+  if (fWniosek && !w) err.wniosek = 'Podaj pełną, poprawną datę: dzień, miesiąc i rok.';
+  if (fPrawomocna && !p) err.prawomocna = 'Podaj pełną, poprawną datę: dzień, miesiąc i rok.';
+  if (w && p && p < w) err.prawomocna = 'Decyzja nie mogła stać się prawomocna przed wpływem wniosku. Sprawdź obie daty.';
+  if (Object.keys(err).length) return { err };
+  if (w && wzIso(w) < WZ_CUT_WNIOSEK) return { r: { kind: 'bez', reason: 'wniosek' } };
+  if (p && wzIso(p) < WZ_CUT_PRAWOMOCNA) return { r: { kind: 'bez', reason: 'prawomocna' } };
+  if (!w) err.wniosek = 'Podaj dzień, w którym wniosek wpłynął do urzędu.';
+  if (!p) err.prawomocna = 'Podaj dzień, od którego decyzja jest prawomocna.';
+  if (Object.keys(err).length) return { err };
+  const last = wzPlusYears(p, 5);
+  const safe = wzAddDays(last, -1);
+  const dow = safe.getUTCDay();
+  const file = dow === 6 ? wzAddDays(safe, -1) : dow === 0 ? wzAddDays(safe, -2) : safe;
+  return { r: { kind: '5lat', last, safe, file, leap: p.getUTCMonth() === 1 && p.getUTCDate() === 29 && last.getUTCDate() === 28 } };
+}
+
+function WzWaznoscResult({ r }) {
+  if (r.kind === 'bez') return (
+    <div className="wzk-res">
+      <span className="wzk-res-label">Wynik</span>
+      <p className="wzk-res-num">Bez terminu ważności</p>
+      <p className="wzk-res-text">
+        {r.reason === 'wniosek' ? 'Wniosek wpłynął do urzędu przed 16 października 2025 r.' : 'Decyzja stała się prawomocna przed 1 stycznia 2026 r.'}{' '}
+        Taka WZ nie wygasa po 5 latach. Wystarczy jeden z tych dwóch warunków: wniosek przed 16.10.2025 r. albo prawomocność przed 1.01.2026 r. (art. 62 ustawy z 7 lipca 2023 r., Dz.U. 2023 poz. 1688, w brzmieniu ustawy Dz.U. 2025 poz. 1668).
+      </p>
+    </div>
+  );
+  const shifted = wzIso(r.file) !== wzIso(r.safe);
+  return (
+    <div className="wzk-res">
+      <span className="wzk-res-label">Ostatni dzień ważności WZ</span>
+      <p className="wzk-res-num">{wzFmt(r.last)} <span className="wzk-res-day">({wzDay(r.last)})</span></p>
+      <p className="wzk-res-text">
+        WZ wygasa po 5 latach od dnia, w którym stała się prawomocna (art. 64c u.p.z.p.). Ostatni dzień to dzień z tą samą datą 5 lat później (art. 112 k.c.), a następnego dnia decyzja już nie obowiązuje. Gdy ten dzień wypada w sobotę albo w święto, termin nie przesuwa się na dzień roboczy.
+        {r.leap && ' Decyzja jest prawomocna od 29 lutego: 5 lat później nie ma 29 lutego, więc termin kończy się 28 lutego.'}
+      </p>
+      <dl className="calc-rows">
+        <div><dt>Bezpieczniej przyjmij jako ostatni dzień</dt><dd>{wzFmt(r.safe)}</dd></div>
+        <div><dt>Wniosek o pozwolenie na budowę niech dotrze do urzędu najpóźniej</dt><dd>{wzFmt(r.file)} ({wzDay(r.file)})</dd></div>
+      </dl>
+      {shifted && <p className="wzk-res-text">{wzFmt(r.safe)} to {wzDay(r.safe)}. Termin ważności WZ nie przesuwa się na dzień roboczy, więc wniosek złóż najpóźniej w piątek.</p>}
+      <p className="wzk-res-text">Jeszcze bezpieczniej złóż wniosek kilka miesięcy wcześniej: do wniosku potrzebny jest projekt budowlany.</p>
+    </div>
+  );
+}
+
+function WzWaznoscCalc() {
+  const [f, setF] = tUseState({ wniosek: '', prawomocna: '' });
+  const [err, setErr] = tUseState({});
+  const [res, setRes] = tUseState(null);
+  const up = (k) => (e) => { setF({ ...f, [k]: e.target.value }); if (err[k]) setErr({ ...err, [k]: undefined }); };
+  function compute(e) {
+    e.preventDefault();
+    const out = wzCompute(f.wniosek, f.prawomocna);
+    if (out.err) {
+      setErr(out.err); setRes(null);
+      const first = document.getElementById(out.err.wniosek ? 'wzk-wniosek' : 'wzk-prawomocna');
+      if (first) first.focus();
+      return;
+    }
+    setErr({}); setRes(out.r);
+    if (window.gtag) window.gtag('event', 'tool_use', { tool: 'wz-waznosc', tool_result: out.r.kind === 'bez' ? 'bez-terminu-' + out.r.reason : '5-lat', page_path: location.pathname });
+  }
+  const field = (k, label, hint) => (
+    <div className="calc-field">
+      <label className="input-label" htmlFor={'wzk-' + k}>{label}</label>
+      <input id={'wzk-' + k} name={'wzk-' + k} className={'input' + (err[k] ? ' input-error' : '')} type="date" min="1995-01-01" max="2100-12-31"
+        value={f[k]} onChange={up(k)} aria-invalid={err[k] ? 'true' : undefined} aria-describedby={(err[k] ? 'wzk-' + k + '-err ' : '') + 'wzk-' + k + '-hint'} />
+      {err[k] && <span className="input-err" id={'wzk-' + k + '-err'}>{err[k]}</span>}
+      <span className="calc-hint" id={'wzk-' + k + '-hint'}>{hint}</span>
+    </div>
+  );
+  return (
+    <section className="wzk card" aria-labelledby="wzk-title" data-place="kalkulator-wz">
+      <div className="wzk-head">
+        <span className="tool-teaser-ic wzk-ic" aria-hidden="true"><TIcon name="calendar-clock" size={24} /></span>
+        <div>
+          <span className="eyebrow">Kalkulator</span>
+          <h3 className="wzk-title" id="wzk-title">Policz ostatni dzień ważności swojej WZ</h3>
+        </div>
+      </div>
+      <form className="wzk-form" onSubmit={compute} noValidate>
+        <div className="calc-two">
+          {field('wniosek', 'Dzień wpływu wniosku do urzędu', 'Z pieczątki wpływu, z UPO albo z akt sprawy. Nie dzień nadania na poczcie.')}
+          {field('prawomocna', 'Dzień, od którego decyzja jest prawomocna', 'Z klauzuli „prawomocna z dniem…”, z akt albo z zaświadczenia urzędu.')}
+        </div>
+        <button type="submit" className="btn btn-primary wzk-btn">Policz termin <TIcon name="calculator" size={16} /></button>
+      </form>
+      <div className="wzk-out" aria-live="polite">
+        {res ? <WzWaznoscResult r={res} /> :
+        <p className="wzk-rule"><strong>Zasada:</strong> WZ z wniosku, który wpłynął do urzędu 16 października 2025 r. lub później, wygasa po 5 latach od dnia, w którym stała się prawomocna, jeżeli stało się to 1 stycznia 2026 r. lub później (art. 64c u.p.z.p.). Ostatni dzień ważności to dzień z tą samą datą 5 lat później. Pozostałe WZ nie mają terminu ważności (art. 62 ustawy z 7 lipca 2023 r.). Podaj obie daty, a kalkulator pokaże wynik dla Twojej decyzji.</p>}
+      </div>
+      <p className="wzk-note">
+        <TIcon name="info" size={16} />
+        <span>Kalkulator nie uwzględnia wcześniejszego wygaśnięcia: każda WZ, także bezterminowa, może wygasnąć np. po uchwaleniu planu miejscowego z innymi ustaleniami albo gdy pozwolenie na budowę uzyska inny wnioskodawca (art. 65 u.p.z.p.). Wyroków o liczeniu 5-letniego terminu jeszcze nie ma. Datę prawomocności sprawdź w decyzji i w urzędzie. Wynik nie jest poradą prawną.</span>
+      </p>
+      <div className="wzk-cta">
+        <p className="wzk-cta-text">Chcesz, żebym policzył termin z akt sprawy i sprawdził, czy gmina nie przygotowuje planu miejscowego?</p>
+        <a href="#formularz" className="btn btn-primary post-cta-btn" data-cta="kalkulator-wz" onClick={(e) => { if (window.goToForm) window.goToForm(e); }}>
+          Opisz sprawę w formularzu <TIcon name="arrow-right" size={16} />
+        </a>
+      </div>
+    </section>
+  );
+}
+window.BLOG_TOOLS = Object.assign(window.BLOG_TOOLS || {}, { 'wz-waznosc': WzWaznoscCalc });
+
+/* ============================================================
    Pływające skróty: telefon + WhatsApp (prawy dolny róg, wszystkie strony)
    ============================================================ */
 const QC_PHONE = '+48884784984';
@@ -306,4 +450,4 @@ function QuickContact() {
   );
 }
 
-Object.assign(window, { KalkulatorSlupyPage, KalkulatorTeaser, PlanAlertBand, QuickContact });
+Object.assign(window, { KalkulatorSlupyPage, KalkulatorTeaser, PlanAlertBand, QuickContact, WzWaznoscCalc, wzCompute });

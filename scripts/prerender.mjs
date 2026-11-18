@@ -53,7 +53,8 @@ const data = await probe.evaluate(() => ({
   blocks: window.SERVICE_BLOCKS.map((b) => ({ id: b.id, title: b.title, tagline: b.tagline || '',
     updated: ((window.BLOCK_CONTENT || {})[b.id] || {}).updated || null,
     services: b.services.map((s) => ({ slug: s.slug, title: s.title, desc: s.desc || '', updated: ((window.SERVICE_CONTENT || {})[s.slug] || {}).updated || null })) })),
-  blog: (window.BLOG || []).map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt || '', iso: p.iso, modified: window.postModifiedIso(p), category: p.category || '' })),
+  blog: (window.BLOG || []).map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt || '', metaDesc: p.metaDesc || '', iso: p.iso, modified: window.postModifiedIso(p), category: p.category || '',
+    cat: (window.blogCategoryOfPost(p) || {}).id || '' })),
   blogCats: window.BLOG_CATEGORIES.filter((c) => window.postsInCategory(c).length).map((c) => ({ id: c.id, title: c.title, desc: c.desc,
     modified: window.postsInCategory(c).map((p) => window.postModifiedIso(p)).sort().pop() })),
   offers: Object.entries(window.OFFERS || {}).map(([slug, o]) => ({ slug, title: o.metaTitle, desc: o.metaDesc, updated: o.updated || null })),
@@ -75,7 +76,7 @@ const routes = [
   ...data.offers.map((o) => ({ path: `/oferta/${o.slug}`, priority: '0.7', lastmod: o.updated || undefined })),
   { path: '/blog', priority: '0.7' },
   ...data.blogCats.map((c) => ({ path: `/blog/kategoria/${c.id}`, lastmod: c.modified, priority: '0.6' })),
-  ...data.blog.map((p) => ({ path: `/blog/${p.slug}`, lastmod: p.modified, priority: '0.6' })),
+  ...data.blog.map((p) => ({ path: `/blog/${p.slug}`, lastmod: p.modified, priority: '0.6', blogSlug: p.slug })),
   { path: '/o-mnie', priority: '0.7' },
   { path: '/kontakt', priority: '0.6' },
   { path: '/faq', priority: '0.5' },
@@ -148,6 +149,12 @@ async function render(page, r) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, res.html);
   r.words = res.words; r.title = res.title;
+  /* llms.txt: blok „Krótka odpowiedź” wpisu (treść wpisu jest tylko w jego pliku content/, nie w app.js) */
+  if (r.blogSlug) r.shortAnswer = await page.evaluate((slug) => {
+    const p = (window.BLOG || []).find((x) => x.slug === slug);
+    const b = ((p && p.body) || []).find((x) => x && (x[0] === 'lead' || x[0] === 'p') && /^\*\*Krótka odpowiedź\.?\*\*/.test(String(x[1])));
+    return b ? String(b[1]) : '';
+  }, r.blogSlug);
 }
 
 const queue = [...routes];
@@ -183,6 +190,19 @@ fs.writeFileSync(path.join(DIST, 'robots.txt'),
   `# mecenasodnieruchomosci.pl — treści są otwarte dla wyszukiwarek i asystentów AI\nUser-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${ORIGIN}/sitemap.xml\n`);
 
 const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
+/* opis wpisu w llms.txt: metaDesc, a bez niego pierwsze zdanie bloku „Krótka odpowiedź” (do ok. 160 znaków).
+   Nie excerpt: we wpisach z WIX to narracyjny wstęp („Dostajesz decyzję…”), który nie mówi, o czym jest wpis;
+   wtedy zostaje sam tytuł. */
+const shorten = (s, n = 160) => { s = clean(s); if (s.length <= n) return s; const cut = s.slice(0, n - 1); return cut.slice(0, cut.lastIndexOf(' ')).replace(/[\s,;:–-]+$/, '') + '…'; };
+const shortAnswerOf = new Map(routes.filter((r) => r.blogSlug).map((r) => [r.blogSlug, r.shortAnswer || '']));
+function llmsPostDesc(p) {
+  if (p.metaDesc) return shorten(p.metaDesc);
+  const sa = clean(String(shortAnswerOf.get(p.slug) || '').replace(/^\*\*Krótka odpowiedź\.?\*\*\s*/, '').replace(/\*\*/g, ''));
+  return sa ? shorten(sa.split(/(?<=[.!?])\s+(?=[A-ZĄĆĘŁŃÓŚŹŻ„])/)[0]) : '';
+}
+/* poradniki pogrupowane jak w Skarbnicy wiedzy (BLOG_CATEGORIES), w kategorii najnowsze najpierw */
+const llmsPosts = (cat) => data.blog.filter((p) => p.cat === cat.id).map((p, i) => [p, i])
+  .sort((a, b) => (b[0].iso || '').localeCompare(a[0].iso || '') || a[1] - b[1]).map((x) => x[0]);
 const llms = [
   '# Kancelaria Nieruchomości adw. dr Maciej Muzyka (Mecenas od Nieruchomości)',
   '',
@@ -194,6 +214,7 @@ const llms = [
   '- E-mail: maciej.muzyka@mecenasodnieruchomosci.pl, tel. +48 884 784 984, ul. Cicha 4/5, 20-078 Lublin (siedziba); spotkania także: ul. Bracka 20/lok. 7A, 00-028 Warszawa',
   '- Wizytówka w Mapach Google: https://maps.google.com/?cid=8576864712077445002',
   `- Kalkulator wynagrodzenia za słupy i rury na działce: ${ORIGIN}/kalkulator-slupy`,
+  `- Kalkulator ostatniego dnia ważności warunków zabudowy (WZ), we wpisie: ${ORIGIN}/blog/warunki-zabudowy-ile-wazne`,
   '',
   '## Usługi',
   '',
@@ -203,10 +224,14 @@ const llms = [
     '',
   ]),
   ...(data.offers.length ? ['## Oferty z cenami', '', ...data.offers.map((o) => `- [${clean(o.title)}](${ORIGIN}/oferta/${o.slug}): ${clean(o.desc)}`), ''] : []),
-  '## Poradniki',
-  '',
-  ...data.blog.map((p) => `- [${clean(p.title)}](${ORIGIN}/blog/${p.slug})${p.excerpt ? ': ' + clean(p.excerpt) : ''}`),
-  '',
+  ...data.blogCats.flatMap((c) => [
+    `## Poradniki: ${c.title}`,
+    '',
+    `Wszystkie wpisy z kategorii: ${ORIGIN}/blog/kategoria/${c.id}`,
+    '',
+    ...llmsPosts(c).map((p) => { const d = llmsPostDesc(p); return `- [${clean(p.title)}](${ORIGIN}/blog/${p.slug})${d ? ': ' + d : ''}`; }),
+    '',
+  ]),
   '## Optional',
   '',
   `- [FAQ](${ORIGIN}/faq)`,

@@ -754,6 +754,8 @@ function renderBlogBlock(b, i) {
   if (t === 'ol') return <ol key={i}>{v.map((li, k) => <li key={k}>{blogInline(li)}</li>)}</ol>;
   if (t === 'quote') return <blockquote key={i}>{blogInline(v)}</blockquote>;
   if (t === 'note') return <p key={i} className="prose-note">{blogInline(v)}</p>;
+  /* narzędzie osadzone w treści: ['tool', '<id>'] → komponent z window.BLOG_TOOLS (tools.jsx), np. kalkulator ważności WZ */
+  if (t === 'tool') { const Tool = (window.BLOG_TOOLS || {})[v]; return Tool ? <Tool key={i} /> : null; }
   if (t === 'wzor') return <div key={i} className="prose-wzor" role="group" aria-label="Wzór pisma">{v.map((line, k) => <p key={k}>{blogInline(line)}</p>)}</div>;
   if (t === 'table') return (
     <div key={i} className="prose-table-wrap">
@@ -987,5 +989,5 @@ Object.assign(window, {
   BlogPage, BlogPostPage, BlogCategoryPage,
   BLOG_CATEGORIES, getBlogCategory, blogCategoryOfPost, postsInCategory, blogByNewest, blogCoverAlt,
   FAQPage, FAQAccordion,
-  KontaktPage, LeadFormBand, BlogTeaserCard,
+  KontaktPage, LeadFormBand, BlogTeaserCard, goToForm,
 });
