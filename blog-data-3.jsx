@@ -105,6 +105,7 @@ window.BLOG.push(
   },
   {
     slug: 'ile-kosztuje-sluzebnosc-drogi-koniecznej',
+    cta: 'Działka nie ma dojazdu do drogi publicznej? Opisz sprawę – w 24 h roboczych odpiszę, jak uregulować dostęp i ile kosztuje moja pomoc.',
     title: 'Ile kosztuje ustanowienie służebności drogi koniecznej w 2025 roku?',
     metaTitle: 'Ile kosztuje służebność drogi? Notariusz, sąd i biegli',
     metaDesc: 'U notariusza ok. 1,5–2 tys. zł, w sądzie 4–8 tys. zł: opłata 200 zł i biegli. Do tego wynagrodzenie sąsiada wg cen ziemi. Przykład: blisko 25 tys. zł.',

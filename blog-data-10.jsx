@@ -1428,6 +1428,7 @@ window.BLOG.push(
   },
   {
     slug: 'uwagi-do-planu-ogolnego',
+    cta: 'Projekt planu ogólnego ogranicza zabudowę Twojej działki? Opisz sprawę – w 24 h roboczych odpiszę, co napisać w uwadze i ile kosztuje jej przygotowanie.',
     title: 'Uwagi do planu ogólnego: do kiedy, jak je napisać i co dalej',
     metaTitle: 'Uwagi do planu ogólnego – do kiedy, jak napisać, co dalej',
     metaDesc: 'Uwagi do planu ogólnego składasz na formularzu do ostatniego dnia konsultacji (min. 28 dni). Co wpisać, jak uzasadnić i co dalej, gdy gmina odmówi.',

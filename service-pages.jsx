@@ -57,7 +57,8 @@ function ServiceTrustStrip() {
    Sits at the bottom of every service & pillar page (id="formularz").
    ============================================================ */
 /* title: trzy wiersze nagłówka (ostatni w kolorze akcentu); preset: formularz z wybraną usługą i pakietem (offers.jsx) */
-function CaseFormBand({ eyebrow, title, heading, lead, preset }) {
+/* cred: jedna linia wiarygodności pod formularzem; collapseOptional: pola opcjonalne zwinięte na telefonie (wpis bloga) */
+function CaseFormBand({ eyebrow, title, heading, lead, preset, cred, collapseOptional }) {
   const GBadge = window.GoogleBadge;
   const t = title || ['Bezpłatnie', 'powiem, co', 'trzeba zrobić.'];
   return (
@@ -85,7 +86,8 @@ function CaseFormBand({ eyebrow, title, heading, lead, preset }) {
             </div>
           </div>
           <div className="case-form-card">
-            <SQualForm preset={preset} />
+            <SQualForm preset={preset} collapseOptional={collapseOptional} />
+            {cred && <p className="case-form-cred">{cred}</p>}
           </div>
         </div>
       </div>

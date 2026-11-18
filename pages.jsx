@@ -313,9 +313,12 @@ function ServiceDetailPage({ serviceId, setRoute }) {
 
 /* Real lead form (Formspree) + trust strip — same band as service pages.
    Resolved at render time: CaseFormBand lives in service-pages.jsx, loaded later. */
-function LeadFormBand() {
+/* variant="post" (wpis bloga): pola opcjonalne zwinięte na telefonie, pod formularzem jedna linia wiarygodności zamiast paska */
+const POST_CRED_LINE = 'adw. dr Maciej Muzyka · wyłącznie prawo nieruchomości · autor monografii (Wolters Kluwer 2023) · wpis LUB/ADW/1702';
+function LeadFormBand({ variant }) {
   const Band = window.CaseFormBand, Strip = window.ServiceTrustStrip;
   if (!Band) return null;
+  if (variant === 'post') return <Band cred={POST_CRED_LINE} collapseOptional />;
   return (<React.Fragment><Band />{Strip && <Strip />}</React.Fragment>);
 }
 
@@ -570,13 +573,16 @@ function BlogPostPage({ slug, setRoute }) {
 
       <article className="section-py">
         <div className="wrap" style={{ maxWidth: '46rem' }}>
-          {ready ? <BlogBody blocks={post.body} service={relatedServicesFor(post)[0]} selfSlug={post.slug} />
+          {ready ? <BlogBody blocks={post.body} service={relatedServicesFor(post)[0]} selfSlug={post.slug} cta={postCtaText(post)} />
             /* treść jeszcze się wczytuje: pusta kolumna zamiast skoku stopki pod nagłówek */
             : <div className="prose prose-article" aria-busy="true" data-content-loading="" style={{ minHeight: '100vh' }}>
                 {window.contentFailed('blog', post.slug) && <window.ContentLoadError />}
               </div>}
         </div>
       </article>
+
+      {/* formularz zaraz za treścią: czytelnik nie musi przewijać przez usługi i „Czytaj dalej” */}
+      <LeadFormBand variant="post" />
 
       {(() => { const t = [post.category].concat(post.tags || []).join(' '); return (
         <React.Fragment>
@@ -606,8 +612,6 @@ function BlogPostPage({ slug, setRoute }) {
           </div>
         </div>
       </section>
-
-      <LeadFormBand />
     </main>
   );
 }
@@ -641,21 +645,91 @@ function blogInline(text) {
   return parts.map((s, i) => (i % 2 === 1 ? <strong key={i}>{blogLinkify(s, 's' + i)}</strong> : <React.Fragment key={i}>{blogLinkify(s, 'p' + i)}</React.Fragment>));
 }
 
+/* ============================================================
+   CTA we wpisie (1.2 planu SEO, 18.11.2026): po leadzie, w ok. 40% treści i zamiast końcowego
+   „Masz podobną sytuację?”. Tekst: pole `cta` wpisu, a bez niego tekst kategorii (BLOG_CATEGORIES).
+   Przycisk przewija do formularza (#formularz) i wysyła cta_click (app.jsx) z nazwą miejsca z data-cta.
+   ============================================================ */
+const BLOG_CTA_DEFAULT = {
+  'warunki-zabudowy': 'Gmina odmawia warunków zabudowy albo plan ogólny zmienia przeznaczenie działki? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
+  'slupy-i-przesyl': 'Na działce stoi słup albo biegnie rura? Opisz sprawę – w 24 h roboczych odpiszę, czego możesz żądać od operatora i ile kosztuje prowadzenie sprawy.',
+  'droga-konieczna': 'Sąsiad nie zgadza się na przejazd? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
+  'najem': 'Najemca nie płaci albo nie chce się wyprowadzić? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
+  'budowa': 'Masz spór z wykonawcą, urzędem albo nadzorem budowlanym? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
+  'zakup-i-umowy': 'Kupujesz nieruchomość albo masz umowę do podpisu? Opisz sprawę – w 24 h roboczych odpiszę, co trzeba sprawdzić i ile to kosztuje.',
+  'zakup-i-ksiegi': 'Coś się nie zgadza w księdze wieczystej albo w stanie prawnym działki? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
+  'deweloper': 'Deweloper spóźnia się z odbiorem albo nie usuwa wad? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
+  'grunty-rolne-oze': 'Kupujesz, sprzedajesz albo dzierżawisz grunt rolny? Opisz sprawę – w 24 h roboczych odpiszę, co trzeba zrobić i ile to kosztuje.',
+  'wspolwlasnosc': 'Nie możecie się porozumieć co do spadku albo wspólnej nieruchomości? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
+};
+const BLOG_CTA_FALLBACK = 'Masz podobną sprawę? Opisz ją – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.';
+function postCtaText(post) {
+  if (post.cta) return post.cta;
+  const c = blogCategoryOfPost(post);
+  return (c && BLOG_CTA_DEFAULT[c.id]) || BLOG_CTA_FALLBACK;
+}
+/* pierwsze zdanie (pytanie o problem) do krótkiego CTA po leadzie */
+function ctaQuestion(t) { const m = /^[^?]*\?/.exec(t); return m ? m[0] : t; }
+function goToForm(e) {
+  e.preventDefault();
+  const form = document.querySelector('#formularz .qual-card') || document.getElementById('formularz');
+  if (!form) return;
+  const top = form.getBoundingClientRect().top + window.pageYOffset - 88;
+  window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+}
+function PostCta({ place, text, button, short, children }) {
+  return (
+    <div className={'post-cta' + (short ? ' post-cta--short' : '')}>
+      <p className="post-cta-text">{text}</p>
+      <a href="#formularz" className="btn btn-primary post-cta-btn" data-cta={place} onClick={goToForm}>
+        {button} <Icon name="arrow-right" size={16} />
+      </a>
+      {children}
+    </div>
+  );
+}
+const CLOSING_RE = /^Masz podobną sytuację\?/;
+function blockText(b) { const v = b && b[1]; return Array.isArray(v) ? v.flat(2).join(' ') : String(v || ''); }
+/* miejsce na CTA w ok. 40% tekstu: przed najbliższym nagłówkiem H2 (nie przed FAQ), a gdy go nie ma do 75% tekstu,
+   po pierwszym akapicie za progiem 40%; -1 = bez CTA (krótki wpis albo za blisko CTA końcowego) */
+function midCtaIndex(blocks, closingAt) {
+  const len = blocks.map((b) => blockText(b).length);
+  const total = len.reduce((s, x) => s + x, 0);
+  if (total < 2500) return -1;
+  const end = closingAt >= 0 ? closingAt : blocks.length;
+  let cum = 0, para = -1;
+  for (let i = 0; i < end; i++) {
+    const share = cum / total;
+    const [t, v] = blocks[i];
+    if (i >= 2 && share >= 0.4 && share <= 0.75 && t === 'h2' && !/Najczęstsze pytania/i.test(v)) return i;
+    if (para < 0 && i >= 2 && share >= 0.4 && share <= 0.75 && i > 0 && blocks[i - 1][0] === 'p') para = i;
+    if (t === 'h2' && /Najczęstsze pytania/i.test(v)) break;
+    cum += len[i];
+  }
+  return para > 0 && para < end - 1 ? para : -1;
+}
+
 /* Article body from block list — see blog-data.jsx for the format */
-function BlogBody({ blocks, service, selfSlug }) {
+function BlogBody({ blocks, service, selfSlug, cta }) {
   BLOG_SELF = selfSlug || null;
+  blocks = blocks || [];
   const svc = service && window.getService ? window.getService(service) : null;
-  /* odnośnik do głównej usługi zaraz po pierwszym akapicie: czytelnik poradnika trafia do usługi, zanim opuści stronę */
-  const callout = svc ? (
-    <p key="svc-callout" className="prose-note" data-svc-callout="">
-      Masz taką sprawę? Zobacz, jak pomagam: <window.NavLink route="usluga" slug={svc.slug}>{svc.title}</window.NavLink>.
-    </p>
-  ) : null;
+  const text = cta || BLOG_CTA_FALLBACK;
+  const closingAt = blocks.findIndex((b) => b && (b[0] === 'p' || b[0] === 'quote') && CLOSING_RE.test(String(b[1])));
+  const midAt = midCtaIndex(blocks, closingAt);
+  /* po leadzie: pytanie z CTA + przycisk; pod nim odnośnik do głównej usługi (czytelnik trafia do usługi, zanim opuści stronę) */
+  const leadCta = (
+    <PostCta key="cta-lead" place="wpis-po-leadzie" text={ctaQuestion(text)} button="Opisz sprawę" short>
+      {svc && <p className="post-cta-svc" data-svc-callout="">Jak prowadzę takie sprawy: <window.NavLink route="usluga" slug={svc.slug}>{svc.title}</window.NavLink>.</p>}
+    </PostCta>
+  );
   return (
     <div className="prose prose-article">
-      {(blocks || []).flatMap((b, i) => {
+      {blocks.flatMap((b, i) => {
+        if (i === closingAt) return [<PostCta key="cta-end" place="wpis-koniec" text={blogInline(b[1])} button="Przejdź do formularza" />];
         const el = renderBlogBlock(b, i);
-        return i === 0 && callout ? [el, callout] : [el];
+        if (i === midAt) return [<PostCta key="cta-mid" place="wpis-40" text={text} button="Opisz sprawę w formularzu" />, el];
+        return i === 0 ? [el, leadCta] : [el];
       })}
     </div>
   );

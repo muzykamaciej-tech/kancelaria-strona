@@ -987,3 +987,11 @@ select.input { appearance: auto; cursor: pointer; }
 }
 /* 6 statystyk: 3 + 3 na komputerze */
 @media (min-width: 1024px) { .stats-band-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* Formularz we wpisie (QualificationForm collapseOptional): na telefonie pola opcjonalne pod przyciskiem */
+.qual-more-toggle { display: none; }
+@media (max-width: 640px) {
+  .qual-more-toggle { display: flex; width: 100%; justify-content: space-between; align-items: center; margin-top: 1rem; padding: 0.75rem 1rem; border: 1px dashed var(--slate-200, #cbd5e1); border-radius: var(--radius-md); background: transparent; color: var(--text-main); font: inherit; font-weight: 600; font-size: 0.9375rem; cursor: pointer; }
+  .qual-more:not(.is-open) { display: none; }
+}
+.case-form-cred { margin: 1rem 0 0; text-align: center; font-size: 0.8125rem; line-height: 1.5; color: var(--text-muted); }

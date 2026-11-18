@@ -219,6 +219,7 @@ window.BLOG.push(
   },
   {
     slug: 'odszkodowanie-za-plan-ogolny',
+    cta: 'Plan ogólny obniżył wartość Twojej działki? Opisz sprawę – w 24 h roboczych odpiszę, czy i kiedy możesz żądać odszkodowania oraz ile kosztuje prowadzenie sprawy.',
     title: 'Odszkodowanie za plan ogólny – czy gmina zapłaci za spadek wartości działki?',
     metaTitle: 'Odszkodowanie za plan ogólny – czy gmina zapłaci?',
     excerpt: 'Reforma planowania przestrzennego narzuciła gminom obowiązek zastąpienia starego studium planem ogólnym. Dla wielu osób brzmi to jak czysta biurokracja, ale w rzeczywistości może drastycznie zmienić wartość Twojej działki. Czy jeśli gmina „odbierze” Ci prawo do budowy domu, możesz liczyć na pieniądze?',

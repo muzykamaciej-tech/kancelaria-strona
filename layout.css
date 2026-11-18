@@ -975,6 +975,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .prose-article strong { font-weight: 700; color: var(--text-main); }
 .prose-note { font-size: 0.9375rem; font-style: italic; color: var(--text-muted); border-top: 1px solid var(--slate-100); padding-top: 1.25rem; margin-top: 2rem; }
 
+/* CTA we wpisie (pages.jsx PostCta): po leadzie (krótkie), w ok. 40% treści i zamiast końcowego „Masz podobną sytuację?” */
+.post-cta { margin: 2rem 0; padding: 1.25rem 1.5rem; border: 1px solid var(--slate-100); border-left: 4px solid var(--brand-primary); border-radius: 0 var(--radius-md) var(--radius-md) 0; background: var(--slate-50); }
+.prose .post-cta-text { margin: 0 0 1rem; font-size: 1.0625rem; font-weight: 600; color: var(--text-main); }
+.post-cta-btn { max-width: 100%; white-space: normal; text-align: center; }
+.post-cta--short { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; padding-block: 1rem; }
+.prose .post-cta--short .post-cta-text { margin: 0; flex: 1 1 16rem; }
+.post-cta--short .post-cta-btn { padding: 0.75rem 1.25rem; }
+.prose .post-cta-svc { flex-basis: 100%; margin: 0.25rem 0 0; font-size: 0.9375rem; color: var(--text-muted); }
+.post-cta-svc a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
 /* Legal pages — extend .prose with ordered lists, tables and inline links */
 .prose-legal h2:first-child { margin-top: 0; }
 .prose-legal { overflow-wrap: anywhere; } /* długie adresy e-mail nie rozpychają strony na telefonie */

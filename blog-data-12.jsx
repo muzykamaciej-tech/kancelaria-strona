@@ -1939,6 +1939,7 @@ window.BLOG.push(
   },
   {
     slug: 'wejscie-na-dzialke-bez-zgody-wlasciciela',
+    cta: 'Ktoś wchodzi na Twoją działkę bez zgody? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
     title: 'Wejście na działkę bez zgody właściciela: kiedy sąsiad, firma lub urząd mogą, a kiedy nie',
     metaTitle: 'Wejście na działkę bez zgody właściciela – kiedy wolno',
     metaDesc: 'Wejście na działkę bez zgody właściciela: kiedy wolno sąsiadowi, operatorowi, geodecie i urzędnikowi, a co zrobić, gdy ktoś wszedł bez podstawy.',

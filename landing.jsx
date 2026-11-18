@@ -158,7 +158,8 @@ const MAILTO_CASE = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Spraw
 
 /* preset (strona oferty, offers.jsx): { service, packages, pakiet, onPakiet, situation, placeholder } —
    usługa i wybrany pakiet trafiają do pól zgłoszenia i do tematu maila */
-function QualificationForm({ compact = false, preset }) {
+/* collapseOptional: na telefonie pola opcjonalne pod przyciskiem „Dodaj szczegóły (opcjonalnie)” (na komputerze widać wszystko) */
+function QualificationForm({ compact = false, preset, collapseOptional = false }) {
   const [state, setState] = lUseState({ name: '', email: '', phone: '', kw: '', situation: (preset && preset.situation) || '', message: '' });
   const pakiet = preset ? preset.pakiet || '' : '';
   const [files, setFiles] = lUseState([]);
@@ -170,6 +171,7 @@ function QualificationForm({ compact = false, preset }) {
   const [filesDropped, setFilesDropped] = lUseState(false);
   const [hp, setHp] = lUseState(''); // honeypot — bots fill this, humans never see it
   const [drag, setDrag] = lUseState(false);
+  const [moreOpen, setMoreOpen] = lUseState(false);
   const fileInput = lUseRef(null);
 
   function validate() {
@@ -180,6 +182,7 @@ function QualificationForm({ compact = false, preset }) {
     if (!state.message.trim() || state.message.trim().length < 10) e.message = 'Opisz proszę pokrótce sprawę (min. 10 znaków).';
     if (contact === 'phone' && !state.phone.trim()) e.phone = 'Podaj numer telefonu, żebym mógł oddzwonić.';
     setErrors(e);
+    if (e.phone) setMoreOpen(true);
     return Object.keys(e).length === 0;
   }
 
@@ -394,6 +397,135 @@ function QualificationForm({ compact = false, preset }) {
         </select>
       </label>}
 
+      {collapseOptional ? <React.Fragment>
+      <div className="qual-grid">
+        <label>
+          <span className="input-label">Imię i nazwisko</span>
+          <input
+            className={`input ${errors.name ? 'input-error' : ''}`}
+            type="text"
+            autoComplete="name"
+            value={state.name}
+            onChange={(e) => setState({ ...state, name: e.target.value })}
+            placeholder="Jan Kowalski" />
+          {errors.name && <div className="input-err">{errors.name}</div>}
+        </label>
+      <label>
+        <span className="input-label">Adres e-mail</span>
+        <input
+          className={`input ${errors.email ? 'input-error' : ''}`}
+          type="email"
+          autoComplete="email"
+          value={state.email}
+          onChange={(e) => setState({ ...state, email: e.target.value })}
+          placeholder="jan@example.com" />
+        {errors.email && <div className="input-err">{errors.email}</div>}
+      </label>
+      </div>
+
+      <label className="qual-field">
+        <span className="input-label">Opis sprawy</span>
+        <textarea
+          className={`textarea ${errors.message ? 'input-error' : ''}`}
+          rows={compact ? 3 : 5}
+          value={state.message}
+          onChange={(e) => setState({ ...state, message: e.target.value })}
+          maxLength={5000}
+          placeholder={(preset && preset.placeholder) || 'Np. Kupuję mieszkanie od dewelopera i nie wiem, czy umowa jest dla mnie bezpieczna…'} />
+        <div className="field-foot">
+          {errors.message ? <div className="input-err">{errors.message}</div> : <span />}
+          <span className={`char-count ${state.message.length > 4800 ? 'is-near' : ''}`}>{state.message.length} / 5000</span>
+        </div>
+        <p className="small qual-hint">Pomocne będą trzy rzeczy: na jakim etapie jest sprawa (przed podpisem czy po), jakie terminy Cię gonią i jakie dokumenty masz.</p>
+      </label>
+      <button type="button" className="qual-more-toggle" aria-expanded={moreOpen} aria-controls="qual-more" onClick={() => setMoreOpen(!moreOpen)}>
+        Dodaj szczegóły (opcjonalnie) <span aria-hidden="true">{moreOpen ? '−' : '+'}</span>
+      </button>
+      <div id="qual-more" className={'qual-more' + (moreOpen ? ' is-open' : '')}>
+        <label className="qual-field">
+          <span className="input-label">Telefon {contact === 'phone' ? '' : <span className="qual-opt">(opcjonalnie)</span>}</span>
+          <input
+            className={`input ${errors.phone ? 'input-error' : ''}`}
+            type="tel"
+            autoComplete="tel"
+            value={state.phone}
+            onChange={(e) => setState({ ...state, phone: e.target.value })}
+            placeholder="+48 …" />
+          {errors.phone && <div className="input-err">{errors.phone}</div>}
+        </label>
+
+      <div className="qual-grid" style={{ marginTop: '1rem' }}>
+        <label>
+          <span className="input-label">Czego dotyczy sprawa? <span className="qual-opt">(opcjonalnie)</span></span>
+          <select className="input" value={state.situation} onChange={(e) => setState({ ...state, situation: e.target.value })}>
+            <option value="">Wybierz…</option>
+            {SITUATION_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
+          </select>
+        </label>
+        <label>
+          <span className="input-label">Numer księgi wieczystej <span className="qual-opt">(jeśli znasz)</span></span>
+          <input
+            className="input"
+            type="text"
+            value={state.kw}
+            onChange={(e) => setState({ ...state, kw: e.target.value })}
+            placeholder="np. LU1I/00012345/6" />
+        </label>
+      </div>
+
+      {/* Załączniki — kilka plików, klik lub przeciągnij */}
+      <div className="qual-field">
+        <span className="input-label">Załączniki <span className="qual-opt">(opcjonalnie — umowa, KW, decyzja, protokół, zdjęcia)</span></span>
+        <input
+          ref={fileInput}
+          type="file"
+          multiple
+          style={{ display: 'none' }}
+          accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.heic"
+          onChange={(e) => { pickFiles(e.target.files); e.target.value = ''; }} />
+        {files.length > 0 &&
+        <div className="file-chips">
+          {files.map((f, i) =>
+          <div key={f.name + f.size} className="file-chip">
+              <SvgIcon name="file-text" size={18} />
+              <span className="file-chip-name">{f.name}</span>
+              <button type="button" aria-label={`Usuń plik ${f.name}`} onClick={() => removeFile(i)}>
+                <SvgIcon name="x" size={16} />
+              </button>
+            </div>
+          )}
+        </div>}
+        {files.length < MAX_FILES &&
+        <button
+          type="button"
+          className={`file-drop ${drag ? 'is-drag' : ''} ${files.length ? 'file-drop--more' : ''}`}
+          onClick={() => fileInput.current && fileInput.current.click()}
+          onDragOver={(e) => { e.preventDefault(); if (!drag) setDrag(true); }}
+          onDragLeave={() => setDrag(false)}
+          onDrop={onDrop}>
+            <SvgIcon name="paperclip" size={18} />
+            <span>{files.length ? 'Dodaj kolejny dokument' : 'Dodaj dokumenty lub zdjęcia — kliknij albo przeciągnij tutaj'}</span>
+            <span className="file-drop-hint">PDF, DOCX, JPG, PNG · do {MAX_FILES} plików, każdy do {MAX_FILE_MB} MB, łącznie do {MAX_TOTAL_MB} MB</span>
+          </button>}
+        {errors.file && <div className="input-err">{errors.file}</div>}
+        <p className="small qual-hint">Nie masz wszystkich dokumentów? Napisz, co masz. Do wstępnej analizy i oferty zwykle wystarczy kilka zdań i jeden dokument.</p>
+      </div>
+
+      <div className="qual-field">
+        <span className="input-label">Jak mam się odezwać?</span>
+        <div className="contact-pref" role="radiogroup" aria-label="Preferowany kontakt">
+          <label className={contact === 'email' ? 'is-on' : ''}><input type="radio" name="contact-pref" checked={contact === 'email'} onChange={() => setContact('email')} />E-mailem</label>
+          <label className={contact === 'phone' ? 'is-on' : ''}><input type="radio" name="contact-pref" checked={contact === 'phone'} onChange={() => setContact('phone')} />Zadzwoń do mnie</label>
+        </div>
+        {contact === 'phone' && <p className="small qual-hint">Oddzwonię w ciągu 24 h roboczych i powiem, co trzeba zrobić. Ofertę z ceną i terminem prześlę mailem. Wpisz numer w polu „Telefon” powyżej.</p>}
+      </div>
+
+      <label className="consent-row consent-row--plain">
+        <input type="checkbox" checked={urgent} onChange={(e) => setUrgent(e.target.checked)} />
+        <span>Sprawa jest pilna — goni mnie termin (podpis, odwołanie, rozprawa).</span>
+      </label>
+      </div>
+      </React.Fragment> : <React.Fragment>
       <div className="qual-grid">
         <label>
           <span className="input-label">Imię i nazwisko</span>
@@ -517,6 +649,8 @@ function QualificationForm({ compact = false, preset }) {
         <input type="checkbox" checked={urgent} onChange={(e) => setUrgent(e.target.checked)} />
         <span>Sprawa jest pilna — goni mnie termin (podpis, odwołanie, rozprawa).</span>
       </label>
+
+      </React.Fragment>}
 
       {/* Klauzula informacyjna RODO — bez checkboxa (odpowiedź na zapytanie nie wymaga odrębnej zgody) */}
       <p className="small qual-rodo">

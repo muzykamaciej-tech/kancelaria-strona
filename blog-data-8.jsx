@@ -1163,6 +1163,7 @@ window.BLOG.push(
   },
   {
     slug: 'przeksztalcenie-dzialki-rolnej-w-budowlana',
+    cta: 'Chcesz przekształcić działkę rolną w budowlaną? Opisz sprawę – w 24 h roboczych odpiszę, od czego zacząć i ile to kosztuje.',
     title: 'Przekształcenie działki rolnej w budowlaną – krok po kroku i ile to kosztuje',
     metaTitle: 'Przekształcenie działki rolnej w budowlaną: 2 etapy i koszty',
     metaDesc: 'Najpierw plan miejscowy albo WZ, potem przy klasach I–III decyzja starosty. Klasy IV–VI z gleby mineralnej: 0 zł. Stawki za 1000 m² i przykład z kwotami.',
@@ -1292,6 +1293,7 @@ window.BLOG.push(
   },
   {
     slug: 'dom-na-dzialce-rolnej',
+    cta: 'Masz działkę rolną i chcesz postawić na niej dom? Opisz sprawę – w 24 h roboczych odpiszę, od czego zacząć i ile to kosztuje.',
     title: 'Dom na działce rolnej: czy można budować, nie będąc rolnikiem (stan 2026)',
     metaTitle: 'Dom na działce rolnej bez statusu rolnika: plan albo WZ',
     metaDesc: 'Rolnikiem być nie musisz: wystarczy plan miejscowy albo WZ na dom. Co daje zabudowa zagrodowa, kiedy odrolnienie i zgłoszenie, jaki podatek. Kroki.',
@@ -2055,6 +2057,7 @@ window.BLOG.push(
   },
   {
     slug: 'zasiedzenie-nieruchomosci-po-ilu-latach',
+    cta: 'Władasz działką od lat, a w księdze wieczystej jest ktoś inny? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
     title: 'Zasiedzenie nieruchomości: po ilu latach, dobra i zła wiara, jak złożyć wniosek',
     metaTitle: 'Zasiedzenie nieruchomości: po ilu latach, wniosek i koszty',
     metaDesc: '20 lat w dobrej wierze, 30 w złej, przed 1.10.1990 krócej. Lata rodziców się liczą. Wniosek 2000 zł, podatek 7%. Jak przerwać zasiedzenie, tabela kosztów.',

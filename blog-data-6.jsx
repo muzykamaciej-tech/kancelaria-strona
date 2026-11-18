@@ -108,6 +108,7 @@ window.BLOG.push(
   },
   {
     slug: 'warunki-zabudowy-ile-wazne',
+    cta: 'Nie wiesz, czy Twoje warunki zabudowy jeszcze obowiązują? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
     title: 'Warunki zabudowy – ile są ważne? Policz ostatni dzień swojej WZ',
     metaTitle: 'Warunki zabudowy – ile ważne? 5 lat, bez terminu i co dalej',
     metaDesc: 'WZ z wniosku od 16.10.2025, prawomocna od 2026 r., wygasa po 5 latach. Starsze nie mają terminu. Jak policzyć ostatni dzień i co zrobić, gdy 5 lat minie.',

@@ -220,6 +220,7 @@ window.BLOG.push(
   },
   {
     slug: 'droga-konieczna-a-warunki-zabudowy',
+    cta: 'Dojeżdżasz do działki przez grunt sąsiada i chcesz złożyć wniosek o warunki zabudowy? Opisz sprawę – w 24 h roboczych odpiszę, co trzeba przygotować i ile to kosztuje.',
     title: 'Droga konieczna a warunki zabudowy – jaki dokument dołączyć do wniosku?',
     metaTitle: 'Droga konieczna a warunki zabudowy: jaki dokument do wniosku',
     metaDesc: 'WZ wymaga dostępu do drogi publicznej. Zgoda sąsiada „na słowo” nie wystarczy: dołącz akt notarialny albo postanowienie sądu. 5 kroków, zjazd, wyroki.',
@@ -324,6 +325,7 @@ window.BLOG.push(
   },
   {
     slug: 'warunki-zabudowy-jakie-dokumenty',
+    cta: 'Składasz wniosek o warunki zabudowy i nie wiesz, czego brakuje? Opisz sprawę – w 24 h roboczych odpiszę, co trzeba przygotować i ile kosztuje moja pomoc.',
     title: 'Warunki zabudowy – jakie dokumenty dołączyć do wniosku o WZ?',
     metaTitle: 'Warunki zabudowy – jakie dokumenty? Mapa i załączniki A–E',
     metaDesc: 'Do wniosku o WZ dołączasz mapę 1:500 lub 1:1000 i opis inwestycji z rysunkiem. Które załączniki A–E przy domu, wezwanie do uzupełnienia, zmiany od 2027.',
@@ -432,6 +434,7 @@ window.BLOG.push(
   },
   {
     slug: 'obszar-uzupelnienia-zabudowy-mapa',
+    cta: 'Twoja działka leży poza obszarem uzupełnienia zabudowy? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
     title: 'Obszar uzupełnienia zabudowy – mapa: jak sprawdzić, czy działka w nim leży',
     metaTitle: 'Obszar uzupełnienia zabudowy (OUZ) – mapa i 5 kroków',
     metaDesc: 'OUZ sprawdzisz na mapie planu ogólnego, a urzędowo w wyrysie. Przy WZ z wniosku od 1.09.2026 nowy dom co do zasady tylko w nim. Co, gdy granica tnie działkę.',
@@ -541,6 +544,7 @@ window.BLOG.push(
   },
   {
     slug: 'warunki-zabudowy-po-uchwaleniu-planu-ogolnego',
+    cta: 'Masz warunki zabudowy, a plan ogólny wpisał działkę do innej strefy? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
     title: 'Warunki zabudowy po uchwaleniu planu ogólnego: co sprawdzi starosta',
     metaTitle: 'Warunki zabudowy po uchwaleniu planu ogólnego – co dalej?',
     metaDesc: 'Plan ogólny nie powoduje wygaśnięcia warunków zabudowy. Starosta sprawdza projekt domu z WZ, a nie z planem ogólnym – także w strefie otwartej.',
@@ -848,6 +852,7 @@ window.BLOG.push(
   },
   {
     slug: 'podzial-dzialki-z-warunkami-zabudowy',
+    cta: 'Chcesz podzielić działkę, która ma warunki zabudowy? Opisz sprawę – w 24 h roboczych odpiszę, od czego zacząć i ile to kosztuje.',
     title: 'Podział działki z warunkami zabudowy: czy WZ przetrwa nowe numery?',
     metaTitle: 'Podział działki z warunkami zabudowy – czy WZ przetrwa?',
     metaDesc: 'Podział działki nie powoduje wygaśnięcia warunków zabudowy. Pod działki budowlane z gruntu rolnego zwykle najpierw uzyskuje się WZ, a potem dzieli teren.',
@@ -1054,6 +1059,7 @@ window.BLOG.push(
   },
   {
     slug: 'warunki-zabudowy-bez-planu-ogolnego',
+    cta: 'Potrzebujesz warunków zabudowy, a plan ogólny gminy jeszcze nie obowiązuje? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
     title: 'Warunki zabudowy a plan ogólny: uchwalony to jeszcze nie obowiązujący',
     metaTitle: 'Warunki zabudowy a plan ogólny – uchwalony czy obowiązujący?',
     metaDesc: 'Warunki zabudowy z wniosku złożonego od 1 września 2026 r. dostaniesz tylko w gminie, w której plan ogólny wszedł w życie. Samo uchwalenie nie wystarcza.',
