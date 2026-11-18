@@ -591,6 +591,7 @@ Object.assign(window.SERVICE_CONTENT, {
     doForEyebrow: 'Zakres współpracy',
     doForTitle: 'Co przygotowuję i prowadzę dla dewelopera',
     doFor: [
+      'Gdy plan albo jego brak blokuje inwestycję, prowadzę wniosek o zintegrowany plan inwestycyjny (ZPI) i negocjuję z gminą umowę urbanistyczną w formie aktu notarialnego (art. 37ea i 37ed u.p.z.p.).',
       'Sprawdzam grunt przed zakupem: księgę wieczystą, hipoteki, służebności i przeznaczenie terenu w planie, potem piszę umowę nabycia.',
       'Przygotowuję prospekt według wzoru ustawowego, harmonogram i treść strony z cenami za 1 m² (art. 19a, 20 i 24 u.d.).',
       'Piszę wzory umowy rezerwacyjnej, deweloperskiej i sprzedaży gotowych lokali i sprawdzam je pod kątem niedozwolonych postanowień umownych (art. 385¹ § 1 k.c.).',
@@ -692,13 +693,13 @@ Object.assign(window.SERVICE_CONTENT, {
       'Obecne wzory umów rezerwacyjnej i deweloperskiej oraz protokołu odbioru.',
       'Pisma nabywców lub banku czekające na odpowiedź, z datą doręczenia.',
     ],
-    guides: ['kara-umowna-za-opoznienie-dewelopera-uchwala-sn', 'warunki-zabudowy-ile-wazne'],
+    guides: ['kara-umowna-za-opoznienie-dewelopera-uchwala-sn', 'warunki-zabudowy-ile-wazne', 'zpi-umowa-urbanistyczna'],
     seeAlso: ['plan-ogolny', 'klauzule-abuzywne-deweloper'],
     cta: {
       heading: 'Cały cykl inwestycji — od gruntu po posprzedaż — pod jedną prawną opieką.',
       lead: 'Opisz przedsięwzięcie i etap, na którym jesteś. W 24 h roboczych odpiszę, które dokumenty przygotować albo poprawić najpierw, a w tej samej wiadomości prześlę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-18',
   },
 
   'obsluga-prawna-biur-nieruchomosci': {

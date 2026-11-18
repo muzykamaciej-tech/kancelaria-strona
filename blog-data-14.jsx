@@ -1319,7 +1319,7 @@ window.BLOG.push(
     metaTitle: 'Współwłasność nieruchomości: kto decyduje i co, gdy spór',
     metaDesc: 'Współwłasność nieruchomości: kto decyduje o remoncie i najmie, jak podzielić korzystanie, kto płaci podatek i co, gdy ktoś nie chce sprzedać.',
     excerpt: 'Współwłasność nieruchomości: kto decyduje o remoncie i najmie, jak podzielić korzystanie, kto płaci podatek i co, gdy ktoś nie chce sprzedać.',
-    date: '7 listopada 2026', iso: '2026-11-07', readTime: '14 min',
+    date: '7 listopada 2026', iso: '2026-11-07', updated: '18 listopada 2026', updatedIso: '2026-11-18', readTime: '14 min',
     category: 'Współwłasność i spadki', tags: ['Współwłasność', 'Zarząd rzeczą wspólną', 'Podział do korzystania'],
     cover: '/assets/blog-wspolwlasnosc-nieruchomosci.jpg',
     coverAlt: 'Okładka wpisu: „Współwłasność nieruchomości. Kto decyduje i co gdy ktoś nie chce sprzedać”, obok dom o dwóch różnie pomalowanych połowach z dwojgiem drzwi o zmierzchu',
@@ -1359,7 +1359,7 @@ window.BLOG.push(
       ['h2', 'Współwłasność nieruchomości a remont: kto się zgadza i kto płaci?'],
       ['p', 'Bieżącą naprawę, która utrzymuje dom w stanie niepogorszonym, co do zasady uzgadnia większość udziałów (art. 201 k.c.). Nadbudowa albo przebudowa to zwykle czynność przekraczająca zwykły zarząd, czyli potrzebna jest zgoda wszystkich (art. 199 k.c.). Ustawa nie podaje progu kwotowego. Liczy się zakres prac i koszt w stosunku do wartości domu, więc także duży remont dachu może przekraczać zwykły zarząd.'],
       ['p', 'Gdy awaria grozi zniszczeniem domu, nie czekaj na zgodę. Czynności, które zmierzają do zachowania wspólnego prawa, może wykonać każdy (art. 209 k.c.). Pilna naprawa co do zasady się w nich mieści. Sam brak zgody nie przeszkadza, ale wyraźny sprzeciw pozostałych może taką czynność podważyć. Zrób tylko to, co zatrzymuje szkodę, i zachowaj zdjęcia oraz faktury.'],
-      ['p', 'Wydatki dzielicie według udziałów, także gdy ktoś w domu nie mieszka (art. 207 k.c.). Uchwała SN z 10.05.2006 (III CZP 11/06) wyjaśnia 3 rzeczy:'],
+      ['p', 'Wydatki dzielicie według udziałów, także gdy ktoś w domu nie mieszka (art. 207 k.c.). Chodzi o koszty utrzymania nieruchomości: podatek, ubezpieczenie, opłaty stałe i naprawy. Prąd, gaz i wodę według zużycia sądy co do zasady przypisują temu, kto je zużywa. Uchwała SN z 10.05.2006 (III CZP 11/06) wyjaśnia 3 rzeczy:'],
       ['ul', [
         '„Wydatki” to wszystkie nakłady: konieczne, użyteczne, a nawet zbytkowne, w ramach zwykłego zarządu i poza nim.',
         'Zwrotu żądasz od osób, które były współwłaścicielami w czasie nakładu. Kupujący udział później za dawny remont co do zasady nie odpowiada.',

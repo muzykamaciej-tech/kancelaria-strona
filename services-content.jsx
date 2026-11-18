@@ -1889,13 +1889,13 @@ const SERVICE_CONTENT = {
       'Decyzja o warunkach zabudowy, pozwolenie na budowę albo zgłoszenie budowy, jeśli masz',
       'Ogłoszenie o konsultacjach społecznych i projekt planu, jeśli plan jest w przygotowaniu',
     ],
-    guides: ['jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym', 'odszkodowanie-za-plan-ogolny', 'miejscowy-plan-zagospodarowania', 'skarga-na-plan-ogolny', 'skarga-na-plan-miejscowy'],
+    guides: ['jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym', 'odszkodowanie-za-plan-ogolny', 'miejscowy-plan-zagospodarowania', 'skarga-na-plan-ogolny', 'skarga-na-plan-miejscowy', 'zakaz-zagospodarowania-terenu-art-35a'],
     seeAlso: ['odszkodowanie-wywlaszczenie', 'odrolnienie'],
     cta: {
       heading: 'Plan miejscowy związał Ci ręce? Sprawdźmy, czy słusznie.',
       lead: 'Napisz, której gminy i działki dotyczy plan i co w nim Ci przeszkadza. W 24 h roboczych odpiszę, która droga wchodzi w grę (uwaga, skarga do WSA czy roszczenie do gminy), i dołączę ofertę: cenę i termin; dopóki jej nie przyjmiesz, nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-18',
   },
 
   /* ===== Opłaty i odszkodowania planistyczne (Blok 4) ===== */
@@ -2192,13 +2192,13 @@ const SERVICE_CONTENT = {
       'Decyzja o warunkach zabudowy albo wypis z planu miejscowego (jeśli masz)',
       'Odwołanie sąsiada albo zawiadomienie urzędu o jego wniesieniu (jeśli dotyczy)',
     ],
-    guides: ['warunki-zabudowy-ile-wazne', 'przebudowa-czy-nowy-zjazd-nsa', 'pozwolenie-na-budowe-krok-po-kroku', 'odwolanie-od-pozwolenia-na-budowe', 'odleglosc-domu-od-granicy-dzialki'],
+    guides: ['warunki-zabudowy-ile-wazne', 'pozwolenie-na-budowe-krok-po-kroku', 'odwolanie-od-pozwolenia-na-budowe', 'odleglosc-domu-od-granicy-dzialki', 'odstepstwo-od-przepisow-techniczno-budowlanych', 'sluzebnosc-drogowa-a-pozwolenie-na-budowe'],
     seeAlso: ['warunki-zabudowy', 'droga-konieczna', 'obsluga-prawna-architektow'],
     cta: {
       heading: 'Odmowa, odwołanie sąsiada albo cisza w urzędzie? Zawalczę o Twoją budowę.',
       lead: 'Prześlij decyzję, postanowienie urzędu albo odwołanie sąsiada z datą doręczenia. Bezpłatnie, w 24 h roboczych, wskażę pismo i termin, które Cię dotyczą, oraz prześlę ofertę z ceną i terminem wykonania; płacisz dopiero po jej akceptacji.',
     },
-    updated: '2026-11-07',
+    updated: '2026-11-18',
   },
 
   'legalizacja-samowoli': {
@@ -2337,13 +2337,13 @@ const SERVICE_CONTENT = {
       'Projekt, pozwolenie albo zgłoszenie, jeśli były',
       'Przy sprzedaży albo zakupie: projekt umowy i termin aktu notarialnego, jeśli już jest',
     ],
-    guides: ['legalizacja-samowoli-budowlanej', 'nakaz-rozbiorki-samowoli'],
+    guides: ['legalizacja-samowoli-budowlanej', 'nakaz-rozbiorki-samowoli', 'decyzja-srodowiskowa-po-wybudowaniu'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'obsluga-sprzedazy'],
     cta: {
       heading: 'Samowola nie zniknie sama. Ale można ją uporządkować.',
       lead: 'Napisz, co i kiedy zbudowano oraz czy przyszło pismo z PINB. W 24 h roboczych bezpłatnie wskażę, co zrobić najpierw, i prześlę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-26',
+    updated: '2026-11-18',
   },
 
   'spory-z-wykonawca': {
@@ -2671,7 +2671,7 @@ const SERVICE_CONTENT = {
       },
       {
         b: 'Projektant uznał zmianę za nieistotną, a inspektor twierdzi inaczej.',
-        t: 'Progi są w ustawie, m.in. powierzchnia zabudowy ponad 5%, wysokość, długość lub szerokość ponad 2% i liczba kondygnacji (art. 36a ust. 5 pkt 2 Pb). Przy istotnym odstąpieniu PINB nakłada obowiązek sporządzenia projektu zamiennego (art. 51 ust. 1 pkt 3 Pb).',
+        t: 'Progi są w ustawie, m.in. powierzchnia zabudowy ponad 5%, wysokość, długość lub szerokość ponad 2% i liczba kondygnacji (art. 36a ust. 5 pkt 2 Pb). Przy istotnym odstąpieniu PINB nakłada obowiązek sporządzenia projektu zamiennego (art. 51 ust. 1 pkt 3 Pb). Przy robotach w toku PINB może najpierw tylko pouczyć Cię o konieczności usunięcia niezgodności i sprawdzić ją po 60 dniach od dnia pouczenia, ale nie musi (art. 51a Pb).',
       },
       {
         b: 'Mieszkasz w domu bez zawiadomienia o zakończeniu budowy.',
@@ -2773,13 +2773,13 @@ const SERVICE_CONTENT = {
       'Zdjęcia stanu robót albo budynku z datą wykonania',
       'Książka obiektu budowlanego i protokoły kontroli okresowych, jeśli sprawa dotyczy istniejącego budynku',
     ],
-    guides: ['nakaz-rozbiorki-samowoli'],
+    guides: ['nakaz-rozbiorki-samowoli', 'zolta-kartka-nadzor-budowlany', 'nadzor-budowlany-pinb-kontrola', 'zalanie-dzialki-przez-sasiada'],
     seeAlso: ['obsluga-prawna-zarzadcow', 'obsluga-prawna-wspolnot', 'wady-czesci-wspolnych'],
     cta: {
       heading: 'Pismo z nadzoru budowlanego? Nie czekaj na decyzję — działaj teraz.',
       lead: 'Prześlij pismo z PINB albo opisz zapowiedzianą kontrolę, a w 24 h roboczych bezpłatnie wskażę, czego wymaga Twoja sprawa przed nadzorem. Ofertę z ceną i terminem dostaniesz w tej samej wiadomości; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-11-07',
+    updated: '2026-11-18',
   },
 
   /* ===== BLOK 6 — Księgi wieczyste, stan prawny i użytkowanie wieczyste ===== */
@@ -3383,13 +3383,13 @@ const SERVICE_CONTENT = {
       'Mapa albo projekt podziału działki od geodety, jeśli są',
       'Pisma i propozycje spłaty od współwłaścicieli, jeśli są',
     ],
-    guides: ['sprzedaz-udzialu-w-nieruchomosci', 'dzial-spadku', 'wspolwlasnosc-nieruchomosci'],
+    guides: ['zniesienie-wspolwlasnosci-nieruchomosci', 'koszty-dzialu-spadku-u-notariusza', 'wspolwlasciciel-nie-placi-i-nie-mieszka', 'sprzedaz-udzialu-w-nieruchomosci', 'wspolwlasnosc-nieruchomosci', 'dzial-spadku'],
     seeAlso: ['obsluga-sprzedazy', 'droga-konieczna'],
     cta: {
       heading: 'Wyjdź ze współwłasności, zanim ona zablokuje Twoje plany.',
       lead: 'Napisz, z kim masz nieruchomość i czy jest zgoda na podział; w ciągu 24 h roboczych bezpłatnie wskażę pierwszy krok. Oferta z ceną i terminem przyjdzie w tym samym mailu, a do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    updated: '2026-11-18',
   },
 
   'dzial-spadku': {
@@ -3543,7 +3543,7 @@ const SERVICE_CONTENT = {
       'Rachunki i przelewy za remonty, podatki i długi zapłacone po śmierci spadkodawcy',
       'Pisma od rodzeństwa albo Twoja propozycja podziału, jeśli masz',
     ],
-    guides: ['dzial-spadku', 'nieruchomosc-maloletniego-zgoda-sadu'],
+    guides: ['dzial-spadku', 'nieruchomosc-maloletniego-zgoda-sadu', 'koszty-dzialu-spadku-u-notariusza', 'wspolwlasciciel-nie-placi-i-nie-mieszka'],
     seeAlso: ['uregulowanie-stanu-prawnego', 'nieruchomosci-rolne'],
     cta: {
       heading: 'Zamień odziedziczone „ułamki” w konkretny, sprawiedliwy podział.',
@@ -6233,7 +6233,7 @@ const SERVICE_CONTENT = {
       'Wniosek sąsiada albo pismo z sądu, jeżeli to sąsiad żąda drogi przez Twój grunt',
       'Zdjęcia przejazdu, bramy albo blokady i dotychczasowe ustalenia z sąsiadem (jeśli masz)',
     ],
-    guides: ['ile-kosztuje-sluzebnosc-drogi-koniecznej', 'wynagrodzenie-za-sluzebnosc-drogi-koniecznej', 'koszty-utrzymania-drogi-koniecznej', 'droga-konieczna-jak-ustanowic'],
+    guides: ['ile-kosztuje-sluzebnosc-drogi-koniecznej', 'wynagrodzenie-za-sluzebnosc-drogi-koniecznej', 'koszty-utrzymania-drogi-koniecznej', 'droga-konieczna-jak-ustanowic', 'sluzebnosc-drogowa-a-pozwolenie-na-budowe'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'pozwolenie-na-budowe'],
     cta: {
       heading: 'Działka bez dojazdu to nie ślepy zaułek — jest droga wyjścia.',

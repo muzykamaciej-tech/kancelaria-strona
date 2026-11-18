@@ -87,22 +87,22 @@
     },
     {
       "source": "/post/czy-s%C5%82u%C5%BCebno%C5%9B%C4%87-wystarczy-by-dosta%C4%87-pozwolenie-na-budow%C4%99",
-      "destination": "/blog/droga-konieczna-a-warunki-zabudowy",
+      "destination": "/blog/sluzebnosc-drogowa-a-pozwolenie-na-budowe",
       "permanent": true
     },
     {
       "source": "/post/czy-służebność-wystarczy-by-dostać-pozwolenie-na-budowę",
-      "destination": "/blog/droga-konieczna-a-warunki-zabudowy",
+      "destination": "/blog/sluzebnosc-drogowa-a-pozwolenie-na-budowe",
       "permanent": true
     },
     {
       "source": "/post/decyzja-nakazująca-przywrócenie-stanu-poprzedniego-co-musi-zawierać-by-nie-była-tylko-świstkiem-p",
-      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "destination": "/blog/zalanie-dzialki-przez-sasiada",
       "permanent": true
     },
     {
       "source": "/post/decyzja-nakazuj%C4%85ca-przywr%C3%B3cenie-stanu-poprzedniego-co-musi-zawiera%C4%87-by-nie-by%C5%82a-tylko-%C5%9Bwistkiem-p",
-      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "destination": "/blog/zalanie-dzialki-przez-sasiada",
       "permanent": true
     },
     {
@@ -182,27 +182,27 @@
     },
     {
       "source": "/post/nowy-bat-na-właścicieli-działek-decyzja-o-zakazie-zagospodarowania-terenu-wbrew-mpzp-art-35a-u-p",
-      "destination": "/uslugi/warunki-zabudowy-planowanie",
+      "destination": "/blog/zakaz-zagospodarowania-terenu-art-35a",
       "permanent": true
     },
     {
       "source": "/post/nowy-bat-na-w%C5%82a%C5%9Bcicieli-dzia%C5%82ek-decyzja-o-zakazie-zagospodarowania-terenu-wbrew-mpzp-art-35a-u-p",
-      "destination": "/uslugi/warunki-zabudowy-planowanie",
+      "destination": "/blog/zakaz-zagospodarowania-terenu-art-35a",
       "permanent": true
     },
     {
       "source": "/post/odstepstwo-przepisy-techniczno-budowlane-2026",
-      "destination": "/uslugi/proces-budowlany/pozwolenie-na-budowe",
+      "destination": "/blog/odstepstwo-od-przepisow-techniczno-budowlanych",
       "permanent": true
     },
     {
       "source": "/post/odst%C4%99pstwa-od-przepis%C3%B3w-techniczno-budowlanych-w-2026-r-rewolucja-dla-inwestor%C3%B3w",
-      "destination": "/uslugi/proces-budowlany/pozwolenie-na-budowe",
+      "destination": "/blog/odstepstwo-od-przepisow-techniczno-budowlanych",
       "permanent": true
     },
     {
       "source": "/post/odstępstwa-od-przepisów-techniczno-budowlanych-w-2026-r-rewolucja-dla-inwestorów",
-      "destination": "/uslugi/proces-budowlany/pozwolenie-na-budowe",
+      "destination": "/blog/odstepstwo-od-przepisow-techniczno-budowlanych",
       "permanent": true
     },
     {
@@ -222,12 +222,12 @@
     },
     {
       "source": "/post/odszkodowanie-za-zalanie-gruntów-czy-decyzja-administracyjna-wystarczy-by-odzyskać-pieniądze",
-      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "destination": "/blog/zalanie-dzialki-przez-sasiada",
       "permanent": true
     },
     {
       "source": "/post/odszkodowanie-za-zalanie-grunt%C3%B3w-czy-decyzja-administracyjna-wystarczy-by-odzyska%C4%87-pieni%C4%85dze",
-      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "destination": "/blog/zalanie-dzialki-przez-sasiada",
       "permanent": true
     },
     {
@@ -297,12 +297,12 @@
     },
     {
       "source": "/post/s%C4%85siad-ignoruje-nakaz-urz%C4%99du-grzywna-w-celu-przymuszenia-jako-spos%C3%B3b-na-opornych",
-      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "destination": "/blog/zalanie-dzialki-przez-sasiada",
       "permanent": true
     },
     {
       "source": "/post/sąsiad-ignoruje-nakaz-urzędu-grzywna-w-celu-przymuszenia-jako-sposób-na-opornych",
-      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "destination": "/blog/zalanie-dzialki-przez-sasiada",
       "permanent": true
     },
     {
@@ -377,12 +377,12 @@
     },
     {
       "source": "/post/zalana-dzia%C5%82ka-przez-s%C4%85siada-sprawd%C5%BA-jak-skutecznie-walczy%C4%87-o-swoje-prawa",
-      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "destination": "/blog/zalanie-dzialki-przez-sasiada",
       "permanent": true
     },
     {
       "source": "/post/zalana-działka-przez-sąsiada-sprawdź-jak-skutecznie-walczyć-o-swoje-prawa",
-      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "destination": "/blog/zalanie-dzialki-przez-sasiada",
       "permanent": true
     },
     {
@@ -407,7 +407,7 @@
     },
     {
       "source": "/post/zintegrowane-plany-inwestycyjne-zpi-i-umowy-urbanistyczne-co-nowelizacja-z-grudnia-2025-r-oznac",
-      "destination": "/uslugi/obsluga-podmiotow-profesjonalnych/obsluga-prawna-deweloperow",
+      "destination": "/blog/zpi-umowa-urbanistyczna",
       "permanent": true
     },
     {
@@ -417,17 +417,17 @@
     },
     {
       "source": "/post/zpi-nowelizacja-2026-umowy-urbanistyczne",
-      "destination": "/uslugi/obsluga-podmiotow-profesjonalnych/obsluga-prawna-deweloperow",
+      "destination": "/blog/zpi-umowa-urbanistyczna",
       "permanent": true
     },
     {
       "source": "/post/żółta-kartka-od-nadzoru-budowlanego-jak-działa-nowa-procedura-naprawcza-w-2026-roku",
-      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "destination": "/blog/zolta-kartka-nadzor-budowlany",
       "permanent": true
     },
     {
       "source": "/post/%C5%BC%C3%B3%C5%82ta-kartka-od-nadzoru-budowlanego-jak-dzia%C5%82a-nowa-procedura-naprawcza-w-2026-roku",
-      "destination": "/uslugi/proces-budowlany/nadzor-budowlany-pinb",
+      "destination": "/blog/zolta-kartka-nadzor-budowlany",
       "permanent": true
     },
     {
