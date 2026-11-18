@@ -20,7 +20,7 @@ Potem commit razem z `dist/`. Najpierw push na gałąź roboczą (podgląd), a n
 
 ## Dodawanie wpisu na blog
 
-- Wpis dopisuj do `blog-data-*.jsx` (np. `window.BLOG.push({...})`, jak w `blog-data-6.jsx`), a nowy plik dodaj w `index.html` przed `services-data.jsx`.
+- Wpis dopisuj do `blog-data-*.jsx` (np. `window.BLOG.push({...})`, jak w `blog-data-6.jsx`), a nowy plik dodaj w `index.html` zaraz po ostatnim `blog-data-*.jsx` (pliki bloga muszą stać jeden po drugim). Pliki bloga to same dane: build wykonuje je raz i dzieli na indeks w `app.js` i treść (`body`, `faq`) w `content/blog/<slug>.<hash>.js`.
 - Wymagane pola:
   - `slug` (ASCII, bez polskich znaków);
   - `iso: 'RRRR-MM-DD'`;
@@ -53,7 +53,7 @@ Potem commit razem z `dist/`. Najpierw push na gałąź roboczą (podgląd), a n
 
 | Skrypt | Co robi |
 |---|---|
-| `scripts/build.mjs` | JSX → jeden `app.<hash>.js`, CSS → `styles.<hash>.css`, vendor, assets |
+| `scripts/build.mjs` | JSX → `app.<hash>.js` (bez treści wpisów, usług i filarów: ta trafia do `content/<rodzaj>/<klucz>.<hash>.js`, ładowanego tylko na swojej trasie), CSS → `styles.<hash>.css`, vendor, assets |
 | `scripts/prerender.mjs` | renderuje każdą trasę w Chrome, zapisuje HTML, `sitemap.xml`, `robots.txt`, `llms.txt` |
 | `scripts/check.mjs` | canonical, JSON-LD, linki, osiągalność, 404, stare `#/`; `--visual` porównuje zrzuty z produkcją |
 | `scripts/serve.mjs` | lokalny podgląd: `node scripts/serve.mjs dist 4173` |

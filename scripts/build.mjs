@@ -1,13 +1,14 @@
 /* build.mjs — compiles the Claude Design sources once, instead of Babel in every visitor's browser.
    Input:  index.html (script order), *.jsx, *.css, assets/
    Output: .dist-build/__shell.html (template for prerender), app.<hash>.js, styles.<hash>.css,
-           vendor/*, assets/*, .source-hash. prerender.mjs renders the pages into .dist-build/ and only then
+           content/<rodzaj>/<klucz>.<hash>.js (treść wpisów, usług i filarów, niżej 1b), vendor/*, assets/*, .source-hash. prerender.mjs renders the pages into .dist-build/ and only then
            replaces dist/, so a failed build never leaves the repo without a working dist/.
    Semantics match the old in-browser Babel: JSX → React.createElement, const/let → var
    (files share one global scope, exactly like separate <script type="text/babel"> tags). */
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import vm from 'node:vm';
 import { execFileSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
@@ -50,9 +51,25 @@ try {
 } catch (e) { /* offline build */ }
 console.log('build: ocena Google ' + (rating ? rating.rating + ' / ' + rating.count + ' opinii (z wizytówki)' : 'z wartości zapasowej w landing.jsx'));
 
-const parts = [];
+/* Treść ładowana na żądanie. Wpisy bloga (blog-data*.jsx, ok. 3,3 MB) i treść stron usług i filarów (services-content
+   i pliki, które do niej dopisują, ok. 0,85 MB) nie trafiają do app.js. Build wykonuje te pliki danych raz (w kolejności
+   index.html, razem z plikami danych przed nimi: data.jsx, services-data.jsx, offers-data.jsx) i dzieli wynik:
+   - w app.js zostaje lekki indeks w miejscu tych plików: przy wpisach wszystko poza treścią (tytuły, daty, excerpt,
+     okładki, tagi, related, meta), przy usługach i filarach tylko pola potrzebne poza ich stroną (`keep`);
+   - reszta pól każdego wpisu, usługi i filaru idzie do /content/<rodzaj>/<klucz>.<hash>.js, ładowanego tylko na jego
+     trasie (app.jsx: contentReady / loadContent); prerender dopisuje ten plik jako <script defer> przed app.js.
+   Pliki źródłowe zostają bez zmian (blog_publish.py pisze do blog-data*.jsx jak dotąd). */
+const LAZY = [
+  { files: /^blog-data(-\d+)?\.jsx$/, split: { BLOG: { kind: 'blog', key: 'slug', lazy: ['body', 'faq', 'source'] } } },
+  { files: /^(services-content|pillars-content|services-b2b|services-lite-fill|services-flip)\.jsx$/,
+    split: { SERVICE_CONTENT: { kind: 'usluga', keep: ['h1', 'metaDesc', 'updated', 'guides'] }, BLOCK_CONTENT: { kind: 'blok', keep: ['updated'] } } },
+];
+LAZY.forEach((g) => { g.list = []; });
+const lazyGroup = (f) => LAZY.find((g) => g.files.test(f));
+const parts = [], partFiles = [];
+const compiled = {}; /* plik → kod po Babelu (do wykonania w build) */
 for (const f of jsxFiles) {
-  if (f === 'tweaks-panel.jsx') { parts.push(`/* ${f} (production stub) */\n${TWEAKS_STUB}`); continue; }
+  if (f === 'tweaks-panel.jsx') { parts.push(compiled[f] = `/* ${f} (production stub) */\n${TWEAKS_STUB}`); partFiles.push(f); continue; }
   /* relative 'assets/…' paths break on nested URLs (/blog/x → /blog/assets/…); new content often uses them, so normalise */
   let code = fs.readFileSync(rel(f), 'utf8').replace(/(["'`(])assets\//g, '$1/assets/');
   if (f === 'landing.jsx' && rating) code = code
@@ -67,19 +84,84 @@ for (const f of jsxFiles) {
     plugins: [require.resolve('@babel/plugin-transform-block-scoping')],
     compact: false,
   });
-  parts.push(`/* ${f} */\n${out.code}`);
+  compiled[f] = `/* ${f} */\n${out.code}`;
+  const g = lazyGroup(f);
+  if (g) {
+    if (!g.list.length) { g.at = parts.length; parts.push(null); partFiles.push(f); } /* miejsce na indeks grupy */
+    else if (g.list.at(-1) !== jsxFiles[jsxFiles.indexOf(f) - 1]) throw new Error(`${f}: pliki tej grupy muszą stać w index.html jeden po drugim`);
+    g.list.push(f);
+    continue;
+  }
+  parts.push(compiled[f]); partFiles.push(f);
 }
-const joined = parts.join('\n;\n');
-const min = await esbuild.transform(joined, { loader: 'js', minify: true, target: 'es2019', legalComments: 'none', charset: 'utf8' });
-/* A duplicated key in a data literal (SERVICE_CONTENT, BLOCK_CONTENT…) silently drops the first entry:
-   esbuild warns, so stop the build and name the file. */
-{
+
+/* esbuild + kontrola zdublowanych kluczy (w literale danych pierwszy wpis ginie bez ostrzeżenia): stop i nazwa pliku */
+async function minifyChecked(chunks, files) {
+  const min = await esbuild.transform(chunks.join('\n;\n'), { loader: 'js', minify: true, target: 'es2019', legalComments: 'none', charset: 'utf8' });
   const starts = []; let line = 1;
-  parts.forEach((p, i) => { starts.push([line, jsxFiles[i]]); line += p.split('\n').length + 1; });
+  chunks.forEach((p, i) => { starts.push([line, files[i]]); line += p.split('\n').length + 1; });
   const fileAt = (l) => (starts.filter(([s]) => s <= l).pop() || [0, '?'])[1];
   const dup = (min.warnings || []).filter((w) => /Duplicate key/.test(w.text));
   if (dup.length) throw new Error('zdublowane klucze w danych (pierwszy wpis ginie bez ostrzeżenia): ' + dup.map((w) => `${w.text} [${w.location ? fileAt(w.location.line) : '?'}]`).join('; '));
+  return min;
 }
+
+/* 1b. treść na żądanie: wykonanie plików danych w piaskownicy → indeks w app.js + /content/<rodzaj>/<klucz>.<hash>.js */
+const isData = (v) => JSON.stringify(v, function (k, x) {
+  if (typeof x === 'function' || x === undefined || (typeof x === 'number' && !Number.isFinite(x))) throw new Error(`pole "${k}" nie jest danymi JSON (${typeof x})`);
+  return x;
+});
+const sandbox = { window: {} }; sandbox.window.window = sandbox.window;
+vm.createContext(sandbox);
+const globalsOf = () => new Set([...Object.keys(sandbox), ...Object.keys(sandbox.window)].filter((k) => k !== 'window'));
+const valueOf = (k) => (k in sandbox.window ? sandbox.window[k] : sandbox[k]);
+const chunkStats = {};
+let evaluated = 0;
+for (const g of LAZY.filter((x) => x.list.length)) {
+  /* pliki przed grupą (dane, od których zależy: np. plainPln z offers-data.jsx) */
+  for (const f of jsxFiles.slice(evaluated, jsxFiles.indexOf(g.list[0]))) {
+    try { vm.runInContext(compiled[f], sandbox, { filename: f }); }
+    catch (e) { throw new Error(`build: ${f} stoi przed plikami ${g.list[0]}… i musi dać się wykonać bez przeglądarki (same dane): ${e.message}`); }
+  }
+  await minifyChecked(g.list.map((f) => compiled[f]), g.list); /* zdublowane klucze w danych */
+  const before = globalsOf();
+  const snapshot = [...before].filter((k) => typeof valueOf(k) !== 'function').map((k) => [k, JSON.stringify(valueOf(k))]);
+  for (const f of g.list) vm.runInContext(compiled[f], sandbox, { filename: f });
+  evaluated = jsxFiles.indexOf(g.list.at(-1)) + 1;
+  for (const [k, json] of snapshot) if (JSON.stringify(valueOf(k)) !== json) throw new Error(`build: ${g.list.join(', ')} zmieniają ${k}, a mogą tylko dodawać własne dane`);
+  let code = `/* indeks: ${g.list.join(', ')} */\n`;
+  for (const name of [...globalsOf()].filter((k) => !before.has(k))) {
+    if (name in sandbox.window && name in sandbox && sandbox.window[name] !== sandbox[name]) throw new Error(`build: ${name} ma dwie różne wartości (window i zmienna globalna)`);
+    let value;
+    try { value = JSON.parse(isData(valueOf(name))); } catch (e) { throw new Error(`build: ${name} z ${g.list.join(', ')}: ${e.message}`); }
+    const cfg = g.split[name];
+    if (cfg) {
+      const hashes = {}, lazyKey = (k) => (cfg.lazy ? cfg.lazy.includes(k) : !cfg.keep.includes(k));
+      const entries = Array.isArray(value) ? value.map((x) => [x && x[cfg.key], x]) : Object.entries(value);
+      const seen = new Set();
+      fs.mkdirSync(path.join(DIST, 'content', cfg.kind), { recursive: true });
+      for (const [key, entry] of entries) {
+        if (typeof key !== 'string' || !/^[a-z0-9-]+$/.test(key)) throw new Error(`build: ${name}: niepoprawny klucz "${key}"`);
+        if (seen.has(key)) throw new Error(`build: ${name}: zdublowany klucz "${key}"`);
+        seen.add(key);
+        const rest = {};
+        for (const k of Object.keys(entry)) if (lazyKey(k)) { rest[k] = entry[k]; delete entry[k]; }
+        if (!Object.keys(rest).length) continue;
+        const chunk = `(window.CONTENT_LOADED=window.CONTENT_LOADED||{})[${JSON.stringify(cfg.kind + '/' + key)}]=${JSON.stringify(rest)};\n`;
+        hashes[key] = hash(chunk);
+        fs.writeFileSync(path.join(DIST, 'content', cfg.kind, `${key}.${hashes[key]}.js`), chunk);
+        const st = (chunkStats[cfg.kind] = chunkStats[cfg.kind] || { n: 0, bytes: 0 }); st.n++; st.bytes += Buffer.byteLength(chunk);
+      }
+      code += `(window.CONTENT_CHUNKS=window.CONTENT_CHUNKS||{})[${JSON.stringify(cfg.kind)}]=${JSON.stringify(hashes)};\n`;
+    }
+    /* JSON.parse: duży literał danych parsuje się szybciej jako JSON niż jako kod JS */
+    const json = JSON.stringify(value);
+    code += `var ${name} = ${json.length > 10000 ? `JSON.parse(${JSON.stringify(json)})` : json};\nwindow.${name} = ${name};\n`;
+  }
+  for (const name of Object.keys(g.split)) if (!code.includes(`var ${name} =`)) throw new Error(`build: ${g.list.join(', ')} nie definiują ${name}`);
+  parts[g.at] = code;
+}
+const min = await minifyChecked(parts, partFiles);
 const appName = `app.${hash(min.code)}.js`;
 fs.writeFileSync(path.join(DIST, appName), min.code);
 
@@ -171,4 +253,4 @@ if (leftCss) throw new Error(`relative stylesheet left in the shell (not bundled
 fs.writeFileSync(path.join(DIST, '__shell.html'), html);
 fs.writeFileSync(path.join(DIST, '.source-hash'), sourceHash(ROOT) + '\n');
 
-console.log(`build: ${jsxFiles.length} JSX → ${appName} (${(min.code.length / 1024).toFixed(0)} KB), ${cssFiles.length} CSS → ${cssName} (${(cssMin.code.length / 1024).toFixed(0)} KB), lucide ${iconList.length} icons (${(vendor['lucide.min.js'].length / 1024).toFixed(0)} KB)`);
+console.log(`build: ${jsxFiles.length} JSX → ${appName} (${(min.code.length / 1024).toFixed(0)} KB) + content/ ${Object.entries(chunkStats).map(([k, v]) => `${k} ${v.n} (${(v.bytes / 1024).toFixed(0)} KB)`).join(', ')}, ${cssFiles.length} CSS → ${cssName} (${(cssMin.code.length / 1024).toFixed(0)} KB), lucide ${iconList.length} icons (${(vendor['lucide.min.js'].length / 1024).toFixed(0)} KB)`);

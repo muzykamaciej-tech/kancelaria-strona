@@ -520,6 +520,8 @@ function BlogCategoryPage({ catId, setRoute }) {
 
 function BlogPostPage({ slug, setRoute }) {
   const post = window.BLOG.find((p) => p.slug === slug) || window.BLOG[0];
+  /* treść wpisu (body, faq) spoza app.js: app.jsx contentReady / loadContent */
+  const ready = window.contentReady('blog', post.slug);
   const idx = window.BLOG.indexOf(post);
   const next = window.BLOG[(idx + 1) % window.BLOG.length];
   const prev = window.BLOG[(idx - 1 + window.BLOG.length) % window.BLOG.length];
@@ -559,7 +561,11 @@ function BlogPostPage({ slug, setRoute }) {
 
       <article className="section-py">
         <div className="wrap" style={{ maxWidth: '46rem' }}>
-          <BlogBody blocks={post.body} service={relatedServicesFor(post)[0]} selfSlug={post.slug} />
+          {ready ? <BlogBody blocks={post.body} service={relatedServicesFor(post)[0]} selfSlug={post.slug} />
+            /* treść jeszcze się wczytuje: pusta kolumna zamiast skoku stopki pod nagłówek */
+            : <div className="prose prose-article" aria-busy="true" data-content-loading="" style={{ minHeight: '100vh' }}>
+                {window.contentFailed('blog', post.slug) && <window.ContentLoadError />}
+              </div>}
         </div>
       </article>
 

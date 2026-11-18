@@ -100,6 +100,8 @@ async function render(page, r) {
   page._errors.length = 0;
   await page.goto(BASE + r.path, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForSelector('#app main', { timeout: 30000 });
+  /* wpis, usługa, filar: treść z /content/<rodzaj>/<klucz>.<hash>.js musi się wczytać (app.jsx: loadContent) */
+  await page.waitForFunction(() => !document.querySelector('#app [data-content-loading]'), { timeout: 30000 });
   await page.waitForFunction(() => !document.querySelector('#app i[data-lucide]'), { timeout: 5000 }).catch(() => {});
   await new Promise((res) => setTimeout(res, 250));
   const res = await page.evaluate((isNotFound) => {
@@ -109,6 +111,10 @@ async function render(page, r) {
     document.querySelectorAll('a[href^="#/"]').forEach((a) => a.setAttribute('href', a.getAttribute('href').slice(1).replace(/\/+$/, '') || '/'));
     /* until the app mounts, Enter in a field must not submit the form natively (GET with the typed text in the URL) */
     document.querySelectorAll('#app form').forEach((f) => f.setAttribute('onsubmit', 'return false'));
+    /* treść strony wczytana przez aplikację → <script defer> przed app.js: na wejściu bezpośrednim przychodzi równolegle
+       z app.js i jest gotowa przed pierwszym renderem (bez stanu ładowania) */
+    const app = document.querySelector('script[src^="/app."]');
+    document.querySelectorAll('script[data-content-chunk]').forEach((s) => { s.defer = true; app.parentNode.insertBefore(s, app); });
     const canonical = document.querySelector('link[rel="canonical"]');
     return {
       icons: [...new Set([...document.querySelectorAll('#app i[data-lucide]')].map((i) => i.getAttribute('data-lucide')))],

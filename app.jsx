@@ -485,6 +485,60 @@ function setJsonLd(data) {
   s.textContent = JSON.stringify(data);
 }
 
+/* Treść ładowana na żądanie (scripts/build.mjs, krok 1b): w app.js jest tylko indeks wpisów (window.BLOG bez body/faq),
+   usług i filarów (SERVICE_CONTENT / BLOCK_CONTENT z polami potrzebnymi poza ich stroną). Reszta pól jest w
+   /content/<rodzaj>/<klucz>.<hash>.js (window.CONTENT_CHUNKS: rodzaj → klucz → hash), który zapisuje ją w
+   window.CONTENT_LOADED['<rodzaj>/<klucz>']. Na stronie wpisu, usługi i filaru prerender wstawia ten plik jako
+   <script defer> przed app.js, więc treść jest gotowa przed pierwszym renderem; przy przejściu z innej strony
+   (albo gdy tamten plik się nie wczytał) ładuje ją loadContent. Bez builda (podgląd w Claude Design) nie ma
+   CONTENT_CHUNKS, a pliki danych dają pełną treść, więc nic się nie ładuje. */
+const CONTENT_TARGET = {
+  blog: (k) => (window.BLOG || []).find((p) => p.slug === k),
+  usluga: (k) => (window.SERVICE_CONTENT || {})[k],
+  blok: (k) => (window.BLOCK_CONTENT || {})[k],
+};
+const CONTENT_STATE = {}; /* '<rodzaj>/<klucz>' → true (scalone) | Promise | 'error' */
+function contentFor(route, ids) {
+  if (route === 'blogpost') return ['blog', ids.blogSlug || window.BLOG[0].slug];
+  if (route === 'usluga') return ['usluga', ids.serviceSlug || window.SERVICE_BLOCKS[0].services[0].slug];
+  if (route === 'blok') return ['blok', ids.blockId || window.SERVICE_BLOCKS[0].id];
+  return null;
+}
+function contentReady(kind, key) {
+  const id = kind + '/' + key;
+  if (CONTENT_STATE[id] === true || !((window.CONTENT_CHUNKS || {})[kind] || {})[key]) return true;
+  const data = (window.CONTENT_LOADED || {})[id], target = CONTENT_TARGET[kind](key);
+  if (!data || !target) return false;
+  Object.assign(target, data);
+  CONTENT_STATE[id] = true;
+  return true;
+}
+function contentFailed(kind, key) { return CONTENT_STATE[kind + '/' + key] === 'error'; }
+function loadContent(kind, key) {
+  const id = kind + '/' + key;
+  if (contentReady(kind, key)) return Promise.resolve();
+  if (CONTENT_STATE[id] instanceof Promise) return CONTENT_STATE[id];
+  return (CONTENT_STATE[id] = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = '/content/' + kind + '/' + key + '.' + window.CONTENT_CHUNKS[kind][key] + '.js';
+    s.setAttribute('data-content-chunk', id);
+    s.onerror = () => { s.remove(); CONTENT_STATE[id] = 'error'; reject(new Error('nie wczytano treści strony: ' + id)); };
+    s.onload = () => (contentReady(kind, key) ? resolve() : s.onerror());
+    document.head.appendChild(s);
+  }));
+}
+function ContentLoadError() {
+  return <p>Nie udało się wczytać treści strony. <button type="button" className="btn-link" onClick={() => location.reload()}>Odśwież stronę</button></p>;
+}
+/* usługa / filar w trakcie wczytywania treści (tylko po przejściu z innej strony): pusta strona zamiast skoku stopki */
+function ContentLoading({ failed }) {
+  return (
+    <main id="main-content" aria-busy="true" data-content-loading="" style={{ minHeight: '100vh' }}>
+      {failed && <div className="wrap section-py"><ContentLoadError /></div>}
+    </main>
+  );
+}
+
 function refreshIconsAndOrphans() {
   if (window.lucide) window.lucide.createIcons();
   fixOrphans();
@@ -619,10 +673,20 @@ function App() {
     return () => document.removeEventListener('click', onClick);
   }, []);
 
+  /* treść strony spoza app.js (wpis, usługa, filar): po wczytaniu ponowny render strony i jej meta/JSON-LD */
+  const [contentTick, setContentTick] = useState(0);
+  const need = contentFor(route, { blogSlug, serviceSlug, blockId });
+  const pending = !!need && !contentReady(need[0], need[1]);
+  useEffect(() => {
+    if (!pending) return;
+    const done = () => setContentTick((n) => n + 1);
+    loadContent(need[0], need[1]).then(done, (e) => { console.error(e.message); done(); });
+  }, [pending, need && need.join('/')]);
+
   /* keep document.title + meta description in sync with the current view */
   useEffect(() => {
     setMetaForView(route, { blockId, serviceSlug, blogSlug, blogCat, offerSlug });
-  }, [route, blockId, serviceSlug, blogSlug, blogCat, offerSlug]);
+  }, [route, blockId, serviceSlug, blogSlug, blogCat, offerSlug, contentTick]);
 
   /* which service block to highlight in the mega-menu */
   let activeBlock = null;
@@ -665,6 +729,7 @@ function App() {
   let body = null;
   if (route === 'landing') body = <LandingPage setRoute={setRoute} />;
   else if (route === 'uslugi') body = <UslugiOverview setRoute={setRoute} />;
+  else if (pending && route !== 'blogpost') body = <ContentLoading failed={contentFailed(need[0], need[1])} />; /* wpis pokazuje nagłówek z indeksu, sam czeka na treść */
   else if (route === 'blok') body = <PillarPage setRoute={setRoute} blockId={blockId || window.SERVICE_BLOCKS[0].id} />;
   else if (route === 'usluga') body = <ServicePage setRoute={setRoute} slug={serviceSlug || window.SERVICE_BLOCKS[0].services[0].slug} />;
   else if (route === 'oferta') body = <window.OfferPage key={offerSlug} slug={offerSlug} />;
@@ -691,7 +756,7 @@ function App() {
       <CookieBanner />
       {window.QuickContact && <window.QuickContact />}
       {route !== 'landing' && <BackToTop />}
-      {route !== 'landing' && <MobileCTABar key={route + (serviceSlug || '') + (blockId || '') + (blogSlug || '') + (blogCat || '') + (offerSlug || '')} />}
+      {route !== 'landing' && <MobileCTABar key={route + (serviceSlug || '') + (blockId || '') + (blogSlug || '') + (blogCat || '') + (offerSlug || '') + (pending ? '…' : '')} />}
 
       <TweaksPanel title="Tweaks" defaultPosition={{ right: 24, bottom: 24 }}>
         <TweakSection label="Układ">
@@ -764,6 +829,6 @@ function App() {
   );
 }
 
-Object.assign(window, { NavLink, routeHref, buildPath, parsePath, postModifiedIso });
+Object.assign(window, { NavLink, routeHref, buildPath, parsePath, postModifiedIso, contentReady, contentFailed, ContentLoadError });
 
 ReactDOM.createRoot(document.getElementById('app')).render(<App />);
