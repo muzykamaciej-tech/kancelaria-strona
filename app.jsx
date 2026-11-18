@@ -456,14 +456,18 @@ function buildJsonLd(route, ids) {
   }
   if (route === 'blogpost') {
     const p = (window.BLOG || []).find((x) => x.slug === ids.blogSlug); if (!p) return null;
+    const url = SITE_BASE + '/blog/' + p.slug, cites = postCitationLd(p), about = postAboutLd(p);
     return { '@context': 'https://schema.org', '@graph': [
-      { '@type': 'BlogPosting', '@id': SITE_BASE + '/blog/' + p.slug + '#artykul', headline: p.title, description: truncMeta(p.excerpt, 300), datePublished: p.iso, dateModified: postModifiedIso(p),
+      /* WebPage: lastReviewed należy do WebPage (schema.org), nie do BlogPosting */
+      { '@type': 'WebPage', '@id': url, url, name: p.title, inLanguage: 'pl', breadcrumb: { '@id': url + '#okruszki' }, mainEntity: { '@id': url + '#artykul' }, lastReviewed: postModifiedIso(p) },
+      { '@type': 'BlogPosting', '@id': url + '#artykul', headline: p.title, description: truncMeta(p.excerpt, 300), datePublished: p.iso, dateModified: postModifiedIso(p),
         image: p.cover ? { '@type': 'ImageObject', url: absUrl(p.cover), width: 1200, height: 654, caption: p.coverAlt || p.title } : undefined,
         inLanguage: 'pl', articleSection: p.category || undefined, keywords: (p.tags && p.tags.length) ? p.tags.join(', ') : undefined,
         author: { '@type': 'Person', '@id': PERSON_ID, name: 'Maciej Muzyka', honorificPrefix: 'adw. dr', jobTitle: 'Adwokat, doktor nauk prawnych', url: SITE_BASE + '/o-mnie', sameAs: ['https://rejestradwokatow.pl/adwokat/muzyka-maciej-35358', LINKEDIN_URL, PROFINFO_AUTHOR_URL] },
-        publisher: { '@id': ORG_ID }, isPartOf: { '@type': 'Blog', '@id': SITE_BASE + '/blog#blog', name: 'Skarbnica wiedzy', url: SITE_BASE + '/blog' }, mainEntityOfPage: SITE_BASE + '/blog/' + p.slug },
+        publisher: { '@id': ORG_ID }, isPartOf: { '@type': 'Blog', '@id': SITE_BASE + '/blog#blog', name: 'Skarbnica wiedzy', url: SITE_BASE + '/blog' }, mainEntityOfPage: { '@id': url },
+        about: about.length ? about : undefined, citation: cites.length ? cites : undefined },
       postFaqLd(p),
-      crumbs([{ name: 'Start', path: '/' }, { name: 'Skarbnica wiedzy', path: '/blog' }, { name: p.title, path: '/blog/' + p.slug }]) ].filter(Boolean) };
+      Object.assign(crumbs([{ name: 'Start', path: '/' }, { name: 'Skarbnica wiedzy', path: '/blog' }, { name: p.title, path: '/blog/' + p.slug }]), { '@id': url + '#okruszki' }) ].filter(Boolean) };
   }
   if (route === 'o-mnie') {
     return { '@context': 'https://schema.org', '@graph': [
@@ -474,6 +478,42 @@ function buildJsonLd(route, ids) {
 }
 /* FAQ wpisu jako FAQPage (Google pokazuje FAQ tylko wybranym witrynom, ale Bing i asystenci AI czytają te pary pytanie–odpowiedź) */
 function plainLd(t) { return String(t || '').replace(/\*\*/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/<[^>]+>/g, '').trim(); }
+/* citation wpisu: linki z listy „Źródła” (wstawia je scripts/link-sources.mjs), najwyżej 10, bez powtórzeń.
+   Akty (ELI) → Legislation z nazwą aktu sprzed nawiasu; orzeczenia (SAOS, CBOSA) → CreativeWork „Wyrok NSA z …, sygn.” */
+const LD_LINK_RE = /\[([^\]\n]+)\]\((https:\/\/[^\s()]+)\)/g;
+const LD_ELI_RE = /^https:\/\/eli\.gov\.pl\/eli\/(DU|MP)\/\d{4}\/\d+\/ogl$/;
+const LD_RULING_RE = /^https:\/\/(www\.saos\.org\.pl\/search\?signature=|orzeczenia\.nsa\.gov\.pl\/cbo\/find\?q=SYGNATURA%5B)/;
+const LD_KIND = { uchwał: 'Uchwała', wyrok: 'Wyrok', postanowi: 'Postanowienie' };
+function postCitationLd(p) {
+  const body = p.body || [], out = [], seen = {};
+  const start = body.findIndex((b) => b && b[0] === 'h2' && b[1] === 'Źródła');
+  if (start < 0) return out;
+  for (let i = start + 1; i < body.length && body[i][0] !== 'h2' && out.length < 10; i++) {
+    if (body[i][0] !== 'ul' && body[i][0] !== 'ol') continue;
+    for (const item of body[i][1]) for (const m of String(item).matchAll(LD_LINK_RE)) {
+      const label = m[1], url = m[2];
+      if (seen[url] || out.length >= 10) continue;
+      const before = plainLd(String(item).slice(0, m.index));
+      if (LD_ELI_RE.test(url)) {
+        const act = /(?:^|[;:]\s|\.\s)([^;():]+?)\s\((?:t\.j\.)?$/.exec(before);
+        out.push({ '@type': 'Legislation', name: act && /^[A-ZĄĆĘŁŃÓŚŹŻ]/.test(act[1]) ? act[1].trim() : label, legislationIdentifier: label, legislationJurisdiction: 'PL', url });
+      } else if (LD_RULING_RE.test(url)) {
+        const kinds = [...before.toLowerCase().matchAll(/(uchwał|wyrok|postanowi)/g)];
+        const kind = kinds.length ? LD_KIND[kinds[kinds.length - 1][1]] : 'Orzeczenie';
+        const court = /saos\.org\.pl/.test(url) ? 'SN' : /\s(SA|SAB)\//.test(label) ? 'WSA' : 'NSA';
+        const date = /(\d{1,2}\.\d{1,2}\.\d{4})(?:\s?r\.)?,?\s*$/.exec(before);
+        out.push({ '@type': 'CreativeWork', name: kind + ' ' + court + (date ? ' z ' + date[1] + ',' : '') + ' ' + label, url });
+      } else continue;
+      seen[url] = 1;
+    }
+  }
+  return out;
+}
+/* about: kategoria i tagi wpisu (1–3) */
+function postAboutLd(p) {
+  const names = [p.category].concat(p.tags || []).filter(Boolean).map((t) => String(t).trim());
+  return names.filter((t, i) => names.indexOf(t) === i).slice(0, 3).map((name) => ({ '@type': 'Thing', name }));
+}
 function postFaqLd(p) {
   /* tylko pytania, które wpis pokazuje jako nagłówki w sekcji „Najczęstsze pytania” */
   const body = p.body || []; const start = body.findIndex((b) => b && b[0] === 'h2' && /Najczęstsze pytania/i.test(b[1]));

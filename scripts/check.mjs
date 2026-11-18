@@ -35,6 +35,10 @@ const fail = [], warn = [];
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}($|T)/;
 const jsonDates = (o, out = []) => { if (o && typeof o === 'object') for (const [k, v] of Object.entries(o)) { if (/^(date(Published|Modified|Created)|lastReviewed)$/.test(k)) out.push(v); else jsonDates(v, out); } return out; };
 /* "today" in Polish time: toISOString() is UTC, so after 22:00 in summer today's date would look like the future */
+/* external links allowed in blog articles (the same list as EXT_HOSTS in pages.jsx) */
+const EXT_HOSTS = new Set(['eli.gov.pl', 'isap.sejm.gov.pl', 'dziennikustaw.gov.pl', 'monitorpolski.gov.pl', 'saos.org.pl', 'www.saos.org.pl',
+  'sn.pl', 'www.sn.pl', 'orzeczenia.nsa.gov.pl', 'orzeczenia.ms.gov.pl', 'trybunal.gov.pl', 'otk.trybunal.gov.pl', 'edziennik.lublin.uw.gov.pl']);
+const CITATION_URL = /^https:\/\/(eli\.gov\.pl\/eli\/(DU|MP)\/\d{4}\/\d+\/ogl|www\.saos\.org\.pl\/search\?signature=[A-Za-z0-9+%]+|orzeczenia\.nsa\.gov\.pl\/cbo\/find\?q=SYGNATURA%5B[A-Za-z0-9+%]+%5D)$/;
 const TODAY = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Warsaw' });
 const jsonNodes = (o, out = []) => { if (Array.isArray(o)) o.forEach((x) => jsonNodes(x, out)); else if (o && typeof o === 'object') { if (o['@type']) out.push(o); Object.values(o).forEach((v) => jsonNodes(v, out)); } return out; };
 
@@ -154,6 +158,24 @@ for (const f of htmlFiles) {
         if (n.lastReviewed !== undefined && n.lastReviewed !== shown['data-asof']) fail.push(`${p}: JSON-LD lastReviewed ${n.lastReviewed} is not the date shown on the page (${shown['data-asof'] || 'none'})`);
       }
       if (std === undefined && nodes.some((n) => /^(WebPage|CollectionPage|FAQPage)$/.test(n['@type']))) fail.push(`${p}: WebPage/FAQPage in JSON-LD, but the page data has no \`updated\` (main[data-std]); add updated: 'YYYY-MM-DD'`);
+    }
+  }
+  /* blog posts (plan SEO 2.7): external links in the article only to official law/case-law databases, new tab with
+     rel=noopener; JSON-LD citation URLs only ELI / SAOS / CBOSA; lastReviewed not in the future */
+  if (p.startsWith('/blog/') && !p.startsWith('/blog/kategoria/')) {
+    const art = findAll(parseHtml(h), (n) => hasClass(n, 'prose-article'))[0];
+    for (const a of art ? findAll(art, (n) => n.tag === 'a' && /^https?:\/\//.test(n.attrs.href || '')) : []) {
+      let host = ''; try { host = new URL(a.attrs.href.replace(/&amp;/g, '&')).hostname; } catch (e) { /* invalid */ }
+      if (!EXT_HOSTS.has(host) && !/^orzeczenia\.[a-z0-9-]+\.(so|sa|sr)\.gov\.pl$/.test(host)) fail.push(`${p}: external link in the article outside the whitelist: ${a.attrs.href}`);
+      if (a.attrs.target !== '_blank' || !/\bnoopener\b/.test(a.attrs.rel || '')) fail.push(`${p}: external link ${a.attrs.href} without target=_blank rel=noopener`);
+    }
+    for (const j of jsonld) {
+      let d; try { d = JSON.parse(j); } catch (e) { continue; }
+      for (const n of jsonNodes(d)) {
+        for (const c of [].concat(n.citation || [])) if (!CITATION_URL.test(c.url || '')) fail.push(`${p}: JSON-LD citation URL "${c.url}" is not ELI/SAOS/CBOSA`);
+        if ([].concat(n.citation || []).length > 10) fail.push(`${p}: JSON-LD citation has more than 10 items`);
+        if (n.lastReviewed && String(n.lastReviewed) > TODAY) fail.push(`${p}: JSON-LD lastReviewed ${n.lastReviewed} is in the future`);
+      }
     }
   }
   /* FAQPage may not hold more questions than the page shows (+1 for „W skrócie”) */
