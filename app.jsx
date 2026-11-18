@@ -208,7 +208,7 @@ function setMeta(title, description, social) {
 }
 /* shorten to n chars: end on a full sentence when one fits, otherwise on a word boundary + '\u2026' (never mid-word) */
 function truncMeta(s, n) {
-  s = (s || '').replace(/\s+/g, ' ').trim();
+  s = (s || '').replace(/\[([^\]]+)\]\(\/[^)\s]*\)/g, '$1').replace(/\s+/g, ' ').trim(); /* link „[tekst](/ścieżka)” z danych usługi → sam tekst */
   if (s.length <= n) return s;
   const head = s.slice(0, n + 1);
   const re = /[.!?](?=\s+[A-Z\u0104\u0106\u0118\u0141\u0143\u00d3\u015a\u0179\u017b0-9\u201e"(])/g;
@@ -858,6 +858,6 @@ function App() {
   );
 }
 
-Object.assign(window, { NavLink, routeHref, buildPath, parsePath, postModifiedIso, contentReady, contentFailed, ContentLoadError });
+Object.assign(window, { plainLd, NavLink, routeHref, buildPath, parsePath, postModifiedIso, contentReady, contentFailed, ContentLoadError });
 
 ReactDOM.createRoot(document.getElementById('app')).render(<App />);
