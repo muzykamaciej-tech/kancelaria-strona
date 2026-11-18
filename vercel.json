@@ -282,12 +282,12 @@
     },
     {
       "source": "/post/rewolucyjny-wyrok-tk-koniec-z-darmowym-zasiedzeniem-służebności-przesyłu",
-      "destination": "/blog/wyrok-tk-zasiedzenie-sluzebnosci-przesylu",
+      "destination": "/blog/zasiedzenie-sluzebnosci-przesylu",
       "permanent": true
     },
     {
       "source": "/post/rewolucyjny-wyrok-tk-koniec-z-darmowym-zasiedzeniem-s%C5%82u%C5%BCebno%C5%9Bci-przesy%C5%82u",
-      "destination": "/blog/wyrok-tk-zasiedzenie-sluzebnosci-przesylu",
+      "destination": "/blog/zasiedzenie-sluzebnosci-przesylu",
       "permanent": true
     },
     {
@@ -508,6 +508,11 @@
     {
       "source": "/blog/plan-ogolny-a-wniosek-o-wz-w-toku",
       "destination": "/blog/warunki-zabudowy-a-plan-ogolny-przepisy-przejsciowe",
+      "permanent": true
+    },
+    {
+      "source": "/blog/wyrok-tk-zasiedzenie-sluzebnosci-przesylu",
+      "destination": "/blog/zasiedzenie-sluzebnosci-przesylu",
       "permanent": true
     }
   ],
