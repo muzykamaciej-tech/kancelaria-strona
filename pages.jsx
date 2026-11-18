@@ -650,10 +650,37 @@ function blogLinkify(text, key) {
     return <window.NavLink key={key + '-' + i} route="blogpost" slug={slug}>{s}</window.NavLink>;
   });
 }
+/* Linki zewnętrzne w treści (plan SEO 2.7): zapis markdown [tekst](https://adres), tylko domeny urzędowych baz prawa
+   i orzeczeń; inny adres → sam tekst. Najpierw linki, potem tytuły wpisów (blogLinkify) w tekście między nimi.
+   Sekcje „Źródła” linkuje scripts/link-sources.mjs. Informację „otwiera się w nowej karcie” czytnik ekranu bierze
+   z jednego ukrytego elementu #ext-link-info w BlogBody (aria-describedby), żeby nie powtarzać jej w tekście strony. */
+const EXT_LINK_RE = /\[([^\]\n]+)\]\((https:\/\/[^\s()]+)\)/g;
+const EXT_HOSTS = new Set(['eli.gov.pl', 'isap.sejm.gov.pl', 'dziennikustaw.gov.pl', 'monitorpolski.gov.pl', 'saos.org.pl', 'www.saos.org.pl',
+  'sn.pl', 'www.sn.pl', 'orzeczenia.nsa.gov.pl', 'orzeczenia.ms.gov.pl', 'trybunal.gov.pl', 'otk.trybunal.gov.pl', 'edziennik.lublin.uw.gov.pl']);
+function extLinkOk(u) {
+  let x; try { x = new URL(u); } catch (e) { return false; }
+  if (x.protocol !== 'https:' || x.username || x.password || x.port) return false;
+  const h = x.hostname.toLowerCase();
+  return EXT_HOSTS.has(h) || /^orzeczenia\.[a-z0-9-]+\.(so|sa|sr)\.gov\.pl$/.test(h);
+}
+function blogLinks(text, key) {
+  const s = String(text);
+  if (s.indexOf('](https://') < 0) return blogLinkify(s, key);
+  const out = []; let last = 0, n = 0;
+  for (const m of s.matchAll(EXT_LINK_RE)) {
+    if (m.index > last) out.push(<React.Fragment key={key + 'x' + n}>{blogLinkify(s.slice(last, m.index), key + 'x' + n)}</React.Fragment>);
+    out.push(extLinkOk(m[2])
+      ? <a key={key + 'a' + n} href={m[2]} rel="noopener" target="_blank" className="ext-link" aria-describedby="ext-link-info">{m[1]}</a>
+      : <React.Fragment key={key + 'a' + n}>{m[1]}</React.Fragment>);
+    last = m.index + m[0].length; n++;
+  }
+  if (last < s.length) out.push(<React.Fragment key={key + 'x' + n}>{blogLinkify(s.slice(last), key + 'x' + n)}</React.Fragment>);
+  return out;
+}
 function blogInline(text) {
   const parts = String(text).split('**');
-  if (parts.length === 1) return blogLinkify(text, 't');
-  return parts.map((s, i) => (i % 2 === 1 ? <strong key={i}>{blogLinkify(s, 's' + i)}</strong> : <React.Fragment key={i}>{blogLinkify(s, 'p' + i)}</React.Fragment>));
+  if (parts.length === 1) return blogLinks(text, 't');
+  return parts.map((s, i) => (i % 2 === 1 ? <strong key={i}>{blogLinks(s, 's' + i)}</strong> : <React.Fragment key={i}>{blogLinks(s, 'p' + i)}</React.Fragment>));
 }
 
 /* ============================================================
@@ -700,7 +727,7 @@ function PostCta({ place, text, button, short, children }) {
   );
 }
 const CLOSING_RE = /^Masz podobną sytuację\?/;
-function blockText(b) { const v = b && b[1]; return Array.isArray(v) ? v.flat(2).join(' ') : String(v || ''); }
+function blockText(b) { const v = b && b[1]; return (Array.isArray(v) ? v.flat(2).join(' ') : String(v || '')).replace(EXT_LINK_RE, '$1'); }
 /* miejsce na CTA w ok. 40% tekstu: przed najbliższym nagłówkiem H2 (nie przed FAQ), a gdy go nie ma do 75% tekstu,
    po pierwszym akapicie za progiem 40%; -1 = bez CTA (krótki wpis albo za blisko CTA końcowego) */
 function midCtaIndex(blocks, closingAt) {
@@ -742,6 +769,7 @@ function BlogBody({ blocks, service, selfSlug, cta }) {
         if (i === midAt) return [<PostCta key="cta-mid" place="wpis-40" text={text} button="Opisz sprawę w formularzu" />, el];
         return i === 0 ? [el, leadCta] : [el];
       })}
+      <span id="ext-link-info" hidden>otwiera się w nowej karcie</span>
     </div>
   );
 }
