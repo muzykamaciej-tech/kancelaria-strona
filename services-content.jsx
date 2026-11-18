@@ -6243,7 +6243,7 @@ const SERVICE_CONTENT = {
       'Wniosek sąsiada albo pismo z sądu, jeżeli to sąsiad żąda drogi przez Twój grunt',
       'Zdjęcia przejazdu, bramy albo blokady i dotychczasowe ustalenia z sąsiadem (jeśli masz)',
     ],
-    guides: ['szerokosc-drogi-koniecznej', 'ile-kosztuje-sluzebnosc-drogi-koniecznej', 'wynagrodzenie-za-sluzebnosc-drogi-koniecznej', 'koszty-utrzymania-drogi-koniecznej', 'droga-konieczna-jak-ustanowic', 'sluzebnosc-drogowa-a-pozwolenie-na-budowe'],
+    guides: ['szerokosc-drogi-koniecznej', 'ile-kosztuje-sluzebnosc-drogi-koniecznej', 'wynagrodzenie-za-sluzebnosc-drogi-koniecznej', 'droga-konieczna-kwoty-orzeczenia', 'koszty-utrzymania-drogi-koniecznej', 'droga-konieczna-jak-ustanowic', 'sluzebnosc-drogowa-a-pozwolenie-na-budowe'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'pozwolenie-na-budowe'],
     cta: {
       heading: 'Działka bez dojazdu to nie ślepy zaułek — jest droga wyjścia.',

@@ -6,7 +6,15 @@
   <atom:link href="https://www.mecenasodnieruchomosci.pl/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Poradniki o prawie nieruchomości: warunki zabudowy, plan ogólny, służebności, najem, spadki i spory z deweloperem. Autor: adw. dr Maciej Muzyka.</description>
   <language>pl</language>
-  <lastBuildDate>Wed, 18 Nov 2026 07:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Thu, 19 Nov 2026 07:00:00 GMT</lastBuildDate>
+  <item>
+    <title>Ile sądy przyznają za drogę konieczną? 17 orzeczeń z kwotami i ceną za m²</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/droga-konieczna-kwoty-orzeczenia</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/droga-konieczna-kwoty-orzeczenia</guid>
+    <pubDate>Thu, 19 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Służebności</category>
+    <description>Od 1,6 do ok. 920 zł za m², mediana ok. 32 zł. Tabela 17 orzeczeń o drodze koniecznej: pas, kwota, cena za m², teren i koszty biegłych.</description>
+  </item>
   <item>
     <title>Decyzja środowiskowa po wybudowaniu: czy można ją uzyskać, gdy inwestycja już stoi, i co z legalizacją</title>
     <link>https://www.mecenasodnieruchomosci.pl/blog/decyzja-srodowiskowa-po-wybudowaniu</link>
@@ -398,14 +406,6 @@
     <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
     <category>Wspólnoty mieszkaniowe</category>
     <description>Walne zgromadzenie spółdzielni mieszkaniowej: kto może być pełnomocnikiem od 28.01.2026, jak się głosuje i jak zaskarżyć uchwałę w 6 tygodni.</description>
-  </item>
-  <item>
-    <title>Zarząd wspólnoty mieszkaniowej: obowiązki, zwykły zarząd i różnica między zarządem a zarządcą</title>
-    <link>https://www.mecenasodnieruchomosci.pl/blog/zarzad-wspolnoty-mieszkaniowej</link>
-    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/zarzad-wspolnoty-mieszkaniowej</guid>
-    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
-    <category>Wspólnoty mieszkaniowe</category>
-    <description>Zarząd wspólnoty: kto może w nim być, co robi sam, na co potrzebuje uchwały, ile zarabia, za co odpowiada i czym różni się od zarządcy.</description>
   </item>
 </channel>
 </rss>

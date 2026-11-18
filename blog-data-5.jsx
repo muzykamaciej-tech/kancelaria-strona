@@ -214,7 +214,7 @@ window.BLOG.push(
     source: 'https://www.mecenasodnieruchomosci.pl/post/wynagrodzenie-za-sluzebnosc-drogi-koniecznej',
     related: ['droga-konieczna'],
     faq: [
-      { q: 'Ile wynosi wynagrodzenie za drogę konieczną za m²?', a: 'Żaden przepis nie podaje stawki. Biegli często liczą wartość 1 m² × powierzchnię pasa × współczynnik K (§ 31 ust. 7 rozporządzenia o wycenie), a sąd dolicza wykazany spadek wartości reszty i koszty (II CSK 517/07). Szerokość pasa wpływa więc wprost na kwotę – zob. Szerokość drogi koniecznej: ile metrów musi mieć dojazd do domu i wjazd na działkę?' },
+      { q: 'Ile wynosi wynagrodzenie za drogę konieczną za m²?', a: 'Żaden przepis nie podaje stawki. Biegli często liczą wartość 1 m² × powierzchnię pasa × współczynnik K (§ 31 ust. 7 rozporządzenia o wycenie), a sąd dolicza wykazany spadek wartości reszty i koszty (II CSK 517/07). Szerokość pasa wpływa więc wprost na kwotę – zob. Szerokość drogi koniecznej: ile metrów musi mieć dojazd do domu i wjazd na działkę? Kwoty, które sądy przyznały w konkretnych sprawach, zebrałem w tekście Ile sądy przyznają za drogę konieczną? 17 orzeczeń z kwotami i ceną za m².' },
       { q: 'Czy należy mi się wynagrodzenie, skoro droga już fizycznie istnieje?', a: 'Tak. Wynagrodzenie należy się za samo ustanowienie służebności, bez względu na szkodę (II CSK 517/07, III CSK 147/14). Istniejący szlak może jedynie obniżyć koszty urządzenia drogi.' },
       { q: 'Czy mogę żądać pieniędzy za lata, gdy sąsiad jeździł bez umowy?', a: 'Tak, ale jako wynagrodzenia za bezumowne korzystanie: od sąsiada w złej wierze za nieprzedawniony okres, od sąsiada w dobrej wierze dopiero od pozwu (art. 224 § 2, 225 w zw. z art. 352 k.c.).' },
       { q: 'Kto płaci podatek od wynagrodzenia za służebność?', a: 'Sąsiad płaci 1% PCC, a Ty PIT od przychodu z innych źródeł (szczegóły w sekcji o podatkach).' },
@@ -331,7 +331,7 @@ window.BLOG.push(
       ['p', 'Masz podobną sytuację? Opisz ją w formularzu poniżej. W ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem. Do akceptacji oferty nic nie płacisz.'],
       ['h2', 'Najczęstsze pytania'],
       ['h3', 'Ile wynosi wynagrodzenie za drogę konieczną za m²?'],
-      ['p', 'Żaden przepis nie podaje stawki. Biegli często liczą wartość 1 m² × powierzchnię pasa × współczynnik K (§ 31 ust. 7 rozporządzenia o wycenie), a sąd dolicza wykazany spadek wartości reszty i koszty (II CSK 517/07). Szerokość pasa wpływa więc wprost na kwotę – zob. Szerokość drogi koniecznej: ile metrów musi mieć dojazd do domu i wjazd na działkę?'],
+      ['p', 'Żaden przepis nie podaje stawki. Biegli często liczą wartość 1 m² × powierzchnię pasa × współczynnik K (§ 31 ust. 7 rozporządzenia o wycenie), a sąd dolicza wykazany spadek wartości reszty i koszty (II CSK 517/07). Szerokość pasa wpływa więc wprost na kwotę – zob. Szerokość drogi koniecznej: ile metrów musi mieć dojazd do domu i wjazd na działkę? Kwoty, które sądy przyznały w konkretnych sprawach, zebrałem w tekście Ile sądy przyznają za drogę konieczną? 17 orzeczeń z kwotami i ceną za m².'],
       ['h3', 'Czy należy mi się wynagrodzenie, skoro droga już fizycznie istnieje?'],
       ['p', 'Tak. Wynagrodzenie należy się za samo ustanowienie służebności, bez względu na szkodę (II CSK 517/07, III CSK 147/14). Istniejący szlak może jedynie obniżyć koszty urządzenia drogi.'],
       ['h3', 'Czy mogę żądać pieniędzy za lata, gdy sąsiad jeździł bez umowy?'],
