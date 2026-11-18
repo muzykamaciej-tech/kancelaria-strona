@@ -263,7 +263,7 @@ window.BLOG.push(
         ['SO w Łodzi, III Ca 3063/25 (24.06.2026)', 'działka miejska, droga i media', '291 m²', '3 × 6039,20 zł = 18 117,60 zł', '62 zł'],
         ['SR dla Warszawy-Mokotowa, XVI Ns 1651/15 (24.01.2019)', 'wjazd do garażu na gruncie miasta', 'ok. 19 m²', '17 500 zł netto + 23% VAT', 'ok. 920 zł netto'],
       ]],
-      ['p', 'Grunt leśny na Mazurach i wjazd w Warszawie to dwa różne rynki. Na kwotę wpływa też szerokość pasa, którą opisuję w tekście Szerokość drogi koniecznej – ile metrów musi mieć dojazd do domu? Jak rzeczoznawca liczy wynagrodzenie, opisuję w tekście Jak obliczyć wynagrodzenie za służebność drogi koniecznej?'],
+      ['p', 'Grunt leśny na Mazurach i wjazd w Warszawie to dwa różne rynki. Na kwotę wpływa też szerokość pasa, którą opisuję w tekście Szerokość drogi koniecznej: ile metrów musi mieć dojazd do domu i wjazd na działkę? Jak rzeczoznawca liczy wynagrodzenie, opisuję w tekście Jak obliczyć wynagrodzenie za służebność drogi koniecznej?'],
       ['h2', 'Podatek przy drodze koniecznej: PCC 1%, VAT czy darowizna?'],
       ['ul', [
         '**Odpłatna służebność:** 1% PCC od wartości świadczeń, przy wynagrodzeniu jednorazowym od tej kwoty (art. 6 ust. 1 pkt 6, art. 7 ust. 1 pkt 3 u.p.c.c.).',

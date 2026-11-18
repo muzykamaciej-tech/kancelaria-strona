@@ -1615,7 +1615,7 @@ window.BLOG.push(
         '**Wjazd z drogi wewnętrznej na działkę.** Art. 29 u.d.p. dotyczy zjazdu będącego częścią drogi publicznej, więc zarządca drogi publicznej nie wydaje tu decyzji. Potrzebujesz udziału w drodze albo służebności.',
         '**Połączenie drogi wewnętrznej z jezdnią drogi publicznej.** To już zjazd, czyli zezwolenie z art. 29 u.d.p. (§ 54 ust. 1 rozporządzenia drogowego).',
         '**Podział działki.** Podział nie jest dopuszczalny, jeżeli nowe działki nie mają dostępu do drogi publicznej. Wystarczy wydzielenie drogi wewnętrznej ze służebnościami albo sprzedaż działki z udziałem w drodze (art. 93 ust. 3 ustawy o gospodarce nieruchomościami, dalej: u.g.n.).',
-        '**Szerokość.** Nie znalazłem przepisu, który podaje jedną liczbę dla każdej drogi wewnętrznej. Rozporządzenie drogowe dotyczy dróg publicznych. Sprawdź plan miejscowy, bo podział musi być z nim zgodny (art. 93 ust. 1 u.g.n.). Dojazd do budynku opisuję w tekście Szerokość drogi koniecznej – ile metrów musi mieć dojazd do domu?',
+        '**Szerokość.** Nie znalazłem przepisu, który podaje jedną liczbę dla każdej drogi wewnętrznej. Rozporządzenie drogowe dotyczy dróg publicznych. Sprawdź plan miejscowy, bo podział musi być z nim zgodny (art. 93 ust. 1 u.g.n.). Dojazd do budynku opisuję w tekście Szerokość drogi koniecznej: ile metrów musi mieć dojazd do domu i wjazd na działkę?',
         '**Warunki zabudowy dla drogi.** Wymogów sąsiedztwa, obszaru uzupełnienia zabudowy i dostępu do drogi publicznej nie stosuje się do dróg (art. 61 ust. 3 pkt 1 u.p.z.p.).',
       ]],
       ['h2', 'Czy zjazd jest potrzebny do warunków zabudowy?'],
