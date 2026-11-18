@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Skarbnica wiedzy – Mecenas od Nieruchomości</title>
+  <link>https://www.mecenasodnieruchomosci.pl/blog</link>
+  <atom:link href="https://www.mecenasodnieruchomosci.pl/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Poradniki o prawie nieruchomości: warunki zabudowy, plan ogólny, służebności, najem, spadki i spory z deweloperem. Autor: adw. dr Maciej Muzyka.</description>
+  <language>pl</language>
+  <lastBuildDate>Sat, 07 Nov 2026 07:00:00 GMT</lastBuildDate>
+  <item>
+    <title>Kooperatywa mieszkaniowa: co to jest, jak ją założyć i na jakie ryzyka uważać</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/kooperatywa-mieszkaniowa</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/kooperatywa-mieszkaniowa</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Zakup nieruchomości</category>
+    <description>Kooperatywa mieszkaniowa: 3 osoby, umowa u notariusza, grunt i kredyt. Co mówi ustawa i na co uważać: solidarne długi, wyjście członka, wpłaty.</description>
+  </item>
+  <item>
+    <title>Umowa z architektem na projekt domu: co musi zawierać, wynagrodzenie i odpowiedzialność za wady projektu</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/umowa-z-architektem</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/umowa-z-architektem</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Proces budowlany</category>
+    <description>Umowa z architektem na projekt domu: zakres, płatności etapami, odbiór, wady i koszt przeprojektowania. Lista zapisów i umowa z architektem wnętrz.</description>
+  </item>
+  <item>
+    <title>Kary umowne w umowie z wykonawcą: jak je zapisać, kiedy się należą i kiedy sąd je obniży</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/kara-umowna-w-umowie-z-wykonawca</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/kara-umowna-w-umowie-z-wykonawca</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Proces budowlany</category>
+    <description>Kary umowne w umowie z wykonawcą: za co się należą, zwłoka a opóźnienie, limit, potrącenie, obniżenie przez sąd. Wzór zapisu i przykład.</description>
+  </item>
+  <item>
+    <title>Odwołanie od pozwolenia na budowę: kto może je złożyć, termin, wzór i co dalej</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/odwolanie-od-pozwolenia-na-budowe</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/odwolanie-od-pozwolenia-na-budowe</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Proces budowlany</category>
+    <description>Odwołanie od pozwolenia na budowę: 14 dni, wojewoda przez starostę, zarzuty i dowody. Kto może je złożyć, wzór pisma, sprzeciw i skarga do WSA.</description>
+  </item>
+  <item>
+    <title>Dobrodziejstwo inwentarza: przyjęcie spadku, odpowiedzialność za długi, spis i wykaz</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/dobrodziejstwo-inwentarza</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/dobrodziejstwo-inwentarza</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Współwłasność i spadki</category>
+    <description>Dobrodziejstwo inwentarza: za długi zmarłego odpowiadasz do wartości spadku, także własnym majątkiem. Wykaz, spis, kredyt na mieszkaniu i komornik.</description>
+  </item>
+  <item>
+    <title>Działka resztkowa po wywłaszczeniu: kiedy przysługuje wykup działki resztkowej</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/wykup-dzialki-resztkowej</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/wykup-dzialki-resztkowej</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Służebność przesyłu</category>
+    <description>Działka resztkowa po wywłaszczeniu: kiedy zarządca drogi musi ją nabyć, jak złożyć wniosek, ile zapłaci i co zrobić, gdy odmawia wykupu.</description>
+  </item>
+  <item>
+    <title>Wady części wspólnych budynku: kto dochodzi roszczeń od dewelopera, wspólnota czy właściciel</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/wady-czesci-wspolnych-budynku</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/wady-czesci-wspolnych-budynku</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Spory z deweloperem</category>
+    <description>Wady części wspólnych budynku: roszczenia ma nabywca lokalu, wspólnota dopiero po przelewie. Terminy, uchwała, naprawa czy pieniądze i kto płaci.</description>
+  </item>
+  <item>
+    <title>Metraż mieszkania inny niż w umowie: dopłata do dewelopera, zwrot ceny i jak zmierzyć powierzchnię</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/metraz-mieszkania-inny-niz-w-umowie</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/metraz-mieszkania-inny-niz-w-umowie</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Spory z deweloperem</category>
+    <description>Metraż mieszkania inny niż w umowie? Ustawa nie zna tolerancji 2%. Kiedy odzyskasz pieniądze, kiedy dopłacisz i jak zmierzyć powierzchnię.</description>
+  </item>
+  <item>
+    <title>Podział majątku po rozwodzie: u notariusza czy w sądzie, spłata, koszty i podatek</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/podzial-majatku-po-rozwodzie</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/podzial-majatku-po-rozwodzie</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Współwłasność i spadki</category>
+    <description>Podział majątku po rozwodzie: umowa u notariusza albo wniosek do sądu za 1000 zł (zgodny 300 zł). Bez terminu. Spłata, nakłady, nierówne udziały, podatek.</description>
+  </item>
+  <item>
+    <title>Współwłasność nieruchomości: kto decyduje, jak dzielić korzystanie i co gdy współwłaściciel nie chce sprzedać</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/wspolwlasnosc-nieruchomosci</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/wspolwlasnosc-nieruchomosci</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Współwłasność i spadki</category>
+    <description>Współwłasność nieruchomości: kto decyduje o remoncie i najmie, jak podzielić korzystanie, kto płaci podatek i co, gdy ktoś nie chce sprzedać.</description>
+  </item>
+  <item>
+    <title>Założenie księgi wieczystej: kiedy jest potrzebne, wniosek, koszty i ile to trwa</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/zalozenie-ksiegi-wieczystej</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/zalozenie-ksiegi-wieczystej</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Księgi wieczyste</category>
+    <description>Założenie księgi wieczystej: formularz KW-ZAL, zwykle 300 zł opłat, dokumenty dla działki, lokalu i mieszkania spółdzielczego. Ile to trwa w 2026 r.</description>
+  </item>
+  <item>
+    <title>Protokół zdawczo-odbiorczy mieszkania: co wpisać przy wydaniu i zwrocie lokalu (wzór)</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/protokol-zdawczo-odbiorczy-najem</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/protokol-zdawczo-odbiorczy-najem</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Najem</category>
+    <description>Protokół odbioru mieszkania po wynajmie: co wpisać przy wydaniu i zwrocie, wzór, liczniki, zdjęcia, odmowa podpisu i przykład rozliczenia kaucji.</description>
+  </item>
+  <item>
+    <title>Prawa najemcy mieszkania: czego wynajmujący nie może, co musi i jak się bronić</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/prawa-najemcy-mieszkania</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/prawa-najemcy-mieszkania</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Najem</category>
+    <description>Prawa najemcy mieszkania: kiedy właściciel może wejść, czego nie wolno mu odciąć, jak obniżyć czynsz przy wadach i zakwestionować podwyżkę.</description>
+  </item>
+  <item>
+    <title>Scalenie gruntów: co to jest, jak przebiega i co możesz zrobić, gdy nie zgadzasz się z projektem</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/scalenie-gruntow</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/scalenie-gruntow</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Grunty rolne i OZE</category>
+    <description>Scalenie gruntów: kto je wszczyna, jak szacuje się ziemię, ile masz czasu na zastrzeżenia do projektu, kto płaci i co z hipoteką i działką budowlaną.</description>
+  </item>
+  <item>
+    <title>Condohotel (condo hotel): co to jest, jak działa umowa z operatorem i na jakie ryzyka uważać</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/condohotel-co-to-jest</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/condohotel-co-to-jest</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Zakup nieruchomości</category>
+    <description>Condohotel to apartament na własność i umowa z operatorem. Lokal użytkowy, VAT 23%, gwarantowany czynsz, upadłość operatora: co sprawdzić przed podpisem.</description>
+  </item>
+  <item>
+    <title>Darowizna działki i mieszkania: notariusz, podatek i sprzedaż przed upływem 5 lat</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/darowizna-dzialki-i-mieszkania</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/darowizna-dzialki-i-mieszkania</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Współwłasność i spadki</category>
+    <description>Darowizna działki wymaga aktu notarialnego. Rodzina bez podatku, inni do 20%. Działka rolna, hipoteka i 19% PIT przy sprzedaży przed upływem 5 lat.</description>
+  </item>
+  <item>
+    <title>Kupno działki budowlanej krok po kroku: od oględzin do aktu notarialnego</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/kupno-dzialki-budowlanej-krok-po-kroku</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/kupno-dzialki-budowlanej-krok-po-kroku</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Zakup nieruchomości</category>
+    <description>Kupno działki budowlanej po kolei: oględziny, księga, plan lub WZ, umowa przedwstępna z warunkiem, pierwokup, akt, PCC albo VAT. Koszty i czas.</description>
+  </item>
+  <item>
+    <title>Rzeczoznawca majątkowy: kiedy jest potrzebny, jak go wybrać i za co odpowiada</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/rzeczoznawca-majatkowy</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/rzeczoznawca-majatkowy</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Rynek nieruchomości</category>
+    <description>Rzeczoznawca majątkowy: kiedy jest potrzebny, jak sprawdzić go w rejestrze, jak ustalić cenę i kto płaci za błędny operat.</description>
+  </item>
+  <item>
+    <title>Wykreślenie hipoteki z księgi wieczystej: wniosek, koszty i co zrobić, gdy bank już nie istnieje</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/wykreslenie-hipoteki</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/wykreslenie-hipoteki</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Księgi wieczyste</category>
+    <description>Wykreślenie hipoteki: wniosek KW-WPIS, opłata 100 zł, dokument wierzyciela. Co zrobić, gdy bank nie istnieje, wierzyciel zmarł albo wpis jest sprzed lat.</description>
+  </item>
+  <item>
+    <title>Prawo pierwokupu gminy: kiedy przysługuje, termin i jak przebiega sprzedaż</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/prawo-pierwokupu-gminy</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/prawo-pierwokupu-gminy</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Zakup nieruchomości</category>
+    <description>Prawo pierwokupu gminy: kiedy przysługuje, miesiąc na decyzję, umowa warunkowa, 2 akty, cena i zadatek. Do tego Skarb Państwa i Lasy Państwowe.</description>
+  </item>
+  <item>
+    <title>Uchwała wspólnoty mieszkaniowej w sprawie remontu: jak ją podjąć, wzór i zaliczka na fundusz remontowy</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/uchwala-wspolnoty-o-remoncie</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/uchwala-wspolnoty-o-remoncie</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Wspólnoty mieszkaniowe</category>
+    <description>Uchwała wspólnoty mieszkaniowej w sprawie remontu: kiedy jest potrzebna, jak głosować, co wpisać (wzór), kredyt i zaliczka na fundusz remontowy.</description>
+  </item>
+  <item>
+    <title>Testament a mieszkanie: zapis windykacyjny, wydziedziczenie i zachowek</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/testament-a-mieszkanie-zachowek</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/testament-a-mieszkanie-zachowek</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Współwłasność i spadki</category>
+    <description>Testament a mieszkanie: zapis zwykły czy windykacyjny, kiedy działa wydziedziczenie i dlaczego zachowek zostaje mimo testamentu. Koszt u notariusza.</description>
+  </item>
+  <item>
+    <title>Ogrodzenie na granicy działki: czy potrzebne zgłoszenie, zgoda sąsiada i kto płaci</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/ogrodzenie-na-granicy-dzialki</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/ogrodzenie-na-granicy-dzialki</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Proces budowlany</category>
+    <description>Ogrodzenie na granicy działki: do 2,20 m bez zgłoszenia, wyższe ze zgłoszeniem. Kiedy potrzebna zgoda sąsiada, kto płaci i co z płotem bez zgłoszenia.</description>
+  </item>
+  <item>
+    <title>Dzierżawa ziemi pod wiatraki: umowa, czynsz i podatek od dochodu</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/dzierzawa-pod-wiatraki</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/dzierzawa-pod-wiatraki</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Grunty rolne i OZE</category>
+    <description>Dzierżawa ziemi pod wiatraki: plan miejscowy, 700 m od domów, czynsz stały czy procent, ryczałt 8,5%, podatek od wieży i demontaż fundamentu.</description>
+  </item>
+  <item>
+    <title>Negocjacje ceny nieruchomości: co ustalić na piśmie, żeby ustępstwo nie wróciło w akcie</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/negocjacje-ceny-nieruchomosci</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/negocjacje-ceny-nieruchomosci</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Zakup nieruchomości</category>
+    <description>Jak negocjować cenę nieruchomości: RCN, wady, zapisy w umowie i akcie. Co zrobić, żeby obniżka nie zniknęła i nie odebrała Ci rękojmi.</description>
+  </item>
+  <item>
+    <title>Wykup mieszkania komunalnego z bonifikatą: warunki, zwrot bonifikaty i sprzedaż przed terminem</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/wykup-mieszkania-komunalnego-bonifikata</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/wykup-mieszkania-komunalnego-bonifikata</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Zakup nieruchomości</category>
+    <description>Wykup mieszkania komunalnego z bonifikatą: kto może kupić, kiedy oddasz bonifikatę, przepisanie na dziecko, sprzedaż przed 5 latami, spadek i najem.</description>
+  </item>
+  <item>
+    <title>Zwrot wywłaszczonej nieruchomości: kiedy możesz odzyskać działkę i co zapłacisz</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/zwrot-wywlaszczonej-nieruchomosci</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/zwrot-wywlaszczonej-nieruchomosci</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Służebność przesyłu</category>
+    <description>Zwrot wywłaszczonej nieruchomości: kiedy działka jest zbędna (7 i 10 lat), termin 20 lat, wniosek do starosty i ile oddasz po waloryzacji.</description>
+  </item>
+  <item>
+    <title>Działka pod drogą: odszkodowanie za grunt zajęty przed 1999 r. i co zrobić, gdy termin minął</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/droga-na-dzialce-przed-1999-odszkodowanie</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/droga-na-dzialce-przed-1999-odszkodowanie</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Służebność przesyłu</category>
+    <description>Działka pod drogą przed 1999 r.: kiedy należało się odszkodowanie, dlaczego wiele roszczeń wygasło 31.12.2005 i co możesz zrobić dziś.</description>
+  </item>
+  <item>
+    <title>Służebność mieszkania: co daje, jak ją ustanowić i kiedy można ją zamienić na rentę</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/sluzebnosc-mieszkania</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/sluzebnosc-mieszkania</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Służebności</category>
+    <description>Służebność mieszkania to prawo do mieszkania w cudzym lokalu. Akt notarialny, wpis, koszty i kiedy sąd zamieni ją na rentę, a kiedy nie (art. 303 k.c.).</description>
+  </item>
+  <item>
+    <title>Hałas, dym i drzewo sąsiada: co możesz zrobić przy immisjach, gałęziach i korzeniach</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/immisje-drzewo-sasiada</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/immisje-drzewo-sasiada</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Służebności</category>
+    <description>Drzewo sąsiada i immisje: kiedy obetniesz gałęzie i korzenie, kiedy sąd nakaże wycinkę, co z hałasem, dymem z pieca i ciszą nocną.</description>
+  </item>
+  <item>
+    <title>Najem instytucjonalny: co to jest, dla kogo i czym różni się od okazjonalnego</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/najem-instytucjonalny</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/najem-instytucjonalny</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Najem</category>
+    <description>Najem instytucjonalny: kto może go zawrzeć, czym różni się od okazjonalnego, ile kosztuje notariusz, jak odzyskać lokal i jakie są wady dla obu stron.</description>
+  </item>
+  <item>
+    <title>Sprzedaż mieszkania krok po kroku: dokumenty, koszty, podatek i wymeldowanie</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/sprzedaz-mieszkania-krok-po-kroku</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/sprzedaz-mieszkania-krok-po-kroku</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Zakup nieruchomości</category>
+    <description>Sprzedaż mieszkania krok po kroku: dokumenty do notariusza, koszty sprzedającego, PIT przed upływem 5 lat, wydanie lokalu i wymeldowanie.</description>
+  </item>
+  <item>
+    <title>Działka ROD: kupno, sprzedaż, dziedziczenie i co wolno zbudować</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/dzialka-rod-kupno-sprzedaz</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/dzialka-rod-kupno-sprzedaz</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Zakup nieruchomości</category>
+    <description>Działka ROD to nie własność. Jak kupić i sprzedać prawo do działki, ile PCC, co po śmierci działkowca, jaka altana i czy dom jest możliwy.</description>
+  </item>
+  <item>
+    <title>Walne zgromadzenie spółdzielni mieszkaniowej: pełnomocnictwo, głosowanie i zaskarżenie uchwały</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/walne-zgromadzenie-spoldzielni-mieszkaniowej</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/walne-zgromadzenie-spoldzielni-mieszkaniowej</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Wspólnoty mieszkaniowe</category>
+    <description>Walne zgromadzenie spółdzielni mieszkaniowej: kto może być pełnomocnikiem od 28.01.2026, jak się głosuje i jak zaskarżyć uchwałę w 6 tygodni.</description>
+  </item>
+  <item>
+    <title>Zarząd wspólnoty mieszkaniowej: obowiązki, zwykły zarząd i różnica między zarządem a zarządcą</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/zarzad-wspolnoty-mieszkaniowej</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/zarzad-wspolnoty-mieszkaniowej</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Wspólnoty mieszkaniowe</category>
+    <description>Zarząd wspólnoty: kto może w nim być, co robi sam, na co potrzebuje uchwały, ile zarabia, za co odpowiada i czym różni się od zarządcy.</description>
+  </item>
+  <item>
+    <title>Przekazanie gospodarstwa rolnego dziecku: umowa, KRUS, podatek i zachowek</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/przekazanie-gospodarstwa-rolnego</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/przekazanie-gospodarstwa-rolnego</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Grunty rolne i OZE</category>
+    <description>Przekazanie gospodarstwa rolnego dziecku: darowizna, dożywocie czy umowa z następcą. Co z KRUS, podatkiem i zachowkiem rodzeństwa.</description>
+  </item>
+  <item>
+    <title>Nieruchomość małoletniego: kiedy potrzebna jest zgoda sądu rodzinnego na sprzedaż, darowiznę i dział spadku</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/nieruchomosc-maloletniego-zgoda-sadu</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/nieruchomosc-maloletniego-zgoda-sadu</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Współwłasność i spadki</category>
+    <description>Sprzedaż mieszkania dziecka, kupno i dział spadku wymagają zgody sądu (art. 101 § 3 k.r.o.). Kiedy darowizna przejdzie bez sądu, wniosek i skutki.</description>
+  </item>
+  <item>
+    <title>Wymeldowanie z mieszkania bez zgody: byłego męża, lokatora i po sprzedaży</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/wymeldowanie-z-mieszkania</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/wymeldowanie-z-mieszkania</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Najem</category>
+    <description>Wymeldowanie z mieszkania bez zgody: kto składa wniosek, jakie dowody, ile to kosztuje. Były mąż, lokator, dziecko, eksmisja i sprzedaż mieszkania.</description>
+  </item>
+  <item>
+    <title>Odległość od granicy działki: dom 3 czy 4 metry, ściana bez okien i zgoda sąsiada</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/odleglosc-domu-od-granicy-dzialki</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/odleglosc-domu-od-granicy-dzialki</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Proces budowlany</category>
+    <description>Odległość od granicy działki: 4 m ściana z oknami, 3 m bez okien, 1,5 m i granica w wyjątkach. Co z okapem, garażem, zgodą sąsiada i starym domem.</description>
+  </item>
+  <item>
+    <title>Miejsce postojowe i garaż: udział, księga wieczysta, sprzedaż i spory we wspólnocie</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/miejsce-postojowe-garaz-wlasnosc</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/miejsce-postojowe-garaz-wlasnosc</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Zakup nieruchomości</category>
+    <description>Miejsce postojowe: co naprawdę kupujesz, księga wieczysta, VAT i PCC, sprzedaż udziału, najem garażu, zasiedzenie i spory we wspólnocie.</description>
+  </item>
+  <item>
+    <title>Zjazd z drogi publicznej na działkę: zezwolenie, zgłoszenie, szerokość i odmowa zarządcy</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/zjazd-z-drogi-publicznej</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/zjazd-z-drogi-publicznej</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Proces budowlany</category>
+    <description>Zjazd z drogi publicznej: zezwolenie zarządcy, kiedy zgłoszenie, skąd 4,5 m i 5 m, co zrobić po odmowie i co z drogą konieczną.</description>
+  </item>
+  <item>
+    <title>Wady ukryte mieszkania lub domu z rynku wtórnego: rękojmia sprzedawcy, terminy i obniżenie ceny</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/wady-ukryte-mieszkania-rynek-wtorny</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/wady-ukryte-mieszkania-rynek-wtorny</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Zakup nieruchomości</category>
+    <description>Wady ukryte mieszkania z rynku wtórnego: 5 lat od wydania, rok na oświadczenie. Co jest wadą, jak policzyć obniżenie ceny i ile kosztuje pozew.</description>
+  </item>
+  <item>
+    <title>Odstąpienie od umowy deweloperskiej: kiedy możesz to zrobić, jak i co z pieniędzmi</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/odstapienie-od-umowy-deweloperskiej</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/odstapienie-od-umowy-deweloperskiej</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Spory z deweloperem</category>
+    <description>Odstąpienie od umowy deweloperskiej: kiedy 30 dni, kiedy 120. Podpis u notariusza, wzór oświadczenia, zwrot wpłat, kredyt i Fundusz Gwarancyjny.</description>
+  </item>
+  <item>
+    <title>SIM, czyli społeczna inicjatywa mieszkaniowa: dla kogo, ile się wpłaca i czym różni się od TBS</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/sim-spoleczna-inicjatywa-mieszkaniowa</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/sim-spoleczna-inicjatywa-mieszkaniowa</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Zakup nieruchomości</category>
+    <description>Społeczna inicjatywa mieszkaniowa (SIM) to najem, nie własność. Dla kogo, ile wynosi partycypacja i czynsz, kto wybiera najemców, czym różni się od TBS.</description>
+  </item>
+  <item>
+    <title>Podwykonawca nie dostał zapłaty: odpowiedzialność inwestora i generalnego wykonawcy</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/podwykonawca-nie-dostal-zaplaty</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/podwykonawca-nie-dostal-zaplaty</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Proces budowlany</category>
+    <description>Podwykonawca nie dostał zapłaty? Inwestor odpowiada solidarnie z wykonawcą, jeżeli roboty zgłoszono na piśmie. Sprzeciw, limit, odsetki i regres.</description>
+  </item>
+  <item>
+    <title>Pozwolenie na budowę domu krok po kroku: wniosek, projekt, terminy i ważność decyzji</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/pozwolenie-na-budowe-krok-po-kroku</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/pozwolenie-na-budowe-krok-po-kroku</guid>
+    <pubDate>Fri, 06 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Proces budowlany</category>
+    <description>Pozwolenie na budowę domu krok po kroku: dokumenty, 65 dni, ostateczność, 3 lata ważności, zmiana projektu i co zrobić po decyzji.</description>
+  </item>
+  <item>
+    <title>Plan ogólny gminy: co to jest, strefy planistyczne i co oznacza dla Twojej działki</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/plan-ogolny-gminy-co-to-jest</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/plan-ogolny-gminy-co-to-jest</guid>
+    <pubDate>Fri, 06 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Planowanie przestrzenne</category>
+    <description>Plan ogólny gminy dzieli gminę na strefy. Nie daje prawa do budowy, ale decyduje o WZ i nowym planie miejscowym. Sprawdź, co znaczy dla Twojej działki.</description>
+  </item>
+  <item>
+    <title>Służebność przesyłu: co to jest, kto może jej żądać i jakie pieniądze należą się właścicielowi działki</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/sluzebnosc-przesylu-co-to-jest</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/sluzebnosc-przesylu-co-to-jest</guid>
+    <pubDate>Fri, 06 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Służebność przesyłu</category>
+    <description>Służebność przesyłu: co to jest, kto może jej żądać, ile wynosi wynagrodzenie, za ile lat wstecz żądać zapłaty i kiedy słup można usunąć z działki.</description>
+  </item>
+  <item>
+    <title>Eksmisja lokatora krok po kroku: pozew, lokal socjalny i komornik</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/eksmisja-lokatora-krok-po-kroku</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/eksmisja-lokatora-krok-po-kroku</guid>
+    <pubDate>Fri, 06 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Najem</category>
+    <description>Eksmisja lokatora krok po kroku: pozew za 200 zł, kogo pozwać, lokal socjalny, gmina i komornik. Kiedy obejdzie się bez pozwu i co z dzieckiem.</description>
+  </item>
+  <item>
+    <title>Wyłączenie z produkcji rolnej: kiedy jest potrzebne, ile kosztuje i jak złożyć wniosek</title>
+    <link>https://www.mecenasodnieruchomosci.pl/blog/wylaczenie-gruntow-z-produkcji-rolnej</link>
+    <guid isPermaLink="true">https://www.mecenasodnieruchomosci.pl/blog/wylaczenie-gruntow-z-produkcji-rolnej</guid>
+    <pubDate>Fri, 06 Nov 2026 07:00:00 GMT</pubDate>
+    <category>Grunty rolne i OZE</category>
+    <description>Wyłączenie z produkcji rolnej: które klasy wymagają decyzji starosty, ile wynosi należność i opłata roczna, jakie dokumenty i co grozi za brak decyzji.</description>
+  </item>
+</channel>
+</rss>

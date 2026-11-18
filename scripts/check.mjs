@@ -108,6 +108,9 @@ for (const f of htmlFiles) {
   });
   /* FAQ: every answer in the HTML, not only the open one (crawlers do not click) */
   const faqItems = (h.match(/class="faq-acc-item"/g) || []).length, faqBodies = (h.match(/class="[^"]*\bfaq-acc-body\b/g) || []).length;
+  /* wpisy bloga pokazują FAQ jako h3 w sekcji „Najczęstsze pytania” (nie akordeon) */
+  const faqSec = (h.split(/>Najczęstsze pytania<\/h2>/)[1] || '').split(/<h2[\s>]/)[0];
+  const faqH3 = (faqSec.match(/<h3[\s>]/g) || []).length;
   if (faqItems !== faqBodies) fail.push(`${p}: ${faqItems} FAQ questions but ${faqBodies} answers in the HTML`);
   for (const [prop, val] of [['og:url', canonical], ['og:title', null], ['og:description', null]]) {
     const v = (h.match(new RegExp(`<meta property="${prop}" content="([^"]*)"`)) || [])[1];
@@ -158,7 +161,7 @@ for (const f of htmlFiles) {
     let d; try { d = JSON.parse(j); } catch (e) { continue; }
     for (const n of jsonNodes(d).filter((x) => x['@type'] === 'FAQPage')) {
       const qn = (n.mainEntity || []).length;
-      if (qn > faqItems + 1) fail.push(`${p}: FAQPage has ${qn} questions, the page shows ${faqItems}`);
+      if (qn > faqItems + faqH3 + 1) fail.push(`${p}: FAQPage has ${qn} questions, the page shows ${faqItems + faqH3}`);
     }
   }
 }

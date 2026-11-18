@@ -282,7 +282,7 @@ function setMetaForView(route, ids) {
     const p = (window.BLOG || []).find((x) => x.slug === ids.blogSlug) || (window.BLOG || [])[0];
     if (p) setMeta(fitTitle([p.metaTitle && p.metaTitle + ' | ' + SITE_NAME, p.title + ' | ' + SITE_NAME, p.metaTitle, p.title]), p.metaDesc || truncMeta(p.excerpt, 155), {
       ogTitle: p.title, type: 'article', published: p.iso, modified: postModifiedIso(p),
-      image: p.cover ? absUrl(p.cover) : null, imageWidth: p.cover ? 1200 : null, imageHeight: p.cover ? 654 : null, imageAlt: p.cover ? p.title : null,
+      image: p.cover ? absUrl(p.cover) : null, imageWidth: p.cover ? 1200 : null, imageHeight: p.cover ? 654 : null, imageAlt: p.cover ? (p.coverAlt || p.title) : null,
     });
   } else if (route === 'faq') {
     setMeta('FAQ — najczęstsze pytania | ' + SITE_NAME, 'Odpowiedzi na pytania o współpracę: bezpłatna wstępna analiza i oferta w 24 h, koszt, poufność i przebieg spraw z nieruchomości.');
@@ -447,8 +447,13 @@ function buildJsonLd(route, ids) {
   if (route === 'blogpost') {
     const p = (window.BLOG || []).find((x) => x.slug === ids.blogSlug); if (!p) return null;
     return { '@context': 'https://schema.org', '@graph': [
-      { '@type': 'BlogPosting', headline: p.title, description: truncMeta(p.excerpt, 300), datePublished: p.iso, dateModified: postModifiedIso(p), image: p.cover ? absUrl(p.cover) : undefined, inLanguage: 'pl', author: { '@type': 'Person', '@id': PERSON_ID, name: 'Maciej Muzyka', url: SITE_BASE + '/o-mnie' }, publisher: { '@id': ORG_ID }, mainEntityOfPage: SITE_BASE + '/blog/' + p.slug },
-      crumbs([{ name: 'Start', path: '/' }, { name: 'Skarbnica wiedzy', path: '/blog' }, { name: p.title, path: '/blog/' + p.slug }]) ] };
+      { '@type': 'BlogPosting', '@id': SITE_BASE + '/blog/' + p.slug + '#artykul', headline: p.title, description: truncMeta(p.excerpt, 300), datePublished: p.iso, dateModified: postModifiedIso(p),
+        image: p.cover ? { '@type': 'ImageObject', url: absUrl(p.cover), width: 1200, height: 654, caption: p.coverAlt || p.title } : undefined,
+        inLanguage: 'pl', articleSection: p.category || undefined, keywords: (p.tags && p.tags.length) ? p.tags.join(', ') : undefined,
+        author: { '@type': 'Person', '@id': PERSON_ID, name: 'Maciej Muzyka', honorificPrefix: 'adw. dr', jobTitle: 'Adwokat, doktor nauk prawnych', url: SITE_BASE + '/o-mnie', sameAs: ['https://rejestradwokatow.pl/adwokat/muzyka-maciej-35358', LINKEDIN_URL, PROFINFO_AUTHOR_URL] },
+        publisher: { '@id': ORG_ID }, isPartOf: { '@type': 'Blog', '@id': SITE_BASE + '/blog#blog', name: 'Skarbnica wiedzy', url: SITE_BASE + '/blog' }, mainEntityOfPage: SITE_BASE + '/blog/' + p.slug },
+      postFaqLd(p),
+      crumbs([{ name: 'Start', path: '/' }, { name: 'Skarbnica wiedzy', path: '/blog' }, { name: p.title, path: '/blog/' + p.slug }]) ].filter(Boolean) };
   }
   if (route === 'o-mnie') {
     return { '@context': 'https://schema.org', '@graph': [
@@ -456,6 +461,18 @@ function buildJsonLd(route, ids) {
       bookEntity() ] };
   }
   return null;
+}
+/* FAQ wpisu jako FAQPage (Google pokazuje FAQ tylko wybranym witrynom, ale Bing i asystenci AI czytają te pary pytanie–odpowiedź) */
+function plainLd(t) { return String(t || '').replace(/\*\*/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/<[^>]+>/g, '').trim(); }
+function postFaqLd(p) {
+  /* tylko pytania, które wpis pokazuje jako nagłówki w sekcji „Najczęstsze pytania” */
+  const body = p.body || []; const start = body.findIndex((b) => b && b[0] === 'h2' && /Najczęstsze pytania/i.test(b[1]));
+  const shownQ = new Set();
+  if (start >= 0) for (let i = start + 1; i < body.length && body[i][0] !== 'h2'; i++) if (body[i][0] === 'h3') shownQ.add(plainLd(body[i][1]));
+  const items = (p.faq || []).filter((f) => f && f.q && f.a && shownQ.has(plainLd(f.q)));
+  if (!items.length) return null;
+  return { '@type': 'FAQPage', '@id': SITE_BASE + '/blog/' + p.slug + '#faq', inLanguage: 'pl',
+    mainEntity: items.map((f) => ({ '@type': 'Question', name: plainLd(f.q), acceptedAnswer: { '@type': 'Answer', text: plainLd(f.a) } })) };
 }
 function setJsonLd(data) {
   let s = document.getElementById('route-jsonld');

@@ -87,12 +87,12 @@
     },
     {
       "source": "/post/czy-s%C5%82u%C5%BCebno%C5%9B%C4%87-wystarczy-by-dosta%C4%87-pozwolenie-na-budow%C4%99",
-      "destination": "/blog/szerokosc-drogi-koniecznej",
+      "destination": "/blog/droga-konieczna-a-warunki-zabudowy",
       "permanent": true
     },
     {
       "source": "/post/czy-służebność-wystarczy-by-dostać-pozwolenie-na-budowę",
-      "destination": "/blog/szerokosc-drogi-koniecznej",
+      "destination": "/blog/droga-konieczna-a-warunki-zabudowy",
       "permanent": true
     },
     {
@@ -493,6 +493,11 @@
     {
       "source": "/blog/page/:page*",
       "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dobrodziejstwie-inwentarza",
+      "destination": "/blog/dobrodziejstwo-inwentarza",
       "permanent": true
     }
   ],

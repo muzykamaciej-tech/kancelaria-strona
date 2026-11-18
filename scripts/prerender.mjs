@@ -53,7 +53,7 @@ const data = await probe.evaluate(() => ({
   blocks: window.SERVICE_BLOCKS.map((b) => ({ id: b.id, title: b.title, tagline: b.tagline || '',
     updated: ((window.BLOCK_CONTENT || {})[b.id] || {}).updated || null,
     services: b.services.map((s) => ({ slug: s.slug, title: s.title, desc: s.desc || '', updated: ((window.SERVICE_CONTENT || {})[s.slug] || {}).updated || null })) })),
-  blog: (window.BLOG || []).map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt || '', iso: p.iso, modified: window.postModifiedIso(p) })),
+  blog: (window.BLOG || []).map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt || '', iso: p.iso, modified: window.postModifiedIso(p), category: p.category || '' })),
   blogCats: window.BLOG_CATEGORIES.filter((c) => window.postsInCategory(c).length).map((c) => ({ id: c.id, title: c.title, desc: c.desc,
     modified: window.postsInCategory(c).map((p) => window.postModifiedIso(p)).sort().pop() })),
   offers: Object.entries(window.OFFERS || {}).map(([slug, o]) => ({ slug, title: o.metaTitle, desc: o.metaDesc, updated: o.updated || null })),
@@ -190,9 +190,24 @@ const llms = [
   '',
   `- [FAQ](${ORIGIN}/faq)`,
   `- [Mapa strony](${ORIGIN}/sitemap.xml)`,
+  `- [Kanał RSS z nowymi poradnikami](${ORIGIN}/feed.xml)`,
   '',
 ].join('\n');
 fs.writeFileSync(path.join(DIST, 'llms.txt'), llms);
+
+/* feed.xml (RSS 2.0): 50 najnowszych poradników, dla czytników i agregatorów */
+const xmlEsc = (s) => clean(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const rfc822 = (iso) => new Date(iso + 'T08:00:00+01:00').toUTCString();
+const feedPosts = [...data.blog].filter((p) => p.iso).sort((a, b) => b.iso.localeCompare(a.iso)).slice(0, 50);
+fs.writeFileSync(path.join(DIST, 'feed.xml'),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n<channel>\n` +
+  `  <title>Skarbnica wiedzy – Mecenas od Nieruchomości</title>\n  <link>${ORIGIN}/blog</link>\n` +
+  `  <atom:link href="${ORIGIN}/feed.xml" rel="self" type="application/rss+xml"/>\n` +
+  `  <description>Poradniki o prawie nieruchomości: warunki zabudowy, plan ogólny, służebności, najem, spadki i spory z deweloperem. Autor: adw. dr Maciej Muzyka.</description>\n` +
+  `  <language>pl</language>\n  <lastBuildDate>${feedPosts.length ? rfc822(feedPosts[0].modified || feedPosts[0].iso) : new Date().toUTCString()}</lastBuildDate>\n` +
+  feedPosts.map((p) => `  <item>\n    <title>${xmlEsc(p.title)}</title>\n    <link>${ORIGIN}/blog/${p.slug}</link>\n    <guid isPermaLink="true">${ORIGIN}/blog/${p.slug}</guid>\n    <pubDate>${rfc822(p.iso)}</pubDate>\n` +
+    (p.category ? `    <category>${xmlEsc(p.category)}</category>\n` : '') + `    <description>${xmlEsc(p.excerpt)}</description>\n  </item>`).join('\n') +
+  `\n</channel>\n</rss>\n`);
 
 const thin = routes.filter((r) => !r.noindex && r.words < 250).map((r) => `${r.path} (${r.words})`);
 if (thin.length) console.log(`thin pages (<250 words in <main>): ${thin.join(', ')}`);

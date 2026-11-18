@@ -293,3 +293,4 @@
 
 - [FAQ](https://www.mecenasodnieruchomosci.pl/faq)
 - [Mapa strony](https://www.mecenasodnieruchomosci.pl/sitemap.xml)
+- [Kanał RSS z nowymi poradnikami](https://www.mecenasodnieruchomosci.pl/feed.xml)
