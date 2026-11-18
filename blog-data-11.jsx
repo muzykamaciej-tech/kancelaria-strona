@@ -985,7 +985,7 @@ window.BLOG.push(
         ['Były lokator mieszkania', 'art. 18 ustawy o ochronie praw lokatorów', 'odszkodowanie w wysokości czynszu, 3 lata przedawnienia'],
         ['Firma przesyłowa: słupy, linia, gazociąg', 'art. 224 § 2, 225 w zw. z art. 230 i 352 § 2 k.c.', 'osobny tekst (link niżej)'],
       ]],
-      ['p', 'Przy sieciach na działce zasady, stawki i zarzut zasiedzenia opisuję w tekście Słup, rura lub kable na działce bez umowy? Sprawdź, czy należy Ci się wynagrodzenie za bezumowne korzystanie.'],
+      ['p', 'Przy sieciach na działce zasady, stawki i zarzut zasiedzenia opisuję w tekście Słup na działce: odszkodowanie, służebność przesyłu, przesunięcie i usunięcie.'],
       ['h2', 'Od kiedy należy się wynagrodzenie: dobra czy zła wiara?'],
       ['ul', [
         '**Dobra wiara jest domniemana** (art. 7 k.c.). Złą wiarę zajmującego musisz wykazać Ty.',

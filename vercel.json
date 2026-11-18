@@ -317,12 +317,12 @@
     },
     {
       "source": "/post/s%C5%82up-rura-lub-kable-na-dzia%C5%82ce-bez-umowy-sprawd%C5%BA-czy-nale%C5%BCy-ci-si%C4%99-wynagrodzenie-za-bezumowne-kor",
-      "destination": "/blog/slup-rura-kable-na-dzialce-bez-umowy-bezumowne-korzystanie",
+      "destination": "/blog/slup-energetyczny-na-dzialce-przesuniecie",
       "permanent": true
     },
     {
       "source": "/post/słup-rura-lub-kable-na-działce-bez-umowy-sprawdź-czy-należy-ci-się-wynagrodzenie-za-bezumowne-kor",
-      "destination": "/blog/slup-rura-kable-na-dzialce-bez-umowy-bezumowne-korzystanie",
+      "destination": "/blog/slup-energetyczny-na-dzialce-przesuniecie",
       "permanent": true
     },
     {
@@ -498,6 +498,11 @@
     {
       "source": "/blog/dobrodziejstwie-inwentarza",
       "destination": "/blog/dobrodziejstwo-inwentarza",
+      "permanent": true
+    },
+    {
+      "source": "/blog/slup-rura-kable-na-dzialce-bez-umowy-bezumowne-korzystanie",
+      "destination": "/blog/slup-energetyczny-na-dzialce-przesuniecie",
       "permanent": true
     }
   ],

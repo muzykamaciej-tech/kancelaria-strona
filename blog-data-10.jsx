@@ -1307,7 +1307,7 @@ window.BLOG.push(
     ],
     body: [
       ['lead', 'Gazownia albo zakład energetyczny chce poprowadzić sieć przez Twoją działkę i pisze, że jeśli się nie zgodzisz, „wystąpi do starosty”. To nie jest pusta zapowiedź. Gdy nie wyrażasz zgody, starosta może w drodze decyzji ograniczyć sposób korzystania z nieruchomości i zezwolić na założenie gazociągu, linii czy wodociągu (art. 124 ust. 1 ustawy o gospodarce nieruchomościami, dalej: u.g.n.). Decyzja nie odbiera Ci własności, ale musisz znosić sieć na swoim gruncie. W zamian należy Ci się odszkodowanie za szkody, powiększone o kwotę spadku wartości działki, jeśli wartość spadła (art. 128 ust. 4 u.g.n.). Ustala je starosta odrębną decyzją po opinii rzeczoznawcy majątkowego, a płaci firma, która dostała zezwolenie (art. 129 ust. 5 pkt 1, art. 130 ust. 2, art. 132 ust. 6 u.g.n.).'],
-      ['note', 'Stan prawny na 2.11.2026. Opisuję decyzję starosty z art. 124–124b u.g.n. (t.j. Dz.U. 2026 poz. 399) i odszkodowanie za nią. Późniejsze zmiany u.g.n. tych przepisów nie dotyczą. Nie opisuję specustaw ani podatku dochodowego. Powołane orzeczenia Sądu Najwyższego dotyczyły głównie decyzji z ustawy z 1958 r., poprzednika art. 124, ale SN odnosi te zasady także do art. 124.'],
+      ['note', 'Stan prawny na 2.11.2026. Opisuję decyzję starosty z art. 124–124b u.g.n. (t.j. Dz.U. 2026 poz. 399) i odszkodowanie za nią. Późniejsze zmiany u.g.n. tych przepisów nie dotyczą. Nie opisuję specustaw ani podatku dochodowego. Decyzję wojewody o gazociągu ze specustawy, 14-dniowy termin odwołania liczony od obwieszczenia i odszkodowanie opisuję w tekście Gazociąg na działce: odszkodowanie, strefa kontrolowana i co możesz zbudować. Powołane orzeczenia Sądu Najwyższego dotyczyły głównie decyzji z ustawy z 1958 r., poprzednika art. 124, ale SN odnosi te zasady także do art. 124.'],
       ['h2', 'Ograniczenie sposobu korzystania z nieruchomości – kiedy starosta wydaje decyzję?'],
       ['p', 'Starosta może wydać decyzję, gdy spełnione są łącznie te warunki:'],
       ['ol', [
@@ -1380,7 +1380,7 @@ window.BLOG.push(
       ]],
       ['p', '**Co pozostaje otwarte:**'],
       ['ul', [
-        '**Okres przed decyzją.** Według NSA decyzją z art. 124 nie można objąć urządzeń już istniejących (wyrok z 13.07.2021, I OSK 2637/20). Jeżeli sieć stała na działce bez umowy i bez decyzji, za ten czas warto zbadać roszczenie o wynagrodzenie za bezumowne korzystanie. Zasady opisuję w tekście Słup, rura lub kable na działce bez umowy? Sprawdź, czy należy Ci się wynagrodzenie za bezumowne korzystanie. Wyroku SN o działaniu decyzji wstecz nie znalazłem.',
+        '**Okres przed decyzją.** Według NSA decyzją z art. 124 nie można objąć urządzeń już istniejących (wyrok z 13.07.2021, I OSK 2637/20). Jeżeli sieć stała na działce bez umowy i bez decyzji, za ten czas warto zbadać roszczenie o wynagrodzenie za bezumowne korzystanie. Zasady opisuję w tekście Słup na działce: odszkodowanie, służebność przesyłu, przesunięcie i usunięcie. Wyroku SN o działaniu decyzji wstecz nie znalazłem.',
         '**Granice decyzji.** Firma ma tytuł w zakresie, jaki wynika z treści decyzji. SN wymaga ustalenia, czy decyzja rzeczywiście obejmuje dane urządzenia i nieruchomość (II CSKP 1042/23). Urządzenie albo pas spoza decyzji ocenia się osobno.',
       ]],
       ['p', 'Przy starszych sieciach przed żądaniem pieniędzy sprawdź w starostwie i archiwum, czy nie wydano decyzji z 1958 r., 1985 r. albo z art. 124. To najczęstsza linia obrony firm.'],

@@ -454,6 +454,10 @@ const SERVICE_CONTENT = {
         a: 'Co do zasady za 6 lat: termin przedawnienia wynosi 6 lat i kończy się ostatniego dnia roku kalendarzowego (art. 118 k.c.). Pozew złożony w 2026 r. obejmuje więc okres od 1.01.2020 r. Jeżeli roszczenie jest związane z działalnością gospodarczą, termin może wynosić 3 lata, czyli od 1.01.2023 r. Dalej wstecz sięgniesz, jeżeli bieg wcześniej przerwano, np. pozwem albo uznaniem roszczenia przez firmę (art. 123 § 1 k.c.), albo zawieszono zawezwaniem do próby ugodowej (art. 121 pkt 6 k.c.).',
       },
       {
+        q: 'Złożyłem zawezwanie do próby ugodowej przed 30.06.2022 r. albo firma płaci mi za słup co roku. Kiedy to się przedawnia?',
+        a: 'Wniosek o zawezwanie złożony przed 30.06.2022 r. co do zasady przerwał bieg przedawnienia, chyba że z okoliczności wynika, że nie złożono go w celu dochodzenia roszczenia (uchwała 7 sędziów SN z 15.05.2025, III CZP 22/24). Po zakończeniu postępowania termin biegł na nowo (art. 124 k.c.). Wniosek złożony później tylko zawiesza bieg (art. 121 pkt 6 k.c.). Jeżeli umowa przewiduje coroczną opłatę za służebność, każda opłata przedawnia się co do zasady po 3 latach, z końcem roku (art. 118 k.c.).',
+      },
+      {
         q: 'PGE proponuje kwotę za słup. Czy podpisać?',
         a: 'Nie podpisuj, zanim nie sprawdzisz tytułu firmy i okresu, za który należy Ci się zapłata. Od podpisanej ugody nie uchylisz się z powodu dowodów znalezionych później, chyba że ugodę zawarto w złej wierze (art. 918 § 2 k.c.). Propozycję porównuję z wyliczeniem według § 32 rozporządzenia w sprawie wyceny nieruchomości.',
       },
@@ -497,7 +501,7 @@ const SERVICE_CONTENT = {
       'Decyzje administracyjne (np. starosty) albo umowy poprzednich właścicieli dotyczące linii lub gazociągu, jeśli masz.',
       'Informacja, czy na działce prowadzisz działalność gospodarczą albo produkcję rolną na sprzedaż.',
     ],
-    guides: ['sluzebnosc-przesylu-jak-obliczyc-wynagrodzenie', 'wycena-sluzebnosci-przesylu-rzeczoznawca', 'linia-energetyczna-na-dzialce-budowa-domu', 'sluzebnosc-przesylu-co-to-jest', 'zasiedzenie-sluzebnosci-przesylu'],
+    guides: ['slup-energetyczny-na-dzialce-przesuniecie', 'sluzebnosc-przesylu-jak-obliczyc-wynagrodzenie', 'odszkodowanie-za-slupy-przedawnienie', 'wycena-sluzebnosci-przesylu-rzeczoznawca', 'linia-energetyczna-na-dzialce-budowa-domu', 'gazociag-na-dzialce-odszkodowanie', 'wezwanie-operatora-do-zaplaty-za-slupy-wzor', 'sluzebnosc-przesylu-co-to-jest', 'zasiedzenie-sluzebnosci-przesylu'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'uregulowanie-stanu-prawnego'],
     cta: {
       heading: 'Nie zostawiaj swoich pieniędzy firmie przesyłowej.',
@@ -6100,7 +6104,7 @@ const SERVICE_CONTENT = {
       'Umowa dzierżawy, najmu albo pisemna zgoda, jeśli kiedyś była, i jej wypowiedzenie',
       'Korespondencja z zajmującym: wezwania, odpowiedzi, propozycje ugody',
     ],
-    guides: ['bezumowne-korzystanie-z-nieruchomosci'],
+    guides: ['bezumowne-korzystanie-z-nieruchomosci', 'slup-energetyczny-na-dzialce-przesuniecie', 'wezwanie-operatora-do-zaplaty-za-slupy-wzor'],
     seeAlso: ['zasiedzenie-nieruchomosci', 'dzierzawa-rolna'],
     cta: {
       heading: 'Ktoś korzysta z Twojej ziemi za darmo? Należy Ci się zapłata.',
