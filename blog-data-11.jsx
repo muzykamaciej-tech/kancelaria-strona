@@ -1095,7 +1095,7 @@ window.BLOG.push(
     metaTitle: 'Miejscowy plan (MPZP): jak sprawdzić, symbole i zmiana planu',
     metaDesc: 'MPZP przesądza, co zbudujesz na działce. Jak sprawdzić plan, wypis i wyrys z kosztami, symbole MN, MW, U, R, KDW i czy gmina zmieni plan dla jednej działki.',
     excerpt: 'Miejscowy plan zagospodarowania przestrzennego: jak sprawdzić MPZP, co znaczą MN, MW, U, R, KDW, ile kosztuje wypis i wyrys i czy gmina zmieni plan.',
-    date: '3 listopada 2026', iso: '2026-11-03', readTime: '13 min',
+    date: '3 listopada 2026', iso: '2026-11-03', updated: '18 listopada 2026', updatedIso: '2026-11-18', readTime: '13 min',
     category: 'Planowanie przestrzenne', tags: ['MPZP', 'Plan miejscowy', 'Wypis i wyrys'],
     cover: '/assets/blog-miejscowy-plan-zagospodarowania.jpg',
     coverAlt: 'Okładka wpisu: „Plan miejscowy. Sprawdź, odczytaj, zmień”, obok rysunek planu z kolorowymi terenami MN i R, wypis z planu i lupa na biurku',
@@ -1131,7 +1131,7 @@ window.BLOG.push(
       ['h2', 'Jak sprawdzić, czy działka ma plan miejscowy?'],
       ['ol', [
         '**Geoportal gminy albo krajowy Geoportal.** Wpisz numer działki i obręb. Mapa pokaże granice planu i często link do uchwały. To podgląd, nie dokument urzędowy.',
-        '**Rejestr Urbanistyczny.** Gminy mają w nim udostępnić dane swoich planów do 30.11.2026 (art. 56 ust. 2 ustawy z 7.07.2023 w brzmieniu ustawy z 30.04.2026).',
+        '**Rejestr Urbanistyczny.** Gminy miały w nim udostępnić dane swoich planów do 30.11.2026 (art. 56 ust. 2 ustawy z 7.07.2023 w brzmieniu ustawy z 30.04.2026). Jeśli danych Twojej gminy brakuje, sprawdź BIP gminy i dziennik urzędowy województwa.',
         '**BIP gminy i dziennik urzędowy województwa.** Tu jest obowiązujący tekst uchwały i rysunek. Sprawdź, czy rada nie przyjęła później zmian planu.',
         '**Wypis i wyrys.** Urzędowe potwierdzenie ustaleń planu dla Twojej działki. Zamów go przed zakupem, kredytem albo projektem.',
       ]],

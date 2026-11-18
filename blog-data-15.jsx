@@ -7,7 +7,7 @@ window.BLOG.push(
     metaTitle: 'Darowizna działki: podatek, koszty i sprzedaż przed 5 lat',
     metaDesc: 'Najbliższa rodzina nie płaci podatku, zięć czy bratanek przy działce za 200 tys. zł od 10 855 do 37 620 zł. Taksa, KOWR, hipoteka, PIT przy sprzedaży.',
     excerpt: 'Darowizna działki wymaga aktu notarialnego. Rodzina bez podatku, inni do 20%. Działka rolna, hipoteka i 19% PIT przy sprzedaży przed upływem 5 lat.',
-    date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
+    date: '7 listopada 2026', iso: '2026-11-07', updated: '18 listopada 2026', updatedIso: '2026-11-18', readTime: '13 min',
     category: 'Współwłasność i spadki', tags: ['Darowizna', 'Podatek od darowizny', 'Działka rolna'],
     cover: '/assets/blog-darowizna-dzialki-i-mieszkania.jpg',
     coverAlt: 'Okładka wpisu: „Darowizna działki i mieszkania. Notariusz, podatek i sprzedaż przed 5 latami”, obok drewniany dom z oświetlonymi oknami za płotem o zmierzchu',
@@ -103,7 +103,7 @@ window.BLOG.push(
       ['p', 'Działkę odwołujesz na tych samych zasadach co mieszkanie: tekst Odwołanie darowizny mieszkania: rażąca niewdzięczność, termin i jak odzyskać nieruchomość.'],
       ['h2', 'Przykład z życia'],
       ['p', 'Pan Marek, wdowiec bez dzieci, kupił w 2010 r. działkę budowlaną wartą dziś 200 000 zł. Chce ją dać siostrzeńcowi Piotrowi, który zamierza sprzedać ją w 2028 r. za 240 000 zł i nie kupuje mieszkania.'],
-      ['p', '**Wariant A: darowizna działki w piątek 27.11.2026 r.**'],
+      ['p', '**Wariant A: darowizna działki w listopadzie 2026 r.**'],
       ['ul', [
         'Taksa z VAT: 1931,10 zł, wniosek o wpis z VAT: 369 zł, wpis: 200 zł, plus wypisy.',
         'Podatek od darowizny: 19 927 zł.',
