@@ -530,13 +530,24 @@ function BlogCategoryPage({ catId, setRoute }) {
   );
 }
 
+/* „Czytaj dalej”: dwa wpisy z tej samej kategorii Skarbnicy, najbliższe datą (Poprzedni = starszy, Następny = nowszy).
+   Na skraju kategorii druga pozycja to kolejny najbliższy wpis z tej samej strony; kategoria z jednym wpisem → sąsiedzi
+   z całego bloga według daty. */
+function postNeighbours(post) {
+  const cat = blogCategoryOfPost(post);
+  let list = blogByNewest(cat ? postsInCategory(cat) : window.BLOG);
+  if (list.length < 3) list = blogByNewest(window.BLOG);
+  const i = list.indexOf(post);
+  const newer = list.slice(0, i).reverse(), older = list.slice(i + 1);
+  const prev = older[0] || newer[1] || null, next = newer[0] || older[1] || null;
+  return { prev, next };
+}
+
 function BlogPostPage({ slug, setRoute }) {
   const post = window.BLOG.find((p) => p.slug === slug) || window.BLOG[0];
   /* treść wpisu (body, faq) spoza app.js: app.jsx contentReady / loadContent */
   const ready = window.contentReady('blog', post.slug);
-  const idx = window.BLOG.indexOf(post);
-  const next = window.BLOG[(idx + 1) % window.BLOG.length];
-  const prev = window.BLOG[(idx - 1 + window.BLOG.length) % window.BLOG.length];
+  const { prev, next } = postNeighbours(post);
 
   return (
     <main id="main-content" data-screen-label={`05 Blog post — ${post.title}`}>
@@ -595,20 +606,20 @@ function BlogPostPage({ slug, setRoute }) {
         <div className="wrap">
           <span className="eyebrow">Czytaj dalej</span>
           <div className="grid grid-2 mt-6" style={{ gap: '1.5rem' }}>
-            <window.NavLink className="related-post" route="blogpost" slug={prev.slug}>
+            {prev && <window.NavLink className="related-post" route="blogpost" slug={prev.slug}>
               <Icon name="arrow-left" size={18} />
               <div>
-                <div className="small uppercase tracking-widest font-bold">Poprzedni</div>
+                <div className="small uppercase tracking-widest font-bold">{prev.iso <= post.iso ? 'Poprzedni' : 'Nowszy'}</div>
                 <div className="font-bold mt-2" style={{ color: 'var(--text-main)' }}>{prev.title}</div>
               </div>
-            </window.NavLink>
-            <window.NavLink className="related-post related-post-next" route="blogpost" slug={next.slug}>
+            </window.NavLink>}
+            {next && <window.NavLink className="related-post related-post-next" route="blogpost" slug={next.slug}>
               <div>
-                <div className="small uppercase tracking-widest font-bold">Następny</div>
+                <div className="small uppercase tracking-widest font-bold">{next.iso >= post.iso ? 'Następny' : 'Starszy'}</div>
                 <div className="font-bold mt-2" style={{ color: 'var(--text-main)' }}>{next.title}</div>
               </div>
               <Icon name="arrow-right" size={18} />
-            </window.NavLink>
+            </window.NavLink>}
           </div>
         </div>
       </section>

@@ -241,14 +241,26 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 /* -------------------------------------------------------------------------
    Breadcrumb
    ------------------------------------------------------------------------- */
+/* jedna linia o stałej wysokości (CLS): bez tego okruszki na telefonie łamały się na 2 wiersze czcionką zastępczą
+   i wracały do 1 po wczytaniu Lory, przesuwając cały nagłówek (CLS usług 0,27–0,32 → < 0,1); dłuższe przewija się w bok */
 .breadcrumb {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.8125rem;
+  line-height: 1.25rem;
+  height: 1.25rem;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
   color: var(--text-muted);
 }
+.breadcrumb::-webkit-scrollbar { display: none; }
+.breadcrumb > * { flex: none; }
+.breadcrumb > svg, .breadcrumb > i { width: 14px; height: 14px; flex: 0 0 14px; }
+.breadcrumb a:focus-visible { outline-offset: -2px; } /* obrys fokusu nie ginie w overflow */
 .breadcrumb button {
   background: none;
   border: none;

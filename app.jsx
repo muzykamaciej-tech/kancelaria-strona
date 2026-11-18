@@ -171,12 +171,13 @@ function setHeadTag(selector, create, attr, value) {
   if (!el) { el = create(); document.head.appendChild(el); }
   el.setAttribute(attr, value);
 }
-/* canonical + og:url point at the page itself (www, no trailing slash); 404 gets noindex and no canonical */
+/* canonical + og:url point at the page itself (www, no trailing slash); 404 gets noindex and no canonical;
+   indexed pages get robots max-image-preview:large (large image previews in Google and Discover) */
 function setCanonical(path, noindex) {
   const url = noindex ? null : SITE_ORIGIN + (path === '/' ? '/' : path);
   setHeadTag('link[rel="canonical"]', () => { const l = document.createElement('link'); l.rel = 'canonical'; return l; }, 'href', url);
   setHeadTag('meta[property="og:url"]', () => { const m = document.createElement('meta'); m.setAttribute('property', 'og:url'); return m; }, 'content', url);
-  setHeadTag('meta[name="robots"]', () => { const m = document.createElement('meta'); m.setAttribute('name', 'robots'); return m; }, 'content', noindex ? 'noindex' : null);
+  setHeadTag('meta[name="robots"]', () => { const m = document.createElement('meta'); m.setAttribute('name', 'robots'); return m; }, 'content', noindex ? 'noindex' : 'max-image-preview:large');
 }
 function setMetaTag(attr, key, value) {
   setHeadTag(`meta[${attr}="${key}"]`, () => { const m = document.createElement('meta'); m.setAttribute(attr, key); return m; }, 'content', value);
@@ -384,6 +385,11 @@ function stdPageNode(type, c, url, name) {
 }
 function buildJsonLd(route, ids) {
   ids = ids || {};
+  /* strona główna: węzeł WebSite (nazwa witryny w Google), wydawca = LegalService z index.html */
+  if (route === 'landing') {
+    return { '@context': 'https://schema.org', '@type': 'WebSite', '@id': SITE_BASE + '/#witryna', name: 'Kancelaria Nieruchomości adw. dr Maciej Muzyka',
+      alternateName: 'Mecenas od Nieruchomości', url: SITE_BASE + '/', inLanguage: 'pl', publisher: { '@id': ORG_ID } };
+  }
   if (route === 'faq') {
     return { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: (window.FAQ_SECTIONS || []).flatMap((s) => s.items).map((it) => ({ '@type': 'Question', name: it.q, acceptedAnswer: { '@type': 'Answer', text: it.a } })) };
   }
