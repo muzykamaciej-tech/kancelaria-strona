@@ -251,7 +251,7 @@ const SEO_TITLE_BLOCK = {
 };
 const SITE_ORIGIN = 'https://www.mecenasodnieruchomosci.pl';
 const DEFAULT_OG_IMAGE = SITE_ORIGIN + '/assets/og-image.png';
-const DEFAULT_OG_ALT = 'adw. dr Maciej Muzyka — Kancelaria Nieruchomości';
+const DEFAULT_OG_ALT = 'Kancelaria Nieruchomości adw. dr Maciej Muzyka';
 /* home page social texts exactly as in index.html (short og:title, own og/twitter descriptions) */
 const LANDING_SOCIAL = {
   ogTitle: 'Prawnik od nieruchomości w Lublinie – adw. dr Maciej Muzyka',
