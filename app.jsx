@@ -259,6 +259,7 @@ const LANDING_SOCIAL = {
   ogDescription: 'Nie musisz znać się na prawie, żeby bezpiecznie kupować i inwestować. Adwokat w Lublinie, wyłącznie prawo nieruchomości. Bezpłatna wstępna analiza i oferta w 24 h.',
   twitterDescription: 'Adwokat w Lublinie, wyłącznie prawo nieruchomości. Opisz sprawę: w 24 h odpiszę, co trzeba zrobić, i prześlę ofertę. Sprawy z całej Polski zdalnie.',
 };
+const LANDING_TITLE = 'Prawnik od nieruchomości Lublin – adwokat dr Maciej Muzyka';
 const LANDING_META = 'Kancelaria Nieruchomości w Lublinie. Adwokat, wyłącznie prawo nieruchomości: plan ogólny i WZ, słupy, zakup, spory. Bezpłatna wstępna analiza i oferta w 24 h.';
 
 function setMetaForView(route, ids) {
@@ -306,7 +307,7 @@ function setMetaForView(route, ids) {
   } else if (route === 'rodo') {
     setMeta('Klauzula informacyjna RODO | ' + SITE_NAME, 'Obowiązek informacyjny RODO — kto przetwarza Twoje dane po wysłaniu formularza, w jakim celu i jak długo oraz jakie masz prawa.');
   } else {
-    setMeta('Prawnik od nieruchomości Lublin – adwokat dr Maciej Muzyka', LANDING_META, LANDING_SOCIAL);
+    setMeta(LANDING_TITLE, LANDING_META, LANDING_SOCIAL);
   }
   setCanonical(buildPath(route, ids), route === 'notfound');
   setJsonLd(buildJsonLd(route, ids));
@@ -386,9 +387,16 @@ function stdPageNode(type, c, url, name) {
 function buildJsonLd(route, ids) {
   ids = ids || {};
   /* strona główna: węzeł WebSite (nazwa witryny w Google), wydawca = LegalService z index.html */
+  /* + WebPage o kancelarii (LegalService z index.html) i FAQPage z pytań sekcji „W Lublinie i okolicy” (landing.jsx, LUBLIN_FAQ) */
   if (route === 'landing') {
-    return { '@context': 'https://schema.org', '@type': 'WebSite', '@id': SITE_BASE + '/#witryna', name: 'Kancelaria Nieruchomości adw. dr Maciej Muzyka',
-      alternateName: 'Mecenas od Nieruchomości', url: SITE_BASE + '/', inLanguage: 'pl', publisher: { '@id': ORG_ID } };
+    const faq = (window.LUBLIN_FAQ || []).map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }));
+    return { '@context': 'https://schema.org', '@graph': [
+      { '@type': 'WebSite', '@id': SITE_BASE + '/#witryna', name: 'Kancelaria Nieruchomości adw. dr Maciej Muzyka',
+        alternateName: 'Mecenas od Nieruchomości', url: SITE_BASE + '/', inLanguage: 'pl', publisher: { '@id': ORG_ID } },
+      { '@type': 'WebPage', '@id': SITE_BASE + '/#strona', url: SITE_BASE + '/', name: LANDING_TITLE, description: LANDING_META, inLanguage: 'pl',
+        isPartOf: { '@id': SITE_BASE + '/#witryna' }, about: { '@id': ORG_ID } },
+      faq.length ? { '@type': 'FAQPage', '@id': SITE_BASE + '/#lublin-faq', inLanguage: 'pl', isPartOf: { '@id': SITE_BASE + '/#witryna' }, mainEntity: faq } : null,
+    ].filter(Boolean) };
   }
   if (route === 'faq') {
     return { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: (window.FAQ_SECTIONS || []).flatMap((s) => s.items).map((it) => ({ '@type': 'Question', name: it.q, acceptedAnswer: { '@type': 'Answer', text: it.a } })) };
@@ -735,7 +743,8 @@ function App() {
       const p = parsePath(path);
       if (p.route === 'notfound') return;
       e.preventDefault();
-      pushPath(buildPath(p.route, p), p.route, p);
+      /* kotwica sekcji na innej stronie (np. /#lublin z /o-mnie): adres z kotwicą, przewinięcie w efekcie po nawigacji */
+      pushPath(buildPath(p.route, p) + (/^#[A-Za-z][\w-]*$/.test(url.hash) ? url.hash : ''), p.route, p);
       show(p, 0);
     }
     document.addEventListener('click', onClick);
@@ -787,7 +796,9 @@ function App() {
   React.useLayoutEffect(() => {
     if (!navTick) return;
     shownPath.current = location.pathname;
-    window.scrollTo({ top: scrollTarget.current, behavior: 'instant' });
+    const anchor = !scrollTarget.current && /^#[A-Za-z][\w-]*$/.test(location.hash) ? document.getElementById(location.hash.slice(1)) : null;
+    if (anchor) anchor.scrollIntoView({ behavior: 'instant', block: 'start' });
+    else window.scrollTo({ top: scrollTarget.current, behavior: 'instant' });
     const h = document.querySelector('#app main h1');
     if (h) {
       if (!h.hasAttribute('tabindex')) h.setAttribute('tabindex', '-1');

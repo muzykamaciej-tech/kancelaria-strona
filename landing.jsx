@@ -1563,6 +1563,110 @@ function MapSection() {
 }
 
 /* ============================================================
+   „Prawnik nieruchomości w Lublinie” (plan SEO 2.8, 18.11.2026): sekcja lokalna strony głównej zamiast osobnej
+   strony /prawnik-nieruchomosci-lublin (strona główna ma już ten tytuł i H1, osobna strona konkurowałaby z nią).
+   Fakty tylko z treści strony: bloki „W Lublinie” usług, /o-mnie, stopka, /faq. FAQ trafia też do JSON-LD
+   strony głównej (app.jsx, buildJsonLd 'landing'), więc odpowiedzi to zwykły tekst.
+   ============================================================ */
+const LUBLIN_PLACES = [
+  { b: 'Sąd Rejonowy Lublin-Wschód w Lublinie z siedzibą w Świdniku', t: 'wschodnia część Lublina, Świdnik oraz m.in. gminy Głusk, Niemce, Wólka i Łęczna. Jego V Wydział prowadzi księgi wieczyste dla tej części miasta i Świdnika.' },
+  { b: 'Sąd Rejonowy Lublin-Zachód w Lublinie', t: 'pozostała część miasta oraz gminy Jastków i Konopnica.' },
+  { b: 'Sąd Okręgowy w Lublinie', t: 'apelacje od wyroków sądów rejonowych i sprawy o ponad 100 000 zł, np. o zachowek albo o wynagrodzenie za słupy na działce. Od jego wyroków apelację rozpoznaje Sąd Apelacyjny w Lublinie.' },
+  { b: 'Wojewódzki Sąd Administracyjny w Lublinie', t: 'skargi na decyzje SKO w Lublinie, np. w sprawie warunków zabudowy, i na uchwały gmin z województwa lubelskiego, w tym na plan ogólny.' },
+  { b: 'Urząd Miasta Lublin i SKO w Lublinie', t: 'wnioski o warunki zabudowy (decyzję wydaje Prezydent Miasta Lublin), wypis i wyrys z planu miejscowego, odwołania od decyzji.' },
+  { b: 'KOWR, Oddział Terenowy w Lublinie', t: 'wnioski o zgodę na nabycie ziemi rolnej; w Białej Podlaskiej działa jego sekcja zamiejscowa.' },
+  { b: 'PGE Dystrybucja S.A. (siedziba w Lublinie)', t: 'wezwania o wynagrodzenie za słupy i linie na działce. Najpierw ustalam z dokumentów, czyje są urządzenia.' },
+];
+/* 10 usług: najwięcej wyświetleń w GSC (3 mies. do 18.11.2026) plus WZ i słupy, które mają blok „W Lublinie” */
+const LUBLIN_SERVICES = ['audyt-stanu-prawnego-nieruchomosci', 'plan-ogolny', 'warunki-zabudowy', 'skarga-na-plan-miejscowy',
+  'odszkodowanie-sluzebnosc-przesylu', 'droga-konieczna', 'eksmisja', 'uzytkowanie-wieczyste', 'zgoda-kowr', 'status-rolnika'];
+const LUBLIN_GUIDES = ['plan-ogolny-lublin-i-gminy-wokol', 'warunki-zabudowy-2026-lublin', 'warunki-zabudowy-od-2027',
+  'wezwanie-operatora-do-zaplaty-za-slupy-wzor', 'szerokosc-drogi-koniecznej', 'warunki-zabudowy-ile-wazne'];
+const LUBLIN_FAQ = [
+  { q: 'Czy prowadzisz sprawy z gmin wokół Lublina?', a: 'Tak, także ze Świdnika i gmin pod Lublinem. Najpierw ustalam właściwy sąd, bo nie każda gmina w okolicy podlega sądom lubelskim: Bełżyce i Wojciechów należą do Sądu Rejonowego w Opolu Lubelskim, Niedrzwica Duża i Borzechów do Sądu Rejonowego w Kraśniku, a Garbów do Sądu Rejonowego w Puławach. Na oględziny działki przez sąd i biegłego przyjeżdżam osobiście.' },
+  { q: 'Który sąd w Lublinie rozpozna sprawę o moją nieruchomość?', a: 'To zależy od rodzaju sprawy i położenia nieruchomości. Zasiedzenie, drogę konieczną czy służebność przesyłu rozpoznaje sąd rejonowy położenia działki: Lublin-Wschód z siedzibą w Świdniku albo Lublin-Zachód, każdy dla swojej części miasta. Przy pozwie o ponad 100 000 zł, np. o wynagrodzenie za słupy na działce w Lublinie, pierwszą instancją jest Sąd Okręgowy w Lublinie. Właściwy sąd ustalam przed złożeniem pisma.' },
+  { q: 'Szukam radcy prawnego od nieruchomości w Lublinie. Czy adwokat poprowadzi taką sprawę?', a: 'Tak. W sprawach o nieruchomości adwokat i radca prawny tak samo mogą reprezentować klienta przed sądami i urzędami, a różni ich samorząd zawodowy, do którego należą. Jestem adwokatem Lubelskiej Izby Adwokackiej (wpis nr LUB/ADW/1702).' },
+  { q: 'Nie mieszkam w Lublinie. Czy poprowadzisz moją sprawę zdalnie?', a: 'Tak. Sprawy klientów spoza Lublina prowadzę zdalnie, w całej Polsce: kontakt i dokumenty wymieniamy przede wszystkim mailowo. Gdy Twoja sprawa toczy się w Lublinie, na rozprawach jestem jako Twój pełnomocnik.' },
+  { q: 'Jak szybko odpowiadasz na opis sprawy z formularza?', a: 'W ciągu 24 h roboczych. Odpisuję, co trzeba w sprawie zrobić, np. audyt, pismo albo sprawa sądowa, i od razu wysyłam ofertę z ceną i terminem. Do akceptacji oferty nic nie płacisz. Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów.' },
+  { q: 'Czy możemy spotkać się w kancelarii w Lublinie?', a: 'Tak, gdy sprawa wymaga spotkania. Na co dzień kontakt prowadzę przede wszystkim mailowo, a spotykamy się w kancelarii przy ul. Cichej 4/5 w Lublinie albo w Warszawie przy ul. Brackiej 20/7A.' },
+];
+function LublinSection() {
+  const NL = window.NavLink, FAQAccordion = window.FAQAccordion;
+  const services = LUBLIN_SERVICES.map((slug) => {
+    const s = window.getService(slug);
+    if (!s) console.error('LUBLIN_SERVICES: brak usługi o slugu "' + slug + '"');
+    return s;
+  }).filter(Boolean);
+  const guides = LUBLIN_GUIDES.map((slug) => {
+    const p = (window.BLOG || []).find((x) => x.slug === slug);
+    if (!p) console.error('LUBLIN_GUIDES: brak wpisu o slugu "' + slug + '"');
+    return p;
+  }).filter(Boolean);
+  return (
+    <section className="section-py lublin-section" id="lublin" aria-labelledby="lublin-h2">
+      <div className="wrap">
+        <div className="section-head section-head--center">
+          <span className="eyebrow">W Lublinie i okolicy</span>
+          <h2 className="h2 mt-4" id="lublin-h2">Prawnik nieruchomości w Lublinie: sądy, urzędy i sprawy z regionu.</h2>
+          <p className="lead mt-6">
+            Kancelarię prowadzę w Lublinie, przy ul. Cichej 4/5, i zajmuję się wyłącznie prawem nieruchomości. W sprawach z Lublina i gmin wokół miasta na rozprawy i oględziny działki przychodzę osobiście. Klientów z reszty Polski obsługuję zdalnie.
+          </p>
+        </div>
+
+        <div className="lublin-grid">
+          <div>
+            <h3 className="lublin-h3">Gdzie prowadzę sprawy</h3>
+            <ul className="check-list mt-6">
+              {LUBLIN_PLACES.map((it, i) =>
+              <li key={i}><LIcon name="map-pin" size={18} style={{ color: 'var(--accent)' }} /><span><strong style={{ color: 'var(--text-main)' }}>{it.b}</strong>: {it.t}</span></li>
+              )}
+            </ul>
+          </div>
+          <div>
+            <h3 className="lublin-h3">Najczęstsze sprawy z Lublina i okolicy</h3>
+            <ul className="lublin-links mt-6">
+              {services.map((s) =>
+              <li key={s.slug}><NL route="usluga" slug={s.slug}><span>{s.title}</span><SvgIcon name="arrow-right" size={14} /></NL></li>
+              )}
+            </ul>
+            <div className="lublin-nap mt-8">
+              <p className="font-bold" style={{ color: 'var(--text-main)' }}>Kancelaria Nieruchomości adw. dr Maciej Muzyka</p>
+              <p className="small">Mecenas od Nieruchomości</p>
+              <p className="mt-3">ul. Cicha 4/5, 20-078 Lublin</p>
+              <p><a href="tel:+48884784984">+48 884 784 984</a></p>
+              <p><a href="mailto:maciej.muzyka@mecenasodnieruchomosci.pl" style={{ wordBreak: 'break-all' }}>maciej.muzyka@mecenasodnieruchomosci.pl</a></p>
+              <p className="mt-3"><a href="https://maps.google.com/?cid=8576864712077445002" target="_blank" rel="noopener noreferrer">Wizytówka w Mapach Google</a></p>
+            </div>
+          </div>
+        </div>
+
+        {guides.length > 0 &&
+        <div className="lublin-block">
+            <h3 className="lublin-h3 text-center">Poradniki dla mieszkańców Lublina i okolic</h3>
+            <ul className="home-guides mt-8">
+              {guides.map((p) =>
+            <li key={p.slug}>
+                  <NL className="home-guide" route="blogpost" slug={p.slug}>
+                    <span className="home-guide-cat">{p.category}</span>
+                    <span className="home-guide-title">{p.title}</span>
+                    <span className="home-guide-arrow" aria-hidden="true"><SvgIcon name="arrow-right" size={16} /></span>
+                  </NL>
+                </li>
+            )}
+            </ul>
+          </div>
+        }
+
+        <div className="lublin-block lublin-faq">
+          <h3 className="lublin-h3 text-center">Pytania o współpracę w Lublinie i okolicy</h3>
+          {FAQAccordion && <FAQAccordion items={LUBLIN_FAQ} />}
+        </div>
+      </div>
+    </section>);
+
+}
+
+/* ============================================================
    LandingPage — assembles everything
    ============================================================ */
 function LandingPage({ setRoute }) {
@@ -1577,10 +1681,11 @@ function LandingPage({ setRoute }) {
       <HomeGuides />
       <Standards />
       <ReviewsBand />
+      <LublinSection />
       <FinalCTA />
       <MobileCTABar />
     </main>);
 
 }
 
-Object.assign(window, { SectionPhoto, LandingPage, QualificationForm, GoogleBadge, ReportShowcase, MapSection, MobileCTABar, lScrollToId, ReviewsBand, FinalCTA });
+Object.assign(window, { SectionPhoto, LandingPage, LUBLIN_FAQ, QualificationForm, GoogleBadge, ReportShowcase, MapSection, MobileCTABar, lScrollToId, ReviewsBand, FinalCTA });

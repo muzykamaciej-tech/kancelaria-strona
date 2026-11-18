@@ -61,6 +61,7 @@ function OMnieIntro() {
             <li>Decydujesz, czy przyjmujesz ofertę; do jej akceptacji nic nie płacisz. Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów. Szczegółowa analiza, pismo czy prowadzenie sprawy to zakres oferty.</li>
           </ol>
           <p>Nie obiecuję wyniku sprawy. Piszę wprost, co przemawia za nią, a co przeciw niej. Kontakt prowadzę przede wszystkim mailowo. Gdy sprawa wymaga spotkania, spotykamy się w Lublinie albo w Warszawie (ul. Bracka 20/7A).</p>
+          <p>Sądy i urzędy, przed którymi prowadzę sprawy w Lublinie i okolicy, oraz poradniki dla mieszkańców regionu zebrałem w części <a href="/#lublin">Prawnik nieruchomości w Lublinie</a> na stronie głównej.</p>
         </div>
       </div>
     </section>

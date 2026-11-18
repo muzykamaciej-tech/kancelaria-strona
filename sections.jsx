@@ -844,6 +844,7 @@ function Footer({ setRoute }) {
               <li><window.NavLink route="faq">FAQ</window.NavLink></li>
               <li><window.NavLink route="kalkulator">Kalkulator — słupy na działce</window.NavLink></li>
               <li><window.NavLink route="kontakt">Kontakt</window.NavLink></li>
+              <li><a href="/#lublin">Prawnik nieruchomości w Lublinie</a></li>
               <li className="mt-4">ul. Cicha 4/5, 20-078 Lublin<br /><span style={{ color: 'var(--slate-500)' }}>Siedziba</span></li>
               <li className="mt-3">ul. Bracka 20/lok. 7A, 00-028 Warszawa<br /><span style={{ color: 'var(--slate-500)' }}>Możliwość spotkania</span></li>
               <li className="mt-3"><a href="tel:+48884784984" style={{ color: 'inherit' }}>+48 884 784 984</a> · <a href="https://wa.me/48884784984" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>WhatsApp</a></li>
