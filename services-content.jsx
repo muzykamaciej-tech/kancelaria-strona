@@ -11,7 +11,7 @@ const SERVICE_CONTENT = {
   'audyt-stanu-prawnego-nieruchomosci': {
     h1Full: 'Audyt stanu prawnego nieruchomości: sprawdzenie działki, domu lub mieszkania przed zakupem',
     topic: 'Audyt nieruchomości',
-    metaDesc: 'Przed zakupem działki, domu lub mieszkania sprawdzam księgę wieczystą, ewidencję, plan i dostęp do drogi. Dostajesz raport z ryzykami i zmianami do umowy.',
+    metaDesc: 'Przed zakupem działki, domu lub mieszkania w Lublinie i całej Polsce sprawdzam księgę wieczystą, ewidencję, plan i drogę. Dostajesz raport z ryzykami.',
     subtitle: 'Kupujesz działkę, dom albo mieszkanie i nie wiesz, czy sprzedający mówi Ci wszystko? Sprawdzenie działki przed zakupem obejmuje księgę wieczystą, ewidencję gruntów, plan i dostęp do drogi publicznej. Robię to przed zadatkiem, a wynik dostajesz w raporcie z ryzykami i zmianami do umowy.',
     short: {
       q: 'Sprawdzenie działki przed zakupem: czy wystarczy księga wieczysta?',
@@ -193,7 +193,16 @@ const SERVICE_CONTENT = {
     ],
     seeAlso: ['droga-konieczna', 'plan-ogolny', 'legalizacja-samowoli'],
     cta: { heading: 'Audyt kosztuje ułamek tego, co możesz stracić.', lead: 'Napisz, co kupujesz i do kiedy masz podpisać umowę. W 24 h roboczych odpiszę ze wstępną analizą i ofertą; płacisz dopiero, gdy ją przyjmiesz.' },
-    updated: '2026-10-26',
+    local: {
+      heading: 'Sprawdzenie działki przed zakupem w Lublinie: księga, plan i urząd',
+      intro: 'Przy działce lub mieszkaniu w Lublinie najpierw ustalam, który sąd prowadzi księgę wieczystą i jakie plany obowiązują dla terenu.',
+      items: [
+        'Księgi wieczyste dla Lublina prowadzą dwa sądy: dla wschodniej części miasta i Świdnika V Wydział Ksiąg Wieczystych Sądu Rejonowego Lublin-Wschód w Lublinie z siedzibą w Świdniku, dla pozostałej części Sąd Rejonowy Lublin-Zachód w Lublinie.',
+        'Wypis i wyrys z planu miejscowego w Lublinie wydaje Urząd Miasta (Wydział Planowania), a stan prac nad planem ogólnym miasto publikuje w BIP. Oba sprawdzam przed zadatkiem.',
+        'Działka w gminie pod Lublinem? Wypis z planu zamawiam w urzędzie tej gminy, a księgę sprawdzam w sądzie właściwym dla gminy, np. dla Bełżyc w Sądzie Rejonowym w Opolu Lubelskim.',
+      ],
+    },
+    updated: '2026-11-18',
   },
 
   /* ===== Sprawdzenie umowy deweloperskiej ===== */
@@ -362,7 +371,7 @@ const SERVICE_CONTENT = {
     h1: 'Odszkodowanie za słupy i urządzenia przesyłowe na działce',
     h1Full: 'Odszkodowanie za słupy na działce: linie, gazociągi i służebność przesyłu',
     topic: 'Służebność przesyłu',
-    metaDesc: 'Słup, linia albo gazociąg na działce bez tytułu prawnego? Możesz żądać wynagrodzenia na przyszłość, a od firmy w złej wierze co do zasady za 6 lat wstecz.',
+    metaDesc: 'Słup lub gazociąg na działce w Lublinie i okolicy bez tytułu prawnego? Możesz żądać wynagrodzenia, od firmy w złej wierze co do zasady za 6 lat wstecz.',
     subtitle: 'Słup, linia średniego lub wysokiego napięcia albo gazociąg stoi na Twojej działce, a firma przesyłowa nic nie płaci? Jeżeli firma nie ma tytułu prawnego, możesz żądać wynagrodzenia na przyszłość, a od firmy w złej wierze także co do zasady za 6 lat wstecz (art. 118 k.c.). Sprawdzam tytuł firmy i okres roszczenia, a potem wzywam ją do zapłaty.',
     short: {
       q: 'Czy należy mi się odszkodowanie za słupy na działce?',
@@ -494,7 +503,16 @@ const SERVICE_CONTENT = {
       heading: 'Nie zostawiaj swoich pieniędzy firmie przesyłowej.',
       lead: 'Napisz, co stoi na działce, od kiedy i czy firma przesłała Ci propozycję kwoty. W 24 h roboczych odpiszę, czy zacząć od sprawdzenia tytułu firmy, czy od wezwania, i prześlę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-11-06',
+    local: {
+      heading: 'Słupy i służebność przesyłu w Lublinie: operator, sąd i oględziny',
+      intro: 'PGE Dystrybucja S.A., operator sieci energetycznej, ma siedzibę w Lublinie, a w regionie działają m.in. jej oddziały Lublin i Zamość. Zanim wyślę wezwanie, ustalam z dokumentów, która firma jest właścicielem urządzeń na Twojej działce.',
+      items: [
+        'Wniosek o ustanowienie służebności przesyłu na działce w Lublinie rozpoznaje sąd rejonowy jej położenia (art. 606 k.p.c.): Sąd Rejonowy Lublin-Wschód w Lublinie z siedzibą w Świdniku albo Sąd Rejonowy Lublin-Zachód w Lublinie.',
+        'Pozew o wynagrodzenie za bezumowne korzystanie także trafia do sądu położenia działki (art. 38 § 1 pkt 4 k.p.c.). Dla działki w Lublinie przy żądaniu ponad 100 000 zł pierwszą instancją jest Sąd Okręgowy w Lublinie (art. 17 pkt 4 k.p.c.).',
+        'W oględzinach działki przez sąd i biegłego biorę udział osobiście, także w gminach pod Lublinem.',
+      ],
+    },
+    updated: '2026-11-18',
   },
 
   /* ===== Warunki zabudowy (WZ) ===== */
@@ -502,7 +520,7 @@ const SERVICE_CONTENT = {
     h1: 'Warunki zabudowy (WZ)',
     h1Full: 'Warunki zabudowy (WZ): wniosek, odmowa i odwołanie po reformie',
     topic: 'Decyzja o warunkach zabudowy',
-    metaDesc: 'Warunki zabudowy (WZ) z wniosku złożonego od 1.09.2026 dostaniesz tylko wtedy, gdy plan ogólny gminy już wszedł w życie. Pomagam przy wniosku i odwołaniu.',
+    metaDesc: 'WZ z wniosku od 1.09.2026 dostaniesz tylko, gdy plan ogólny gminy wszedł w życie. W Lublinie decyzję wydaje prezydent miasta. Pomagam przy wniosku.',
     subtitle: 'Chcesz budować na działce bez planu miejscowego albo gmina odmówiła Ci „wuzetki”? Warunki zabudowy (WZ) z wniosku złożonego od 1.09.2026 urząd wyda tylko wtedy, gdy plan ogólny gminy już wszedł w życie. Sprawdzam, czy działka spełnia warunki, składam wniosek, a po odmowie piszę odwołanie do samorządowego kolegium odwoławczego (SKO).',
     short: {
       q: 'Czy dziś dostanę warunki zabudowy na działkę bez planu miejscowego?',
@@ -662,7 +680,16 @@ const SERVICE_CONTENT = {
       heading: 'Zanim kupisz działkę, sprawdź, czy na niej zbudujesz.',
       lead: 'Opisz działkę, którą masz albo chcesz kupić, i plan budowy, albo dołącz odmowę WZ. W 24 h roboczych bezpłatnie odpiszę, od czego zacząć, i dołączę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    local: {
+      heading: 'Warunki zabudowy w Lublinie: kto wydaje decyzję i gdzie się odwołać',
+      intro: 'W Lublinie decyzję o warunkach zabudowy wydaje Prezydent Miasta Lublin, a wniosek prowadzi Wydział Planowania Urzędu Miasta. W gminach pod Lublinem decyzję wydaje wójt albo burmistrz (art. 60 ust. 1 u.p.z.p.).',
+      items: [
+        'Odwołanie od decyzji wydanej w Lublinie rozpatruje Samorządowe Kolegium Odwoławcze w Lublinie. Składasz je za pośrednictwem Prezydenta Miasta Lublin w 14 dni od doręczenia decyzji.',
+        'Skargę na decyzję SKO w Lublinie rozpoznaje Wojewódzki Sąd Administracyjny w Lublinie (art. 13 § 2 p.p.s.a.). Ten sąd rozpoznaje też skargi na uchwały gmin z województwa lubelskiego, w tym na plan ogólny.',
+        'Według BIP Urzędu Miasta Lublin (stan na 18.11.2026) Rada Miasta uchwaliła plan ogólny, a po rozstrzygnięciu nadzorczym Wojewody Lubelskiego trwa procedura części II planu. Zanim złożę wniosek o WZ, sprawdzam, co to znaczy dla Twojej działki.',
+      ],
+    },
+    updated: '2026-11-18',
   },
 
   /* ===== Umowa przedwstępna (Blok 1) ===== */
@@ -2760,7 +2787,7 @@ const SERVICE_CONTENT = {
     h1: 'Zasiedzenie nieruchomości',
     h1Full: 'Zasiedzenie nieruchomości: ile lat, jak udowodnić i jak się bronić',
     topic: 'Zasiedzenie nieruchomości',
-    metaDesc: 'Zasiedzenie następuje po 20 latach posiadania w dobrej wierze albo po 30 latach w złej (art. 172 k.c.). Wpis w księdze wymaga postanowienia sądu.',
+    metaDesc: 'Zasiedzenie następuje po 20 latach posiadania w dobrej wierze albo po 30 latach w złej (art. 172 k.c.). W Lublinie orzeka sąd rejonowy położenia działki.',
     subtitle: 'Od lat użytkujesz działkę, która w księdze wieczystej nie jest Twoja, albo ktoś zajmuje pas Twojego gruntu? Zasiedzenie nieruchomości następuje po 20 albo 30 latach samoistnego posiadania, zależnie od dobrej lub złej wiary przy jego objęciu (art. 172 k.c.). Prowadzę sprawy posiadaczy i właścicieli: napisz, od kiedy korzystasz z działki.',
     short: {
       q: 'Po ilu latach następuje zasiedzenie?',
@@ -2892,7 +2919,16 @@ const SERVICE_CONTENT = {
       heading: 'Wieloletnie posiadanie może stać się własnością. Sprawdźmy, czy w Twoim przypadku.',
       lead: 'Napisz, od kiedy i jak korzystasz z nieruchomości albo kto zajmuje Twoją. W 24 h roboczych odpiszę, co trzeba zrobić w tej sprawie, i wyślę ofertę z ceną i terminem; do akceptacji oferty nic nie płacisz.',
     },
-    updated: '2026-10-26',
+    local: {
+      heading: 'Zasiedzenie w Lublinie: który sąd i jak wygląda sprawa',
+      intro: 'Wniosek o stwierdzenie zasiedzenia składam w sądzie rejonowym położenia nieruchomości (art. 606 k.p.c.). Lublin jest podzielony między dwa sądy rejonowe, więc najpierw ustalam, w której części miasta leży działka.',
+      items: [
+        'Sąd Rejonowy Lublin-Wschód w Lublinie z siedzibą w Świdniku obejmuje część Lublina na wschód od Bystrzycy i na północ od ulic Fabrycznej, Droga Męczenników Majdanka i Franczaka, a także Świdnik i gminy m.in. Głusk, Niemce, Wólka i Łęczna.',
+        'Sąd Rejonowy Lublin-Zachód w Lublinie obejmuje resztę miasta i dwie gminy: Jastków oraz Konopnicę.',
+        'Oba sądy prowadzą też księgi wieczyste. Z prawomocnym postanowieniem o zasiedzeniu składam wniosek o wpis w księdze, którą prowadzi sąd właściwy dla działki.',
+      ],
+    },
+    updated: '2026-11-18',
   },
 
   'uregulowanie-stanu-prawnego': {
@@ -3360,7 +3396,7 @@ const SERVICE_CONTENT = {
     h1: 'Dział spadku z nieruchomością',
     h1Full: 'Dział spadku z nieruchomością: notariusz czy sąd i spłata rodzeństwa',
     topic: 'Dział spadku',
-    metaDesc: 'Przy zgodzie wszystkich spadkobierców dział spadku jest u notariusza, bez niej orzeka sąd. Opłata sądowa 500 zł, zgodny projekt 300 zł (art. 51 u.k.s.c.).',
+    metaDesc: 'Dział spadku przy zgodzie spadkobierców robisz u notariusza, bez niej orzeka sąd spadku, np. w Lublinie. Opłata sądowa 500 zł, zgodny projekt 300 zł.',
     subtitle: 'Odziedziczyłeś z rodzeństwem dom albo mieszkanie i nie wiesz, jak je podzielić? Przy zgodzie wszystkich spadkobierców umowę o dział podpisujesz u notariusza, a bez zgody jednej osoby decyduje sąd (art. 1037 k.c.). Przygotowuję umowę o dział albo wniosek do sądu i prowadzę sprawę do wpisu w księdze wieczystej.',
     short: {
       q: 'Dział spadku u notariusza czy w sądzie: od czego to zależy?',
@@ -3513,14 +3549,23 @@ const SERVICE_CONTENT = {
       heading: 'Zamień odziedziczone „ułamki” w konkretny, sprawiedliwy podział.',
       lead: 'Napisz, czy rodzeństwo zgadza się na podział, a do 24 h roboczych bezpłatnie wskażę, od czego zacząć. W tej odpowiedzi znajdziesz też ofertę z ceną i terminem pracy przy dziale; płacisz dopiero po jej przyjęciu.',
     },
-    updated: '2026-11-07',
+    local: {
+      heading: 'Dział spadku w Lublinie: notariusz czy sąd spadku',
+      intro: 'Gdy wszyscy spadkobiercy się zgadzają, dział spadku robicie umową u notariusza. Bez zgody wniosek rozpoznaje sąd spadku, czyli sąd ostatniego miejsca zwykłego pobytu spadkodawcy (art. 628 k.p.c.), także gdy dom leży w innym mieście.',
+      items: [
+        'Spadkodawca mieszkał ostatnio we wschodniej części Lublina albo w Świdniku? Sądem spadku jest Sąd Rejonowy Lublin-Wschód w Lublinie z siedzibą w Świdniku. Dla reszty Lublina oraz gmin Jastków i Konopnica jest nim Sąd Rejonowy Lublin-Zachód w Lublinie.',
+        'Wniosek o stwierdzenie nabycia spadku także składa się w sądzie spadku (art. 628 k.p.c.), więc obie sprawy toczą się w tym samym sądzie.',
+        'Przy umowie u notariusza wcześniej uzgadniam projekt i wyliczenie spłat, żeby na akcie nie negocjować od zera.',
+      ],
+    },
+    updated: '2026-11-18',
   },
 
   'zachowek': {
     h1: 'Zachowek',
     h1Full: 'Zachowek: dochodzenie i obrona – ile się należy, darowizny, przedawnienie',
     topic: 'Zachowek',
-    metaDesc: 'Zachowek to 1/2 wartości udziału z ustawy, a 2/3 dla małoletniego zstępnego albo trwale niezdolnego do pracy (art. 991 k.c.). Przedawnia się po 5 latach.',
+    metaDesc: 'Zachowek to 1/2 wartości udziału z ustawy, 2/3 dla małoletniego zstępnego albo trwale niezdolnego do pracy (art. 991 k.c.). Adwokat w Lublinie.',
     subtitle: 'Rodzic przepisał mieszkanie na rodzeństwo i pominął Cię w testamencie, albo to od Ciebie ktoś żąda zachowku? Zachowek to suma pieniędzy równa co do zasady połowie wartości udziału, który przypadłby Ci z ustawy (art. 991 k.c.). Prowadzę sprawy po obu stronach: opisz w formularzu, kto zmarł i komu przekazał majątek.',
     short: {
       q: 'Ile wynosi zachowek: połowa czy dwie trzecie?',
@@ -3661,7 +3706,16 @@ const SERVICE_CONTENT = {
       heading: 'Pominięto Cię przy podziale majątku? Zachowek to Twoje prawo.',
       lead: 'Opisz rodzinę zmarłego i darowizny, o których wiesz: w 24 h roboczych odpiszę, od czego zacząć. Ofertę z ceną i terminem dostajesz od razu, a do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-11-07',
+    local: {
+      heading: 'Zachowek w Lublinie: który sąd rozpozna pozew',
+      intro: 'Pozew o zachowek wnosi się wyłącznie do sądu ostatniego miejsca zwykłego pobytu spadkodawcy (art. 39 k.p.c.). Nie decyduje o tym, gdzie mieszkasz Ty ani obdarowany.',
+      items: [
+        'Jeżeli spadkodawca mieszkał ostatnio w Lublinie, a żądasz do 100 000 zł, sprawę rozpozna Sąd Rejonowy Lublin-Wschód w Lublinie z siedzibą w Świdniku albo Sąd Rejonowy Lublin-Zachód w Lublinie, zależnie od części miasta.',
+        'Przy żądaniu ponad 100 000 zł pierwszą instancją jest Sąd Okręgowy w Lublinie (art. 17 pkt 4 k.p.c.), a apelację rozpoznaje Sąd Apelacyjny w Lublinie (art. 367 § 2 k.p.c.).',
+        'Mieszkasz daleko, a sprawa toczy się w Lublinie? Na rozprawach jestem jako Twój pełnomocnik, a dokumenty wymieniamy mailowo.',
+      ],
+    },
+    updated: '2026-11-18',
   },
 
   'stwierdzenie-nabycia-spadku': {
@@ -3826,7 +3880,7 @@ const SERVICE_CONTENT = {
     h1: 'Podział majątku po rozwodzie',
     h1Full: 'Podział majątku po rozwodzie: mieszkanie, kredyt hipoteczny i spłata',
     topic: 'Podział majątku wspólnego',
-    metaDesc: 'Majątek po rozwodzie dzielisz u notariusza albo w sądzie, co do zasady po równo. Przy mieszkaniu z kredytem zwolnić Cię z długu może tylko bank.',
+    metaDesc: 'Majątek po rozwodzie dzielisz u notariusza albo w sądzie, co do zasady po równo; w Lublinie w sądzie rejonowym. Z kredytu zwolnić Cię może tylko bank.',
     subtitle: 'Po rozwodzie zostało wspólne mieszkanie albo dom, często z kredytem, i nie wiesz, kto je zatrzyma? Majątek dzielisz z byłym małżonkiem umową u notariusza albo w sądzie, a udziały są co do zasady równe (art. 43 § 1 k.r.o.). Prowadzę podział, w którym chodzi o nieruchomość: wycenę, spłatę, nakłady i raty kredytu.',
     short: {
       q: 'Jak podzielić mieszkanie z kredytem hipotecznym po rozwodzie?',
@@ -3960,7 +4014,15 @@ const SERVICE_CONTENT = {
       heading: 'Wspólny dom i kredyt po rozwodzie? Zadbam, żeby podział wyszedł po Twojej stronie.',
       lead: 'Opisz, co macie wspólnego i ile zostało kredytu. Bezpłatną wstępną analizę z pierwszym krokiem wyślę w ciągu 24 h roboczych. Cenę i termin prowadzenia podziału podam w ofercie, a płacisz dopiero po jej akceptacji.',
     },
-    updated: '2026-10-10',
+    local: {
+      heading: 'Podział majątku po rozwodzie w Lublinie: który sąd, gdy nie ma zgody',
+      intro: 'Bez zgody o podziale orzeka sąd rejonowy miejsca położenia majątku (art. 566 k.p.c.), a nie sąd okręgowy, który orzekł rozwód. Przy mieszkaniu w Lublinie to jeden z dwóch lubelskich sądów rejonowych.',
+      items: [
+        'Mieszkanie we wschodniej części Lublina albo w Świdniku: Sąd Rejonowy Lublin-Wschód w Lublinie z siedzibą w Świdniku. Pozostała część miasta, Jastków i Konopnica: Sąd Rejonowy Lublin-Zachód w Lublinie.',
+        'Przy porozumieniu umowę o podział podpisujecie u notariusza; projekt i termin spłaty uzgadniam z kancelarią notarialną przed aktem.',
+      ],
+    },
+    updated: '2026-11-18',
   },
 
   /* ===== BLOK 8 — Najem ===== */
@@ -4429,7 +4491,16 @@ const SERVICE_CONTENT = {
       heading: 'Lokator, który nie płaci i nie wychodzi, to nie musi być Twój problem na lata.',
       lead: 'Opisz umowę i od kiedy lokator nie płaci albo kiedy skończył się najem. W 24 h roboczych odpiszę, którą drogą odzyskać lokal, i dostaniesz ofertę z ceną i terminem; do akceptacji nic nie płacisz.',
     },
-    updated: '2026-11-07',
+    local: {
+      heading: 'Eksmisja w Lublinie: sąd, komornik i rozprawy na miejscu',
+      intro: 'W Lublinie sprawy cywilne rozpoznają dwa sądy rejonowe: Lublin-Wschód (z siedzibą w Świdniku) dla wschodniej części miasta i Lublin-Zachód dla pozostałej. Przed pozwem o eksmisję ustalam, który z nich jest właściwy dla Twojego lokalu.',
+      items: [
+        'Eksmisję prowadzi komornik przy sądzie, w którego okręgu leży lokal (art. 1046 § 1 k.p.c.). Dla mieszkania w Lublinie to komornik przy Sądzie Rejonowym Lublin-Wschód albo Lublin-Zachód.',
+        'Apelację od wyroku sądu rejonowego rozpoznaje Sąd Okręgowy w Lublinie (art. 367 § 2 k.p.c.).',
+        'Na rozprawy w Lublinie i Świdniku stawiam się osobiście jako Twój pełnomocnik.',
+      ],
+    },
+    updated: '2026-11-18',
   },
 
   'windykacja-czynszu': {
@@ -6168,7 +6239,16 @@ const SERVICE_CONTENT = {
       heading: 'Działka bez dojazdu to nie ślepy zaułek — jest droga wyjścia.',
       lead: 'Opisz, którędy dziś dojeżdżasz albo którędy sąsiad chce poprowadzić drogę przez Twój grunt. Bezpłatną wstępną analizę, czyli informację, co trzeba zrobić z dojazdem, i ofertę z ceną i terminem dostaniesz w 24 h roboczych; do akceptacji oferty nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    local: {
+      heading: 'Droga konieczna w Lublinie i okolicy: który sąd ustala przejazd',
+      intro: 'O drogę konieczną orzeka sąd rejonowy położenia nieruchomości (art. 606 k.p.c.). W Lublinie są to Sąd Rejonowy Lublin-Wschód w Lublinie z siedzibą w Świdniku i Sąd Rejonowy Lublin-Zachód w Lublinie, każdy dla swojej części miasta.',
+      items: [
+        'Do Lublin-Zachód należą też gminy Jastków i Konopnica, a do Lublin-Wschód m.in. Świdnik, Mełgiew, Piaski, Jabłonna i Strzyżewice.',
+        'Nie każda gmina pod Lublinem podlega lubelskim sądom: Bełżyce i Wojciechów należą do Sądu Rejonowego w Opolu Lubelskim, Niedrzwica Duża i Borzechów do Sądu Rejonowego w Kraśniku, a Garbów do Sądu Rejonowego w Puławach.',
+        'Na oględziny przez sąd przyjeżdżam z Tobą i na miejscu pokazuję trasę przejazdu, którą proponujemy.',
+      ],
+    },
+    updated: '2026-11-18',
   },
 
   'odszkodowanie-wywlaszczenie': {
@@ -6743,7 +6823,15 @@ const SERVICE_CONTENT = {
       heading: 'Nie jesteś rolnikiem, a chcesz kupić ziemię? Przeprowadzę Cię przez zgodę KOWR.',
       lead: 'Opisz działkę i napisz, kto sprzedaje, a kto kupuje. W 24 h roboczych odpiszę, co trzeba zrobić przed aktem notarialnym, i prześlę ofertę z ceną i terminem; do jej akceptacji nic nie płacisz.',
     },
-    updated: '2026-10-10',
+    local: {
+      heading: 'Zgoda KOWR w Lublinie: gdzie złożyć wniosek o nabycie ziemi rolnej',
+      intro: 'Wniosek o zgodę na nabycie nieruchomości rolnej składa się w oryginale w oddziale terenowym KOWR właściwym ze względu na położenie nieruchomości. Decyzję wydaje Dyrektor Generalny KOWR.',
+      items: [
+        'W Lublinie działa Oddział Terenowy KOWR, a w Białej Podlaskiej jego sekcja zamiejscowa. Ustalam, który oddział jest właściwy dla Twojej działki, i tam składam wniosek.',
+        'Kopie dokumentów do wniosku poświadczam za zgodność z oryginałem jako pełnomocnik będący adwokatem, więc nie musisz zamawiać odpisów u notariusza.',
+      ],
+    },
+    updated: '2026-11-18',
     faqHeading: 'Pytania sprzedających i kupujących ziemię rolną',
   },
 

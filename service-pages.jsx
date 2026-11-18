@@ -547,6 +547,19 @@ function buildServiceSections(c, ctx) {
       </ol>
     ),
   });
+  /* „W Lublinie”: który sąd lub urząd i co robię na miejscu (SEO lokalne). Fakty tylko ze źródeł urzędowych;
+     H2 z nazwą usługi i „Lublin”. Zdanie o pracy zdalnej domyślne (krótkie, więc może się powtarzać między stronami). */
+  if (c.local) blocks.push({
+    eyebrow: c.local.eyebrow || 'W Lublinie',
+    title: c.local.heading,
+    node: (
+      <React.Fragment>
+        {c.local.intro && <p className="lead mt-6">{c.local.intro}</p>}
+        {c.local.items && c.local.items.length > 0 && <ul className="check-list mt-8">{c.local.items.map((it, i) => svcItem(it, i, 'map-pin'))}</ul>}
+        <p className="body mt-6">{c.local.remote || 'Nieruchomość poza Lublinem? Sprawy z całej Polski prowadzę zdalnie.'}</p>
+      </React.Fragment>
+    ),
+  });
   if (!c.levels && c.need) blocks.push({
     eyebrow: 'Czego potrzebuję od Ciebie',
     title: 'Na start wystarczy tyle.',
