@@ -765,12 +765,16 @@ function ReportShowcase() {
 function SectionPhoto({ name, side, alt, fit, eager, children }) {
   return (
     <div className={`section-photo section-photo--${side}${fit === 'top' ? ' section-photo--top' : ''}`}>
-      <img
-        src={`/assets/maciej-muzyka-${name}-1400.webp`}
-        srcSet={`/assets/maciej-muzyka-${name}-800.webp 800w, /assets/maciej-muzyka-${name}-1400.webp 1400w`}
-        sizes="(min-width: 980px) 50vw, 100vw"
-        alt={alt} width="1400" height={{ hero: 1974, telefon: 1555, smartfon: 1575, omnie: 1597 }[name]}
-        loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" />
+      {/* AVIF (build: scripts/image-variants.py, ok. 40% wagi WebP) dla przeglądarek, które go obsługują; WebP jako zapas */}
+      <picture>
+        <source type="image/avif" srcSet={`/assets/maciej-muzyka-${name}-800.avif 800w, /assets/maciej-muzyka-${name}-1400.avif 1400w`} sizes="(min-width: 980px) 50vw, 100vw" />
+        <img
+          srcSet={`/assets/maciej-muzyka-${name}-800.webp 800w, /assets/maciej-muzyka-${name}-1400.webp 1400w`}
+          sizes="(min-width: 980px) 50vw, 100vw"
+          src={`/assets/maciej-muzyka-${name}-1400.webp`}
+          alt={alt} width="1400" height={{ hero: 1974, telefon: 1555, smartfon: 1575, omnie: 1597 }[name]}
+          loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" />
+      </picture>
       {children}
     </div>
   );

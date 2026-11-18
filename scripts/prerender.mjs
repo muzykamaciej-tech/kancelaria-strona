@@ -115,6 +115,21 @@ async function render(page, r) {
        z app.js i jest gotowa przed pierwszym renderem (bez stanu ładowania) */
     const app = document.querySelector('script[src^="/app."]');
     document.querySelectorAll('script[data-content-chunk]').forEach((s) => { s.defer = true; app.parentNode.insertBefore(s, app); });
+    /* LCP: obraz z fetchpriority="high" (zdjęcie na stronie głównej, okładka wpisu) → <link rel="preload"> na początku <head>,
+       żeby pobieranie ruszyło przed arkuszami stylów; z <picture> bierze pierwsze <source> (AVIF) z jego typem */
+    const lcpImg = document.querySelector('#app img[fetchpriority="high"]');
+    if (lcpImg) {
+      const source = lcpImg.parentElement.tagName === 'PICTURE' ? lcpImg.parentElement.querySelector('source[srcset]') : null;
+      const from = source || lcpImg;
+      const link = document.createElement('link');
+      link.rel = 'preload'; link.as = 'image'; link.setAttribute('fetchpriority', 'high');
+      if (from.getAttribute('srcset')) {
+        link.setAttribute('imagesrcset', from.getAttribute('srcset'));
+        if (from.getAttribute('sizes')) link.setAttribute('imagesizes', from.getAttribute('sizes'));
+      } else link.href = from.getAttribute('src');
+      if (source && source.type) link.type = source.type;
+      document.head.insertBefore(link, document.head.querySelector('link[rel="preconnect"], link[rel="stylesheet"]'));
+    }
     const canonical = document.querySelector('link[rel="canonical"]');
     return {
       icons: [...new Set([...document.querySelectorAll('#app i[data-lucide]')].map((i) => i.getAttribute('data-lucide')))],

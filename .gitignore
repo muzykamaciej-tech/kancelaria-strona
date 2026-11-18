@@ -2,3 +2,4 @@
 .check/
 node_modules/
 .dist-build/
+.img-cache/

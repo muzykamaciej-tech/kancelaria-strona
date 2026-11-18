@@ -232,6 +232,11 @@ for (const logo of ['logo.png', 'logo-on-dark.png']) {
   try { execFileSync('sips', ['--resampleWidth', '686', rel('assets/' + logo), '--out', path.join(DIST, 'assets', logo)], { stdio: 'ignore' }); }
   catch (e) { console.warn(`build: ${logo} not resized (sips unavailable), original copied`); }
 }
+/* 4b. Lżejsze warianty obrazów (LCP na telefonie): okładki wpisów jako WebP 640/1200 + 64 px do rozmytego tła,
+   zdjęcia Macieja jako AVIF. Strona się do nich odwołuje (pages.jsx coverImg, landing.jsx SectionPhoto), więc bez nich
+   build się zatrzymuje. Pamięć podręczna w .img-cache/ (poza repozytorium). */
+try { execFileSync('python3', [rel('scripts/image-variants.py'), rel('assets'), path.join(DIST, 'assets'), rel('.img-cache')], { stdio: 'inherit' }); }
+catch (e) { throw new Error('build: scripts/image-variants.py nie zadziałał (potrzebny python3 z Pillow obsługującym WebP i AVIF)'); }
 
 /* 5. HTML shell */
 let html = src;

@@ -10,7 +10,7 @@ export function sourceHash(root) {
   const walk = (d) => fs.readdirSync(path.join(root, d), { withFileTypes: true })
     .forEach((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : files.push(path.join(d, e.name))));
   walk('assets');
-  files.push('scripts/build.mjs', 'scripts/prerender.mjs');
+  files.push('scripts/build.mjs', 'scripts/prerender.mjs', 'scripts/image-variants.py');
   const h = crypto.createHash('sha256');
   for (const f of files.filter((f) => !/(^|\/)\.DS_Store$/.test(f)).sort()) {
     h.update(f.split(path.sep).join('/') + '\0');

@@ -54,6 +54,7 @@ Potem commit razem z `dist/`. Najpierw push na gałąź roboczą (podgląd), a n
 | Skrypt | Co robi |
 |---|---|
 | `scripts/build.mjs` | JSX → `app.<hash>.js` (bez treści wpisów, usług i filarów: ta trafia do `content/<rodzaj>/<klucz>.<hash>.js`, ładowanego tylko na swojej trasie), CSS → `styles.<hash>.css`, vendor, assets |
+| `scripts/image-variants.py` | wywoływany przez build: okładki `assets/blog-*.jpg` → WebP 640/1200 px + 64 px do rozmytego tła wpisu, zdjęcia `maciej-muzyka-*.webp` → AVIF; wymaga `python3` z Pillow (WebP, AVIF), pamięć podręczna `.img-cache/` |
 | `scripts/prerender.mjs` | renderuje każdą trasę w Chrome, zapisuje HTML, `sitemap.xml`, `robots.txt`, `llms.txt` |
 | `scripts/check.mjs` | canonical, JSON-LD, linki, osiągalność, 404, stare `#/`; `--visual` porównuje zrzuty z produkcją |
 | `scripts/serve.mjs` | lokalny podgląd: `node scripts/serve.mjs dist 4173` |

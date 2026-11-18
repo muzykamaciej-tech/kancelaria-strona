@@ -26,8 +26,16 @@
   } catch (e) {}
   gtag('js', new Date());
   gtag('config', window.GA_ID);
+  /* gtag.js (ok. 150 KB) dopiero po zdarzeniu load: na wolnym łączu nie zabiera pasma zdjęciu z pierwszego ekranu (LCP).
+     Polecenia wyżej czekają w dataLayer i wykonują się po wczytaniu skryptu. */
+  window.addEventListener('load', function () {
+    if (window.__PRERENDER__) return; /* prerender.mjs: znacznik nie może trafić do gotowego HTML */
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GA_ID;
+    document.head.appendChild(s);
+  });
 </script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-J93NJSQCTN"></script>
 <title>Prawnik od nieruchomości Lublin – adwokat dr Maciej Muzyka</title>
 <meta name="description" content="Kancelaria Nieruchomości w Lublinie. Adwokat, wyłącznie prawo nieruchomości: plan ogólny i WZ, słupy, zakup, spory. Bezpłatna wstępna analiza i oferta w 24 h." />
 <link rel="canonical" href="https://mecenasodnieruchomosci.pl/" />

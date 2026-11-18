@@ -346,6 +346,15 @@ function blogByNewest(posts) {
 function blogNewest(n) { return blogByNewest(window.BLOG).slice(0, n); }
 /* alt okładki: pole `coverAlt` wpisu (z pliku md, „Alt okładki”), a bez niego tytuł wpisu */
 function blogCoverAlt(post) { return post.coverAlt || 'Okładka wpisu: ' + post.title; }
+/* okładka /assets/blog-<slug>.jpg: build (scripts/image-variants.py) tworzy WebP 640 i 1200 px oraz 64 px do rozmytego tła;
+   JPG zostaje jako src (og:image, JSON-LD, RSS i przeglądarki bez srcset). Inne ścieżki: bez wariantów. */
+const coverBase = (cover) => (/^\/assets\/(blog-[a-z0-9-]+)\.jpg$/.exec(cover || '') || [])[1];
+function coverImg(cover, sizes) {
+  const b = coverBase(cover);
+  return b ? { srcSet: `/assets/${b}-640.webp 640w, /assets/${b}-1200.webp 1200w`, sizes: sizes, src: cover } : { src: cover }; /* srcset przed src: obraz tworzony w JS nie pobiera najpierw JPG */
+}
+function coverBg(cover) { const b = coverBase(cover); return b ? `/assets/${b}-bg.webp` : cover; }
+const COVER_SIZES_CARD = '(min-width: 640px) 50vw, 100vw';
 function wpisy(n) {
   const d = n % 10, dd = n % 100;
   return n + (n === 1 ? ' wpis' : (d >= 2 && d <= 4 && (dd < 12 || dd > 14)) ? ' wpisy' : ' wpisów');
@@ -379,7 +388,7 @@ function BlogPage({ setRoute }) {
           <div className="blog-newest mt-8">
             {blogNewest(3).map((post) => (
               <window.NavLink key={post.slug} className="blog-newest-card" route="blogpost" slug={post.slug}>
-                <span className="blog-newest-photo"><img src={post.cover} alt="" width="1200" height="654" loading="eager" decoding="async" /></span>
+                <span className="blog-newest-photo"><img {...coverImg(post.cover, COVER_SIZES_CARD)} alt="" width="1200" height="654" loading="eager" decoding="async" /></span>
                 <span className="blog-newest-body">
                   <span className="tag tag-info">{post.category}</span>
                   <span className="blog-newest-title">{post.title}</span>
@@ -476,7 +485,7 @@ function BlogCategoryPage({ catId, setRoute }) {
               <li key={post.slug} className="blog-card-wrap">
                 <window.NavLink className="blog-card blog-card--photo" route="blogpost" slug={post.slug}>
                   <div className="blog-card-aside">
-                    <img className="blog-card-img" src={post.cover} alt="" width="1200" height="654" loading="lazy" decoding="async" />
+                    <img className="blog-card-img" {...coverImg(post.cover, COVER_SIZES_CARD)} alt="" width="1200" height="654" loading="lazy" decoding="async" />
                   </div>
                   <div className="blog-card-body">
                     <div className="blog-card-meta">
@@ -530,7 +539,7 @@ function BlogPostPage({ slug, setRoute }) {
     <main id="main-content" data-screen-label={`05 Blog post — ${post.title}`}>
       <section className={'bg-light' + (post.cover ? ' post-hero' : '')} style={{ paddingBlock: '3rem 4rem' }}>
         {/* tło: rozmyta, przyciemniona okładka na całą szerokość ekranu */}
-        {post.cover && <div className="post-hero-bg" aria-hidden="true" style={{ backgroundImage: `url(${post.cover})` }} />}
+        {post.cover && <div className="post-hero-bg" aria-hidden="true" style={{ backgroundImage: `url(${coverBg(post.cover)})` }} />}
         <div className="wrap relative" style={{ zIndex: 1 }}>
           <nav className="breadcrumb">
             <window.NavLink route="landing">Start</window.NavLink>
@@ -555,7 +564,7 @@ function BlogPostPage({ slug, setRoute }) {
             </div>
           </div>
           {/* okładka na pełną szerokość treści (bez przycinania — ma wpisany tytuł) */}
-          {post.cover && <img className="post-hero-cover" src={post.cover} alt={blogCoverAlt(post)} width="1200" height="654" fetchpriority="high" decoding="async" />}
+          {post.cover && <img className="post-hero-cover" {...coverImg(post.cover, '(min-width: 1280px) 1200px, 100vw')} alt={blogCoverAlt(post)} width="1200" height="654" fetchpriority="high" decoding="async" />}
         </div>
       </section>
 
@@ -808,7 +817,7 @@ function BlogTeaser({ setRoute }) {
 function BlogTeaserCard({ post }) {
   return (
     <window.NavLink className={'card card-hover blog-teaser-card' + (post.cover ? ' blog-teaser-card--photo' : '')} route="blogpost" slug={post.slug} style={{ textAlign: 'left' }}>
-      {post.cover && <span className="blog-teaser-photo" aria-hidden="true"><img src={post.cover} alt="" width="1200" height="654" loading="lazy" decoding="async" /></span>}
+      {post.cover && <span className="blog-teaser-photo" aria-hidden="true"><img {...coverImg(post.cover, COVER_SIZES_CARD)} alt="" width="1200" height="654" loading="lazy" decoding="async" /></span>}
       <span className="tag tag-info">{post.category}</span>
       <h3 className="font-bold mt-4" style={{ color: 'var(--text-main)', fontSize: '1.125rem', lineHeight: 1.3 }}>{post.title}</h3>
       <div className="small mt-4 flex items-center gap-2">
