@@ -138,6 +138,7 @@ window.BLOG.push(
         '**5 lat od prawomocności** obowiązują wszystkie pozostałe WZ (art. 64c u.p.z.p.). Po upływie 5 lat decyzja wygasa z mocy prawa, bez osobnej decyzji urzędu (tak wynika z brzmienia art. 64c; orzeczeń jeszcze nie ma). Ustawa nie przewiduje jej przedłużenia.',
         '**Każda WZ, także bezterminowa, może wygasnąć wcześniej**, np. gdy rada gminy uchwali dla tego terenu plan miejscowy z innymi ustaleniami (art. 65 u.p.z.p.). Opisuję to niżej.',
       ]],
+      ['p', 'Które wnioski złożone przed planem ogólnym i przed 1.09.2026 dały WZ bez terminu, a które 5-letnią, opisuję w tekście Warunki zabudowy a plan ogólny: co z wnioskiem złożonym przed planem, przed 1.09.2026 i przed 1.01.2027.'],
       ['h2', 'Jak policzyć termin ważności warunków zabudowy? 3 kroki'],
       ['ol', [
         '**Sprawdź datę wniosku.** Jeżeli wniosek o WZ wpłynął do urzędu przed 16 października 2025 r., Twoja decyzja nie ma terminu ważności. Liczy się dzień, w którym wniosek dotarł do urzędu, a nie dzień nadania na poczcie (art. 61 § 3 k.p.a.). Znajdziesz go na pieczątce wpływu na Twojej kopii wniosku, w potwierdzeniu odbioru (UPO) przy wniosku elektronicznym albo w aktach sprawy. Data „na wniosek z dnia…” w decyzji bywa datą z wniosku, a nie datą wpływu. Jeżeli wniosek wpłynął przed 16 października 2025 r., przejdź od razu do części o planie miejscowym.',

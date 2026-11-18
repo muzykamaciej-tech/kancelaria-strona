@@ -232,12 +232,12 @@
     },
     {
       "source": "/post/panika-w-urzędzie-czy-plan-ogólny-wysadzi-twój-wniosek-o-wz-w-powietrze",
-      "destination": "/blog/plan-ogolny-a-wniosek-o-wz-w-toku",
+      "destination": "/blog/warunki-zabudowy-a-plan-ogolny-przepisy-przejsciowe",
       "permanent": true
     },
     {
       "source": "/post/panika-w-urz%C4%99dzie-czy-plan-og%C3%B3lny-wysadzi-tw%C3%B3j-wniosek-o-wz-w-powietrze",
-      "destination": "/blog/plan-ogolny-a-wniosek-o-wz-w-toku",
+      "destination": "/blog/warunki-zabudowy-a-plan-ogolny-przepisy-przejsciowe",
       "permanent": true
     },
     {
@@ -503,6 +503,11 @@
     {
       "source": "/blog/slup-rura-kable-na-dzialce-bez-umowy-bezumowne-korzystanie",
       "destination": "/blog/slup-energetyczny-na-dzialce-przesuniecie",
+      "permanent": true
+    },
+    {
+      "source": "/blog/plan-ogolny-a-wniosek-o-wz-w-toku",
+      "destination": "/blog/warunki-zabudowy-a-plan-ogolny-przepisy-przejsciowe",
       "permanent": true
     }
   ],

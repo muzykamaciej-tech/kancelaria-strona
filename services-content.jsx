@@ -1715,7 +1715,7 @@ const SERVICE_CONTENT = {
       'Uwaga albo wniosek, które już złożyłeś, i raport z konsultacji, jeśli są',
       'Wypis z planu miejscowego albo decyzja WZ, jeżeli działka je ma: od nich zaczynam analizę',
     ],
-    guides: ['plan-ogolny-lublin-i-gminy-wokol', 'odszkodowanie-za-plan-ogolny', 'jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym', 'plan-ogolny-a-wniosek-o-wz-w-toku', 'uwagi-do-planu-ogolnego', 'skarga-na-plan-ogolny', 'miejscowy-plan-zagospodarowania', 'plan-ogolny-gminy-co-to-jest'],
+    guides: ['plan-ogolny-lublin-i-gminy-wokol', 'odszkodowanie-za-plan-ogolny', 'jak-przygotowac-sie-na-zmiany-w-planowaniu-przestrzennym', 'warunki-zabudowy-a-plan-ogolny-przepisy-przejsciowe', 'uwagi-do-planu-ogolnego', 'skarga-na-plan-ogolny', 'miejscowy-plan-zagospodarowania', 'plan-ogolny-gminy-co-to-jest'],
     seeAlso: ['analiza-umowy-przedwstepnej', 'obsluga-prawna-deweloperow'],
     cta: {
       heading: 'Nie daj się zaskoczyć planem ogólnym.',
