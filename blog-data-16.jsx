@@ -10,6 +10,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Najem', tags: ['Najem instytucjonalny', 'Najem okazjonalny', 'Umowa najmu'],
     cover: '/assets/blog-najem-instytucjonalny.jpg',
+    coverAlt: 'Okładka wpisu: „Najem instytucjonalny. Co to jest i dla kogo”, obok klucze do mieszkania i umowa najmu na biurku',
     related: ['obsluga-wynajmujacych', 'analiza-umowy-najmu', 'bezpieczny-najem'],
     faq: [
       { q: 'Czy najem instytucjonalny obejmuje lokal użytkowy?', a: 'Nie. Art. 19f ust. 1 u.o.p.l. mówi o umowie najmu lokalu mieszkalnego. Sklep czy biuro wynajmujesz na zasadach Kodeksu cywilnego.' },
@@ -169,6 +170,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '14 min',
     category: 'Zakup nieruchomości', tags: ['Sprzedaż mieszkania', 'Dokumenty', 'PIT', 'Świadectwo energetyczne'],
     cover: '/assets/blog-sprzedaz-mieszkania-krok-po-kroku.jpg',
+    coverAlt: 'Okładka wpisu: „Sprzedaż mieszkania krok po kroku. Dokumenty, koszty i podatek”, obok klucze i teczka z dokumentami na stole w pustym mieszkaniu',
     related: ['obsluga-sprzedazy', 'analiza-umowy-przedwstepnej', 'dzial-spadku'],
     faq: [
       { q: 'Sprzedaż mieszkania: gdzie zgłosić?', a: 'Wniosek o wpis kupującego składa notariusz (art. 92 § 4 p.n.). Przy odrębnej własności składasz w gminie informację o nieruchomości w 14 dni od aktu, a obowiązek podatkowy wygasa z końcem miesiąca (art. 6 ust. 4 i 6 ustawy o podatkach i opłatach lokalnych). Urzędowi skarbowemu: PIT-39, tylko przed upływem 5 lat.' },
@@ -317,6 +319,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Zakup nieruchomości', tags: ['Działka ROD', 'Prawo do działki', 'Altana działkowa'],
     cover: '/assets/blog-dzialka-rod-kupno-sprzedaz.jpg',
+    coverAlt: 'Okładka wpisu: „Działka ROD. Kupno, sprzedaż i altana”, obok ogród działkowy z drewnianą altaną i grządkami',
     related: ['obsluga-zakupu'],
     faq: [
       { q: 'Czy można zasiedzieć działkę ROD?', a: 'Co do zasady nie. Zasiedzenie wymaga posiadania samoistnego (art. 172 k.c.), a działkowiec włada działką jak dzierżawca, czyli jest posiadaczem zależnym (art. 336 k.c.). Sąd Okręgowy w Łomży oddalił apelację działkowca korzystającego z działki od 1984 r. (postanowienie z 7.06.2018, I Ca 115/18).' },
@@ -487,6 +490,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Wspólnoty mieszkaniowe', tags: ['Spółdzielnia mieszkaniowa', 'Walne zgromadzenie', 'Zaskarżenie uchwały'],
     cover: '/assets/blog-walne-zgromadzenie-spoldzielni-mieszkaniowej.jpg',
+    coverAlt: 'Okładka wpisu: „Walne zgromadzenie spółdzielni. Pełnomocnictwo, głosowanie, uchwały”, obok sala zebrań z rzędami krzeseł i kartami do głosowania',
     related: ['obsluga-prawna-spoldzielni'],
     faq: [
       { q: 'Czy można nagrywać walne zgromadzenie w spółdzielni mieszkaniowej?', a: 'U.s.m. i Prawo spółdzielcze tego nie regulują, a orzeczenia rozstrzygającego tę kwestię nie znalazłem. Sprawdź regulamin walnego i zapytaj przewodniczącego przed obradami. Protokół jest jawny dla członków (art. 41 § 4 pr. spółdz.). Publikacja nagrania może naruszyć dobra osobiste innych osób, np. wizerunek (art. 23 k.c.).' },
@@ -637,6 +641,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Wspólnoty mieszkaniowe', tags: ['Zarząd wspólnoty', 'Zwykły zarząd', 'Absolutorium'],
     cover: '/assets/blog-zarzad-wspolnoty-mieszkaniowej.jpg',
+    coverAlt: 'Okładka wpisu: „Zarząd wspólnoty. Co może sam, a na co potrzebuje uchwały”, obok klatka schodowa bloku z tablicą ogłoszeń, segregator z uchwałami i pęk kluczy',
     related: ['obsluga-prawna-wspolnot'],
     faq: [
       { q: 'Czy zarząd wspólnoty może być jednoosobowy?', a: 'Tak (art. 20 ust. 1 u.w.l.). Taki zarząd sam składa oświadczenia woli, bo wymóg 2 podpisów dotyczy zarządu kilkuosobowego (art. 21 ust. 2 u.w.l.).' },
@@ -801,6 +806,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Grunty rolne i OZE', tags: ['Gospodarstwo rolne', 'KRUS', 'Zachowek'],
     cover: '/assets/blog-przekazanie-gospodarstwa-rolnego.jpg',
+    coverAlt: 'Okładka wpisu: „Przekazanie gospodarstwa rolnego dziecku. Umowa, KRUS, podatek, zachowek”, obok zabudowania gospodarstwa, pole i akt notarialny na stole',
     related: ['nieruchomosci-rolne', 'obsluga-prawna-przedsiebiorstw-rolnych', 'zachowek'],
     faq: [
       { q: 'Czy przekazanie gospodarstwa rolnego wymaga notariusza?', a: 'Tak, jeżeli obejmuje nieruchomości. Bez aktu notarialnego umowa jest nieważna (art. 73 § 2, art. 158, art. 890 § 2 k.c., art. 85 u.s.u.r.).' },
@@ -952,6 +958,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '14 min',
     category: 'Współwłasność i spadki', tags: ['Małoletni', 'Sąd opiekuńczy', 'Dział spadku', 'Darowizna'],
     cover: '/assets/blog-nieruchomosc-maloletniego-zgoda-sadu.jpg',
+    coverAlt: 'Okładka wpisu: „Nieruchomość małoletniego. Kiedy potrzebna jest zgoda sądu”, obok teczka z dokumentami i klucze na stole w jasnym mieszkaniu',
     related: ['dzial-spadku', 'darowizna-nieruchomosci'],
     faq: [
       { q: 'Czy jeden rodzic może odrzucić spadek w imieniu małoletniego?', a: 'Może działać sam (art. 98 § 1 k.r.o.), ale potrzebuje zezwolenia sądu (art. 101 § 3 k.r.o.). Wyjątek z art. 101 § 4 k.r.o. wymaga działania wspólnego albo zgody drugiego rodzica z władzą rodzicielską.' },
@@ -1077,6 +1084,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '14 min',
     category: 'Najem', tags: ['Wymeldowanie', 'Meldunek', 'Eksmisja'],
     cover: '/assets/blog-wymeldowanie-z-mieszkania.jpg',
+    coverAlt: 'Okładka wpisu: „Wymeldowanie z mieszkania. Bez zgody zameldowanego”, obok wniosek do urzędu gminy, klucze i długopis na biurku',
     related: ['eksmisja'],
     faq: [
       { q: 'Czy za niewymeldowanie się grozi kara?', a: 'Dla obywatela polskiego kary nie znalazłem. Art. 147 Kodeksu wykroczeń jest uchylony, a art. 59 u.e.l. przewiduje grzywnę tylko dla części cudzoziemców.' },
@@ -1220,6 +1228,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Proces budowlany', tags: ['Pozwolenie na budowę', 'Granica działki', 'Sąsiad'],
     cover: '/assets/blog-odleglosc-domu-od-granicy-dzialki.jpg',
+    coverAlt: 'Okładka wpisu: „Odległość od granicy działki. 3 czy 4 metry i zgoda sąsiada”, obok kask i rolki projektów na stole, w tle działka o zmierzchu',
     related: ['pozwolenie-na-budowe'],
     faq: [
       { q: 'Czy mogę później wybić okno w ścianie bez okien?', a: 'Tylko gdy ściana stoi co najmniej 4 m od granicy albo spełniasz ust. 1a. Inaczej naruszasz § 12 ust. 1 pkt 1 WT, a zmiana ściany domu jednorodzinnego to przebudowa przegrody, co do zasady na zgłoszenie (art. 29 ust. 3 pkt 1 lit. a Pb). Art. 102a tych robót nie wymienia, ale oświadczenie i tak dołącz.' },
@@ -1368,6 +1377,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Zakup nieruchomości', tags: ['Miejsce postojowe', 'Garaż', 'Księga wieczysta', 'Wspólnota mieszkaniowa'],
     cover: '/assets/blog-miejsce-postojowe-garaz-wlasnosc.jpg',
+    coverAlt: 'Okładka wpisu: „Miejsce postojowe i garaż. Udział, księga i spory we wspólnocie”, obok podziemna hala garażowa z filarami i zaparkowanym autem',
     related: ['obsluga-zakupu'],
     faq: [
       { q: 'Czy mogę sprzedać miejsce postojowe osobie spoza budynku?', a: 'Udział w lokalu garażowym tak (art. 198 k.c.), z zastrzeżeniem pierwokupu umownego. Miejsca w nieruchomości wspólnej nie, bo udział jest związany z lokalem (art. 3 ust. 1 u.w.l., I CSK 51/19).' },
@@ -1519,6 +1529,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Proces budowlany', tags: ['Zjazd z drogi', 'Zarządca drogi', 'Dostęp do drogi publicznej'],
     cover: '/assets/blog-zjazd-z-drogi-publicznej.jpg',
+    coverAlt: 'Okładka wpisu: „Zjazd z drogi publicznej. Zezwolenie, szerokość i odmowa”, obok żwirowa droga do domu o zmierzchu',
     related: ['zgloszenie-budowy', 'droga-konieczna', 'warunki-zabudowy'],
     faq: [
       { q: 'Czy zjazd na działkę rolną też wymaga zezwolenia?', a: 'Tak. Art. 29 ust. 1 u.d.p. nie rozróżnia działek rolnych i budowlanych.' },
@@ -1655,6 +1666,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Zakup nieruchomości', tags: ['Wady ukryte', 'Rękojmia', 'Rynek wtórny', 'Obniżenie ceny'],
     cover: '/assets/blog-wady-ukryte-mieszkania-rynek-wtorny.jpg',
+    coverAlt: 'Okładka wpisu: „Wady ukryte z rynku wtórnego. Rękojmia sprzedawcy i terminy”, obok lupa na planie działki i dokumentach na biurku przy lampie',
     related: ['obsluga-zakupu', 'rekojmia-wady-lokalu', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Czy rękojmia obejmuje wady ukryte działki budowlanej?', a: 'Tak. Termin 5 lat dotyczy wad nieruchomości, a nie tylko budynków (art. 568 § 1 k.c.).' },
@@ -1797,6 +1809,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Spory z deweloperem', tags: ['Odstąpienie od umowy', 'Rachunek powierniczy', 'Zwrot wpłat'],
     cover: '/assets/blog-odstapienie-od-umowy-deweloperskiej.jpg',
+    coverAlt: 'Okładka wpisu: „Odstąpienie od umowy deweloperskiej. Kiedy możesz i co z pieniędzmi”, obok budynek w budowie z żurawiem o zmierzchu i kalendarz na kontenerze budowy',
     related: ['kary-za-opoznienie-dewelopera'],
     faq: [
       { q: 'Czy mogę cofnąć odstąpienie od umowy deweloperskiej?', a: 'Sam nie. Odwołanie działa tylko wtedy, gdy dojdzie do dewelopera najpóźniej razem z oświadczeniem (art. 61 § 1 k.c.). Później potrzebujesz nowej umowy.' },
@@ -1945,6 +1958,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Zakup nieruchomości', tags: ['SIM', 'TBS', 'Partycypacja', 'Mieszkanie na wynajem'],
     cover: '/assets/blog-sim-spoleczna-inicjatywa-mieszkaniowa.jpg',
+    coverAlt: 'Okładka wpisu: „SIM. Inicjatywa mieszkaniowa. Dla kogo i czym różni się od TBS”, obok trzykondygnacyjny budynek z oświetlonymi oknami i plac zabaw o zmierzchu',
     related: ['obsluga-prawna-tbs-sim-kooperatyw'],
     faq: [
       { q: 'Czy w SIM zawsze trzeba wpłacić partycypację?', a: 'Nie. Ustawa mówi, że osoba fizyczna „może zawrzeć” umowę w sprawie partycypacji (art. 29a ust. 1 u.s.f.r.m.). W praktyce decyduje SIM.' },
@@ -2082,6 +2096,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Proces budowlany', tags: ['Podwykonawca', 'Inwestor', 'Zapłata'],
     cover: '/assets/blog-podwykonawca-nie-dostal-zaplaty.jpg',
+    coverAlt: 'Okładka wpisu: „Podwykonawca bez zapłaty. Odpowiedzialność inwestora i wykonawcy”, obok wnętrze budowy nocą z ceglaną ścianą, narzędziami i zapaloną lampą budowlaną',
     related: ['spory-z-wykonawca'],
     faq: [
       { q: 'Czy podwykonawca może pozwać inwestora, choć nie ma z nim umowy?', a: 'Tak. Odpowiedzialność inwestora wynika z ustawy, nie z umowy (art. 647¹ § 1 k.c.). Musisz wykazać zgłoszenie albo umowę z § 2, wykonanie robót i wysokość wynagrodzenia (art. 6 k.c.).' },

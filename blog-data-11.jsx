@@ -10,6 +10,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', readTime: '14 min',
     category: 'Planowanie przestrzenne', tags: ['Plan ogólny', 'Skarga do WSA', 'Nadzór wojewody'],
     cover: '/assets/blog-skarga-na-plan-ogolny.jpg',
+    coverAlt: 'Okładka wpisu: „Skarga na plan ogólny. Kto, kiedy i czy pisać do wojewody”, obok mapa gminy ze strefami, uchwała rady gminy i koperta z pismem do urzędu wojewódzkiego na biurku',
     related: ['plan-ogolny', 'skarga-na-plan-miejscowy', 'oplaty-odszkodowania-planistyczne'],
     faq: [
       { q: 'Kto może zaskarżyć plan ogólny gminy?', a: 'Każdy, czyj interes prawny lub uprawnienie plan narusza (art. 101 ust. 1 u.s.g.), najczęściej właściciel albo użytkownik wieczysty działki. Spadek wartości działki to interes faktyczny (II SA/Gl 1501/25). Ustalenia dla działek sąsiednich mogą naruszać Twój interes przy konkretnym związku z Twoją działką (NSA, II OSK 2294/26).' },
@@ -148,6 +149,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '14 min',
     category: 'Proces budowlany', tags: ['Nakaz rozbiórki', 'Samowola budowlana', 'Nadzór budowlany'],
     cover: '/assets/blog-nakaz-rozbiorki-samowoli.jpg',
+    coverAlt: 'Okładka wpisu: „Nakaz rozbiórki. Kiedy PINB go wydaje i jak się bronić”, obok dom z dobudowanym garażem i koperta z decyzją nadzoru budowlanego na biurku',
     related: ['legalizacja-samowoli', 'nadzor-budowlany-pinb'],
     faq: [
       { q: 'Kto wydaje nakaz rozbiórki?', a: 'PINB w decyzji administracyjnej, a w drugiej instancji WINB (art. 83 ust. 1 i 2 Pb).' },
@@ -286,6 +288,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', readTime: '13 min',
     category: 'Współwłasność i spadki', tags: ['Odwołanie darowizny', 'Rażąca niewdzięczność', 'Darowizna'],
     cover: '/assets/blog-odwolanie-darowizny.jpg',
+    coverAlt: 'Okładka wpisu: „Odwołanie darowizny. Niewdzięczność, termin, zwrot mieszkania”, obok akt notarialny, podpisane pismo w kopercie i klucze do mieszkania na stole',
     related: ['darowizna-nieruchomosci', 'dozywocie-renta', 'zachowek'],
     faq: [
       { q: 'Kiedy można odwołać darowiznę mieszkania?', a: 'Darowiznę wykonaną odwołasz, gdy obdarowany dopuścił się względem Ciebie rażącej niewdzięczności (art. 898 § 1 k.c.), np. przemocy, ciężkich znieważeń albo porzucenia w chorobie. Darowiznę niewykonaną możesz też odwołać, gdy Twój stan majątkowy pogorszył się tak, że jej wykonanie zagrozi Twojemu utrzymaniu (art. 896 k.c.). Zwykłe konflikty rodzinne nie wystarczą (wyrok SN II CSK 68/10).' },
@@ -438,6 +441,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', readTime: '14 min',
     category: 'Najem', tags: ['Wypowiedzenie najmu', 'Najem mieszkania', 'Najem okazjonalny'],
     cover: '/assets/blog-wypowiedzenie-umowy-najmu-mieszkania.jpg',
+    coverAlt: 'Okładka wpisu: „Wypowiedzenie umowy najmu mieszkania. Terminy, przyczyny, pismo”, obok koperta z listem poleconym, klucze do mieszkania i kalendarz na biurku',
     related: ['analiza-umowy-najmu', 'eksmisja', 'obsluga-wynajmujacych'],
     faq: [
       { q: 'Ile wynosi okres wypowiedzenia umowy najmu mieszkania?', a: 'Dla najemcy przy umowie na czas nieoznaczony z czynszem miesięcznym – 3 miesiące naprzód na koniec miesiąca kalendarzowego, chyba że umowa daje dłuższy termin (art. 673 § 1, art. 688 k.c.). Właściciel przy zwykłym najmie stosuje terminy z art. 11 u.o.p.l., przy zaległościach – miesiąc naprzód na koniec miesiąca.' },
@@ -578,6 +582,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', readTime: '14 min',
     category: 'Najem', tags: ['Zaległy czynsz', 'Wezwanie do zapłaty', 'Nakaz zapłaty'],
     cover: '/assets/blog-lokator-nie-placi-czynszu.jpg',
+    coverAlt: 'Okładka wpisu: „Lokator nie płaci czynszu. Wezwanie, wypowiedzenie, nakaz zapłaty”, obok koperta z wezwaniem do zapłaty, kalendarz i klucze do mieszkania na biurku',
     related: ['windykacja-czynszu', 'eksmisja', 'obsluga-wynajmujacych'],
     faq: [
       { q: 'Co zrobić, gdy lokator nie płaci czynszu?', a: 'Wyślij pisemne wezwanie z wyliczeniem rat, a przy zaległości za 3 pełne okresy – z uprzedzeniem o zamiarze wypowiedzenia i miesięcznym terminem (art. 11 ust. 2 pkt 2 u.o.p.l.). Potem pozew o zapłatę z odsetkami (art. 481 k.c.).' },
@@ -699,6 +704,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', readTime: '13 min',
     category: 'Spory z deweloperem', tags: ['Gwarancja', 'Rękojmia', 'Wady lokalu'],
     cover: '/assets/blog-gwarancja-dewelopera-na-mieszkanie.jpg',
+    coverAlt: 'Okładka wpisu: „Gwarancja dewelopera a rękojmia. 2 lata czy 5 lat?”, obok karta gwarancyjna, klucze do mieszkania i kalendarz na parapecie przy oknie balkonowym',
     related: ['gwarancja-jakosci-lokal', 'rekojmia-wady-lokalu', 'wady-czesci-wspolnych'],
     faq: [
       { q: 'Jaka jest gwarancja na mieszkanie od dewelopera?', a: 'Taka, jaką deweloper dobrowolnie udzielił w oświadczeniu gwarancyjnym, np. w umowie albo karcie gwarancyjnej (art. 577 § 1 k.c.). Jeżeli oświadczenie nie podaje terminu, gwarancja trwa 2 lata od wydania lokalu (art. 577 § 4 k.c.). Niezależnie od niej działa 5-letnia rękojmia (art. 568 § 1 i art. 579 § 1 k.c.).' },
@@ -828,6 +834,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', readTime: '14 min',
     category: 'Zakup nieruchomości', tags: ['Umowa pośrednictwa', 'Prowizja pośrednika', 'Biuro nieruchomości'],
     cover: '/assets/blog-umowa-posrednictwa-prowizja.jpg',
+    coverAlt: 'Okładka wpisu: „Umowa pośrednictwa. Prowizja, wyłączność, kiedy nie płacisz”, obok umowa z biura nieruchomości, klucze do mieszkania i kalkulator na biurku',
     related: ['obsluga-prawna-biur-nieruchomosci', 'obsluga-sprzedazy', 'obsluga-zakupu'],
     faq: [
       { q: 'Czy umowa pośrednictwa musi być na piśmie?', a: 'Tak – w formie pisemnej lub elektronicznej (kwalifikowany podpis), pod rygorem nieważności (art. 180 ust. 3 u.g.n.). Umowa zawarta zwykłym e-mailem jest nieważna.' },
@@ -952,6 +959,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', readTime: '14 min',
     category: 'Służebności', tags: ['Bezumowne korzystanie', 'Współwłasność', 'Przedawnienie'],
     cover: '/assets/blog-bezumowne-korzystanie-z-nieruchomosci.jpg',
+    coverAlt: 'Okładka wpisu: „Ktoś korzysta z Twojej działki bez umowy? Ile i do kiedy”, obok mapa działki z zaznaczonym pasem przy płocie i kalendarz na biurku',
     related: ['bezumowne-korzystanie', 'odszkodowanie-sluzebnosc-przesylu', 'zniesienie-wspolwlasnosci'],
     faq: [
       { q: 'Czym jest bezumowne korzystanie z nieruchomości według Kodeksu cywilnego?', a: 'To władanie cudzą nieruchomością bez uprawnienia skutecznego wobec właściciela, np. bez umowy, służebności albo decyzji (art. 222 § 1 k.c.). Właściciel może żądać jej wydania i wynagrodzenia za korzystanie (art. 224–225 k.c.), także od byłego najemcy i dzierżawcy (art. 230 k.c.).' },
@@ -1090,6 +1098,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', readTime: '13 min',
     category: 'Planowanie przestrzenne', tags: ['MPZP', 'Plan miejscowy', 'Wypis i wyrys'],
     cover: '/assets/blog-miejscowy-plan-zagospodarowania.jpg',
+    coverAlt: 'Okładka wpisu: „Plan miejscowy. Sprawdź, odczytaj, zmień”, obok rysunek planu z kolorowymi terenami MN i R, wypis z planu i lupa na biurku',
     related: ['skarga-na-plan-miejscowy', 'plan-ogolny', 'warunki-zabudowy'],
     faq: [
       { q: 'Do kiedy obowiązuje MPZP?', a: 'Bez terminu, do zmiany, nowego planu albo stwierdzenia nieważności (art. 67 ust. 1 ustawy z 7.07.2023, art. 10 ust. 1 ustawy z 30.04.2026). Termin 31.08.2026 dotyczył studium (art. 65 ust. 1 ustawy z 7.07.2023).' },
@@ -1248,6 +1257,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '13 min',
     category: 'Grunty rolne i OZE', tags: ['Gospodarstwo rolne', 'KOWR', 'KRUS', 'Podatki'],
     cover: '/assets/blog-sprzedaz-gospodarstwa-rolnego.jpg',
+    coverAlt: 'Okładka wpisu: „Sprzedać czy przekazać gospodarstwo? KOWR, podatki, emerytura”, obok pole z ciągnikiem, zabudowania gospodarstwa i akt notarialny na stole',
     related: ['obsluga-prawna-przedsiebiorstw-rolnych', 'nieruchomosci-rolne', 'zgoda-kowr'],
     faq: [
       { q: 'Czy sprzedaż gospodarstwa rolnego jest opodatkowana?', a: 'PIT co do zasady nie, chyba że grunty utraciły charakter rolny (art. 10 ust. 1 pkt 8, art. 21 ust. 1 pkt 28 u.p.d.o.f.). Kupujący płaci 2% PCC, chyba że po zakupie ma gospodarstwo od 11 do 300 ha i prowadzi je 5 lat (art. 9 pkt 2 u.p.c.c.).' },
@@ -1379,6 +1389,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', readTime: '13 min',
     category: 'Współwłasność i spadki', tags: ['Renta dożywotnia', 'Odwrócona hipoteka', 'Umowa renty'],
     cover: '/assets/blog-renta-dozywotnia-odwrocona-hipoteka.jpg',
+    coverAlt: 'Okładka wpisu: „Renta dożywotnia czy odwrócona hipoteka? Na co uważać”, obok klucze do mieszkania, wyciąg z księgi wieczystej i kalkulator na stole',
     related: ['dozywocie-renta', 'darowizna-nieruchomosci'],
     faq: [
       { q: 'Renta dożywotnia – co to jest?', a: 'W Kodeksie cywilnym to umowa, w której jedna strona płaci drugiej świadczenia okresowe w pieniądzu albo w rzeczach (art. 903 k.c.), także do końca życia. Potocznie to umowa z firmą: oddajesz mieszkanie, a ona płaci rentę do Twojej śmierci. Ta druga umowa nie ma własnej ustawy (wyrok SA w Gdańsku V ACa 87/19).' },
@@ -1527,6 +1538,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', updated: '6 listopada 2026', updatedIso: '2026-11-06', readTime: '14 min',
     category: 'Zakup nieruchomości', tags: ['Kredyt hipoteczny', 'Hipoteka', 'Sprzedaż nieruchomości'],
     cover: '/assets/blog-sprzedaz-domu-z-kredytem-hipotecznym.jpg',
+    coverAlt: 'Okładka wpisu: „Sprzedaż domu z kredytem. Jak spłacić hipotekę z ceny”, obok akt notarialny, klucze do domu i zaświadczenie z banku na biurku',
     related: ['obsluga-sprzedazy', 'analiza-umowy-przedwstepnej', 'obsluga-zakupu'],
     faq: [
       { q: 'Czy można sprzedać mieszkanie z kredytem hipotecznym bez wcześniejszej spłaty?', a: 'Tak. W akcie zapisujecie, że część ceny trafi wprost do Twojego banku, a reszta do Ciebie. Po spłacie długu hipoteka co do zasady wygasa (art. 94 u.k.w.h.), a bank musi umożliwić jej wykreślenie (art. 100 u.k.w.h.). Do tego czasu obciąża ona mieszkanie także po sprzedaży (art. 65 ust. 1 u.k.w.h.).' },
@@ -1667,6 +1679,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', readTime: '13 min',
     category: 'Zakup nieruchomości', tags: ['Koszty zakupu mieszkania', 'PCC', 'Taksa notarialna', 'Księga wieczysta'],
     cover: '/assets/blog-koszty-zakupu-mieszkania.jpg',
+    coverAlt: 'Okładka wpisu: „Koszty zakupu mieszkania 2026. Co doliczyć do ceny”, obok kalkulator, klucze do mieszkania i projekt aktu notarialnego na biurku',
     related: ['obsluga-zakupu', 'audyt-stanu-prawnego-nieruchomosci', 'analiza-umowy-przedwstepnej'],
     faq: [
       { q: 'Jakie są koszty zakupu mieszkania z rynku wtórnego?', a: 'PCC 2% wartości rynkowej (chyba że to pierwsze mieszkanie), najwyżej połowa taksy z § 3 plus VAT, do 300 zł plus VAT za wniosek do księgi, wypisy i 200 zł za wpis własności. Przy kredycie dochodzi 200 zł za wpis hipoteki i zwykle 19 zł PCC od hipoteki.' },
@@ -1809,6 +1822,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', readTime: '14 min',
     category: 'Współwłasność i spadki', tags: ['Kredyt hipoteczny', 'Rozwód', 'Podział majątku'],
     cover: '/assets/blog-kredyt-hipoteczny-po-rozwodzie.jpg',
+    coverAlt: 'Okładka wpisu: „Kredyt hipoteczny po rozwodzie. Kto spłaca i jak wyjść z kredytu”, obok umowa kredytu, dwa komplety kluczy i harmonogram rat na biurku',
     related: ['podzial-majatku-po-rozwodzie', 'zniesienie-wspolwlasnosci', 'obsluga-sprzedazy'],
     faq: [
       { q: 'Kto spłaca kredyt hipoteczny po rozwodzie?', a: 'Wobec banku oboje, jeżeli oboje podpisaliście umowę i odpowiadacie solidarnie: bank może żądać całej raty od każdego z Was (art. 366 § 1 k.c.). Między sobą co do zasady po połowie (art. 376 § 1 k.c.).' },
@@ -1919,6 +1933,7 @@ window.BLOG.push(
     date: '3 listopada 2026', iso: '2026-11-03', readTime: '14 min',
     category: 'Najem', tags: ['Najem komercyjny', 'Umowa najmu', 'Lokal użytkowy'],
     cover: '/assets/blog-umowa-najmu-lokalu-uzytkowego.jpg',
+    coverAlt: 'Okładka wpisu: „Umowa najmu lokalu użytkowego. Co wpisać, żeby się zabezpieczyć”, obok witryna lokalu z kartką „do wynajęcia”, klucze i umowa z zaznaczonymi paragrafami',
     related: ['obsluga-prawna-najemcow-komercyjnych', 'analiza-umowy-najmu', 'windykacja-czynszu'],
     faq: [
       { q: 'Czy umowa najmu lokalu użytkowego musi być na piśmie?', a: 'Gdy ma trwać dłużej niż rok – powinna, inaczej poczytuje się ją za zawartą na czas nieoznaczony (art. 660 k.c.). Forma pisemna jest też warunkiem ochrony najemcy przy sprzedaży lokalu (art. 678 § 2 k.c.).' },

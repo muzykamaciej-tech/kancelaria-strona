@@ -10,6 +10,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Zakup nieruchomości', tags: ['Kooperatywa mieszkaniowa', 'Budowa bez dewelopera', 'Spółka cywilna'],
     cover: '/assets/blog-kooperatywa-mieszkaniowa.jpg',
+    coverAlt: 'Okładka wpisu: „Kooperatywa mieszkaniowa. Jak działa i czym różni się od dewelopera”, obok budynek wielorodzinny z oświetlonymi oknami i placem zabaw o zmierzchu',
     related: ['obsluga-prawna-tbs-sim-kooperatyw', 'umowa-o-roboty-budowlane', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Czy po budowie mogę sprzedać mieszkanie?', a: 'Tak, po wyodrębnieniu lokalu. Przy gruncie od gminy gmina ma przez 20 lat prawo pierwokupu, a cenę pomniejsza się o niespłaconą część ceny gruntu przypadającą na sprzedawcę (art. 27 ust. 1–2 u.k.m.).' },
@@ -153,6 +154,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Proces budowlany', tags: ['Umowa z architektem', 'Projekt domu', 'Rękojmia'],
     cover: '/assets/blog-umowa-z-architektem.jpg',
+    coverAlt: 'Okładka wpisu: „Umowa z architektem. Zakres, wynagrodzenie i prawa do projektu”, obok makieta domu, rysunki elewacji i cyrkiel na biurku pod lampą',
     related: ['obsluga-prawna-architektow', 'umowa-o-roboty-budowlane'],
     faq: [
       { q: 'Czy mogę wstrzymać ostatnią ratę, gdy projekt ma wady?', a: 'Sama wada co do zasady nie zwalnia z zapłaty, ale pozwala obniżyć wynagrodzenie (art. 560 k.c.). Gdy opracowanie nie nadaje się do użycia, sąd może uznać, że wynagrodzenie się nie należy. Tak było w V ACa 83/13 przy etapie II, obok odstąpienia.' },
@@ -313,6 +315,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Proces budowlany', tags: ['Kara umowna', 'Wykonawca', 'Umowa o roboty budowlane'],
     cover: '/assets/blog-kara-umowna-w-umowie-z-wykonawca.jpg',
+    coverAlt: 'Okładka wpisu: „Kara umowna w umowie z wykonawcą. Jak ją zapisać i kiedy sąd ją obniży”, obok kask budowlany, miarka i umowa z długopisem na biurku, za oknem plac budowy o zmierzchu',
     related: ['umowa-o-roboty-budowlane', 'spory-z-wykonawca'],
     faq: [
       { q: 'Czy kary umowne w umowie najmu są dopuszczalne?', a: 'Tak, za obowiązek niepieniężny, np. zwłokę w wydaniu lokalu. Za zaległy czynsz kary nie zastrzeżesz, bo to świadczenie pieniężne, więc należą się odsetki (art. 483 § 1, art. 481 § 1 k.c.).' },
@@ -455,6 +458,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Proces budowlany', tags: ['Pozwolenie na budowę', 'Odwołanie', 'Sąsiad'],
     cover: '/assets/blog-odwolanie-od-pozwolenia-na-budowe.jpg',
+    coverAlt: 'Okładka wpisu: „Odwołanie od pozwolenia na budowę. Kto, kiedy i jak”, obok decyzja starosty, projekt domu i koperta polecona na biurku',
     related: ['pozwolenie-na-budowe', 'nadzor-budowlany-pinb'],
     faq: [
       { q: 'Ile kosztuje odwołanie od pozwolenia na budowę?', a: 'Przepis o opłacie skarbowej nie wymienia samego odwołania (art. 1 ust. 1 ustawy o opłacie skarbowej). Za pełnomocnictwo płacisz 17 zł, chyba że pełnomocnikiem jest małżonek, wstępny, zstępny albo rodzeństwo (załącznik, cz. IV).' },
@@ -607,6 +611,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Współwłasność i spadki', tags: ['Spadek', 'Dobrodziejstwo inwentarza', 'Długi spadkowe'],
     cover: '/assets/blog-dobrodziejstwo-inwentarza.jpg',
+    coverAlt: 'Okładka wpisu: „Dobrodziejstwo inwentarza. Długi spadkowe, spis i wykaz”, obok biurko z teczką, piórem, pieczęcią i zapaloną lampą o zmierzchu',
     related: ['stwierdzenie-nabycia-spadku', 'dzial-spadku'],
     faq: [
       { q: 'Czy muszę iść do notariusza, żeby przyjąć spadek z dobrodziejstwem inwentarza?', a: 'Nie. Brak oświadczenia w ciągu 6 miesięcy ma taki skutek (art. 1015 § 2 k.c.). Przy wcześniejszym oświadczeniu maksymalna stawka notariusza to 100 zł plus VAT (§ 8 pkt 9 taksy), a opłata od wniosku w sądzie 100 zł (art. 49 ust. 1 pkt 4 u.k.s.c.).' },
@@ -753,6 +758,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Służebność przesyłu', tags: ['Działka resztkowa', 'Wywłaszczenie', 'ZRID'],
     cover: '/assets/blog-wykup-dzialki-resztkowej.jpg',
+    coverAlt: 'Okładka wpisu: „Działka resztkowa. Kiedy możesz żądać wykupu po wywłaszczeniu”, obok wąski pas trawy między nasypem drogi a ogrodzeniem o zmierzchu',
     related: ['wykup-dzialki-resztkowej', 'odszkodowanie-wywlaszczenie', 'droga-konieczna'],
     faq: [
       { q: 'Czy muszę sprzedać resztówkę, jeżeli zarządca tego chce?', a: 'Nie. Nabycie następuje na wniosek właściciela albo użytkownika wieczystego (art. 13 ust. 3 specustawy drogowej). ZRID przenosi tylko części oznaczone w decyzji (art. 11f ust. 1 pkt 6, art. 12 ust. 4).' },
@@ -907,6 +913,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Spory z deweloperem', tags: ['Części wspólne', 'Rękojmia', 'Wspólnota mieszkaniowa'],
     cover: '/assets/blog-wady-czesci-wspolnych-budynku.jpg',
+    coverAlt: 'Okładka wpisu: „Wady części wspólnych budynku. Wspólnota czy właściciel: kto dochodzi roszczeń”, obok podziemny garaż z zaciekami na stropie i wodą na posadzce',
     related: ['wady-czesci-wspolnych', 'roszczenia-wspolnota-deweloper'],
     faq: [
       { q: 'Balkon, taras i garaż: czy to część wspólna?', a: 'Decyduje funkcja elementu i księga wieczysta (art. 3 ust. 2 u.w.l.). Sąd Apelacyjny w Lublinie uznał wady izolacji tarasów i ścian garaży za wady nieruchomości wspólnej, bo wpływały na konstrukcję budynku (I ACa 71/22). Sama przynależność tarasu do lokalu tego nie zmienia.' },
@@ -1041,6 +1048,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '14 min',
     category: 'Spory z deweloperem', tags: ['Metraż', 'Powierzchnia użytkowa', 'Obniżenie ceny'],
     cover: '/assets/blog-metraz-mieszkania-inny-niz-w-umowie.jpg',
+    coverAlt: 'Okładka wpisu: „Metraż inny niż w umowie. Dopłata, zwrot ceny i pomiar powierzchni”, obok dalmierz laserowy i miarka zwijana na podłodze pustego mieszkania',
     related: ['spory-o-metraz', 'klauzule-abuzywne-deweloper', 'rekojmia-wady-lokalu'],
     faq: [
       { q: 'Do kiedy mogę żądać zwrotu za brakujące metry?', a: 'Z rękojmi wadę musisz stwierdzić w ciągu 5 lat od wydania lokalu, a oświadczenie złożyć w ciągu roku od stwierdzenia. Konsument ma na to co najmniej te 5 lat (art. 568 § 1–3 k.c.). Roszczenie z umowy albo o zwrot nienależnego świadczenia przedawnia się co do zasady po 6 latach, z końcem roku (art. 118 k.c.), a początek biegu trzeba ustalić w konkretnej sprawie.' },
@@ -1165,6 +1173,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Współwłasność i spadki', tags: ['Podział majątku', 'Rozwód', 'Spłata', 'Koszty i podatki'],
     cover: '/assets/blog-podzial-majatku-po-rozwodzie.jpg',
+    coverAlt: 'Okładka wpisu: „Podział majątku po rozwodzie. Notariusz czy sąd, spłata, koszty i podatek”, obok salon z kartonami do przeprowadzki i dwa komplety kluczy na stole',
     related: ['podzial-majatku-po-rozwodzie', 'zniesienie-wspolwlasnosci', 'obsluga-sprzedazy'],
     faq: [
       { q: 'Czy dzieci mają wpływ na podział majątku po rozwodzie?', a: 'Dzieci nie są stroną podziału i nic z niego nie dostają. Żaden przepis nie przyznaje mieszkania automatycznie rodzicowi, z którym mieszkają, ale sąd decyduje „stosownie do okoliczności” (art. 212 § 2 k.c.), więc bierze to pod uwagę.' },
@@ -1313,6 +1322,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '14 min',
     category: 'Współwłasność i spadki', tags: ['Współwłasność', 'Zarząd rzeczą wspólną', 'Podział do korzystania'],
     cover: '/assets/blog-wspolwlasnosc-nieruchomosci.jpg',
+    coverAlt: 'Okładka wpisu: „Współwłasność nieruchomości. Kto decyduje i co gdy ktoś nie chce sprzedać”, obok dom o dwóch różnie pomalowanych połowach z dwojgiem drzwi o zmierzchu',
     related: ['zniesienie-wspolwlasnosci', 'dzial-spadku', 'bezumowne-korzystanie'],
     faq: [
       { q: 'Czy umowa o podział do korzystania wymaga notariusza?', a: 'Nie, przepisy k.c. nie zastrzegają dla niej szczególnej formy. Notariusz przyda się przy wpisie do księgi wieczystej (art. 31 ust. 1 u.k.w.h.).' },
@@ -1447,6 +1457,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Księgi wieczyste', tags: ['Założenie księgi wieczystej', 'KW-ZAL', 'Stan prawny'],
     cover: '/assets/blog-zalozenie-ksiegi-wieczystej.jpg',
+    coverAlt: 'Okładka wpisu: „Założenie księgi wieczystej. Wniosek, koszty i ile to trwa”, obok formularz wniosku, wyrys z mapy działki i klucze do mieszkania na biurku',
     related: ['uregulowanie-stanu-prawnego', 'zasiedzenie-nieruchomosci', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Czy można założyć księgę wieczystą bez aktu notarialnego?', a: 'Tak, jeżeli nabycie wynika z innego dokumentu o wymaganej formie, np. prawomocnego orzeczenia albo decyzji (art. 31 ust. 1 u.k.w.h.). Wypis z ewidencji oznacza działkę, a nie zastępuje dokumentu nabycia (§ 78 i § 106 ust. 1 rozporządzenia).' },
@@ -1581,6 +1592,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Najem', tags: ['Protokół zdawczo-odbiorczy', 'Najem mieszkania', 'Kaucja'],
     cover: '/assets/blog-protokol-zdawczo-odbiorczy-najem.jpg',
+    coverAlt: 'Okładka wpisu: „Protokół zdawczo-odbiorczy. Co wpisać przy wydaniu i zwrocie mieszkania”, obok klucze i koperta na parapecie przy oknie o zmierzchu',
     related: ['kaucja-najem', 'analiza-umowy-najmu', 'bezpieczny-najem'],
     faq: [
       { q: 'Czy protokół zdawczo-odbiorczy musi być na piśmie i czy potrzebny jest notariusz?', a: 'Art. 6c u.o.p.l. nie określa formy ani nie wymaga notariusza. Spisz protokół i podpiszcie go, bo wtedy działa art. 245 k.p.c.' },
@@ -1754,6 +1766,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Najem', tags: ['Prawa najemcy', 'Podwyżka czynszu', 'Wady lokalu'],
     cover: '/assets/blog-prawa-najemcy-mieszkania.jpg',
+    coverAlt: 'Okładka wpisu: „Prawa najemcy mieszkania. Czego wynajmujący nie może, a co musi”, obok umowa, długopis i klucze do mieszkania na stoliku w salonie wieczorem',
     related: ['analiza-umowy-najmu'],
     faq: [
       { q: 'Jakie prawa ma najemca bez umowy na piśmie?', a: 'Ustna umowa też jest najmem, a zawarta na ponad rok uchodzi za umowę na czas nieoznaczony (art. 659 § 1, 660 k.c.). Udowodnisz ją m.in. przelewami czynszu i wiadomościami. Najem okazjonalny i instytucjonalny bez pisma jest nieważny (art. 19a ust. 6, art. 19g ust. 1 u.o.p.l.).' },
@@ -1913,6 +1926,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Grunty rolne i OZE', tags: ['Scalenie gruntów', 'Gospodarstwo rolne', 'Odwołanie'],
     cover: '/assets/blog-scalenie-gruntow.jpg',
+    coverAlt: 'Okładka wpisu: „Scalenie gruntów. Na czym polega i jak się odwołać”, obok silosy zbożowe, hala i ciągnik w gospodarstwie o zmierzchu',
     related: ['obsluga-prawna-przedsiebiorstw-rolnych', 'nieruchomosci-rolne', 'uregulowanie-stanu-prawnego'],
     faq: [
       { q: 'Scalenie gruntów: jaka ustawa to reguluje?', a: 'Ustawa z 26.03.1982 r. o scalaniu i wymianie gruntów, a w sprawach w niej nieuregulowanych k.p.a. (art. 33 ust. 1 u.s.w.g.).' },
@@ -2069,6 +2083,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '14 min',
     category: 'Zakup nieruchomości', tags: ['Condohotel', 'Najem zwrotny', 'Lokal użytkowy'],
     cover: '/assets/blog-condohotel-co-to-jest.jpg',
+    coverAlt: 'Okładka wpisu: „Condohotel – co to jest. Umowa z operatorem, podatki i ryzyka”, obok pokój hotelowy z łóżkiem i lampką, za oknem nocny widok na stare miasto',
     related: ['audyt-stanu-prawnego-nieruchomosci', 'obsluga-prawna-operatorow-najmu'],
     faq: [
       { q: 'Czy condohotel to dobra inwestycja?', a: 'Tego nie oceniam, bo to decyzja finansowa, a nie prawna. Prawnik może sprawdzić status lokalu, dłużnika, zabezpieczenia i koszty z umowy.' },

@@ -10,6 +10,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Współwłasność i spadki', tags: ['Darowizna', 'Podatek od darowizny', 'Działka rolna'],
     cover: '/assets/blog-darowizna-dzialki-i-mieszkania.jpg',
+    coverAlt: 'Okładka wpisu: „Darowizna działki i mieszkania. Notariusz, podatek i sprzedaż przed 5 latami”, obok drewniany dom z oświetlonymi oknami za płotem o zmierzchu',
     related: ['darowizna-nieruchomosci', 'zachowek'],
     faq: [
       { q: 'Czym różni się darowizna mieszkania od darowizny działki?', a: 'Forma i podatek są takie same. Przy lokalu nie stosujesz u.k.u.r., a w I grupie mogą dojść ulga z art. 16 u.p.s.d. i połowa taksy z § 6 pkt 15.' },
@@ -162,6 +163,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '14 min',
     category: 'Zakup nieruchomości', tags: ['Kupno działki', 'Działka budowlana', 'Umowa przedwstępna', 'PCC'],
     cover: '/assets/blog-kupno-dzialki-budowlanej-krok-po-kroku.jpg',
+    coverAlt: 'Okładka wpisu: „Kupno działki krok po kroku. Od oględzin do aktu notarialnego”, obok mapa ewidencyjna, wypis z rejestru gruntów i lupa na biurku w świetle lampy',
     related: ['obsluga-zakupu', 'audyt-stanu-prawnego-nieruchomosci', 'analiza-umowy-przedwstepnej'],
     faq: [
       { q: 'Czy przy pierwszej działce nie płacę PCC?', a: 'Płacisz. Zwolnienie dla pierwszego mieszkania obejmuje lokal mieszkalny, budynek jednorodzinny i spółdzielcze prawa, a nie grunt niezabudowany (art. 9 pkt 17 u.p.c.c.).' },
@@ -305,6 +307,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Rynek nieruchomości', tags: ['Rzeczoznawca majątkowy', 'Operat szacunkowy', 'Wycena nieruchomości'],
     cover: '/assets/blog-rzeczoznawca-majatkowy.jpg',
+    coverAlt: 'Okładka wpisu: „Rzeczoznawca majątkowy. Kiedy jest potrzebny i za co odpowiada”, obok segregator, kalkulator, miarka i zdjęcia domu na biurku',
     related: ['obsluga-prawna-rzeczoznawcow', 'odszkodowanie-sluzebnosc-przesylu'],
     faq: [
       { q: 'Jak zostać rzeczoznawcą majątkowym i jakie trzeba mieć wykształcenie?', a: 'Potrzebne są: wyższe wykształcenie, studia podyplomowe z wyceny nieruchomości, co najmniej 6 miesięcy praktyki i pozytywny wynik postępowania kwalifikacyjnego z egzaminem. Do tego pełna zdolność do czynności prawnych i niekaralność za wymienione przestępstwa. Są wyjątki od studiów podyplomowych i praktyki (art. 177 u.g.n.). Zarobków przepisy nie regulują, a wiarygodnych danych nie mam.' },
@@ -449,6 +452,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Księgi wieczyste', tags: ['Wykreślenie hipoteki', 'Hipoteka', 'KW-WPIS'],
     cover: '/assets/blog-wykreslenie-hipoteki.jpg',
+    coverAlt: 'Okładka wpisu: „Wykreślenie hipoteki. Wniosek, koszty i stare wpisy banków”, obok regały archiwum ze starymi księgami i teczkami',
     related: ['uregulowanie-stanu-prawnego', 'audyt-stanu-prawnego-nieruchomosci', 'obsluga-sprzedazy'],
     faq: [
       { q: 'Czy bank sam wykreśli hipotekę po spłacie kredytu?', a: 'Nie musi składać wniosku, ale musi wydać dokument (art. 100 u.k.w.h.). Wniosek składasz Ty.' },
@@ -600,6 +604,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Zakup nieruchomości', tags: ['Prawo pierwokupu', 'Gmina', 'Umowa warunkowa', 'Lasy Państwowe'],
     cover: '/assets/blog-prawo-pierwokupu-gminy.jpg',
+    coverAlt: 'Okładka wpisu: „Prawo pierwokupu gminy. Kiedy przysługuje i jak przebiega sprzedaż”, obok oświetlony dom o zmierzchu i pusta drewniana tablica na słupku w ogrodzie',
     related: ['obsluga-sprzedazy', 'obsluga-zakupu'],
     faq: [
       { q: 'Czy prawo pierwokupu gminy dotyczy sprzedaży mieszkania?', a: 'Punkty 1–2 nie, bo mówią o nieruchomości niezabudowanej. Zostają punkty 3–4b art. 109 ust. 1 u.g.n. Sąd Najwyższy objął pierwokupem sprzedaż lokalu wydzielonego z nieruchomości wpisanej do rejestru zabytków, gdy pierwokup był ujawniony w księdze (postanowienie z 10.11.2010, II CSK 197/10; spółki, lokale niemieszkalne, grunt gminy w użytkowaniu wieczystym).' },
@@ -733,6 +738,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Wspólnoty mieszkaniowe', tags: ['Uchwała wspólnoty', 'Remont', 'Fundusz remontowy'],
     cover: '/assets/blog-uchwala-wspolnoty-o-remoncie.jpg',
+    coverAlt: 'Okładka wpisu: „Uchwała o remoncie we wspólnocie. Głosowanie, fundusz i zaskarżenie”, obok oświetlone wejście do bloku wieczorem ze skrzynkami pocztowymi i tablicą ogłoszeń',
     related: ['obsluga-prawna-wspolnot'],
     faq: [
       { q: 'Czy po sprzedaży mieszkania dostanę zwrot wpłat na fundusz remontowy?', a: 'Ustawa takiego zwrotu nie przewiduje. Środki funduszu należą do majątku wspólnoty, odrębnego od majątków właścicieli (II CSK 358/10). Sprawdź uchwałę o funduszu, bo może przewidywać rozliczenia, i uwzględnij to w cenie.' },
@@ -888,6 +894,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Współwłasność i spadki', tags: ['Testament', 'Zachowek', 'Spadek'],
     cover: '/assets/blog-testament-a-mieszkanie-zachowek.jpg',
+    coverAlt: 'Okładka wpisu: „Testament a mieszkanie. Zapis, wydziedziczenie i zachowek”, obok fotel, lampa i filiżanka przy oknie z widokiem na kamienicę o zmierzchu',
     related: ['zachowek', 'stwierdzenie-nabycia-spadku'],
     faq: [
       { q: 'Czy odrzucając spadek z testamentu, zachowam zachowek?', a: 'Co do zasady nie. Kto odrzucił spadek, jest traktowany, jakby nie dożył otwarcia spadku (art. 1020 k.c.), a zachowek należy się temu, kto byłby powołany z ustawy (art. 991 § 1 k.c.). Gdy testament Cię pomija, nie jesteś spadkobiercą, więc odrzucenie nic nie zmienia.' },
@@ -1055,6 +1062,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Proces budowlany', tags: ['Ogrodzenie', 'Zgłoszenie budowy', 'Sąsiad'],
     cover: '/assets/blog-ogrodzenie-na-granicy-dzialki.jpg',
+    coverAlt: 'Okładka wpisu: „Ogrodzenie na granicy działki. Zgłoszenie, sąsiad i koszty płotu”, obok drewniany płot porośnięty zielenią i oświetlona szopa o zmierzchu',
     related: ['zgloszenie-budowy'],
     faq: [
       { q: 'Czy ogrodzenie działki rolnej wymaga zgłoszenia?', a: 'Pb nie rozróżnia działek pod tym względem, więc reguła 2,20 m jest ta sama. Sprawdź plan miejscowy, a przy drodze art. 43 u.d.p.' },
@@ -1207,6 +1215,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Grunty rolne i OZE', tags: ['Wiatraki', 'Dzierżawa', 'Umowa z inwestorem'],
     cover: '/assets/blog-dzierzawa-pod-wiatraki.jpg',
+    coverAlt: 'Okładka wpisu: „Dzierżawa pod wiatraki. Umowa, czynsz i podatek”, obok turbiny wiatrowe i panele na polu o zachodzie słońca',
     related: ['dzierzawa-oze', 'dzierzawa-rolna', 'odrolnienie'],
     faq: [
       { q: 'Ile kosztuje dzierżawa ziemi pod wiatraki?', a: 'Przepisy nie podają stawki. Czynsz ustalacie w umowie (art. 693 k.c.), często od turbiny lub mocy.' },
@@ -1346,6 +1355,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Zakup nieruchomości', tags: ['Negocjacje', 'Cena', 'Umowa przedwstępna', 'Rękojmia'],
     cover: '/assets/blog-negocjacje-ceny-nieruchomosci.jpg',
+    coverAlt: 'Okładka wpisu: „Negocjacje ceny nieruchomości. Co zapisać, zanim uzgodnisz cenę”, obok stół z dwiema filiżankami i dokumentami przy oknie z widokiem na miasto nocą',
     related: ['negocjacje-nieruchomosci', 'analiza-umowy-przedwstepnej', 'obsluga-zakupu'],
     faq: [
       { q: 'Jak negocjować kupno działki?', a: 'Cenami podobnych działek z RCN i faktami: plan, dojazd, media, służebność, hipoteka (art. 25 ust. 1 u.k.w.h.). Jeżeli cena zależy od możliwości zabudowy, wpisz warunek do umowy przedwstępnej i skutek jego niespełnienia dla wpłaconych pieniędzy.' },
@@ -1489,6 +1499,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Zakup nieruchomości', tags: ['Mieszkanie komunalne', 'Bonifikata', 'Gmina', 'Sprzedaż mieszkania'],
     cover: '/assets/blog-wykup-mieszkania-komunalnego-bonifikata.jpg',
+    coverAlt: 'Okładka wpisu: „Wykup mieszkania z bonifikatą. Zwrot bonifikaty i sprzedaż przed terminem”, obok wieczorne wnętrze mieszkania z widokiem na miasto i klucze na blacie kuchennym',
     related: ['obsluga-sprzedazy', 'obsluga-zakupu'],
     faq: [
       { q: 'Czy mogę wykupić mieszkanie komunalne od razu na dziecko?', a: 'Pierwszeństwo ma najemca (art. 34 ust. 1 pkt 3 u.g.n.), więc to on kupuje. Dziecko będzie nabywcą, jeżeli samo jest najemcą. Inaczej najemca kupuje i później może przenieść lokal na dziecko (art. 68 ust. 2b).' },
@@ -1648,6 +1659,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Służebność przesyłu', tags: ['Zwrot nieruchomości', 'Wywłaszczenie', 'ZRID'],
     cover: '/assets/blog-zwrot-wywlaszczonej-nieruchomosci.jpg',
+    coverAlt: 'Okładka wpisu: „Zwrot wywłaszczonej nieruchomości. Kiedy możesz odzyskać działkę”, obok maszyny układające asfalt na nowej drodze o zmierzchu',
     related: ['odszkodowanie-wywlaszczenie', 'wykup-dzialki-resztkowej', 'stwierdzenie-nabycia-spadku'],
     faq: [
       { q: 'Czy urząd musi mnie zawiadomić, że działka jest zbędna?', a: 'Przepis wiąże obowiązek z zamiarem użycia działki na inny cel (art. 136 ust. 2 u.g.n.). Wniosek możesz złożyć sam, gdy działka stała się zbędna (art. 136 ust. 3). Nie czekaj na pismo.' },
@@ -1795,6 +1807,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Służebność przesyłu', tags: ['Droga publiczna', 'Odszkodowanie', 'Wywłaszczenie'],
     cover: '/assets/blog-droga-na-dzialce-przed-1999-odszkodowanie.jpg',
+    coverAlt: 'Okładka wpisu: „Działka pod drogą przed 1999 r. Kiedy należy się odszkodowanie”, obok żwirowa droga prowadząca do oświetlonego domu o zmierzchu',
     related: ['odszkodowanie-wywlaszczenie'],
     faq: [
       { q: 'Czy mogę zamknąć drogę gminną na mojej działce?', a: 'Nie rób tego przed wyjaśnieniem jej statusu. Jeżeli grunt przeszedł na mocy art. 73, nie jesteś już właścicielem. Jeżeli nie przeszedł, wydania gruntu żądasz w sądzie (art. 222 § 1 k.c.).' },
@@ -1934,6 +1947,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Służebności', tags: ['Służebność mieszkania', 'Darowizna', 'Dożywocie'],
     cover: '/assets/blog-sluzebnosc-mieszkania.jpg',
+    coverAlt: 'Okładka wpisu: „Służebność mieszkania. Dożywotnie prawo do lokalu i jego granice”, obok fotel z kocem, lampa i filiżanka przy oknie z widokiem na kamienicę o zmierzchu',
     related: ['dozywocie-renta', 'darowizna-nieruchomosci'],
     faq: [
       { q: 'Czy właściciel może wejść do mieszkania objętego służebnością?', a: 'Kodeks nie reguluje tego wprost. Uprawniony ma zezwolić na potrzebne roboty (art. 302 § 2 w zw. z art. 260 § 1 k.c.). Wstęp przy awarii i przeglądach zapisz w akcie.' },
@@ -2084,6 +2098,7 @@ window.BLOG.push(
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Służebności', tags: ['Immisje', 'Drzewo sąsiada', 'Hałas'],
     cover: '/assets/blog-immisje-drzewo-sasiada.jpg',
+    coverAlt: 'Okładka wpisu: „Hałas i drzewo sąsiada. Immisje, gałęzie i korzenie”, obok drewniane ogrodzenie i drzewa przy domu o zmierzchu',
     related: ['ograniczenie-korzystania-nieruchomosci', 'bezumowne-korzystanie'],
     faq: [
       { q: 'Czy sąsiad odpowiada za liście na mojej działce?', a: 'Sam opad liści może się mieścić w przeciętnej mierze (art. 144 k.c.). Sąd ocenia to w konkretnej sprawie. Pomaga dowód np. zapchanych rynien i kosztu ich czyszczenia.' },

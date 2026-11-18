@@ -10,6 +10,7 @@ window.BLOG.push(
     date: '23 października 2026', iso: '2026-10-23', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '13 min',
     category: 'Planowanie przestrzenne', tags: ['WZ', 'Zakup działki', 'Działka rolna'],
     cover: '/assets/blog-kupno-dzialki-rolnej-z-warunkami-zabudowy.jpg',
+    coverAlt: 'Okładka wpisu: „Działka rolna z WZ? Sprawdź decyzję przed zadatkiem”, obok decyzja z mapą i lupa na biurku',
     related: ['audyt-stanu-prawnego-nieruchomosci', 'analiza-umowy-przedwstepnej', 'warunki-zabudowy'],
     faq: [
       { q: 'Czy działka rolna z warunkami zabudowy to działka budowlana?', a: 'Nie automatycznie. WZ określa, co możesz zbudować, ale nie zmienia użytku w ewidencji gruntów. Przed budową możesz potrzebować decyzji o wyłączeniu gruntu z produkcji rolnej (art. 11 ust. 4 ustawy o ochronie gruntów rolnych i leśnych). Do zakupu nadal stosuje się co do zasady u.k.u.r., bo wyłącza ją tylko przeznaczenie w planie (art. 2 pkt 1 u.k.u.r.).' },
@@ -116,6 +117,7 @@ window.BLOG.push(
     date: '23 października 2026', iso: '2026-10-23', readTime: '13 min',
     category: 'Planowanie przestrzenne', tags: ['WZ', 'Dobre sąsiedztwo', 'Obszar analizowany'],
     cover: '/assets/blog-jak-sprawdzic-czy-dostane-warunki-zabudowy.jpg',
+    coverAlt: 'Okładka wpisu: „Czy dostanę WZ? 4 kroki przed wnioskiem”, obok mapa działki z zaznaczonym pasem wokół niej i linijka na biurku',
     related: ['warunki-zabudowy', 'plan-ogolny', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Czy dostanę warunki zabudowy, jeśli obok nie ma zabudowy?', a: 'Co do zasady nie. Co najmniej jedna działka sąsiednia, dostępna z tej samej drogi publicznej, musi być zabudowana tak, żeby dało się z niej odczytać parametry nowej zabudowy (art. 61 ust. 1 pkt 1 u.p.z.p.). Wyjątki dotyczą m.in. zabudowy zagrodowej przy gospodarstwie większym niż średnie w gminie oraz infrastruktury, OZE i stacji paliw (art. 61 ust. 3 i 4). Dla zwykłego domu zostaje wtedy plan miejscowy.' },
@@ -225,6 +227,7 @@ window.BLOG.push(
     date: '23 października 2026', iso: '2026-10-23', readTime: '12 min',
     category: 'Planowanie przestrzenne', tags: ['WZ', 'Droga konieczna', 'Dostęp do drogi publicznej'],
     cover: '/assets/blog-droga-konieczna-a-warunki-zabudowy.jpg',
+    coverAlt: 'Okładka wpisu: „Droga konieczna a WZ. Jaki dokument o dojeździe dołączyć do wniosku?”, obok polna droga między działkami i teczka z aktem notarialnym',
     related: ['droga-konieczna', 'warunki-zabudowy', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Czy dostanę warunki zabudowy bez drogi dojazdowej?', a: 'Co do zasady nie. WZ można wydać tylko przy łącznym spełnieniu warunków z art. 61 ust. 1 u.p.z.p., a jednym z nich jest dostęp terenu do drogi publicznej (pkt 2). Wymóg nie dotyczy m.in. dróg, sieci, urządzeń infrastruktury technicznej i instalacji OZE (art. 61 ust. 3). Dla domu jednorodzinnego dostęp musi być bezpośredni, przez drogę wewnętrzną albo przez ustanowioną służebność drogową (art. 2 pkt 14).' },
@@ -328,6 +331,7 @@ window.BLOG.push(
     date: '23 października 2026', iso: '2026-10-23', readTime: '13 min',
     category: 'Planowanie przestrzenne', tags: ['WZ', 'Wniosek o WZ', 'Dokumenty'],
     cover: '/assets/blog-warunki-zabudowy-jakie-dokumenty.jpg',
+    coverAlt: 'Okładka wpisu: „Wniosek o WZ. Jakie dokumenty dołączyć?”, obok formularz z zaznaczonymi polami, arkusz mapy i długopis na biurku',
     related: ['warunki-zabudowy', 'plan-ogolny', 'droga-konieczna'],
     faq: [
       { q: 'Jakie dokumenty do warunków zabudowy na dom jednorodzinny?', a: 'Do wniosku o warunki zabudowy na dom dołączasz urzędowy formularz, mapę zasadniczą albo ewidencyjną 1:500 lub 1:1000 z zasobu geodezyjnego, rysunek zagospodarowania z frontem terenu oraz załączniki A (media) i B (budynek). Zależnie od sprawy dochodzi pełnomocnictwo, dowód zapłaty 598 zł, gdy wnioskodawca nie jest właścicielem ani użytkownikiem wieczystym, i dokument o dojeździe przez cudzą działkę (art. 52 ust. 2 w zw. z art. 64 ust. 1 u.p.z.p.).' },
@@ -435,6 +439,7 @@ window.BLOG.push(
     date: '23 października 2026', iso: '2026-10-23', updated: '6 listopada 2026', updatedIso: '2026-11-06', readTime: '12 min',
     category: 'Planowanie przestrzenne', tags: ['WZ', 'Plan ogólny', 'Obszar uzupełnienia zabudowy'],
     cover: '/assets/blog-obszar-uzupelnienia-zabudowy-mapa.jpg',
+    coverAlt: 'Okładka wpisu: „Obszar uzupełnienia zabudowy – mapa. Czy Twoja działka w nim leży?”, obok wyrys z planu ogólnego z kreskowaniem i ołówek na biurku',
     related: ['warunki-zabudowy', 'plan-ogolny', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Co to jest obszar uzupełnienia zabudowy?', a: 'To część gminy wyznaczona w planie ogólnym wokół istniejących skupisk co najmniej 5 budynków, w której wolno dogęszczać zabudowę. Gmina wyznacza go według rozporządzenia Ministra Rozwoju i Technologii z 2 maja 2024 r. Na wniosek o WZ złożony od 1 września 2026 r. nowy budynek co do zasady może powstać tylko w tym obszarze (art. 61 ust. 1 pkt 1a u.p.z.p.). Wyjątki to m.in. odbudowa, rozbudowa i nadbudowa.' },
@@ -543,6 +548,7 @@ window.BLOG.push(
     date: '23 października 2026', iso: '2026-10-23', readTime: '14 min',
     category: 'Planowanie przestrzenne', tags: ['WZ', 'Plan ogólny', 'Pozwolenie na budowę'],
     cover: '/assets/blog-warunki-zabudowy-po-uchwaleniu-planu-ogolnego.jpg',
+    coverAlt: 'Okładka wpisu: „Masz WZ, a działka w strefie otwartej? Starosta sprawdzi projekt z WZ”, obok decyzja z pieczęcią i rulon projektu domu na biurku',
     related: ['pozwolenie-na-budowe', 'warunki-zabudowy', 'plan-ogolny', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Czy warunki zabudowy po uchwaleniu planu ogólnego są nadal ważne?', a: 'Tak. Ani uchwalenie, ani wejście w życie planu ogólnego nie jest przyczyną wygaśnięcia WZ (art. 65 ust. 1 u.p.z.p.). WZ wygasa po 5 latach od prawomocności, jeśli ma termin (art. 64c u.p.z.p.), albo gdy urząd stwierdzi jej wygaśnięcie z powodu planu miejscowego z innymi ustaleniami lub pozwolenia uzyskanego przez innego wnioskodawcę (art. 65 ust. 1 u.p.z.p.).' },
@@ -641,6 +647,7 @@ window.BLOG.push(
     date: '23 października 2026', iso: '2026-10-23', readTime: '11 min',
     category: 'Planowanie przestrzenne', tags: ['WZ', 'Koszt WZ', 'Opłata skarbowa'],
     cover: '/assets/blog-warunki-zabudowy-koszt.jpg',
+    coverAlt: 'Okładka wpisu: „Warunki zabudowy – koszt. 598 zł czy 0 zł?”, obok arkusz mapy, kalkulator i pióro na biurku',
     related: ['warunki-zabudowy', 'analiza-umowy-przedwstepnej', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Ile kosztują warunki zabudowy?', a: 'Koszt warunków zabudowy w urzędzie to 598 zł opłaty skarbowej albo 0 zł, gdy wniosek składa właściciel działki lub jej użytkownik wieczysty (załącznik do ustawy o opłacie skarbowej, cz. I pkt 8). Do tego dochodzi opłata w starostwie za mapę, a przy pełnomocniku spoza rodziny 17 zł. Za projekt decyzji nie płacisz (art. 60 ust. 4 ustawy o planowaniu i zagospodarowaniu przestrzennym).' },
@@ -741,6 +748,7 @@ window.BLOG.push(
     date: '23 października 2026', iso: '2026-10-23', readTime: '12 min',
     category: 'Planowanie przestrzenne', tags: ['WZ', 'Ponaglenie', 'Bezczynność urzędu'],
     cover: '/assets/blog-warunki-zabudowy-ile-sie-czeka.jpg',
+    coverAlt: 'Okładka wpisu: „Ile się czeka na WZ? I kiedy ponaglić gminę”, obok stos dokumentów w tacy na biurku i kalendarz',
     related: ['warunki-zabudowy', 'analiza-umowy-przedwstepnej', 'obsluga-zakupu'],
     faq: [
       { q: 'Ile się czeka na warunki zabudowy?', a: 'Za zwłokę ponad 90 dni od złożenia wniosku gminie grozi kara (art. 51 ust. 2 w zw. z art. 64 ust. 1 pkt 1 u.p.z.p.). Przy wolno stojącym domu jednorodzinnym do 70 m² powierzchni zabudowy, budowanym na własne potrzeby mieszkaniowe, ten termin wynosi 21 dni (art. 64 ust. 1 pkt 1 lit. a u.p.z.p.). K.p.a. daje urzędowi 1–2 miesiące (art. 35 § 3 k.p.a.). Od 9 grudnia 2025 r. do 31 grudnia 2026 r. terminy z ustawy o planowaniu nie biegną, a od 1 stycznia 2027 r. liczą się od nowa (art. 6 ustawy z 5 listopada 2025 r.).' },
@@ -847,6 +855,7 @@ window.BLOG.push(
     date: '23 października 2026', iso: '2026-10-23', readTime: '11 min',
     category: 'Planowanie przestrzenne', tags: ['WZ', 'Podział działki', 'Działka rolna'],
     cover: '/assets/blog-podzial-dzialki-z-warunkami-zabudowy.jpg',
+    coverAlt: 'Okładka wpisu: „Podział działki z WZ. Czy WZ przetrwa?”, w tle mapa z liniami podziału działki i drewniany palik geodezyjny',
     related: ['warunki-zabudowy', 'audyt-stanu-prawnego-nieruchomosci', 'nieruchomosci-rolne'],
     faq: [
       { q: 'Czy po podziale działki warunki zabudowy są nadal ważne?', a: 'Tak, jeżeli nie wygasły z innego powodu. Podziału nie ma wśród przyczyn wygaśnięcia WZ (art. 64c i 65 u.p.z.p.). Decyzja dotyczy terenu wskazanego na mapie, a nie numeru działki. Sprawdź tylko, czy budynek z WZ mieści się na nowej działce.' },
@@ -946,6 +955,7 @@ window.BLOG.push(
     date: '23 października 2026', iso: '2026-10-23', readTime: '12 min',
     category: 'Planowanie przestrzenne', tags: ['WZ', 'Działka rolna', 'Odrolnienie'],
     cover: '/assets/blog-warunki-zabudowy-na-dzialce-rolnej.jpg',
+    coverAlt: 'Okładka wpisu: „WZ na działce rolnej. Najpierw WZ czy odrolnienie?”, obok model domu na pasie zaoranej ziemi',
     related: ['warunki-zabudowy', 'odrolnienie', 'plan-ogolny', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Czy dostanę warunki zabudowy na działce rolnej?', a: 'Tak, jeżeli gmina ma plan ogólny, a działka leży w strefie dopuszczającej Twoją zabudowę i co do zasady w obszarze uzupełnienia zabudowy (art. 61 ust. 1 u.p.z.p.). Dom jednorodzinny mieści się m.in. w strefie wielofunkcyjnej z zabudową mieszkaniową jednorodzinną (SJ). Teren nie może też wymagać zgody na zmianę przeznaczenia gruntów rolnych (art. 61 ust. 1 pkt 4). Tak jest przy wnioskach od 1 września 2026 r. albo wcześniejszych, złożonych już po wejściu w życie planu ogólnego (art. 59 ust. 2–3 ustawy z 7 lipca 2023 r.).' },
@@ -1051,6 +1061,7 @@ window.BLOG.push(
     date: '23 października 2026', iso: '2026-10-23', readTime: '13 min',
     category: 'Planowanie przestrzenne', tags: ['WZ', 'Plan ogólny', 'Wniosek o WZ'],
     cover: '/assets/blog-warunki-zabudowy-bez-planu-ogolnego.jpg',
+    coverAlt: 'Okładka wpisu: „Warunki zabudowy a plan ogólny – uchwalony to nie obowiązujący. Sprawdź w 4 krokach, czy plan już obowiązuje”, obok teczka z uchwałą i kalendarz na biurku',
     related: ['warunki-zabudowy', 'plan-ogolny', 'analiza-umowy-przedwstepnej'],
     faq: [
       { q: 'Czy dostanę warunki zabudowy, jeśli moja gmina nie ma planu ogólnego?', a: 'Nie, jeżeli wniosek wpłynął do urzędu 1 września 2026 r. lub później, a plan ogólny gminy jeszcze nie wszedł w życie (art. 59 ust. 3 ustawy z 7 lipca 2023 r. o zmianie ustawy o planowaniu i zagospodarowaniu przestrzennym). Wnioski złożone najpóźniej 31 sierpnia 2026 r., gdy w gminie obowiązywało jeszcze studium, urząd rozpatruje według dawnych zasad (art. 59 ust. 2 i art. 65 ust. 1 tej ustawy).' },
@@ -1152,6 +1163,7 @@ window.BLOG.push(
     date: '23 października 2026', iso: '2026-10-23', readTime: '12 min',
     category: 'Planowanie przestrzenne', tags: ['WZ', 'Przeniesienie WZ', 'Zakup działki'],
     cover: '/assets/blog-czy-warunki-zabudowy-przechodza-na-nowego-wlasciciela.jpg',
+    coverAlt: 'Okładka wpisu: „Kupujesz działkę z WZ? Przenieś decyzję na siebie”, obok decyzja z pieczęcią i klucz na biurku',
     related: ['warunki-zabudowy', 'analiza-umowy-przedwstepnej', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Czy warunki zabudowy są przypisane do działki, czy do osoby?', a: 'Do jednego i drugiego. WZ określa, co można zbudować na konkretnym terenie, ale jej adresatem jest osoba, która złożyła wniosek. Dlatego warunki zabudowy nie przechodzą na nowego właściciela działki automatycznie, choć sprzedaż czy darowizna nie powoduje ich wygaśnięcia. Urząd przeniesie WZ na nabywcę osobną decyzją, za zgodą dotychczasowego adresata, jeżeli nabywca przyjmie wszystkie warunki z decyzji (art. 63 ust. 5 u.p.z.p.).' },

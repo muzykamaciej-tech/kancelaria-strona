@@ -10,6 +10,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', readTime: '13 min',
     category: 'Służebności', tags: ['Droga konieczna', 'Dostęp do drogi publicznej', 'Sąsiad'],
     cover: '/assets/blog-droga-konieczna-jak-ustanowic.jpg',
+    coverAlt: 'Okładka wpisu: „Droga konieczna. Jak ją ustanowić i jak się bronić”, obok mapa dwóch działek z zaznaczonym pasem przejazdu i pismo z sądu na biurku',
     related: ['droga-konieczna', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Jaka jest cena za m² drogi koniecznej?', a: 'Żaden przepis jej nie podaje. Liczą się ceny rynkowe i sposób korzystania z reszty nieruchomości, a nie same hipotetyczne założenia, np. przyszła zabudowa gruntu rolnego (V CSK 594/13).' },
@@ -137,6 +138,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '13 min',
     category: 'Współwłasność i spadki', tags: ['Dział spadku', 'Spłata rodzeństwa', 'Koszty i podatki'],
     cover: '/assets/blog-dzial-spadku.jpg',
+    coverAlt: 'Okładka wpisu: „Dział spadku. Notariusz czy sąd, spłaty i koszty”, obok projekt aktu notarialnego, klucze do domu i kalkulator na stole',
     related: ['dzial-spadku', 'zniesienie-wspolwlasnosci', 'stwierdzenie-nabycia-spadku'],
     faq: [
       { q: 'Czy umowę o dział spadku można podważyć?', a: 'Z powodu błędu tylko wtedy, gdy dotyczył stanu faktycznego, który strony uważały za niewątpliwy (art. 1045 k.c.). Spadkobiercy odpowiadają też wzajemnie z rękojmi za wady (art. 1046 k.c.).' },
@@ -284,6 +286,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '13 min',
     category: 'Księgi wieczyste', tags: ['Uzgodnienie księgi wieczystej', 'Pozew', 'Stan prawny'],
     cover: '/assets/blog-uzgodnienie-tresci-ksiegi-wieczystej.jpg',
+    coverAlt: 'Okładka wpisu: „Uzgodnienie treści księgi wieczystej. Kiedy pozew i ile kosztuje”, obok odpis księgi wieczystej z zaznaczonym wpisem i pozew na biurku',
     related: ['uregulowanie-stanu-prawnego', 'stwierdzenie-nabycia-spadku', 'zasiedzenie-nieruchomosci'],
     faq: [
       { q: 'Czy zamiast pozwu o uzgodnienie można wnieść pozew o ustalenie?', a: 'Gdy chcesz zmienić księgę, właściwy jest pozew z art. 10 u.k.w.h., bo doprowadza ją do stanu aktualnego w dniu orzekania. Pozew o ustalenie wymaga interesu prawnego (art. 189 k.p.c.). SN wskazał, że art. 10 u.k.w.h. nie jest uniwersalnym narzędziem ani wyłączną drogą, gdy powód kwestionuje stan prawny z przeszłości (wyrok z 24.08.2011, IV CSK 602/10).' },
@@ -422,6 +425,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', updated: '6 listopada 2026', updatedIso: '2026-11-06', readTime: '14 min',
     category: 'Proces budowlany', tags: ['Dom do 70 m²', 'Zgłoszenie budowy', 'Dom bez pozwolenia'],
     cover: '/assets/blog-dom-do-70-m2-bez-pozwolenia.jpg',
+    coverAlt: 'Okładka wpisu: „Dom do 70 m² bez pozwolenia. Warunki, zgłoszenie, pułapki”, obok projekt małego domu, mapa działki i formularz zgłoszenia na biurku',
     related: ['zgloszenie-budowy', 'pozwolenie-na-budowe', 'legalizacja-samowoli'],
     faq: [
       { q: 'Ile metrów może mieć dom bez pozwolenia na budowę?', a: 'W trybie z pkt 1a do 70 m² zabudowy. Większy wolno stojący dom też zbudujesz na zgłoszenie, bo pkt 1 nie podaje limitu metrów, jeżeli obszar oddziaływania mieści się na działce. Wtedy jednak urząd ma 21 dni na sprzeciw, a kierownik budowy jest obowiązkowy.' },
@@ -550,6 +554,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', readTime: '13 min',
     category: 'Służebność przesyłu', tags: ['Linia energetyczna', 'Gazociąg', 'Budowa domu'],
     cover: '/assets/blog-linia-energetyczna-na-dzialce-budowa-domu.jpg',
+    coverAlt: 'Okładka wpisu: „Linia nad działką. Czy postawisz dom i co z odszkodowaniem”, obok słup wysokiego napięcia i dom o zachodzie słońca',
     related: ['odszkodowanie-sluzebnosc-przesylu', 'bezumowne-korzystanie', 'ograniczenie-korzystania-nieruchomosci'],
     faq: [
       { q: 'Słup wysokiego napięcia na działce rolnej – czy należy mi się odszkodowanie?', a: 'Tak, zasady są te same (art. 305² § 2 k.c.), ale kwota zależy m.in. od przeznaczenia gruntu (IV CSK 440/12).' },
@@ -686,6 +691,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', readTime: '14 min',
     category: 'Planowanie przestrzenne', tags: ['Plan miejscowy', 'Odszkodowanie', 'Art. 36 u.p.z.p.'],
     cover: '/assets/blog-odszkodowanie-za-plan-miejscowy.jpg',
+    coverAlt: 'Okładka wpisu: „Odszkodowanie za plan miejscowy. Kiedy gmina zapłaci lub wykupi działkę”, obok mapa planu z zaznaczoną działką i kalkulator na biurku',
     related: ['oplaty-odszkodowania-planistyczne', 'skarga-na-plan-miejscowy', 'plan-ogolny'],
     faq: [
       { q: 'Ile kosztuje pozew o odszkodowanie za miejscowy plan zagospodarowania?', a: 'Przy wartości sporu ponad 20 000 zł opłata stała wynosi 1000 zł, bez względu na kwotę (art. 13b ustawy o kosztach sądowych w sprawach cywilnych). Przepis mówi o roszczeniach z art. 36, więc obejmuje też pozew o wykup. Dochodzą koszty biegłego, a przegrana strona zwraca koszty procesu przeciwnikowi (art. 98 § 1 k.p.c.). Powyżej 100 000 zł sprawę rozpoznaje sąd okręgowy (art. 17 pkt 4 k.p.c.).' },
@@ -825,6 +831,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '14 min',
     category: 'Służebność przesyłu', tags: ['Wywłaszczenie', 'ZRID', 'Odszkodowanie'],
     cover: '/assets/blog-wywlaszczenie-pod-droge-odszkodowanie.jpg',
+    coverAlt: 'Okładka wpisu: „Działka pod drogę. Wywłaszczenie i odszkodowanie krok po kroku”, obok walce i rozściełacz na budowie drogi o zmierzchu',
     related: ['odszkodowanie-wywlaszczenie', 'wykup-dzialki-resztkowej', 'ograniczenie-korzystania-nieruchomosci'],
     faq: [
       { q: 'Zarządca drogi proponuje mi umowę przed ZRID. Czy podpisać?', a: 'Możesz, ale najpierw sprawdź wycenę. Przy umowie stosuje się odpowiednio te same zasady, na dzień umowy (§ 49 ust. 6 pkt 4 rozporządzenia). Dodatków z art. 18 ust. 1e i 1f umowa sama nie daje.' },
@@ -951,6 +958,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', readTime: '13 min',
     category: 'Zakup nieruchomości', tags: ['Prospekt informacyjny', 'Ustawa deweloperska', 'Deweloper'],
     cover: '/assets/blog-prospekt-informacyjny-dewelopera.jpg',
+    coverAlt: 'Okładka wpisu: „Prospekt informacyjny. Co sprawdzić, zanim podpiszesz z deweloperem”, obok makieta bloku mieszkalnego, plik dokumentów i pióro na biurku',
     related: ['sprawdzenie-umowy-deweloperskiej', 'sprawdzenie-umowy-rezerwacyjnej'],
     faq: [
       { q: 'Gdzie znajdę wzór prospektu informacyjnego na 2026 r.?', a: 'W załączniku do ustawy deweloperskiej, w tekście jednolitym Dz.U. 2026 poz. 880 (art. 20 ust. 3).' },
@@ -1093,6 +1101,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', readTime: '14 min',
     category: 'Spory z deweloperem', tags: ['Klauzule niedozwolone', 'Umowa deweloperska', 'UOKiK'],
     cover: '/assets/blog-klauzule-niedozwolone-umowa-deweloperska.jpg',
+    coverAlt: 'Okładka wpisu: „Klauzule niedozwolone. Które zapisy w umowie Cię nie wiążą”, obok umowa z zaznaczonymi fragmentami i lupa na biurku przy oknie z widokiem na miasto nocą',
     related: ['klauzule-abuzywne-deweloper', 'sprawdzenie-umowy-deweloperskiej'],
     faq: [
       { q: 'Czy klauzule niedozwolone i abuzywne to to samo?', a: 'Tak. Warunki i skutek są te same (art. 385¹ § 1 k.c.).' },
@@ -1215,6 +1224,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', readTime: '13 min',
     category: 'Spory z deweloperem', tags: ['Usterki', 'Wady lokalu', 'Rękojmia'],
     cover: '/assets/blog-deweloper-nie-usuwa-usterek.jpg',
+    coverAlt: 'Okładka wpisu: „Deweloper nie usuwa usterek. Terminy i naprawa na jego koszt”, obok lista usterek na podkładce oparta o ścianę nowego mieszkania z oznaczeniami z taśmy',
     related: ['usuniecie-wad-protokol', 'rekojmia-wady-lokalu', 'wady-czesci-wspolnych'],
     faq: [
       { q: 'Podpisałem protokół bez uwag. Czy to zamyka sprawę?', a: 'Nie. Rękojmi wyłącza co do zasady wiedza o wadzie (art. 557 k.c.), a nie sam podpis. Przy wadzie widocznej deweloper będzie twierdził, że o niej wiedziałeś.' },
@@ -1357,6 +1367,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', readTime: '13 min',
     category: 'Proces budowlany', tags: ['Gwarancja zapłaty', 'Roboty budowlane', 'Wykonawca'],
     cover: '/assets/blog-gwarancja-zaplaty-za-roboty-budowlane.jpg',
+    coverAlt: 'Okładka wpisu: „Gwarancja zapłaty. Jak wykonawca zabezpiecza swoje pieniądze”, obok nocne zdjęcie budowy wielokondygnacyjnego budynku z żurawiem',
     related: ['obsluga-prawna-firm-budowlanych'],
     faq: [
       { q: 'Czy po upływie 45 dni muszę od razu odstąpić?', a: 'Nie. Kodeks mówi, że jesteś uprawniony, i nie podaje daty końcowej (art. 649⁴ § 1 k.c.). W sprawie V AGa 31/20 termin minął 1.10.2012 r., a oświadczenie z 13.12.2012 r. sąd uznał za skuteczne. Nie zwlekaj jednak, bo każdy wykonany etap zawęża to, od czego możesz odstąpić.' },
@@ -1504,6 +1515,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', readTime: '13 min',
     category: 'Proces budowlany', tags: ['Odstąpienie od umowy', 'Wykonawca', 'Rękojmia'],
     cover: '/assets/blog-odstapienie-od-umowy-z-wykonawca.jpg',
+    coverAlt: 'Okładka wpisu: „Odstąpienie od umowy z wykonawcą. Kiedy możesz i jak to zrobić”, obok niedokończone wnętrze domu z ceglanymi ścianami, porzuconymi narzędziami i lampą budowlaną',
     related: ['spory-z-wykonawca', 'umowa-o-roboty-budowlane'],
     faq: [
       { q: 'Czy można cofnąć odstąpienie od umowy z wykonawcą?', a: 'Sam tylko wtedy, gdy cofnięcie dojdzie do firmy najpóźniej razem z oświadczeniem (art. 61 § 1 k.c.). Później potrzebna jest jej zgoda.' },
@@ -1658,6 +1670,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', readTime: '13 min',
     category: 'Spory z deweloperem', tags: ['Kara umowna', 'Opóźnienie dewelopera', 'Odstąpienie od umowy'],
     cover: '/assets/blog-opoznienie-dewelopera-odszkodowanie.jpg',
+    coverAlt: 'Okładka wpisu: „Opóźnienie dewelopera. Kara umowna, odsetki i odszkodowanie”, obok nieukończony budynek z żurawiem o zmierzchu i kalendarz na kontenerze budowlanym',
     related: ['kary-za-opoznienie-dewelopera', 'klauzule-abuzywne-deweloper', 'sprawdzenie-umowy-deweloperskiej'],
     faq: [
       { q: 'Czy mogę odstąpić, jeżeli opóźnienie nie jest winą dewelopera?', a: 'Co do zasady tak. Sąd Apelacyjny w Katowicach przyjął, że podstawą odstąpienia jest sam fakt opóźnienia, niezależnie od jego przyczyn (V ACa 67/20, na tle ustawy z 2011 r.). Odszkodowanie to inna sprawa: tu deweloper może się bronić brakiem odpowiedzialności (art. 471 k.c.).' },
@@ -1799,6 +1812,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', readTime: '13 min',
     category: 'Zakup nieruchomości', tags: ['Flip mieszkania', 'PIT od sprzedaży', 'VAT', 'Rękojmia'],
     cover: '/assets/blog-flip-mieszkania.jpg',
+    coverAlt: 'Okładka wpisu: „Flip mieszkania. Podatki, VAT i ryzyka prawne”, obok mieszkanie w remoncie z drabiną, wałkiem, wiadrami i lampą budowlaną',
     related: ['flip-mieszkania', 'obsluga-prawna-inwestorow-flipping', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Czy po 5 latach flip jest bez podatku?', a: 'Tylko poza działalnością gospodarczą. Sprzedaż w wykonaniu działalności jest przychodem bez względu na czas (art. 10 ust. 1 pkt 3 i 8 u.p.d.o.f.).' },
@@ -1932,6 +1946,7 @@ window.BLOG.push(
     date: '4 listopada 2026', iso: '2026-11-04', readTime: '13 min',
     category: 'Proces budowlany', tags: ['Wejście na działkę', 'Sąsiad', 'Prawo wstępu'],
     cover: '/assets/blog-wejscie-na-dzialke-bez-zgody-wlasciciela.jpg',
+    coverAlt: 'Okładka wpisu: „Wejście na działkę. Kiedy sąsiad lub firma może bez Twojej zgody”, obok koparka i świeży wykop w trawniku przy domu o zmierzchu',
     related: ['ograniczenie-korzystania-nieruchomosci', 'odszkodowanie-sluzebnosc-przesylu'],
     faq: [
       { q: 'Czy mogę zamknąć bramę przed ekipą operatora?', a: 'Tak, jeżeli firma nie ma tytułu, decyzji ani nagłej awarii. W przeciwnym razie obowiązek udostępnienia działki podlega egzekucji administracyjnej (art. 124 ust. 6, art. 124b ust. 5, art. 126 ust. 5 u.g.n.).' },

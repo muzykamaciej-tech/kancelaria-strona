@@ -26,7 +26,7 @@ function OMniePage({ setRoute }) {
         </div>
       </section>
       <OMnieIntro />
-      {About && <About />}
+      {About && <About book />}
       {Reviews && <Reviews />}
       {Lead && <Lead />}
     </main>

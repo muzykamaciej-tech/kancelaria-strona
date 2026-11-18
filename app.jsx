@@ -320,13 +320,25 @@ function absUrl(p) { return SITE_BASE + (p.charAt(0) === '/' ? '' : '/') + p; }
 function crumbs(list) {
   return { '@type': 'BreadcrumbList', itemListElement: list.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE_BASE + c.path })) };
 }
+const LINKEDIN_URL = 'https://www.linkedin.com/in/maciej-muzyka-a76a66147/';
+const PROFINFO_AUTHOR_URL = 'https://www.profinfo.pl/autorzy/maciej-muzyka,99592.html';
+/* monografia (dane z Profinfo, 18.11.2026); rok jako copyrightYear, bo check.mjs wymaga pełnej daty ISO w datePublished */
+function bookEntity() {
+  return {
+    '@type': 'Book', '@id': SITE_BASE + '/#monografia-skarga-na-przewleklosc',
+    name: 'Skarga na przewlekłość postępowania cywilnego', author: { '@id': PERSON_ID },
+    publisher: { '@type': 'Organization', name: 'Wolters Kluwer Polska' }, copyrightYear: 2023,
+    isbn: '978-83-8328-442-2', bookEdition: '1', numberOfPages: 212, inLanguage: 'pl',
+    url: 'https://www.profinfo.pl/sklep/skarga-na-przewleklosc-postepowania-cywilnego,406225.html',
+  };
+}
 /* the author as an entity (facts as stated on the site: AboutBlock, footer, /o-mnie) */
 function personEntity() {
   return {
     '@type': 'Person', '@id': PERSON_ID, name: 'Maciej Muzyka', honorificPrefix: 'adw. dr',
     jobTitle: 'Adwokat, doktor nauk prawnych', url: SITE_BASE + '/o-mnie', image: SITE_BASE + '/assets/maciej-muzyka.webp',
     identifier: { '@type': 'PropertyValue', propertyID: 'Numer wpisu na listę adwokatów', value: 'LUB/ADW/1702' },
-    sameAs: ['https://rejestradwokatow.pl/adwokat/muzyka-maciej-35358'],
+    sameAs: ['https://rejestradwokatow.pl/adwokat/muzyka-maciej-35358', LINKEDIN_URL, PROFINFO_AUTHOR_URL],
     alumniOf: [
       { '@type': 'CollegeOrUniversity', name: 'Uniwersytet Jagielloński' },
       { '@type': 'CollegeOrUniversity', name: 'Uniwersytet Marii Curie-Skłodowskiej w Lublinie' },
@@ -439,7 +451,9 @@ function buildJsonLd(route, ids) {
       crumbs([{ name: 'Start', path: '/' }, { name: 'Skarbnica wiedzy', path: '/blog' }, { name: p.title, path: '/blog/' + p.slug }]) ] };
   }
   if (route === 'o-mnie') {
-    return { '@context': 'https://schema.org', '@type': 'ProfilePage', url: SITE_BASE + '/o-mnie', inLanguage: 'pl', mainEntity: personEntity() };
+    return { '@context': 'https://schema.org', '@graph': [
+      { '@type': 'ProfilePage', url: SITE_BASE + '/o-mnie', inLanguage: 'pl', mainEntity: personEntity() },
+      bookEntity() ] };
   }
   return null;
 }

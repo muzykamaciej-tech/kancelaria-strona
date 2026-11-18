@@ -10,6 +10,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', readTime: '15 min',
     category: 'Zakup nieruchomości', tags: ['Umowa rezerwacyjna', 'Opłata rezerwacyjna', 'Deweloper', 'Rynek wtórny'],
     cover: '/assets/blog-umowa-rezerwacyjna-mieszkania.jpg',
+    coverAlt: 'Okładka wpisu: „Umowa rezerwacyjna. Kiedy odzyskasz opłatę?”, obok rzut mieszkania z zaznaczonym lokalem, umowa z zakreśloną kwotą i klucze na biurku',
     related: ['sprawdzenie-umowy-rezerwacyjnej', 'sprawdzenie-umowy-deweloperskiej', 'analiza-umowy-przedwstepnej'],
     faq: [
       { q: 'Co to jest umowa rezerwacyjna mieszkania?', a: 'To umowa, w której deweloper zobowiązuje się czasowo wyłączyć z oferty sprzedaży wybrany przez Ciebie lokal albo dom (art. 29 ust. 2 ustawy deweloperskiej). Wymaga formy pisemnej pod rygorem nieważności (art. 30 ust. 1). Nie zobowiązuje Cię do kupna mieszkania.' },
@@ -167,6 +168,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', readTime: '15 min',
     category: 'Zakup nieruchomości', tags: ['Umowa deweloperska', 'Deweloper', 'Prospekt informacyjny'],
     cover: '/assets/blog-umowa-deweloperska.jpg',
+    coverAlt: 'Okładka wpisu: „Umowa deweloperska. Co sprawdzić przed aktem?”, obok projekt aktu notarialnego z zaznaczonymi paragrafami, rzut mieszkania i długopis na biurku',
     related: ['sprawdzenie-umowy-deweloperskiej', 'sprawdzenie-umowy-rezerwacyjnej', 'kary-za-opoznienie-dewelopera'],
     faq: [
       { q: 'Co to jest umowa deweloperska?', a: 'To umowa w formie aktu notarialnego, w której deweloper zobowiązuje się wybudować budynek, ustanowić odrębną własność lokalu i przenieść ją na Ciebie, a Ty zobowiązujesz się zapłacić cenę (art. 5 pkt 6 i art. 40 ust. 1 ustawy deweloperskiej). Własność przechodzi dopiero drugim aktem po odbiorze. Do tego czasu masz roszczenie wpisane do księgi wieczystej gruntu (art. 38 ust. 2).' },
@@ -319,6 +321,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', readTime: '15 min',
     category: 'Spory z deweloperem', tags: ['Odbiór mieszkania', 'Protokół odbioru', 'Wady lokalu'],
     cover: '/assets/blog-odbior-mieszkania-od-dewelopera.jpg',
+    coverAlt: 'Okładka wpisu: „Odbiór mieszkania od dewelopera. Protokół, wady, terminy”, obok protokół odbioru z listą usterek, poziomica i klucze na parapecie',
     related: ['usuniecie-wad-protokol', 'rekojmia-wady-lokalu', 'wady-czesci-wspolnych'],
     faq: [
       { q: 'Kiedy jest odbiór mieszkania od dewelopera?', a: 'Po uprawomocnieniu się decyzji o pozwoleniu na użytkowanie, a przy domu jednorodzinnym także po zawiadomieniu o zakończeniu budowy bez sprzeciwu organu (art. 41 ust. 1 u.d.). Termin odbioru i sposób zawiadomienia określa umowa deweloperska (art. 35 ust. 1 pkt 17 u.d.).' },
@@ -473,6 +476,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', readTime: '14 min',
     category: 'Współwłasność i spadki', tags: ['Spadek', 'Stwierdzenie nabycia spadku', 'Akt poświadczenia dziedziczenia'],
     cover: '/assets/blog-stwierdzenie-nabycia-spadku.jpg',
+    coverAlt: 'Okładka wpisu: „Spadek. Notariusz czy sąd?”, obok teczka z aktem zgonu, akt notarialny z pieczęcią i klucze na drewnianym stole',
     related: ['stwierdzenie-nabycia-spadku', 'dzial-spadku'],
     faq: [
       { q: 'Stwierdzenie nabycia spadku – notariusz czy sąd?', a: 'Notariusz, jeżeli wszyscy, którzy mogą dziedziczyć, biorą udział w protokole dziedziczenia i zgodnie żądają poświadczenia (art. 95b i 95c § 2 pkt 1 pr. not.). Sąd, gdy ktoś nie przyjdzie, kwestionuje testament albo notariusz odmówi (art. 95e pr. not., art. 1025 § 1 k.c.). Zarejestrowany akt ma skutki prawomocnego postanowienia (art. 95j § 1 pr. not.).' },
@@ -626,6 +630,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', updated: '6 listopada 2026', updatedIso: '2026-11-06', readTime: '15 min',
     category: 'Współwłasność i spadki', tags: ['Zachowek', 'Darowizna', 'Spadek'],
     cover: '/assets/blog-zachowek-z-darowizny.jpg',
+    coverAlt: 'Okładka wpisu: „Zachowek z darowizny. Ile się należy i do kiedy?”, obok akt notarialny darowizny, klucze do mieszkania i kalkulator na stole',
     related: ['zachowek', 'darowizna-nieruchomosci', 'stwierdzenie-nabycia-spadku'],
     faq: [
       { q: 'Czy z darowizny należy się zachowek?', a: 'Tak. Przy obliczaniu zachowku dolicza się do spadku darowizny zrobione przez spadkodawcę (art. 993 § 1 k.c.). Zachowku mogą żądać zstępni, małżonek i rodzice zmarłego, którzy dziedziczyliby z ustawy (art. 991 § 1 k.c.). Należy się także spadkobiercy ustawowemu, który dziedziczy pusty spadek, bo majątek wyczerpała darowizna (uchwała SN III CZP 53/13).' },
@@ -782,6 +787,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '15 min',
     category: 'Współwłasność i spadki', tags: ['Dożywocie', 'Zachowek', 'Podatek PCC'],
     cover: '/assets/blog-umowa-dozywocia.jpg',
+    coverAlt: 'Okładka wpisu: „Umowa dożywocia. Mieszkanie za opiekę – co z zachowkiem i podatkiem?”, obok klucze do mieszkania, akt notarialny i filiżanka herbaty na stole',
     related: ['dozywocie-renta', 'darowizna-nieruchomosci', 'zachowek'],
     faq: [
       { q: 'Umowa dożywocia – co to jest?', a: 'Zbywca przenosi własność nieruchomości, a nabywca zapewnia mu dożywotnie utrzymanie: mieszkanie, wyżywienie, pomoc w chorobie i pogrzeb, jeżeli strony nie ustalą inaczej (art. 908 § 1 k.c.). Wymaga aktu notarialnego (art. 158 k.c.).' },
@@ -922,6 +928,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '15 min',
     category: 'Wspólnoty mieszkaniowe', tags: ['Wspólnota mieszkaniowa', 'Uchwała wspólnoty', 'Zaskarżenie uchwały'],
     cover: '/assets/blog-wspolnota-mieszkaniowa-uchwaly.jpg',
+    coverAlt: 'Okładka wpisu: „Uchwała wspólnoty. Masz 6 tygodni”, obok karta do głosowania z polami „za” i „przeciw”, klucze do mieszkania i kalendarz na biurku',
     related: ['obsluga-prawna-wspolnot', 'roszczenia-wspolnota-deweloper', 'obsluga-prawna-spoldzielni'],
     faq: [
       { q: 'Co to jest wspólnota mieszkaniowa?', a: 'Ogół właścicieli lokali w danej nieruchomości (art. 6 u.w.l.). Powstaje z mocy prawa z wyodrębnieniem pierwszego lokalu należącego do innej osoby niż właściciel nieruchomości (uchwała SN III CZP 42/13).' },
@@ -1105,6 +1112,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '14 min',
     category: 'Najem', tags: ['Umowa najmu', 'Najem okazjonalny', 'Najem instytucjonalny'],
     cover: '/assets/blog-umowa-najmu-mieszkania-rodzaje.jpg',
+    coverAlt: 'Okładka wpisu: „Umowa najmu mieszkania. Zwykła, okazjonalna czy instytucjonalna?”, obok umowa, klucze do mieszkania i długopis na biurku',
     related: ['bezpieczny-najem', 'analiza-umowy-najmu', 'obsluga-wynajmujacych'],
     faq: [
       { q: 'Jakie są rodzaje umowy najmu mieszkania?', a: 'Trzy: zwykła, okazjonalna i instytucjonalna. Okazjonalną zawiera osoba fizyczna bez działalności w zakresie wynajmowania lokali (art. 19a ust. 1 u.o.p.l.), instytucjonalną – osoba lub firma z taką działalnością (art. 19f ust. 1).' },
@@ -1246,6 +1254,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '15 min',
     category: 'Najem', tags: ['Kaucja', 'Najem mieszkania', 'Zwrot kaucji'],
     cover: '/assets/blog-kaucja-za-mieszkanie.jpg',
+    coverAlt: 'Okładka wpisu: „Kaucja za mieszkanie. Ile, kiedy zwrot, co wolno potrącić”, obok klucze do mieszkania, protokół zdawczo-odbiorczy i banknoty na biurku',
     related: ['kaucja-najem', 'analiza-umowy-najmu', 'bezpieczny-najem'],
     faq: [
       { q: 'Kaucja za mieszkanie – ile może wynosić?', a: 'Przy zwykłym najmie najwyżej 12 miesięcznych czynszów, liczonych według stawki z dnia zawarcia umowy (art. 6 ust. 1 u.o.p.l.). Przy najmie okazjonalnym i instytucjonalnym najwyżej 6 czynszów (art. 19a ust. 4, art. 19f ust. 5). Minimum ustawa nie określa, a kaucja w ogóle nie jest obowiązkowa.' },
@@ -1392,6 +1401,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', readTime: '15 min',
     category: 'Najem', tags: ['Najem komercyjny', 'Wypowiedzenie najmu', 'Lokal użytkowy'],
     cover: '/assets/blog-wypowiedzenie-najmu-lokalu-uzytkowego.jpg',
+    coverAlt: 'Okładka wpisu: „Wypowiedzenie najmu lokalu użytkowego. Terminy i pismo”, obok witryna pustego sklepu, klucze i podpisane pismo na ladzie',
     related: ['obsluga-prawna-najemcow-komercyjnych', 'windykacja-czynszu', 'eksmisja'],
     faq: [
       { q: 'Jaki jest okres wypowiedzenia najmu lokalu użytkowego?', a: 'Taki, jaki ustala umowa, ale przy czynszu miesięcznym nie krótszy niż ustawowy. Gdy umowa milczy, a czynsz jest płatny miesięcznie, najem na czas nieoznaczony wypowiadasz najpóźniej na 3 miesiące naprzód na koniec miesiąca kalendarzowego (art. 688 k.c.). Przy czynszu płatnym rzadziej niż co miesiąc – na 3 miesiące naprzód na koniec kwartału (art. 673 § 2 k.c.).' },
@@ -1548,6 +1558,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', readTime: '16 min',
     category: 'Planowanie przestrzenne', tags: ['Opłata adiacencka', 'Renta planistyczna', 'Operat szacunkowy'],
     cover: '/assets/blog-oplata-adiacencka-renta-planistyczna.jpg',
+    coverAlt: 'Okładka wpisu: „Opłata adiacencka czy renta planistyczna? Kiedy płacisz gminie”, obok mapa podziału działki z nowymi numerami, decyzja z pieczęcią gminy i kalkulator na biurku',
     related: ['oplaty-odszkodowania-planistyczne', 'obsluga-sprzedazy', 'plan-ogolny'],
     faq: [
       { q: 'Opłata adiacencka – co to jest?', a: 'To opłata na rzecz gminy za wzrost wartości nieruchomości spowodowany jej podziałem, scaleniem i podziałem albo budową drogi lub sieci z udziałem środków publicznych (art. 4 pkt 11 u.g.n.). Ustala ją wójt, burmistrz albo prezydent miasta w decyzji po uzyskaniu opinii rzeczoznawcy majątkowego (art. 146 ust. 1a u.g.n.). Ustawa mówi, że wójt „może” ją ustalić.' },
@@ -1694,6 +1705,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', readTime: '15 min',
     category: 'Planowanie przestrzenne', tags: ['Operat szacunkowy', 'Rzeczoznawca majątkowy', 'Odszkodowanie'],
     cover: '/assets/blog-operat-szacunkowy-jak-podwazyc.jpg',
+    coverAlt: 'Okładka wpisu: „Operat szacunkowy. Jak go podważyć?”, obok gruby operat z kolorowymi zakładkami, tabela transakcji z zakreślonymi cenami i długopis na biurku',
     related: ['odszkodowanie-wywlaszczenie', 'oplaty-odszkodowania-planistyczne', 'odszkodowanie-sluzebnosc-przesylu'],
     faq: [
       { q: 'Co to jest operat szacunkowy?', a: 'To pisemna opinia rzeczoznawcy majątkowego o wartości nieruchomości (art. 156 ust. 1 u.g.n.). Przedstawia cel i przedmiot wyceny, daty, analizę rynku, wybrane podejście z uzasadnieniem, obliczenia i wynik (§ 79 rozporządzenia w sprawie wyceny nieruchomości). Sporządzić go może tylko rzeczoznawca z uprawnieniami (art. 174 u.g.n.).' },
@@ -1843,6 +1855,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', readTime: '15 min',
     category: 'Grunty rolne i OZE', tags: ['Zgoda KOWR', 'Nieruchomość rolna', 'Ustawa o kształtowaniu ustroju rolnego'],
     cover: '/assets/blog-zgoda-kowr-nabycie-ziemi-rolnej.jpg',
+    coverAlt: 'Okładka wpisu: „Zgoda KOWR na zakup ziemi. Kiedy i jak?”, obok decyzja z pieczęcią, mapa ewidencyjna pola i długopis na biurku',
     related: ['zgoda-kowr', 'nieruchomosci-rolne', 'status-rolnika'],
     faq: [
       { q: 'Kiedy potrzebna jest zgoda KOWR na nabycie ziemi rolnej?', a: 'Gdy kupujesz nieruchomość rolną o powierzchni co najmniej 1 ha, z co najmniej 0,3 ha użytków rolnych, a nie jesteś rolnikiem indywidualnym i nie pasuje żaden wyjątek, np. zakup od osoby bliskiej (art. 1a pkt 1 lit. b, art. 2a ust. 1, 3 i 4 u.k.u.r.). Ustawy nie stosuje się do nieruchomości przeznaczonych w planach zagospodarowania przestrzennego na cele inne niż rolne (art. 2 pkt 1).' },
@@ -1982,6 +1995,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', readTime: '16 min',
     category: 'Grunty rolne i OZE', tags: ['Rolnik indywidualny', 'Kwalifikacje rolnicze', 'Zakup ziemi rolnej'],
     cover: '/assets/blog-status-rolnika-indywidualnego.jpg',
+    coverAlt: 'Okładka wpisu: „Rolnik indywidualny. Kto nim jest i co daje status?”, obok dyplom, zaświadczenie z urzędu gminy i mapa pola na biurku',
     related: ['status-rolnika', 'zgoda-kowr', 'nieruchomosci-rolne'],
     faq: [
       { q: 'Ile ha musi mieć rolnik indywidualny?', a: 'Najwyżej 300 ha użytków rolnych, licząc grunty własne, dzierżawione i we współwłasności (art. 6 ust. 1 i 4 u.k.u.r.). Dolnej granicy art. 6 nie podaje, ale gospodarstwo rolne w u.k.u.r. ma co najmniej 1 ha (art. 2 pkt 2), więc potrzebujesz co najmniej 1 ha.' },
@@ -2143,6 +2157,7 @@ window.BLOG.push(
     date: '27 października 2026', iso: '2026-10-27', readTime: '15 min',
     category: 'Proces budowlany', tags: ['Umowa o roboty budowlane', 'Wykonawca', 'Odbiór robót'],
     cover: '/assets/blog-umowa-o-roboty-budowlane.jpg',
+    coverAlt: 'Okładka wpisu: „Umowa z firmą budowlaną. Co wpisać, żeby Cię chroniła?”, obok projekt domu, umowa z zaznaczonymi paragrafami, kask i długopis na biurku',
     related: ['umowa-o-roboty-budowlane(/uslugi/proces-budowlany/umowa-o-roboty-budowlane)', 'spory-z-wykonawca'],
     faq: [
       { q: 'Co to jest umowa o roboty budowlane?', a: 'To umowa, w której wykonawca zobowiązuje się oddać obiekt wykonany zgodnie z projektem i zasadami wiedzy technicznej, a inwestor przygotować roboty, odebrać obiekt i zapłacić (art. 647 k.c.). To odrębny typ umowy, a nie odmiana umowy o dzieło (uchwała SN III CZP 63/01).' },

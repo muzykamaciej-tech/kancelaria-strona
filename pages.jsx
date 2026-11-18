@@ -340,9 +340,12 @@ function getBlogCategory(id) { return BLOG_CATEGORIES.find((c) => c.id === id) |
 function blogCategoryOfPost(post) { return BLOG_CATEGORIES.find((c) => c.cats.indexOf(post.category) !== -1) || null; }
 function postsInCategory(cat) { return window.BLOG.filter((p) => cat.cats.indexOf(p.category) !== -1); }
 /* najnowsze najpierw; ten sam dzień — kolejność z danych */
-function blogNewest(n) {
-  return window.BLOG.map((p, i) => [p, i]).sort((a, b) => (b[0].iso || '').localeCompare(a[0].iso || '') || a[1] - b[1]).slice(0, n).map((x) => x[0]);
+function blogByNewest(posts) {
+  return posts.map((p, i) => [p, i]).sort((a, b) => (b[0].iso || '').localeCompare(a[0].iso || '') || a[1] - b[1]).map((x) => x[0]);
 }
+function blogNewest(n) { return blogByNewest(window.BLOG).slice(0, n); }
+/* alt okładki: pole `coverAlt` wpisu (z pliku md, „Alt okładki”), a bez niego tytuł wpisu */
+function blogCoverAlt(post) { return post.coverAlt || 'Okładka wpisu: ' + post.title; }
 function wpisy(n) {
   const d = n % 10, dd = n % 100;
   return n + (n === 1 ? ' wpis' : (d >= 2 && d <= 4 && (dd < 12 || dd > 14)) ? ' wpisy' : ' wpisów');
@@ -406,6 +409,33 @@ function BlogPage({ setRoute }) {
                   </span>
                   <span className="blog-cat-tile-arrow"><Icon name="arrow-up-right" size={16} /></span>
                 </window.NavLink>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* pełna lista poradników: zwykłe linki w prerenderowanym HTML (linkowanie wewnętrzne, każdy wpis 1 klik od /blog) */}
+      <section className="section-py bg-light">
+        <div className="wrap">
+          <span className="eyebrow">Wszystkie poradniki · {wpisy(window.BLOG.length)}</span>
+          <h2 className="h2 mt-4">Pełna lista według rodzaju sprawy.</h2>
+          <div className="blog-all mt-8">
+            {BLOG_CATEGORIES.map((c) => {
+              const posts = blogByNewest(postsInCategory(c));
+              if (!posts.length) return null;
+              return (
+                <div key={c.id} className="blog-all-group">
+                  <h3 className="blog-all-cat">
+                    <window.NavLink route="blogcat" slug={c.id}>{c.title}</window.NavLink>
+                    <span className="blog-all-count">{wpisy(posts.length)}</span>
+                  </h3>
+                  <ul className="blog-all-list">
+                    {posts.map((post) => (
+                      <li key={post.slug}><window.NavLink route="blogpost" slug={post.slug}>{post.title}</window.NavLink></li>
+                    ))}
+                  </ul>
+                </div>
               );
             })}
           </div>
@@ -523,7 +553,7 @@ function BlogPostPage({ slug, setRoute }) {
             </div>
           </div>
           {/* okładka na pełną szerokość treści (bez przycinania — ma wpisany tytuł) */}
-          {post.cover && <img className="post-hero-cover" src={post.cover} alt="" width="1200" height="654" fetchpriority="high" decoding="async" />}
+          {post.cover && <img className="post-hero-cover" src={post.cover} alt={blogCoverAlt(post)} width="1200" height="654" fetchpriority="high" decoding="async" />}
         </div>
       </section>
 
@@ -854,7 +884,7 @@ function KontaktPage({ setRoute }) {
 Object.assign(window, {
   HomePage, UslugiPage, ServiceDetailPage,
   BlogPage, BlogPostPage, BlogCategoryPage,
-  BLOG_CATEGORIES, getBlogCategory, blogCategoryOfPost, postsInCategory,
+  BLOG_CATEGORIES, getBlogCategory, blogCategoryOfPost, postsInCategory, blogByNewest, blogCoverAlt,
   FAQPage, FAQAccordion,
   KontaktPage, LeadFormBand, BlogTeaserCard,
 });

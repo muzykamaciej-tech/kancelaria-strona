@@ -10,6 +10,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', readTime: '14 min',
     category: 'Wspólnoty mieszkaniowe', tags: ['Zarządca nieruchomości', 'Umowa o zarządzanie', 'Wspólnota mieszkaniowa'],
     cover: '/assets/blog-zarzadca-nieruchomosci-umowa.jpg',
+    coverAlt: 'Okładka wpisu: „Zarządca nieruchomości. Umowa, OC, odpowiedzialność”, obok segregator z umową o zarządzanie, pęk kluczy do klatki schodowej i polisa na biurku',
     related: ['obsluga-prawna-zarzadcow', 'obsluga-prawna-wspolnot'],
     faq: [
       { q: 'Czy zarządca nieruchomości musi mieć licencję?', a: 'Nie, od 1.01.2014 (ustawa z 13.06.2013, Dz.U. 2013 poz. 829). Musi mieć obowiązkowe OC z minimalną sumą gwarancyjną 50 000 euro (art. 186 ust. 3 u.g.n., § 4 ust. 1 rozporządzenia z 26.04.2019).' },
@@ -159,6 +160,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '14 min',
     category: 'Księgi wieczyste', tags: ['Spółdzielnia mieszkaniowa', 'Księga wieczysta', 'Przekształcenie we własność'],
     cover: '/assets/blog-spoldzielcze-wlasnosciowe-prawo-do-lokalu.jpg',
+    coverAlt: 'Okładka wpisu: „Spółdzielcze własnościowe prawo do lokalu. Czym różni się od własności?”, obok zaświadczenie ze spółdzielni, klucze do mieszkania i odpis księgi wieczystej na biurku',
     related: ['obsluga-prawna-spoldzielni', 'uregulowanie-stanu-prawnego'],
     faq: [
       { q: 'Co to znaczy spółdzielcze własnościowe prawo do lokalu?', a: 'To ograniczone prawo rzeczowe do mieszkania w budynku spółdzielni: zbywalne, dziedziczne i podlegające egzekucji (art. 17² ust. 1 u.s.m., art. 244 § 1 k.c.). Właścicielem lokalu pozostaje spółdzielnia. Na Twoje żądanie musi przenieść na Ciebie jego własność (art. 17¹⁴ ust. 1 u.s.m.).' },
@@ -300,6 +302,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', readTime: '13 min',
     category: 'Grunty rolne i OZE', tags: ['Dzierżawa rolna', 'Umowa dzierżawy', 'KRUS'],
     cover: '/assets/blog-umowa-dzierzawy-gruntu-rolnego.jpg',
+    coverAlt: 'Okładka wpisu: „Umowa dzierżawy gruntu rolnego. Co wpisać, żeby KRUS i ARiMR ją przyjęły?”, obok umowa z pieczęcią urzędu gminy, mapa ewidencyjna pola i kłosy zboża na biurku',
     related: ['dzierzawa-rolna', 'status-rolnika'],
     faq: [
       { q: 'Umowa dzierżawy gruntu rolnego na 10 lat – po co tyle?', a: 'Przy co najmniej 10 latach, formie pisemnej, potwierdzeniu wójta i dzierżawcy spoza rodziny wydzierżawionych gruntów nie uwzględnia się przy zawieszeniu stałej renty rolniczej (art. 28 ust. 4 pkt 1 u.s.u.r.). Taka umowa przenosi też podatek rolny na dzierżawcę (art. 3 ust. 3 u.p.r.).' },
@@ -440,6 +443,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', readTime: '14 min',
     category: 'Planowanie przestrzenne', tags: ['Podział działki', 'Geodeta', 'Działka rolna'],
     cover: '/assets/blog-podzial-dzialki-krok-po-kroku.jpg',
+    coverAlt: 'Okładka wpisu: „Podział działki krok po kroku. Kiedy, ile trwa, ile kosztuje”, obok mapa z czerwoną linią podziału, palik graniczny i decyzja na biurku',
     related: ['obsluga-prawna-geodetow', 'warunki-zabudowy', 'oplaty-odszkodowania-planistyczne'],
     faq: [
       { q: 'Ile kosztuje podział działki?', a: 'Opłaty skarbowej nie płacisz, bo sprawy z u.g.n. są z niej zwolnione (art. 2 ust. 1 pkt 1 lit. h ustawy o opłacie skarbowej). Główny koszt to geodeta, którego ceny nie reguluje przepis. Przy sprzedaży dochodzi taksa notarialna plus VAT oraz 100 zł za odłączenie i 200 zł za wpis własności (art. 42 ust. 1, art. 44 ust. 1–2 u.k.s.c.).' },
@@ -586,6 +590,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '14 min',
     category: 'Grunty rolne i OZE', tags: ['Fotowoltaika', 'Dzierżawa', 'Umowa z inwestorem'],
     cover: '/assets/blog-dzierzawa-ziemi-pod-fotowoltaike.jpg',
+    coverAlt: 'Okładka wpisu: „Dzierżawa ziemi pod fotowoltaikę. Umowa, czynsz, ryzyka”, obok pole z rzędami paneli, projekt umowy i długopis na biurku',
     related: ['dzierzawa-oze', 'dzierzawa-rolna', 'odrolnienie'],
     faq: [
       { q: 'Na ile lat podpisuje się dzierżawę ziemi pod fotowoltaikę?', a: 'Zwykle na 25–30 lat, często liczonych od uruchomienia farmy, plus okres przygotowawczy. Po 30 latach umowa staje się bezterminowa (art. 695 § 1 k.c.).' },
@@ -741,6 +746,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', readTime: '14 min',
     category: 'Najem', tags: ['Ryczałt od najmu', 'Podatek od najmu', 'PIT-28'],
     cover: '/assets/blog-podatek-od-najmu-ryczalt.jpg',
+    coverAlt: 'Okładka wpisu: „Podatek od najmu. Ryczałt 8,5% i 12,5%, terminy, PIT-28”, obok klucze do mieszkania, kalkulator i wyciąg z przelewami czynszu na biurku',
     related: ['obsluga-wynajmujacych', 'bezpieczny-najem'],
     faq: [
       { q: 'Ile wynosi ryczałt od najmu w 2026 r.?', a: '8,5% przychodu do 100 000 zł w roku i 12,5% od nadwyżki ponad 100 000 zł (art. 12 ust. 1 pkt 4 lit. a u.z.p.d.). Małżonkowie ze wspólnością majątkową co do zasady mają limit u każdego z osobna (art. 12 ust. 5 i 6).' },
@@ -863,6 +869,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', updated: '6 listopada 2026', updatedIso: '2026-11-06', readTime: '14 min',
     category: 'Służebności', tags: ['Granice działki', 'Rozgraniczenie', 'Geodeta'],
     cover: '/assets/blog-wznowienie-granic-dzialki.jpg',
+    coverAlt: 'Okładka wpisu: „Wznowienie granic czy rozgraniczenie? Gdy sąsiad przesunął płot”, obok czerwono-biały palik graniczny, siatka ogrodzeniowa i szkic geodety na biurku',
     related: ['obsluga-prawna-geodetow', 'zasiedzenie-nieruchomosci', 'uregulowanie-stanu-prawnego'],
     faq: [
       { q: 'Co to jest wznowienie granic działki?', a: 'To odtworzenie przez geodetę znaków granicznych ustalonych wcześniej, według dokumentów ich położenia, bez postępowania przed urzędem (art. 39 ust. 1 p.g.k.). Nie zmienia granicy.' },
@@ -1001,6 +1008,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', readTime: '14 min',
     category: 'Współwłasność i spadki', tags: ['Spadek', 'Odrzucenie spadku', 'Długi spadkowe'],
     cover: '/assets/blog-odrzucenie-spadku.jpg',
+    coverAlt: 'Okładka wpisu: „Odrzucenie spadku. 6 miesięcy, notariusz czy sąd?”, obok koperty z wezwaniami do zapłaty, kalendarz i długopis na stole',
     related: ['stwierdzenie-nabycia-spadku', 'dzial-spadku'],
     faq: [
       { q: 'Do kiedy można odrzucić spadek?', a: 'W ciągu 6 miesięcy od dnia, w którym dowiedziałeś się o tytule swojego powołania do spadku, a nie od dnia śmierci (art. 1015 § 1 k.c.). Termin biegnie osobno dla każdego spadkobiercy. Do jego zachowania wystarczy złożyć przed upływem wniosek do sądu o odebranie oświadczenia (art. 1015 § 1¹ k.c.).' },
@@ -1134,6 +1142,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '14 min',
     category: 'Współwłasność i spadki', tags: ['Darowizna', 'Służebność mieszkania', 'Zachowek'],
     cover: '/assets/blog-przepisanie-mieszkania-na-dziecko.jpg',
+    coverAlt: 'Okładka wpisu: „Przepisanie mieszkania na dziecko. Koszty, podatek, ryzyka”, obok akt notarialny, klucze do mieszkania i długopis na stole',
     related: ['darowizna-nieruchomosci', 'dozywocie-renta', 'zachowek'],
     faq: [
       { q: 'Ile kosztuje przepisanie mieszkania na dziecko?', a: 'Przy wartości 500 000 zł maksymalna taksa za akt to 2770 zł plus VAT (§ 3 pkt 5 rozporządzenia o taksie). Do tego wniosek o wpis (do 300 zł plus VAT, § 15c) i opłaty sądowe: 200 zł za własność i 200 zł za służebność (art. 42 ust. 1 u.k.s.c.).' },
@@ -1286,6 +1295,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', readTime: '14 min',
     category: 'Służebność przesyłu', tags: ['Art. 124 u.g.n.', 'Odszkodowanie', 'Decyzja starosty'],
     cover: '/assets/blog-ograniczenie-korzystania-z-nieruchomosci-odszkodowanie.jpg',
+    coverAlt: 'Okładka wpisu: „Art. 124 u.g.n. Decyzja starosty i odszkodowanie”, obok mapa działki z zaznaczonym przebiegiem gazociągu i pieczątka na decyzji',
     related: ['ograniczenie-korzystania-nieruchomosci', 'odszkodowanie-sluzebnosc-przesylu', 'odszkodowanie-wywlaszczenie'],
     faq: [
       { q: 'Czy muszę zgodzić się na gazociąg albo linię przez moją działkę?', a: 'Nie musisz, ale brak Twojej zgody to warunek wydania decyzji przez starostę (art. 124 ust. 1 u.g.n.). Decyzja wymaga zgodności z planem miejscowym albo decyzją o lokalizacji inwestycji celu publicznego i wcześniejszych rokowań z Tobą (art. 124 ust. 1 i 3). Od decyzji odwołujesz się do wojewody w 14 dni (art. 129 § 2 k.p.a.).' },
@@ -1425,6 +1435,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', readTime: '14 min',
     category: 'Planowanie przestrzenne', tags: ['Plan ogólny', 'Konsultacje społeczne', 'Uwagi do planu'],
     cover: '/assets/blog-uwagi-do-planu-ogolnego.jpg',
+    coverAlt: 'Okładka wpisu: „Uwagi do planu ogólnego. Do kiedy, jak napisać, co dalej”, obok mapa gminy z kolorowymi strefami, formularz uwagi i długopis na biurku',
     related: ['plan-ogolny', 'warunki-zabudowy', 'skarga-na-plan-miejscowy'],
     faq: [
       { q: 'Do kiedy można składać uwagi do planu ogólnego?', a: 'Do ostatniego dnia konsultacji społecznych z ogłoszenia wójta, burmistrza albo prezydenta miasta (art. 8h ust. 1 u.p.z.p.). Zbieranie uwag trwa co najmniej 28 dni (art. 8j pkt 1). Jednej daty dla kraju nie ma.' },
@@ -1565,6 +1576,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', readTime: '14 min',
     category: 'Najem', tags: ['Najem krótkoterminowy', 'Usługi hotelarskie', 'Wspólnota mieszkaniowa'],
     cover: '/assets/blog-najem-krotkoterminowy.jpg',
+    coverAlt: 'Okładka wpisu: „Najem krótkoterminowy. Co obowiązuje w 2026 r. i co może wspólnota”, obok klucze z brelokiem z numerem, walizka na kółkach i kalendarz z zaznaczonymi dobami na biurku',
     related: ['obsluga-wynajmujacych', 'obsluga-prawna-wspolnot', 'obsluga-prawna-operatorow-najmu'],
     faq: [
       { q: 'Czy jest już ustawa o najmie krótkoterminowym?', a: 'Na 2.11.2026 nie. Nowelizacja ustawy o usługach hotelarskich uchwalona przez Sejm 8.10.2026 nie została ogłoszona w Dzienniku Ustaw. Obowiązują dotychczasowe przepisy (art. 3 ust. 1 pkt 8, art. 35–39 u.u.h.).' },
@@ -1682,6 +1694,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '14 min',
     category: 'Współwłasność i spadki', tags: ['Sprzedaż udziału', 'Współwłasność', 'Prawo pierwokupu'],
     cover: '/assets/blog-sprzedaz-udzialu-w-nieruchomosci.jpg',
+    coverAlt: 'Okładka wpisu: „Sprzedaż udziału w nieruchomości. Czy potrzebna zgoda?”, obok klucz do domu, odpis księgi wieczystej z zaznaczonym udziałem 1/2 i akt notarialny na biurku',
     related: ['zniesienie-wspolwlasnosci', 'obsluga-sprzedazy', 'dzial-spadku'],
     faq: [
       { q: 'Czy można sprzedać udział w nieruchomości bez zgody współwłaściciela?', a: 'Tak. Każdy współwłaściciel może rozporządzać swoim udziałem bez zgody pozostałych (art. 198 k.c.), w formie aktu notarialnego (art. 158 k.c.). Zgoda jest potrzebna m.in. przy udziale w przedmiocie spadku przed działem (art. 1036 k.c.) i po ustaniu wspólności małżeńskiej przed podziałem majątku (art. 46 k.r.o.).' },
@@ -1812,6 +1825,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '14 min',
     category: 'Proces budowlany', tags: ['Prawa autorskie', 'Projekt budowlany', 'Architekt'],
     cover: '/assets/blog-prawa-autorskie-do-projektu-budowlanego.jpg',
+    coverAlt: 'Okładka wpisu: „Prawa autorskie do projektu budowlanego. Kto je ma, licencja, zmiany”, obok rysunki elewacji domu, umowa z architektem i długopis na biurku',
     related: ['obsluga-prawna-architektow', 'pozwolenie-na-budowe', 'umowa-o-roboty-budowlane'],
     faq: [
       { q: 'Kto ma prawa autorskie do projektu budowlanego?', a: 'Co do zasady architekt, który go stworzył (art. 8 ust. 1 pr. aut.), a przy projekcie pracownika – pracownia (art. 12 ust. 1). Inwestor nabywa je tylko pisemną umową przeniesienia praw (art. 53).' },
@@ -1952,6 +1966,7 @@ window.BLOG.push(
     date: '2 listopada 2026', iso: '2026-11-02', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '14 min',
     category: 'Najem', tags: ['TBS', 'SIM', 'Partycypacja', 'Najem mieszkania'],
     cover: '/assets/blog-mieszkanie-w-tbs.jpg',
+    coverAlt: 'Okładka wpisu: „Mieszkanie w TBS. Partycypacja, czynsz, wykup”, obok klucze, umowa najmu i umowa partycypacji na biurku',
     related: ['obsluga-prawna-tbs-sim-kooperatyw', 'bezpieczny-najem'],
     faq: [
       { q: 'Mieszkanie w TBS – co to znaczy?', a: 'To mieszkanie na wynajem w zasobach towarzystwa budownictwa społecznego albo społecznej inicjatywy mieszkaniowej (art. 27 ust. 1 u.s.f.r.m.). Właścicielem jest spółka, a Ty jesteś najemcą.' },

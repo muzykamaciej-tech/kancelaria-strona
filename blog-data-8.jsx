@@ -10,6 +10,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', readTime: '15 min',
     category: 'Proces budowlany', tags: ['Pozwolenie na budowę', 'Zgłoszenie budowy', 'Dom jednorodzinny'],
     cover: '/assets/blog-pozwolenie-na-budowe-czy-zgloszenie.jpg',
+    coverAlt: 'Okładka wpisu: „Pozwolenie na budowę czy zgłoszenie? Lista 2026”, obok projekt domu, mapa działki z zaznaczoną granicą i kask budowlany na biurku',
     related: ['pozwolenie-na-budowe', 'zgloszenie-budowy', 'legalizacja-samowoli'],
     faq: [
       { q: 'Na co potrzebne jest pozwolenie na budowę?', a: 'Na każdą budowę, której ustawa nie zwalnia z pozwolenia (art. 28 ust. 1 Pb). Przy domu to przede wszystkim dom, którego obszar oddziaływania wychodzi poza działkę, dom niewolno stojący oraz wolno stojący garaż lub budynek gospodarczy powyżej 35 m² zabudowy (art. 29 ust. 1 pkt 1 i 14).' },
@@ -175,6 +176,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '16 min',
     category: 'Zakup nieruchomości', tags: ['Zakup nieruchomości', 'Księga wieczysta', 'Stan prawny'],
     cover: '/assets/blog-co-sprawdzic-przed-zakupem-nieruchomosci.jpg',
+    coverAlt: 'Okładka wpisu: „Co sprawdzić przed zakupem? Lista kontrolna prawnika”, obok odpis księgi wieczystej, mapa działki z zaznaczonym słupem i klucze do mieszkania na biurku',
     related: ['audyt-stanu-prawnego-nieruchomosci', 'analiza-umowy-przedwstepnej', 'sprawdzenie-umowy-deweloperskiej'],
     faq: [
       { q: 'Co sprawdzić przed zakupem działki?', a: 'Księgę wieczystą (4 działy), ewidencję gruntów, plan miejscowy albo plan ogólny, dostęp do drogi publicznej i sieci na gruncie. Przy gruncie rolnym ustal, czy stosuje się u.k.u.r. Podstawa: art. 25 u.k.w.h., art. 20 i 24 p.g.k., art. 30 ust. 1 u.p.z.p., art. 1a i 2a u.k.u.r.' },
@@ -325,6 +327,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', readTime: '15 min',
     category: 'Proces budowlany', tags: ['Samowola budowlana', 'Legalizacja', 'Nadzór budowlany'],
     cover: '/assets/blog-legalizacja-samowoli-budowlanej.jpg',
+    coverAlt: 'Okładka wpisu: „Samowola budowlana. Legalizacja po 20 latach”, obok dom z dobudówką i pismo z nadzoru budowlanego na biurku',
     related: ['legalizacja-samowoli', 'nadzor-budowlany-pinb'],
     faq: [
       { q: 'Co to jest samowola budowlana?', a: 'To obiekt albo jego część w budowie albo wybudowany bez wymaganego pozwolenia na budowę, zgłoszenia albo mimo sprzeciwu (art. 48 ust. 1 Pb). Budową jest też rozbudowa i nadbudowa (art. 3 pkt 6 Pb). Legalizuje się ją przed nadzorem budowlanym, co do zasady przed PINB (art. 83 ust. 1 Pb).' },
@@ -471,6 +474,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', readTime: '14 min',
     category: 'Zakup nieruchomości', tags: ['Zadatek', 'Zaliczka', 'Umowa przedwstępna'],
     cover: '/assets/blog-zadatek-a-zaliczka.jpg',
+    coverAlt: 'Okładka wpisu: „Zadatek czy zaliczka? Kiedy odzyskasz pieniądze”, obok umowa przedwstępna, dwa stosy banknotów i długopis na biurku',
     related: ['analiza-umowy-przedwstepnej', 'sprawdzenie-umowy-rezerwacyjnej', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Zadatek a zaliczka – co to jest i czym się różnią?', a: 'Zaliczka to wpłata na poczet ceny, która wraca, gdy do umowy sprzedaży nie dojdzie, bez względu na przyczynę (art. 410 § 2 k.c.; uchwała SN III CZP 3/07). Zadatek to zabezpieczenie wykonania umowy. Tracisz go, gdy nie wykonasz umowy z własnej winy, a gdy zawini druga strona, możesz odstąpić i żądać dwukrotności (art. 394 § 1 k.c.).' },
@@ -616,6 +620,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', readTime: '15 min',
     category: 'Zakup nieruchomości', tags: ['Umowa przedwstępna', 'Zadatek', 'Akt notarialny'],
     cover: '/assets/blog-umowa-przedwstepna-kupna-mieszkania.jpg',
+    coverAlt: 'Okładka wpisu: „Umowa przedwstępna. Na piśmie czy u notariusza?”, obok klucze do mieszkania, długopis i umowa z zakreślonym terminem na biurku',
     related: ['analiza-umowy-przedwstepnej', 'obsluga-zakupu', 'sprawdzenie-umowy-rezerwacyjnej'],
     faq: [
       { q: 'Czy umowa przedwstępna sprzedaży mieszkania musi być u notariusza?', a: 'Nie. Umowa przedwstępna w formie pisemnej jest ważna, ale daje tylko prawo do odszkodowania, gdy druga strona się uchyla (art. 390 § 1 k.c.). Żądać w sądzie zawarcia umowy sprzedaży możesz tylko przy umowie przedwstępnej w formie aktu notarialnego, bo taką formę ma mieć sama sprzedaż (art. 390 § 2 i art. 158 k.c.).' },
@@ -751,6 +756,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', readTime: '15 min',
     category: 'Użytkowanie wieczyste', tags: ['Użytkowanie wieczyste', 'Opłata przekształceniowa', 'Opłata roczna'],
     cover: '/assets/blog-uzytkowanie-wieczyste-oplata-przeksztalcenie.jpg',
+    coverAlt: 'Okładka wpisu: „Użytkowanie wieczyste. Opłata, przekształcenie, bonifikata”, obok pismo z urzędu z kwotą opłaty, odpis księgi wieczystej i kalkulator na biurku',
     related: ['uzytkowanie-wieczyste', 'uregulowanie-stanu-prawnego', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Na ile lat jest użytkowanie wieczyste?', a: 'Co do zasady na 99 lat. W wypadkach wyjątkowych można je ustanowić na krótszy okres, ale nie krótszy niż 40 lat (art. 236 § 1 k.c.). W ostatnich 5 latach możesz żądać przedłużenia na 40–99 lat, a odmowa jest dopuszczalna tylko ze względu na ważny interes społeczny (art. 236 § 2 k.c.).' },
@@ -905,6 +911,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '15 min',
     category: 'Współwłasność i spadki', tags: ['Zniesienie współwłasności', 'Spłata współwłaściciela', 'Koszty i podatki'],
     cover: '/assets/blog-zniesienie-wspolwlasnosci-nieruchomosci.jpg',
+    coverAlt: 'Okładka wpisu: „Zniesienie współwłasności. Notariusz czy sąd?”, obok klucze do mieszkania przecięte linią na pół, odpis księgi wieczystej i kalkulator na biurku',
     related: ['zniesienie-wspolwlasnosci', 'dzial-spadku'],
     faq: [
       { q: 'Czy można zmusić współwłaściciela do sprzedaży mieszkania?', a: 'Co do zasady nie do sprzedaży na rynku, bo ta wymaga zgody wszystkich (art. 199 k.c.). Jeżeli masz co najmniej połowę udziałów, możesz prosić sąd o zezwolenie na sprzedaż całości (art. 199 zd. 2 k.c.), ale to droga niepewna, bo sąd może uznać, że wniosek obchodzi przepisy o zniesieniu współwłasności. Możesz jednak żądać zniesienia współwłasności w sądzie (art. 210 § 1 k.c.). Jeżeli żaden z Was nie zechce przejąć mieszkania, sąd zarządzi sprzedaż, którą przeprowadzi komornik (art. 212 § 2 k.c., art. 1066–1067 k.p.c.; postanowienie SN z 26.04.2013, II CSK 459/12).' },
@@ -1031,6 +1038,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '15 min',
     category: 'Współwłasność i spadki', tags: ['Spadek', 'Dział spadku', 'Spłata rodzeństwa'],
     cover: '/assets/blog-mieszkanie-po-rodzicach-spadek.jpg',
+    coverAlt: 'Okładka wpisu: „Mieszkanie po rodzicach. Kto dziedziczy i jak spłacić rodzeństwo?”, obok klucze do mieszkania, akt notarialny i dwie filiżanki na kuchennym stole',
     related: ['dzial-spadku', 'stwierdzenie-nabycia-spadku', 'zniesienie-wspolwlasnosci'],
     faq: [
       { q: 'Kto dziedziczy mieszkanie po rodzicach bez testamentu?', a: 'Dzieci zmarłego i jego małżonek, w częściach równych; małżonek dostaje co najmniej 1/4 spadku (art. 931 § 1 k.c.). Gdy mieszkanie było w majątku wspólnym rodziców, do spadku po pierwszym z nich wchodzi tylko połowa mieszkania (art. 43 § 1 k.r.o.). Po śmierci drugiego rodzica jego udział dziedziczą dzieci.' },
@@ -1161,6 +1169,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', readTime: '15 min',
     category: 'Grunty rolne i OZE', tags: ['Odrolnienie', 'Działka rolna', 'Plan ogólny'],
     cover: '/assets/blog-przeksztalcenie-dzialki-rolnej-w-budowlana.jpg',
+    coverAlt: 'Okładka wpisu: „Z rolnej w budowlaną. Krok po kroku i koszty”, obok wypis z rejestru gruntów z zaznaczoną klasą gleby, kalkulator i model domu na skraju pola',
     related: ['odrolnienie', 'warunki-zabudowy', 'plan-ogolny'],
     faq: [
       { q: 'Czy można przekształcić działkę rolną w budowlaną?', a: 'Tak, jeżeli plan miejscowy przeznaczy ją pod zabudowę albo, bez planu, dostaniesz WZ (art. 4 ust. 1–2 u.p.z.p.). WZ z wniosku złożonego od 1 września 2026 r. wydaje się tylko w gminie z obowiązującym planem ogólnym (art. 59 ust. 3 ustawy z 7 lipca 2023 r.), a nowy dom co do zasady tylko w obszarze uzupełnienia zabudowy (art. 61 ust. 1 pkt 1a u.p.z.p.). Przy klasach I–III i glebach organicznych potrzebujesz jeszcze decyzji starosty (art. 11 ust. 1 u.o.g.r.l.).' },
@@ -1289,6 +1298,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', readTime: '15 min',
     category: 'Grunty rolne i OZE', tags: ['Działka rolna', 'Zabudowa zagrodowa', 'Dom jednorodzinny'],
     cover: '/assets/blog-dom-na-dzialce-rolnej.jpg',
+    coverAlt: 'Okładka wpisu: „Dom na działce rolnej. Czy trzeba być rolnikiem?”, obok wypis z rejestru gruntów z symbolem RIVa, szkic domu i mapa działki na biurku',
     related: ['odrolnienie', 'warunki-zabudowy', 'nieruchomosci-rolne'],
     faq: [
       { q: 'Czy można wybudować dom na działce rolnej, nie będąc rolnikiem?', a: 'Tak. Potrzebujesz planu miejscowego z zabudową mieszkaniową albo WZ na dom jednorodzinny (art. 4 i 59 ust. 1 u.p.z.p.); urząd nie bada wtedy, czy jesteś rolnikiem. Z wniosku od 1 września 2026 r. WZ dostaniesz tylko w gminie z obowiązującym planem ogólnym, w strefie dopuszczającej dom i co do zasady w obszarze uzupełnienia zabudowy (art. 59 ust. 3 ustawy z 7 lipca 2023 r.; art. 61 ust. 1 pkt 1a u.p.z.p.).' },
@@ -1434,6 +1444,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', readTime: '15 min',
     category: 'Proces budowlany', tags: ['Nadzór budowlany', 'PINB', 'Kontrola budowy'],
     cover: '/assets/blog-nadzor-budowlany-pinb-kontrola.jpg',
+    coverAlt: 'Okładka wpisu: „Nadzór budowlany. Zgłoszenie, kontrola, Twoje prawa”, obok kask budowlany, dziennik budowy i pismo z PINB na biurku',
     related: ['nadzor-budowlany-pinb', 'legalizacja-samowoli', 'pozwolenie-na-budowe'],
     faq: [
       { q: 'Co to jest nadzór budowlany i kto to jest?', a: 'To organy, które kontrolują przestrzeganie Prawa budowlanego: PINB, wojewoda z WINB i Główny Inspektor Nadzoru Budowlanego (art. 80 ust. 2 Pb). Twoje sprawy prowadzi PINB, a WINB rozpatruje odwołania (art. 83 ust. 1–2 Pb). Inspektor nadzoru inwestorskiego nie jest urzędnikiem, tylko osobą, którą zatrudniasz sam (art. 18 ust. 2 Pb).' },
@@ -1604,6 +1615,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', readTime: '16 min',
     category: 'Zakup nieruchomości', tags: ['Licytacja komornicza', 'Rękojmia', 'Przysądzenie własności', 'Flip'],
     cover: '/assets/blog-mieszkanie-z-licytacji-komorniczej.jpg',
+    coverAlt: 'Okładka wpisu: „Mieszkanie z licytacji. Co sprawdzić przed rękojmią?”, obok obwieszczenie komornika, klucze i wydruk księgi wieczystej na biurku',
     related: ['flip-mieszkania', 'audyt-stanu-prawnego-nieruchomosci', 'eksmisja'],
     faq: [
       { q: 'Ile trzeba wpłacić, żeby wziąć udział w licytacji komorniczej?', a: 'Rękojmię w wysokości 1/10 sumy oszacowania (art. 962 § 1 k.p.c.). Przy licytacji elektronicznej musi być na rachunku komornika najpóźniej na 2 dni robocze przed rozpoczęciem przetargu (art. 986⁵ § 1). Gdy przegrasz, wraca do Ciebie niezwłocznie, a gdy wygrasz, zalicza się na cenę (art. 963 i 967).' },
@@ -1743,6 +1755,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '17 min',
     category: 'Księgi wieczyste', tags: ['Księga wieczysta', 'Wpis własności', 'Stan prawny'],
     cover: '/assets/blog-ksiega-wieczysta-jak-sprawdzic-wpis.jpg',
+    coverAlt: 'Okładka wpisu: „Księga wieczysta. Jak sprawdzić i jak się wpisać?”, obok wydruk odpisu księgi z czterema działami, lupa i wyrys z mapy działki na biurku',
     related: ['uregulowanie-stanu-prawnego', 'audyt-stanu-prawnego-nieruchomosci', 'zasiedzenie-nieruchomosci'],
     faq: [
       { q: 'Czy księgę wieczystą można sprawdzić po numerze działki za darmo?', a: 'Nie. Bezpłatnie przeglądasz księgę, gdy znasz jej numer (art. 36⁴ ust. 6 u.k.w.h.). Wyszukiwanie ksiąg w centralnej bazie prowadzą tylko podmioty z art. 36⁴ ust. 8, np. notariusze i komornicy, po zgodzie Ministra Sprawiedliwości. Numer znajdziesz w akcie notarialnym albo w pełnym wypisie z rejestru gruntów.' },
@@ -1903,6 +1916,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', readTime: '15 min',
     category: 'Podatki', tags: ['Spadek', 'PIT od sprzedaży', 'Ulga mieszkaniowa'],
     cover: '/assets/blog-sprzedaz-mieszkania-ze-spadku-podatek.jpg',
+    coverAlt: 'Okładka wpisu: „Mieszkanie ze spadku. Kiedy sprzedasz bez podatku?”, obok kalkulator, klucze do mieszkania i akt notarialny na stole',
     related: ['obsluga-sprzedazy', 'dzial-spadku', 'stwierdzenie-nabycia-spadku'],
     faq: [
       { q: 'Czy sprzedaż mieszkania ze spadku jest bez podatku?', a: 'Tak, jeżeli od końca roku, w którym spadkodawca nabył albo wybudował mieszkanie, minęło 5 lat (art. 10 ust. 1 pkt 8 i ust. 5 u.p.d.o.f.). Data śmierci rodzica i data stwierdzenia nabycia spadku nie mają znaczenia. Po 5 latach nie składasz też PIT-39.' },
@@ -2047,6 +2061,7 @@ window.BLOG.push(
     date: '24 października 2026', iso: '2026-10-24', updated: '6 listopada 2026', updatedIso: '2026-11-06', readTime: '17 min',
     category: 'Zasiedzenie', tags: ['Zasiedzenie', 'Dobra i zła wiara', 'Wniosek do sądu'],
     cover: '/assets/blog-zasiedzenie-nieruchomosci-po-ilu-latach.jpg',
+    coverAlt: 'Okładka wpisu: „Zasiedzenie. 20 czy 30 lat?”, obok stary drewniany płot na granicy działki, klepsydra i odpis księgi wieczystej na biurku',
     related: ['zasiedzenie-nieruchomosci', 'uregulowanie-stanu-prawnego'],
     faq: [
       { q: 'Po ilu latach następuje zasiedzenie nieruchomości?', a: 'Po 20 latach nieprzerwanego posiadania samoistnego, jeżeli uzyskałeś posiadanie w dobrej wierze, albo po 30 latach, jeżeli w złej (art. 172 k.c.). Do swojego czasu doliczasz czas poprzednika, także spadkodawcy (art. 176 k.c.). Jeżeli właściciel był małoletni, zasiedzenie nie skończy się wcześniej niż 2 lata po jego pełnoletności (art. 173 k.c.).' },

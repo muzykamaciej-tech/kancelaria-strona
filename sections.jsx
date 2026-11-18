@@ -544,7 +544,9 @@ function ServiceTile({ service, onOpen, route, slug, large = false }) {
 /* ============================================================
    About block
    ============================================================ */
-function AboutBlock({ compact = false }) {
+/* monografia: dane z Profinfo (18.11.2026); pokazywana w kwalifikacjach tylko na /o-mnie (prop `book`) */
+const BOOK_URL = 'https://www.profinfo.pl/sklep/skarga-na-przewleklosc-postepowania-cywilnego,406225.html';
+function AboutBlock({ compact = false, book = false }) {
   return (
     <section className={`section-py ${compact ? '' : 'bg-dark about-band'} relative overflow-hidden`}>
       {!compact && <div className="orb" style={{ width: 500, height: 500, bottom: '-20%', right: '-10%', opacity: 'calc(0.2 * var(--ambient-on))' }} />}
@@ -576,15 +578,16 @@ function AboutBlock({ compact = false }) {
           { i: 'scale', t: 'Adwokat — Lubelska Izba Adwokacka, wpis nr LUB/ADW/1702', href: KRA_URL, hrefLabel: 'Krajowy Rejestr Adwokatów' },
           { i: 'graduation-cap', t: 'Absolwent prawa Uniwersytetu Jagiellońskiego' },
           { i: 'book-open', t: 'Doktor nauk prawnych (postępowanie cywilne) — UMCS' },
+          book && { i: 'book-marked', node: <React.Fragment>Autor monografii <a className="about-cred-link" href={BOOK_URL} target="_blank" rel="noopener noreferrer">„Skarga na przewlekłość postępowania cywilnego”</a> (Wolters Kluwer 2023)</React.Fragment> },
           { i: 'award', t: 'Doświadczenie z kancelarii SPCG — jednej z czołowych w Polsce' },
           { i: 'landmark', t: 'Były pracownik naukowy Katedry Prawa Rolnego i Gospodarki Gruntami UMCS' },
           { i: 'presentation', t: 'Wykładowca Okręgowej Rady Adwokackiej w Lublinie — postępowanie sądowoadministracyjne (skargi do WSA i NSA)' },
           { i: 'file-search', t: 'Praktyka wyłącznie w prawie nieruchomości' },
           { i: 'map-pin', t: 'Prowadzę sprawy klientów z całej Polski' }].
-          map((c, i) =>
+          filter(Boolean).map((c, i) =>
           <li key={i}>
               <span className={`icon-tile ${compact ? 'icon-tile--info' : 'icon-tile--dark'}`}><Icon name={c.i} size={20} /></span>
-              <span style={{ color: compact ? 'var(--text-main)' : 'var(--text-on-dark)', fontWeight: 500 }}>{c.t}{c.href && <React.Fragment> · <a className="about-cred-link" href={c.href} target="_blank" rel="noopener noreferrer">{c.hrefLabel}</a></React.Fragment>}</span>
+              <span style={{ color: compact ? 'var(--text-main)' : 'var(--text-on-dark)', fontWeight: 500 }}>{c.node || c.t}{c.href && <React.Fragment> · <a className="about-cred-link" href={c.href} target="_blank" rel="noopener noreferrer">{c.hrefLabel}</a></React.Fragment>}</span>
             </li>
           )}
         </ul>

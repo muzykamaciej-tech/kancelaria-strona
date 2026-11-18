@@ -1138,6 +1138,56 @@ function PracticeAreas({ setRoute }) {
 }
 
 /* ============================================================
+   Poradniki na start — 10 linków do wpisów z głównych obszarów usług (linkowanie wewnętrzne)
+   ============================================================ */
+const HOME_GUIDES = [
+  'zachowek-z-darowizny',
+  'sluzebnosc-przesylu-co-to-jest',
+  'droga-konieczna-jak-ustanowic',
+  'zasiedzenie-nieruchomosci-po-ilu-latach',
+  'jak-sprawdzic-czy-dostane-warunki-zabudowy',
+  'plan-ogolny-gminy-co-to-jest',
+  'co-sprawdzic-przed-zakupem-nieruchomosci',
+  'eksmisja-lokatora-krok-po-kroku',
+  'rekojmia-za-wady-mieszkania',
+  'dzial-spadku',
+];
+function HomeGuides() {
+  const posts = HOME_GUIDES.map((slug) => {
+    const p = (window.BLOG || []).find((x) => x.slug === slug);
+    if (!p) console.error('HOME_GUIDES: brak wpisu o slugu "' + slug + '"');
+    return p;
+  }).filter(Boolean);
+  if (!posts.length) return null;
+  return (
+    <section className="section-py bg-light" id="poradniki">
+      <div className="wrap">
+        <div className="section-head section-head--center">
+          <span className="eyebrow">Skarbnica wiedzy</span>
+          <h2 className="h2 mt-4">Poradniki, od których warto zacząć.</h2>
+        </div>
+        <ul className="home-guides mt-12">
+          {posts.map((p) =>
+          <li key={p.slug}>
+              <window.NavLink className="home-guide" route="blogpost" slug={p.slug}>
+                <span className="home-guide-cat">{p.category}</span>
+                <span className="home-guide-title">{p.title}</span>
+                <span className="home-guide-arrow" aria-hidden="true"><SvgIcon name="arrow-right" size={16} /></span>
+              </window.NavLink>
+            </li>
+          )}
+        </ul>
+        <div className="text-center mt-8">
+          <window.NavLink className="btn-link" route="blog">
+            Wszystkie poradniki <SvgIcon name="arrow-right" size={14} />
+          </window.NavLink>
+        </div>
+      </div>
+    </section>);
+
+}
+
+/* ============================================================
    Standards
    ============================================================ */
 function Standards() {
@@ -1349,6 +1399,7 @@ function LandingPage({ setRoute }) {
       <HowItWorks />
       <PracticeAreas setRoute={setRoute} />
       <LAboutBlock />
+      <HomeGuides />
       <Standards />
       <ReviewsBand />
       <FinalCTA />

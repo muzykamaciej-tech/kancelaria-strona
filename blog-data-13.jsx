@@ -10,6 +10,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '14 min',
     category: 'Proces budowlany', tags: ['Pozwolenie na budowę', 'Dom jednorodzinny', 'Projekt budowlany'],
     cover: '/assets/blog-pozwolenie-na-budowe-krok-po-kroku.jpg',
+    coverAlt: 'Okładka wpisu: „Pozwolenie na budowę krok po kroku. Wniosek, projekt, terminy”, obok projekt domu, formularz wniosku i decyzja na biurku',
     related: ['pozwolenie-na-budowe', 'warunki-zabudowy', 'zgloszenie-budowy'],
     faq: [
       { q: 'Ile kosztuje pozwolenie na budowę domu?', a: 'Opłaty skarbowej co do zasady nie płacisz, bo zwolnione są sprawy budownictwa mieszkaniowego (art. 2 ust. 1 pkt 2 ustawy o opłacie skarbowej, dalej: u.o.s.). Tak samo jest przy przeniesieniu pozwolenia; poza tymi sprawami kosztuje ono 90 zł (załącznik do u.o.s., cz. I ust. 11). Główny koszt to projekt, mapa i badania gruntu.' },
@@ -146,6 +147,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '13 min',
     category: 'Planowanie przestrzenne', tags: ['Plan ogólny', 'Strefy planistyczne', 'MPZP'],
     cover: '/assets/blog-plan-ogolny-gminy-co-to-jest.jpg',
+    coverAlt: 'Okładka wpisu: „Plan ogólny gminy. Co to jest. Strefy planistyczne i skutki dla działki”, obok kolorowa mapa stref na biurku, linijka i cyrkiel w świetle lampy',
     related: ['plan-ogolny', 'warunki-zabudowy', 'audyt-stanu-prawnego-nieruchomosci'],
     faq: [
       { q: 'Na ile lat uchwala się plan ogólny gminy?', a: 'Ustawa nie określa okresu obowiązywania planu ogólnego. Co najmniej raz w kadencji rada dostaje analizy i podejmuje uchwałę w sprawie aktualności planu (art. 32 ust. 2 u.p.z.p.). Jeżeli uzna plan za nieaktualny, plan nie wygasa: rada podejmuje działania zmierzające do jego zmiany (art. 27 i art. 32 ust. 2).' },
@@ -297,6 +299,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '14 min',
     category: 'Służebność przesyłu', tags: ['Słupy na działce', 'Wynagrodzenie', 'Bezumowne korzystanie'],
     cover: '/assets/blog-sluzebnosc-przesylu-co-to-jest.jpg',
+    coverAlt: 'Okładka wpisu: „Służebność przesyłu. Co to jest. Kto może żądać i jakie pieniądze się należą”, obok słup wysokiego napięcia i dom o zachodzie słońca',
     related: ['odszkodowanie-sluzebnosc-przesylu', 'bezumowne-korzystanie', 'ograniczenie-korzystania-nieruchomosci'],
     faq: [
       { q: 'Czy można cofnąć służebność przesyłu?', a: 'Jednostronnie nie. Służebność wygasa m.in., gdy firma się jej zrzeknie (art. 246 k.c.), gdy nie jest wykonywana przez 10 lat (art. 293 § 1 w zw. z art. 305⁴ k.c.) i najpóźniej z końcem likwidacji przedsiębiorstwa (art. 305³ § 2 k.c.). Potem firma usuwa urządzenia utrudniające korzystanie z działki, a gdy to nadmiernie trudne lub kosztowne, naprawia szkodę (art. 305³ § 3 k.c.).' },
@@ -440,6 +443,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '13 min',
     category: 'Najem', tags: ['Eksmisja', 'Lokal socjalny', 'Komornik'],
     cover: '/assets/blog-eksmisja-lokatora-krok-po-kroku.jpg',
+    coverAlt: 'Okładka wpisu: „Eksmisja lokatora krok po kroku. Pozew, lokal socjalny i komornik”, obok zamknięte drzwi mieszkania na klatce schodowej nocą',
     related: ['eksmisja', 'windykacja-czynszu', 'bezpieczny-najem'],
     faq: [
       { q: 'Ile trwa eksmisja lokatora?', a: 'Z mojej praktyki zwykle od kilkunastu miesięcy do kilku lat. Najdłużej trwa czekanie na gminę, bo ustawa nie daje jej terminu (art. 14 ust. 6 u.o.p.l., art. 1046 § 4 k.p.c.).' },
@@ -592,6 +596,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '13 min',
     category: 'Grunty rolne i OZE', tags: ['Wyłączenie z produkcji rolnej', 'Odrolnienie', 'Opłaty'],
     cover: '/assets/blog-wylaczenie-gruntow-z-produkcji-rolnej.jpg',
+    coverAlt: 'Okładka wpisu: „Wyłączenie z produkcji rolnej. Kiedy jest potrzebne i ile kosztuje”, obok pole o zmierzchu z palikami geodezyjnymi przy drodze',
     related: ['odrolnienie', 'warunki-zabudowy', 'nieruchomosci-rolne'],
     faq: [
       { q: 'Czy wyłączenie z produkcji rolnej dotyczy całej działki?', a: 'Nie musi. Wyłączenie to rozpoczęcie innego użytkowania konkretnego gruntu (art. 4 pkt 11 u.o.g.r.l.). Kraków przyjmuje wnioski na część działki, a Warszawa wymaga, żeby grunt tworzył obszar zwarty.' },
@@ -739,6 +744,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '13 min',
     category: 'Grunty rolne i OZE', tags: ['Działka rolna', 'Nieruchomość rolna', 'Zakup ziemi rolnej'],
     cover: '/assets/blog-kupno-dzialki-rolnej-nie-rolnik.jpg',
+    coverAlt: 'Okładka wpisu: „Działka rolna bez statusu rolnika. Co możesz kupić i jakie są limity”, obok pole zboża o zmierzchu i oświetlone gospodarstwo na horyzoncie',
     related: ['nieruchomosci-rolne', 'zgoda-kowr', 'status-rolnika'],
     faq: [
       { q: 'Czy na działce rolnej można budować?', a: 'Tak, także bez statusu rolnika, jeżeli pozwala na to plan miejscowy albo WZ (art. 4 u.p.z.p.). Co można postawić, opisuję w tekście Dom na działce rolnej: czy można budować, nie będąc rolnikiem (stan 2026).' },
@@ -888,6 +894,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '13 min',
     category: 'Grunty rolne i OZE', tags: ['Prawo pierwokupu', 'KOWR', 'Prawo nabycia', 'Ustawa o kształtowaniu ustroju rolnego'],
     cover: '/assets/blog-prawo-pierwokupu-kowr.jpg',
+    coverAlt: 'Okładka wpisu: „Pierwokup KOWR i prawo nabycia. Kiedy KOWR może przejąć działkę”, obok betonowy słupek na skraju pola przy polnej drodze o zmierzchu',
     related: ['zgoda-kowr', 'nieruchomosci-rolne', 'status-rolnika'],
     faq: [
       { q: 'Od jakiej powierzchni KOWR ma prawo pierwokupu?', a: 'Od 0,3 ha użytków rolnych w sprzedawanej nieruchomości (art. 1a pkt 1 lit. b u.k.u.r.). Próg 1 ha dotyczy statusu kupującego, a 5 ha spółek.' },
@@ -1041,6 +1048,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '13 min',
     category: 'Współwłasność i spadki', tags: ['Zachowek', 'Spadek', 'Wycena nieruchomości'],
     cover: '/assets/blog-ile-wynosi-zachowek.jpg',
+    coverAlt: 'Okładka wpisu: „Ile wynosi zachowek? Jak go policzyć, gdy w spadku jest nieruchomość”, obok zapieczętowana teczka z dokumentami i zegarek kieszonkowy na biurku',
     related: ['zachowek', 'dzial-spadku', 'darowizna-nieruchomosci'],
     faq: [
       { q: 'Ile wynosi zachowek od mieszkania wartego 500 000 zł?', a: 'Bez długów i darowizn, przy wdowcu z dwojgiem dzieci, 125 000 zł na dziecko. Gdy żyje drugi rodzic, jest jedno dziecko, a mieszkanie było wspólne, podstawa to 250 000 zł, a zachowek 62 500 zł.' },
@@ -1202,6 +1210,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '14 min',
     category: 'Proces budowlany', tags: ['Zgłoszenie budowy', 'Sprzeciw urzędu', 'Roboty budowlane'],
     cover: '/assets/blog-zgloszenie-robot-budowlanych.jpg',
+    coverAlt: 'Okładka wpisu: „Zgłoszenie robót budowlanych. 21 dni i sprzeciw urzędu”, obok formularz zgłoszenia, projekt i kalendarz na biurku',
     related: ['zgloszenie-budowy', 'pozwolenie-na-budowe', 'legalizacja-samowoli'],
     faq: [
       { q: 'Ile kosztuje zgłoszenie robót budowlanych?', a: 'Przy domu nie płacisz za część mieszkalną (art. 2 ust. 1 pkt 2 ustawy o opłacie skarbowej, dalej: u.o.s.). Za niemieszkalną powierzchnię użytkową płacisz 1 zł za m², najwyżej 539 zł (załącznik do u.o.s., cz. I ust. 9a). Sieć kosztuje 105 zł do 1 km i 2143 zł powyżej (ust. 9b). Garażu do 35 m² ani szamba wykaz nie wymienia. Pełnomocnictwo to 17 zł (cz. IV).' },
@@ -1349,6 +1358,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '13 min',
     category: 'Służebność przesyłu', tags: ['Zasiedzenie', 'Słupy na działce', 'Trybunał Konstytucyjny'],
     cover: '/assets/blog-zasiedzenie-sluzebnosci-przesylu.jpg',
+    coverAlt: 'Okładka wpisu: „Zasiedzenie służebności przesyłu. Kiedy operator się na nie powoła i jak się bronić”, obok słupek znacznikowy i żółta rura gazociągu na polu o zmierzchu',
     related: ['odszkodowanie-sluzebnosc-przesylu', 'bezumowne-korzystanie'],
     faq: [
       { q: 'Czy zasiedzenie widać w księdze wieczystej?', a: 'Nie musi. Nabycie następuje z upływem terminu, a wpis w dziale III może pojawić się później. Pismo operatora też niczego nie przesądza, więc żądaj dowodów (art. 6 k.c.).' },
@@ -1506,6 +1516,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '13 min',
     category: 'Zasiedzenie', tags: ['Zasiedzenie działki', 'Pas gruntu', 'Granice działki'],
     cover: '/assets/blog-zasiedzenie-dzialki-sasiada.jpg',
+    coverAlt: 'Okładka wpisu: „Zasiedzenie działki sąsiada. Pas gruntu za płotem i spór o granicę”, obok stary drewniany płot i domek na działce o zmierzchu',
     related: ['zasiedzenie-nieruchomosci', 'uregulowanie-stanu-prawnego'],
     faq: [
       { q: 'Jak sprawdzić, czy ktoś zasiedział moją działkę?', a: 'Księga tego nie pokaże, dopóki posiadacz nie wpisze się na podstawie postanowienia sądu (art. 31 ust. 2 u.k.w.h.), bo własność przechodzi z mocy prawa (art. 172 k.c.). Sprawdź granice u geodety, ustal datę płotu i policz 20 oraz 30 lat.' },
@@ -1657,6 +1668,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '13 min',
     category: 'Planowanie przestrzenne', tags: ['Plan miejscowy', 'Skarga do WSA', 'Uwagi do MPZP'],
     cover: '/assets/blog-skarga-na-plan-miejscowy.jpg',
+    coverAlt: 'Okładka wpisu: „Skarga na plan miejscowy. Uwagi, WSA, nieważność planu”, obok rysunek planu z zaznaczoną działką, uchwała rady gminy i skarga do sądu na biurku',
     related: ['skarga-na-plan-miejscowy', 'oplaty-odszkodowania-planistyczne', 'plan-ogolny'],
     faq: [
       { q: 'Czy mogę zaskarżyć plan uchwalony wiele lat temu?', a: 'Tak, bo skarga nie ma terminu (art. 53 § 2a p.p.s.a.). Liczy się jednak, czy plan narusza interes prawny obecnego właściciela (art. 101 ust. 1 u.s.g., II OSK 1783/16).' },
@@ -1815,6 +1827,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '13 min',
     category: 'Służebności', tags: ['Rozgraniczenie', 'Granice działki', 'Geodeta'],
     cover: '/assets/blog-rozgraniczenie-dzialek.jpg',
+    coverAlt: 'Okładka wpisu: „Rozgraniczenie działek. Gmina czy sąd, koszty i przebieg”, obok tachimetr geodezyjny na statywie i biało-czerwone tyczki na polu o zmierzchu',
     related: ['obsluga-prawna-geodetow', 'uregulowanie-stanu-prawnego', 'zasiedzenie-nieruchomosci'],
     faq: [
       { q: 'Kto płaci za rozgraniczenie działek przez gminę?', a: 'Co do zasady właściciele sąsiednich działek po połowie, także gdy wniosek złożył tylko jeden z nich (art. 152 k.c.; wyrok NSA I OSK 1744/17).' },
@@ -1964,6 +1977,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '13 min',
     category: 'Spory z deweloperem', tags: ['Rękojmia', 'Wady lokalu', 'Rynek wtórny'],
     cover: '/assets/blog-rekojmia-za-wady-mieszkania.jpg',
+    coverAlt: 'Okładka wpisu: „Rękojmia za wady mieszkania. Terminy i Twoje żądania”, obok akt notarialny, klucze i zdjęcie zawilgoconej ściany na biurku',
     related: ['rekojmia-wady-lokalu', 'wady-czesci-wspolnych', 'usuniecie-wad-protokol'],
     faq: [
       { q: 'Ile trwa rękojmia dewelopera?', a: '5 lat od dnia wydania lokalu na stwierdzenie wady fizycznej (art. 568 § 1 k.c., art. 41a u.d.). Konsument ma na działanie rok od stwierdzenia, ale nie mniej niż do końca tych 5 lat (art. 568 § 2–3 k.c.).' },
@@ -2104,6 +2118,7 @@ window.BLOG.push(
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '14 min',
     category: 'Zakup nieruchomości', tags: ['Akt notarialny', 'Notariusz', 'Depozyt notarialny', 'Umowa sprzedaży'],
     cover: '/assets/blog-akt-notarialny-kupna-nieruchomosci.jpg',
+    coverAlt: 'Okładka wpisu: „Akt notarialny kupna nieruchomości. Co zawiera i co sprawdzić przed podpisem”, obok klucze z breloczkiem w kształcie domu i pióro na dokumencie na biurku',
     related: ['obsluga-zakupu', 'audyt-stanu-prawnego-nieruchomosci', 'analiza-umowy-przedwstepnej'],
     faq: [
       { q: 'Ile kosztuje akt notarialny kupna mieszkania?', a: 'Przy cenie 480 000 zł taksa wynosi najwyżej 1345 zł plus VAT, czyli 1654,35 zł (§ 3 pkt 5 i § 6 pkt 19 rozporządzenia o taksie). Od 5.11.2026 r. dochodzi do 300 zł plus VAT za wniosek do księgi (§ 15c) i 12 zł plus VAT za stronę wypisu, od 1 do 10 strony (§ 12 ust. 1). Przy deweloperze stawka jest taka sama (§ 6 pkt 16). Całość, z PCC, wyliczam w tekście Koszty zakupu mieszkania 2026: notariusz, PCC, opłaty sądowe i co jeszcze doliczyć do ceny.' },
