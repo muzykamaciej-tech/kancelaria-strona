@@ -1043,7 +1043,7 @@ window.BLOG.push(
     slug: 'ile-wynosi-zachowek',
     title: 'Ile wynosi zachowek: jak go policzyć, gdy w spadku jest nieruchomość (przykłady)',
     metaTitle: 'Ile wynosi zachowek? 1/2 lub 2/3 udziału – wzór i przykłady',
-    metaDesc: 'Połowa udziału z ustawy, 2/3 przy małoletnim albo niezdolnym do pracy. Dwoje dzieci: z mieszkania za 600 tys. zł 150 tys. zł. Tabela i 2 przykłady.',
+    metaDesc: 'Połowa udziału z ustawy, 2/3 przy małoletnim lub niezdolnym do pracy. Dwoje dzieci, bez małżonka: z mieszkania za 600 tys. zł 150 tys. zł. 2 przykłady.',
     excerpt: 'Ile wynosi zachowek: 1/2 albo 2/3 udziału z ustawy. Wzór, tabela procentów, wycena mieszkania i domu oraz 2 przykłady liczbowe krok po kroku.',
     date: '6 listopada 2026', iso: '2026-11-06', readTime: '13 min',
     category: 'Współwłasność i spadki', tags: ['Zachowek', 'Spadek', 'Wycena nieruchomości'],

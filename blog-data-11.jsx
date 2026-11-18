@@ -1092,7 +1092,7 @@ window.BLOG.push(
   {
     slug: 'miejscowy-plan-zagospodarowania',
     title: 'Miejscowy plan zagospodarowania przestrzennego: jak go sprawdzić, co oznaczają symbole i jak go zmienić',
-    metaTitle: 'Miejscowy plan zagospodarowania (MPZP): sprawdź i zmień',
+    metaTitle: 'Miejscowy plan (MPZP): jak sprawdzić, symbole i zmiana planu',
     metaDesc: 'MPZP przesądza, co zbudujesz na działce. Jak sprawdzić plan, wypis i wyrys z kosztami, symbole MN, MW, U, R, KDW i czy gmina zmieni plan dla jednej działki.',
     excerpt: 'Miejscowy plan zagospodarowania przestrzennego: jak sprawdzić MPZP, co znaczą MN, MW, U, R, KDW, ile kosztuje wypis i wyrys i czy gmina zmieni plan.',
     date: '3 listopada 2026', iso: '2026-11-03', readTime: '13 min',
@@ -1817,7 +1817,7 @@ window.BLOG.push(
     slug: 'kredyt-hipoteczny-po-rozwodzie',
     title: 'Kredyt hipoteczny po rozwodzie: kto spłaca, jak wyjść z kredytu i co z mieszkaniem',
     metaTitle: 'Kredyt hipoteczny po rozwodzie: kto spłaca i jak wyjść',
-    metaDesc: 'Rozwód nie zmienia umowy z bankiem: bank może żądać całej raty od każdego z Was. Wyjście tylko za zgodą banku. Zwrot połowy rat i 3 warianty.',
+    metaDesc: 'Rozwód nie zmienia umowy z bankiem: przy długu solidarnym bank może żądać całej raty od każdego z Was. Wyjście tylko za zgodą banku. Zwrot połowy rat.',
     excerpt: 'Kredyt hipoteczny po rozwodzie spłacacie oboje, jak w umowie. Z kredytu wyjdziesz tylko za zgodą banku. Jak rozliczyć raty i mieszkanie przy podziale.',
     date: '3 listopada 2026', iso: '2026-11-03', readTime: '14 min',
     category: 'Współwłasność i spadki', tags: ['Kredyt hipoteczny', 'Rozwód', 'Podział majątku'],
