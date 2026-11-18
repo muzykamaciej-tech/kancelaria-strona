@@ -1451,8 +1451,8 @@ window.BLOG.push(
   {
     slug: 'zalozenie-ksiegi-wieczystej',
     title: 'Założenie księgi wieczystej: kiedy jest potrzebne, wniosek, koszty i ile to trwa',
-    metaTitle: 'Założenie księgi wieczystej: wniosek, koszt i ile to trwa',
-    metaDesc: 'Założenie księgi wieczystej: formularz KW-ZAL, zwykle 300 zł opłat, dokumenty dla działki, lokalu i mieszkania spółdzielczego. Ile to trwa w 2026 r.',
+    metaTitle: 'Założenie księgi wieczystej: ile kosztuje i ile trwa',
+    metaDesc: 'Wniosek KW-ZAL do sądu z dokumentem nabycia. Opłaty zwykle 300 zł, po spadku 250 zł. Dokumenty dla działki, lokalu i mieszkania spółdzielczego. Czas.',
     excerpt: 'Założenie księgi wieczystej: formularz KW-ZAL, zwykle 300 zł opłat, dokumenty dla działki, lokalu i mieszkania spółdzielczego. Ile to trwa w 2026 r.',
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Księgi wieczyste', tags: ['Założenie księgi wieczystej', 'KW-ZAL', 'Stan prawny'],
@@ -2077,8 +2077,8 @@ window.BLOG.push(
   {
     slug: 'condohotel-co-to-jest',
     title: 'Condohotel (condo hotel): co to jest, jak działa umowa z operatorem i na jakie ryzyka uważać',
-    metaTitle: 'Condohotel – co to jest? Umowa z operatorem i ryzyka',
-    metaDesc: 'Condohotel to apartament na własność i umowa z operatorem. Lokal użytkowy, VAT 23%, gwarantowany czynsz, upadłość operatora: co sprawdzić przed podpisem.',
+    metaTitle: 'Condohotel: co to jest i kto płaci „gwarantowany” zwrot',
+    metaDesc: 'Apartament na własność oddany operatorowi w najem albo zarządzanie. Lokal użytkowy czy mieszkalny, VAT 23% czy 8% i co, gdy operator upada. Tabele.',
     excerpt: 'Condohotel to apartament na własność i umowa z operatorem. Lokal użytkowy, VAT 23%, gwarantowany czynsz, upadłość operatora: co sprawdzić przed podpisem.',
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '14 min',
     category: 'Zakup nieruchomości', tags: ['Condohotel', 'Najem zwrotny', 'Lokal użytkowy'],

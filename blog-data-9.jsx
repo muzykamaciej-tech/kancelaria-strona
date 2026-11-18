@@ -624,8 +624,8 @@ window.BLOG.push(
   {
     slug: 'zachowek-z-darowizny',
     title: 'Zachowek z darowizny: kiedy się należy, ile wynosi i kiedy się przedawnia',
-    metaTitle: 'Zachowek z darowizny – ile wynosi i kiedy się przedawnia',
-    metaDesc: 'Zachowek z darowizny należy się dzieciom, małżonkowi i rodzicom. Ile wynosi, jak wycenić mieszkanie, od kogo żądać i kiedy mija 5 lat.',
+    metaTitle: 'Zachowek z darowizny: ile lat wstecz i kiedy przedawnienie',
+    metaDesc: 'Darowizny dla spadkobierców liczysz bez limitu lat, dla innych z 10 lat przed śmiercią. Zachowek to 1/2 albo 2/3 udziału, przedawnia się po 5 latach.',
     excerpt: 'Zachowek z darowizny należy się dzieciom, małżonkowi i rodzicom. Ile wynosi, jak wycenić mieszkanie, od kogo żądać i kiedy mija 5 lat.',
     date: '27 października 2026', iso: '2026-10-27', updated: '6 listopada 2026', updatedIso: '2026-11-06', readTime: '15 min',
     category: 'Współwłasność i spadki', tags: ['Zachowek', 'Darowizna', 'Spadek'],
@@ -781,8 +781,8 @@ window.BLOG.push(
   {
     slug: 'umowa-dozywocia',
     title: 'Umowa dożywocia: dożywocie a darowizna, zachowek i podatek',
-    metaTitle: 'Umowa dożywocia – zachowek, podatek i darowizna',
-    metaDesc: 'Umowa dożywocia: nabywca od razu jest właścicielem i zapewnia Ci opiekę do końca życia. Płaci 2% PCC. Co z zachowkiem i czym różni się od darowizny.',
+    metaTitle: 'Umowa dożywocia: podatek 2%, zachowek i różnice z darowizną',
+    metaDesc: 'Nabywca od razu jest właścicielem i zapewnia zbywcy utrzymanie do końca życia. Płaci 2% PCC, także w rodzinie. Zachowek, koszt u notariusza.',
     excerpt: 'Umowa dożywocia: nabywca od razu jest właścicielem i zapewnia Ci opiekę do końca życia. Płaci 2% PCC. Co z zachowkiem i czym różni się od darowizny.',
     date: '27 października 2026', iso: '2026-10-27', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '15 min',
     category: 'Współwłasność i spadki', tags: ['Dożywocie', 'Zachowek', 'Podatek PCC'],
@@ -1248,8 +1248,8 @@ window.BLOG.push(
   {
     slug: 'kaucja-za-mieszkanie',
     title: 'Kaucja za mieszkanie: ile może wynosić, kiedy zwrot i jakie potrącenia',
-    metaTitle: 'Kaucja za mieszkanie – ile, kiedy zwrot i jakie potrącenia',
-    metaDesc: 'Kaucja za mieszkanie: maksymalnie 12 czynszów (6 przy najmie okazjonalnym), zwrot w miesiąc od wyprowadzki, z waloryzacją. Co wolno potrącić, a czego nie.',
+    metaTitle: 'Kaucja za mieszkanie: ile, zwrot w miesiąc i potrącenia',
+    metaDesc: 'Zwykły najem: do 12 czynszów, okazjonalny: do 6. Zwrot w miesiąc od wyprowadzki, z waloryzacją. Co wolno potrącić, protokół i wzór wezwania.',
     excerpt: 'Kaucja za mieszkanie: maksymalnie 12 czynszów (6 przy najmie okazjonalnym), zwrot w miesiąc od wyprowadzki, z waloryzacją. Co wolno potrącić, a czego nie.',
     date: '27 października 2026', iso: '2026-10-27', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '15 min',
     category: 'Najem', tags: ['Kaucja', 'Najem mieszkania', 'Zwrot kaucji'],
@@ -1849,8 +1849,8 @@ window.BLOG.push(
   {
     slug: 'zgoda-kowr-nabycie-ziemi-rolnej',
     title: 'Zgoda KOWR na nabycie nieruchomości rolnej: kiedy jest potrzebna i jak ją uzyskać',
-    metaTitle: 'Zgoda KOWR na nabycie ziemi rolnej – kiedy i jak ją uzyskać',
-    metaDesc: 'Zgoda KOWR na nabycie ziemi rolnej: kiedy jej potrzebujesz, kto składa wniosek, ogłoszenie na 30 dni, rok ważności, odwołanie i 5 lat gospodarstwa.',
+    metaTitle: 'Zgoda KOWR na nabycie ziemi rolnej: kiedy, wniosek, terminy',
+    metaDesc: 'Potrzebna, gdy nie jesteś rolnikiem i kupujesz ziemię rolną od 1 ha. Ogłoszenie na 30 dni, kto składa wniosek, rok ważności, odmowa, 5 lat gospodarstwa.',
     excerpt: 'Zgoda KOWR na nabycie ziemi rolnej: kiedy jej potrzebujesz, kto składa wniosek, ogłoszenie na 30 dni, rok ważności, odwołanie i 5 lat gospodarstwa.',
     date: '27 października 2026', iso: '2026-10-27', readTime: '15 min',
     category: 'Grunty rolne i OZE', tags: ['Zgoda KOWR', 'Nieruchomość rolna', 'Ustawa o kształtowaniu ustroju rolnego'],

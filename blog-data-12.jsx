@@ -4,8 +4,8 @@ window.BLOG.push(
   {
     slug: 'droga-konieczna-jak-ustanowic',
     title: 'Droga konieczna: co to jest, jak ją ustanowić w sądzie i jak się bronić, gdy sąsiad żąda przejazdu',
-    metaTitle: 'Droga konieczna – co to jest, wniosek do sądu i obrona',
-    metaDesc: 'Droga konieczna to przejazd przez grunt sąsiada za wynagrodzeniem. Jak ją ustanowić u notariusza i w sądzie (200 zł) i jak się bronić, gdy sąsiad jej żąda.',
+    metaTitle: 'Droga konieczna: jak ustanowić i jak się bronić przed nią',
+    metaDesc: 'Przejazd przez grunt sąsiada za wynagrodzeniem. Zgoda: akt notarialny, brak zgody: wniosek do sądu za 200 zł. Którędy sąd poprowadzi drogę, cena za m².',
     excerpt: 'Droga konieczna to przejazd przez grunt sąsiada za wynagrodzeniem. Jak ją ustanowić u notariusza i w sądzie (200 zł) i jak się bronić, gdy sąsiad jej żąda.',
     date: '4 listopada 2026', iso: '2026-11-04', readTime: '13 min',
     category: 'Służebności', tags: ['Droga konieczna', 'Dostęp do drogi publicznej', 'Sąsiad'],
@@ -132,8 +132,8 @@ window.BLOG.push(
   {
     slug: 'dzial-spadku',
     title: 'Dział spadku: u notariusza czy w sądzie, spłaty rodzeństwa, koszty i ile to trwa',
-    metaTitle: 'Dział spadku – notariusz czy sąd, spłaty, koszty, czas',
-    metaDesc: 'Dział spadku: akt u notariusza albo wniosek do sądu za 500 zł (zgodny 300 zł). Spłaty rodzeństwa, darowizny, PCC 2%, koszty i czas trwania.',
+    metaTitle: 'Dział spadku u notariusza czy w sądzie: koszty, spłaty, czas',
+    metaDesc: 'Ze zgodą akt notarialny, bez zgody wniosek do sądu za 500 zł (zgodny 300 zł). Spłaty rodzeństwa, darowizny, PCC 2%, tabela kosztów i wzór wniosku.',
     excerpt: 'Dział spadku: akt u notariusza albo wniosek do sądu za 500 zł (zgodny 300 zł). Spłaty rodzeństwa, darowizny, PCC 2%, koszty i czas trwania.',
     date: '4 listopada 2026', iso: '2026-11-04', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '13 min',
     category: 'Współwłasność i spadki', tags: ['Dział spadku', 'Spłata rodzeństwa', 'Koszty i podatki'],
@@ -419,8 +419,8 @@ window.BLOG.push(
   {
     slug: 'dom-do-70-m2-bez-pozwolenia',
     title: 'Dom do 70 m² bez pozwolenia na budowę: warunki, zgłoszenie krok po kroku i pułapki (2026)',
-    metaTitle: 'Dom do 70 m² bez pozwolenia: warunki i zgłoszenie 2026',
-    metaDesc: 'Dom do 70 m² bez pozwolenia: 5 warunków, zgłoszenie z projektem, start po doręczeniu, bez kierownika budowy. WZ, sprzedaż domu i pułapki.',
+    metaTitle: 'Dom do 70 m² bez pozwolenia 2026: 5 warunków i zgłoszenie',
+    metaDesc: 'Dom do 70 m² zabudowy postawisz na zgłoszenie: wolno stojący, do 2 kondygnacji, na własne potrzeby. Bez kierownika budowy. WZ, sprzedaż domu, pułapki.',
     excerpt: 'Dom do 70 m² bez pozwolenia: 5 warunków, zgłoszenie z projektem, start po doręczeniu, bez kierownika budowy. WZ, sprzedaż domu i pułapki.',
     date: '4 listopada 2026', iso: '2026-11-04', updated: '6 listopada 2026', updatedIso: '2026-11-06', readTime: '14 min',
     category: 'Proces budowlany', tags: ['Dom do 70 m²', 'Zgłoszenie budowy', 'Dom bez pozwolenia'],

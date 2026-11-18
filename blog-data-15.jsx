@@ -4,8 +4,8 @@ window.BLOG.push(
   {
     slug: 'darowizna-dzialki-i-mieszkania',
     title: 'Darowizna działki i mieszkania: notariusz, podatek i sprzedaż przed upływem 5 lat',
-    metaTitle: 'Darowizna działki: notariusz, podatek, sprzedaż przed 5 lat',
-    metaDesc: 'Darowizna działki wymaga aktu notarialnego. Rodzina bez podatku, inni do 20%. Działka rolna, hipoteka i 19% PIT przy sprzedaży przed upływem 5 lat.',
+    metaTitle: 'Darowizna działki: podatek, koszty i sprzedaż przed 5 lat',
+    metaDesc: 'Najbliższa rodzina nie płaci podatku, zięć czy bratanek przy działce za 200 tys. zł od 10 855 do 37 620 zł. Taksa, KOWR, hipoteka, PIT przy sprzedaży.',
     excerpt: 'Darowizna działki wymaga aktu notarialnego. Rodzina bez podatku, inni do 20%. Działka rolna, hipoteka i 19% PIT przy sprzedaży przed upływem 5 lat.',
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Współwłasność i spadki', tags: ['Darowizna', 'Podatek od darowizny', 'Działka rolna'],
@@ -301,8 +301,8 @@ window.BLOG.push(
   {
     slug: 'rzeczoznawca-majatkowy',
     title: 'Rzeczoznawca majątkowy: kiedy jest potrzebny, jak go wybrać i za co odpowiada',
-    metaTitle: 'Rzeczoznawca majątkowy: kiedy potrzebny, jak go wybrać',
-    metaDesc: 'Rzeczoznawca majątkowy: kiedy jest potrzebny, jak sprawdzić go w rejestrze, jak ustalić cenę i kto płaci za błędny operat.',
+    metaTitle: 'Rzeczoznawca majątkowy: kiedy potrzebny i jak go wybrać',
+    metaDesc: 'Rzeczoznawca z rejestru sporządza operat. Kiedy jest potrzebny, jak sprawdzić uprawnienia i ustalić cenę, operat a biegły w sądzie, kto płaci za błąd.',
     excerpt: 'Rzeczoznawca majątkowy: kiedy jest potrzebny, jak sprawdzić go w rejestrze, jak ustalić cenę i kto płaci za błędny operat.',
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Rynek nieruchomości', tags: ['Rzeczoznawca majątkowy', 'Operat szacunkowy', 'Wycena nieruchomości'],
@@ -446,8 +446,8 @@ window.BLOG.push(
   {
     slug: 'wykreslenie-hipoteki',
     title: 'Wykreślenie hipoteki z księgi wieczystej: wniosek, koszty i co zrobić, gdy bank już nie istnieje',
-    metaTitle: 'Wykreślenie hipoteki: wniosek, koszt i co, gdy banku nie ma',
-    metaDesc: 'Wykreślenie hipoteki: wniosek KW-WPIS, opłata 100 zł, dokument wierzyciela. Co zrobić, gdy bank nie istnieje, wierzyciel zmarł albo wpis jest sprzed lat.',
+    metaTitle: 'Wykreślenie hipoteki: wniosek, 100 zł i co, gdy banku nie ma',
+    metaDesc: 'Wniosek KW-WPIS z dokumentem wierzyciela, opłata 100 zł. Gdy bank nie istnieje, szukasz następcy. Wierzyciel zmarł, hipoteka sprzed lat, depozyt.',
     excerpt: 'Wykreślenie hipoteki: wniosek KW-WPIS, opłata 100 zł, dokument wierzyciela. Co zrobić, gdy bank nie istnieje, wierzyciel zmarł albo wpis jest sprzed lat.',
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Księgi wieczyste', tags: ['Wykreślenie hipoteki', 'Hipoteka', 'KW-WPIS'],
@@ -1493,8 +1493,8 @@ window.BLOG.push(
   {
     slug: 'wykup-mieszkania-komunalnego-bonifikata',
     title: 'Wykup mieszkania komunalnego z bonifikatą: warunki, zwrot bonifikaty i sprzedaż przed terminem',
-    metaTitle: 'Wykup mieszkania komunalnego: bonifikata, zwrot i sprzedaż',
-    metaDesc: 'Wykup mieszkania komunalnego z bonifikatą: kto może kupić, kiedy oddasz bonifikatę, przepisanie na dziecko, sprzedaż przed 5 latami, spadek i najem.',
+    metaTitle: 'Wykup mieszkania komunalnego: bonifikata i jej zwrot',
+    metaDesc: 'Gmina sprzedaje lokal najemcy bez przetargu, bonifikatę ustala rada gminy. Kiedy oddasz bonifikatę, a kiedy nie: sprzedaż, dziecko, spadek, najem.',
     excerpt: 'Wykup mieszkania komunalnego z bonifikatą: kto może kupić, kiedy oddasz bonifikatę, przepisanie na dziecko, sprzedaż przed 5 latami, spadek i najem.',
     date: '7 listopada 2026', iso: '2026-11-07', readTime: '13 min',
     category: 'Zakup nieruchomości', tags: ['Mieszkanie komunalne', 'Bonifikata', 'Gmina', 'Sprzedaż mieszkania'],

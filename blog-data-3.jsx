@@ -52,7 +52,8 @@ window.BLOG.push(
   {
     slug: 'farma-fotowoltaiczna-na-dzialce-rolnej',
     title: 'Czy na każdej działce rolnej można postawić farmę fotowoltaiczną?',
-    metaTitle: 'Farma fotowoltaiczna na działce rolnej – kiedy można?',
+    metaTitle: 'Farma fotowoltaiczna na działce rolnej: klasa, MPZP i sieć',
+    metaDesc: 'Nie na każdej działce. Na gruntach rolnych klas I–IV farma inwestora wymaga dziś planu miejscowego, na WZ tylko poza nimi i do 1000 kW. Przykład.',
     excerpt: 'Fotowoltaika w Polsce przeżywa boom, a widok paneli słonecznych na polach powoli staje się elementem naszego krajobrazu. Dla wielu właścicieli gruntów rolnych wydzierżawienie ziemi pod farmę PV to wizja stałego, bezpiecznego i atrakcyjnego dochodu pasywnego. Odpowiedź prawnika rzadko jest prosta, ale w tym przypadku brzmi ona: nie, nie na każdej działce rolnej postawisz farmę fotowoltaiczną.',
     date: '18 grudnia 2025', iso: '2025-12-18', updated: '7 października 2026', updatedIso: '2026-10-07', readTime: '4 min',
     category: 'Grunty rolne i OZE', tags: ['Fotowoltaika', 'Klasa gruntu', 'MPZP'],
@@ -105,7 +106,8 @@ window.BLOG.push(
   {
     slug: 'ile-kosztuje-sluzebnosc-drogi-koniecznej',
     title: 'Ile kosztuje ustanowienie służebności drogi koniecznej w 2025 roku?',
-    metaTitle: 'Ile kosztuje ustanowienie służebności drogi koniecznej?',
+    metaTitle: 'Ile kosztuje służebność drogi? Notariusz, sąd i biegli',
+    metaDesc: 'U notariusza ok. 1,5–2 tys. zł, w sądzie 4–8 tys. zł: opłata 200 zł i biegli. Do tego wynagrodzenie sąsiada wg cen ziemi. Przykład: blisko 25 tys. zł.',
     excerpt: 'Kupiłeś działkę w atrakcyjnej cenie, ale okazuje się, że nie ma ona bezpośredniego dostępu do drogi publicznej? A może odziedziczyłeś ziemię, do której dojeżdża się „przez pole sąsiada” na podstawie ustnej umowy sprzed lat? W obu przypadkach, aby legalnie budować lub sprzedać nieruchomość, potrzebujesz uregulowanego dostępu do drogi – czyli służebności drogi koniecznej.',
     date: '19 grudnia 2025', iso: '2025-12-19', readTime: '3 min',
     category: 'Służebności', tags: ['Droga konieczna', 'Koszty', 'Biegły'],

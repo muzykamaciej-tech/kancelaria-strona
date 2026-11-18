@@ -4,7 +4,8 @@ window.BLOG.push(
   {
     slug: 'ile-trwa-eksmisja-lokatora',
     title: 'Ile trwa eksmisja lokatora bez tytułu prawnego? Kalendarz 2026',
-    metaTitle: 'Ile trwa eksmisja lokatora? Kalendarz i koszty 2026',
+    metaTitle: 'Ile trwa eksmisja lokatora? Kalendarz od długu do komornika',
+    metaDesc: 'Od pierwszej niezapłaconej raty do końca najmu mija ok. 5 miesięcy, potem proces i komornik. Razem od kilkunastu miesięcy do kilku lat. Jak to skrócić.',
     excerpt: 'Eksmisja lokatora bez tytułu prawnego trwa od kilkunastu miesięcy do kilku lat. Pokazuję kalendarz, błędy, które cofają sprawę, i jak odzyskać pieniądze.',
     date: '26 września 2026', iso: '2026-09-26', readTime: '10 min',
     updated: '6 listopada 2026', updatedIso: '2026-11-06',
@@ -108,8 +109,8 @@ window.BLOG.push(
   {
     slug: 'warunki-zabudowy-ile-wazne',
     title: 'Warunki zabudowy – ile są ważne? Policz ostatni dzień swojej WZ',
-    metaTitle: 'Warunki zabudowy – ile ważne? 5 lat czy bezterminowo',
-    metaDesc: 'Warunki zabudowy z wniosków, które wpłynęły od 16.10.2025 r., prawomocne w 2026 r. lub później, są ważne 5 lat. Pozostałe nie mają terminu ważności.',
+    metaTitle: 'Warunki zabudowy – ile ważne? 5 lat, bez terminu i co dalej',
+    metaDesc: 'WZ z wniosku od 16.10.2025, prawomocna od 2026 r., wygasa po 5 latach. Starsze nie mają terminu. Jak policzyć ostatni dzień i co zrobić, gdy 5 lat minie.',
     excerpt: 'Nowa WZ wygasa po 5 latach od uprawomocnienia. Pokazuję, jak w 3 krokach policzyć ostatni dzień ważności i jak nie stracić decyzji przed budową.',
     date: '6 października 2026', iso: '2026-10-06', readTime: '14 min',
     category: 'Planowanie przestrzenne', tags: ['WZ', 'Ważność WZ', 'Pozwolenie na budowę'],

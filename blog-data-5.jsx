@@ -177,14 +177,14 @@ window.BLOG.push(
   {
     slug: 'szerokosc-drogi-koniecznej',
     title: 'Szerokość drogi koniecznej – ile metrów musi mieć dojazd do domu?',
-    metaTitle: 'Szerokość drogi koniecznej – ile metrów musi mieć dojazd?',
+    metaTitle: 'Szerokość drogi koniecznej: 3, 4 czy 5 m? Stan na 2026',
     excerpt: 'Dostęp do drogi publicznej to podstawa – bez niego działka jest w świetle prawa budowlanego praktycznie bezużyteczna. Ale co, gdy dostęp niby jest, ale tak wąski, że ledwo mieści się samochód? Albo gdy sąsiad zgadza się na służebność, ale chce wydzielić tylko 2,5 metra?',
     date: '15 stycznia 2026', iso: '2026-01-15', updated: '26 października 2026', updatedIso: '2026-10-26', readTime: '5 min',
     category: 'Służebności', tags: ['Droga konieczna', 'Droga pożarowa', 'Pozwolenie na budowę'],
     cover: '/assets/blog-szerokosc-drogi-granat.jpg',
     source: 'https://www.mecenasodnieruchomosci.pl/post/szerokosc-drogi-koniecznej',
     related: ['droga-konieczna', 'pozwolenie-na-budowe'],
-    metaDesc: 'Szerokości drogi koniecznej nie podaje żaden przepis. Sąd ustala ją według potrzeb działki (art. 145 k.c.). Dla domu zwykle 3–4 m, z miejscem na media.',
+    metaDesc: 'Przepis nie podaje liczby metrów. Dla domu w praktyce 3–4 m, dla ciągu pieszo-jezdnego dawniej 5 m. Zmiany po 19.09.2026, media w pasie i przykład 2,5 m.',
     body: [
       ['lead', 'Sąsiad zgadza się na drogę konieczną, ale tylko na 2,5 metra, bo „osobówka się zmieści”? Szerokości drogi koniecznej nie podaje żaden przepis. Sąd ustala ją według potrzeb Twojej działki, z możliwie najmniejszym obciążeniem gruntu sąsiada (art. 145 § 2 Kodeksu cywilnego). Dla domu jednorodzinnego w praktyce to zwykle 3–4 metry, a więcej, jeśli w pasie mają biec media.'],
       ['note', 'Stan prawny na 26.10.2026. Rozporządzenie o warunkach technicznych budynków z 2002 r., które wymagało dojazdu o szerokości jezdni co najmniej 3 m, obowiązywało do 19.09.2026 r. Nowego rozporządzenia dla budynków nie ogłoszono. Do marca 2028 r. inwestor może jednak projektować według dawnych przepisów (art. 102a Prawa budowlanego). Poniżej piszę, co to zmienia.'],
@@ -285,7 +285,8 @@ window.BLOG.push(
   {
     slug: 'slup-energetyczny-na-dzialce-przesuniecie',
     title: 'Słup energetyczny na działce: czy musisz płacić za jego przesunięcie?',
-    metaTitle: 'Słup energetyczny na działce: kto płaci za przesunięcie?',
+    metaTitle: 'Słup na działce: kto płaci za przesunięcie i co się należy',
+    metaDesc: 'Słup energetyczny albo linia średniego lub wysokiego napięcia na działce? Bez tytułu firmy żądasz usunięcia na jej koszt i zapłaty do 6 lat wstecz.',
     excerpt: '„W 2007 roku kupiłem działkę budowlaną, na której końcu stoi słup linii średniego napięcia. Firma energetyczna twierdzi, że skablowanie linii i usunięcie słupa jest możliwe tylko na mój koszt. Czy to legalne? Czy naprawdę muszę płacić za ich infrastrukturę na mojej ziemi?”',
     date: '19 stycznia 2026', iso: '2026-01-19', updated: '23 października 2026', updatedIso: '2026-10-23', readTime: '2 min',
     category: 'Służebność przesyłu', tags: ['Słupy na działce', 'Przesunięcie urządzeń', 'Pytanie klienta'],

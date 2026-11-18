@@ -236,9 +236,13 @@ function localTitle(names) {
 const SEO_TITLE_SERVICE = {
   'odszkodowanie-sluzebnosc-przesylu': 'Odszkodowanie za słupy na działce – adwokat, Lublin',
   'plan-ogolny': 'Plan ogólny gminy: uwagi i skarga – adwokat, Lublin',
-  'eksmisja': 'Eksmisja lokatora: od pozwu po egzekucję – adwokat, Lublin',
+  'eksmisja': 'Eksmisja lokatora: wypowiedzenie, pozew, komornik – Lublin',
   'zachowek': 'Zachowek: dochodzenie i obrona – adwokat, Lublin',
   'ograniczenie-korzystania-nieruchomosci': 'Ograniczenie korzystania z nieruchomości – adwokat, Lublin',
+  'status-rolnika': 'Status rolnika indywidualnego: warunki i dokumenty – Lublin',
+  'droga-konieczna': 'Droga konieczna przez działkę sąsiada – adwokat, Lublin',
+  'uzytkowanie-wieczyste': 'Użytkowanie wieczyste: podwyżka opłaty i wykup – Lublin',
+  'zgoda-kowr': 'Zgoda KOWR na zakup ziemi rolnej od 1 ha – adwokat, Lublin',
 };
 const SEO_TITLE_BLOCK = {
   'sluzebnosci-odszkodowania': 'Służebności, słupy i odszkodowania – adwokat, Lublin',
@@ -287,7 +291,7 @@ function setMetaForView(route, ids) {
   } else if (route === 'faq') {
     setMeta('FAQ — najczęstsze pytania | ' + SITE_NAME, 'Odpowiedzi na pytania o współpracę: bezpłatna wstępna analiza i oferta w 24 h, koszt, poufność i przebieg spraw z nieruchomości.');
   } else if (route === 'kontakt') {
-    setMeta('Kontakt – adwokat od nieruchomości, Lublin, ul. Cicha 4/5', 'Kancelaria adwokacka: ul. Cicha 4/5, 20-078 Lublin. Spotkania także w Warszawie, ul. Bracka 20/7A. Opisz sprawę: wstępna analiza i oferta w 24 h.');
+    setMeta('Kontakt: adwokat od nieruchomości w Lublinie i Warszawie', 'Kancelaria: ul. Cicha 4/5, 20-078 Lublin, spotkania w Warszawie, ul. Bracka 20/7A. Kontakt głównie mailowy. Opisz sprawę: odpowiedź i oferta w 24 h.');
   } else if (route === 'o-mnie') {
     setMeta('adw. dr Maciej Muzyka – Mecenas od Nieruchomości, Lublin', 'Adwokat w Lublinie (LUB/ADW/1702) i doktor nauk prawnych. Wyłącznie prawo nieruchomości. Absolwent UJ, doktorat na UMCS, wykładowca ORA w Lublinie.');
   } else if (route === 'notfound') {

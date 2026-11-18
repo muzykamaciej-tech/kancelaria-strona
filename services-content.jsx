@@ -3064,7 +3064,7 @@ const SERVICE_CONTENT = {
     h1: 'Użytkowanie wieczyste: przekształcenie i opłaty',
     h1Full: 'Użytkowanie wieczyste: przekształcenie i opłaty, wykup gruntu i podwyżka opłaty rocznej',
     topic: 'Użytkowanie wieczyste',
-    metaDesc: 'Grunt pod budynkiem mieszkalnym co do zasady stał się własnością 1.01.2019 r. Na wniosek do SKO od podwyżki opłaty rocznej masz 30 dni od wypowiedzenia.',
+    metaDesc: 'Od podwyżki opłaty rocznej masz 30 dni na wniosek do SKO. Grunt pod budynkiem mieszkalnym jest własnością od 1.01.2019 r. Wykup innego gruntu i bonifikaty.',
     subtitle: 'Gmina przysłała wypowiedzenie opłaty za użytkowanie wieczyste albo chcesz mieć grunt na własność? Grunt pod domem albo budynkiem mieszkalnym co do zasady stał się Twoją własnością z mocy prawa 1.01.2019 r. (art. 1 ustawy z 20.07.2018 r.). Na wniosek do samorządowego kolegium odwoławczego (SKO) od podwyżki masz 30 dni od otrzymania wypowiedzenia, więc prześlij je od razu.',
     short: {
       q: 'Jak dziś przekształcić użytkowanie wieczyste we własność?',
@@ -4278,7 +4278,7 @@ const SERVICE_CONTENT = {
     h1: 'Eksmisja',
     h1Full: 'Eksmisja lokatora: od pozwu po egzekucję i odzyskanie mieszkania',
     topic: 'Eksmisja lokatora',
-    metaDesc: 'Eksmisja lokatora wymaga co do zasady wyroku sądu i komornika. Przy najmie okazjonalnym zgłoszonym w 14 dni do urzędu skarbowego proces nie jest potrzebny.',
+    metaDesc: 'Lokator nie płaci albo nie wychodzi? Co do zasady potrzebny wyrok i komornik, przy najmie okazjonalnym klauzula. Zima, lokal socjalny, odszkodowanie.',
     subtitle: 'Lokator nie płaci albo najem się skończył, a on nie chce się wyprowadzić? Eksmisja lokatora wymaga co do zasady wyroku sądu, a wykonuje ją komornik. Najem okazjonalny zgłoszony w 14 dni do urzędu skarbowego pozwala pominąć proces: wystarczy żądanie opróżnienia i klauzula wykonalności (art. 19b, 19d u.o.p.l.). Prowadzę sprawę od wypowiedzenia do komornika i dochodzę pieniędzy za każdy miesiąc.',
     short: {
       q: 'Jak eksmitować lokatora, który nie płaci albo nie chce się wyprowadzić?',
@@ -6040,7 +6040,7 @@ const SERVICE_CONTENT = {
     h1: 'Droga konieczna',
     h1Full: 'Droga konieczna: dojazd do działki przez grunt sąsiada',
     topic: 'Droga konieczna',
-    metaDesc: 'Droga konieczna to służebność drogowa przez grunt sąsiada, za wynagrodzeniem dla niego (art. 145 § 1 k.c.). Bez zgody sąsiada ustanawia ją sąd rejonowy.',
+    metaDesc: 'Służebność drogowa przez grunt sąsiada, za wynagrodzeniem. Ze zgodą: akt notarialny. Bez zgody: sąd rejonowy, opłata 200 zł, kilka–kilkanaście miesięcy.',
     subtitle: 'Twoja działka nie ma dojazdu do drogi publicznej albo sąsiad chce poprowadzić przejazd przez Twój grunt. Droga konieczna to służebność drogowa, której za wynagrodzeniem może żądać od sąsiadów właściciel działki bez odpowiedniego dostępu do drogi publicznej (art. 145 § 1 k.c.). Prowadzę sprawy obu stron; najpierw sprawdzam, czy wystarczy umowa u notariusza, a bez zgody sąsiada sprawę rozstrzyga sąd rejonowy.',
     short: {
       q: 'Moja działka nie ma dojazdu. Czy sąd może wyznaczyć drogę przez działkę sąsiada?',
@@ -6597,7 +6597,7 @@ const SERVICE_CONTENT = {
   },
 
   'zgoda-kowr': {
-    metaDesc: 'Nierolnik kupujący ziemię rolną od 1 ha co do zasady potrzebuje zgody KOWR. Bez niej umowa jest nieważna. Przygotowuję ogłoszenie, wniosek i projekt umowy.',
+    metaDesc: 'Nierolnik kupujący ziemię rolną od 1 ha co do zasady potrzebuje zgody KOWR, bez niej umowa jest nieważna. Wniosek po 30 dniach ogłoszenia, ważność rok.',
     h1: 'Zgoda KOWR na nabycie ziemi rolnej',
     h1Full: 'Zgoda KOWR na nabycie ziemi rolnej: ogłoszenie, wniosek, decyzja',
     topic: 'Zgoda KOWR',
@@ -6751,7 +6751,7 @@ const SERVICE_CONTENT = {
     h1: 'Status rolnika indywidualnego',
     h1Full: 'Status rolnika indywidualnego: kwalifikacje, zamieszkanie i dokumenty',
     topic: 'Rolnik indywidualny',
-    metaDesc: 'Rolnik indywidualny ma kwalifikacje rolnicze, do 300 ha użytków rolnych i od co najmniej 5 lat mieszka w gminie gospodarstwa, które osobiście prowadzi.',
+    metaDesc: 'Rolnik indywidualny ma kwalifikacje rolnicze, do 300 ha i od 5 lat mieszka w gminie, sam prowadząc gospodarstwo. Jakie dokumenty to wykażą, co po zakupie.',
     subtitle: 'Chcesz kupić ziemię rolną, a notariusz pyta, czy jesteś rolnikiem indywidualnym? Status ma osoba z kwalifikacjami rolniczymi, która od 5 lat mieszka w gminie gospodarstwa i osobiście je prowadzi (art. 6 ust. 1 u.k.u.r.). Sprawdzam, którymi dokumentami wykażesz każdy warunek, i przygotowuję oświadczenia do aktu notarialnego.',
     short: {
       q: 'Jak sprawdzić, czy masz status rolnika indywidualnego?',

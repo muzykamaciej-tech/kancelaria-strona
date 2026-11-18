@@ -186,7 +186,8 @@ window.BLOG.push(
   {
     slug: 'czy-sasiad-moze-zablokowac-budowe',
     title: 'Czy sąsiad może zablokować Twoją budowę? Prawo inwestora a interesy osób trzecich',
-    metaTitle: 'Czy sąsiad może zablokować Twoją budowę?',
+    metaTitle: 'Czy sąsiad może zablokować budowę? Interes prawny i hałas',
+    metaDesc: 'Pozwolenie na budowę to decyzja związana: gdy spełniasz przepisy, urząd musi je wydać. Sąsiad musi wskazać naruszony przepis. Hałas i wyrok WSA z 2026 r.',
     excerpt: 'Masz świetny projekt, zabezpieczone finansowanie, działkę i nagle pojawia się mur. Sąsiedzi obawiają się hałasu, a urząd, zamiast wydać zgodę, piętrzy przed Tobą trudności. Czy czyjeś niezadowolenie może przekreślić Twoje plany? Przekładam na „ludzki” język przepisy i najnowsze orzecznictwo — gdzie kończą się prawa sąsiada, a zaczyna Twoje prawo do zabudowy.',
     date: '26 lutego 2026', iso: '2026-02-26', readTime: '3 min',
     category: 'Proces budowlany', tags: ['Pozwolenie na budowę', 'Sąsiad', 'Hałas'],

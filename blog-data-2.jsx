@@ -3,7 +3,8 @@ window.BLOG.push(
   {
     slug: 'podzial-nieruchomosci-po-rozwodzie-komu-sad-przyzna-mieszkanie',
     title: 'Podział nieruchomości po rozwodzie: komu sąd przyzna mieszkanie lub dom?',
-    metaTitle: 'Komu sąd przyzna mieszkanie po rozwodzie? Kryteria sądu',
+    metaTitle: 'Komu sąd przyzna mieszkanie po rozwodzie? Spłata i dzieci',
+    metaDesc: 'Zwykle jednemu z małżonków ze spłatą. Liczy się zdolność do spłaty, potem dobro dzieci. Kredytu sąd nie odejmuje od wartości. Dwa przykłady, checklista.',
     excerpt: 'Gdy małżeństwo się kończy, wspólny dom lub mieszkanie staje się centralnym punktem sporu. To nie tylko budynek, ale centrum życiowe, inwestycja i symbol stabilizacji. Pytanie „kto to dostanie?” pada niemal zawsze jako pierwsze. Odpowiedź jest złożona, ale opiera się na twardej logice, którą sąd stosuje w każdej sprawie.',
     date: '10 października 2025', iso: '2025-10-10', updated: '7 listopada 2026', updatedIso: '2026-11-07', readTime: '6 min',
     category: 'Podział majątku', tags: ['Rozwód', 'Podział majątku', 'Kredyt hipoteczny'],
@@ -387,7 +388,8 @@ window.BLOG.push(
   {
     slug: 'zasiedzenie-sluzebnosci-drogi-po-30-latach',
     title: 'Zasiedzenie służebności drogi: czy można przejąć prawo przejazdu po 30 latach?',
-    metaTitle: 'Zasiedzenie służebności drogi: przejazd po 30 latach',
+    metaTitle: 'Zasiedzenie drogi po 30 latach: kiedy koleiny nie wystarczą',
+    metaDesc: 'Zasiedzenie przejazdu wymaga 20 lat w dobrej wierze albo 30 w złej oraz trwałego, widocznego urządzenia, np. utwardzonej drogi. Przykład i ryzyka.',
     excerpt: 'Wyobraź sobie sytuację: od dekad dojeżdżasz do swojego domu tą samą, utartą ścieżką biegnącą przez działkę sąsiada. Tak robił Twój ojciec, a może i dziadek. Nikt nigdy nie protestował. Aż do dzisiaj. Nowy właściciel sąsiedniej działki stawia płot i mówi: „To mój teren, proszę tędy nie jeździć”.',
     date: '16 grudnia 2025', iso: '2025-12-16', updated: '26 października 2026', updatedIso: '2026-10-26', readTime: '3 min',
     category: 'Służebności', tags: ['Zasiedzenie', 'Droga dojazdowa', 'Art. 292 KC'],
