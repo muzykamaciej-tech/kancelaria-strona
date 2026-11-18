@@ -1147,7 +1147,7 @@ window.BLOG.push(
         'Decyzja gminy.',
       ]],
       ['p', 'Sam wyrok nie wystarcza, dopóki osoba mieszka w lokalu, bo art. 35 u.e.l. wymaga, żeby go opuściła. Jeżeli po wyroku wyprowadziła się sama, krok 2 odpada (por. II OSK 2337/19). Po wykonaniu eksmisji nie ma znaczenia, czy eksmitowany się z tym pogodził. Wykonanie prawomocnego nakazu odbiera mu faktyczną i prawną możliwość zamieszkiwania, a utrzymanie wpisu byłoby fikcją meldunkową (II OSK 2250/25). Organ oparł się tam na zaświadczeniu komornika, informacji policji i zeznaniach sąsiada. Co do zasady nie kontroluje przy tym czynności komornika.'],
-      ['p', 'Meldunek nie chroni przed eksmisją, a wymeldowanie nie jest jej warunkiem. Przebieg sprawy opisuję w tekście Eksmisja lokatora krok po kroku: pozew, lokal socjalny i komornik, a czas w tekście Ile trwa eksmisja lokatora bez tytułu prawnego? Kalendarz 2026.'],
+      ['p', 'Meldunek nie chroni przed eksmisją, a wymeldowanie nie jest jej warunkiem. Przebieg sprawy opisuję w tekście Eksmisja lokatora krok po kroku: najemca, lokator bez umowy, były małżonek, a czas w tekście Ile trwa eksmisja lokatora bez tytułu prawnego? Kalendarz 2026.'],
       ['h2', 'Jak wymeldować lokatora?'],
       ['p', 'Dopóki lokator mieszka, nie wymeldujesz go, nawet po końcu umowy. Brak tytułu prawnego to sprawa dla sądu, a nie dla urzędu. Jeżeli wyprowadził się bez wymeldowania, składasz wniosek z art. 35 u.e.l. Dołącz umowę, protokół zdania lokalu i potwierdzenie zwrotu kluczy.'],
       ['p', 'Przy nowym najmie zwróć uwagę na rodzaj meldunku. Przy pobycie czasowym lokator wskazuje deklarowany okres pobytu (art. 28 ust. 3 u.e.l.). Obowiązek wymeldowania i art. 35 dotyczą tu wyjazdu przed upływem tego okresu (art. 33 ust. 1 u.e.l.).'],

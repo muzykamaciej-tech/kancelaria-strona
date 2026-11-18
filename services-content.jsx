@@ -4435,6 +4435,10 @@ const SERVICE_CONTENT = {
     ],
     faq: [
       {
+        q: 'Jak eksmitować byłego męża albo krewnego, który mieszka za darmo?',
+        a: 'Z mieszkania, które należy tylko do Ciebie, pozwem o opróżnienie lokalu (art. 222 § 1 k.c.). Krewnego mieszkającego za darmo najpierw wypowiedz na piśmie (art. 365¹ k.c.). Sąd i tak orzeka o najmie socjalnym, choć przy mieszkaniu prywatnym nie musi go przyznać (art. 14 ust. 1 i 7 u.o.p.l.). Gdy mieszkanie było wspólne, nakaz opróżnienia wydaje sąd w podziale majątku (art. 624 k.p.c.).',
+      },
+      {
         q: 'Ile trwa eksmisja od pozwu do oddania kluczy?',
         a: 'Z mojej praktyki: całość zajmuje zwykle od kilkunastu miesięcy do kilku lat. Przy długu około 5 miesięcy mija do końca najmu (art. 11 u.o.p.l.), a sam proces trwa od kilku do kilkunastu miesięcy. Najwięcej czasu zabiera czekanie na ofertę lokalu socjalnego albo na tymczasowe pomieszczenie od gminy (art. 14 ust. 6 u.o.p.l., art. 1046 § 4 k.p.c.).',
       },
