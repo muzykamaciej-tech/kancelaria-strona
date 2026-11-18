@@ -1609,7 +1609,7 @@ function LublinSection() {
           <span className="eyebrow">W Lublinie i okolicy</span>
           <h2 className="h2 mt-4" id="lublin-h2">Prawnik nieruchomości w Lublinie: sądy, urzędy i sprawy z regionu.</h2>
           <p className="lead mt-6">
-            Kancelarię prowadzę w Lublinie, przy ul. Cichej 4/5, i zajmuję się wyłącznie prawem nieruchomości. W sprawach z Lublina i gmin wokół miasta na rozprawy i oględziny działki przychodzę osobiście. Klientów z reszty Polski obsługuję zdalnie.
+            Kancelarię prowadzę w Lublinie, przy ul. Cichej 4/5, i zajmuję się wyłącznie prawem nieruchomości. Sprawy z Lublina i gmin wokół miasta prowadzę w lubelskich sądach i urzędach wymienionych niżej. Klientów z reszty Polski obsługuję zdalnie.
           </p>
         </div>
 
