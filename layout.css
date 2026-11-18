@@ -951,6 +951,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .prose p { margin: 0 0 1.25rem; font-size: 1.0625rem; }
 .prose ul { padding-left: 1.25rem; margin: 0 0 1.25rem; }
 .prose ul li { margin-bottom: 0.5rem; font-size: 1.0625rem; }
+.prose .prose-wzor {
+  margin: 1.5rem 0 2rem;
+  padding: 1.5rem 1.75rem;
+  border: 1px dashed var(--slate-300, #cbd5e1);
+  background: var(--slate-50);
+  border-radius: var(--radius-md);
+}
+.prose .prose-wzor p { margin: 0 0 0.75rem; font-size: 1rem; }
+.prose .prose-wzor p:last-child { margin-bottom: 0; }
 .prose blockquote {
   margin: 2rem 0;
   padding: 1.5rem 1.75rem;

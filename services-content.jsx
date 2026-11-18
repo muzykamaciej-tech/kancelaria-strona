@@ -671,6 +671,8 @@ const SERVICE_CONTENT = {
       'Umowa, z której wynika Twoje prawo do działki, jeżeli nie jesteś jej właścicielem',
     ],
     guides: [
+      'warunki-zabudowy-od-2027',
+      'odwolanie-od-warunkow-zabudowy',
       'warunki-zabudowy-ile-wazne',
       'warunki-zabudowy-2026-lublin',
       'warunki-zabudowy-a-plan-ogolny-przepisy-przejsciowe',

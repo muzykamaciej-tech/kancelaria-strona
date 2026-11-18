@@ -669,6 +669,7 @@ function renderBlogBlock(b, i) {
   if (t === 'ol') return <ol key={i}>{v.map((li, k) => <li key={k}>{blogInline(li)}</li>)}</ol>;
   if (t === 'quote') return <blockquote key={i}>{blogInline(v)}</blockquote>;
   if (t === 'note') return <p key={i} className="prose-note">{blogInline(v)}</p>;
+  if (t === 'wzor') return <div key={i} className="prose-wzor" role="group" aria-label="Wzór pisma">{v.map((line, k) => <p key={k}>{blogInline(line)}</p>)}</div>;
   if (t === 'table') return (
     <div key={i} className="prose-table-wrap">
       <table className="prose-table">
