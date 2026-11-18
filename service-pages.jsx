@@ -57,7 +57,8 @@ function ServiceTrustStrip() {
    Sits at the bottom of every service & pillar page (id="formularz").
    ============================================================ */
 /* title: trzy wiersze nagłówka (ostatni w kolorze akcentu); preset: formularz z wybraną usługą i pakietem (offers.jsx) */
-function CaseFormBand({ eyebrow, title, heading, lead, preset }) {
+/* cred: jedna linia wiarygodności pod formularzem; collapseOptional: pola opcjonalne zwinięte na telefonie (wpis bloga) */
+function CaseFormBand({ eyebrow, title, heading, lead, preset, cred, collapseOptional }) {
   const GBadge = window.GoogleBadge;
   const t = title || ['Bezpłatnie', 'powiem, co', 'trzeba zrobić.'];
   return (
@@ -85,7 +86,8 @@ function CaseFormBand({ eyebrow, title, heading, lead, preset }) {
             </div>
           </div>
           <div className="case-form-card">
-            <SQualForm preset={preset} />
+            <SQualForm preset={preset} collapseOptional={collapseOptional} />
+            {cred && <p className="case-form-cred">{cred}</p>}
           </div>
         </div>
       </div>
@@ -353,14 +355,33 @@ function isoPl(iso) {
 function stdDate(c) { return c && c.updated ? c.updated : undefined; }
 /* Poradniki tylko z jawnej listy `guides` (slugi wpisów), w podanej kolejności. Nieznany slug = błąd w konsoli,
    a błąd w konsoli zatrzymuje prerender (literówka nie znika po cichu). */
+/* Kolejność (1.4 planu SEO): najpierw wpisy z największą liczbą wyświetleń w GSC (blog-weights.jsx), przy równej liczbie
+   (także 0) — kolejność z listy `guides`. */
 function guidesFor(c) {
   if (!c || !Array.isArray(c.guides)) return [];
-  const B = window.BLOG || [];
-  return c.guides.map((g) => {
+  const B = window.BLOG || [], W = window.BLOG_WEIGHTS || {};
+  return c.guides.map((g, i) => {
     const p = B.find((x) => x.slug === g);
     if (!p) console.error('guides: brak wpisu o slugu "' + g + '"');
-    return p;
-  }).filter(Boolean);
+    return p && [p, W[g] || 0, i];
+  }).filter(Boolean).sort((a, b) => b[1] - a[1] || a[2] - b[2]).map((x) => x[0]);
+}
+/* Linki w tekście usługi: „[opisowa kotwica](/blog/slug)” w stringu danych → zwykły <a href> (router przechwytuje klik).
+   Tylko ścieżki wewnętrzne zaczynające się od jednego „/”; inny zapis zostaje zwykłym tekstem. React escapuje tekst,
+   więc nie ma tu wstrzykiwania HTML. Na razie obsługuje pole `intro`; w meta i JSON-LD znaczniki są usuwane (app.jsx). */
+const SVC_LINK_RE = /\[([^\]]+)\]\((\/(?!\/)[^)\s]*)\)/g;
+function svcText(t) {
+  const s = String(t || '');
+  if (s.indexOf('](/') === -1) return s;
+  const out = []; let last = 0, m, k = 0;
+  SVC_LINK_RE.lastIndex = 0;
+  while ((m = SVC_LINK_RE.exec(s))) {
+    if (m.index > last) out.push(s.slice(last, m.index));
+    out.push(<a key={k++} href={m[2]}>{m[1]}</a>);
+    last = m.index + m[0].length;
+  }
+  if (last < s.length) out.push(s.slice(last));
+  return out;
 }
 /* Usługi z innych obszarów (`seeAlso`): slugi usług; pełna ścieżka z briefu też działa (liczy się ostatni człon). */
 function seeAlsoFor(list, blockId) {
@@ -432,8 +453,8 @@ function buildServiceSections(c, ctx) {
   });
   if (c.intro) blocks.push({
     eyebrow: 'Na czym to polega',
-    title: c.introHeading || (c.intro.split('. ')[0].replace(/\.$/, '') + '.'),
-    node: <p className="lead mt-6">{c.intro}</p>,
+    title: c.introHeading || (window.plainLd(c.intro).split('. ')[0].replace(/\.$/, '') + '.'),
+    node: <p className="lead mt-6">{svcText(c.intro)}</p>,
   });
   if (c.when) blocks.push({
     eyebrow: c.whenTitle || 'Kiedy to potrzebne',

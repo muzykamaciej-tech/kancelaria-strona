@@ -36,7 +36,7 @@ const SERVICE_CONTENT = {
       ],
     },
     introHeading: 'Dlaczego przed zakupem nie wystarczy przeczytać księgi wieczystej',
-    intro: 'Jeżeli w dniu umowy wiesz o wadzie nieruchomości, sprzedawca nie odpowiada za nią z tytułu rękojmi za wady (art. 557 § 1 k.c.). Wadą prawną jest m.in. obciążenie prawem osoby trzeciej, np. hipoteką albo służebnością (art. 556³ k.c.), więc znalezione ryzyko załatwiasz w umowie albo w cenie. Księga wieczysta jest jawna (art. 2 u.k.w.h.) i co do zasady chroni kupującego, który na niej polega (art. 5), ale nie przy nabyciu nieodpłatnym ani w złej wierze (art. 6 ust. 1). Część ryzyk leży poza księgą: plan, droga, sieci i najem.',
+    intro: 'Jeżeli w dniu umowy wiesz o wadzie nieruchomości, sprzedawca nie odpowiada za nią z tytułu rękojmi za wady (art. 557 § 1 k.c.). Wadą prawną jest m.in. obciążenie prawem osoby trzeciej, np. hipoteką albo służebnością (art. 556³ k.c.), więc znalezione ryzyko załatwiasz w umowie albo w cenie. Księga wieczysta jest jawna (art. 2 u.k.w.h.) i co do zasady chroni kupującego, który na niej polega (art. 5), ale nie przy nabyciu nieodpłatnym ani w złej wierze (art. 6 ust. 1). Część ryzyk leży poza księgą: plan, droga, sieci i najem. Co możesz sprawdzić sam, opisuję w poradnikach [jak sprawdzić księgę wieczystą](/blog/ksiega-wieczysta-jak-sprawdzic-wpis) i [umowa przedwstępna kupna mieszkania](/blog/umowa-przedwstepna-kupna-mieszkania), a skutki wpłaty pieniędzy przed umową w tekście [zadatek a zaliczka](/blog/zadatek-a-zaliczka).',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Kupujesz i boisz się, że z działką albo mieszkaniem coś jest nie tak',
     when: [
@@ -1591,7 +1591,7 @@ const SERVICE_CONTENT = {
       ],
     },
     introHeading: 'Co znaczy symbol strefy dla Twojej działki',
-    intro: 'Plan ogólny gminy to uchwała rady gminy dla obszaru gminy, bez m.in. terenów zamkniętych, i akt prawa miejscowego (art. 13a ust. 1 i 7 u.p.z.p.). Mapa planu dzieli gminę na strefy planistyczne oznaczone symbolami, np. SJ albo SO (art. 13c ust. 1 i 2). Funkcja, którą urząd wpisze w warunkach zabudowy, musi mieścić się w profilu funkcjonalnym strefy, czyli w liście terenów przypisanych do tej strefy (art. 54 ust. 2 pkt 1 lit. a w zw. z art. 64 ust. 1). Plan ogólny nie uchyla jednak planów miejscowych (art. 34 ust. 1a). Dlatego najpierw sprawdzam, czy Twoja działka ma plan miejscowy, a dopiero potem czytam jej strefę.',
+    intro: 'Plan ogólny gminy to uchwała rady gminy dla obszaru gminy, bez m.in. terenów zamkniętych, i akt prawa miejscowego (art. 13a ust. 1 i 7 u.p.z.p.). Mapa planu dzieli gminę na strefy planistyczne oznaczone symbolami, np. SJ albo SO (art. 13c ust. 1 i 2). Funkcja, którą urząd wpisze w warunkach zabudowy, musi mieścić się w profilu funkcjonalnym strefy, czyli w liście terenów przypisanych do tej strefy (art. 54 ust. 2 pkt 1 lit. a w zw. z art. 64 ust. 1). Plan ogólny nie uchyla jednak planów miejscowych (art. 34 ust. 1a). Dlatego najpierw sprawdzam, czy Twoja działka ma plan miejscowy, a dopiero potem czytam jej strefę. Strefy i symbole wyjaśniam w poradniku [plan ogólny gminy: co to jest](/blog/plan-ogolny-gminy-co-to-jest), terminy i treść uwag w tekście [uwagi do planu ogólnego](/blog/uwagi-do-planu-ogolnego), a roszczenia w tekście [odszkodowanie za plan ogólny](/blog/odszkodowanie-za-plan-ogolny).',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Działka w strefie otwartej, projekt w konsultacjach albo plan już uchwalony',
     when: [
@@ -1755,7 +1755,7 @@ const SERVICE_CONTENT = {
       ],
     },
     introHeading: 'Co plan miejscowy przesądza o Twojej działce i kiedy jest nieważny',
-    intro: 'Miejscowy plan zagospodarowania przestrzennego jest aktem prawa miejscowego (art. 14 ust. 8 u.p.z.p.), czyli uchwałą rady gminy, która wiąże Ciebie i urząd jak przepis. Samo niezadowolenie z planu nie wystarczy do skargi. Nieważność powoduje istotne naruszenie zasad sporządzania planu, istotne naruszenie trybu albo naruszenie właściwości organów (art. 28 ust. 1 u.p.z.p.). Studia gmin straciły moc najpóźniej z końcem 31.08.2026 r. Nowy plan gmina co do zasady uchwala od tego czasu tylko przy obowiązującym planie ogólnym i zgodnie z jego ustaleniami (art. 20 ust. 1 u.p.z.p.; art. 65 ust. 1 i art. 67 ust. 4 ustawy z 7.07.2023).',
+    intro: 'Miejscowy plan zagospodarowania przestrzennego jest aktem prawa miejscowego (art. 14 ust. 8 u.p.z.p.), czyli uchwałą rady gminy, która wiąże Ciebie i urząd jak przepis. Samo niezadowolenie z planu nie wystarczy do skargi. Nieważność powoduje istotne naruszenie zasad sporządzania planu, istotne naruszenie trybu albo naruszenie właściwości organów (art. 28 ust. 1 u.p.z.p.). Studia gmin straciły moc najpóźniej z końcem 31.08.2026 r. Nowy plan gmina co do zasady uchwala od tego czasu tylko przy obowiązującym planie ogólnym i zgodnie z jego ustaleniami (art. 20 ust. 1 u.p.z.p.; art. 65 ust. 1 i art. 67 ust. 4 ustawy z 7.07.2023). Jak czytać plan, opisuję w poradniku o [miejscowym planie zagospodarowania przestrzennego](/blog/miejscowy-plan-zagospodarowania), a etapy sprawy w tekście [skarga na plan miejscowy](/blog/skarga-na-plan-miejscowy). Skargę na plan ogólny opisuję osobno: [skarga na plan ogólny gminy](/blog/skarga-na-plan-ogolny).',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Gmina dopiero pisze plan albo już go uchwaliła i blokuje Ci budowę',
     when: [
@@ -3127,7 +3127,7 @@ const SERVICE_CONTENT = {
       ],
     },
     introHeading: 'Dlaczego za grunt płacisz co roku, choć dom jest Twój',
-    intro: 'Użytkowanie wieczyste pozwala korzystać z gruntu Skarbu Państwa albo samorządu z wyłączeniem innych osób, co do zasady przez 99 lat (art. 232 § 1, art. 233 i art. 236 § 1 k.c.). Budynki są Twoje (art. 235 k.c.), ale za grunt płacisz do 31 marca opłatę roczną (art. 71 ust. 4 u.g.n.). Wynosi ona od 0,3% do 3% wartości gruntu zależnie od celu z umowy, przy celu mieszkaniowym 1% (art. 72 ust. 3 u.g.n.). Właściciel gruntu może podnieść opłatę najwyżej raz na 3 lata, na podstawie wartości określonej przez rzeczoznawcę majątkowego (art. 77 ust. 1 i 3 u.g.n.). Dlatego w sprawie o podwyżkę pracuję przede wszystkim na operacie szacunkowym i nie obiecuję wyniku.',
+    intro: 'Użytkowanie wieczyste pozwala korzystać z gruntu Skarbu Państwa albo samorządu z wyłączeniem innych osób, co do zasady przez 99 lat (art. 232 § 1, art. 233 i art. 236 § 1 k.c.). Budynki są Twoje (art. 235 k.c.), ale za grunt płacisz do 31 marca opłatę roczną (art. 71 ust. 4 u.g.n.). Wynosi ona od 0,3% do 3% wartości gruntu zależnie od celu z umowy, przy celu mieszkaniowym 1% (art. 72 ust. 3 u.g.n.). Właściciel gruntu może podnieść opłatę najwyżej raz na 3 lata, na podstawie wartości określonej przez rzeczoznawcę majątkowego (art. 77 ust. 1 i 3 u.g.n.). Dlatego w sprawie o podwyżkę pracuję przede wszystkim na operacie szacunkowym i nie obiecuję wyniku. Opłatę roczną i przekształcenie we własność opisuję w poradniku [użytkowanie wieczyste: opłata i przekształcenie](/blog/uzytkowanie-wieczyste-oplata-przeksztalcenie), a pracę biegłego w tekście [rzeczoznawca majątkowy: za co odpowiada](/blog/rzeczoznawca-majatkowy).',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Pismo z gminy, zaświadczenie o opłacie albo plan wykupu gruntu',
     when: [
@@ -3911,7 +3911,7 @@ const SERVICE_CONTENT = {
       ],
     },
     introHeading: 'Co wchodzi do podziału po rozwodzie, a co zostaje Twoje',
-    intro: 'Majątek wspólny to co do zasady wszystko, co Ty albo były małżonek nabyliście w czasie trwania wspólności, np. mieszkanie kupione po ślubie, nawet jeśli w akcie jest jedno nazwisko (art. 31 § 1 k.r.o.). Do podziału nie wchodzi majątek osobisty: rzeczy sprzed ślubu, spadek i darowizna, chyba że darczyńca postanowił inaczej, oraz to, co kupiono w zamian za majątek osobisty (art. 33 pkt 1, 2 i 10 k.r.o.).',
+    intro: 'Majątek wspólny to co do zasady wszystko, co Ty albo były małżonek nabyliście w czasie trwania wspólności, np. mieszkanie kupione po ślubie, nawet jeśli w akcie jest jedno nazwisko (art. 31 § 1 k.r.o.). Do podziału nie wchodzi majątek osobisty: rzeczy sprzed ślubu, spadek i darowizna, chyba że darczyńca postanowił inaczej, oraz to, co kupiono w zamian za majątek osobisty (art. 33 pkt 1, 2 i 10 k.r.o.). Komu sąd przyzna mieszkanie, piszę w poradniku [podział nieruchomości po rozwodzie](/blog/podzial-nieruchomosci-po-rozwodzie-komu-sad-przyzna-mieszkanie), a o wspólnym kredycie w tekście [kredyt hipoteczny po rozwodzie](/blog/kredyt-hipoteczny-po-rozwodzie).',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Rozwód za Tobą, a wspólne mieszkanie i kredyt zostały',
     when: [
@@ -4375,7 +4375,7 @@ const SERVICE_CONTENT = {
       ],
     },
     introHeading: 'Kiedy sąd i komornik mogą usunąć lokatora i gdzie ucieka czas',
-    intro: 'Eksmisja to potoczna nazwa opróżnienia lokalu na podstawie wyroku albo oświadczenia najemcy w formie aktu notarialnego (akt notarialny najemcy) z klauzulą wykonalności nadaną przez sąd. Ustawa o ochronie praw lokatorów (u.o.p.l.) obejmuje lokale służące do zaspokajania potrzeb mieszkaniowych (art. 2 ust. 1 pkt 4) i ogranicza wynajmującego przy wypowiedzeniu, w wyroku i przy egzekucji. Lokatora bez tytułu do innego lokalu komornik nie usunie, dopóki gmina nie wskaże mu tymczasowego pomieszczenia (art. 1046 § 4 k.p.c.). Z mojej praktyki: najwięcej miesięcy wynajmujący tracą na wadliwych wypowiedzeniach i na czekaniu na gminę.',
+    intro: 'Eksmisja to potoczna nazwa opróżnienia lokalu na podstawie wyroku albo oświadczenia najemcy w formie aktu notarialnego (akt notarialny najemcy) z klauzulą wykonalności nadaną przez sąd. Ustawa o ochronie praw lokatorów (u.o.p.l.) obejmuje lokale służące do zaspokajania potrzeb mieszkaniowych (art. 2 ust. 1 pkt 4) i ogranicza wynajmującego przy wypowiedzeniu, w wyroku i przy egzekucji. Lokatora bez tytułu do innego lokalu komornik nie usunie, dopóki gmina nie wskaże mu tymczasowego pomieszczenia (art. 1046 § 4 k.p.c.). Z mojej praktyki: najwięcej miesięcy wynajmujący tracą na wadliwych wypowiedzeniach i na czekaniu na gminę. Kolejne etapy i czas trwania opisuję w poradnikach [eksmisja lokatora krok po kroku](/blog/eksmisja-lokatora-krok-po-kroku) i [ile trwa eksmisja lokatora](/blog/ile-trwa-eksmisja-lokatora), a ryzyko samowolnego usunięcia najemcy w tekście o [nielegalnych sposobach na wyrzucenie lokatora](/blog/5-nielegalnych-sposobow-na-wyrzucenie-lokatora).',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Lokator nie płaci, nie wychodzi albo czekasz na gminę',
     when: [
@@ -6142,7 +6142,7 @@ const SERVICE_CONTENT = {
       ],
     },
     introHeading: 'Prawo przejazdu przez cudzy grunt, a nie zakup pasa ziemi',
-    intro: 'Droga konieczna to prawo przejazdu i przechodu przez grunt sąsiada, a nie własność pasa ziemi. Sąsiad pozostaje właścicielem, a Ty korzystasz z jego gruntu w zakresie oznaczonym w umowie albo w postanowieniu sądu (art. 285 § 1 k.c.). Służebność wykonuje się tak, żeby jak najmniej utrudniała korzystanie z gruntu obciążonego (art. 288 k.c.). Rękojmia wiary publicznej ksiąg wieczystych nie działa przeciwko służebności drogi koniecznej (art. 7 pkt 4 u.k.w.h.). Taka droga może więc obciążać działkę, choć księga wieczysta jej nie pokazuje.',
+    intro: 'Droga konieczna to prawo przejazdu i przechodu przez grunt sąsiada, a nie własność pasa ziemi. Sąsiad pozostaje właścicielem, a Ty korzystasz z jego gruntu w zakresie oznaczonym w umowie albo w postanowieniu sądu (art. 285 § 1 k.c.). Służebność wykonuje się tak, żeby jak najmniej utrudniała korzystanie z gruntu obciążonego (art. 288 k.c.). Rękojmia wiary publicznej ksiąg wieczystych nie działa przeciwko służebności drogi koniecznej (art. 7 pkt 4 u.k.w.h.). Taka droga może więc obciążać działkę, choć księga wieczysta jej nie pokazuje. Szerokość drogi i jej koszt opisuję w poradnikach o [szerokości drogi koniecznej](/blog/szerokosc-drogi-koniecznej) i o tym, [ile kosztuje służebność drogi koniecznej](/blog/ile-kosztuje-sluzebnosc-drogi-koniecznej). Gdy przejazd istnieje od lat, przeczytaj też o [zasiedzeniu służebności drogi](/blog/zasiedzenie-sluzebnosci-drogi-po-30-latach).',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Brak dojazdu, brama na przejeździe albo sąsiad żąda drogi przez Twój grunt',
     when: [
@@ -6712,7 +6712,7 @@ const SERVICE_CONTENT = {
       ],
     },
     introHeading: 'Kto może kupić ziemię rolną, a kto potrzebuje zgody',
-    intro: 'Nabywcą nieruchomości rolnej może być wyłącznie rolnik indywidualny, chyba że ustawa stanowi inaczej (art. 2a ust. 1 u.k.u.r.; definicja rolnika w art. 6). To ograniczenie nie obejmuje m.in. zakupu nieruchomości mniejszej niż 1 ha, zakupu od osoby bliskiej ani dziedziczenia (art. 2a ust. 3). Próg 5 ha, który wszedł w życie 30.04.2026, dotyczy tylko sprzedaży ziemi państwowej z Zasobu Własności Rolnej Skarbu Państwa (Dz.U. 2026 poz. 317). Pozostałe progi i zwolnienia opisuję na stronie „Nieruchomości rolne (UKUR, KOWR)”. Jeżeli żadne zwolnienie nie pasuje, zostaje zgoda Dyrektora Generalnego KOWR. Przy zakupie za taką zgodą nie działa ustawowe prawo pierwokupu dzierżawcy i KOWR (art. 3 ust. 5 pkt 2).',
+    intro: 'Nabywcą nieruchomości rolnej może być wyłącznie rolnik indywidualny, chyba że ustawa stanowi inaczej (art. 2a ust. 1 u.k.u.r.; definicja rolnika w art. 6). To ograniczenie nie obejmuje m.in. zakupu nieruchomości mniejszej niż 1 ha, zakupu od osoby bliskiej ani dziedziczenia (art. 2a ust. 3). Próg 5 ha, który wszedł w życie 30.04.2026, dotyczy tylko sprzedaży ziemi państwowej z Zasobu Własności Rolnej Skarbu Państwa (Dz.U. 2026 poz. 317). Pozostałe progi i zwolnienia opisuję na stronie „Nieruchomości rolne (UKUR, KOWR)”. Jeżeli żadne zwolnienie nie pasuje, zostaje zgoda Dyrektora Generalnego KOWR. Przy zakupie za taką zgodą nie działa ustawowe prawo pierwokupu dzierżawcy i KOWR (art. 3 ust. 5 pkt 2). Krok po kroku opisuję to w poradnikach [zgoda KOWR na nabycie nieruchomości rolnej](/blog/zgoda-kowr-nabycie-ziemi-rolnej) i [kupno działki rolnej bez statusu rolnika](/blog/kupno-dzialki-rolnej-nie-rolnik). Kupujesz działkę rolną z WZ? Zobacz, [co sprawdzić w decyzji o warunkach zabudowy](/blog/kupno-dzialki-rolnej-z-warunkami-zabudowy).',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Sprzedajesz albo kupujesz ziemię, a kupujący nie jest rolnikiem',
     when: [
@@ -6866,7 +6866,7 @@ const SERVICE_CONTENT = {
       ],
     },
     introHeading: 'Co zmienia się przy zakupie ziemi i jakie obowiązki masz przez 5 lat po akcie',
-    intro: 'Rolnik indywidualny to pojęcie z ustawy o kształtowaniu ustroju rolnego (u.k.u.r.): co do zasady tylko on może kupić nieruchomość rolną (art. 2a ust. 1). Po zakupie co do zasady przez co najmniej 5 lat osobiście prowadzisz gospodarstwo z tą ziemią (art. 2b ust. 1). W tym czasie nie możesz jej zbyć ani oddać w posiadanie innym podmiotom (art. 2b ust. 2). Nabycie oparte na nieprawdziwym oświadczeniu jest nieważne, a o stwierdzenie nieważności może pozwać także KOWR (art. 9 ust. 1 pkt 3 i ust. 2).',
+    intro: 'Rolnik indywidualny to pojęcie z ustawy o kształtowaniu ustroju rolnego (u.k.u.r.): co do zasady tylko on może kupić nieruchomość rolną (art. 2a ust. 1). Po zakupie co do zasady przez co najmniej 5 lat osobiście prowadzisz gospodarstwo z tą ziemią (art. 2b ust. 1). W tym czasie nie możesz jej zbyć ani oddać w posiadanie innym podmiotom (art. 2b ust. 2). Nabycie oparte na nieprawdziwym oświadczeniu jest nieważne, a o stwierdzenie nieważności może pozwać także KOWR (art. 9 ust. 1 pkt 3 i ust. 2). Jeżeli statusu rolnika nie masz, sprawdź, [co kupisz bez statusu rolnika](/blog/kupno-dzialki-rolnej-nie-rolnik) i [kiedy potrzebna jest zgoda KOWR](/blog/zgoda-kowr-nabycie-ziemi-rolnej).',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Kupujesz ziemię, a notariusz pyta o wykształcenie, staż i zameldowanie',
     when: [
@@ -7136,7 +7136,7 @@ const SERVICE_CONTENT = {
       ],
     },
     introHeading: 'Dlaczego „odrolnienie” to dwie sprawy w dwóch urzędach',
-    intro: 'Słowa „odrolnienie” nie ma w ustawie o ochronie gruntów rolnych i leśnych. Ustawa mówi o przeznaczeniu gruntów na cele nierolnicze (art. 4 pkt 6 u.o.g.r.l.) i o wyłączeniu gruntów z produkcji, czyli rozpoczęciu innego niż rolnicze użytkowania (art. 4 pkt 11). Pierwsze to sprawa gminy: plan miejscowy, a bez planu warunki zabudowy. Drugie to decyzja starosty. Należność i opłaty roczne płacisz od dnia faktycznego wyłączenia, czyli od dnia, w którym działka zaczyna służyć innemu celowi niż rolniczy, a nie od dnia decyzji (art. 12 ust. 1).',
+    intro: 'Słowa „odrolnienie” nie ma w ustawie o ochronie gruntów rolnych i leśnych. Ustawa mówi o przeznaczeniu gruntów na cele nierolnicze (art. 4 pkt 6 u.o.g.r.l.) i o wyłączeniu gruntów z produkcji, czyli rozpoczęciu innego niż rolnicze użytkowania (art. 4 pkt 11). Pierwsze to sprawa gminy: plan miejscowy, a bez planu warunki zabudowy. Drugie to decyzja starosty. Należność i opłaty roczne płacisz od dnia faktycznego wyłączenia, czyli od dnia, w którym działka zaczyna służyć innemu celowi niż rolniczy, a nie od dnia decyzji (art. 12 ust. 1). Oba etapy opisuję w poradnikach [przekształcenie działki rolnej w budowlaną](/blog/przeksztalcenie-dzialki-rolnej-w-budowlana) i [wyłączenie gruntów z produkcji rolnej](/blog/wylaczenie-gruntow-z-produkcji-rolnej). Kolejność kroków bez planu miejscowego wyjaśniam w tekście [warunki zabudowy na działce rolnej](/blog/warunki-zabudowy-na-dzialce-rolnej).',
     whenTitle: 'Czy to Twoja sytuacja',
     whenHeading: 'Chcesz przekształcić działkę rolną na budowlaną albo masz już decyzję starosty',
     when: [

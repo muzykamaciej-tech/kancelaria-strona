@@ -201,9 +201,9 @@ function Navbar({ route, setRoute, serviceSlug }) {
           route="landing"
           className="nav-logo"
           onNavigate={closeMenus}
-          aria-label="Kancelaria Nieruchomości — Adwokat Maciej Muzyka">
+          aria-label="Kancelaria Nieruchomości adw. dr Maciej Muzyka">
 
-          <img src={window.__resources?.logoDark || "/assets/logo-on-dark.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" width="686" height="208" style={{ objectFit: "cover" }} />
+          <img src={window.__resources?.logoDark || "/assets/logo-on-dark.png"} alt="Kancelaria Nieruchomości adw. dr Maciej Muzyka" width="686" height="208" style={{ objectFit: "cover" }} />
         </window.NavLink>
 
         {/* Desktop links */}
@@ -824,7 +824,7 @@ function Footer({ setRoute }) {
         <div className="footer-grid">
           <div>
             <window.NavLink route="landing" className="footer-logo-link" style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}>
-              <img src={window.__resources?.logoDark || "/assets/logo-on-dark.png"} alt="Kancelaria Nieruchomości — Adwokat Maciej Muzyka" width="686" height="208" loading="lazy" decoding="async" style={{ height: 104, width: 'auto' }} />
+              <img src={window.__resources?.logoDark || "/assets/logo-on-dark.png"} alt="Kancelaria Nieruchomości adw. dr Maciej Muzyka" width="686" height="208" loading="lazy" decoding="async" style={{ height: 104, width: 'auto' }} />
             </window.NavLink>
             <p className="mt-6" style={{ color: 'var(--text-on-dark-3)', fontSize: '0.875rem', lineHeight: 1.6, maxWidth: '24rem' }}>
               Kancelaria adwokacka w Lublinie: wyłącznie prawo nieruchomości i proces inwestycyjno-budowlany. Sprawy klientów z całej Polski prowadzę zdalnie.
@@ -870,7 +870,7 @@ function Footer({ setRoute }) {
 
         <div className="footer-bottom">
           <p className="small" style={{ color: 'var(--slate-500)' }}>
-            © 2026 adw. dr Maciej Muzyka Kancelaria Adwokacka. Wszelkie prawa zastrzeżone.
+            © 2026 Kancelaria Nieruchomości adw. dr Maciej Muzyka. Wszelkie prawa zastrzeżone.
           </p>
           <ul className="footer-legal">
             <li><a href="/polityka-prywatnosci">Polityka Prywatności</a></li>

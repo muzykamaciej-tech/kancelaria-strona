@@ -387,6 +387,7 @@ window.BLOG.push(
   },
   {
     slug: 'zasiedzenie-sluzebnosci-drogi-po-30-latach',
+    cta: 'Sąsiad zamknął przejazd, z którego korzystasz od lat? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
     title: 'Zasiedzenie służebności drogi: czy można przejąć prawo przejazdu po 30 latach?',
     metaTitle: 'Zasiedzenie drogi po 30 latach: kiedy koleiny nie wystarczą',
     metaDesc: 'Zasiedzenie przejazdu wymaga 20 lat w dobrej wierze albo 30 w złej oraz trwałego, widocznego urządzenia, np. utwardzonej drogi. Przykład i ryzyka.',

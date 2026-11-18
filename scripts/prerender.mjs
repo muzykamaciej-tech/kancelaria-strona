@@ -184,9 +184,9 @@ fs.writeFileSync(path.join(DIST, 'robots.txt'),
 
 const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
 const llms = [
-  '# Kancelaria Nieruchomości – adw. dr Maciej Muzyka (Mecenas od Nieruchomości)',
+  '# Kancelaria Nieruchomości adw. dr Maciej Muzyka (Mecenas od Nieruchomości)',
   '',
-  '> Mecenas od Nieruchomości: kancelaria adwokacka z Lublina zajmująca się wyłącznie prawem nieruchomości. Prowadzi adw. dr Maciej Muzyka (Lubelska Izba Adwokacka, wpis LUB/ADW/1702). Sprawy z całej Polski, kontakt zdalny, przede wszystkim mailowo; spotkania w Lublinie i w Warszawie. Sprawę opisuje się w formularzu na stronie. W ciągu 24 h roboczych klient dostaje bezpłatną wstępną analizę (co trzeba zrobić: np. szczegółowy audyt, pismo albo sprawa sądowa) i jednocześnie ofertę z ceną i terminem. Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów. Bez płatnych konsultacji. Cenę ustala się osobno dla każdej sprawy; wyjątek to stałe pakiety z cenami podanymi na stronach ofert (sekcja „Oferty z cenami”).',
+  '> Kancelaria Nieruchomości adw. dr Maciej Muzyka (marka: Mecenas od Nieruchomości) to kancelaria adwokacka z Lublina zajmująca się wyłącznie prawem nieruchomości. Adwokat: Lubelska Izba Adwokacka, wpis LUB/ADW/1702. Sprawy z całej Polski, kontakt zdalny, przede wszystkim mailowo; spotkania w Lublinie i w Warszawie. Sprawę opisuje się w formularzu na stronie. W ciągu 24 h roboczych klient dostaje bezpłatną wstępną analizę (co trzeba zrobić: np. szczegółowy audyt, pismo albo sprawa sądowa) i jednocześnie ofertę z ceną i terminem. Wstępna analiza nie jest opinią prawną ani pełnym sprawdzeniem dokumentów. Bez płatnych konsultacji. Cenę ustala się osobno dla każdej sprawy; wyjątek to stałe pakiety z cenami podanymi na stronach ofert (sekcja „Oferty z cenami”).',
   '',
   `- Strona: ${ORIGIN}/`,
   `- O kancelarii i kwalifikacjach: ${ORIGIN}/o-mnie`,
@@ -222,7 +222,7 @@ const rfc822 = (iso) => new Date(iso + 'T08:00:00+01:00').toUTCString();
 const feedPosts = [...data.blog].filter((p) => p.iso).sort((a, b) => b.iso.localeCompare(a.iso)).slice(0, 50);
 fs.writeFileSync(path.join(DIST, 'feed.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n<channel>\n` +
-  `  <title>Skarbnica wiedzy – Mecenas od Nieruchomości</title>\n  <link>${ORIGIN}/blog</link>\n` +
+  `  <title>Skarbnica wiedzy – Kancelaria Nieruchomości adw. dr Maciej Muzyka</title>\n  <link>${ORIGIN}/blog</link>\n` +
   `  <atom:link href="${ORIGIN}/feed.xml" rel="self" type="application/rss+xml"/>\n` +
   `  <description>Poradniki o prawie nieruchomości: warunki zabudowy, plan ogólny, służebności, najem, spadki i spory z deweloperem. Autor: adw. dr Maciej Muzyka.</description>\n` +
   `  <language>pl</language>\n  <lastBuildDate>${feedPosts.length ? rfc822(feedPosts[0].modified || feedPosts[0].iso) : new Date().toUTCString()}</lastBuildDate>\n` +

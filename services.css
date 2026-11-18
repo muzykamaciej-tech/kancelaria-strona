@@ -505,3 +505,7 @@ a.blog-newest-card:hover .blog-newest-photo img, .blog-teaser-card--photo:hover 
 .level-price { margin-top: 0.75rem; color: var(--text-body); font-size: 1rem; }
 .level-price strong { font-size: 1.5rem; color: var(--text-main); font-weight: var(--weight-bold); }
 .level-card .check-list li.level-includes span { font-weight: var(--weight-bold); color: var(--text-main); }
+
+/* Linki do poradników w treści usługi (service-pages.jsx svcText, zapis „[kotwica](/blog/slug)”) */
+.service-section-body .lead a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.service-section-body .lead a:hover { color: var(--text-main); }

@@ -3,6 +3,7 @@
 window.BLOG.push(
   {
     slug: 'skarga-na-plan-ogolny',
+    cta: 'Rada gminy uchwaliła plan ogólny, a Twoja uwaga przepadła? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
     title: 'Skarga na plan ogólny gminy: kto może ją złożyć, w jakim terminie i kiedy lepiej pisać do wojewody',
     metaTitle: 'Skarga na plan ogólny – kto, kiedy i czy pisać do wojewody',
     metaDesc: 'Skarga na plan ogólny: bez terminu, przez radę gminy, wpis 300 zł, gdy plan narusza Twój interes prawny. Kiedy pismo do wojewody działa szybciej.',

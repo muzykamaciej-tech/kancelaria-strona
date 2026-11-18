@@ -201,6 +201,7 @@ const BLOG = [
   },
   {
     slug: 'warunki-zabudowy-a-plan-ogolny-przepisy-przejsciowe',
+    cta: 'Twój wniosek o warunki zabudowy czeka, a gmina uchwala plan ogólny? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile to kosztuje.',
     title: 'Na jakiej podstawie należy wydać warunki zabudowy, jeśli w trakcie postępowania wejdzie w życie plan ogólny?',
     metaTitle: 'Warunki zabudowy a plan ogólny – przepisy przejściowe',
     excerpt: 'Reforma planowania przestrzennego wprowadziła sporo zamieszania w kalendarzach inwestorów. Wielu moich klientów pyta z niepokojem: „Panie Mecenasie, co jeśli złożę wniosek o WZ, a gmina w międzyczasie uchwali plan ogólny? Czy moje starania pójdą na marne?”. Odpowiedź jest optymistyczna, ale diabeł tkwi w szczegółach.',

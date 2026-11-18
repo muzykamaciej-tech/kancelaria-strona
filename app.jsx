@@ -171,12 +171,13 @@ function setHeadTag(selector, create, attr, value) {
   if (!el) { el = create(); document.head.appendChild(el); }
   el.setAttribute(attr, value);
 }
-/* canonical + og:url point at the page itself (www, no trailing slash); 404 gets noindex and no canonical */
+/* canonical + og:url point at the page itself (www, no trailing slash); 404 gets noindex and no canonical;
+   indexed pages get robots max-image-preview:large (large image previews in Google and Discover) */
 function setCanonical(path, noindex) {
   const url = noindex ? null : SITE_ORIGIN + (path === '/' ? '/' : path);
   setHeadTag('link[rel="canonical"]', () => { const l = document.createElement('link'); l.rel = 'canonical'; return l; }, 'href', url);
   setHeadTag('meta[property="og:url"]', () => { const m = document.createElement('meta'); m.setAttribute('property', 'og:url'); return m; }, 'content', url);
-  setHeadTag('meta[name="robots"]', () => { const m = document.createElement('meta'); m.setAttribute('name', 'robots'); return m; }, 'content', noindex ? 'noindex' : null);
+  setHeadTag('meta[name="robots"]', () => { const m = document.createElement('meta'); m.setAttribute('name', 'robots'); return m; }, 'content', noindex ? 'noindex' : 'max-image-preview:large');
 }
 function setMetaTag(attr, key, value) {
   setHeadTag(`meta[${attr}="${key}"]`, () => { const m = document.createElement('meta'); m.setAttribute(attr, key); return m; }, 'content', value);
@@ -207,7 +208,7 @@ function setMeta(title, description, social) {
 }
 /* shorten to n chars: end on a full sentence when one fits, otherwise on a word boundary + '\u2026' (never mid-word) */
 function truncMeta(s, n) {
-  s = (s || '').replace(/\s+/g, ' ').trim();
+  s = (s || '').replace(/\[([^\]]+)\]\(\/[^)\s]*\)/g, '$1').replace(/\s+/g, ' ').trim(); /* link „[tekst](/ścieżka)” z danych usługi → sam tekst */
   if (s.length <= n) return s;
   const head = s.slice(0, n + 1);
   const re = /[.!?](?=\s+[A-Z\u0104\u0106\u0118\u0141\u0143\u00d3\u015a\u0179\u017b0-9\u201e"(])/g;
@@ -251,7 +252,7 @@ const SEO_TITLE_BLOCK = {
 };
 const SITE_ORIGIN = 'https://www.mecenasodnieruchomosci.pl';
 const DEFAULT_OG_IMAGE = SITE_ORIGIN + '/assets/og-image.png';
-const DEFAULT_OG_ALT = 'adw. dr Maciej Muzyka — Kancelaria Nieruchomości';
+const DEFAULT_OG_ALT = 'Kancelaria Nieruchomości adw. dr Maciej Muzyka';
 /* home page social texts exactly as in index.html (short og:title, own og/twitter descriptions) */
 const LANDING_SOCIAL = {
   ogTitle: 'Prawnik od nieruchomości w Lublinie – adw. dr Maciej Muzyka',
@@ -384,6 +385,11 @@ function stdPageNode(type, c, url, name) {
 }
 function buildJsonLd(route, ids) {
   ids = ids || {};
+  /* strona główna: węzeł WebSite (nazwa witryny w Google), wydawca = LegalService z index.html */
+  if (route === 'landing') {
+    return { '@context': 'https://schema.org', '@type': 'WebSite', '@id': SITE_BASE + '/#witryna', name: 'Kancelaria Nieruchomości adw. dr Maciej Muzyka',
+      alternateName: 'Mecenas od Nieruchomości', url: SITE_BASE + '/', inLanguage: 'pl', publisher: { '@id': ORG_ID } };
+  }
   if (route === 'faq') {
     return { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: (window.FAQ_SECTIONS || []).flatMap((s) => s.items).map((it) => ({ '@type': 'Question', name: it.q, acceptedAnswer: { '@type': 'Answer', text: it.a } })) };
   }
@@ -538,6 +544,29 @@ function ContentLoading({ failed }) {
     </main>
   );
 }
+
+/* GA4: kliknięcia w kontakt i w przyciski CTA, jeden nasłuch na całą stronę (Consent Mode jak w index.html).
+   contact_click: każdy link tel:, mailto: i WhatsApp; contact_type = tel | mail | whatsapp, placement = miejsce
+   (atrybut data-place najbliższego elementu, a bez niego: stopka, formularz, kontakt, treść).
+   cta_click: element z data-cta (nazwa miejsca, np. wpis-po-leadzie). */
+function clickPlace(el) {
+  const own = el.closest('[data-place]');
+  if (own) return own.getAttribute('data-place');
+  if (el.closest('footer')) return 'stopka';
+  if (el.closest('#formularz')) return 'formularz';
+  if (el.closest('main') && location.pathname === '/kontakt') return 'kontakt';
+  if (el.closest('main')) return 'tresc';
+  return 'inne';
+}
+document.addEventListener('click', (e) => {
+  if (!window.gtag || !e.target || !e.target.closest) return;
+  const a = e.target.closest('a[href]');
+  const href = a ? a.getAttribute('href') || '' : '';
+  const type = /^tel:/i.test(href) ? 'tel' : /^mailto:/i.test(href) ? 'mail' : /^https:\/\/(wa\.me|api\.whatsapp\.com)\//i.test(href) ? 'whatsapp' : null;
+  if (type) window.gtag('event', 'contact_click', { contact_type: type, placement: clickPlace(a), page_path: location.pathname });
+  const cta = e.target.closest('[data-cta]');
+  if (cta) window.gtag('event', 'cta_click', { cta_place: cta.getAttribute('data-cta'), page_path: location.pathname });
+}, true);
 
 function refreshIconsAndOrphans() {
   if (window.lucide) window.lucide.createIcons();
@@ -829,6 +858,6 @@ function App() {
   );
 }
 
-Object.assign(window, { NavLink, routeHref, buildPath, parsePath, postModifiedIso, contentReady, contentFailed, ContentLoadError });
+Object.assign(window, { plainLd, NavLink, routeHref, buildPath, parsePath, postModifiedIso, contentReady, contentFailed, ContentLoadError });
 
 ReactDOM.createRoot(document.getElementById('app')).render(<App />);

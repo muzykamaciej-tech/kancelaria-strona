@@ -2,6 +2,7 @@
 window.BLOG.push(
   {
     slug: 'wycena-sluzebnosci-przesylu-rzeczoznawca',
+    cta: 'Operator proponuje kwotę za słupy albo rurę na działce? Opisz sprawę – w 24 h roboczych odpiszę, co możesz zrobić i ile kosztuje prowadzenie sprawy.',
     title: 'Wycena służebności przesyłu – jak robi to rzeczoznawca majątkowy?',
     metaTitle: 'Wycena służebności przesyłu – jak liczy rzeczoznawca?',
     excerpt: 'Dostałeś pismo od zakładu energetycznego lub gazowniczego z propozycją zapłaty za ustanowienie służebności przesyłu? Kluczowe pytanie brzmi: „ILE?”. Wyjaśniam, jak rzeczoznawcy majątkowi wyliczają te kwoty i dlaczego pierwsza propozycja od przedsiębiorcy to zazwyczaj tylko ułamek tego, co Ci się należy.',
@@ -176,6 +177,7 @@ window.BLOG.push(
   },
   {
     slug: 'szerokosc-drogi-koniecznej',
+    cta: 'Sąsiad zgadza się tylko na wąski przejazd? Opisz sprawę – w 24 h roboczych odpiszę, jakiej szerokości drogi możesz żądać i ile kosztuje prowadzenie sprawy.',
     title: 'Szerokość drogi koniecznej – ile metrów musi mieć dojazd do domu?',
     metaTitle: 'Szerokość drogi koniecznej: 3, 4 czy 5 m? Stan na 2026',
     excerpt: 'Dostęp do drogi publicznej to podstawa – bez niego działka jest w świetle prawa budowlanego praktycznie bezużyteczna. Ale co, gdy dostęp niby jest, ale tak wąski, że ledwo mieści się samochód? Albo gdy sąsiad zgadza się na służebność, ale chce wydzielić tylko 2,5 metra?',

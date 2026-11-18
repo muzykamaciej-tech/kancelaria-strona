@@ -737,6 +737,7 @@ window.BLOG.push(
   },
   {
     slug: 'kupno-dzialki-rolnej-nie-rolnik',
+    cta: 'Chcesz kupić działkę rolną bez statusu rolnika? Opisz sprawę – w 24 h roboczych odpiszę, co trzeba sprawdzić przed umową i ile to kosztuje.',
     title: 'Kupno działki rolnej bez statusu rolnika: co możesz kupić, jakie są limity i kiedy potrzebna jest zgoda',
     metaTitle: 'Kupno działki rolnej bez statusu rolnika – limity i zgoda',
     metaDesc: 'Działka rolna bez statusu rolnika: poniżej 1 ha kupi ją każdy, od 1 ha potrzebna zgoda KOWR albo wyjątek. Progi, 5 lat gospodarstwa i oferty „z WZ”.',
