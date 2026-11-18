@@ -539,6 +539,29 @@ function ContentLoading({ failed }) {
   );
 }
 
+/* GA4: kliknięcia w kontakt i w przyciski CTA, jeden nasłuch na całą stronę (Consent Mode jak w index.html).
+   contact_click: każdy link tel:, mailto: i WhatsApp; contact_type = tel | mail | whatsapp, placement = miejsce
+   (atrybut data-place najbliższego elementu, a bez niego: stopka, formularz, kontakt, treść).
+   cta_click: element z data-cta (nazwa miejsca, np. wpis-po-leadzie). */
+function clickPlace(el) {
+  const own = el.closest('[data-place]');
+  if (own) return own.getAttribute('data-place');
+  if (el.closest('footer')) return 'stopka';
+  if (el.closest('#formularz')) return 'formularz';
+  if (el.closest('main') && location.pathname === '/kontakt') return 'kontakt';
+  if (el.closest('main')) return 'tresc';
+  return 'inne';
+}
+document.addEventListener('click', (e) => {
+  if (!window.gtag || !e.target || !e.target.closest) return;
+  const a = e.target.closest('a[href]');
+  const href = a ? a.getAttribute('href') || '' : '';
+  const type = /^tel:/i.test(href) ? 'tel' : /^mailto:/i.test(href) ? 'mail' : /^https:\/\/(wa\.me|api\.whatsapp\.com)\//i.test(href) ? 'whatsapp' : null;
+  if (type) window.gtag('event', 'contact_click', { contact_type: type, placement: clickPlace(a), page_path: location.pathname });
+  const cta = e.target.closest('[data-cta]');
+  if (cta) window.gtag('event', 'cta_click', { cta_place: cta.getAttribute('data-cta'), page_path: location.pathname });
+}, true);
+
 function refreshIconsAndOrphans() {
   if (window.lucide) window.lucide.createIcons();
   fixOrphans();

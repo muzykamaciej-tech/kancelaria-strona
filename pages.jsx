@@ -883,7 +883,7 @@ function KontaktPage({ setRoute }) {
               <button className="btn btn-primary" onClick={() => window.spScrollToForm && window.spScrollToForm()}>
                 Opisz swoją sprawę <Icon name="arrow-right" size={16} />
               </button>
-              <a className="btn btn-secondary" href="mailto:maciej.muzyka@mecenasodnieruchomosci.pl">
+              <a className="btn btn-secondary" href="mailto:maciej.muzyka@mecenasodnieruchomosci.pl" data-place="kontakt">
                 Napisz e-mail
               </a>
             </div>

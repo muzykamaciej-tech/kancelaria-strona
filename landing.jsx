@@ -41,6 +41,41 @@ const FORMSPREE_READY = !FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID');
 /* Własny skrypt Google (Dysk + mail). Gdy adres jest wpisany, formularz wysyła tutaj zamiast do Formspree. */
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzdGA45EQN9rXFRSW38RNIAhYU7ALkKCrQDa45I1tRoare8r3VPVTKldwwDYAFSzu2Q_w/exec';
 window.APPS_SCRIPT_URL = APPS_SCRIPT_URL;
+
+/* Skąd przyszedł klient (do maila „Nowa sprawa”): pierwszy adres w tej sesji strony i referrer z pierwszego wejścia.
+   Liczone raz, przy wczytaniu skryptu (przejścia wewnątrz strony nie przeładowują jej), i trzymane tylko w zmiennej:
+   bez cookies, localStorage i sessionStorage. Z adresu zostają tylko ścieżka i parametry utm_*. */
+const ENTRY_SOURCES = [
+  [/(^|\.)chatgpt\.com$|(^|\.)chat\.openai\.com$/, 'chatgpt.com'],
+  [/(^|\.)perplexity\.ai$/, 'perplexity.ai'],
+  [/^copilot\.microsoft\.com$/, 'Copilot (copilot.microsoft.com)'],
+  [/^gemini\.google\.com$/, 'Gemini (gemini.google.com)'],
+  [/(^|\.)claude\.ai$/, 'claude.ai'],
+  [/(^|\.)google\.[a-z.]+$/, 'Google'],
+  [/(^|\.)bing\.com$/, 'Bing'],
+  [/(^|\.)duckduckgo\.com$/, 'DuckDuckGo'],
+  [/(^|\.)yahoo\.com$/, 'Yahoo'],
+  [/(^|\.)ecosia\.org$/, 'Ecosia'],
+  [/(^|\.)facebook\.com$|^fb\.me$/, 'Facebook'],
+  [/(^|\.)instagram\.com$/, 'Instagram'],
+  [/(^|\.)linkedin\.com$|^lnkd\.in$/, 'LinkedIn'],
+];
+const ENTRY_INFO = (function () {
+  const out = { page: '', source: 'bezpośrednio' };
+  try {
+    const q = new URLSearchParams(location.search);
+    const utm = ['utm_source', 'utm_medium', 'utm_campaign'].filter((k) => q.get(k)).map((k) => k + '=' + q.get(k).slice(0, 60));
+    out.page = location.pathname + (utm.length ? '?' + utm.join('&') : '');
+    let host = '';
+    try { host = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, '') : ''; } catch (e) {}
+    if (host === location.hostname.replace(/^www\./, '') || host === 'mecenasodnieruchomosci.pl') out.source = 'wewnętrzne (z tej samej strony)';
+    else if (host) out.source = ((ENTRY_SOURCES.find(([re]) => re.test(host)) || [])[1]) || host;
+    else if (q.get('utm_source')) out.source = q.get('utm_source').slice(0, 60) + ' (utm_source)';
+    if (q.get('gclid')) out.source += ' · reklama Google (gclid)';
+    if (utm.length && host) out.source += ' · ' + utm.join(', ');
+  } catch (e) {}
+  return out;
+})();
 const MAX_TOTAL_MB = 25;
 function fileToB64(file) {
   return new Promise((ok, fail) => {
@@ -183,6 +218,8 @@ function QualificationForm({ compact = false, preset }) {
       fd.append('Pilne', urgent ? 'TAK — klient zaznaczył pilne terminy' : 'nie');
       fd.append('Opis sprawy', state.message);
       fd.append('Strona', src + ' · ' + location.href);
+      fd.append('Strona wejścia', ENTRY_INFO.page || '—');
+      fd.append('Źródło', ENTRY_INFO.source);
       files.forEach((f, i) => fd.append('Załącznik ' + (i + 1), f));
       fd.append('_subject', (urgent ? 'PILNE · ' : '') + (preset
         ? 'Pakiet: ' + (pakiet || 'do wyboru') + ' · ' + preset.service + ' — ' + state.name
@@ -1318,7 +1355,7 @@ function FinalCTA() {
               <button className="btn btn-on-dark" onClick={() => lScrollToId('formularz')}>
                 Opisz swoją sprawę <SvgIcon name="arrow-right" size={16} />
               </button>
-              <a className="btn btn-secondary" href="mailto:maciej.muzyka@mecenasodnieruchomosci.pl" style={{ background: 'transparent', color: '#fff', borderColor: 'rgba(255,255,255,0.3)' }}>
+              <a className="btn btn-secondary" href="mailto:maciej.muzyka@mecenasodnieruchomosci.pl" data-place="strona-glowna-zakonczenie" style={{ background: 'transparent', color: '#fff', borderColor: 'rgba(255,255,255,0.3)' }}>
                 Napisz e-mail
               </a>
             </div>
