@@ -8,14 +8,16 @@ const TOOLS_EMAIL = 'maciej.muzyka@mecenasodnieruchomosci.pl';
 
 /* ============================================================
    Kalkulator — założenia metodyczne (uproszczone, jak w operatach)
+   Współczynniki k: § 32 ust. 6 rozporządzenia MRiT z 5.09.2023 w sprawie wyceny nieruchomości (Dz.U. 2023 poz. 1832):
+   podziemne ≤ 0,3, nadziemne ≤ 0,5, naziemne 1; wyższe tylko w szczególnych przypadkach (ust. 7). Zmiana 19.11.2026.
    ============================================================ */
 const CALC_DEVICES = [
   { id: 'slup-nn', label: 'Słup lub linia niskiego napięcia (do 1 kV)', width: 4, k: [0.3, 0.5] },
-  { id: 'slup-sn', label: 'Słup lub linia średniego napięcia (15–30 kV)', width: 7, k: [0.4, 0.6] },
-  { id: 'linia-wn', label: 'Linia wysokiego napięcia (110 kV i więcej)', width: 20, k: [0.6, 0.9] },
-  { id: 'gazociag', label: 'Gazociąg', width: 6, k: [0.4, 0.7] },
-  { id: 'wodkan', label: 'Wodociąg, kanalizacja, ciepłociąg', width: 4, k: [0.2, 0.4] },
-  { id: 'trafo', label: 'Stacja transformatorowa', area: 120, k: [0.8, 1.0] },
+  { id: 'slup-sn', label: 'Słup lub linia średniego napięcia (15–30 kV)', width: 7, k: [0.3, 0.5] },
+  { id: 'linia-wn', label: 'Linia wysokiego napięcia (110 kV i więcej)', width: 20, k: [0.4, 0.5] },
+  { id: 'gazociag', label: 'Gazociąg', width: 6, k: [0.2, 0.3] },
+  { id: 'wodkan', label: 'Wodociąg, kanalizacja, ciepłociąg', width: 4, k: [0.2, 0.3] },
+  { id: 'trafo', label: 'Stacja transformatorowa', area: 120, k: [1.0, 1.0] },
 ];
 const CALC_LAND = [
   { id: 'budowlana', label: 'Budowlana / mieszkaniowa', price: 250 },
@@ -57,8 +59,8 @@ function CalcResult({ r, setRoute }) {
         <ul>
           <li>Pas służebności: {r.device.area ? `${r.area} m² (typowa powierzchnia stacji z dojazdem)` : `${r.area.toLocaleString('pl-PL')} m² — długość × ${r.device.width} m typowej szerokości strefy`}.</li>
           <li>Wartość gruntu: {r.price.toLocaleString('pl-PL')} zł/m² ({r.land.label.toLowerCase()}).</li>
-          <li>Współczynnik współkorzystania: {r.device.k[0]}–{r.device.k[1]} — jak bardzo urządzenie ogranicza Ciebie, a nie firmę.</li>
-          <li>Bezumowne korzystanie: ok. {Math.round(CALC_RATE * 100)}% wartości pasa rocznie, z uwzględnieniem współczynnika, co do zasady maks. 6 lat wstecz (art. 118 k.c.; przy roszczeniu związanym z działalnością gospodarczą może to być 3 lata).</li>
+          <li>Współczynnik korzystania z pasa: {r.device.k[0] === r.device.k[1] ? r.device.k[0] : `${r.device.k[0]}–${r.device.k[1]}`} — w granicach z § 32 ust. 6 rozporządzenia o wycenie nieruchomości (urządzenia podziemne do 0,3, nadziemne do 0,5, naziemne 1). Wyższy współczynnik biegły może przyjąć tylko w szczególnych przypadkach (§ 32 ust. 7).</li>
+          <li>Bezumowne korzystanie: przyjęte założenie ok. {Math.round(CALC_RATE * 100)}% wartości pasa rocznie (szacunek, nie norma prawna; w sprawie liczy to biegły), z uwzględnieniem współczynnika, co do zasady maks. 6 lat wstecz (art. 118 k.c.; przy roszczeniu związanym z działalnością gospodarczą może to być 3 lata).</li>
         </ul>
       </details>
       <p className="small calc-disclaimer mt-6">To orientacyjny przedział oparty na metodach stosowanych przez rzeczoznawców. Nie jest wyceną ani poradą prawną — ostateczna kwota zależy od operatu, stanu prawnego urządzeń (umowa, decyzja, zasiedzenie) i lokalnych cen. Wynik może różnić się w obie strony.</p>
@@ -171,7 +173,7 @@ function KalkulatorSlupyPage({ setRoute }) {
           </div>
           <div className="calc-how mt-10">
             <div className="card"><span className="kicker-num">1</span><h3 className="font-bold mt-3" style={{ color: 'var(--text-main)' }}>Pas i jego wartość</h3><p className="body mt-2">Powierzchnia pasa zajętego przez urządzenie i jego strefę ochronną razy wartość 1 m² Twojego gruntu. Działka budowlana to inna liga niż rolna.</p></div>
-            <div className="card"><span className="kicker-num">2</span><h3 className="font-bold mt-3" style={{ color: 'var(--text-main)' }}>Współczynnik współkorzystania</h3><p className="body mt-2">Określa, jak bardzo urządzenie ogranicza Ciebie: od ok. 0,2 dla rury głęboko pod ziemią do 1,0 dla stacji, pod którą nie zrobisz nic.</p></div>
+            <div className="card"><span className="kicker-num">2</span><h3 className="font-bold mt-3" style={{ color: 'var(--text-main)' }}>Współczynnik współkorzystania</h3><p className="body mt-2">Określa, jak bardzo urządzenie ogranicza Ciebie. Rozporządzenie o wycenie nieruchomości (§ 32 ust. 6) podaje: do 0,3 dla urządzeń podziemnych (np. gazociąg), do 0,5 dla nadziemnych (słupy, linie) i 1 dla naziemnych (np. stacja).</p></div>
             <div className="card"><span className="kicker-num">3</span><h3 className="font-bold mt-3" style={{ color: 'var(--text-main)' }}>Lata bez umowy</h3><p className="body mt-2">Za każdy rok bez tytułu prawnego należy się wynagrodzenie za bezumowne korzystanie, co do zasady do 6 lat wstecz (art. 118 k.c.). Firma, która twierdzi, że zasiedziała służebność, musi to udowodnić (art. 6 k.c.).</p></div>
           </div>
         </div>

@@ -113,7 +113,7 @@ function PolitykaPrywatnosciPage({ setRoute }) {
         Twoje dane mogą być powierzane wyłącznie zaufanym podmiotom przetwarzającym je na zlecenie Administratora, na podstawie umów powierzenia:
       </p>
       <ul>
-        <li><strong>dostawcy usługi obsługi formularza</strong> — formularz kontaktowy działa w oparciu o usługę <em>Formspree</em> (Formspree, Inc., z siedzibą w USA), która pośredniczy w przekazaniu wiadomości z formularza na skrzynkę Kancelarii;</li>
+        <li><strong>Google (usługi Google Workspace)</strong> — formularz „Wstępna analiza sprawy” i zapis na powiadomienia o planie ogólnym działają przez usługę <em>Google Apps Script</em>: treść zgłoszenia i załączniki są zapisywane na Dysku Google Kancelarii, powiadomienie trafia na skrzynkę Kancelarii, a na podany adres e-mail wysyłamy potwierdzenie otrzymania zgłoszenia. Google przetwarza te dane na zlecenie Kancelarii jako dostawca poczty i przechowywania plików;</li>
         <li><strong>dostawcy poczty elektronicznej i hostingu</strong> — w zakresie przechowywania korespondencji i strony;</li>
         <li><strong>biuro rachunkowe</strong> — w zakresie niezbędnym do rozliczeń;</li>
         <li><strong>dostawca narzędzia statystyki</strong> — Google (Google Analytics), jeżeli wyrazisz zgodę na cookies analityczne.</li>
@@ -124,7 +124,7 @@ function PolitykaPrywatnosciPage({ setRoute }) {
 
       <h2>6. Przekazywanie danych poza EOG</h2>
       <p>
-        Korzystamy z narzędzi dostawców z siedzibą w Stanach Zjednoczonych (Formspree oraz — po wyrażeniu zgody — Google Analytics). Oznacza to przekazanie danych do państwa trzeciego. Odbywa się ono na podstawie zabezpieczeń przewidzianych w rozdziale V RODO — standardowych klauzul umownych zatwierdzonych przez Komisję Europejską lub uczestnictwa dostawcy w programie <em>Data Privacy Framework</em>. Kopię odpowiednich zabezpieczeń możesz uzyskać, kontaktując się z Administratorem.
+        Korzystamy z usług Google (Google Workspace oraz — po wyrażeniu zgody — Google Analytics), w ramach których dane mogą być przekazywane do Stanów Zjednoczonych. Oznacza to przekazanie danych do państwa trzeciego. Odbywa się ono na podstawie zabezpieczeń przewidzianych w rozdziale V RODO — standardowych klauzul umownych zatwierdzonych przez Komisję Europejską lub uczestnictwa dostawcy w programie <em>Data Privacy Framework</em>. Kopię odpowiednich zabezpieczeń możesz uzyskać, kontaktując się z Administratorem.
       </p>
 
       <h2>7. Okres przechowywania danych</h2>
@@ -162,7 +162,7 @@ function PolitykaPrywatnosciPage({ setRoute }) {
 
       <h2>11. Zmiany polityki</h2>
       <p>
-        Politykę możemy aktualizować, np. w związku ze zmianą przepisów lub wykorzystywanych narzędzi. Aktualna wersja jest zawsze dostępna na tej stronie. Data ostatniej aktualizacji: <strong>4 lipca 2026 r.</strong>
+        Politykę możemy aktualizować, np. w związku ze zmianą przepisów lub wykorzystywanych narzędzi. Aktualna wersja jest zawsze dostępna na tej stronie. Data ostatniej aktualizacji: <strong>19 listopada 2026 r.</strong>
       </p>
     </LegalLayout>);
 
