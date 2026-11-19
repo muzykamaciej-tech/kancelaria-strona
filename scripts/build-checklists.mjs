@@ -68,7 +68,7 @@ const LISTS = [
       { slug: 'slup-energetyczny-na-dzialce-przesuniecie', title: 'Słup na działce: odszkodowanie, służebność przesyłu, przesunięcie i usunięcie', stan: '19.11.2026' },
       { slug: 'wezwanie-operatora-do-zaplaty-za-slupy-wzor', title: 'Odszkodowanie za słupy: wzór pisma do PGE, Tauronu i Gaz-Systemu i co dalej po wezwaniu', stan: '18.11.2026' },
     ],
-    intro: 'Za słup na swojej działce nie płacisz. Urządzenia należą do firmy (art. 49 § 1 k.c.) i to ona potrzebuje tytułu prawnego do Twojego gruntu. Jeżeli go nie ma, możesz żądać wynagrodzenia za ustanowienie służebności przesyłu (art. 305² § 2 k.c.), zapłaty za bezumowne korzystanie co do zasady za 6 lat wstecz (art. 224 § 2, 225, 230, 352 i 118 k.c.) albo usunięcia urządzeń na koszt firmy (art. 222 § 2 k.c.). Te same przepisy dotyczą linii, kabla, gazociągu i wodociągu.',
+    intro: 'Za słup na swojej działce nie płacisz. Urządzenia, które wchodzą w skład przedsiębiorstwa, nie są częścią Twojej działki (art. 49 § 1 k.c.), a firma potrzebuje tytułu prawnego do Twojego gruntu. Jeżeli go nie ma, możesz żądać wynagrodzenia za ustanowienie służebności przesyłu (art. 305² § 2 k.c.), zapłaty za bezumowne korzystanie co do zasady za 6 lat wstecz (art. 224 § 2, 225, 230, 352 i 118 k.c.) albo usunięcia urządzeń na koszt firmy (art. 222 § 2 k.c.). Te same przepisy dotyczą linii, kabla, gazociągu i wodociągu.',
     sections: [
       { h: 'Dokumenty do zebrania', items: [
         { t: '**Odpis księgi wieczystej** z działem III (czy wpisano służebność) i, jeśli możesz, wgląd do akt księgi. Pusty dział III niczego nie przesądza – decyzja albo zasiedzenie mogą istnieć poza księgą.' },
