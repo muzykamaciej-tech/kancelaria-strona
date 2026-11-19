@@ -637,6 +637,7 @@ window.BLOG.push(
         '**Wezwij firmę na piśmie** do zawarcia umowy i zapłaty albo do usunięcia słupa, z terminem, np. 30 dni.',
         '**Pilnuj terminów.** Do 31.12.2026 złóż pozew o zapłatę, żeby nie stracić 2020 r. Bieg zasiedzenia przerwij wnioskiem o służebność albo pozwem o usunięcie.',
       ]],
+      ['download', 'lista-slup-linia-rura'],
       ['p', 'W tych sprawach najpierw ustalam tytuł firmy, daty i okres roszczenia, potem orientacyjnie szacuję kwotę i wzywam firmę. Gdy odmawia, prowadzę sprawę o służebność, zapłatę albo usunięcie urządzeń. Zakres opisuję na stronie usługi Odszkodowanie za słupy i służebność przesyłu. Nie obiecuję wyniku. Powiem wprost, co jest realne.'],
       ['p', 'Masz podobną sytuację? Opisz ją w formularzu poniżej. W ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem. Do akceptacji oferty nic nie płacisz.'],
       ['h2', 'Najczęstsze pytania'],

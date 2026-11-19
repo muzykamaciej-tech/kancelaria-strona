@@ -58,6 +58,7 @@ const data = await probe.evaluate(() => ({
   blogCats: window.BLOG_CATEGORIES.filter((c) => window.postsInCategory(c).length).map((c) => ({ id: c.id, title: c.title, desc: c.desc,
     modified: window.postsInCategory(c).map((p) => window.postModifiedIso(p)).sort().pop() })),
   offers: Object.entries(window.OFFERS || {}).map(([slug, o]) => ({ slug, title: o.metaTitle, desc: o.metaDesc, updated: o.updated || null })),
+  downloads: Object.values(window.DOWNLOADS || {}).map((d) => ({ href: d.href, title: d.title })),
   uncategorized: (window.BLOG || []).filter((p) => !window.blogCategoryOfPost(p)).map((p) => p.slug + ' (' + p.category + ')'),
 }));
 await probe.close();
@@ -216,6 +217,7 @@ const llms = [
   '- Wizytówka w Mapach Google: https://maps.google.com/?cid=8576864712077445002',
   `- Kalkulator wynagrodzenia za słupy i rury na działce: ${ORIGIN}/kalkulator-slupy`,
   `- Kalkulator ostatniego dnia ważności warunków zabudowy (WZ), we wpisie: ${ORIGIN}/blog/warunki-zabudowy-ile-wazne`,
+  ...(data.downloads.length ? [`- Do pobrania (listy kontrolne PDF, bez rejestracji): ${data.downloads.map((d) => `[${clean(d.title)}](${ORIGIN}${d.href})`).join(', ')}`] : []),
   '',
   '## Usługi',
   '',

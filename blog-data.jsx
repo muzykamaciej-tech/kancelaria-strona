@@ -1,5 +1,6 @@
 /* blog-data.jsx — wpisy przeniesione 1:1 z www.mecenasodnieruchomosci.pl/blog (Wix).
    body = lista bloków: ['lead'|'p'|'h2'|'h3', tekst] | ['ul'|'ol', [pozycje]].
+   Lista kontrolna PDF do pobrania: ['download', '<id z DOWNLOADS w pages.jsx>'] – po krokach/liście, nie w pierwszych 30% tekstu.
    W tekście **pogrubienie** renderuje się jako <strong>. Okładki pobrane z Wix do assets/. */
 
 const BLOG = [

@@ -1006,6 +1006,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .prose .post-cta-svc { flex-basis: 100%; margin: 0.25rem 0 0; font-size: 0.9375rem; color: var(--text-muted); }
 .post-cta-svc a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 
+/* lista kontrolna PDF we wpisie (pages.jsx DownloadBox, blok ['download', id]) i link na stronie usługi (RelatedGuides) */
+.post-download { display: flex; gap: 1rem; align-items: flex-start; margin: 2rem 0; padding: 1.25rem 1.5rem; border: 1px dashed var(--accent); border-radius: var(--radius-md); background: var(--surface-2); }
+.post-download-icon { flex: none; color: var(--accent); margin-top: 0.15rem; }
+.prose .post-download p { margin: 0; }
+.prose .post-download-eyebrow { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.prose .post-download-title { margin-top: 0.35rem; font-size: 1.125rem; font-weight: 700; line-height: 1.35; }
+.post-download-title a { color: var(--text-main); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+.post-download-title a:hover { color: var(--accent); }
+.prose .post-download-meta { margin-top: 0.35rem; font-size: 0.875rem; color: var(--text-muted); }
+.guides-downloads { margin: 2rem auto 0; max-width: 56rem; text-align: center; color: var(--text-body); }
+.guides-downloads a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
 /* Legal pages — extend .prose with ordered lists, tables and inline links */
 .prose-legal h2:first-child { margin-top: 0; }
 .prose-legal { overflow-wrap: anywhere; } /* długie adresy e-mail nie rozpychają strony na telefonie */

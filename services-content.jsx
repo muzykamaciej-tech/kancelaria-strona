@@ -502,6 +502,7 @@ const SERVICE_CONTENT = {
       'Informacja, czy na działce prowadzisz działalność gospodarczą albo produkcję rolną na sprzedaż.',
     ],
     guides: ['slup-energetyczny-na-dzialce-przesuniecie', 'sluzebnosc-przesylu-jak-obliczyc-wynagrodzenie', 'odszkodowanie-za-slupy-przedawnienie', 'wycena-sluzebnosci-przesylu-rzeczoznawca', 'linia-energetyczna-na-dzialce-budowa-domu', 'gazociag-na-dzialce-odszkodowanie', 'wezwanie-operatora-do-zaplaty-za-slupy-wzor', 'sluzebnosc-przesylu-co-to-jest', 'zasiedzenie-sluzebnosci-przesylu'],
+    downloads: ['lista-slup-linia-rura'],
     seeAlso: ['audyt-stanu-prawnego-nieruchomosci', 'uregulowanie-stanu-prawnego'],
     cta: {
       heading: 'Nie zostawiaj swoich pieniędzy firmie przesyłowej.',
@@ -681,6 +682,7 @@ const SERVICE_CONTENT = {
       'warunki-zabudowy-2026-lublin',
       'warunki-zabudowy-a-plan-ogolny-przepisy-przejsciowe',
     ],
+    downloads: ['lista-wz-przed-2027', 'lista-odwolanie-od-wz'],
     seeAlso: ['pozwolenie-na-budowe', 'audyt-stanu-prawnego-nieruchomosci', 'odrolnienie'],
     cta: {
       heading: 'Zanim kupisz działkę, sprawdź, czy na niej zbudujesz.',

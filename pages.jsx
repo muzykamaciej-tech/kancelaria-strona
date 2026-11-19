@@ -727,7 +727,7 @@ function PostCta({ place, text, button, short, children }) {
   );
 }
 const CLOSING_RE = /^Masz podobną sytuację\?/;
-function blockText(b) { const v = b && b[1]; return (Array.isArray(v) ? v.flat(2).join(' ') : String(v || '')).replace(EXT_LINK_RE, '$1'); }
+function blockText(b) { const v = b && b[1]; if (b && b[0] === 'download') return ''; return (Array.isArray(v) ? v.flat(2).join(' ') : String(v || '')).replace(EXT_LINK_RE, '$1'); }
 /* miejsce na CTA w ok. 40% tekstu: przed najbliższym nagłówkiem H2 (nie przed FAQ), a gdy go nie ma do 75% tekstu,
    po pierwszym akapicie za progiem 40%; -1 = bez CTA (krótki wpis albo za blisko CTA końcowego) */
 function midCtaIndex(blocks, closingAt) {
@@ -773,6 +773,40 @@ function BlogBody({ blocks, service, selfSlug, cta }) {
     </div>
   );
 }
+/* Listy kontrolne PDF do pobrania bez rejestracji (assets/pobierz/, generuje ręcznie scripts/build-checklists.mjs).
+   Rozmiar `size` po każdym ponownym wygenerowaniu PDF: skrypt ostrzega, gdy nie zgadza się z plikiem.
+   Wpis: blok ['download', '<id>'] (albo ['download', { href, title, size }]); usługa: `downloads: ['<id>']` w SERVICE_CONTENT.
+   GA4: bez własnego zdarzenia. Pomiar zaawansowany GA4 sam wysyła file_download (z file_name) dla linków do .pdf;
+   własne zdarzenie liczyłoby każde pobranie dwa razy. data-download-id pozwala odróżnić listę w GTM/GA4. */
+const DOWNLOADS = {
+  'lista-wz-przed-2027': { href: '/assets/pobierz/lista-wz-przed-2027.pdf', title: 'Warunki zabudowy przed 1.01.2027 – lista kontrolna', size: '125 KB' },
+  'lista-slup-linia-rura': { href: '/assets/pobierz/lista-slup-linia-rura-na-dzialce.pdf', title: 'Słup, linia albo rura na działce – lista dokumentów i kroków', size: '125 KB' },
+  'lista-odwolanie-od-wz': { href: '/assets/pobierz/lista-odwolanie-od-wz-14-dni.pdf', title: 'Odwołanie od warunków zabudowy – lista kontrolna 14 dni', size: '125 KB' },
+};
+function getDownload(d) {
+  const item = typeof d === 'string' ? DOWNLOADS[d] : d;
+  if (!item) console.error('download: brak pliku "' + d + '" w DOWNLOADS (pages.jsx)');
+  return item ? { id: typeof d === 'string' ? d : item.href.split('/').pop().replace(/\.pdf$/, ''), ...item } : null;
+}
+function DownloadLink({ d, children }) {
+  const item = getDownload(d);
+  if (!item) return null;
+  return <a href={item.href} download rel="noopener" data-download-id={item.id} type="application/pdf">{children || item.title}</a>;
+}
+function DownloadBox({ d }) {
+  const item = getDownload(d);
+  if (!item) return null;
+  return (
+    <aside className="post-download" aria-label="Lista kontrolna do pobrania">
+      <Icon name="download" size={22} className="post-download-icon" />
+      <div>
+        <p className="post-download-eyebrow">Pobierz listę kontrolną (PDF, bez rejestracji)</p>
+        <p className="post-download-title"><DownloadLink d={d} /></p>
+        <p className="post-download-meta">PDF · {item.size} · do wydruku i odhaczania, bez podawania e-maila</p>
+      </div>
+    </aside>
+  );
+}
 function renderBlogBlock(b, i) {
   const [t, v] = b;
   if (t === 'lead') return <p key={i} className="lead">{blogInline(v)}</p>;
@@ -784,6 +818,8 @@ function renderBlogBlock(b, i) {
   if (t === 'note') return <p key={i} className="prose-note">{blogInline(v)}</p>;
   /* narzędzie osadzone w treści: ['tool', '<id>'] → komponent z window.BLOG_TOOLS (tools.jsx), np. kalkulator ważności WZ */
   if (t === 'tool') { const Tool = (window.BLOG_TOOLS || {})[v]; return Tool ? <Tool key={i} /> : null; }
+  /* lista kontrolna PDF: ['download', '<id z DOWNLOADS>'] */
+  if (t === 'download') return <DownloadBox key={i} d={v} />;
   if (t === 'wzor') return <div key={i} className="prose-wzor" role="group" aria-label="Wzór pisma">{v.map((line, k) => <p key={k}>{blogInline(line)}</p>)}</div>;
   if (t === 'table') return (
     <div key={i} className="prose-table-wrap">
@@ -1018,4 +1054,5 @@ Object.assign(window, {
   BLOG_CATEGORIES, getBlogCategory, blogCategoryOfPost, postsInCategory, blogByNewest, blogCoverAlt,
   FAQPage, FAQAccordion,
   KontaktPage, LeadFormBand, BlogTeaserCard, goToForm,
+  DOWNLOADS, DownloadLink,
 });

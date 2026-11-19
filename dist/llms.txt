@@ -10,6 +10,7 @@
 - Wizytówka w Mapach Google: https://maps.google.com/?cid=8576864712077445002
 - Kalkulator wynagrodzenia za słupy i rury na działce: https://www.mecenasodnieruchomosci.pl/kalkulator-slupy
 - Kalkulator ostatniego dnia ważności warunków zabudowy (WZ), we wpisie: https://www.mecenasodnieruchomosci.pl/blog/warunki-zabudowy-ile-wazne
+- Do pobrania (listy kontrolne PDF, bez rejestracji): [Warunki zabudowy przed 1.01.2027 – lista kontrolna](https://www.mecenasodnieruchomosci.pl/assets/pobierz/lista-wz-przed-2027.pdf), [Słup, linia albo rura na działce – lista dokumentów i kroków](https://www.mecenasodnieruchomosci.pl/assets/pobierz/lista-slup-linia-rura-na-dzialce.pdf), [Odwołanie od warunków zabudowy – lista kontrolna 14 dni](https://www.mecenasodnieruchomosci.pl/assets/pobierz/lista-odwolanie-od-wz-14-dni.pdf)
 
 ## Usługi
 

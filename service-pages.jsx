@@ -406,9 +406,11 @@ function OtherAreaServices({ services }) {
     </React.Fragment>
   );
 }
-function RelatedGuides({ posts, heading }) {
+/* downloads: listy kontrolne PDF usługi (`downloads` w SERVICE_CONTENT, identyfikatory z window.DOWNLOADS w pages.jsx) */
+function RelatedGuides({ posts, heading, downloads }) {
   const Card = window.BlogTeaserCard;
   if (!Card || !posts || !posts.length) return null;
+  const files = (downloads || []).filter((d) => window.DOWNLOADS && window.DOWNLOADS[d]);
   return (
     <section className="section-py">
       <div className="wrap">
@@ -419,6 +421,8 @@ function RelatedGuides({ posts, heading }) {
         <div className="grid grid-3 mt-8" style={{ gap: 'var(--d-gap)' }}>
           {posts.map((p) => <Card key={p.slug} post={p} />)}
         </div>
+        {files.length > 0 && <p className="guides-downloads">Do pobrania (PDF, bez rejestracji):{' '}
+          {files.map((d, i) => <React.Fragment key={d}>{i > 0 && ' · '}<window.DownloadLink d={d} /></React.Fragment>)}</p>}
       </div>
     </section>
   );
@@ -794,7 +798,7 @@ function ServicePage({ slug, setRoute }) {
 
       {!(c && c.need) && <DocsToSend blockId={block.id} n={String((isFull ? buildServiceSections(c).length : 1) + 1)} docs={c && c.docs} title={h2For(c, 'docsHeading', 'docs', 'Wystarczy to, co masz.')} />}
 
-      <RelatedGuides posts={guidesFor(c)} heading={h2For(c, 'guidesHeading', null, service.title + ': poradniki.')} />
+      <RelatedGuides posts={guidesFor(c)} heading={h2For(c, 'guidesHeading', null, service.title + ': poradniki.')} downloads={c && c.downloads} />
 
       <RelatedServices block={block} slug={slug} setRoute={setRoute} extra={c && c.seeAlso} />
 

@@ -523,6 +523,7 @@ window.BLOG.push(
         'Wypełnij wzór i wyślij wezwanie.',
         'Jeżeli do końca roku zostały mniej niż 2 miesiące, przygotuj od razu zawezwanie albo pozew.',
       ]],
+      ['download', 'lista-slup-linia-rura'],
       ['p', 'W tych sprawach ustalam właściciela urządzeń i jego tytuł, liczę okres roszczenia i piszę pisma. Zakres opisuję na stronach usług Wynagrodzenie za bezumowne korzystanie z gruntu oraz Odszkodowanie za słupy i urządzenia przesyłowe na działce. Nie obiecuję wyniku. Powiem wprost, czy kwota jest warta sprawy.'],
       ['p', 'Masz podobną sytuację? Opisz ją w formularzu poniżej. W ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem. Do akceptacji oferty nic nie płacisz.'],
       ['h2', 'Najczęstsze pytania'],
@@ -777,6 +778,7 @@ window.BLOG.push(
         '**Wybierz działki do wniosków grudniowych:** teren w obszarze uzupełnienia zabudowy w gminie z obowiązującym planem ogólnym. Za każdą WZ bez tytułu zapłacisz 598 zł.',
         '**Przygotuj wzór umowy na 2027 r.:** przedwstępna, dzierżawa albo użyczenie z uprawnieniem do robót budowlanych. Opłata nadal wyniesie 598 zł, bo zwolnienie dotyczy tylko właściciela i użytkownika wieczystego.',
       ]],
+      ['download', 'lista-wz-przed-2027'],
       ['p', '**Przykład.** Kupujący podpisał we wtorek 10 listopada 2026 r. umowę przedwstępną zakupu łąki pod dom. Akt notarialny strony wyznaczyły na marzec 2027 r. Plan ogólny gminy obowiązuje od lipca 2026 r., a łąka leży w obszarze uzupełnienia zabudowy. Kupujący składa wniosek o WZ osobiście w urzędzie gminy w poniedziałek 14 grudnia 2026 r. i płaci 598 zł. Ustawowy termin 90 dni na WZ zacznie biec 1 stycznia 2027 r. (art. 6 ustawy z 5.11.2025). Jeżeli urząd wyda decyzję w 2027 r., i tak zastosuje dawny art. 63, bez badania prawa do łąki. Przy wniosku z poniedziałku 4 stycznia 2027 r. kupujący potrzebowałby zapisu o prawie do dysponowania łąką na cele budowlane i oświadczenia pod rygorem odpowiedzialności karnej.'],
       ['h2', 'Co mogę dla Ciebie zrobić'],
       ['ul', [
@@ -943,6 +945,7 @@ window.BLOG.push(
         'Sprawdź strefę i obszar uzupełnienia zabudowy w planie ogólnym.',
         'Nadaj odwołanie przed ostatnim dniem i zachowaj potwierdzenie nadania.',
       ]],
+      ['download', 'lista-odwolanie-od-wz'],
       ['p', 'Przejrzę akta, ocenię, które zarzuty mają oparcie w przepisach, i napiszę odwołanie do SKO, sprzeciw albo skargę do WSA. Inwestorowi pomogę odpowiedzieć na odwołanie sąsiada, a pominiętemu sąsiadowi złożyć wniosek o wznowienie. Zakres opisuję na stronie Warunki zabudowy. Nie obiecuję wyniku. Jeżeli biegnie termin 14 dni, napisz to w pierwszym zdaniu.'],
       ['p', 'Masz podobną sytuację? Opisz ją w formularzu poniżej. W ciągu 24 h roboczych odpiszę, co trzeba zrobić, i prześlę ofertę z ceną i terminem. Do akceptacji oferty nic nie płacisz.'],
       ['h2', 'Najczęstsze pytania'],
