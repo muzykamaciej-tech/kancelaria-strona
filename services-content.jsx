@@ -443,7 +443,7 @@ const SERVICE_CONTENT = {
       },
       {
         q: 'Słupy stoją od 30 lat. Czy zakład energetyczny zasiedział służebność?',
-        a: 'Mógł, ale udowodnić to musi firma, która się na zasiedzenie powołuje (art. 6 k.c.). Zasiedzenie wymaga korzystania z trwałego i widocznego urządzenia przez 20 lat w dobrej wierze albo 30 lat w złej wierze (art. 292 w zw. z art. 172 i 305⁴ k.c.). Firma wykazuje więc, od kiedy korzysta z urządzenia na Twojej działce; dobrą wiarę i ciągłość posiadania prawo domniemywa (art. 7 i 340 k.c.). Sądy są podzielone co do lat sprzed 3.08.2008 r., a wyrok TK P 10/16 nie został ogłoszony w Dzienniku Ustaw; spór opisuję w poradniku o zasiedzeniu służebności przesyłu.',
+        a: 'Mógł, ale udowodnić to musi firma, która się na zasiedzenie powołuje (art. 6 k.c.). Zasiedzenie wymaga korzystania z trwałego i widocznego urządzenia przez 20 lat w dobrej wierze albo 30 lat w złej wierze (art. 292 w zw. z art. 172 i 305⁴ k.c.). Firma wykazuje więc, od kiedy korzysta z urządzenia na Twojej działce; dobrą wiarę i ciągłość posiadania prawo domniemywa (art. 7 i 340 k.c.). Sądy są podzielone co do lat sprzed 3.08.2008 r., a wyrok TK P 10/16 nie został ogłoszony w Dzienniku Ustaw, ale 18.11.2026 r. połączone Izby SN uznały, że orzeczenie TK obowiązuje niezależnie od ogłoszenia, jeżeli wydał je prawidłowo obsadzony skład (III CZP 41/26); spór opisuję w poradniku o zasiedzeniu służebności przesyłu.',
       },
       {
         q: 'Czy od wynagrodzenia za służebność płacę podatek?',
